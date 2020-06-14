@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>AzCam Home</title>
+
+   <!-- Bootstrap -->
+   <link href="static/bootstrap/css/bootstrap-4.0.0.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="static/style.css">
+   <link rel="shortcut icon" href="static/favicon.ico">
+</head>
+
+<body>
+
+   <div class="jumbotron text-center">
+      <h2 id="title" class="display-5">AzCam Home</h2>
+   </div>
+
+   <div class="container">
+
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">Status</h4>
+               <h6 class="card-subtitle mb-2 text-muted">Camera Status</h6>
+               <p class="card-text">Click the Sttaus button below to open a new tab with current camera status. The tew tab which may be dragged to a new window if desired.</p>
+               <a href="http://localhost:2403/status" target="_blank" class="btn btn-primary">Status</a>
+            </div>
+         </div>
+
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">Help</h4>
+               <p>The links below open new tabs with useful information relating to observing.</p>
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><a href="http://localhost:2403/updates" target="_blank" class="card-link">AzCam Recent Changes</a></li>
+                  <li class="list-group-item"><a href="https://mplesser.github.io/azcam/" target="_blank" class="card-link">AzCam Software</a></li>
+                  <li class="list-group-item"><a href="http://www.as.arizona.edu/observing" target="_blank" class="card-link">Steward Observatory Observing</a></li>
+                  <li class="list-group-item"><a href="https://github.com/mplesser/azcam-focus#readme" target="_blank" class="card-link">AzCam focus code</a></li>
+                  <li class="list-group-item"><a href="https://github.com/mplesser/azcam-observe#readme" target="_blank" class="card-link">AzCam observe code</a></li>
+               </ul>
+            </div>
+         </div>
+
+   </div> <!-- end container -->
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="static/bootstrap/js/jquery-3.2.1.min.js"></script>
+   <script src="static/bootstrap/js/popper.min.js"></script>
+   <script src="static/bootstrap/js/bootstrap-4.0.0.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Display Class &mdash; azcam 20.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fits Class" href="fits.html" />
+    <link rel="prev" title="Image Class" href="image.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> azcam
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home - Azcam Documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Display Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="report.html">Report Commands</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testers.html">Tester Classes</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">azcam</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Display Class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="fits.html" class="btn btn-neutral float-right" title="Fits Class" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="image.html" class="btn btn-neutral float-left" title="Image Class" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="display-class">
+<h1>Display Class<a class="headerlink" href="#display-class" title="Permalink to this headline">¶</a></h1>
+<p>This class defines Azcam’s image display interface to SAO’s ds9 image display.
+It is usually instantiated as the <em>display</em> object for both server and clients.</p>
+<p>Depending on system configuration, the <em>display</em> object may be available
+directly from the command line, e.g. <code class="docutils literal notranslate"><span class="pre">display.display('test.fits'</span></code>).</p>
+<p>Usage Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rois</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">get_rois</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;detector&#39;</span><span class="p">)</span>  
+<span class="n">azcam</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">fits</span><span class="s1">&#39;)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="azcam.displays.ds9display.Ds9Display">
+<em class="property">class </em><code class="sig-name descname">Ds9Display</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.displays.display.Display</span></code></p>
+<p>azcam’s interface to SAO’s ds9 image display tool.</p>
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.delete_all_rois">
+<code class="sig-name descname">delete_all_rois</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.delete_all_rois" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all ROIs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return None</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.display">
+<code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">extension_number</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a file in ds9, making a copy so locking does not occur.
+If specified for an MEF file, only extension_number is displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – a filename or an image object</p></li>
+<li><p><strong>extension_number</strong> (<em>int</em>) – FITS extension number of image, -1 for all</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.draw_box">
+<code class="sig-name descname">draw_box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xy</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">[51, 51]</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.draw_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a box on the display.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xy</strong> (<em>list</em>) – [x,y] coords of box to be drawn in image coordinates</p></li>
+<li><p><strong>size</strong> (<em>list</em>) – [xwidth,ywidth] of box</p></li>
+<li><p><strong>angle</strong> (<em>float</em>) – Angle of box.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.exam">
+<code class="sig-name descname">exam</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">box_size</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">loop</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.exam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interactive: Get info around blinking cursor position.
+print() is allowed here as interactive only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>box_size</strong> (<em>int</em>) – Size of examine box</p></li>
+<li><p><strong>Loop</strong> (<em>bool</em>) – True for keep looping until <em>q</em> pressed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>[KeyPressed,X,Y] or [] in case or error.  KeyPressed is a character.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.find_displays">
+<code class="sig-name descname">find_displays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.find_displays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of ds9 servers.
+The returned list is like: [‘a00009c:50064’, ‘a00009c:59734’], which is host:port.
+If not servers are found, the returned list is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return list</dt>
+<dd class="field-odd"><p>Display info from XPA</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_box">
+<code class="sig-name descname">get_box</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get position of the first box in image coords.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return None</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns [Status,[pixel1,pixel2,…]] in display ROI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>roi_number</strong> (<em>int</em>) – Number of ROI to get data</p>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>[status,[pixel1,pixel2,…]] for ROI</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_last_point">
+<code class="sig-name descname">get_last_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinate_mode</span><span class="o">=</span><span class="default_value">'physical'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_last_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns coordinates of the last point selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>coordinate_mode</strong> (<em>str</em>) – Coorinate mode, wcs or pysical</p>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>Coords of point as [x,y] or [] if none</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_number_rois">
+<code class="sig-name descname">get_number_rois</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_number_rois" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of defined ROI’s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return int</dt>
+<dd class="field-odd"><p>Number of ROI’s specified by ds9</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_regions">
+<code class="sig-name descname">get_regions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinate_type</span><span class="o">=</span><span class="default_value">'image'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of regions, each a list of [shape,coords…].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinate_type</strong> (<em>str</em>) – Type of coords as defined by the display server [‘image’,’detector’, ‘amplifier’]</p></li>
+<li><p><strong>list</strong> – List of ROI info in ds9 format</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_roi_string">
+<code class="sig-name descname">get_roi_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">coordinate_type</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_roi_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an ROI descriptor formatted as a string with integer values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roi_number</strong> (<em>int</em>) – roi_number to return</p></li>
+<li><p><strong>coordinate_type</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>List of ROIs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_rois">
+<code class="sig-name descname">get_rois</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">coordinate_type</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_rois" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Region Of Interest from the display tool and sets the internal ROI descriptors
+to the values read.
+If roi_number is not specified then a list of all defined ROI’s is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roi_number</strong> (<em>int</em>) – roi number to be returned</p></li>
+<li><p><strong>CoorinateType</strong> (<em>str</em>) – Type of coords as defined by the display server [‘image’,’detector’, ‘amplifier’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>The list of ROIs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_stats">
+<code class="sig-name descname">get_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns statistics [status,mean,sdev] of an  ROI
+Also sets display.mean and display.sdev global variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>roi_number</strong> (<em>int</em>) – Number of ROI to get status</p>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>[status,mean,sdev] for ROI</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.host">
+<code class="sig-name descname">host</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.host" title="Permalink to this definition">¶</a></dt>
+<dd><p>display Host, as a string hex code</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Ds9.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return None</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.mean">
+<code class="sig-name descname">mean</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>mean of current display ROI</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.name">
+<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>display ID</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.port">
+<code class="sig-name descname">port</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>display Port, as a string decimal code</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.read_rois">
+<code class="sig-name descname">read_rois</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.read_rois" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and internally save image, detector, and amplifier all Rois.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return None</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset dispaly object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.root">
+<code class="sig-name descname">root</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>get names based on OS type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.save_fits">
+<code class="sig-name descname">save_fits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'display.fits'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.save_fits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save displayed image as a FITS file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename of image to be saved.</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.save_image">
+<code class="sig-name descname">save_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'display.png'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.save_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save displayed image as a PNG snapshot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename of image to be saved.</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.sdev">
+<code class="sig-name descname">sdev</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.sdev" title="Permalink to this definition">¶</a></dt>
+<dd><p>standard deviation of current display ROI</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.set_cursor_mode">
+<code class="sig-name descname">set_cursor_mode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'point'</span></em>, <em class="sig-param"><span class="n">clear_rois</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.set_cursor_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the display cursor mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em>) – Cursor mode (“point”, “crosshair”)</p></li>
+<li><p><strong>clear_rois</strong> (<em>bool</em>) – True to clear all ROIs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.set_display">
+<code class="sig-name descname">set_display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">display_number</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.set_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current ds9 display by number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>display_number</strong> (<em>int</em>) – Number for display to be used (0-&gt;N)</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.show_stats">
+<code class="sig-name descname">show_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.show_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interactive: Print stats from an ROI in a real-time loop until <em>q</em> is pressed.
+print() is allowed here as interactive only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>roi_number</strong> (<em>int</em>) – Number of ROI to get status</p>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>[status,mean,sdev] for ROI</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.displays.ds9display.Ds9Display.size_x">
+<code class="sig-name descname">size_x</code><em class="property"> = None</em><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.size_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>image size for binary images</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.xpaget">
+<code class="sig-name descname">xpaget</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.xpaget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Issue xpaget command for ds9.
+Returns data as a list of space deliminated items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>str</em>) – command string for xpaget command</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.xpaset">
+<code class="sig-name descname">xpaset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.xpaset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Issue xpaset command for ds9.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>str</em>) – command string for xpaset command</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.zoom">
+<code class="sig-name descname">zoom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set display zoom factor relative to current zoom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Scale</strong> (<em>int</em>) – Scale factor for zoom, 0 “to fit”</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fits.html" class="btn btn-neutral float-right" title="Fits Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="image.html" class="btn btn-neutral float-left" title="Image Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, University of Arizona
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

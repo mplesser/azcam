@@ -1,0 +1,16 @@
+.jumbotron {
+    margin: 0px; 
+    padding: 0px;
+    color: blue;
+}
+
+#title {
+    margin: 5px; 
+    padding: 5px;
+    background-color: none;
+}
+
+#progressbar {
+    height: 15px;
+    width: 100%;
+}
