@@ -298,7 +298,7 @@ class Fe55(TesterBase):
 
         if self.threshold == 0:
             if azcam.testers.bias.valid:
-                self.threshold = azcam.testers.bias.sdev * self.noise_threshold
+                self.threshold = [self.noise_threshold * sd for sd in azcam.testers.bias.sdev]
 
         # process each channel
         self.chansanalyzed = 0

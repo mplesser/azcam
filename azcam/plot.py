@@ -310,10 +310,6 @@ def plot_image(azimage, scale_type="useimage", scale_factor="useimage", cmap="gr
     scaletype is sdev, minmax, scaled,absolute.
     """
 
-    # image attributes
-    # self.scale_type = 'sdev'
-    # self.scale_factor=2.0
-
     if scale_type == "useimage":
         scale_type = azimage.scale_type
     if scale_factor == "useimage":
