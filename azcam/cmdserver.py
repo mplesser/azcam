@@ -331,7 +331,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     pass  # OK to do nothing
                 finally:
                     # self.request.close()  # mod 21feb20
-                    break
+                    pass  # was break 25jun20
 
         return
 
