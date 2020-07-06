@@ -15,52 +15,53 @@ class MonitorInterface(object):
     def __init__(self):
 
         # Registration port (UDP)
-        self.RegisterPort = 2400
+        self.register_port = 2400
 
         # Get the AzCam Monitor host (local host)
-        self.MonitorHost = azcam.db.hostname
+        self.monitor_host = azcam.db.hostname
         # Command port
-        self.CommandPort = azcam.db.cmdserver.port
+        self.command_port = azcam.db.cmdserver.port
         
 
         # Process fileds:
         # Process ID
-        self.ProcID = 0
+        self.proc_id = 0
         # Default system name
-        self.SysName = azcam.db.systemname
+        self.system_name = azcam.db.systemname
         # Process path
-        self.ProcPath = ""
+        self.proc_path = ""
         # Process flags
-        self.ProcFlags = 0
+        self.proc_flags = 0
         # Process watchdog time
-        self.Watchdog = 1
+        self.watchdog = 1
         # Registration flag
-        self.Registered = 0
+        self.registered = 0
         
-        self.Debug = 1
+        self.debug = 1
         
            
-    def Register(self):
+    def register(self):
         """
-        Sends UDP Register requests.
-        Last change: 26Jul2019 GSZ
+        Sends UDP register requests.
         """
         
-        self.ProcID = os.getpid()
+        self.proc_id = os.getpid()
         
-        CommandPort = str(self.CommandPort)
-        # Register string: command = '1' 
-        cmd = "1 " + str(self.ProcID) + " " + self.SysName + " " + CommandPort + " " + self.MonitorHost + " " + self.ProcPath + " " + str(self.ProcFlags) + " " + str(self.Watchdog) + "\r\n"
-        print("Register process: "  + cmd)
+        command_port = str(self.command_port)
+        # register string: command = '1' 
+        cmd = "1 " + str(self.proc_id) + " " + self.system_name + " " + command_port + " " + self.monitor_host + " " + self.proc_path + " " + str(self.proc_flags) + " " + str(self.watchdog) + "\r\n"
+        azcam.log("Azcam monitor register: "  + cmd)
         # create a new socket for sending register command
         udp_socketReg = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)      
         
-        udp_socketReg.sendto(bytes(cmd, "utf-8"), (self.MonitorHost, self.RegisterPort))
+        udp_socketReg.sendto(bytes(cmd, "utf-8"), (self.monitor_host, self.register_port))
         
         udp_socketReg.close()    
         
-        self.Registered = 1
+        self.registered = 1
+
+        return
         
             
 

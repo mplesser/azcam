@@ -479,6 +479,11 @@ class Image(object):
             NumExt = 0
             first_ext = 0
             last_ext = 1
+            """
+            NumExt = 1
+            first_ext = 1
+            last_ext = 2
+            """
         else:
             n = 0
             for i in range(len(self.hdulist)):
@@ -497,7 +502,7 @@ class Image(object):
         cntExt = self.focalplane.numamps_image
 
         # update file type
-        if self.num_extensions > 1:
+        if self.num_extensions > 0:
             self.filetype = azcam.db.filetypes["MEF"]
         else:
             self.filetype = azcam.db.filetypes["FITS"]

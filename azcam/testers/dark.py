@@ -184,7 +184,10 @@ class Dark(TesterBase):
                 azcam.fits.colbias(masterdark, fit_order=self.fit_order)
         else:
             azcam.fits.combine(
-                darks, masterdark, "median", overscan_correct=self.overscan_correct
+                darks, masterdark, 
+                "median",
+                overscan_correct=self.overscan_correct,
+                fit_order = self.fit_order
             )
             s = f"{numdarks} dark images have been combined into {masterdark}"
         azcam.log(s)
