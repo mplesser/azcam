@@ -212,12 +212,7 @@ class ControllerArc(Controller):
         if not self.initialized:
             self.initialize()
 
-        try:
-            self.reset_controller()
-        except azcam.AzcamError as e:
-            # warn about power and fiber
-            if e.error_code == 1:
-                raise azcam.AzcamError("Controller not reset: check power and fibers")
+        self.reset_controller()
 
         # restore PCIFILE keyword
         self.header.set_keyword(

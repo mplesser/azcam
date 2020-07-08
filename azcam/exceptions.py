@@ -37,9 +37,9 @@ class AzcamError(Exception):
             self.error_code = error_code
             # Original error was self.errors.message
 
-        try:
+        if db.logger is not None:
             db.logger.warning(f"ERR-> {message}")
-        except Exception:
+        else:
             print(f"AzcamError: {message}")
 
 
