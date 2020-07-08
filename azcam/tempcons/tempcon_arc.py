@@ -55,7 +55,7 @@ class TempConArc(TempCon):
         self.control_temperature_number = temperature_id
         counts = self.convert_temp_to_counts(2, self.control_temperature)
         azcam.db.controller.write_memory(
-            "Y", self.db.controller.UTILITYBOARD, TEMPSET, int(counts)
+            "Y", azcam.db.controller.UTILITYBOARD, TEMPSET, int(counts)
         )
 
         return
@@ -128,12 +128,15 @@ class TempConArc(TempCon):
         # read temperature
         cmd = "RDM"
         avecount = 0
-        for _ in range(self.num_temp_reads):
-            reply = azcam.db.controller.board_command(
-                cmd, azcam.db.controller.UTILITYBOARD, 0x400000 | Address
-            )  # Y space
-            counts = int(reply[1])
-            avecount += counts
+        try:
+            for _ in range(self.num_temp_reads):
+                reply = azcam.db.controller.board_command(
+                    cmd, azcam.db.controller.UTILITYBOARD, 0x400000 | Address
+                )  # Y space
+                counts = int(reply[1])
+                avecount += counts
+        except ValueError:
+            raise azcam.AzcamError("could not read temperature")
         counts = avecount / self.num_temp_reads
 
         # convert from counts to Celsius

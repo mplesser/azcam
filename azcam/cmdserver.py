@@ -65,7 +65,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
             self.server.serve_forever()  # waits here forever
         except Exception as message:
             self.is_running = 0
-            azcam.log("ERROR in cmdserver:%s Is it already running? Exiting..." % repr(message))
+            azcam.log(f"ERROR in cmdserver:{repr(message)} Is it already running? Exiting...")
             time.sleep(3)
             os._exit(1)
 
@@ -212,7 +212,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # receive command from the network socket
                 # ************************************************************************
                 try:
-                    command_string = self.receive_command(self.currentclient)
+                    command_string = self.receive_command(self.currentclient).strip()
                 except ConnectionResetError:
                     azcam.log(
                         f"Client {self.cmdserver.socketnames[self.currentclient]} disconnected",
