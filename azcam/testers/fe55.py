@@ -43,8 +43,6 @@ class Fe55(TesterBase):
 
         self.acquire_darks = 0  # flag to acquire darks of the same exposur time
 
-        self.fit_order = 0  # ColBias fit order
-
         self.number_events = []
         self.pixel_size = -1
         self.spec_sigma = -1  # charge diffusion spec in microns
@@ -251,7 +249,7 @@ class Fe55(TesterBase):
         if NumExt > 1:
             ext = 1
         else:
-            ext = 0
+            ext = 1  # 0
         reply = azcam.fits.get_section(filename, "DATASEC", ext)
         xedges = []
         yedges = []

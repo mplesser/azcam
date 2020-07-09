@@ -36,7 +36,6 @@ class Superflat(TesterBase):
             "superflatscaled.fits"  # filename of gain corrected fits image
         )
         self.system_gain = []
-        self.fit_order = 3  # fit order for overscan correction
         self.scale_type = "sdev"
         self.scale_factor = 20.0
 

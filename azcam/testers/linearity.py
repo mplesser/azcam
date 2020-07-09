@@ -208,7 +208,7 @@ class Linearity(TesterBase):
 
                 # Overscan correct each image
                 azcam.log("Overscan correct image: %s" % os.path.basename(nextfile))
-                azcam.fits.colbias(nextfile)
+                azcam.fits.colbias(nextfile, fit_order=self.fit_order)
 
                 SequenceNumber = SequenceNumber + 1
                 nextfile = (

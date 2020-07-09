@@ -40,6 +40,8 @@ class TesterBase(object):
         setattr(azcam.db, obj_id, self)
         azcam.db.cli_cmds[obj_id] = self
 
+        self.fit_order = 3  # fit order for overscan correction
+
     def acquire(self):
         """
         Acquire data.

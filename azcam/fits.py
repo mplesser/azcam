@@ -170,10 +170,7 @@ def get_extensions(filename: str) -> List:
         else:
             n = 0
             for item in hdulist:
-                if (
-                    "XTENSION" in item.header
-                    and item.header["XTENSION"] == "IMAGE"
-                ):
+                if "XTENSION" in item.header and item.header["XTENSION"] == "IMAGE":
                     n += 1
             first_ext = 1
             last_ext = n + 1
@@ -201,8 +198,6 @@ def arith(
     :param datatype: valid datatype string for resultant data type
     """
 
-    MakeU16 = 1
-
     MakeU16 = 1 if datatype == "uint16" else 0
     header = []  # header for output file
 
@@ -210,7 +205,7 @@ def arith(
     filename1 = azcam.utils.make_image_filename(filename1)
     numext1, fext, lext = get_extensions(filename1)
     im1 = pyfits.open(filename1, lazy_load_hdus=False)  # this is an hdulist
-    if numext1 > 1:
+    if numext1 > 0:
         MEF = 1
         header.append(im1[0].header)  # save for output file
         data1 = []  # first data index is 0
@@ -338,8 +333,7 @@ def _is_image_extension(hdulist, extension: int) -> bool:
     """
 
     return (
-        "XTENSION" in hdulist[extension].header
-        and hdulist[extension].header["XTENSION"] == "IMAGE"
+        "XTENSION" in hdulist[extension].header and hdulist[extension].header["XTENSION"] == "IMAGE"
     )
 
 
@@ -402,6 +396,7 @@ def combine(
     out_filename: str = "combined.fits",
     combination_type: str = "median",
     overscan_correct: int = 1,
+    fit_order = 3,
 ) -> None:
     """
     Make a combination of a list of FITS filenames.
@@ -424,7 +419,7 @@ def combine(
 
         # overscan correct
         if overscan_correct > 0:
-            colbias(filename, overscan_correct)
+            colbias(filename, fit_order)
 
         dataarray = []  # each dataset by channel
 
@@ -786,10 +781,13 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
             for row in range(row1, row2 + 1):
                 Median[i].append(numpy.median(im[i].data[row : row + 1, col1 : col2 + 1]))
 
-            slope, xdata, yfit, resids, residspercent = _line_fit(
-                list(range(row1, row2 + 1)), Median[i], fit_order
-            )
-            yfit = yfit.astype("float32")
+            if fit_order > 0:
+                slope, xdata, yfit, resids, residspercent = _line_fit(
+                    list(range(row1, row2 + 1)), Median[i], fit_order
+                )
+                yfit = yfit.astype("float32")
+            else:
+                yfit = numpy.array(Median)
 
             # correct data by subtracting row by row best fit
             for row in range(row1, row2 + 1):

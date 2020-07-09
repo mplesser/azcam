@@ -235,7 +235,7 @@ class Ptc(TesterBase):
             azcam.log("Overscan correcting images")
             while os.path.exists(nextfile):
                 azcam.log("Overscan correct image: %s" % os.path.basename(nextfile))
-                azcam.fits.colbias(nextfile)
+                azcam.fits.colbias(nextfile,fit_order=self.fit_order)
                 seq_num = seq_num + 1
                 nextfile = os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
                 loop += 1
