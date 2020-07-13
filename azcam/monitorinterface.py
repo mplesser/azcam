@@ -33,7 +33,7 @@ class MonitorInterface(object):
         # Process flags
         self.proc_flags = 0
         # Process watchdog time
-        self.watchdog = 1
+        self.watchdog = 0
         # Registration flag
         self.registered = 0
         
