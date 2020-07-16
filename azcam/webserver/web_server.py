@@ -60,11 +60,11 @@ class WebServer(object):
         # ******************************************************************************
         # api commands
         # ******************************************************************************
-        # @app.route("/exposure/<path:command>", methods=["GET"])
-        @app.route("/<path:command>", methods=["GET"])
+        # @app.route("/monitor/<path:command>", methods=["GET"])
+        @app.route("/api/<path:command>", methods=["GET"])
         def api(command):
             """
-            Remote web commands such as: /exposure/reset
+            Remote web api commands. such as: /exposure/reset
             """
 
             url = request.url
@@ -85,7 +85,7 @@ class WebServer(object):
             if e.error_code == 4:
                 reply = "remote call not allowed"
         except Exception:
-            reply = "invalid web command"
+            reply = "invalid API command"
 
         return reply
 
@@ -95,7 +95,12 @@ class WebServer(object):
         """
 
         s = urlparse(url)
-        _, obj, method = s.path.split("/")
+        p = s.path[5:]  # remove /api/
+
+        try:
+            obj, method = p.split("/")
+        except Exception as e:
+            raise e("Invalid API command")
 
         args = s.query.split("&")
 

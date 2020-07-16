@@ -51,10 +51,13 @@ exposure = Exposure()
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
 azcam.db.genpars = GenPars()
-pardict = azcam.db.genpars.parfile_read(parfile)["azcamserver"]
-azcam.utils.update_pars(0, pardict)
-wd = azcam.db.genpars.get_par(pardict, "wd", "default")
-azcam.utils.curdir(wd)
+try:
+    pardict = azcam.db.genpars.parfile_read(parfile)["azcamserver"]
+    azcam.utils.update_pars(0, pardict)
+    wd = azcam.db.genpars.get_par(pardict, "wd", "default")
+    azcam.utils.curdir(wd)
+except FileNotFoundError:
+    azcam.log(f"Paramater file not found: {parfile}")
 
 # ****************************************************************
 # command server

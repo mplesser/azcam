@@ -201,25 +201,24 @@
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Most of Azcam’s functionality is available only after importing configuration code from a script or package which defines a system’s hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.</p>
+<p>Most of Azcam’s functionality is available only after importing configuration code which defines a system’s hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.</p>
 <p>There are several operation modes of azcam. One is the server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware. Another is the console, usually called <em>azcamconsole</em>, which is usually implemented as an IPython command window that is able to communicate with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.</p>
-<p>Using the <em>azcam_itl</em> configuration package as an example, the server-side code to get the current system wavelength is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam_itl.server</span>  <span class="c1"># configures the server app</span>
-<span class="kn">from</span> <span class="nn">azcam_itl.server</span> <span class="kn">import</span> <span class="n">exposure</span><span class="p">,</span> <span class="n">instrument</span>
+<p>Using the <em>azcam_itl</em> environment as an example, the server-side code to get the current system wavelength is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam_itl_server</span> <span class="kn">import</span> <span class="n">exposure</span><span class="p">,</span> <span class="n">instrument</span>
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
 <span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For a console application (which usually connects to a separate server application), this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam_itl.console</span>  <span class="c1"># configures the console app</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam_itl_console</span>  <span class="c1"># configures the console app</span>
 <span class="kn">from</span> <span class="nn">azcam</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
 <span class="n">api</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Example configuration code can be loaded with either of the commands:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam.example_server_config.py</span>
-<span class="kn">import</span> <span class="nn">azcam.example_console_config.py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam.example_server_config</span>
+<span class="kn">import</span> <span class="nn">azcam.example_console_config</span>
 </pre></div>
 </div>
 <p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, <strong>after</strong> configuring the environment, execute the command:</p>
@@ -232,9 +231,12 @@
 <h2>Server Operation<a class="headerlink" href="#server-operation" title="Permalink to this headline">¶</a></h2>
 <p>Azcam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like <em>azcamtool</em> or a pyhton command line interface using azcam’s console code.</p>
 <p>The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second “flat field” exposure is:</p>
-<p>Local CLI or script example: <code class="docutils literal notranslate"><span class="pre">expose.exposure(2.5,</span> <span class="pre">'flat',</span> <span class="pre">'an</span> <span class="pre">image</span> <span class="pre">title')</span></code></p>
-<p>Remote socket connection example: <code class="docutils literal notranslate"><span class="pre">exposure.expose</span> <span class="pre">2.5</span> <span class="pre">flat</span> <span class="pre">&quot;an</span> <span class="pre">image</span> <span class="pre">title&quot;</span></code></p>
-<p>Web (http) connection example: <code class="docutils literal notranslate"><span class="pre">http://hostname:2403/expose?exposure_time=2.5&amp;image_type=flat&amp;image_title=an+image+title</span></code>.</p>
+<p>Local CLI or script example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">expose.exposure(2.5,</span> <span class="pre">'flat',</span> <span class="pre">'an</span> <span class="pre">image</span> <span class="pre">title')</span></code></p>
+<p>Remote socket connection example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">exposure.expose</span> <span class="pre">2.5</span> <span class="pre">flat</span> <span class="pre">&quot;an</span> <span class="pre">image</span> <span class="pre">title&quot;</span></code></p>
+<p>Web (http) connection example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">http://hostname:2403/api/exposure/expose?exposure_time=2.5&amp;image_type=flat&amp;image_title=an+image+title</span></code></p>
 </div>
 <div class="section" id="shortcuts">
 <h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>

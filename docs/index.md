@@ -11,39 +11,37 @@ This documentation was built for azcam version 20.1.
    :hidden:
 
    Home - Azcam Documentation <self>
-```   
+```
 
 ## Help
-Azcam is often used with IPython.  Help is then avaialble by typing ``?xxx``, ``xxx?``, ``xxx??`` or ``help(xxx)`` where ``xxx`` is an azcam class, command, or object instance.
+Azcam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an azcam class, command, or object instance.
 
 Useful links include:
-
- * IPython <https://ipython.org>
- * Python programming language <https://www.python.org>
+* IPython <https://ipython.org>
+* Python programming language <https://www.python.org>
   
 ## Usage
-Most of Azcam's functionality is available only after importing configuration code from a script or package which defines a system's hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.
+Most of Azcam's functionality is available only after importing configuration code which defines a system's hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.
 
 There are several operation modes of azcam. One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware. Another is the console, usually called *azcamconsole*, which is usually implemented as an IPython command window that is able to communicate with *azcamserver* and is used to acquire and analyze image data through the command line and python code. 
   
-Using the *azcam_itl* configuration package as an example, the server-side code to get the current system wavelength is:
+Using the *azcam_itl* environment as an example, the server-side code to get the current system wavelength is:
 
-    import azcam_itl.server  # configures the server app
-    from azcam_itl.server import exposure, instrument
+    from azcam_itl_server import exposure, instrument  # configures the server
     wavelength = instrument.get_wavelength()
     exposure.expose(30., 'dark', "a dark image title")
 
 For a console application (which usually connects to a separate server application), this would be:
 
-    import azcam_itl.console  # configures the console app
+    import azcam_itl_console  # configures the console
     from azcam import api
     wavelength = api.get_wavelength()
     api.exposure.expose(30., 'dark', "a dark image title")
 
    Example configuration code can be loaded with either of the commands:
     
-    import azcam.example_server_config.py
-    import azcam.example_console_config.py
+    import azcam.example_server_config
+    import azcam.example_console_config
 
 When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, **after** configuring the environment, execute the command:
 
@@ -56,11 +54,17 @@ Azcam is most often used as a server application to which clients connect via et
 
 The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:
 
-Local CLI or script example: ``expose.exposure(2.5, 'flat', 'an image title')``
+Local CLI or script example:
 
-Remote socket connection example: ``exposure.expose 2.5 flat "an image title"``
+`expose.exposure(2.5, 'flat', 'an image title')`
 
-Web (http) connection example: ``http://hostname:2403/expose?exposure_time=2.5&image_type=flat&image_title=an+image+title``.
+Remote socket connection example:
+
+`exposure.expose 2.5 flat "an image title"`
+
+Web (http) connection example:
+
+`http://hostname:2403/api/exposure/expose?exposure_time=2.5&image_type=flat&image_title=an+image+title`
 
 ## Shortcuts
 When using IPython, the auto parenthesis mode allows typing commands without 
