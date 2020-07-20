@@ -34,6 +34,7 @@ class WebServer(object):
         index_home = "index.html"
         updates_home = "updates.html"
         status_home = "status.html"
+        exptool_home = "exptool.html"
 
         #: port for webserver
         self.webport = azcam.db.cmdserver.port + 1
@@ -56,6 +57,10 @@ class WebServer(object):
         @app.route("/status", methods=["GET"])
         def status():
             return render_template(status_home)
+
+        @app.route("/exptool", methods=["GET"])
+        def exptool():
+            return render_template(exptool_home)
 
         # ******************************************************************************
         # api commands
