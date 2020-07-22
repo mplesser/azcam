@@ -13,8 +13,7 @@ from flask import Flask, jsonify, request, render_template
 import azcam
 
 
-# url="http://locahost:2402/instrument/set_filter?filter=1&filter_id=2"
-# url = "http://locahost:2402/instrument/initialize"
+# url= "http://locahost:2402/api/instrument/set_filter?filter=1&filter_id=2"
 
 
 class WebServer(object):
@@ -89,7 +88,8 @@ class WebServer(object):
         except azcam.AzcamError as e:
             if e.error_code == 4:
                 reply = "remote call not allowed"
-        except Exception:
+        except Exception as e:
+            print(repr(e))
             reply = "invalid API command"
 
         return reply

@@ -1483,6 +1483,8 @@ class Exposure(object):
             "exposuretime": azcam.utils.get_par("exposuretime"),
             "colbin": azcam.utils.get_par("colbin"),
             "rowbin": azcam.utils.get_par("rowbin"),
+            "systemname": azcam.db.systemname,
+            "mode": azcam.db.servermode,
         }
 
         return response
