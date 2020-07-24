@@ -12,18 +12,17 @@ $(document).ready(function () {
             $("#colbin").text(data.data.colbin);
             $("#rowbin").text(data.data.rowbin);
             $("#testimage").text(data.data.imagetest);
-            $("#exposurestate").text(data.data.exposurestate);
             $("#message").text(data.data.message);
             $("#progressbar").css("width", data.data.progressbar + "%");
             $("#progressbar").text(data.data.exposurelabel);
-            $("#title").css("background-color", data.data.exposurecolor);
+            $("#statustitle").css("background-color", data.data.exposurecolor);
             $("#timestamp").text(data.data.timestamp);
         });
         return false;
     }
 
     // set timer to get status
-    setInterval(getstatus, 1000);  
+    setInterval(getstatus, 500);  
 
     // example...
     $("#exposuretime" ).click(function() {
