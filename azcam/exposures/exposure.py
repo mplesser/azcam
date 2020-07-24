@@ -1399,9 +1399,10 @@ class Exposure(object):
         filename = self.get_filename()
         filename = os.path.basename(filename)
         et = self.get_exposuretime()
-        if azcam.utils.get_par("isexposuresequence"):
-            seqcount = int(azcam.utils.get_par("exposuresequencenumber"))
-            seqtotal = int(azcam.utils.get_par("exposuresequencetotal"))
+        if self.is_exposure_sequence:
+            self.exposure_sequence_number
+            seqcount = self.exposure_sequence_number
+            seqtotal = self.exposure_sequence_total
         else:
             seqcount = 0
             seqtotal = 0
@@ -1454,8 +1455,12 @@ class Exposure(object):
             explabel = ""
             expstate = ""
 
-        if self.message == "":
+        if self.message == "" and expstate != "":
             message = expstate
+            if self.is_exposure_sequence:
+                message = (
+                    f"{message} - {self.exposure_sequence_number} of {self.exposure_sequence_total}"
+                )
         else:
             message = self.message
 
@@ -1529,6 +1534,23 @@ class Exposure(object):
             expstate = ""
 
         return progress, expstate, explabel, expcolor
+
+    # special cases for remote access
+    def get_par(self, parameter):
+        """
+        Return the value of a parameter from the local azcamparameters dictionary.
+        Returns None on error.
+        """
+
+        return azcam.utils.get_par(parameter)
+
+    def set_par(self, parameter, value=None):
+        """
+        Set the value of a parameter in the local azcamparameters dictionary.
+        Returns None on error.
+        """
+
+        return azcam.utils.set_par(parameter, value)
 
 
 class ReceiveData(object):

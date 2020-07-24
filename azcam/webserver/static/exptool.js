@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    
+
     // getstatus function
-    function getstatus(){
-        $.getJSON('/api/exposure/get_status', {}, function(data) {
+    function getstatus() {
+        $.getJSON('/api/exposure/get_status', {}, function (data) {
             $("#imagetitle").text(data.data.imagetitle);
             $("#imagefilename").text(data.data.filename);
-            $("#imagetype").text(data.data.imagetype);
+            //$("#imagetype").text(data.data.imagetype);
             $("#exposuretime").text(data.data.exposuretime);
             $("#camtemp").text(data.data.camtemp);
             $("#dewtemp").text(data.data.dewtemp);
@@ -22,103 +22,119 @@ $(document).ready(function () {
     }
 
     // set timer to get status
-    setInterval(getstatus, 500);  
+    setInterval(getstatus, 500);
 
     // example...
-    $("#exposuretime" ).click(function() {
+    $("#exposuretime").click(function () {
         var et = $("#exposuretime").val();
-            et1=parseFloat(et);
-            $("#testbox" ).text(et1.toFixed(3));
-        });
-    
-        // **********************************************************************
-        // initialization
-        // **********************************************************************
-        
-        $( window ).load(function() {
-          Initialize();
-        });        
-    
+        et1 = parseFloat(et);
+        $("#testbox").text(et1.toFixed(3));
+    });
+
+    // **********************************************************************
+    // initialization
+    // **********************************************************************
+
+    $(window).load(function () {
+        Initialize();
+    });
+
 }); // end ready
 
-    // **********************************************************************
-    // functions
-    // **********************************************************************
-    
-    var folder = document.getElementById("myInput");
-    folder.onchange=function(){
-      var files = folder.files,
-          len = files.length,
-          i;
-      for(i=0;i<len;i+=1){
-        console.log(files[i]);
-      }
-    }
-        
-    function selectFolder(e) {
-        var theFiles = e.target.files;
-        var relativePath = theFiles[0].webkitRelativePath;
-        var folder = relativePath.split("/");
-        alert(folder[0]);
-    } 
 
-    function Expose(et,it,title) {
-        $("#message").text("starting exposure...");
-        var testimage = $('#testimage')[0].checked;
-        var et = $("#exposuretime").val();
-        var it = $("#imagetype").val();
-        var title = $("#title").val();
-        var cmd="/obstool/expose?exposuretime="+et+"&imagetype="+it+"&title="+title+"&testimage="+testimage;
-        $("#testbox").text(cmd);
-        $.getJSON(cmd, {},
-            function(data) {
+$("#testimage").click(function () {
+    alert($("#testimage").prop("checked"));
+});
+
+// **********************************************************************
+// functions
+// **********************************************************************
+
+var folder = document.getElementById("myInput");
+folder.onchange = function () {
+    var files = folder.files,
+        len = files.length,
+        i;
+    for (i = 0; i < len; i += 1) {
+        console.log(files[i]);
+    }
+}
+
+function selectFolder(e) {
+    var theFiles = e.target.files;
+    var relativePath = theFiles[0].webkitRelativePath;
+    var folder = relativePath.split("/");
+    alert(folder[0]);
+}
+
+function Expose(et, it, title) {
+    $("#message").text("starting exposure...");
+    var testimage = $('#testimage')[0].checked;
+    var et = $("#exposuretime").val();
+    var it = $("#imagetype").val();
+    var title = $("#imagetitle").val();
+    var cmd = "/api/exposure/expose?exposure_time=" + et + "&imagetype=" + it + "&title=" + title;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function (data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
-            });
-            return false;
-    }
-    
-    function Sequence() {
+        });
+    return false;
+}
+
+function TestImage() {
+    var testimage = $('#testimage')[0].checked;
+    var cmd = "/api/exposure/set_par?parameter=imagetest&value=" + imagetest;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    return false;
+}
+
+function Sequence() {
     $("#message").text("starting exposure sequence...");
-    $.getJSON('/obstool/sequence', {},
-        function(data) {
-        $("#message").text(data.message);
-        $("#command").text(data.command);
+    $.getJSON('/api/exposure/sequence', {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
         });
-        return false;
-    }
-    
-    function Reset() {
+    return false;
+}
+
+function Reset() {
     $("#message").text("resetting camera...");
-    $.getJSON('/obstool/reset', {},
-        function(data) {
-        $("#message").text(data.message);
-        $("#command").text(data.command);
+    $.getJSON('/api/exposure/reset', {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
         });
-        return false;
-    }
-    
-    function Initialize() {
-    $.getJSON('/obstool/initialize', {},
-        function(data) {
-        $("#message").text(data.message);
-        $("#command").text(data.command);
-        var prog = data.progress;
-        $("#progressbar").progressbar({value: prog});
-        $("#watchdog").text(data.watchdog);
-        $("#camtemp").text(data.camtemp);
-        $("#dewtemp").text(data.dewtemp);
-        $("#filename").text(data.filename);
-        $("#seqnumber").text(data.seqnumber);
-        $("#exposuretime").val(data.exposuretime);
-        $("#testbox").val(data.testimage);
-        $("#title").val(data.title);
-        if (data.testimage == 1) {
-           $('#testimage').prop("checked", true);
-        } else {
-           $('#testimage').prop("checked", false);
-        };
+    return false;
+}
+
+function Initialize() {
+    $.getJSON('/api/initialize', {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+            var prog = data.progress;
+            $("#progressbar").progressbar({ value: prog });
+            $("#watchdog").text(data.watchdog);
+            $("#camtemp").text(data.camtemp);
+            $("#dewtemp").text(data.dewtemp);
+            $("#filename").text(data.filename);
+            $("#seqnumber").text(data.seqnumber);
+            $("#exposuretime").val(data.exposuretime);
+            $("#testbox").val(data.testimage);
+            $("#title").val(data.title);
+            if (data.testimage == 1) {
+                $('#testimage').prop("checked", true);
+            } else {
+                $('#testimage').prop("checked", false);
+            };
         });
-        return false;
-    }
-    
+    return false;
+}

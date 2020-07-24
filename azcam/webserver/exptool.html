@@ -5,7 +5,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>AzCam Home</title>
+   <title>AzCam Exptool</title>
 
    <!-- Bootstrap -->
    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,13 +47,16 @@
                      <div class="card-header">Actions</div>
                      <div class="card-body">
                         <div class="btn-group-vertical btn-group-sm" role="group">
-                           <button type="button" class="btn btn-outline-primary mt-0">Expose</button>
-                           <button type="button" class="btn btn-outline-primary mt-1">Sequence</button>
-                           <button type="button" class="btn btn-outline-primary mt-1">Reset</button>
-                           <button type="button" class="btn btn-outline-primary mt-1">Pause</button>
-                           <button type="button" class="btn btn-outline-primary mt-1 disabled">Resume</button>
-                           <button type="button" class="btn btn-outline-primary mt-1 disabled">Readout</button>
-                           <button type="button" class="btn btn-outline-primary mt-1 ">Abort</button>
+                           <button type="button" class="btn btn-outline-primary mt-0" onclick="Expose()">Expose</button>
+                           <button type="button" class="btn btn-outline-primary mt-1"
+                              onclick="Sequence()">Sequence</button>
+                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Reset()">Reset</button>
+                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Pause()">Pause</button>
+                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Resume()"
+                              disabled">Resume</button>
+                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Readout()"
+                              disabled">Readout</button>
+                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Abort()">Abort</button>
                         </div>
                      </div>
                   </div> <!-- end card -->
@@ -66,8 +69,8 @@
 
                         <form class="form-inline">
                            <div class="form-group">
-                              <label for="formImageType">Image Type:</label>
-                              <select id="formImageType" class="form-control">
+                              <label for="imagetype">Image Type:</label>
+                              <select id="imagetype" class="form-control">
                                  <option>zero</option>
                                  <option>object</option>
                                  <option>flat</option>
@@ -149,7 +152,8 @@
                            <div id="timestamp">timestamp</div>
                         </div>
                         <div class="col-10">
-                           <span class="form-control" rows="1" id="message" name="message" title="messages">messages...</span>
+                           <span class="form-control" rows="1" id="message" name="message"
+                              title="messages">messages...</span>
                         </div>
                      </div>
 

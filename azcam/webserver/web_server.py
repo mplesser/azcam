@@ -64,11 +64,10 @@ class WebServer(object):
         # ******************************************************************************
         # api commands
         # ******************************************************************************
-        # @app.route("/monitor/<path:command>", methods=["GET"])
         @app.route("/api/<path:command>", methods=["GET"])
         def api(command):
             """
-            Remote web api commands. such as: /exposure/reset
+            Remote web api commands. such as: /api/exposure/reset
             """
 
             url = request.url
@@ -84,7 +83,8 @@ class WebServer(object):
 
         try:
             caller, kwargs = self.webparse(url)
-            reply = self.webcall(caller, kwargs)
+            reply = caller() if kwargs is None else caller(**kwargs)
+
         except azcam.AzcamError as e:
             if e.error_code == 4:
                 reply = "remote call not allowed"
@@ -125,15 +125,6 @@ class WebServer(object):
 
         return caller, kwargs
 
-    def webcall(self, caller, kwargs):
-        """
-        Make api call from webapi result.
-        """
-
-        # print(caller,kwargs)
-
-        return caller() if kwargs is None else caller(**kwargs)
-
     def make_response(self, command, reply):
 
         # generic response
@@ -143,7 +134,6 @@ class WebServer(object):
             "data": reply,
         }
 
-        # print(response)
         response = jsonify(response)
 
         return response
