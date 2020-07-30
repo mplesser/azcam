@@ -120,6 +120,31 @@ function Sequence() {
         s
     } f = 0;
 
+    var et = $("#exposuretime").val();
+    var it = $("#imagetype").val();
+    var title = $("#imagetitle").val();
+    var cmd = "/api/exposure/set_exposuretime?exposure_time=" + et;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    var cmd = "/api/exposure/set_image_type?imagetype=" + it;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    var cmd = "/api/exposure/set_image_title?title=" + title;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+
     var cmd = '/api/exposure/sequence?number_exposures=' + seq_total +
         "&flush_array_flag=" + sf + "&delay=" + seq_delay
     $.getJSON(cmd, {},
