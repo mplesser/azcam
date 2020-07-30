@@ -2,316 +2,392 @@
 <html lang="en">
 
 <head>
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>AzCam Exptool</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AzCam Exptool</title>
 
-   <!-- Bootstrap -->
-   <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="static/style_exptool.css">
-   <link rel="shortcut icon" href="static/favicon.ico">
+    <!-- Bootstrap -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/style_exptool.css">
+    <link rel="shortcut icon" href="static/favicon.ico">
 </head>
 
 <body>
 
-   <div class="container">
+    <div class="container">
 
-      <!-- Tab menu -->
-      <ul class="nav nav-pills" role="tablist">
-         <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#exposure-tab">Exposure</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#filename-tab">Filename</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#detector-tab">Detector</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#options-tab">Options</a>
-         </li>
-      </ul>
+        <!-- Tab menu -->
+        <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#exposure-tab">Exposure</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#filename-tab">Filename</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#detector-tab">Detector</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#options-tab">Options</a>
+            </li>
+        </ul>
 
-      <!-- Tab content -->
-      <div class="tab-content">
+        <!-- Tab content -->
+        <div class="tab-content">
 
-         <!-- Exposure tab -->
-         <div id="exposure-tab" class="container tab-pane active">
-            <h3>Exposure</h3>
+            <!-- Exposure tab -->
+            <div id="exposure-tab" class="container tab-pane active">
 
-            <div class="row">
+                <div class="row">
 
-               <div class="col-3">
-                  <div class="card border-primary mb-3">
-                     <div class="card-header">Actions</div>
-                     <div class="card-body">
-                        <div class="btn-group-vertical btn-group-sm" role="group">
-                           <button type="button" class="btn btn-outline-primary mt-0" onclick="Expose()">Expose</button>
-                           <button type="button" class="btn btn-outline-primary mt-1"
-                              onclick="Sequence()">Sequence</button>
-                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Reset()">Reset</button>
-                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Pause()">Pause</button>
-                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Resume()"
-                              disabled">Resume</button>
-                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Readout()"
-                              disabled">Readout</button>
-                           <button type="button" class="btn btn-outline-primary mt-1" onclick="Abort()">Abort</button>
+                    <div class="col-3">
+                        <div class="card border-primary mb-3">
+                            <div class="card-header">Actions</div>
+                            <div class="card-body">
+                                <div class="btn-group-vertical btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-primary mt-0"
+                                        id="expose">Expose</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1"
+                                        id="sequence">Sequence</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="reset">Reset</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="pause">Pause</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1"
+                                        id="resume">Resume</button>
+                                    <button type="button" class=" btn btn-outline-primary mt-1"
+                                        id="readout">Readout</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="abort">Abort</button>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div> <!-- end card -->
-               </div>
+                    </div>
 
-               <div class="col-9">
-                  <div class="card border-primary mb-3">
-                     <div class="card-header">Control</div>
-                     <div class="card-body">
+                    <div class="col-9">
+                        <div class="card border-primary mb-3">
+                            <div class="card-header">Control</div>
+                            <div class="card-body">
 
-                        <form class="form-inline">
-                           <div class="form-group">
-                              <label for="imagetype">Image Type:</label>
-                              <select id="imagetype" class="form-control">
-                                 <option>zero</option>
-                                 <option>object</option>
-                                 <option>flat</option>
-                                 <option>dark</option>
-                              </select>
-                           </div>
-                        </form>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <form class="form">
+                                            <div class="form-group">
+                                                <label for="imagetype">Image Type:</label>
+                                                <select id="imagetype" class="form-control">
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
 
-                        <label for="numseq">NumSeq:</label>
-                        <input type="number" id="numseq" value=1 name="numseq" title="number of exposures in sequence"
-                           min="1">
+                                    <div class="col-4">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="imagetest"
+                                                title="check to create a tets image">
+                                            <label class="form-check-label" for="imagetest">Test image</label>
+                                        </div>
+                                    </div>
 
-                        <div class="form-check">
-                           <input type="checkbox" class="form-check-input" id="testimage">
-                           <label class="form-check-label" for="testimage">Test image</label>
+                                    <div class="col-4">
+                                        <label for="exposuretime">Exposure time (s):</label>
+                                        <input type="number" id="exposuretime" value=1.0 name="exposuretime"
+                                            title="exposure time in seconds" min="0">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="seq_total">Num. Sequence Images:</label>
+                                        <input type="number" id="seq_total" value=1 name="seq_total"
+                                            title="number of exposures in sequence" min="1">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for=seq_delay>Sequence Delay:</label>
+                                        <input type="number" id="seq_delay" value=1 name="seq_delay"
+                                            title="sequence delay (sec)" min="0">
+                                    </div>
+                                    <div class="col-4">
+                                        <form class="form">
+                                            <div class="form-group">
+                                                <label for="seq_flush">Sequence Flushing:</label>
+                                                <select id="seq_flush" class="form-control" title="sequence flushing">
+                                                    <option>All</option>
+                                                    <option>Once</option>
+                                                    <option>None</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="imagetitle">Image Title:</label>
+                                        <input type="text" id="imagetitle" name="imagetitle" title="image title">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <!-- end card -->
+                    </div>
+                </div>
+                <!-- end row 1 -->
 
-                        <br>
-                        <label for="exposuretime">Exposure time (s):</label>
-                        <input type="number" id="exposuretime" value=1.0 name="exposuretime"
-                           title="exposure time in seconds" min="0">
+                <div class="row">
+                    <!-- status row -->
 
-                        <br>
-                        <label for="imagetitle">Image Title:</label>
-                        <input type="text" id="imagetitle" name="imagetitle" title="image title">
+                    <div class="col">
 
-                     </div>
-                  </div> <!-- end card -->
-               </div>
-            </div> <!-- end row 1 -->
+                        <div class="card border-primary mb-3">
+                            <div class="card-header" id="statustitle">Status</div>
+                            <div class="card-body">
 
-            <div class="row">
-               <!-- status row -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="imagefilename_status">Image filename:</label>
+                                        <span style="width: 100%;" id="imagefilename_status" name="imagefilename_status"
+                                            title="image filename"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="imagetitle_status">Image title:</label>
+                                        <span style="width: 100%;" id="imagetitle_status" name="imagetitle_status"
+                                            title="image filename"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="exposuretime_status">Exposure time (s):</label>
+                                        <span style="width: 100%;" id="exposuretime_status" name="exposuretime_status"
+                                            title="image filename"></span>
+                                    </div>
+                                </div>
 
-               <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label for="camtemp">CamTemp:</label>
+                                        <div id="camtemp" class="alert alert-dark" style="width: 50%;" role="alert">
+                                            -999.99
+                                        </div>
+                                    </div>
 
-                  <div class="card border-primary mb-3">
-                     <div class="card-header" id="statustitle">Status</div>
-                     <div class="card-body">
+                                    <div class="col-md-2">
+                                        <label for="dewtemp">DewTemp:</label>
+                                        <div id="dewtemp" class="alert alert-dark" style="width: 50%;" role="alert">
+                                            -999.99
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <label for="colbin_status">ColBin:</label>
+                                        <div id="colbin_status" class="alert alert-dark" style="width: 50%;"
+                                            role="alert">1
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <label for="rowbin_status">RowBin:</label>
+                                        <div id="rowbin_status" class="alert alert-dark" style="width: 50%;"
+                                            role="alert">1
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2">
+                                    <div id="timestamp">timestamp</div>
+                                </div>
+                                <div class="col-10">
+                                    <span class="form-control" rows="1" id="message" name="message"
+                                        title="messages">messages...</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="progress">
+                                        <div class="progress-bar" id="progressbar" role="progressbar"
+                                            title="integration or readout progress" aria-valuenow="50" aria-valuemin="0"
+                                            aria-valuemax="100">50</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </div>
+                <!-- end row 2 -->
+
+            </div>
+            <!-- end exposure tab -->
+
+            <!-- Filename tab -->
+            <div id="filename-tab" class="container tab-pane fade">
+
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Filename</div>
+                    <div class="card-body">
 
                         <div class="row">
-                           <div class="col-12">
-                              <label for="imagefilename">Image filename:</label>
-                              <span style="width: 100%;" id="imagefilename" name="imagefilename"
-                                 title="image filename"></span>
-                           </div>
+                            <div class="col-md-12">
+                                <label for="imagefolder">Directory name:</label>
+                                <input type="text" id="imagefolder" name="imagefolder" title="image directory name">
+                            </div>
                         </div>
 
                         <div class="row">
-                           <div class="col-2">
-                              <label for="camtemp">CamTemp:</label>
-                              <div id="camtemp" class="alert alert-dark" style="width: 50%;" role="alert">-999.99
-                              </div>
-                           </div>
-
-                           <div class="col-md-2">
-                              <label for="dewtemp">DewTemp:</label>
-                              <div id="dewtemp" class="alert alert-dark" style="width: 50%;" role="alert">-999.99
-                              </div>
-                           </div>
-
-                           <div class="col-2">
-                              <label for="colbin">ColBin:</label>
-                              <div id="colbin" class="alert alert-dark" style="width: 50%;" role="alert">1 </div>
-                           </div>
-
-                           <div class="col-2">
-                              <label for="rowbin">RowBin:</label>
-                              <div id="rowbin" class="alert alert-dark" style="width: 50%;" role="alert">1
-                              </div>
-                           </div>
-
+                            <div class="col-md-12">
+                                <label for=imagesequencenumber>Image Number:</label>
+                                <input type="number" id="imagesequencenumber" value=1 name="imagesequencenumber"
+                                    title="image sequence number" min="0">
+                            </div>
                         </div>
 
-                     </div>
-
-                     <div class="row">
-                        <div class="col-2">
-                           <div id="timestamp">timestamp</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="imageroot">Rootname:</label>
+                                <input type="text" id="imageroot" name="imageroot" title="image root name">
+                            </div>
                         </div>
-                        <div class="col-10">
-                           <span class="form-control" rows="1" id="message" name="message"
-                              title="messages">messages...</span>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="imageautoincrementsequencenumber" title="">
+                                    <label class="form-check-label" for="imageautoincrementsequencenumber"
+                                        title="increment sequence number after next exposure">Auto increment sequence
+                                        number</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="imageoverwrite"
+                                        title="">
+                                    <label class="form-check-label" for="imageoverwrite"
+                                        title="allow new image to overwrite existing image">Overwrite existing
+                                        image</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="imageincludesequencenumber" title="">
+                                    <label class="form-check-label" for="imageincludesequencenumber"
+                                        title="include a sequence number">Include sequence
+                                        number</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="imageautoname"
+                                        title="use ImageType in filename">
+                                    <label class="form-check-label" for="imageautoname">Auto Name</label>
+                                </div>
+                                <label for="rootname">Remote image mode:</label>
+                                <input type="text" id="remotemode" name="remotemode"
+                                    style="background-color: white; border-width: 1px; width: 3%;margin-left: 10px;"
+                                    title="Green when images will be sent from server to a remote machine">
+                            </div>
                         </div>
-                     </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end filename tab -->
 
-                     <div class="row">
-                        <div class="col">
-                           <div class="progress">
-                              <div class="progress-bar" id="progressbar" role="progressbar"
-                                 title="integration or readout progress" aria-valuenow="50" aria-valuemin="0"
-                                 aria-valuemax="100">50</div>
-                           </div>
+            <!-- Detector tab -->
+            <div id="detector-tab" class="container tab-pane fade">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Detector</div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-1">
+                                <label for=firstcol>FirstCol:</label>
+                                <input type="number" id="firstcol" value=1 name="firstcol"
+                                    title="first unbinned column number" min="1">
+                            </div>
+                            <div class="col-1">
+                                <label for=lastcol>LastCol:</label>
+                                <input type="number" id="lastcol" value=9999 name="lastcol"
+                                    title="last unbinned column number" min="1">
+                            </div>
+                            <div class="col-1">
+                                <label for=colbin>ColBin:</label>
+                                <input type="number" id="colbin" value=1 name="colbin" title="column binning" min="1">
+                            </div>
                         </div>
-                     </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for=firstcol>FirstRow:</label>
+                                <input type="number" id="firstrow" value=1 name="firstrow"
+                                    title="first unbinned row number" min="1">
+                            </div>
+                            <div class="col-1">
+                                <label for=lastrow>LastRow:</label>
+                                <input type="number" id="lastrow" value=9999 name="lastrow"
+                                    title="last unbinned row number" min="1">
+                            </div>
+                            <div class="col-1">
+                                <label for=rowbin>RowBin:</label>
+                                <input type="number" id="rowbin" value=1 name="rowbin" title="row binning" min="1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" id="fullframe" class="btn btn-primary mr-2 mt-2"
+                                        title="set ROI to full frame">Full Frame</button>
+                                    <button type="button" id="applyroi" name="applyroi" class="btn btn-primary mt-2"
+                                        title="apply detector parameters">Apply</button>
+                                </div>
+                            </div>
+                        </div>
 
-                  </div>
-               </div> <!-- end card -->
+                    </div>
+                </div>
             </div>
-         </div> <!-- end row 2 -->
+            <!-- end detector tab -->
 
-      </div> <!-- end exposure tab -->
+            <!-- Options tab -->
+            <div id="options-tab" class="container tab-pane fade"><br>
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Options</div>
+                    <div class="card-body">
 
-      <!-- Filename tab -->
-      <div id="filename-tab" class="container tab-pane fade">
+                        <input type="checkbox" id="flusharray" name="flusharray" value="flusharray"
+                            title="flush sensor before each exposure">
+                        <label for="flusharray"> Clear Array before each exposure</label><br>
 
-         <div class="card border-primary mb-3">
-            <div class="card-header">Filename</div>
-            <div class="card-body">
+                        <input type="checkbox" id="displayimage" name="displayimage" value="displayimage"
+                            title="display image locally after each exposure">
+                        <label for="displayimage"> Display image</label><br>
 
-               <div class="row">
-                  <div class="col-md-12">
-                     <label for="rootname">Directory name:</label>
-                     <input type="text" id="dirname" name="dirname" title="image directory name">
-                  </div>
-               </div>
+                        <input type="checkbox" id="instrumentenabled" name="instrumentenabled" value="instrumentenabled"
+                            title="enable instrument">
+                        <label for="instrumentenabled"> Enable Instrument</label><br>
 
-               <div class="row">
-                  <div class="col-md-12">
-                     <label for=imageseqnum>Sequence Number:</label>
-                     <input type="number" id="imageseqnum" value=1 name="imageseqnum" title="image sequence number"
-                        min="0">
-                  </div>
+                        <input type="checkbox" id="telescopeenabled" name="telescopeenabled" value="telescopename"
+                            title="enable telescope">
+                        <label for="telescopeenabled"> Enable Telescope</label><br>
 
-                  <div class="col-md-12">
-                     <label for="rootname">Rootname:</label>
-                     <input type="text" id="rootname" name="rootname" title="image root name">
-                  </div>
-               </div>
+                        <input type="checkbox" id="autotitle" name="autotitle" value="autotitle"
+                            title="automatically title images by ImageType">
+                        <label for="autotitle"> Auto title images</label><br>
 
-               <div class="row">
-
-                  <div class="col-md-8">
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="autoincseqnum" title="">
-                        <label class="form-check-label" for="defaultCheck1">Auto increment sequence number</label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="overwrite" title="">
-                        <label class="form-check-label" for="defaultCheck1">Overwrite existing image</label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="includeseqnum" title="">
-                        <label class="form-check-label" for="defaultCheck1">Include sequence number</label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="autoname" title="">
-                        <label class="form-check-label" for="defaultCheck1">Auto Name</label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="testimage" title="">
-                        <label class="form-check-label" for="defaultCheck1">Test Image</label>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <label for="rootname">Remote image mode:</label>
-                     <input type="text" id="remotemode" name="remotemode" style="background-color: green"
-                        title="ON when images will be sent to remote machine">
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div> <!-- end filename tab -->
+            <!-- end options tab -->
 
-      <!-- Detector tab -->
-      <div id="detector-tab" class="container tab-pane fade">
-         <div class="card border-primary mb-3">
-            <div class="card-header">Detector</div>
-            <div class="card-body">
+        </div>
+        <!-- end tab-content-->
 
-               <div class="row">
-                  <div class="col-md-1">
-                     <label for=firstcol>FirstCol:</label>
-                     <input type="number" id="firstcol" value=1 name="firstcol" title="first unbinned column number"
-                        min="1">
-                  </div>
-                  <div class="col-md-1">
-                     <label for=lastcol>LastCol:</label>
-                     <input type="number" id="lastcol" value=9999 name="lastcol" title="last unbinned column number"
-                        min="1">
-                  </div>
-                  <div class="col-md-1">
-                     <label for=colbin_detector>ColBin:</label>
-                     <input type="number" id="colbin_detector" value=1 name="colbin_detector" title="column binning"
-                        min="1">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-1">
-                     <label for=firstcol>FirstRow:</label>
-                     <input type="number" id="firstrow" value=1 name="firstrow" title="first unbinned row number"
-                        min="1">
-                  </div>
-                  <div class="col-md-1">
-                     <label for=lastrow>LastRow:</label>
-                     <input type="number" id="lastrow" value=9999 name="lastrow" title="last unbinned row number"
-                        min="1">
-                  </div>
-                  <div class="col-md-1">
-                     <label for=rowbin_detector>RowBin:</label>
-                     <input type="number" id="rowbin_detector" value=1 name="rowbin_detector" title="row binning"
-                        min="1">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-4">
-                     <div class="btn-group btn-group-sm" role="group">
-                        <button type="button" id="fullframe" class="btn btn-primary mr-2 mt-2"
-                           title="set ROI to ful frame">Full Frame</button>
-                        <button type="button" id="applyroi" class="btn btn-primary mt-2"
-                           title="apply detector parameters">Apply</button>
-                     </div>
-                  </div>
-               </div>
+    </div>
+    <!-- end container -->
 
-            </div>
-         </div>
-      </div> <!-- end detector tab -->
-
-      <!-- Options tab -->
-      <div id="options-tab" class="container tab-pane fade"><br>
-         <div class="card border-primary mb-3">
-            <div class="card-header">Options</div>
-            <div class="card-body">
-
-
-
-
-            </div>
-         </div>
-      </div> <!-- end options tab -->
-
-   </div> <!-- end tab-content-->
-
-   </div> <!-- end container -->
-
-   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-   <script src="static/jquery-3.4.1.min.js"></script>
-   <script src="static/popper.min.js"></script>
-   <script src="static/bootstrap/js/bootstrap.min.js"></script>
-   <script src="static/exptool.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="static/jquery-3.4.1.min.js"></script>
+    <script src="static/popper.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/exptool.js"></script>
 </body>
 
 </html>

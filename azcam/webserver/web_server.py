@@ -27,7 +27,9 @@ class WebServer(object):
         app = Flask(__name__, template_folder="")
         self.app = app
 
-        self.logcommands = 0
+        self.logcommands = 1
+
+        self.mock_mode = 0
 
         # define pages
         index_home = "index.html"
@@ -72,8 +74,14 @@ class WebServer(object):
 
             url = request.url
             if self.logcommands:
-                azcam.log(url, prefix="Web-> ")
-            reply = self.webapi(url)
+                if "api/exposure/get_status" not in url:
+                    azcam.log(url, prefix="Web-> ")
+            if self.mock_mode:
+                reply = "mock data"
+            else:
+                reply = self.webapi(url)
+                if self.logcommands and "api/exposure/get_status" not in url:
+                    azcam.log(reply, prefix="Web->   ")
             return self.make_response(command, reply)
 
     def webapi(self, url):
@@ -88,9 +96,10 @@ class WebServer(object):
         except azcam.AzcamError as e:
             if e.error_code == 4:
                 reply = "remote call not allowed"
+            else:
+                reply = f"webapi error: {repr(e)}"
         except Exception as e:
-            print(repr(e))
-            reply = "invalid API command"
+            reply = f"invalid API command: {url}"
 
         return reply
 

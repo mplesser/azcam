@@ -259,6 +259,32 @@ class Exposure(object):
 
         return [self.exposure_flag, azcam.db.exposureflags_rev[self.exposure_flag]]
 
+    def test(self, exposure_time=0.0, shutter=0):
+        """
+        Make a test exposure.
+        exposure_time is the exposure time in seconds
+        shutter is 0 for closed and 1 for open
+        title is the image title.
+        """
+
+        old_testimage = self.filename.test_image
+        old_imagetype = self.image_type
+        old_exposuretime = self.exposure_time
+        self.filename.test_image = 1
+
+        if shutter:
+            shutter_state = "object"
+        else:
+            shutter_state = "dark"
+
+        self.expose(exposure_time, shutter_state, "test image")
+
+        self.filename.test_image = old_testimage
+        self.image_type = old_imagetype
+        self.exposure_time = old_exposuretime
+
+        return
+
     def expose(self, exposure_time=-1, imagetype="", title=""):
         """
         Make a complete exposure.
