@@ -5,7 +5,7 @@ $(document).ready(function () {
     // get_status function which runs on a timer
     function getstatus() {
         $.getJSON('/api/exposure/get_status', {}, function (data) {
-            $("#imagetitle_status").text(data.data.imagetitle);
+            $("#imagetitle_status").text(decodeURI(data.data.imagetitle));
             $("#imagefilename_status").text(data.data.filename);
             $("#exposuretime_status").text(data.data.exposuretime);
             $("#camtemp").text(data.data.camtemp);
@@ -70,6 +70,9 @@ $("#readout").click(function () {
 });
 $("#abort").click(function () {
     Abort();
+});
+$("#save_pars").click(function () {
+    save_pars();
 });
 
 $("#imagetest").click(function () {
@@ -205,6 +208,17 @@ function Abort() {
     return false;
 }
 
+function save_pars() {
+    $("#message").text("saving parameters...");
+    $.getJSON('/api/exposure/save_pars', {},
+        function (data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    return false;
+}
+
+
 // ****************************************************************************
 // Filename pane
 // ****************************************************************************
@@ -233,7 +247,7 @@ $("#imageautoname").change(function () {
 function SetFilename() {
     $.getJSON('/api/exposure/get_par?parameter=imagefolder', {},
         function (data) {
-            $("#imagefolder").val(data.data);
+            $("#imagefolder").val(decodeURI(data.data));
         });
     $.getJSON('/api/exposure/get_par?parameter=imagesequencenumber', {},
         function (data) {
@@ -483,7 +497,7 @@ function Initialize() {
     // exposure tab - control box
     $.getJSON('/api/exposure/get_par?parameter=imagetitle', {},
         function (data) {
-            $("#imagetitle").val(data.data);
+            $("#imagetitle").val(decodeURI(data.data));
         });
     $.getJSON('/api/exposure/get_image_types', {},
         function (data) {

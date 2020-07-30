@@ -1578,6 +1578,16 @@ class Exposure(object):
 
         return azcam.utils.set_par(parameter, value)
 
+    def save_pars(self):
+        """
+        Save the current parameter set.
+        """
+
+        azcam.utils.update_pars(1)
+        azcam.db.genpars.parfile_write()
+
+        return
+
 
 class ReceiveData(object):
     """
