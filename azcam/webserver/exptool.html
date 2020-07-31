@@ -40,109 +40,118 @@
             <div id="exposure-tab" class="container tab-pane active">
 
                 <div class="row">
+                    <!-- control row -->
 
-                    <div class="col-3">
-                        <div class="card border-primary mb-3">
-                            <div class="card-header">Actions</div>
-                            <div class="card-body">
-                                <div class="btn-group-vertical btn-group-sm" role="group">
-                                    <button type="button" class="btn btn-outline-primary mt-0"
-                                        id="expose">Expose</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1"
-                                        id="sequence">Sequence</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1" id="reset">Reset</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1" id="pause">Pause</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1"
-                                        id="resume">Resume</button>
-                                    <button type="button" class=" btn btn-outline-primary mt-1"
-                                        id="readout">Readout</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1" id="abort">Abort</button>
-                                    <button type="button" class="btn btn-outline-primary mt-1" id="save_pars">Save
-                                        Pars</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-9">
+                    <div class="col-12">
                         <div class="card border-primary mb-3">
                             <div class="card-header">Control</div>
                             <div class="card-body itl">
 
                                 <div class="row itl">
-                                    <div class="col-2">
-                                        <form class="form">
-                                            <div class="form-group">
-                                                <label for="imagetype">Image Type:</label>
-                                                <select id="imagetype" class="form-control">
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
 
                                     <div class="col-2">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="imagetest"
-                                                title="check to create a tets image">
-                                            <label class="form-check-label" for="imagetest">Test image</label>
+                                        <div class="btn-group-vertical btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-outline-primary mt-0"
+                                                id="expose">Expose</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="sequence">Sequence</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="reset">Reset</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="pause">Pause</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="resume">Resume</button>
+                                            <button type="button" class=" btn btn-outline-primary mt-1"
+                                                id="readout">Readout</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="abort">Abort</button>
+                                            <button type="button" class="btn btn-outline-primary mt-1"
+                                                id="save_pars">Save
+                                                Pars</button>
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
-                                        <label for="exposuretime">Exposure time (s):</label>
-                                        <input type="number" id="exposuretime" value=1.0 name="exposuretime"
-                                            title="exposure time in seconds" min="0">
-                                    </div>
-                                </div>
+                                    <div class="col-10">
 
-                                <div class="row itl">
-                                    <div class="col-2">
-                                        <label for="seq_total">Num. Sequence Images:</label>
-                                        <input type="number" class="number_box" id="seq_total" value=1 name="seq_total"
-                                            title="number of exposures in sequence" min="1">
-                                    </div>
-                                    <div class="col-2">
-                                        <label for=seq_delay>Sequence Delay:</label>
-                                        <input type="number" id="seq_delay" value=1 name="seq_delay"
-                                            title="sequence delay (sec)" min="0">
-                                    </div>
-                                    <div class="col-2">
-                                        <form class="form">
-                                            <div class="form-group">
-                                                <label for="seq_flush">Sequence Flushing:</label>
-                                                <select id="seq_flush" class="form-control" title="sequence flushing">
-                                                    <option>All</option>
-                                                    <option>Once</option>
-                                                    <option>None</option>
-                                                </select>
+                                        <div class="row itl">
+                                            <div class="col-4">
+                                                <form class="form">
+                                                    <div class="form-group">
+                                                        <label for="imagetype">Image Type:</label>
+                                                        <select id="imagetype" class="form-control drop_box">
+                                                        </select>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
 
-                                <div class="row itl">
-                                    <div class="col-12">
-                                        <label for="imagetitle">Image Title:</label>
-                                        <input type="text" id="imagetitle" name="imagetitle" title="image title">
-                                    </div>
+                                            <div class="col-2">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="imagetest"
+                                                        title="check to create a tets image">
+                                                    <label class="form-check-label" for="imagetest">Test image</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="exposuretime">Exposure time (s):</label>
+                                                <input type="number" id="exposuretime" class="number_box" value=1.0
+                                                    name=" exposuretime" title="exposure time in seconds" min="0">
+                                            </div>
+                                        </div>
+
+                                        <div class="row itl">
+                                            <div class="col-4">
+                                                <label for="seq_total">Num. Sequence Images:</label>
+                                                <input type="number" id="seq_total" class="number_box" value=1
+                                                    name="seq_total" title="number of exposures in sequence" min="1">
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for=seq_delay>Sequence Delay:</label>
+                                                <input type="number" id="seq_delay" class="number_box" value=1
+                                                    name="seq_delay" title="sequence delay (sec)" min="0">
+                                            </div>
+
+                                            <div class="col-4">
+                                                <form class="form">
+                                                    <div class="form-group">
+                                                        <label for="seq_flush">Sequence Flushing:</label>
+                                                        <select id="seq_flush" class="form-control drop_box"
+                                                            title="sequence flushing">
+                                                            <option>All</option>
+                                                            <option>Once</option>
+                                                            <option>None</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="row itl">
+                                            <div class="col-12">
+                                                <label for="imagetitle">Image Title:</label>
+                                                <input type="text" id="imagetitle" name="imagetitle"
+                                                    title="image title">
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end column -->
                                 </div>
                             </div>
-                        </div>
-                        <!-- end card -->
+                        </div> <!-- end card -->
                     </div>
-                </div>
-                <!-- end row 1 -->
+                </div> <!-- end row 1 -->
 
                 <div class="row">
                     <!-- status row -->
 
-                    <div class="col">
+                    <div class="col-12">
 
                         <div class="card border-primary mb-3">
                             <div class="card-header" id="statustitle">Status</div>
                             <div class="card-body">
 
-                                <div class="row">
+                                <div class="row itl">
                                     <div class="col-12">
                                         <label for="imagefilename_status">Image filename:</label>
                                         <span style="width: 100%;" id="imagefilename_status" name="imagefilename_status"
@@ -165,31 +174,29 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <label for="camtemp">CamTemp:</label>
-                                        <div id="camtemp" class="alert alert-dark" style="width: 50%;" role="alert">
+                                        <div id="camtemp" class="number_box">
                                             -999.99
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-3">
                                         <label for="dewtemp">DewTemp:</label>
-                                        <div id="dewtemp" class="alert alert-dark" style="width: 50%;" role="alert">
+                                        <div id="dewtemp" class="number_box">
                                             -999.99
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <label for="colbin_status">ColBin:</label>
-                                        <div id="colbin_status" class="alert alert-dark" style="width: 50%;"
-                                            role="alert">1
+                                        <div id="colbin_status" class="number_box">1
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <label for="rowbin_status">RowBin:</label>
-                                        <div id="rowbin_status" class="alert alert-dark" style="width: 50%;"
-                                            role="alert">1
+                                        <div id="rowbin_status" class="number_box">1
                                         </div>
                                     </div>
 
@@ -198,10 +205,10 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-3">
                                     <div id="timestamp">timestamp</div>
                                 </div>
-                                <div class="col-10">
+                                <div class="col-9">
                                     <span class="form-control" rows="1" id="message" name="message"
                                         title="messages">messages...</span>
                                 </div>
@@ -217,14 +224,11 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <!-- end card -->
+                        </div> <!-- end card -->
                     </div>
-                </div>
-                <!-- end row 2 -->
+                </div> <!-- end row 2 -->
 
-            </div>
-            <!-- end exposure tab -->
+            </div> <!-- end exposure tab -->
 
             <!-- Filename tab -->
             <div id="filename-tab" class="container tab-pane fade">
@@ -261,7 +265,8 @@
                                     <input class="form-check-input" type="checkbox" value=""
                                         id="imageautoincrementsequencenumber" title="">
                                     <label class="form-check-label" for="imageautoincrementsequencenumber"
-                                        title="increment sequence number after next exposure">Auto increment sequence
+                                        title="increment sequence number after next exposure">Auto increment
+                                        sequence
                                         number</label>
                                 </div>
                                 <div class="form-check">

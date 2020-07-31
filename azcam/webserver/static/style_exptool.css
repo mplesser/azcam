@@ -9,15 +9,26 @@
 }
 
 .card-body {
-    padding: 1px;
+    padding-top: 1px;
     margin: 1px;
+    background-color: red;
 }
-.row.itl {
-    background-color: lightcyan;
+.row.itl{
+    /*background-color: lightcyan; */
     padding: 0px;
     margin: 0px;
-    }
+}
 
 .number_box {
-    width: 100%;
-    }
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: blue;
+    width: 50%;
+}
+
+.drop_box {
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: blue;
+    width: 50%;
+}
