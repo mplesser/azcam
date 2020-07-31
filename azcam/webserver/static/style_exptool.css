@@ -2,3 +2,22 @@
     width: 98%;
     height: 100%;
 }
+
+.card-header {
+    padding: 2px;
+    margin: 2px;
+}
+
+.card-body {
+    padding: 1px;
+    margin: 1px;
+}
+.row.itl {
+    background-color: lightcyan;
+    padding: 0px;
+    margin: 0px;
+    }
+
+.number_box {
+    width: 100%;
+    }
