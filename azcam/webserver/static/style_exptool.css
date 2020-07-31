@@ -1,6 +1,23 @@
+body {
+    min-width: 576px;
+}
+
+
+/*
 #message {
     width: 98%;
     height: 100%;
+}
+*/
+
+.tab-content {
+    margin-top: 5px;
+}
+
+.card {
+    padding-left: 15px;
+    margin-left: 1px;
+    margin-bottom: 0.5rem;
 }
 
 .card-header {
@@ -10,25 +27,33 @@
 
 .card-body {
     padding-top: 1px;
-    margin: 1px;
-    background-color: red;
-}
-.row.itl{
-    /*background-color: lightcyan; */
-    padding: 0px;
-    margin: 0px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    margin-left: 1px;
 }
 
 .number_box {
-    border-radius: 5px;
+    border-radius: 2px;
     border-width: 1px;
     border-color: blue;
     width: 50%;
 }
 
 .drop_box {
-    border-radius: 5px;
+    border-radius: 3px;
     border-width: 1px;
     border-color: blue;
     width: 50%;
+}
+
+.row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background-color: lightcoral;
+}
+
+[class*="col-"] {
+    padding-left: 2px !important;
+    padding-right: 0 !important;
+    background-color: lightcyan;
 }
