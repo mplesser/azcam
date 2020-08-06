@@ -21,29 +21,29 @@ body {
 }
 
 .card-header {
-    padding: 2px;
-    margin: 2px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: -10px;
 }
 
 .card-body {
     padding-top: 1px;
     padding-bottom: 1px;
-    padding-left: 1px;
-    margin-left: 1px;
+    padding-left: 2px;
+    margin-top: 2px;
+    margin-left: 2px;
 }
 
 .number_box {
     border-radius: 2px;
     border-width: 1px;
     border-color: blue;
-    width: 50%;
 }
 
 .drop_box {
-    border-radius: 3px;
+    border-radius: 2px;
     border-width: 1px;
     border-color: blue;
-    width: 50%;
 }
 
 .row {
