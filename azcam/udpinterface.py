@@ -24,7 +24,7 @@ class UDPinterface(object):
     def __init__(self):
 
         self.resp = []
-        self.wait = 1
+        self.wait = 1  # seconds
 
     def get_ip(self, hostName):
         """
