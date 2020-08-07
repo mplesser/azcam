@@ -127,11 +127,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
             else:
                 return "ERROR invalid object for remote command"
         else:
-            if cmd == "get_par":
-                reply = azcam.utils.get_par(tokens[1])
-            elif cmd == "set_par":
-                reply = azcam.utils.set_par(tokens[1], tokens[2])
-            elif cmd == "set_genpar":
+            if cmd == "set_genpar":
                 reply = azcam.db.genpars.set_par(*tokens[1:])
             elif cmd == "get_genpar":
                 reply = azcam.db.genpars.get_par(*tokens[1:])
