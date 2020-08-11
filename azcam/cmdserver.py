@@ -104,7 +104,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
         tokens = azcam.utils.parse(command, 0)  # parse
         cmd = tokens[0]
 
-        # command must be of form object.command or in default parser
+        # command must be of form object.command
         if "." in cmd:
             cmdobject, cmdcommand = cmd.split(".")
             if cmdobject in azcam.db.cmd_objects:
@@ -127,22 +127,9 @@ class CommandServer(socketserver.ThreadingTCPServer):
             else:
                 return "ERROR invalid object for remote command"
         else:
-            if cmd == "set_genpar":
-                reply = azcam.db.genpars.set_par(*tokens[1:])
-            elif cmd == "get_genpar":
-                reply = azcam.db.genpars.get_par(*tokens[1:])
-            elif cmd == "parfile_read":
-                reply = azcam.db.genpars.parfile_read()
-                azcam.utils.update_pars(0)
-            elif cmd == "parfile_write":
-                azcam.utils.update_pars(1)
-                reply = azcam.db.genpars.parfile_write()
-            elif cmd == "read_header_file":
-                reply = azcam.db.headers["system"].read_file(*tokens[1:])
-            else:
-                s = f"ERROR {cmd} not recognized"
-                azcam.log(s)
-                return s
+            s = f"ERROR {cmd} not recognized"
+            azcam.log(s)
+            return s
 
         # process reply
         if reply is None or reply == "":
@@ -247,7 +234,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # check special cases which do not leave cmdserver
                 # ************************************************************************
 
-                # close socket connection
+                # close socket connection to client
                 if command_string.lower().startswith("closeconnection"):
                     azcam.log(
                         f"closing connection to {self.cmdserver.socketnames[self.currentclient]}",
@@ -257,7 +244,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     self.request.close()
                     break
 
-                # register - register a client name as "register console"
+                # register - register a client name, example: register console
                 elif command_string.lower().startswith("register"):
                     x = command_string.split(" ")
                     self.cmdserver.socketnames[
@@ -266,13 +253,6 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     self.request.send(str.encode("OK\r\n"))
                     azcam.log(f"OK client {self.currentclient}", prefix=prefix_out)  # log reply
                     command_string = ""
-
-                # exit - send reply for handshake before closing socket and shutting down
-                elif command_string.lower().startswith("exit"):
-                    self.request.send(str.encode("OK\r\n"))
-                    azcam.log("%s" % "OK", prefix=prefix_out)  # log reply
-                    self.request.close()
-                    os._exit(0)  # kill python
 
                 # echo - for polling as "echo hello" or just "echo"
                 elif command_string.lower().startswith("echo"):
@@ -285,17 +265,17 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                         reply = "OK %s" % " ".join(s[1:])
                     self.request.send(str.encode(reply + "\r\n"))
                     if azcam.db.cmdserver.logcommands:
-                        azcam.log("%s" % reply, prefix=prefix_out)  # log reply
+                        azcam.log("%s" % reply, prefix=prefix_out)
                     command_string = ""
 
-                # update monitor
+                # update - azcammonitor
                 elif command_string.lower().startswith("update"):
                     if self.cmdserver.monitorinterface == 0:
-                        azcam.log("%s" % "ERROR", prefix=prefix_out)  # log reply
-                        reply = "ERROR Register Process"
+                        azcam.log("ERROR updating azcammonitor", prefix=prefix_out)
+                        reply = "ERROR updating azcammonitor"
                     else:
                         self.cmdserver.monitorinterface.Register()
-                        azcam.log("%s" % "OK", prefix=prefix_out)  # log reply
+                        azcam.log("%s" % "OK", prefix=prefix_out)
                         reply = "OK"
 
                     self.request.send(str.encode(reply + "\r\n"))

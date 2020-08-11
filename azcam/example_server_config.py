@@ -14,7 +14,7 @@ from azcam.controllers.controller import Controller
 from azcam.tempcons.tempcon import TempCon
 from azcam.exposures.exposure import Exposure
 from azcam.cmdserver import CommandServer
-from genpars import GenPars
+from azcam.genpars import GenPars
 
 print("Loading example server configuration")
 
@@ -50,11 +50,12 @@ exposure = Exposure()
 # read par file and set working directory
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
-azcam.db.genpars = GenPars()
+genpars = GenPars()
+
 try:
-    pardict = azcam.db.genpars.parfile_read(parfile)["azcamserver"]
+    pardict = genpars.parfile_read(parfile)["azcamserver"]
     azcam.utils.update_pars(0, pardict)
-    wd = azcam.db.genpars.get_par(pardict, "wd", "default")
+    wd = genpars.get_par(pardict, "wd", "default")
     azcam.utils.curdir(wd)
 except FileNotFoundError:
     azcam.log(f"Paramater file not found: {parfile}")
