@@ -281,6 +281,13 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     self.request.send(str.encode(reply + "\r\n"))
                     command_string = ""
 
+                # exit - send reply for handshake before closing socket and shutting down
+                elif command_string.lower().startswith("exit"):
+                    self.request.send(str.encode("OK\r\n"))
+                    azcam.log("%s" % "OK", prefix=prefix_out)  # log reply
+                    self.request.close()
+                    os._exit(0)  # kill python
+
                 # ************************************************************************
                 # process all other command_strings
                 # ************************************************************************
