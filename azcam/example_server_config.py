@@ -51,7 +51,6 @@ exposure = Exposure()
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
 genpars = GenPars()
-azcam.db.cmd_objects["genpars"] = genpars
 
 try:
     pardict = genpars.parfile_read(parfile)["azcamserver"]

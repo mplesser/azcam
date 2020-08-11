@@ -20,9 +20,10 @@ class GenPars(object):
         self.par_dict: dict = {}
 
         # save object
-        self.obj_id = "genpars"
-        setattr(azcam.db, self.obj_id, self)
-        azcam.db.cli_cmds[self.obj_id] = self
+        setattr(azcam.db, "genpars", self)
+        azcam.db.cli_cmds["genpars"] = self
+        if azcam.db.app_type == 1:
+            azcam.db.cmd_objects["genpars"] = self
 
     def parfile_read(self, parfilename: str = None) -> None:
         """
