@@ -108,9 +108,7 @@ class API(object):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand(
-            f'exposure.expose {exposure_time} {image_type} "{image_title}"'
-        )
+        return self.rcommand(f'exposure.expose {exposure_time} {image_type} "{image_title}"')
 
     def expose1(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -123,17 +121,21 @@ class API(object):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand(
-            f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
-        )
+        return self.rcommand(f'exposure.expose1 {exposure_time} {image_type} "{image_title}"')
 
-    def begin_exposure(self) -> None:
+    def begin_exposure(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
         """
         Initiates the first part of an exposure, through image flushing.
         This is an advanced function.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand("exposure.begin_exposure")
+        return self.rcommand(f'exposure.begin {exposure_time} {image_type} "{image_title}"')
 
     def integrate_exposure(self) -> None:
         """
@@ -141,7 +143,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.integrate_exposure")
+        return self.rcommand("exposure.integrate")
 
     def readout_exposure(self) -> None:
         """
@@ -149,7 +151,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.readout_exposure")
+        return self.rcommand("exposure.readout")
 
     def end_exposure(self) -> None:
         """
@@ -157,11 +159,9 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.end_exposure")
+        return self.rcommand("exposure.end")
 
-    def sequence(
-        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
-    ) -> Optional[str]:
+    def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
         """
         Take an exposure sequence.
 
@@ -176,9 +176,7 @@ class API(object):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self.rcommand(
-            f"exposure.sequence {number_exposures} {flush_array} {delay}"
-        )
+        return self.rcommand(f"exposure.sequence {number_exposures} {flush_array} {delay}")
 
     def sequence1(
         self, number_exposures: int = 1, flush_array: int = -1, delay=-1
@@ -197,9 +195,7 @@ class API(object):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self.rcommand(
-            f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
-        )
+        return self.rcommand(f"exposure.sequence1 {number_exposures} {flush_array} {delay}")
 
     def guide(self, number_exposures: int = 1) -> Optional[str]:
         """
@@ -296,10 +292,7 @@ class API(object):
         return self.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
-        self,
-        number_exposures: int = 1,
-        exposure_time: float = 1.0,
-        image_type: str = "zero",
+        self, number_exposures: int = 1, exposure_time: float = 1.0, image_type: str = "zero",
     ) -> Optional[str]:
         """
         Make test exposures, which overwrite previous test images.
@@ -315,9 +308,7 @@ class API(object):
 
         for _ in range(int(number_exposures)):
             try:
-                reply = self.rcommand(
-                    f'exposure.expose {exposure_time} {image_type} "test image"'
-                )
+                reply = self.rcommand(f'exposure.expose {exposure_time} {image_type} "test image"')
             except Exception as e:
                 self.set_par("imagetest", testflag)
                 raise (e)
@@ -399,9 +390,7 @@ class API(object):
 
         return self.rcommand(f"instrument.get_filter {filter_id}")
 
-    def get_current(
-        self, diode_id: int = 0, shutter_state: int = 1
-    ) -> Union[str, float]:
+    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
         """
         Returns a list of instrument diode currents.
 
@@ -461,13 +450,18 @@ class API(object):
         :param focus_type: focus type (absolute or step)
         """
 
-        return self.rcommand(
-            f"instrument.set_focus {focus_value} {focus_id} {focus_component} {focus_type}"
+        if focus_component == "instrument":
+            self.rcommand(
+            f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
+        )
+        elif focus_component == "telescope":
+            self.rcommand(
+            f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
         )
 
-    def get_focus(
-        self, focus_id: int = 0, focus_component: str = "instrument"
-    ) -> float:
+        return
+
+    def get_focus(self, focus_id: int = 0, focus_component: str = "instrument") -> float:
         """
         Get the current focus position.
 
@@ -475,7 +469,10 @@ class API(object):
         :param focus_component: focus type (typically instrument or telecope)
         """
 
-        reply = self.rcommand(f"instrument.get_focus {focus_id} {focus_component}")
+        if focus_component == "instrument":
+            reply = self.rcommand(f"instrument.get_focus {focus_id}")
+        elif focus_component == "telescope":
+            reply = self.rcommand(f"telescope.get_focus {focus_id}")
 
         return float(reply)
 
@@ -573,9 +570,7 @@ class API(object):
 
         return self.rcommand(f"{key_object}.get_keyword {keyword}")
 
-    def delete_keyword(
-        self, keyword: str, key_object: str = "controller"
-    ) -> Optional[str]:
+    def delete_keyword(self, keyword: str, key_object: str = "controller") -> Optional[str]:
         """
         Delete a keyword from a header.
         The keyword is set in the controller header by default.

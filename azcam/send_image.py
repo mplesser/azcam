@@ -13,6 +13,16 @@ class SendImage(object):
     def __init__(self):
 
         self.timeout = 10.0
+        self.overwrite = 0
+        self.test_image = 0
+
+        self.remote_imageserver_host = ""
+        self.remote_imageserver_port = 0
+        self.remote_imageserver_filename = ""
+        self.display_image = 0
+        self.filetype = 0
+        self.size_x = 0
+        self.size_y = 0
 
     def azcam_imageserver(self, filename, remote_imageserver_host, remote_imageserver_port):
         """
