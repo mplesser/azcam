@@ -221,13 +221,14 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     break
                 except Exception as e:
                     azcam.log(f"ERROR in handle: {e}", prefix="Err-> ")
+                    break
 
                 # ************************************************************************
                 # disconnect on empty string - important
                 # ************************************************************************
                 if command_string.strip() == "":
                     try:
-                        self.request.send(str.encode("OK\r\n"))  # reply 'OK' to empty string
+                        self.request.send(str.encode("OK\r\n"))
                     except OSError:
                         pass
                     except Exception as e:
@@ -260,7 +261,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     self.request.close()
                     break
 
-                # register - register a client name
+                # register - register a client name as "register console"
                 elif command_string.lower().startswith("register"):
                     x = command_string.split(" ")
                     self.cmdserver.socketnames[
@@ -277,7 +278,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     self.request.close()
                     os._exit(0)  # kill python
 
-                # echo - for polling
+                # echo - for polling as "echo hello" or just "echo"
                 elif command_string.lower().startswith("echo"):
                     s = command_string.split(" ")
                     if len(s) == 1:
