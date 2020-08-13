@@ -458,6 +458,8 @@ class API(object):
             self.rcommand(
             f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
         )
+        else:
+            raise azcam.AzcamError("unknown focus_component")
 
         return
 
@@ -473,6 +475,8 @@ class API(object):
             reply = self.rcommand(f"instrument.get_focus {focus_id}")
         elif focus_component == "telescope":
             reply = self.rcommand(f"telescope.get_focus {focus_id}")
+        else:
+            raise azcam.AzcamError("unknown focus_component")
 
         return float(reply)
 
@@ -711,7 +715,7 @@ class API(object):
         parameter = parameter.lower()
         value = None
 
-        reply = self.rcommand(f"get_par {parameter}")
+        reply = self.rcommand(f"exposure.get_par {parameter}")
         _, value = azcam.utils.get_datatype(reply)
 
         return value
@@ -727,7 +731,7 @@ class API(object):
 
         parameter = parameter.lower()
 
-        self.rcommand(f"set_par {parameter} {value}")
+        self.rcommand(f"exposure.set_par {parameter} {value}")
 
         return
 
