@@ -760,7 +760,7 @@ class Exposure(ReceiveData):
         :param number_rows: number of rows to shift (positive is toward readout, negative is away)
         """
 
-        number_rows = int(number_rows)
+        number_rows = int(float(number_rows))
 
         azcam.db.controller.parshift(number_rows)
 
