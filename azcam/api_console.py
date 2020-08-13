@@ -123,13 +123,19 @@ class API(object):
 
         return self.rcommand(f'exposure.expose1 {exposure_time} {image_type} "{image_title}"')
 
-    def begin_exposure(self) -> None:
+    def begin_exposure(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
         """
         Initiates the first part of an exposure, through image flushing.
         This is an advanced function.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand("exposure.begin_exposure")
+        return self.rcommand(f'exposure.begin {exposure_time} {image_type} "{image_title}"')
 
     def integrate_exposure(self) -> None:
         """
@@ -137,7 +143,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.integrate_exposure")
+        return self.rcommand("exposure.integrate")
 
     def readout_exposure(self) -> None:
         """
@@ -145,7 +151,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.readout_exposure")
+        return self.rcommand("exposure.readout")
 
     def end_exposure(self) -> None:
         """
@@ -153,7 +159,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.end_exposure")
+        return self.rcommand("exposure.end")
 
     def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
         """
@@ -444,9 +450,18 @@ class API(object):
         :param focus_type: focus type (absolute or step)
         """
 
-        return self.rcommand(
-            f"instrument.set_focus {focus_value} {focus_id} {focus_component} {focus_type}"
+        if focus_component == "instrument":
+            self.rcommand(
+            f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
         )
+        elif focus_component == "telescope":
+            self.rcommand(
+            f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
+        )
+        else:
+            raise azcam.AzcamError("unknown focus_component")
+
+        return
 
     def get_focus(self, focus_id: int = 0, focus_component: str = "instrument") -> float:
         """
@@ -456,7 +471,12 @@ class API(object):
         :param focus_component: focus type (typically instrument or telecope)
         """
 
-        reply = self.rcommand(f"instrument.get_focus {focus_id} {focus_component}")
+        if focus_component == "instrument":
+            reply = self.rcommand(f"instrument.get_focus {focus_id}")
+        elif focus_component == "telescope":
+            reply = self.rcommand(f"telescope.get_focus {focus_id}")
+        else:
+            raise azcam.AzcamError("unknown focus_component")
 
         return float(reply)
 

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
+
 requirements = [
-    "genpars",
     "loguru",
     "numpy",
     "matplotlib",
@@ -10,7 +10,8 @@ requirements = [
     "pypdf2",
     "pdfkit",
     "markdown",
- ]
+    "psutil",
+]
 
 
 with open("README.md", "r") as fh:
@@ -18,11 +19,11 @@ with open("README.md", "r") as fh:
 
 setup(
     name="azcam",
-    version="20.1",
+    version="20.2",
     description="azcam",
     long_description=long_description,
     author="Michael Lesser",
-    author_email="mlesser@email.arizona.edu",
+    author_email="mlesser@arizona.edu",
     keywords="ccd imaging astronomy observation observatory",
     packages=find_packages(),
     zip_safe=False,

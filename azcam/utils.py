@@ -510,9 +510,12 @@ def update_pars(write, par_dict=None):
 
     if par_dict is None:
         if azcam.db.app_type == 1:
-            par_dict = azcam.db.genpars.par_dict["azcamserver"]
+            dictname = "azcamserver"
         elif azcam.db.app_type == 2:
-            par_dict = azcam.db.genpars.par_dict["azcamconsole"]
+            dictname = "azcamconsole"
+        par_dict = azcam.db.genpars.par_dict[dictname]
+    elif type(par_dict) == str:
+        par_dict = azcam.db.genpars.par_dict[par_dict]
 
     keys = par_dict.keys()
     if keys is None:

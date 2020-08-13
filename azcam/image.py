@@ -441,6 +441,16 @@ class Image(object):
         Server types (self.server_type) are: azcam, lbtguider, and dataserver.
         """
 
+        self.sendimage.remote_imageserver_filename = self.remote_imageserver_filename
+        self.sendimage.overwrite = self.overwrite
+        self.sendimage.test_image =self.test_image
+        self.sendimage.remote_imageserver_host = self.remote_imageserver_host
+        self.sendimage.remote_imageserver_port = self.remote_imageserver_port
+        self.sendimage.display_image = self.display_image
+        self.sendimage.filetype = self.filetype
+        self.sendimage.size_x = self.size_x
+        self.sendimage.size_y = self.size_y
+
         if self.server_type == "azcam":
             self.sendimage.azcam_imageserver(
                 local_filename, self.remote_imageserver_host, self.remote_imageserver_port,

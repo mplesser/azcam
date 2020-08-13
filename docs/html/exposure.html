@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Exposure Class &mdash; azcam 20.1 documentation</title>
+  <title>Exposure Class &mdash; azcam 20.2 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Controller Class" href="controller.html" />
-    <link rel="prev" title="Plot Commands" href="plot.html" /> 
+    <link rel="prev" title="Utility Commands" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                20.1
+                20.2
               </div>
             
           
@@ -88,14 +88,16 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home - Azcam Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home - AzCam Documentation</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Exposure Class</a></li>
@@ -177,7 +179,7 @@
         <a href="controller.html" class="btn btn-neutral float-right" title="Controller Class" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="plot.html" class="btn btn-neutral float-left" title="Plot Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utility Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -197,7 +199,7 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
 <dl class="py class">
 <dt id="azcam.exposures.exposure.Exposure">
 <em class="property">class </em><code class="sig-name descname">Exposure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'exposure'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.exposures.receive_data.ReceiveData</span></code></p>
 <p>The Azcam Exposure class.
 Only required attributes and stub methods are defined here. Additional
 methods and attributes are added as needed in exposure-specific classes
@@ -453,6 +455,13 @@ Gets imagetypes from detector and instrument.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.get_par">
+<code class="sig-name descname">get_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.get_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of a parameter from the local azcamparameters dictionary.
+Returns None on error.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.get_pixels_remaining">
 <code class="sig-name descname">get_pixels_remaining</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.get_pixels_remaining" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return number of remaining pixels to be read (counts down).</p>
@@ -534,6 +543,12 @@ NumberExposures is the number of exposures to make, -1 loop forever</p>
 <dd><p>True when in an exposure sequence</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.mock_data">
+<code class="sig-name descname">mock_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.mock_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate mock data for demo mode.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="azcam.exposures.exposure.Exposure.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.name" title="Permalink to this definition">¶</a></dt>
@@ -589,9 +604,23 @@ Really sets a flag which is read in expose().</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.read_header_file">
+<code class="sig-name descname">read_header_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.read_header_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read header tempalte file.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.readout">
 <code class="sig-name descname">readout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.readout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exposure readout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.receive_image_data">
+<code class="sig-name descname">receive_image_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataSize</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.receive_image_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive binary image data from controller server.
+dataSize is bytes.
+new version: 15May2015 Zareba</p>
 </dd></dl>
 
 <dl class="py method">
@@ -599,6 +628,11 @@ Really sets a flag which is read in expose().</p>
 <code class="sig-name descname">record_current_times</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.record_current_times" title="Permalink to this definition">¶</a></dt>
 <dd><p>Record the current times and data info in the header.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.request_data">
+<code class="sig-name descname">request_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datacnt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.request_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.reset">
@@ -773,6 +807,13 @@ zero, object, dark, flat.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.set_par">
+<code class="sig-name descname">set_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.set_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of a parameter in the local azcamparameters dictionary.
+Returns None on error.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.set_ref_pixel">
 <code class="sig-name descname">set_ref_pixel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">XY</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.set_ref_pixel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the reference pixel.
@@ -871,6 +912,15 @@ Really sets a flag which is read in expose().</p>
 <dd><p>temporary image files</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.test">
+<code class="sig-name descname">test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exposure_time</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">shutter</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a test exposure.
+exposure_time is the exposure time in seconds
+shutter is 0 for closed and 1 for open
+title is the image title.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="azcam.exposures.exposure.Exposure.title">
 <code class="sig-name descname">title</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.title" title="Permalink to this definition">¶</a></dt>
@@ -905,7 +955,7 @@ Really the exposure object has no useful header so this does nothing.</p>
         <a href="controller.html" class="btn btn-neutral float-right" title="Controller Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="plot.html" class="btn btn-neutral float-left" title="Plot Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utility Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
