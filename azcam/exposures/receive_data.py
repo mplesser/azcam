@@ -1,6 +1,7 @@
 import socket
 
 import numpy
+import time
 import azcam
 
 
