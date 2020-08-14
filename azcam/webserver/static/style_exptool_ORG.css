@@ -1,3 +1,15 @@
+body {
+    min-width: 576px;
+}
+
+
+/*
+#message {
+    width: 98%;
+    height: 100%;
+}
+*/
+
 .tab-content {
     margin-top: 5px;
 }
@@ -23,11 +35,13 @@
 }
 
 .number_box {
+    border-radius: 2px;
     border-width: 1px;
     border-color: blue;
 }
 
 .drop_box {
+    border-radius: 2px;
     border-width: 1px;
     border-color: blue;
 }
