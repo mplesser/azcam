@@ -33,7 +33,7 @@ azcam.db.systemfolder = os.path.dirname(__file__)
 # enable logging
 # ****************************************************************
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", "azcam.log")
-azcam.utils.start_logging(azcam.db.logfile, "123")
+azcam.logging.start_logging(azcam.db.logfile, "123")
 azcam.log(f"Configuring azcam for {azcam.db.systemname}")
 
 # ****************************************************************

@@ -5,6 +5,7 @@ Contains the base Exposure class.
 import os
 import threading
 import time
+import datetime
 
 import numpy
 
@@ -1508,7 +1509,7 @@ class Exposure(ReceiveData):
             "filename": filename,
             "seqcount": seqcount,
             "seqtotal": seqtotal,
-            "timestamp": azcam.utils.timestamp(0),
+            "timestamp": self._timestamp(0),
             "imagetitle": azcam.utils.get_par("imagetitle"),
             "imagetype": azcam.utils.get_par("imagetype"),
             "imagetest": azcam.utils.get_par("imagetest"),
@@ -1562,6 +1563,26 @@ class Exposure(ReceiveData):
             expstate = ""
 
         return progress, expstate, explabel, expcolor
+
+    def _timestamp(self, precision=0):
+        """
+        Return a timestamp string.
+        precision is number of fractional seconds.
+        """
+
+        dateTimeObj = datetime.datetime.now()
+        timestamp = str(dateTimeObj)
+
+        if precision >= 6:
+            pass
+        elif precision == 0:
+            timestamp = timestamp[:-7]
+        else:
+            tosecs = timestamp[:-7]
+            frac = str(round(float(timestamp[-7:]), precision))
+            timestamp = tosecs + frac
+
+        return timestamp
 
     def get_par(self, parameter):
         """

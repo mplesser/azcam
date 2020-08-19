@@ -57,7 +57,7 @@ else:
 # ****************************************************************
 tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", f"console_{tt}.log")
-azcam.utils.start_logging(azcam.db.logfile)
+azcam.logging.start_logging(azcam.db.logfile)
 azcam.log(f"Configuring console for {azcam.db.systemname}")
 
 # ****************************************************************

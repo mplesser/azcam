@@ -1,5 +1,5 @@
 """
-General support commands for azcam code.
+General support commands for throughout azcam code.
 """
 
 import os
@@ -11,10 +11,7 @@ import tarfile
 import hashlib
 import fnmatch
 import shutil
-import datetime
 from typing import List
-
-from loguru import logger
 
 # keyboard checking is optional
 try:
@@ -23,28 +20,6 @@ except Exception:
     pass
 
 import azcam
-
-
-def timestamp(precision=0):
-    """
-    Return a timestamp string.
-    precision is number of fractional seconds.
-    """
-
-    dateTimeObj = datetime.datetime.now()
-    timestamp = str(dateTimeObj)
-
-    if precision >= 6:
-        pass
-    elif precision == 0:
-        timestamp = timestamp[:-7]
-    else:
-        tosecs = timestamp[:-7]
-        frac = str(round(float(timestamp[-7:]), precision))
-        timestamp = tosecs + frac
-
-    return timestamp
-
 
 # **************************************************************************************************
 # file and folder commands
@@ -148,95 +123,6 @@ def make_image_filename(imagefile):
         imagefile += ".fits"
 
     return fix_path(imagefile)
-
-
-def log(message, *args, prefix="Log-> ", level=1, logconsole=1):
-    """
-    Send a message to the logging system.
-    :param str message: String message to be logged
-    :param str args: Additional string message to be logged
-    :param str prefix: Prefix to be prepended to logged message, ex: 'log> '
-    :param int level: verbosity level for output
-    :param bool logconsole: set to False to not log to console
-    :return None:
-
-    Message is output to logger if level > db.verbosity.
-    Levels are:
-    0 => silent
-    1 => normal
-    2 => extended info
-    3 => debug
-    """
-
-    # don't log if level > global verbosity
-    if level > azcam.db.verbosity:
-        return
-
-    message = str(message)  # better for exceptions
-
-    if len(args) == 1:
-        message = message + " " + str(args[0])
-    elif len(args) > 1:
-        message = message + " " + " ".join(str(x) for x in args)
-
-    if message.startswith("'") or message.startswith('"'):
-        message = message[1:]
-
-    if prefix != "" and azcam.db.use_logprefix:
-        message = prefix + message
-
-    if azcam.db.logger is None:
-        if logconsole:
-            print(message)
-    else:
-        azcam.db._logconsole = logconsole
-        azcam.db.logger.info(f"{message}")
-        azcam.db._logconsole = 1
-
-    return
-
-
-def _logfilter(record):
-    return azcam.db._logconsole
-
-
-def start_logging(logfile="azcam.log", logtype="13", host="localhost", port=2406):
-    """
-    Start the azcam logger.
-
-    :param str logfile: base filename of log file. If not absolute path, will use db.systemfolder. Use None for no log file.
-    :param str logtype: code for loggers to start (1 console, 2 socket, 3 file, codes may be combined as '23')
-    :param Port: socket port number
-    """
-
-    azcam.db.logger = logger
-
-    # remove default logger for customization
-    try:
-        azcam.db.logger.remove(0)
-    except Exception:
-        pass
-
-    # console handler
-    if "1" in logtype:
-        azcam.db.logger.add(
-            sys.stdout, colorize=False, filter=_logfilter, format="{message}", enqueue=True,
-        )
-
-    # socket handler
-    if "2" in logtype:
-        pass
-
-    # rotating file handler
-    if "3" in logtype and (logfile is not None):
-        azcam.db.logger.add(
-            logfile,
-            format="{time:DD-MMM-YY HH:mm:ss.SSS} | {level} | {message}",
-            rotation="10 MB",
-            retention="1 week",
-        )
-
-    return
 
 
 def parse(String, SetType=0):
@@ -397,6 +283,7 @@ def show_menu(configs):
         return choice
 
     CONFIRMED = 0
+    choice = ""
     while not CONFIRMED:
         print("Select configuration number from list below:\n")
         i = 0
@@ -441,39 +328,6 @@ def show_menu(configs):
     return choice
 
 
-def check_reply(status):
-    """
-    Check if a list or string begins with ERROR.
-    If ERROR then return True and sets the internal ErrorStatus.
-
-    :return bool: True if error occurred
-    """
-
-    # if None, do nothing
-    if status is None:
-        return False
-
-    # if status is a string check beginning of string
-    if type(status) == str:
-        if status.startswith("ERROR"):
-            message = status.lstrip("ERROR").strip()
-            set_error_status("ERROR", message)
-            return True
-        else:
-            set_error_status()
-            return False
-
-    # now status must be a list
-    if status[0] == "ERROR":
-        if len(status) == 1:
-            status.append("Unknown error")
-        set_error_status(status[0], status[1])
-        return True
-    else:
-        set_error_status()
-        return False
-
-
 def set_error_status(ErrorFlag="OK", Message=""):
     """
     Sets the global *errorstatus* list database parameter.
@@ -513,6 +367,8 @@ def update_pars(write, par_dict=None):
             dictname = "azcamserver"
         elif azcam.db.app_type == 2:
             dictname = "azcamconsole"
+        else:
+            dictname = "azcamserver"
         par_dict = azcam.db.genpars.par_dict[dictname]
     elif type(par_dict) == str:
         par_dict = azcam.db.genpars.par_dict[par_dict]

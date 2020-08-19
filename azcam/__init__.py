@@ -7,7 +7,7 @@ import socket
 # bring these into azcam namespace so importing not required
 from .exceptions import AzcamError, AzcamWarning
 from .database import db
-from .utils import log
+from .logging import log
 from .image import Image
 from . import utils, plot, fits
 
