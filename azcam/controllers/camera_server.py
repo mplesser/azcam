@@ -41,9 +41,12 @@ class CameraServerInterface(object):
         if self.demo_mode:
             reply = ["DEMO", 0]
         else:
-            reply = self.socketserver.command(command, terminator)
-
-        return reply
+            try:
+                reply = self.socketserver.command(command, terminator)
+                return reply
+            except Exception as e:
+                if e.error_code == 2:
+                    raise azcam.AzcamError("Could not connect to camserver")
 
     def test(self):
         """
