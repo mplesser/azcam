@@ -1035,6 +1035,10 @@ class ControllerArc(Controller):
             for loop in range(loops):
                 value = loop if value == "counter" else value
                 reply = self.board_command("TDL", board, value)
+                if reply[0] == "ERROR":
+                    raise azcam.AzcamError(
+                        f"Communication to board {board} failed on loop {loop}: {reply[1]}"
+                    )
                 if int(reply[1]) == value:
                     continue
                 else:
