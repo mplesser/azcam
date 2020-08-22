@@ -10,7 +10,6 @@ requirements = [
     "pypdf2",
     "pdfkit",
     "markdown",
-    "psutil",
 ]
 
 

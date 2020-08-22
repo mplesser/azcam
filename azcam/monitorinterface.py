@@ -3,15 +3,12 @@
 # After registration the communication with the AzCam Monitor is based on TCP/IP.
 
 import socket
-import multiprocessing
-import time, ipaddress
 import os
 
 import azcam
 
 
 class MonitorInterface(object):
-
     def __init__(self):
 
         # Registration port (UDP)
@@ -21,7 +18,6 @@ class MonitorInterface(object):
         self.monitor_host = azcam.db.hostname
         # Command port
         self.command_port = azcam.db.cmdserver.port
-        
 
         # Process fileds:
         # Process ID
@@ -36,33 +32,44 @@ class MonitorInterface(object):
         self.watchdog = 0
         # Registration flag
         self.registered = 0
-        
+
         self.debug = 1
-        
-           
+
     def register(self):
         """
         Sends UDP register requests.
         """
-        
+
         self.proc_id = os.getpid()
-        
+
         command_port = str(self.command_port)
-        # register string: command = '1' 
-        cmd = "1 " + str(self.proc_id) + " " + self.system_name + " " + command_port + " " + self.monitor_host + " " + self.proc_path + " " + str(self.proc_flags) + " " + str(self.watchdog)
-        azcam.log("Monitor-azcam register: "  + cmd)
+        # register string: command = '1'
+        cmd = (
+            "1 "
+            + str(self.proc_id)
+            + " "
+            + self.system_name
+            + " "
+            + command_port
+            + " "
+            + self.monitor_host
+            + " "
+            + self.proc_path
+            + " "
+            + str(self.proc_flags)
+            + " "
+            + str(self.watchdog)
+        )
+        azcam.log("Monitor-azcam register: " + cmd)
         # create a new socket for sending register command
         udp_socketReg = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)      
-        
+        udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
         udp_socketReg.sendto(bytes(cmd, "utf-8"), (self.monitor_host, self.register_port))
-        
-        udp_socketReg.close()    
-        
+
+        udp_socketReg.close()
+
         self.registered = 1
 
         return
-        
-            
-
 
