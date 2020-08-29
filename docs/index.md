@@ -27,13 +27,13 @@ There are several operation modes of azcam. One is the server-side, usually impl
   
 Using the *azcam_itl* environment as an example, the server-side code to get the current system wavelength is:
 
-    from server_azcam_itl import exposure, instrument  # configures the server
+    from console_itl import exposure, instrument  # configures the server
     wavelength = instrument.get_wavelength()
     exposure.expose(30., 'dark', "a dark image title")
 
 For a console application (which usually connects to a separate server application), this would be:
 
-    import console_azcam_itl  # configures the console
+    import console_itl  # configures the console
     from azcam import api
     wavelength = api.get_wavelength()
     api.exposure.expose(30., 'dark', "a dark image title")
