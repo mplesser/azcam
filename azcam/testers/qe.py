@@ -3,9 +3,11 @@ import shutil
 import glob
 
 import numpy
-import matplotlib.pyplot as plt
 
 import azcam
+import azcam.plot
+from azcam.plot import plt
+import azcam.fits
 from azcam.console import api
 import azcam.testers
 from azcam.testers.testerbase import TesterBase

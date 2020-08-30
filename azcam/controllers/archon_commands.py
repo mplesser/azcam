@@ -1,4 +1,5 @@
 import azcam
+import azcam.fits
 from azcam.console import api
 
 # these are client-side commands

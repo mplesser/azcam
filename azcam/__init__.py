@@ -9,7 +9,7 @@ from .exceptions import AzcamError, AzcamWarning
 from .database import db
 from .logging import log
 from .image import Image
-from . import utils, plot, fits
+from . import utils
 
 # save this machine's hostname and ip address
 db.hostname = socket.gethostname()

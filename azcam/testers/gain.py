@@ -3,9 +3,10 @@ import shutil
 import os
 
 import numpy
-from astropy.io import fits as pyfits
 
 import azcam
+import azcam.fits
+from azcam.fits import pyfits
 from azcam.console import api
 import azcam.testers
 from azcam.testers.testerbase import TesterBase

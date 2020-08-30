@@ -322,7 +322,10 @@ class ControllerMag(Controller):
         # set keyword for file loaded
         if BoardNumber == 2:
             self.header.set_keyword(
-                "DSPFILE", os.path.basename(filename), "Timing board DSP code filename", str,
+                "DSPFILE",
+                os.path.basename(filename),
+                "Timing board DSP code filename",
+                str,
             )
 
         return
@@ -335,7 +338,9 @@ class ControllerMag(Controller):
         """
 
         self.camserver.load_file(BoardNumber, filename)
-        self.header.set_keyword("DSPFILE", os.path.basename(filename), "DSP code filename", str)
+        self.header.set_keyword(
+            "DSPFILE", os.path.basename(filename), "DSP code filename", str
+        )
 
         return
 

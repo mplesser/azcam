@@ -2,10 +2,12 @@ import os
 import math
 
 import numpy
-import matplotlib.pyplot as plt
-from astropy.io import fits as pyfits
 
 import azcam
+import azcam.plot
+from azcam.plot import plt
+import azcam.fits
+from azcam.fits import pyfits
 from azcam.console import api
 from azcam.testers.testerbase import TesterBase
 

@@ -7,6 +7,7 @@ Defines: sav, bf, sroi, sf, gf
 import azcam
 from azcam.console import api
 
+
 def sav():
     """Shortcut for parfile_write() saving current folder in database."""
 

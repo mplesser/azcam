@@ -8,9 +8,9 @@ import math
 import time
 
 import numpy
-from astropy.io import fits as pyfits
 
 import azcam
+from azcam.fits import pyfits
 from azcam.header import Header
 from azcam.focalplane import FocalPlane
 from azcam.send_image import SendImage
@@ -296,9 +296,13 @@ class Image(object):
         # image [row,cols] or [y,x]) - if image is not read from file
         if self.from_file != 1:
             if self.data.dtype == "float64":
-                self.buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float64")
+                self.buffer = numpy.empty(
+                    shape=[self.size_y, self.size_x], dtype="float64"
+                )
             else:
-                self.buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float32")
+                self.buffer = numpy.empty(
+                    shape=[self.size_y, self.size_x], dtype="float32"
+                )
 
         Offsets = self.offsets
         Scales = self.scales
@@ -374,7 +378,9 @@ class Image(object):
             for line in range(parAmps * dstAmpY, parAmps * dstAmpY + dstAmpY):
                 lineStart = 0
 
-                for currExt in range(extBase, extBase + self.focalplane.num_ser_amps_det):
+                for currExt in range(
+                    extBase, extBase + self.focalplane.num_ser_amps_det
+                ):
                     # copy one line from the current extension
 
                     indx = Ext[currExt] - 1  # current amplifier
@@ -410,7 +416,9 @@ class Image(object):
                         lineStart += self.lineLen
                         pixNum += self.lineLen
 
-                    if flip == 3:  # xy flip; get the flip line and reverse the readout sequence
+                    if (
+                        flip == 3
+                    ):  # xy flip; get the flip line and reverse the readout sequence
 
                         posX = (srcAmpY - srcLine - prescan2 - 1) * srcAmpX + prescan1
                         self.buffer[line][lineStart : lineStart + dstAmpX] = (
@@ -443,7 +451,7 @@ class Image(object):
 
         self.sendimage.remote_imageserver_filename = self.remote_imageserver_filename
         self.sendimage.overwrite = self.overwrite
-        self.sendimage.test_image =self.test_image
+        self.sendimage.test_image = self.test_image
         self.sendimage.remote_imageserver_host = self.remote_imageserver_host
         self.sendimage.remote_imageserver_port = self.remote_imageserver_port
         self.sendimage.display_image = self.display_image
@@ -453,15 +461,21 @@ class Image(object):
 
         if self.server_type == "azcam":
             self.sendimage.azcam_imageserver(
-                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
+                local_filename,
+                self.remote_imageserver_host,
+                self.remote_imageserver_port,
             )
         elif self.server_type == "lbtguider":
             self.sendimage.lbtguider(
-                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
+                local_filename,
+                self.remote_imageserver_host,
+                self.remote_imageserver_port,
             )
         elif self.server_type == "dataserver":
             self.sendimage.dataserver(
-                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
+                local_filename,
+                self.remote_imageserver_host,
+                self.remote_imageserver_port,
             )
         else:
             raise azcam.AzcamError("Unknown remote image server type")
@@ -692,7 +706,9 @@ class Image(object):
             # multiple extension file
             try:
                 hdr = pyfits.getheader(CurrentFile, 1)
-                section = hdr["DATASEC"]  # includes overscan, total binned pixels per amp
+                section = hdr[
+                    "DATASEC"
+                ]  # includes overscan, total binned pixels per amp
                 section = section.lstrip("[")
                 section = section.split(":")
                 fc = int(section[0])
@@ -732,7 +748,9 @@ class Image(object):
             self.focalplane.numrows_amp = numrows
 
             self.focalplane.numcols_image = numcols * self.focalplane.num_ser_amps_det
-            self.focalplane.NumPixels = self.focalplane.numpix_amp * self.focalplane.numamps_image
+            self.focalplane.NumPixels = (
+                self.focalplane.numpix_amp * self.focalplane.numamps_image
+            )
             self.focalplane.numrows_image = numrows * self.focalplane.num_par_amps_det
 
             self.size_x = numcols * self.focalplane.num_ser_amps_det
@@ -750,18 +768,42 @@ class Image(object):
                 for indx in range(1, NumExt + 1):
                     # read the focal plane keywords
                     try:
-                        self.focalplane.ampcfg[indx - 1] = self.hdulist[indx].header["AMP-CFG"]
-                        self.focalplane.detnum[indx - 1] = self.hdulist[indx].header["DET-NUM"]
-                        self.focalplane.extnum[indx - 1] = self.hdulist[indx].header["EXT-NUM"]
-                        self.focalplane.jpgext[indx - 1] = self.hdulist[indx].header["JPG-EXT"]
-                        self.focalplane.detpos_x[indx - 1] = self.hdulist[indx].header["DET-POSX"]
-                        self.focalplane.detpos_y[indx - 1] = self.hdulist[indx].header["DET-POSY"]
-                        self.focalplane.extpos_x[indx - 1] = self.hdulist[indx].header["EXT-POSX"]
-                        self.focalplane.extpos_y[indx - 1] = self.hdulist[indx].header["EXT-POSY"]
-                        self.focalplane.amppix1[indx - 1] = self.hdulist[indx].header["AMP-PIX1"]
-                        self.focalplane.amppix2[indx - 1] = self.hdulist[indx].header["AMP-PIX2"]
-                        self.focalplane.refpix1[indx - 1] = self.hdulist[indx].header["CRPIX1"]
-                        self.focalplane.refpix2[indx - 1] = self.hdulist[indx].header["CRPIX2"]
+                        self.focalplane.ampcfg[indx - 1] = self.hdulist[indx].header[
+                            "AMP-CFG"
+                        ]
+                        self.focalplane.detnum[indx - 1] = self.hdulist[indx].header[
+                            "DET-NUM"
+                        ]
+                        self.focalplane.extnum[indx - 1] = self.hdulist[indx].header[
+                            "EXT-NUM"
+                        ]
+                        self.focalplane.jpgext[indx - 1] = self.hdulist[indx].header[
+                            "JPG-EXT"
+                        ]
+                        self.focalplane.detpos_x[indx - 1] = self.hdulist[indx].header[
+                            "DET-POSX"
+                        ]
+                        self.focalplane.detpos_y[indx - 1] = self.hdulist[indx].header[
+                            "DET-POSY"
+                        ]
+                        self.focalplane.extpos_x[indx - 1] = self.hdulist[indx].header[
+                            "EXT-POSX"
+                        ]
+                        self.focalplane.extpos_y[indx - 1] = self.hdulist[indx].header[
+                            "EXT-POSY"
+                        ]
+                        self.focalplane.amppix1[indx - 1] = self.hdulist[indx].header[
+                            "AMP-PIX1"
+                        ]
+                        self.focalplane.amppix2[indx - 1] = self.hdulist[indx].header[
+                            "AMP-PIX2"
+                        ]
+                        self.focalplane.refpix1[indx - 1] = self.hdulist[indx].header[
+                            "CRPIX1"
+                        ]
+                        self.focalplane.refpix2[indx - 1] = self.hdulist[indx].header[
+                            "CRPIX2"
+                        ]
 
                         DetSec = self.hdulist[indx].header["DETSEC"]
                         DetSec = (DetSec.lstrip("[").rstrip("]")).split(",")
@@ -773,8 +815,12 @@ class Image(object):
                             self.focalplane.amppix2[indx - 1]
                         ) - float(DetSec[1].split(":")[0])
 
-                        self.focalplane.AmpPosX[indx - 1] = self.hdulist[indx].header["AMP-POSX"]
-                        self.focalplane.AmpPosY[indx - 1] = self.hdulist[indx].header["AMP-POSY"]
+                        self.focalplane.AmpPosX[indx - 1] = self.hdulist[indx].header[
+                            "AMP-POSX"
+                        ]
+                        self.focalplane.AmpPosY[indx - 1] = self.hdulist[indx].header[
+                            "AMP-POSY"
+                        ]
 
                     except KeyError:
                         pass
@@ -782,27 +828,65 @@ class Image(object):
                     # read the WCS keywords from main header
                     try:
                         # image transformation keywords
-                        self.focalplane.wcs.atm_1_1[indx - 1] = self.hdulist[indx].header["ATM1_1"]
-                        self.focalplane.wcs.atm_2_2[indx - 1] = self.hdulist[indx].header["ATM2_2"]
-                        self.focalplane.wcs.atv1[indx - 1] = self.hdulist[indx].header["ATV1"]
-                        self.focalplane.wcs.ltv_2[indx - 1] = self.hdulist[indx].header["ATV2"]
-                        self.focalplane.wcs.ltm_1_1[indx - 1] = self.hdulist[indx].header["LTM1_1"]
-                        self.focalplane.wcs.ltm_2_2[indx - 1] = self.hdulist[indx].header["LTM2_2"]
-                        self.focalplane.wcs.ltv_1[indx - 1] = self.hdulist[indx].header["LTV1"]
-                        self.focalplane.wcs.ltv_2[indx - 1] = self.hdulist[indx].header["LTV2"]
-                        self.focalplane.wcs.dtm_1_1[indx - 1] = self.hdulist[indx].header["DTM1_1"]
-                        self.focalplane.wcs.dtm_2_2[indx - 1] = self.hdulist[indx].header["DTM2_2"]
-                        self.focalplane.wcs.dtv_1[indx - 1] = self.hdulist[indx].header["DTV1"]
-                        self.focalplane.wcs.dtv_2[indx - 1] = self.hdulist[indx].header["DTV2"]
+                        self.focalplane.wcs.atm_1_1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["ATM1_1"]
+                        self.focalplane.wcs.atm_2_2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["ATM2_2"]
+                        self.focalplane.wcs.atv1[indx - 1] = self.hdulist[indx].header[
+                            "ATV1"
+                        ]
+                        self.focalplane.wcs.ltv_2[indx - 1] = self.hdulist[indx].header[
+                            "ATV2"
+                        ]
+                        self.focalplane.wcs.ltm_1_1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["LTM1_1"]
+                        self.focalplane.wcs.ltm_2_2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["LTM2_2"]
+                        self.focalplane.wcs.ltv_1[indx - 1] = self.hdulist[indx].header[
+                            "LTV1"
+                        ]
+                        self.focalplane.wcs.ltv_2[indx - 1] = self.hdulist[indx].header[
+                            "LTV2"
+                        ]
+                        self.focalplane.wcs.dtm_1_1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["DTM1_1"]
+                        self.focalplane.wcs.dtm_2_2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["DTM2_2"]
+                        self.focalplane.wcs.dtv_1[indx - 1] = self.hdulist[indx].header[
+                            "DTV1"
+                        ]
+                        self.focalplane.wcs.dtv_2[indx - 1] = self.hdulist[indx].header[
+                            "DTV2"
+                        ]
 
                         # WCS keywords
-                        self.focalplane.wcs.rot_deg[indx - 1] = self.hdulist[indx].header["ROT-DEG"]
-                        self.focalplane.wcs.scale1[indx - 1] = self.hdulist[indx].header["SCALE1"]
-                        self.focalplane.wcs.scale2[indx - 1] = self.hdulist[indx].header["SCALE2"]
-                        self.focalplane.wcs.cd_1_1[indx - 1] = self.hdulist[indx].header["CD1_1"]
-                        self.focalplane.wcs.cd_1_2[indx - 1] = self.hdulist[indx].header["CD1_2"]
-                        self.focalplane.wcs.cd_2_1[indx - 1] = self.hdulist[indx].header["CD2_1"]
-                        self.focalplane.wcs.cd_2_2[indx - 1] = self.hdulist[indx].header["CD2_2"]
+                        self.focalplane.wcs.rot_deg[indx - 1] = self.hdulist[
+                            indx
+                        ].header["ROT-DEG"]
+                        self.focalplane.wcs.scale1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["SCALE1"]
+                        self.focalplane.wcs.scale2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["SCALE2"]
+                        self.focalplane.wcs.cd_1_1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["CD1_1"]
+                        self.focalplane.wcs.cd_1_2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["CD1_2"]
+                        self.focalplane.wcs.cd_2_1[indx - 1] = self.hdulist[
+                            indx
+                        ].header["CD2_1"]
+                        self.focalplane.wcs.cd_2_2[indx - 1] = self.hdulist[
+                            indx
+                        ].header["CD2_2"]
 
                     except KeyError:
                         pass
@@ -850,14 +934,22 @@ class Image(object):
         if self.array_type == "float64":
             self.buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float64")
 
-            self.in_buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float64")
-            self.out_buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float64")
+            self.in_buffer = numpy.empty(
+                shape=[self.size_y, self.size_x], dtype="float64"
+            )
+            self.out_buffer = numpy.empty(
+                shape=[self.size_y, self.size_x], dtype="float64"
+            )
             self.in_buffer = self.data.astype("float64")
         else:
             self.buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float32")
 
-            self.in_buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float32")
-            self.out_buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float32")
+            self.in_buffer = numpy.empty(
+                shape=[self.size_y, self.size_x], dtype="float32"
+            )
+            self.out_buffer = numpy.empty(
+                shape=[self.size_y, self.size_x], dtype="float32"
+            )
             self.in_buffer = self.data.astype("float32")
 
         # set parameters
@@ -995,7 +1087,9 @@ class Image(object):
             numrows_amp = self.focalplane.numrows_amp
             numcols_amp = self.focalplane.numcols_amp
             data = numpy.ndarray(
-                shape=(numrows_amp, numcols_amp), dtype="<u2", buffer=self.data[extnum - 1],
+                shape=(numrows_amp, numcols_amp),
+                dtype="<u2",
+                buffer=self.data[extnum - 1],
             )
 
             hdu = pyfits.ImageHDU(data=data, name=str(extname))
@@ -1111,7 +1205,9 @@ class Image(object):
 
         # squeeze the data into 16 bit numbers
         for i in range(self.num_extensions):
-            self.hdulist[i + 1].data = self.hdulist[i + 1].data.astype("uint16").squeeze()
+            self.hdulist[i + 1].data = (
+                self.hdulist[i + 1].data.astype("uint16").squeeze()
+            )
 
         # write it all to a disk file and close
         self.hdulist.writeto(filename)
@@ -1128,8 +1224,12 @@ class Image(object):
         numHDUs = self.focalplane.numamps_image
         if numHDUs == 1:  # no extensions for single amp
             numHDUs = 0
-        hdu.header.set("NEXTEND", numHDUs, "Number of extensions")  # near top of FITS header
-        hdu.header.set("BITPIX", 16, "array data type")  # so 8 bits never shows up in PHU
+        hdu.header.set(
+            "NEXTEND", numHDUs, "Number of extensions"
+        )  # near top of FITS header
+        hdu.header.set(
+            "BITPIX", 16, "array data type"
+        )  # so 8 bits never shows up in PHU
         # hdu.header.set('BZERO',32768.0)   # these 2 new for ushort in IRAF header 07sep10
         # hdu.header.set('BSCALE',1.0)
 
@@ -1150,8 +1250,12 @@ class Image(object):
         # CCDSUM is binning
         s = "%d %d" % (self.focalplane.col_bin, self.focalplane.row_bin)
         hdu.header.set("CCDSUM", s, "CCD pixel summing")
-        hdu.header.set("CCDBIN1", self.focalplane.col_bin, "Binning factor along axis 1")
-        hdu.header.set("CCDBIN2", self.focalplane.row_bin, "Binning factor along axis 2")
+        hdu.header.set(
+            "CCDBIN1", self.focalplane.col_bin, "Binning factor along axis 1"
+        )
+        hdu.header.set(
+            "CCDBIN2", self.focalplane.row_bin, "Binning factor along axis 2"
+        )
 
         # filename at acquisition (no folder)
         filename = self.filename
@@ -1198,8 +1302,12 @@ class Image(object):
         numHDUs = 2
 
         hdu.header.set("EXTEND", True, "")
-        hdu.header.set("NEXTEND", numHDUs, "Number of extensions")  # near top of FITS header
-        hdu.header.set("BITPIX", 16, "array data type")  # so 8 bits never shows up in PHU
+        hdu.header.set(
+            "NEXTEND", numHDUs, "Number of extensions"
+        )  # near top of FITS header
+        hdu.header.set(
+            "BITPIX", 16, "array data type"
+        )  # so 8 bits never shows up in PHU
         # hdu.header.set('BZERO',32768.0)   # these 2 new for ushort in IRAF header 07sep10
         # hdu.header.set('BSCALE',1.0)
 
@@ -1212,8 +1320,12 @@ class Image(object):
         # CCDSUM is binning
         s = "%d %d" % (self.focalplane.col_bin, self.focalplane.row_bin)
         hdu.header.set("CCDSUM", s, "CCD pixel summing")
-        hdu.header.set("CCDBIN1", self.focalplane.col_bin, "Binning factor along axis 1")
-        hdu.header.set("CCDBIN2", self.focalplane.row_bin, "Binning factor along axis 2")
+        hdu.header.set(
+            "CCDBIN1", self.focalplane.col_bin, "Binning factor along axis 1"
+        )
+        hdu.header.set(
+            "CCDBIN2", self.focalplane.row_bin, "Binning factor along axis 2"
+        )
 
         # filename at acquisition (no folder)
         filename = self.filename
@@ -1256,11 +1368,13 @@ class Image(object):
         # make nice header text
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================", after=curpos,
+            "==================================================================",
+            after=curpos,
         )
         hdu.header.add_comment("Image", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================", after=curpos + 2,
+            "==================================================================",
+            after=curpos + 2,
         )
         curpos = curpos + 3
 
@@ -1323,12 +1437,16 @@ class Image(object):
         self.origsecx1 = 1
         # self.origsecx2	= self.coltotal/self.col_bin GSZ
         self.origsecx2 = (
-            self.focalplane.numcols_amp * self.focalplane.num_ser_amps_det / self.focalplane.col_bin
+            self.focalplane.numcols_amp
+            * self.focalplane.num_ser_amps_det
+            / self.focalplane.col_bin
         )
         self.origsecy1 = 1
         # self.origsecy2	= self.rowtotal/self.row_bin
         self.origsecy2 = (
-            self.focalplane.numrows_amp * self.focalplane.num_par_amps_det / self.focalplane.row_bin
+            self.focalplane.numrows_amp
+            * self.focalplane.num_par_amps_det
+            / self.focalplane.row_bin
         )
 
         # determine amplifier orientation: new version GSZ 04.14.2011
@@ -1392,17 +1510,30 @@ class Image(object):
                 self.focalplane.numvisrows_amp,
             )
         else:
-            s = "[1:%d,1:%d]" % (self.focalplane.numviscols_amp, self.focalplane.numvisrows_amp,)
+            s = "[1:%d,1:%d]" % (
+                self.focalplane.numviscols_amp,
+                self.focalplane.numvisrows_amp,
+            )
         hdu.header.set("BIASSEC", s, "Bias section", after=curpos)  # string
         curpos += 1
 
         # DATASEC is data region
-        s = "[%d:%d,%d:%d]" % (self.datasecx1, self.datasecx2, self.datasecy1, self.datasecy2,)
+        s = "[%d:%d,%d:%d]" % (
+            self.datasecx1,
+            self.datasecx2,
+            self.datasecy1,
+            self.datasecy2,
+        )
         hdu.header.set("DATASEC", s, "Data section", after=curpos)  # string
         curpos += 1
 
         # TRIMSEC is trim region for trimming and display
-        s = "[%d:%d,%d:%d]" % (self.trimsecx1, self.trimsecx2, self.trimsecy1, self.trimsecy2,)
+        s = "[%d:%d,%d:%d]" % (
+            self.trimsecx1,
+            self.trimsecx2,
+            self.trimsecy1,
+            self.trimsecy2,
+        )
         hdu.header.set("TRIMSEC", s, "Trim section", after=curpos)  # string
         curpos += 1
 
@@ -1412,16 +1543,36 @@ class Image(object):
 
         if ampflip == 0:
             # no flip
-            s = "[%d:%d,%d:%d]" % (self.ccdsecX1, self.ccdsecX2, self.ccdsecY1, self.ccdsecY2,)
+            s = "[%d:%d,%d:%d]" % (
+                self.ccdsecX1,
+                self.ccdsecX2,
+                self.ccdsecY1,
+                self.ccdsecY2,
+            )
         elif ampflip == 1:
             # flip in x
-            s = "[%d:%d,%d:%d]" % (self.ccdsecX2, self.ccdsecX1, self.ccdsecY1, self.ccdsecY2,)
+            s = "[%d:%d,%d:%d]" % (
+                self.ccdsecX2,
+                self.ccdsecX1,
+                self.ccdsecY1,
+                self.ccdsecY2,
+            )
         elif ampflip == 2:
             # flip in y
-            s = "[%d:%d,%d:%d]" % (self.ccdsecX1, self.ccdsecX2, self.ccdsecY2, self.ccdsecY1,)
+            s = "[%d:%d,%d:%d]" % (
+                self.ccdsecX1,
+                self.ccdsecX2,
+                self.ccdsecY2,
+                self.ccdsecY1,
+            )
         elif ampflip == 3:
             # flip both
-            s = "[%d:%d,%d:%d]" % (self.ccdsecX2, self.ccdsecX1, self.ccdsecY2, self.ccdsecY1,)
+            s = "[%d:%d,%d:%d]" % (
+                self.ccdsecX2,
+                self.ccdsecX1,
+                self.ccdsecY2,
+                self.ccdsecY1,
+            )
 
         hdu.header.set("AMPSEC", s, "Amplifier section", after=curpos)  # string
         curpos += 1
@@ -1431,12 +1582,18 @@ class Image(object):
 
         # amplifier's positions for CCDSEC
         if self.focalplane.detpos_x[extnum - 1] > 1:
-            Nx = self.focalplane.extpos_x[extnum - 1] - self.focalplane.detpos_x[extnum - 1]
+            Nx = (
+                self.focalplane.extpos_x[extnum - 1]
+                - self.focalplane.detpos_x[extnum - 1]
+            )
         else:
             Nx = nx
 
         if self.focalplane.detpos_y[extnum - 1] > 1:
-            Ny = self.focalplane.extpos_y[extnum - 1] - self.focalplane.detpos_y[extnum - 1]
+            Ny = (
+                self.focalplane.extpos_y[extnum - 1]
+                - self.focalplane.detpos_y[extnum - 1]
+            )
         else:
             Ny = ny
 
@@ -1515,10 +1672,14 @@ class Image(object):
             Y_Val2 = Ny * lastRow
 
             # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
-            xCCD1 = ((Nx * self.focalplane.ampvispix_x) - skipX1) / self.focalplane.col_bin
+            xCCD1 = (
+                (Nx * self.focalplane.ampvispix_x) - skipX1
+            ) / self.focalplane.col_bin
             if xCCD1 == 0:
                 xCCD1 = 1
-            xCCD2 = ((Nx - 1) * self.focalplane.ampvispix_x - skipX1) / self.focalplane.col_bin + 1
+            xCCD2 = (
+                (Nx - 1) * self.focalplane.ampvispix_x - skipX1
+            ) / self.focalplane.col_bin + 1
             if xCCD2 == 0:
                 xCCD2 = 1
 
@@ -1555,10 +1716,14 @@ class Image(object):
             if xCCD2 == 0:
                 xCCD2 = 1
 
-            yCCD1 = ((Ny * self.focalplane.ampvispix_y) - skipY1) / self.focalplane.row_bin
+            yCCD1 = (
+                (Ny * self.focalplane.ampvispix_y) - skipY1
+            ) / self.focalplane.row_bin
             if yCCD1 == 0:
                 yCCD1 = 1
-            yCCD2 = ((Ny - 1) * self.focalplane.ampvispix_y - skipY1) / self.focalplane.row_bin + 1
+            yCCD2 = (
+                (Ny - 1) * self.focalplane.ampvispix_y - skipY1
+            ) / self.focalplane.row_bin + 1
             if yCCD2 == 0:
                 yCCD2 = 1
 
@@ -1580,17 +1745,25 @@ class Image(object):
             Y_Val2 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
 
             # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
-            xCCD1 = ((Nx - 1) * self.focalplane.ampvispix_x - skipX1) / self.focalplane.col_bin + 1
+            xCCD1 = (
+                (Nx - 1) * self.focalplane.ampvispix_x - skipX1
+            ) / self.focalplane.col_bin + 1
             if xCCD1 == 0:
                 xCCD1 = 1
-            xCCD2 = ((Nx * self.focalplane.ampvispix_x) - skipX1) / self.focalplane.col_bin
+            xCCD2 = (
+                (Nx * self.focalplane.ampvispix_x) - skipX1
+            ) / self.focalplane.col_bin
             if xCCD2 == 0:
                 xCCD2 = 1
 
-            yCCD1 = ((Ny * self.focalplane.ampvispix_y) - skipY1) / self.focalplane.row_bin
+            yCCD1 = (
+                (Ny * self.focalplane.ampvispix_y) - skipY1
+            ) / self.focalplane.row_bin
             if yCCD1 == 0:
                 yCCD1 = 1
-            yCCD2 = ((Ny - 1) * self.focalplane.ampvispix_y - skipY1) / self.focalplane.row_bin + 1
+            yCCD2 = (
+                (Ny - 1) * self.focalplane.ampvispix_y - skipY1
+            ) / self.focalplane.row_bin + 1
             if yCCD2 == 0:
                 yCCD2 = 1
 
@@ -1616,13 +1789,21 @@ class Image(object):
         curpos += 1
 
         # other versions of same info
-        hdu.header.set("OVRSCAN1", self.focalplane.xoverscan, "Overscan on axis 1", after=curpos)
+        hdu.header.set(
+            "OVRSCAN1", self.focalplane.xoverscan, "Overscan on axis 1", after=curpos
+        )
         curpos += 1
-        hdu.header.set("OVRSCAN2", self.focalplane.yoverscan, "Overscan on axis 2", after=curpos)
+        hdu.header.set(
+            "OVRSCAN2", self.focalplane.yoverscan, "Overscan on axis 2", after=curpos
+        )
         curpos += 1
-        hdu.header.set("PRESCAN1", self.focalplane.xunderscan, "Underscan on axis 1", after=curpos)
+        hdu.header.set(
+            "PRESCAN1", self.focalplane.xunderscan, "Underscan on axis 1", after=curpos
+        )
         curpos += 1
-        hdu.header.set("PRESCAN2", self.focalplane.yunderscan, "Underscan on axis 2", after=curpos)
+        hdu.header.set(
+            "PRESCAN2", self.focalplane.yunderscan, "Underscan on axis 2", after=curpos
+        )
         curpos += 1
 
         # include CCDSUM
@@ -1638,8 +1819,12 @@ class Image(object):
 
             # calculate CCD to image transformation matrix and vectors
 
-            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(self.focalplane.col_bin)
-            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(self.focalplane.row_bin)
+            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(
+                self.focalplane.col_bin
+            )
+            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(
+                self.focalplane.row_bin
+            )
 
             if self.focalplane.split_physical_coords == 1:
                 # split physical coordinates
@@ -1828,8 +2013,12 @@ class Image(object):
             # detectors with single amplifer
 
             # calculate CCD to image transformation matrix and vectors
-            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(self.focalplane.col_bin)
-            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(self.focalplane.row_bin)
+            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(
+                self.focalplane.col_bin
+            )
+            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(
+                self.focalplane.row_bin
+            )
 
             self.focalplane.wcs.ltv_1[extnum - 1] = (
                 self.datasecx1
@@ -1992,39 +2181,61 @@ class Image(object):
 
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================", after=curpos,
+            "==================================================================",
+            after=curpos,
         )
         hdu.header.add_comment("WCS", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================", after=curpos + 2,
+            "==================================================================",
+            after=curpos + 2,
         )
         curpos = curpos + 3
-        hdu.header.set("EQUINOX", self.focalplane.wcs.equinox, "Equinox of WCS", after=curpos)
+        hdu.header.set(
+            "EQUINOX", self.focalplane.wcs.equinox, "Equinox of WCS", after=curpos
+        )
         curpos += 1
-        hdu.header.set("WCSDIM", self.focalplane.wcs.wcs_dim, "WCS Dimensionality", after=curpos)
+        hdu.header.set(
+            "WCSDIM", self.focalplane.wcs.wcs_dim, "WCS Dimensionality", after=curpos
+        )
         curpos += 1
-        hdu.header.set("CTYPE1", self.focalplane.wcs.ctype1, "Coordinate type", after=curpos)
+        hdu.header.set(
+            "CTYPE1", self.focalplane.wcs.ctype1, "Coordinate type", after=curpos
+        )
         curpos += 1
-        hdu.header.set("CTYPE2", self.focalplane.wcs.ctype2, "Coordinate type", after=curpos)
+        hdu.header.set(
+            "CTYPE2", self.focalplane.wcs.ctype2, "Coordinate type", after=curpos
+        )
         curpos += 1
 
         self.focalplane.wcs.get_ra_dec()
 
         if self.focalplane.wcs.ctype1.startswith("RA"):
             hdu.header.set(
-                "CRVAL1", self.focalplane.wcs.ra_deg, "Coordinate reference value", after=curpos,
+                "CRVAL1",
+                self.focalplane.wcs.ra_deg,
+                "Coordinate reference value",
+                after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CRVAL2", self.focalplane.wcs.dec_deg, "Coordinate reference value", after=curpos,
+                "CRVAL2",
+                self.focalplane.wcs.dec_deg,
+                "Coordinate reference value",
+                after=curpos,
             )
         else:
             hdu.header.set(
-                "CRVAL1", self.focalplane.wcs.dec_deg, "Coordinate reference value", after=curpos,
+                "CRVAL1",
+                self.focalplane.wcs.dec_deg,
+                "Coordinate reference value",
+                after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CRVAL2", self.focalplane.wcs.ra_deg, "Coordinate reference value", after=curpos,
+                "CRVAL2",
+                self.focalplane.wcs.ra_deg,
+                "Coordinate reference value",
+                after=curpos,
             )
 
         curpos += 1
@@ -2095,19 +2306,31 @@ class Image(object):
             curpos += 1
         else:
             hdu.header.set(
-                "CD1_1", self.focalplane.wcs.cd_1_1[extnum - 1], "Coordinate matrix", after=curpos,
+                "CD1_1",
+                self.focalplane.wcs.cd_1_1[extnum - 1],
+                "Coordinate matrix",
+                after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CD1_2", self.focalplane.wcs.cd_1_2[extnum - 1], "Coordinate matrix", after=curpos,
+                "CD1_2",
+                self.focalplane.wcs.cd_1_2[extnum - 1],
+                "Coordinate matrix",
+                after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CD2_1", self.focalplane.wcs.cd_2_1[extnum - 1], "Coordinate matrix", after=curpos,
+                "CD2_1",
+                self.focalplane.wcs.cd_2_1[extnum - 1],
+                "Coordinate matrix",
+                after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CD2_2", self.focalplane.wcs.cd_2_2[extnum - 1], "Coordinate matrix", after=curpos,
+                "CD2_2",
+                self.focalplane.wcs.cd_2_2[extnum - 1],
+                "Coordinate matrix",
+                after=curpos,
             )
             curpos += 1
 
@@ -2121,26 +2344,39 @@ class Image(object):
 
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================", after=curpos,
+            "==================================================================",
+            after=curpos,
         )
         hdu.header.add_comment("ITL Focal plane", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================", after=curpos + 2,
+            "==================================================================",
+            after=curpos + 2,
         )
         curpos += 3
         hdu.header.set(
-            "AMP-CFG", self.focalplane.ampcfg[extnum - 1], "Amplifier configuration", after=curpos,
+            "AMP-CFG",
+            self.focalplane.ampcfg[extnum - 1],
+            "Amplifier configuration",
+            after=curpos,
         )
         curpos += 1
         hdu.header.set(
-            "DET-NUM", self.focalplane.detnum[extnum - 1], "Detector number", after=curpos,
+            "DET-NUM",
+            self.focalplane.detnum[extnum - 1],
+            "Detector number",
+            after=curpos,
         )
         curpos += 1
         hdu.header.set(
-            "EXT-NUM", self.focalplane.extnum[extnum - 1], "extension number", after=curpos,
+            "EXT-NUM",
+            self.focalplane.extnum[extnum - 1],
+            "extension number",
+            after=curpos,
         )
         curpos += 1
-        hdu.header.set("JPG-EXT", self.focalplane.jpgext[extnum - 1], "Image section", after=curpos)
+        hdu.header.set(
+            "JPG-EXT", self.focalplane.jpgext[extnum - 1], "Image section", after=curpos
+        )
         curpos += 1
         hdu.header.set(
             "DET-POSX",

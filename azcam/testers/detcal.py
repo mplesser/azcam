@@ -5,6 +5,7 @@ import time
 import numpy
 
 import azcam
+import azcam.fits
 from azcam.console import api
 import azcam.testers
 from azcam.testers.testerbase import TesterBase

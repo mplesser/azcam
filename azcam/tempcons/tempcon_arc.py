@@ -168,7 +168,7 @@ class TempConArc(TempCon):
 
           * 0 => convert DT670  counts to degrees C
           * 1 => convert AD590  counts to degrees C
-          * 2 => convert 1N4148 counts to degrees C	(not used?)
+          * 2 => convert 1N4148 counts to degrees C
           * 3 => convert 1N914  counts to degrees C
         """
 

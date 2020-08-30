@@ -1,4 +1,3 @@
-
 import os
 import datetime
 
@@ -46,7 +45,9 @@ class DetChar(object):
             pass
         azcam.utils.curdir(newfolder)
 
-        datestring = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y").lower()
+        datestring = datetime.datetime.strftime(
+            datetime.datetime.now(), "%d%b%y"
+        ).lower()
         try:
             os.mkdir(datestring)
         except FileExistsError:

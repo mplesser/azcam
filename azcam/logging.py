@@ -75,7 +75,11 @@ def start_logging(logfile="azcam.log", logtype="13", host="localhost", port=2406
     # console handler
     if "1" in logtype:
         azcam.db.logger.add(
-            sys.stdout, colorize=False, filter=_logfilter, format="{message}", enqueue=True,
+            sys.stdout,
+            colorize=False,
+            filter=_logfilter,
+            format="{message}",
+            enqueue=True,
         )
 
     # socket handler

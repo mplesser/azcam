@@ -680,7 +680,7 @@ class ControllerArchon(Controller):
 
     def power_on(self, wait=1):
         """
-        Turns power on        """
+        Turns power on"""
 
         cmd = "POWERON"
 
@@ -1658,7 +1658,7 @@ class ControllerArchon(Controller):
                 else:
                     raise azcam.AzcamError("Archon response out of sync")
 
-        else: 
+        else:
             return None  # no Archon reponse is OK
 
     def archon_bin_command(self, command):

@@ -1,7 +1,8 @@
 import numpy
-from astropy.io import fits as pyfits
 
 import azcam
+import azcam.fits
+from azcam.fits import pyfits
 from azcam.testers.testerbase import TesterBase
 
 

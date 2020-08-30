@@ -62,7 +62,9 @@ class ExposureArc(Exposure):
         loopcount = 0
 
         while remtime > 0.6:
-            if self.exposure_flag == azcam.db.exposureflags["EXPOSING"]:  # no EF changes
+            if (
+                self.exposure_flag == azcam.db.exposureflags["EXPOSING"]
+            ):  # no EF changes
                 time.sleep(min(remtime, 0.5))
                 reply = self.get_exposuretime_remaining()
                 remtime = reply
@@ -78,7 +80,9 @@ class ExposureArc(Exposure):
                 self.exposure_flag = azcam.db.exposureflags["ABORT"]
                 azcam.db.controller.exposure_abort()
                 break
-            elif self.exposure_flag == azcam.db.exposureflags["ABORT"]:  # AbortExposure received
+            elif (
+                self.exposure_flag == azcam.db.exposureflags["ABORT"]
+            ):  # AbortExposure received
                 if self.is_exposure_sequence:
                     azcam.log("Stopping exposure sequence")
                     self.is_exposure_sequence = 0
@@ -87,26 +91,36 @@ class ExposureArc(Exposure):
                 else:
                     azcam.db.controller.exposure_abort()
                     break
-            elif self.exposure_flag == azcam.db.exposureflags["PAUSE"]:  # PauseExposure received
+            elif (
+                self.exposure_flag == azcam.db.exposureflags["PAUSE"]
+            ):  # PauseExposure received
                 azcam.db.controller.exposure_pause()
                 self.exposure_flag = azcam.db.exposureflags["PAUSED"]
                 azcam.log("Integration paused")
-            elif self.exposure_flag == azcam.db.exposureflags["RESUME"]:  # ResumeExposure received
+            elif (
+                self.exposure_flag == azcam.db.exposureflags["RESUME"]
+            ):  # ResumeExposure received
                 azcam.db.controller.exposure_resume()
                 self.exposure_flag = azcam.db.exposureflags["EXPOSING"]
                 reply = self.get_exposuretime_remaining()
                 remtime = reply
                 azcam.log("Integration resumed")
-            elif self.exposure_flag == azcam.db.exposureflags["READ"]:  # ReadExposure received
+            elif (
+                self.exposure_flag == azcam.db.exposureflags["READ"]
+            ):  # ReadExposure received
                 remtime = 0.0
-                self.exposure_time_actual = self.exposure_time - self.exposure_time_remaining
+                self.exposure_time_actual = (
+                    self.exposure_time - self.exposure_time_remaining
+                )
                 break
             elif (
                 self.exposure_flag == azcam.db.exposureflags["PAUSE"]
             ):  # already paused so just loop
                 time.sleep(0.5)
 
-        if self.exposure_flag == azcam.db.exposureflags["ABORT"]:  # abort in remaining time
+        if (
+            self.exposure_flag == azcam.db.exposureflags["ABORT"]
+        ):  # abort in remaining time
             azcam.log("Integration aborted")
         else:
             time.sleep(remtime + 0.1)
@@ -215,7 +229,9 @@ class ExposureArc(Exposure):
 
         # if remote write, LocalFile is local temp file
         if self.image.remote_imageserver_flag:
-            LocalFile = self.temp_image_file + "." + self.filename.get_extension(self.filetype)
+            LocalFile = (
+                self.temp_image_file + "." + self.filename.get_extension(self.filetype)
+            )
             try:
                 os.remove(LocalFile)
             except FileNotFoundError:
@@ -234,8 +250,12 @@ class ExposureArc(Exposure):
         # update controller header with keywords which might have changed
         et = float(int(self.exposure_time_actual * 1000.0) / 1000.0)
         dt = float(int(self.dark_time * 1000.0) / 1000.0)
-        azcam.db.headers["exposure"].set_keyword("EXPTIME", et, "Exposure time (seconds)", float)
-        azcam.db.headers["exposure"].set_keyword("DARKTIME", dt, "Dark time (seconds)", float)
+        azcam.db.headers["exposure"].set_keyword(
+            "EXPTIME", et, "Exposure time (seconds)", float
+        )
+        azcam.db.headers["exposure"].set_keyword(
+            "DARKTIME", dt, "Dark time (seconds)", float
+        )
 
         # write file(s) to disk
         if self.save_file:
@@ -263,7 +283,9 @@ class ExposureArc(Exposure):
                     ]  # reset flag now so next exposure can start
                     azcam.log("Starting asynchronous image transfer to dataserver")
                     sendthread = threading.Thread(
-                        target=self.image.send_image, name="writeasync", args=("dataserver"),
+                        target=self.image.send_image,
+                        name="writeasync",
+                        args=("dataserver"),
                     )
                     sendthread.start()
 
@@ -332,11 +354,15 @@ class ExposureArc(Exposure):
 
         if Flag:
             Delay = self.tdi_delay
-            azcam.db.controller.header.set_keyword("TdiDelay", Delay, "TDI delay multiplier", int)
+            azcam.db.controller.header.set_keyword(
+                "TdiDelay", Delay, "TDI delay multiplier", int
+            )
         else:
             Delay = self.par_delay
             azcam.db.controller.header.delete_keyword("TdiDelay")
 
-        azcam.db.controller.write_memory("Y", azcam.db.controller.TIMINGBOARD, 0x20, Delay)
+        azcam.db.controller.write_memory(
+            "Y", azcam.db.controller.TIMINGBOARD, 0x20, Delay
+        )
 
         return

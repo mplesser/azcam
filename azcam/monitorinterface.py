@@ -65,11 +65,12 @@ class MonitorInterface(object):
         udp_socketReg = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-        udp_socketReg.sendto(bytes(cmd, "utf-8"), (self.monitor_host, self.register_port))
+        udp_socketReg.sendto(
+            bytes(cmd, "utf-8"), (self.monitor_host, self.register_port)
+        )
 
         udp_socketReg.close()
 
         self.registered = 1
 
         return
-

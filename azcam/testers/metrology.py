@@ -3,12 +3,13 @@ import shlex
 
 import matplotlib.pylab as pylab
 from matplotlib.ticker import FormatStrFormatter
-import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 import scipy.optimize
 import numpy
 
 import azcam
+import azcam.plot
+from azcam.plot import plt
 from azcam.testers.testerbase import TesterBase
 
 
@@ -677,7 +678,9 @@ class Metrology(TesterBase):
         zoffset = 0.0
 
         # raw output datafile
-        with open(f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w") as fout:
+        with open(
+            f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w"
+        ) as fout:
 
             for line in lines:
                 line = line.strip()
@@ -856,7 +859,9 @@ class Metrology(TesterBase):
 
                     zs_mean = numpy.array(zstandard).mean()
                     self.zstandard.append(zs_mean)
-                    zoffset = zs_mean - self.standard_zheight  # this updates current value
+                    zoffset = (
+                        zs_mean - self.standard_zheight
+                    )  # this updates current value
 
                 # write line to CSV file
                 self.csv_tokens_raw = [
@@ -946,7 +951,9 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref1 Diameter") or line.startswith("Ref1 Roundness"):
+                elif line.startswith("Ref1 Diameter") or line.startswith(
+                    "Ref1 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -956,7 +963,9 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref2 Diameter") or line.startswith("Ref2 Roundness"):
+                elif line.startswith("Ref2 Diameter") or line.startswith(
+                    "Ref2 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -966,7 +975,9 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref3 Diameter") or line.startswith("Ref3 Roundness"):
+                elif line.startswith("Ref3 Diameter") or line.startswith(
+                    "Ref3 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -976,7 +987,9 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref4 Diameter") or line.startswith("Ref4 Roundness"):
+                elif line.startswith("Ref4 Diameter") or line.startswith(
+                    "Ref4 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")

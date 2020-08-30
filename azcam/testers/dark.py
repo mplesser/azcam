@@ -3,10 +3,11 @@ import glob
 import os
 import shutil
 
-import matplotlib.pyplot as plt
-
 import azcam
 from azcam.console import api
+import azcam.plot
+from azcam.plot import plt
+import azcam.fits
 import azcam.testers
 from azcam.testers.testerbase import TesterBase
 
@@ -184,10 +185,11 @@ class Dark(TesterBase):
                 azcam.fits.colbias(masterdark, fit_order=self.fit_order)
         else:
             azcam.fits.combine(
-                darks, masterdark, 
+                darks,
+                masterdark,
                 "median",
                 overscan_correct=self.overscan_correct,
-                fit_order = self.fit_order
+                fit_order=self.fit_order,
             )
             s = f"{numdarks} dark images have been combined into {masterdark}"
         azcam.log(s)
@@ -240,7 +242,8 @@ class Dark(TesterBase):
         if self.use_edge_mask:
             if azcam.testers.defects.valid:
                 self.MaskedImage = numpy.ma.masked_where(
-                    azcam.testers.defects.defects_mask, self.darkimage.buffer,
+                    azcam.testers.defects.defects_mask,
+                    self.darkimage.buffer,
                 )
             else:
                 azcam.testers.defects.make_edge_mask(self.darkimage.buffer)

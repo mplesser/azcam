@@ -2,9 +2,10 @@ import os
 import numpy
 import shutil
 
-import matplotlib.pyplot as plt
-
 import azcam
+import azcam.plot
+from azcam.plot import plt
+import azcam.fits
 import azcam.testers
 from azcam.testers.testerbase import TesterBase
 

@@ -6,9 +6,8 @@ import numpy
 import os
 import time
 
-from astropy.io import fits as pyfits
-
 import azcam
+from azcam.fits import pyfits
 from azcam.exposures.exposure import Exposure
 
 
@@ -135,7 +134,9 @@ class ExposureArchon(Exposure):
             dtype="uint16",
         )
 
-        self.fileconverter.copy_to_buffer(azcam.db.controller.imagedata, self.image.data)
+        self.fileconverter.copy_to_buffer(
+            azcam.db.controller.imagedata, self.image.data
+        )
 
         # why is this necessary?
         self.image.data.reshape(
@@ -551,7 +552,9 @@ class ReceiveDataArchon(object):
                 frameW = int(azcam.db.controller.dict_frame[frameBase + "WIDTH"])
                 frameH = int(azcam.db.controller.dict_frame[frameBase + "HEIGHT"])
                 # get sample mode
-                sampleMode = int(azcam.db.controller.dict_frame[frameBase + "SAMPLE"]) + 1
+                sampleMode = (
+                    int(azcam.db.controller.dict_frame[frameBase + "SAMPLE"]) + 1
+                )
 
                 # calculate fetch command values
                 frameSize = sampleMode * 2 * frameW * frameH
@@ -669,7 +672,9 @@ class ReceiveDataArchon(object):
                         self.RData = numpy.empty(shape=int(rawSize / 2), dtype="<u2")
 
                         while totalRecv < totalBytes:
-                            getData = azcam.db.controller.camserver.socket.recv(currLine)
+                            getData = azcam.db.controller.camserver.socket.recv(
+                                currLine
+                            )
 
                             totalRecv += len(getData)
 

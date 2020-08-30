@@ -140,7 +140,9 @@ class ControllerArc(Controller):
         elif self.utility_board in ["gen1", "gen2", "gen3"]:
             self.utility_board_installed = 1
         else:
-            raise azcam.AzcamError(f"Unrecognized utility board name: {self.utility_board}")
+            raise azcam.AzcamError(
+                f"Unrecognized utility board name: {self.utility_board}"
+            )
 
         return
 
@@ -214,7 +216,10 @@ class ControllerArc(Controller):
 
         # restore PCIFILE keyword
         self.header.set_keyword(
-            "PCIFILE", os.path.basename(self.pci_file), "PCI board DSP code filename", str,
+            "PCIFILE",
+            os.path.basename(self.pci_file),
+            "PCI board DSP code filename",
+            str,
         )
 
         if self.timing_board_installed:
@@ -266,8 +271,12 @@ class ControllerArc(Controller):
         """
 
         # number of total pixels in image for data transfer
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NSIMAGE, self.detpars.numcols_image)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NPIMAGE, self.detpars.numrows_image)
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NSIMAGE, self.detpars.numcols_image
+        )
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NPIMAGE, self.detpars.numrows_image
+        )
 
         # frame transfer skip size
         self.write_memory("Y", self.TIMINGBOARD, self.Y_FRAMET, self.detpars.framet)
@@ -285,17 +294,33 @@ class ControllerArc(Controller):
         self.write_memory("Y", self.TIMINGBOARD, self.Y_NPCLEAR, self.detpars.yflush)
 
         # write skipping parameters
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NSPRESKIP, self.detpars.xpreskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NSUNDERSCAN, self.detpars.xunderscan)
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NSPRESKIP, self.detpars.xpreskip
+        )
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NSUNDERSCAN, self.detpars.xunderscan
+        )
         self.write_memory("Y", self.TIMINGBOARD, self.Y_NSSKIP, self.detpars.xskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NSPOSTSKIP, self.detpars.xpostskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NSOVERSCAN, self.detpars.xoverscan)
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NSPOSTSKIP, self.detpars.xpostskip
+        )
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NSOVERSCAN, self.detpars.xoverscan
+        )
 
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NPPRESKIP, self.detpars.ypreskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NPUNDERSCAN, self.detpars.yunderscan)
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NPPRESKIP, self.detpars.ypreskip
+        )
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NPUNDERSCAN, self.detpars.yunderscan
+        )
         self.write_memory("Y", self.TIMINGBOARD, self.Y_NPSKIP, self.detpars.yskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NPPOSTSKIP, self.detpars.ypostskip)
-        self.write_memory("Y", self.TIMINGBOARD, self.Y_NPOVERSCAN, self.detpars.yoverscan)
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NPPOSTSKIP, self.detpars.ypostskip
+        )
+        self.write_memory(
+            "Y", self.TIMINGBOARD, self.Y_NPOVERSCAN, self.detpars.yoverscan
+        )
 
         return
 
@@ -392,8 +417,12 @@ class ControllerArc(Controller):
                 raise ValueError("Gain must be 1 or 2")
 
             self.video_gain = Gain
-            self.header.set_keyword("DETGAIN", self.video_gain, "Video gain setting", int)
-            self.header.set_keyword("VIDGAIN", self.video_gain, "Video gain setting", int)
+            self.header.set_keyword(
+                "DETGAIN", self.video_gain, "Video gain setting", int
+            )
+            self.header.set_keyword(
+                "VIDGAIN", self.video_gain, "Video gain setting", int
+            )
 
         elif self.video_boards[0] in ["gen2", "arc45"]:
             if Gain in [1, 2, 5, 10]:
@@ -406,9 +435,15 @@ class ControllerArc(Controller):
                 raise azcam.AzcamError("Gain must be 1, 2, 5, or 10")
 
             self.video_gain = Gain
-            self.header.set_keyword("DETGAIN", self.video_gain, "Video gain setting", int)
-            self.header.set_keyword("VIDGAIN", self.video_gain, "Video gain setting", int)
-            self.header.set_keyword("VIDSPEED", self.video_speed, "Video speed setting", int)
+            self.header.set_keyword(
+                "DETGAIN", self.video_gain, "Video gain setting", int
+            )
+            self.header.set_keyword(
+                "VIDGAIN", self.video_gain, "Video gain setting", int
+            )
+            self.header.set_keyword(
+                "VIDSPEED", self.video_speed, "Video speed setting", int
+            )
 
         return
 
@@ -428,7 +463,9 @@ class ControllerArc(Controller):
             self.video_speed = Speed
             speed = self.video_speed - 1
             self.board_command("SGN", self.TIMINGBOARD, self.video_gain, speed)
-            self.header.set_keyword("VIDSPEED", self.video_speed, "Video speed setting", int)
+            self.header.set_keyword(
+                "VIDSPEED", self.video_speed, "Video speed setting", int
+            )
 
         return
 
@@ -443,7 +480,9 @@ class ControllerArc(Controller):
         if self.video_boards[0] == "arc48":  # assume all board types are the same
             self.board_command("SVO", self.TIMINGBOARD, BoardNumber, DAC, DacValue)
         else:
-            raise azcam.AzcamError("Command set_video_offset not supported for this video board")
+            raise azcam.AzcamError(
+                "Command set_video_offset not supported for this video board"
+            )
 
         return
 
@@ -654,11 +693,20 @@ class ControllerArc(Controller):
         """
 
         if self.video_boards[0] == "gen1":
-            raise azcam.AzcamError("Command set_bias_number not supported for this controller")
-        elif self.video_boards[0] in ["arc48", "arc47"]:  # assume all board types are the same
-            self.board_command("SBN", self.TIMINGBOARD, BoardNumber, Type, DAC, DacValue)
+            raise azcam.AzcamError(
+                "Command set_bias_number not supported for this controller"
+            )
+        elif self.video_boards[0] in [
+            "arc48",
+            "arc47",
+        ]:  # assume all board types are the same
+            self.board_command(
+                "SBN", self.TIMINGBOARD, BoardNumber, Type, DAC, DacValue
+            )
         else:
-            self.board_command("SBN", self.TIMINGBOARD, BoardNumber, DAC, Type, DacValue)
+            self.board_command(
+                "SBN", self.TIMINGBOARD, BoardNumber, DAC, Type, DacValue
+            )
 
         return
 
@@ -788,15 +836,24 @@ class ControllerArc(Controller):
         # set keyword for file loaded
         if BoardNumber == 1:
             self.header.set_keyword(
-                "PCIFILE", os.path.basename(filename), "PCI board DSP code filename", str,
+                "PCIFILE",
+                os.path.basename(filename),
+                "PCI board DSP code filename",
+                str,
             )
         elif BoardNumber == 2:
             self.header.set_keyword(
-                "TIMFILE", os.path.basename(filename), "Timing board DSP code filename", str,
+                "TIMFILE",
+                os.path.basename(filename),
+                "Timing board DSP code filename",
+                str,
             )
         elif BoardNumber == 3:
             self.header.set_keyword(
-                "UTILFILE", os.path.basename(filename), "Utility board DSP code filename", str,
+                "UTILFILE",
+                os.path.basename(filename),
+                "Utility board DSP code filename",
+                str,
             )
 
         return
@@ -984,7 +1041,8 @@ class ControllerArc(Controller):
                 if int(reply[1]) == value:
                     continue
                 else:
-                    raise azcam.AzcamError(f"Communication to board {board} failed on loop {loop}")
+                    raise azcam.AzcamError(
+                        f"Communication to board {board} failed on loop {loop}"
+                    )
 
         return
-
