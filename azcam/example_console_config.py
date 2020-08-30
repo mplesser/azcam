@@ -109,7 +109,7 @@ azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
 # ****************************************************************
 # define names to imported into namespace when using cli
 # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.api})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.console.api})
 
 # ****************************************************************
 # clean namespace
