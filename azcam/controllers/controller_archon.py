@@ -18,6 +18,10 @@ EXP_DONE = 5
 
 
 class ControllerArchon(Controller):
+    """
+    The controller class for STA Archon controllers.
+    """
+
     def __init__(self, *args):
 
         super().__init__(*args)
@@ -192,7 +196,7 @@ class ControllerArchon(Controller):
         # Raw data received from the Archom controller
         self.rawdata = 0
 
-        # controller server
+        # camera server
         self.camserver = azcam.sockets.SocketInterface()
         self.camserver.host = ""
         self.camserver.port = 4242
@@ -222,10 +226,58 @@ class ControllerArchon(Controller):
 
         return
 
+    def archon_command(self, Command):
+        """
+        Send a command to the Archon controller.
+        """
+
+        if not self.camserver.open():
+            raise azcam.AzcamError("Could not open connection to controller")
+
+        self.camserver.lastcmd_id = self.camserver.cmd_id
+        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
+        preCmd = ">%02X" % (self.camserver.cmd_id)
+        preResp = "<%02X" % (self.camserver.cmd_id)
+        cmd = preCmd + Command
+
+        self.camserver.send(cmd, "\r\n")
+
+        if Command not in ["WARMBOOT", "REBOOT"]:
+            reply = self.camserver.recv(-1)
+            status = reply.split(" ")[0]
+
+            # check if the reply is synchronized
+            if status[0:3] == preResp:
+                return reply[3:]
+            else:
+                if reply[0] == "?":
+                    raise azcam.AzcamError("Archon response not valid")
+                else:
+                    raise azcam.AzcamError("Archon response out of sync")
+
+        else:
+            return None  # no Archon reponse is OK
+
+    def archon_bin_command(self, command):
+        """
+        Send binary command to the Archon controller.
+        """
+
+        self.camserver.lastcmd_id = self.camserver.cmd_id
+        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
+
+        preCmd = ">%02X" % (self.camserver.cmd_id)
+        cmd = preCmd + command
+
+        self.camserver.send(cmd, "\r\n")
+
+        return
+
     def reboot(self):
         """
         Send REBOOT command.
         """
+
         cmd = "REBOOT"
         self.archon_command(cmd)
 
@@ -564,9 +616,7 @@ class ControllerArchon(Controller):
         for param in range(0, paramCnt):
             paramStr = "PARAMETER" + str(param)
             paramName = self.dict_config[paramStr].split("=")[0].replace('"', "")
-            self.config_params.append(
-                self.config_data[int(self.dict_wconfig[paramStr])]
-            )
+            self.config_params.append(self.config_data[int(self.dict_wconfig[paramStr])])
             self.dict_params[paramName] = paramStr
 
         """
@@ -623,28 +673,20 @@ class ControllerArchon(Controller):
 
         # extract exposure settings
         cont_exp = (
-            self.dict_config[self.dict_params["ContinuousExposures"]]
-            .replace('"', "")
-            .split("=")
+            self.dict_config[self.dict_params["ContinuousExposures"]].replace('"', "").split("=")
         )
         self.cont_exp = cont_exp[1]
 
-        Exp = (
-            self.dict_config[self.dict_params["Exposures"]].replace('"', "").split("=")
-        )
+        Exp = self.dict_config[self.dict_params["Exposures"]].replace('"', "").split("=")
         self.exp = Exp[1]
 
-        sweep_cnt = (
-            self.dict_config[self.dict_params["SweepCount"]].replace('"', "").split("=")
-        )
+        sweep_cnt = self.dict_config[self.dict_params["SweepCount"]].replace('"', "").split("=")
         self.sweep_cnt = sweep_cnt[1]
 
         IntMS = self.dict_config[self.dict_params["IntMS"]].replace('"', "").split("=")
         self.int_ms = IntMS[1]
 
-        NoIntMS = (
-            self.dict_config[self.dict_params["NoIntMS"]].replace('"', "").split("=")
-        )
+        NoIntMS = self.dict_config[self.dict_params["NoIntMS"]].replace('"', "").split("=")
         self.noint_ms = NoIntMS[1]
 
         azcam.log("-----> ContinuousExposures = ", self.cont_exp, level=3)
@@ -868,9 +910,9 @@ class ControllerArchon(Controller):
             self.cont_exp = cont_exp
 
             # update config dictionary
-            self.dict_config[
-                self.dict_params["ContinuousExposures"]
-            ] = "ContinuousExposures=%s" % (self.int_ms)
+            self.dict_config[self.dict_params["ContinuousExposures"]] = "ContinuousExposures=%s" % (
+                self.int_ms
+            )
 
             # update Archons CountinuousExposures value
             indxParam = self.dict_wconfig[self.dict_params["ContinuousExposures"]]
@@ -989,9 +1031,7 @@ class ControllerArchon(Controller):
             self.exp = Exp
 
             # update config dictionary
-            self.dict_config[self.dict_params["Exposures"]] = "Exposures=%s" % (
-                self.exp
-            )
+            self.dict_config[self.dict_params["Exposures"]] = "Exposures=%s" % (self.exp)
 
             # update Archons Exposures value
             indxParam = self.dict_wconfig[self.dict_params["Exposures"]]
@@ -1156,9 +1196,7 @@ class ControllerArchon(Controller):
             raise azcam.AzcamError("Configuration data not loaded")
 
         # update config dictionary
-        self.dict_config[self.dict_params["ParallelPumping"]] = "ParallelPumping=%s" % (
-            str(flag)
-        )
+        self.dict_config[self.dict_params["ParallelPumping"]] = "ParallelPumping=%s" % (str(flag))
 
         # update Archons IntMS value
         indxParam = self.dict_wconfig[self.dict_params["ParallelPumping"]]
@@ -1575,9 +1613,7 @@ class ControllerArchon(Controller):
                 cnt += 1
 
             if 1:
-                azcam.log(
-                    f"Reading: {(time.time() - self.read_time):.1f} secs", level=2
-                )
+                azcam.log(f"Reading: {(time.time() - self.read_time):.1f} secs", level=2)
 
             # check for abort
             if azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
@@ -1626,62 +1662,5 @@ class ControllerArchon(Controller):
                 endCfg = 1
 
         self.ConfigArchonCnt = len(self.ConfigArchon)
-
-        return
-
-    def archon_command(self, Command):
-        """
-        Send a command to the Archon controller.
-        """
-
-        if not self.camserver.open():
-            raise azcam.AzcamError("Could not open connection to controller")
-
-        self.camserver.lastcmd_id = self.camserver.cmd_id
-        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
-        preCmd = ">%02X" % (self.camserver.cmd_id)
-        preResp = "<%02X" % (self.camserver.cmd_id)
-        cmd = preCmd + Command
-
-        self.camserver.send(cmd, "\r\n")
-
-        if Command not in ["WARMBOOT", "REBOOT"]:
-            reply = self.camserver.recv(-1)
-            status = reply.split(" ")[0]
-
-            # check if the reply is synchronized
-            if status[0:3] == preResp:
-                return reply[3:]
-            else:
-                if reply[0] == "?":
-                    raise azcam.AzcamError("Archon response not valid")
-                else:
-                    raise azcam.AzcamError("Archon response out of sync")
-
-        else:
-            return None  # no Archon reponse is OK
-
-    def archon_bin_command(self, command):
-        """
-        Send binary command to the Archon controller.
-        """
-
-        self.camserver.lastcmd_id = self.camserver.cmd_id
-        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
-
-        preCmd = ">%02X" % (self.camserver.cmd_id)
-        cmd = preCmd + command
-
-        self.camserver.send(cmd, "\r\n")
-
-        return
-
-    def flush(self, cycles=1):
-        """
-        Flush or clear out the detector.
-        Returns after clearing is finished which could take many seconds.
-        """
-
-        # not supported
 
         return

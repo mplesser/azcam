@@ -1,5 +1,5 @@
 """
-Contains the CameraServerInterface class.
+Contains the AzCam CameraServerInterface class.
 """
 
 import azcam
@@ -8,7 +8,7 @@ import azcam.sockets
 
 class CameraServerInterface(object):
     """
-    The ControllerServer interface.
+    The azcam camera server interface class for ARC and Magellan controllers.
     """
 
     def __init__(self, host: str = "", port: int = 0) -> bool:

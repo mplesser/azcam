@@ -8,7 +8,7 @@ from azcam.header import Header
 
 class Controller(object):
     """
-    Base controller class for Azcam.
+    The base controller class for azcam-supported controllers.
     """
 
     def __init__(self, obj_id="controller"):
@@ -56,8 +56,8 @@ class Controller(object):
         """
         Sets the shutter state during an exposure.
         Flag is:
-        open -> close shutter during exposure
-        close -> open shutter during exposure
+        open or 1 -> close shutter during exposure
+        close or 0 -> open shutter during exposure
         """
 
         return
@@ -101,13 +101,6 @@ class Controller(object):
         """
 
         self.header.delete_keyword(keyword)
-
-        return
-
-    def stop_idle(self):
-        """
-        Stop idle clocking.
-        """
 
         return
 

@@ -1,8 +1,11 @@
+"""
+Client-side commands for Archon controller.
+"""
+
+
 import azcam
 import azcam.fits
 from azcam.console import api
-
-# these are client-side commands
 
 
 def get_cds():

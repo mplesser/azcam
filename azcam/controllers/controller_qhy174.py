@@ -1,6 +1,5 @@
 """
 Contains the ControllerQHY class.
-Uses the ASCOM interface.
 """
 
 import time
@@ -12,7 +11,7 @@ from azcam.controllers.controller import Controller
 
 class ControllerQHY(Controller):
     """
-    Defines the QHY174 controller commands.
+    The controller class for QHY174 cameras using ASCOM.
     """
 
     def __init__(self, *args):
@@ -89,7 +88,7 @@ class ControllerQHY(Controller):
 
         return header
 
-    def set_shutter(self, state):
+    def set_shutter_state(self, state):
         """
         Open or close controller shutter.
         """
@@ -124,3 +123,10 @@ class ControllerQHY(Controller):
         self.camera.StartExposure(self.exposure_time, self.shutter_state)
 
         return
+
+    def update_exposuretime_remaining(self):
+        """
+        Return remaining exposure time (in seconds).
+        """
+
+        return 0

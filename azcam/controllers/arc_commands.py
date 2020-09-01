@@ -1,6 +1,8 @@
-from azcam.console import api
+"""
+Client-side commands for ARC controller.
+"""
 
-# these are client-side commands
+from azcam.console import api
 
 
 def stop_idle():

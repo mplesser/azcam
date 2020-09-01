@@ -53,13 +53,9 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = "=================================================================="
 
         return
 
@@ -260,6 +256,13 @@ class Header(object):
         else:
             attributetypestring = "float"
         return attributetypestring
+
+    def update(self):
+        """
+        Update header.
+        """
+
+        return
 
     def read_file(self, filename=""):
         """

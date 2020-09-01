@@ -11,8 +11,7 @@ from azcam.controllers.camera_server import CameraServerInterface
 
 class ControllerArc(Controller):
     """
-    Defines the ARC controller commands.
-    This is used for Gen1, Gen2, and Gen3 ARC controllers.
+    The controller class for ARC Gen1, Gen2, and Gen3 controllers.
     """
 
     def __init__(self, *args):

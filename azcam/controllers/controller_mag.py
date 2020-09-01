@@ -21,7 +21,7 @@ fillbuffer 3 		-> fill buffer with random values
 
 class ControllerMag(Controller):
     """
-    Defines the Magellan controller commands.
+    The controller class for Magellan controllers.
     """
 
     def __init__(self, *args):
@@ -338,9 +338,7 @@ class ControllerMag(Controller):
         """
 
         self.camserver.load_file(BoardNumber, filename)
-        self.header.set_keyword(
-            "DSPFILE", os.path.basename(filename), "DSP code filename", str
-        )
+        self.header.set_keyword("DSPFILE", os.path.basename(filename), "DSP code filename", str)
 
         return
 

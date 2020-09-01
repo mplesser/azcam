@@ -10,7 +10,7 @@ import time
 from azcam.fits import pyfits
 
 import azcam
-from azcam.exposures.exposure import Exposure, ReceiveData
+from azcam.exposures.exposure import Exposure
 
 
 class ExposureQHY(Exposure):
@@ -23,36 +23,37 @@ class ExposureQHY(Exposure):
         super().__init__(*args)
 
         self.id = "qhy"
-        self.receive_data = ReceiveData(self)
         self.exp_start = 0
-        self.readout_delay = 3
+        self.readout_delay = 1
 
     def integrate(self):
         """
         Integration.
         """
 
-        # start integration
         self.exposure_flag = azcam.db.exposureflags["EXPOSING"]
         imagetype = self.image_type.lower()
 
-        # do this as some DSP code not work right
         try:
             shutterstate = self.shutter_dict[self.image_type.lower()]
         except KeyError:
             shutterstate = "open"  # other types are comps, so open shutter
 
         if shutterstate == "open":
-            azcam.db.controller.set_shutter(1)
+            azcam.db.controller.set_shutter_state(1)
+        else:
+            azcam.db.controller.set_shutter_state(0)
 
         # start exposure
         if imagetype != "zero":
             azcam.log("Integration started")
 
         self.exp_start = time.time()
+        self.dark_time_start = self.exp_start
         azcam.db.controller.start_exposure()
-        time.sleep(self.readout_delay)
-        self.dark_time_start = time.time()
+
+        # wait for integration
+        time.sleep(self.exposure_time)
 
         # exposure finished
         if imagetype == "zero":
@@ -66,32 +67,22 @@ class ExposureQHY(Exposure):
         if self.image_type.lower() != "zero":
             azcam.log("integration finished", level=2)
 
-        time.sleep(0.04)  # some bug on controller
-
         return
-
-    def get_exposuretime_remaining(self):
-        """
-        Return remaining exposure time (in seconds).
-        """
-
-        return self.exposure_time_remaining
 
     def readout(self):
         """
         Exposure readout.
         """
 
-        self.hdu = pyfits.PrimaryHDU(azcam.db.controller.camera.ImageArray)
-
         self.exposure_flag = azcam.db.exposureflags["READ"]
 
-        imagetype = self.image_type.lower()
-
+        # allow readout to complete
+        time.sleep(self.readout_delay)
         self.image.valid = 1
 
+        imagetype = self.image_type.lower()
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter(0)
+            azcam.db.controller.set_shutter_state(0)
 
         if self.exposure_flag == azcam.db.exposureflags["ABORT"]:
             azcam.log("Readout aborted")
@@ -106,6 +97,7 @@ class ExposureQHY(Exposure):
         Completes an exposure by writing file and displaying image.
         """
 
+        self.hdu = pyfits.PrimaryHDU(azcam.db.controller.camera.ImageArray)
         self.hdu.writeto(self.filename.get_name())
 
         self.exposure_flag = azcam.db.exposureflags["WRITING"]
@@ -171,3 +163,10 @@ class ExposureQHY(Exposure):
         self.exposure_flag = azcam.db.exposureflags["NONE"]
 
         return
+
+    def get_exposuretime_remaining(self):
+        """
+        Return remaining exposure time (in seconds).
+        """
+
+        return self.controller.update_exposuretime_remaining()
