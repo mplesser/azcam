@@ -98,7 +98,6 @@ class ExposureQHY(Exposure):
         """
 
         self.hdu = pyfits.PrimaryHDU(azcam.db.controller.camera.ImageArray)
-        self.hdu.writeto(self.filename.get_name())
 
         self.exposure_flag = azcam.db.exposureflags["WRITING"]
 
@@ -134,8 +133,8 @@ class ExposureQHY(Exposure):
             self.image.overwrite = self.filename.overwrite
             self.image.test_image = self.filename.test_image
 
-            # hdu.writeto("test.fits")
-            reply = self.image.write_file(local_file, self.filetype)
+            self.hdu.writeto(self.filename.get_name())
+            # self.image.write_file(local_file, self.filetype)
 
             azcam.log("Writing finished", level=2)
 
@@ -169,4 +168,4 @@ class ExposureQHY(Exposure):
         Return remaining exposure time (in seconds).
         """
 
-        return self.controller.update_exposuretime_remaining()
+        return azcam.db.controller.update_exposuretime_remaining()

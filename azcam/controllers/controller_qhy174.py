@@ -37,16 +37,13 @@ class ControllerQHY(Controller):
 
     def reset(self):
         """
-        Reset controller.
-        May warn that the controller could not be reset.
+        Reset the controller.
         """
 
         # reset flag even is system has previously been reset
         self.is_reset = 0
 
         self.header.delete_all_keywords()
-
-        self.camera.connected = True
 
         self.is_reset = 1
 
@@ -65,7 +62,9 @@ class ControllerQHY(Controller):
         # x.DeviceType = "Camera"
         # self.driver = x.Choose(None)
         self.camera = win32com.client.Dispatch(self.driver)
-        self.camera.connected = False
+        self.camera.connected = True
+
+        self.initialized = 1
 
         return
 

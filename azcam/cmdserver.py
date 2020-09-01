@@ -65,9 +65,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
             self.server.serve_forever()  # waits here forever
         except Exception as message:
             self.is_running = 0
-            azcam.log(
-                f"ERROR in cmdserver:{repr(message)} Is it already running? Exiting..."
-            )
+            azcam.log(f"ERROR in cmdserver:{repr(message)} Is it already running? Exiting...")
             time.sleep(3)
             os._exit(1)
 
@@ -217,9 +215,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     except OSError:
                         pass
                     except Exception as e:
-                        azcam.log(
-                            f"Null command send error for client {self.currentclient}: {e}"
-                        )
+                        azcam.log(f"Null command send error for client {self.currentclient}: {e}")
                         pass
                     # azcam.log(f"closing connection to client {self.currentclient}")
                     break
@@ -230,9 +226,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 try:
                     self.cmdserver.socketnames[self.currentclient]
                 except Exception:
-                    self.cmdserver.socketnames[
-                        self.currentclient
-                    ] = f"unknown_{self.currentclient}"
+                    self.cmdserver.socketnames[self.currentclient] = f"unknown_{self.currentclient}"
                 if azcam.db.cmdserver.logcommands:
                     azcam.log(command_string.strip(), prefix=prefix_in)
 
@@ -257,9 +251,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                         self.currentclient
                     ] = f"{x[1]}_{int(self.currentclient)}"
                     self.request.send(str.encode("OK\r\n"))
-                    azcam.log(
-                        f"OK client {self.currentclient}", prefix=prefix_out
-                    )  # log reply
+                    azcam.log(f"OK client {self.currentclient}", prefix=prefix_out)  # log reply
                     command_string = ""
 
                 # echo - for polling as "echo hello" or just "echo"
@@ -301,7 +293,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # ************************************************************************
                 if command_string != "":
 
-                    # execute command, catching all errors so server does not crash
+                    # execute command
                     reply = azcam.db.cmdserver.rcommand(command_string)
 
                     # log reply
@@ -334,8 +326,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
 
         if self.cmdserver.log_connections and self.cmdserver.verbose:
             azcam.log(
-                f"Client connection made from {str(self.client_address)}",
-                prefix="cmd> ",
+                f"Client connection made from {str(self.client_address)}", prefix="cmd> ",
             )
 
         return socketserver.BaseRequestHandler.setup(self)
