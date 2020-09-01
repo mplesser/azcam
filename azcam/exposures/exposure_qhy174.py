@@ -7,6 +7,8 @@ Contains the ExposureQHY class.
 import os
 import time
 
+from azcam.fits import pyfits
+
 import azcam
 from azcam.exposures.exposure import Exposure, ReceiveData
 
@@ -23,7 +25,7 @@ class ExposureQHY(Exposure):
         self.id = "qhy"
         self.receive_data = ReceiveData(self)
         self.exp_start = 0
-        self.curr_delay = 1
+        self.readout_delay = 3
 
     def integrate(self):
         """
@@ -49,6 +51,7 @@ class ExposureQHY(Exposure):
 
         self.exp_start = time.time()
         azcam.db.controller.start_exposure()
+        time.sleep(self.readout_delay)
         self.dark_time_start = time.time()
 
         # exposure finished
@@ -79,6 +82,8 @@ class ExposureQHY(Exposure):
         Exposure readout.
         """
 
+        self.hdu = pyfits.PrimaryHDU(azcam.db.controller.camera.ImageArray)
+
         self.exposure_flag = azcam.db.exposureflags["READ"]
 
         imagetype = self.image_type.lower()
@@ -100,6 +105,8 @@ class ExposureQHY(Exposure):
         """
         Completes an exposure by writing file and displaying image.
         """
+
+        self.hdu.writeto(self.filename.get_name())
 
         self.exposure_flag = azcam.db.exposureflags["WRITING"]
 

@@ -111,6 +111,14 @@ class Controller(object):
 
         return
 
+    def flush(self, Cycles=1):
+        """
+        Flush or clear out the detector.
+        Returns after clearing is finished which could take many seconds.
+        """
+
+        return
+
 
 class DetPars(object):
     """

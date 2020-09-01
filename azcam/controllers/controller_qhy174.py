@@ -1,13 +1,12 @@
 """
 Contains the ControllerQHY class.
+Uses the ASCOM interface.
 """
 
 import time
-import os
 import win32com.client
 
 import azcam
-from azcam.fits import pyfits
 from azcam.controllers.controller import Controller
 
 
@@ -31,8 +30,11 @@ class ControllerQHY(Controller):
         self.controller_class = "qhy"
         self.controller_type = "qhy174"
 
-        # DSP code filename
-        self.timing_file = ""
+        self.shutter_state = 0
+
+        # ASCOM
+        self.driver = "ASCOM.QHYCCD.Camera"
+        self.camera = None
 
     def reset(self):
         """
@@ -44,6 +46,8 @@ class ControllerQHY(Controller):
         self.is_reset = 0
 
         self.header.delete_all_keywords()
+
+        self.camera.connected = True
 
         self.is_reset = 1
 
@@ -58,67 +62,13 @@ class ControllerQHY(Controller):
         Initialize the controller interface.
         """
 
-        x = win32com.client.Dispatch("ASCOM.Utilities.Chooser")
-        x.DeviceType = "Camera"
-        self.driver = x.Choose(None)
+        # x = win32com.client.Dispatch("ASCOM.Utilities.Chooser")
+        # x.DeviceType = "Camera"
+        # self.driver = x.Choose(None)
         self.camera = win32com.client.Dispatch(self.driver)
-        self.camera.connected = True
+        self.camera.connected = False
 
         return
-
-    # *** ROI shifting parameters  ***
-
-    def set_roi(self):
-        """
-        Sets the ROI parameters values in the controller based on focalplane parameters.
-        Sends parameters to the controller.
-        """
-        # send parameters to controller in order to do all hardware communication here
-        if self.is_reset:
-            cmd = (
-                "SetFormat "
-                + str(self.detpars.ns_total)
-                + " "
-                + str(self.detpars.ns_predark)
-                + " "
-                + str(self.detpars.ns_underscan)
-                + " "
-                + str(self.detpars.ns_overscan)
-                + " "
-                + str(self.detpars.np_total)
-                + " "
-                + str(self.detpars.np_predark)
-                + " "
-                + str(self.detpars.np_underscan)
-                + " "
-                + str(self.detpars.np_overscan)
-                + " "
-                + str(self.detpars.np_frametransfer)
-            )
-            self.camserver.command(cmd)
-
-            self.camserver.command(
-                "SetRoi "
-                + str(self.detpars.first_col)
-                + " "
-                + str(self.detpars.last_col)
-                + " "
-                + str(self.detpars.first_row)
-                + " "
-                + str(self.detpars.last_row)
-                + " "
-                + str(self.detpars.col_bin)
-                + " "
-                + str(self.detpars.row_bin)
-            )
-
-        # update ControllerServer for image size
-        if self.is_reset:
-            self.camserver.set("NumberPixelsImage", self.detpars.numpix_image)
-
-        return
-
-    # *** header ***
 
     def read_header(self):
         """
@@ -145,9 +95,9 @@ class ControllerQHY(Controller):
         """
 
         if state:
-            self.set_shutter_state = 1
+            self.shutter_state = 1
         else:
-            self.set_shutter_state = 0
+            self.shutter_state = 0
 
         return
 
@@ -171,9 +121,6 @@ class ControllerQHY(Controller):
         Start exposure (integration).
         """
 
-        self.camera.StartExposure(self.exposure_time, self.set_shutter_state)
-        time.sleep(1)
-        image = self.camera.ImageArray
-        self.hdu = pyfits.PrimaryHDU(image)
+        self.camera.StartExposure(self.exposure_time, self.shutter_state)
 
         return
