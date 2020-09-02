@@ -851,7 +851,7 @@ class Exposure(ReceiveData):
     def update_header(self):
         """
         Update header.
-        Really the exposure object has no useful header so this does nothing.
+        The exposure object has no items to update.
         """
 
         return

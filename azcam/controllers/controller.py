@@ -69,13 +69,17 @@ class Controller(object):
 
         return
 
-    def update_header(self):
+    def flush(self, Cycles=1):
         """
-        Update header.
-        Normally controller keywords are set during reset.
+        Flush or clear out the detector.
+        Returns after clearing is finished which could take many seconds.
         """
 
         return
+
+    # ****************************************************************
+    # header
+    # ****************************************************************
 
     def get_keyword(self, keyword):
         """
@@ -85,29 +89,10 @@ class Controller(object):
 
         return self.header.get_keyword(keyword)
 
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
+    def update_header(self):
         """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
-        """
-
-        self.header.set_keyword(keyword, value, comment, typestring)
-
-        return
-
-    def delete_keyword(self, keyword):
-        """
-        Delete a keyword.
-        """
-
-        self.header.delete_keyword(keyword)
-
-        return
-
-    def flush(self, Cycles=1):
-        """
-        Flush or clear out the detector.
-        Returns after clearing is finished which could take many seconds.
+        Update header.
+        Normally controller keywords are set during reset.
         """
 
         return
