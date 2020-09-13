@@ -22,11 +22,10 @@ class ControllerArchon(Controller):
     The controller class for STA Archon controllers.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.name = "archon"
         self.controller_class = "archon"
         self.controller_type = "archon"
 
@@ -128,16 +127,11 @@ class ControllerArchon(Controller):
         # Image data received from the Archom controller in Direct Mode
         self.imagedata = 0
 
-        self.is_reset = 0
-
         # video gain flag
         self.video_gain = 1
 
         # True to lower voltages when integrating
         self.lower_voltages = 0
-
-        # True when controller is enabled
-        self.enabled = 1
 
         # For timing
         self.frame_time = 0
@@ -149,10 +143,6 @@ class ControllerArchon(Controller):
 
         self.pixels = 0
         self.lines = 0
-
-        # set to define interface initialization state (False->closed, True->opened)
-        self.initialized = False
-        self.is_reset = 0
 
         # video gain flag
         self.video_gain = 1

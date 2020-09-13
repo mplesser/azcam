@@ -14,10 +14,10 @@ from azcam.image import Image
 from azcam.header import Header
 from azcam.exposures.filename import Filename
 from azcam.exposures.obstime import ObsTime
-from azcam.exposures.receive_data import ReceiveData
+from azcam.baseobject import Objects
 
 
-class Exposure(ReceiveData):
+class Exposure(Objects):
     """
     The Azcam Exposure class.
     Only required attributes and stub methods are defined here. Additional
@@ -25,13 +25,9 @@ class Exposure(ReceiveData):
     which should inherit this class.
     """
 
-    def __init__(self, obj_id="exposure"):
+    def __init__(self, obj_id="exposure", obj_name="Exposure"):
 
-        #: exposure name
-        self.name = ""
-
-        #: exposure id
-        self.obj_id = obj_id
+        super().__init__(obj_id, obj_name)
 
         #: exposure flag defining state of current exposure
         self.exposure_flag = azcam.db.exposureflags["NONE"]
@@ -72,9 +68,6 @@ class Exposure(ReceiveData):
         self.comp_exposure = 0
         #: True when in a comparision exposure sequence so lamps stay on
         self.comp_sequence = 0
-
-        #: True when initialized
-        self.initialized = 0
 
         #: True when exposure has been aborted
         self.aborted = 0
@@ -157,7 +150,7 @@ class Exposure(ReceiveData):
 
         self.obstime = ObsTime()
 
-        # objects which are reset or initialized with exposure
+        # obj_id's which are reset or initialized with exposure
         self.objects_reset = [
             "controller",
             "instrument",
@@ -174,11 +167,6 @@ class Exposure(ReceiveData):
         ]
 
         self.pgress = 0  # debug
-
-        # save object
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cmd_objects[obj_id] = self
-        azcam.db.cli_cmds[obj_id] = self
 
     def initialize(self):
         """
@@ -466,7 +454,10 @@ class Exposure(ReceiveData):
 
         if self.new_roi:
             self.image.data = numpy.empty(
-                shape=[self.image.focalplane.numamps_image, self.image.focalplane.numpix_amp,],
+                shape=[
+                    self.image.focalplane.numamps_image,
+                    self.image.focalplane.numpix_amp,
+                ],
                 dtype="<u2",
             )
             self.new_roi = 0
@@ -511,9 +502,9 @@ class Exposure(ReceiveData):
             azcam.db.controller.set_shutter_state(shutterstate)
 
             if not self.comp_exposure:
-                azcam.db.headers["exposure"].set_keyword("IMAGETYP", imagetype, "Image type", str)
+                self.set_keyword("IMAGETYP", imagetype, "Image type", str)
 
-        azcam.db.exposure.header.delete_keyword("COMPLAMP")
+        self.delete_keyword("COMPLAMP")
 
         # set comp lamps, turn on, set keyword
         if self.comp_exposure and azcam.db.instrument.enabled:
@@ -524,14 +515,14 @@ class Exposure(ReceiveData):
                 if not azcam.db.instrument.shutter_strobe:
                     azcam.db.instrument.comps_on()
             lampnames = " ".join(azcam.db.instrument.get_active_comps())
-            azcam.db.headers["exposure"].set_keyword("COMPLAMP", lampnames, "Comp lamp names", str)
-            azcam.db.headers["exposure"].set_keyword("IMAGETYP", "comp", "Image type", str)
+            self.set_keyword("COMPLAMP", lampnames, "Comp lamp names", str)
+            self.set_keyword("IMAGETYP", "comp", "Image type", str)
             azcam.db.instrument.comps_delay()  # delay for lamp warmup
         else:
             if not self.guide_mode:
                 if (azcam.db.get("instrument") is not None) and azcam.db.get("instrument").enabled:
                     azcam.db.instrument.set_active_comps()  # reset
-                azcam.db.headers["exposure"].set_keyword("IMAGETYP", imagetype, "Image type", str)
+                self.set_keyword("IMAGETYP", imagetype, "Image type", str)
 
         # update all headers with current data
         if self.update_headers_in_background:
@@ -823,7 +814,6 @@ class Exposure(ReceiveData):
     # **********************************************************************************************
     # header
     # **********************************************************************************************
-
     def record_current_times(self):
         """
         Record the current times and data info in the header.
@@ -843,16 +833,11 @@ class Exposure(ReceiveData):
         self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
         self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
-            "LOCTIME", self.obstime.local_time[0], "Local time at start of exposure", int,
+            "LOCTIME",
+            self.obstime.local_time[0],
+            "Local time at start of exposure",
+            int,
         )
-
-        return
-
-    def update_header(self):
-        """
-        Update header.
-        The exposure object has no items to update.
-        """
 
         return
 
@@ -920,7 +905,7 @@ class Exposure(ReceiveData):
                     title = self.image_type.lower()
 
         # set OBJECT keyword to title or autotitle value
-        azcam.db.headers["exposure"].set_keyword("OBJECT", title, "", str)
+        self.set_keyword("OBJECT", title, "", str)
         self.title = title
         self.image.title = title
 
@@ -1459,19 +1444,18 @@ class Exposure(ReceiveData):
 
         if ef == 1:
             expcolor = "green"
-            et = azcam.db.exposure.get_exposuretime()
+            et = self.get_exposuretime()
             if et == 0:
                 progress = 0.0
                 explabel = ""
             else:
-                etr = azcam.db.exposure.get_exposuretime_remaining()
+                etr = self.get_exposuretime_remaining()
                 explabel = f"{etr:.1f} sec"
                 progress = float(100.0 * (etr / et))
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0
-                * (azcam.db.exposure.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
             )
             explabel = f"{progress}%"
         elif ef == 8:
@@ -1538,19 +1522,18 @@ class Exposure(ReceiveData):
 
         if ef == 1:
             expcolor = "green"
-            et = azcam.db.exposure.get_exposuretime()
+            et = self.get_exposuretime()
             if et == 0:
                 progress = 0.0
                 explabel = ""
             else:
-                etr = azcam.db.exposure.get_exposuretime_remaining()
+                etr = self.get_exposuretime_remaining()
                 explabel = f"{etr:.1f} sec"
                 progress = float(100.0 * (etr / et))
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0
-                * (azcam.db.exposure.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
             )
             explabel = "%p%"
         elif ef == 8:

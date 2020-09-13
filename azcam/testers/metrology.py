@@ -8,12 +8,10 @@ import scipy.optimize
 import numpy
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Metrology(TesterBase):
+class Metrology(Tester):
     """
     Metrology analysis.
     This class analyzes a grid of (x,y,z) image surface points.
@@ -144,12 +142,8 @@ class Metrology(TesterBase):
             azcam.log("Quantile\tHeight")
             for i, p in enumerate(self.quantile_percents):
                 azcam.log("%5.01f\t\t%.04f" % (p, self.quantile_values[i]))
-        self.z_halfband = (
-            self.quantile_values[self.qfh1] - self.quantile_values[self.qfh0]
-        ) / 2.0
-        self.z_mid = (
-            self.quantile_values[self.qfh1] + self.quantile_values[self.qfh0]
-        ) / 2.0
+        self.z_halfband = (self.quantile_values[self.qfh1] - self.quantile_values[self.qfh0]) / 2.0
+        self.z_mid = (self.quantile_values[self.qfh1] + self.quantile_values[self.qfh0]) / 2.0
         azcam.log("%s\t\t%.04f" % ("Z-mid", self.z_mid))
         azcam.log("%s\t%.04f" % ("Z-mid_HalfBand", self.z_halfband))
 
@@ -185,12 +179,10 @@ class Metrology(TesterBase):
             for i, p in enumerate(self.quantile_percents):
                 azcam.log("%5.01f\t\t%.01f" % (p, self.flatness_quantile_values[i]))
         self.f_halfband = (
-            self.flatness_quantile_values[self.qfh1]
-            - self.flatness_quantile_values[self.qfh0]
+            self.flatness_quantile_values[self.qfh1] - self.flatness_quantile_values[self.qfh0]
         ) / 2.0
         self.fmid = (
-            self.flatness_quantile_values[self.qfh1]
-            + self.flatness_quantile_values[self.qfh0]
+            self.flatness_quantile_values[self.qfh1] + self.flatness_quantile_values[self.qfh0]
         ) / 2.0
         azcam.log("%s\t\t%.04f" % ("F-mid", self.fmid))
         azcam.log("%s\t%.04f" % ("F-mid_HalfBand", self.f_halfband))
@@ -486,9 +478,7 @@ class Metrology(TesterBase):
             plt.title("Z-Standard Drift")
             ax.set_xlabel("Row")
             ax.set_ylabel("Z [microns]")
-            ax.xaxis.set_major_locator(
-                plt.MaxNLocator(integer=True)
-            )  # integer row numbers
+            ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # integer row numbers
             drift_1 = self.standard1_z - self.standard_zheight
             plt.plot(drift_1)
             drift_2 = self.standard2_z - self.standard_zheight
@@ -606,16 +596,12 @@ class Metrology(TesterBase):
             lines.append(s)
         lines.append("")
 
-        lines.append(
-            f"![Z-Height Histogram]({os.path.abspath(self.HistogramHeightPlot)})  "
-        )
+        lines.append(f"![Z-Height Histogram]({os.path.abspath(self.HistogramHeightPlot)})  ")
         lines.append("")
         lines.append(f"Z-Height Histogram.")
         lines.append("")
 
-        lines.append(
-            f"![Flatness Histogram]({os.path.abspath(self.HistogramFlatnessPlot)})  "
-        )
+        lines.append(f"![Flatness Histogram]({os.path.abspath(self.HistogramFlatnessPlot)})  ")
         lines.append("")
         lines.append(f"Flatness Histogram.")
         lines.append("")
@@ -678,9 +664,7 @@ class Metrology(TesterBase):
         zoffset = 0.0
 
         # raw output datafile
-        with open(
-            f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w"
-        ) as fout:
+        with open(f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w") as fout:
 
             for line in lines:
                 line = line.strip()
@@ -859,9 +843,7 @@ class Metrology(TesterBase):
 
                     zs_mean = numpy.array(zstandard).mean()
                     self.zstandard.append(zs_mean)
-                    zoffset = (
-                        zs_mean - self.standard_zheight
-                    )  # this updates current value
+                    zoffset = zs_mean - self.standard_zheight  # this updates current value
 
                 # write line to CSV file
                 self.csv_tokens_raw = [
@@ -951,9 +933,7 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref1 Diameter") or line.startswith(
-                    "Ref1 Roundness"
-                ):
+                elif line.startswith("Ref1 Diameter") or line.startswith("Ref1 Roundness"):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -963,9 +943,7 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref2 Diameter") or line.startswith(
-                    "Ref2 Roundness"
-                ):
+                elif line.startswith("Ref2 Diameter") or line.startswith("Ref2 Roundness"):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -975,9 +953,7 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref3 Diameter") or line.startswith(
-                    "Ref3 Roundness"
-                ):
+                elif line.startswith("Ref3 Diameter") or line.startswith("Ref3 Roundness"):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -987,9 +963,7 @@ class Metrology(TesterBase):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref4 Diameter") or line.startswith(
-                    "Ref4 Roundness"
-                ):
+                elif line.startswith("Ref4 Diameter") or line.startswith("Ref4 Roundness"):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")

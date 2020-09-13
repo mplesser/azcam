@@ -5,13 +5,12 @@ import shutil
 import numpy
 
 import azcam
-import azcam.fits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Prnu(TesterBase):
+class Prnu(Tester):
     """
     Photo-Response Non-Uniformity (PRNU) acquisition and analysis.
     """
@@ -87,12 +86,8 @@ class Prnu(TesterBase):
                 wave = int(wave)
                 azcam.log(f"Current wavelength: {wave}")
             filename = os.path.basename(api.get_image_filename())
-            azcam.log(
-                f"Taking PRNU image for {exposuretime:.3f} seconds at {wavelength:.1f} nm"
-            )
-            api.expose(
-                exposuretime, self.exposure_type, f"PRNU image {wavelength:.1f} nm"
-            )
+            azcam.log(f"Taking PRNU image for {exposuretime:.3f} seconds at {wavelength:.1f} nm")
+            api.expose(exposuretime, self.exposure_type, f"PRNU image {wavelength:.1f} nm")
 
         # finish
         api.restore_imagepars(impars, currentfolder)
@@ -123,9 +118,7 @@ class Prnu(TesterBase):
             for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
                 shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(
-                subfolder
-            )  # move for analysis folder - assume it already exists
+            azcam.utils.curdir(subfolder)  # move for analysis folder - assume it already exists
         else:
             subfolder = startingfolder
 
@@ -165,8 +158,7 @@ class Prnu(TesterBase):
                 if wavelength not in self.wavelengths:
                     SequenceNumber = SequenceNumber + 1
                     nextfile = (
-                        os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                        + ".fits"
+                        os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
                     )
                     continue
             except Exception:
@@ -232,10 +224,7 @@ class Prnu(TesterBase):
             azcam.log(s)
 
             SequenceNumber = SequenceNumber + 1
-            nextfile = (
-                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                + ".fits"
-            )
+            nextfile = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
 
         if "FAIL" in list(self.grades.values()):
             self.grade = "FAIL"

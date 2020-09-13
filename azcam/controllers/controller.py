@@ -4,29 +4,20 @@ Contains the base Controller class.
 
 import azcam
 from azcam.header import Header
+from azcam.baseobject import Objects
 
 
-class Controller(object):
+class Controller(Objects):
     """
     The base controller class for azcam-supported controllers.
     """
 
-    def __init__(self, obj_id="controller"):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        #: controller name
-        self.name = ""
+        super().__init__(obj_id, obj_name)
 
-        #: controller ID
-        self.obj_id = obj_id
-
-        #: True when controller is enabled
-        self.enabled = 1
-        #: True when contorller is initialized
-        self.initialized = 0
         #: interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0
-        # True when controller has been reset
-        self.is_reset = 0
 
         # create the controller Header object but name it "Camera"
         self.header = Header("Camera")
@@ -39,11 +30,6 @@ class Controller(object):
         self.detpars = DetPars()
 
         self.reset_flag = 0
-
-        # save object
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cmd_objects[obj_id] = self
-        azcam.db.cli_cmds[obj_id] = self
 
     def set_roi(self):
         """
@@ -73,26 +59,6 @@ class Controller(object):
         """
         Flush or clear out the detector.
         Returns after clearing is finished which could take many seconds.
-        """
-
-        return
-
-    # ****************************************************************
-    # header
-    # ****************************************************************
-
-    def get_keyword(self, keyword):
-        """
-        Return a keyword value and its comment.
-        Comment always returned in double quotes, even if empty.
-        """
-
-        return self.header.get_keyword(keyword)
-
-    def update_header(self):
-        """
-        Update header.
-        Normally controller keywords are set during reset.
         """
 
         return

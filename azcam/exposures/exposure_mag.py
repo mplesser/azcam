@@ -14,11 +14,10 @@ class ExposureMag(Exposure):
     Defines the exposure class for Magellan controllers which makes an exposure.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="exposure", obj_name="Exposure"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.id = "mag"
         self.receive_data = ReceiveData(self)
         self.exp_start = 0
         self.curr_delay = 0
@@ -125,9 +124,7 @@ class ExposureMag(Exposure):
 
         # transfer image data already read from controller
         try:
-            reply = self.receive_data.receive_image_data(
-                self.image.focalplane.numpix_image * 2
-            )
+            reply = self.receive_data.receive_image_data(self.image.focalplane.numpix_image * 2)
         except azcam.AzcamError:
             self.exposure_flag = azcam.db.exposureflags["ABORT"]
 
@@ -152,9 +149,7 @@ class ExposureMag(Exposure):
         self.exposure_flag = azcam.db.exposureflags["WRITING"]
 
         if self.image.remote_imageserver_flag:
-            local_file = (
-                self.temp_image_file + "." + self.filename.get_extension(self.filetype)
-            )
+            local_file = self.temp_image_file + "." + self.filename.get_extension(self.filetype)
             try:
                 os.remove(local_file)
             except FileNotFoundError:
@@ -173,12 +168,8 @@ class ExposureMag(Exposure):
         # update controller header with keywords which might have changed
         et = float(int(self.exposure_time_actual * 1000.0) / 1000.0)
         dt = float(int(self.dark_time * 1000.0) / 1000.0)
-        azcam.db.headers["exposure"].set_keyword(
-            "EXPTIME", et, "Exposure time (seconds)", float
-        )
-        azcam.db.headers["exposure"].set_keyword(
-            "DARKTIME", dt, "Dark time (seconds)", float
-        )
+        azcam.db.headers["exposure"].set_keyword("EXPTIME", et, "Exposure time (seconds)", float)
+        azcam.db.headers["exposure"].set_keyword("DARKTIME", dt, "Dark time (seconds)", float)
 
         # write file(s) to disk
         if self.save_file:

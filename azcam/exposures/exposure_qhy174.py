@@ -7,7 +7,7 @@ Contains the ExposureQHY class.
 import os
 import time
 
-from azcam.fits import pyfits
+from azcam.functions.fits import pyfits
 
 import azcam
 from azcam.exposures.exposure import Exposure
@@ -18,11 +18,10 @@ class ExposureQHY(Exposure):
     Defines the exposure class for QHY174 camera which makes an exposure.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="exposure", obj_name="Exposure"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.id = "qhy"
         self.exp_start = 0
         self.readout_delay = 1
 

@@ -11,11 +11,10 @@ class TempConMag(TempCon):
     Defines the MAG temperature control class.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.enabled = 1
         self.num_temp_reads = 3
         self.control_temperature = self.bad_temp_value  # no active control
 

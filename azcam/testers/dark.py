@@ -5,14 +5,11 @@ import shutil
 
 import azcam
 from azcam.console import api
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Dark(TesterBase):
+class Dark(Tester):
     """
     Dark signal acquisition and analysis.
     """
@@ -258,12 +255,8 @@ class Dark(TesterBase):
                 self.MaskedImage,
                 copy=False,
             )
-            self.num_rejected_bright_pixels = totalpixels - numpy.ma.count(
-                self.MaskedImage
-            )
-            azcam.log(
-                f"Number of rejected bright pixels: {self.num_rejected_bright_pixels}"
-            )
+            self.num_rejected_bright_pixels = totalpixels - numpy.ma.count(self.MaskedImage)
+            azcam.log(f"Number of rejected bright pixels: {self.num_rejected_bright_pixels}")
 
         # get number of pixels not masked
         self.total_pixels = numpy.ma.count(self.MaskedImage)
@@ -397,70 +390,66 @@ class Dark(TesterBase):
         """
 
         # plot dark image
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         # darkimage.plot()
         azcam.plot.plot_image(self.darkimage)
-        plt.title("Combined Dark Image")
-        plt.show()
+        azcam.plot.plt.title("Combined Dark Image")
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, self.darkimage_plot)
 
         # plot cummulative histogram
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.hist(
+        azcam.plot.plt.hist(
             self.validdata, bins="auto", density=1, histtype="step", cumulative=True
         )
-        ax = plt.gca()
+        ax = azcam.plot.plt.gca()
         ax.set_xlabel("Dark Signal [e/pix/sec]")
         ax.set_ylabel("Pixel Fraction")
-        plt.ylim(0.5, 1.0)
-        ax.set_yticks(
-            [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00]
-        )
-        plt.xlim(0.0, self.mean_dark_signal * 10.0)
+        azcam.plot.plt.ylim(0.5, 1.0)
+        ax.set_yticks([0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00])
+        azcam.plot.plt.xlim(0.0, self.mean_dark_signal * 10.0)
 
         if self.mean_dark_spec != -1:
-            plt.axvline(
+            azcam.plot.plt.axvline(
                 x=self.mean_dark_signal, linestyle="-", color="green", label="Mean"
             )
-            plt.legend(loc="upper right")
-            plt.axvline(
-                x=self.mean_dark_spec, linestyle="--", color="red", label="Spec"
-            )
-            plt.legend(loc="upper right")
+            azcam.plot.plt.legend(loc="upper right")
+            azcam.plot.plt.axvline(x=self.mean_dark_spec, linestyle="--", color="red", label="Spec")
+            azcam.plot.plt.legend(loc="upper right")
         if self.dark_limit != -1:
-            plt.axhline(
+            azcam.plot.plt.axhline(
                 y=self.dark_fraction, linestyle="--", color="red", label="Fraction"
             )
-            plt.axvline(x=self.dark_limit, linestyle="--", color="blue", label="Limit")
-            plt.legend(loc="upper right")
+            azcam.plot.plt.axvline(x=self.dark_limit, linestyle="--", color="blue", label="Limit")
+            azcam.plot.plt.legend(loc="upper right")
 
-        plt.title("Dark Signal Cummulative Histogram")
-        plt.show()
+        azcam.plot.plt.title("Dark Signal Cummulative Histogram")
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, self.cumm_hist_plot)
 
         # plot full signal histogram
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         # xmax = min(self.mean_dark_signal * 10.0, self.validdata.max())
-        # plt.hist(self.validdata, "auto", histtype="step", log=True)
+        # azcam.plot.plt.hist(self.validdata, "auto", histtype="step", log=True)
         xmax = self.mean_dark_signal * 100.0
         histvals = self.validdata[self.validdata < xmax]
-        plt.hist(histvals, range=[0.0, xmax], histtype="step", log=True)
-        ax = plt.gca()
+        azcam.plot.plt.hist(histvals, range=[0.0, xmax], histtype="step", log=True)
+        ax = azcam.plot.plt.gca()
         ax.set_xlabel("Dark Signal [e/pix/sec]")
         ax.set_ylabel("Pixels")
-        plt.title("Dark Signal Histogram")
-        plt.ylim(1.0)
+        azcam.plot.plt.title("Dark Signal Histogram")
+        azcam.plot.plt.ylim(1.0)
         if self.mean_dark_spec != -1:
-            plt.axvline(
+            azcam.plot.plt.axvline(
                 x=self.mean_dark_signal, linestyle="-", color="green", label="Mean"
             )
-            plt.legend(loc="upper right")
+            azcam.plot.plt.legend(loc="upper right")
             ax.annotate(
                 f"{self.mean_dark_signal:0.5f}",
                 xy=(self.mean_dark_signal, 10000),
@@ -468,7 +457,7 @@ class Dark(TesterBase):
                 ha="center",
                 textcoords="offset points",
             )
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, self.full_hist_plot)
 
         return
@@ -503,9 +492,7 @@ class Dark(TesterBase):
 
         lines.append("")
         if "cumm_hist" in self.report_plots:
-            lines.append(
-                f"![Cumulative Histogram]({os.path.abspath(self.cumm_hist_plot)})  "
-            )
+            lines.append(f"![Cumulative Histogram]({os.path.abspath(self.cumm_hist_plot)})  ")
             lines.append("*Cumulative Histogram.*")
             lines.append("")
 

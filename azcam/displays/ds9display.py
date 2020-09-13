@@ -11,7 +11,7 @@ import subprocess
 from typing import List
 
 import azcam
-from azcam.fits import pyfits
+from azcam.functions.fits import pyfits
 from azcam.displays.display import Display
 
 
@@ -20,12 +20,9 @@ class Ds9Display(Display):
     Azcam's interface to SAO's ds9 image display tool.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="display", obj_name="ds9"):
 
-        super().__init__(*args)
-
-        #: display ID
-        self.name = "ds9"
+        super().__init__(obj_id, obj_name)
 
         #: display Host, as a string hex code
         self.host = "0"
@@ -109,9 +106,7 @@ class Ds9Display(Display):
         # cmd = '\"'+self.xpaaccess_app+'\" -v ds9 '
         # args=['-v','ds9']
         # p=subprocess.Popen([cmd,args],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        p = subprocess.Popen(
-            [cmd, "-v", "ds9"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
+        p = subprocess.Popen([cmd, "-v", "ds9"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         # output = os.popen(cmd).readlines()
         # 1output=p.stdout.readlines()
         output, errors = p.communicate()
@@ -230,9 +225,7 @@ class Ds9Display(Display):
         if coordinate_type == "":
             coordinate_type = self.coordinate_type
 
-        Rois = self.get_regions(
-            coordinate_type
-        )  # this is a list of roi's, each [shape, roi]
+        Rois = self.get_regions(coordinate_type)  # this is a list of roi's, each [shape, roi]
         if not Rois:
             return []
 
@@ -461,6 +454,21 @@ class Ds9Display(Display):
 
         return
 
+    def zoom(self, scale=0):
+        """
+        Set display zoom factor relative to current zoom.
+
+        :param int Scale: Scale factor for zoom, 0 "to fit"
+        :return None:
+        """
+
+        s = "to fit" if scale == 0 else str(scale)
+        try:
+            cmd = "zoom " + s
+            self.xpaset(cmd)
+        except Exception:
+            return
+
     def _set_crosshair(self, clear_rois=0):
         """
         Set the ds9 pointer to a crosshair.
@@ -502,23 +510,8 @@ class Ds9Display(Display):
 
         return
 
-    def zoom(self, scale=0):
-        """
-        Set display zoom factor relative to current zoom.
-
-        :param int Scale: Scale factor for zoom, 0 "to fit"
-        :return None:
-        """
-
-        s = "to fit" if scale == 0 else str(scale)
-        try:
-            cmd = "zoom " + s
-            self.xpaset(cmd)
-        except Exception:
-            return
-
     # *************************************************************************************************
-    #   image display
+    #   display image
     # *************************************************************************************************
     def display(self, image, extension_number=-1):
         """
@@ -554,13 +547,7 @@ class Ds9Display(Display):
                 s = self.xpaset_app + " " + ds9 + "fits iraf < " + filename
             else:
                 if extension_number == -1:
-                    s = (
-                        self.xpaset_app
-                        + " "
-                        + ds9
-                        + "fits mosaicimage iraf < "
-                        + filename
-                    )
+                    s = self.xpaset_app + " " + ds9 + "fits mosaicimage iraf < " + filename
                 else:
                     s = (
                         self.xpaset_app
@@ -718,6 +705,9 @@ class Ds9Display(Display):
         except Exception:
             return []
 
+    # *************************************************************************************************
+    #   save displayed image
+    # *************************************************************************************************
     def save_image(self, filename="display.png"):
         """
         Save displayed image as a PNG snapshot.
@@ -761,7 +751,6 @@ class Ds9Display(Display):
     # *************************************************************************************************
     #   XPA commands
     # *************************************************************************************************
-
     def xpaget(self, command):
         """
         Issue xpaget command for ds9.

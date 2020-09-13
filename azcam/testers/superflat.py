@@ -5,15 +5,12 @@ import shutil
 import numpy
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Superflat(TesterBase):
+class Superflat(Tester):
     """
     Flat field image acquisition and analysis.
     """
@@ -74,9 +71,7 @@ class Superflat(TesterBase):
 
             meanelectrons = azcam.testers.detcal.mean_electrons
 
-            self.exposure_times = (
-                numpy.array(self.exposure_levels) / meanelectrons[wave]
-            )
+            self.exposure_times = numpy.array(self.exposure_levels) / meanelectrons[wave]
         elif len(self.exposure_times) > 0:
             azcam.log("Using ExposureTimes")
         else:
@@ -167,9 +162,7 @@ class Superflat(TesterBase):
                 azcam.fits.colbias(nextfile, fit_order=self.fit_order)
 
             SequenceNumber = SequenceNumber + 1
-            nextfile = (
-                os.path.join(subfolder, rootname + "%04d" % SequenceNumber) + ".fits"
-            )
+            nextfile = os.path.join(subfolder, rootname + "%04d" % SequenceNumber) + ".fits"
             loop += 1
 
         # median combine all images
@@ -208,9 +201,7 @@ class Superflat(TesterBase):
             shutil.copy(self.superflat_filename, startingfolder)
             shutil.copy(self.scaled_superflat_filename, startingfolder)
             shutil.copy("superflatimage.png", startingfolder)
-            self.superflat_filename = os.path.join(
-                startingfolder, self.superflat_filename
-            )
+            self.superflat_filename = os.path.join(startingfolder, self.superflat_filename)
             self.scaled_superflat_filename = os.path.join(
                 startingfolder, self.scaled_superflat_filename
             )

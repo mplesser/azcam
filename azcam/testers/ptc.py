@@ -5,15 +5,12 @@ import shutil
 import numpy
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Ptc(TesterBase):
+class Ptc(Tester):
     """
     Photon Transfer Curve acquisition and analysis.
     """
@@ -121,9 +118,7 @@ class Ptc(TesterBase):
         # measure the reference diode current with shutter closed
         if self.use_ref_diode:
             dc = api.get_current(0, 0)
-            api.set_keyword(
-                "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
-            )
+            api.set_keyword("REFCUR", dc, "Reference diode current (A)", "float", "instrument")
 
         api.expose(0, "zero", "PTC bias")
 
@@ -137,9 +132,7 @@ class Ptc(TesterBase):
                 wave = self.wavelength
 
             meanelectrons = azcam.testers.detcal.mean_electrons
-            self.exposure_times = (
-                numpy.array(self.exposure_levels) / meanelectrons[wave]
-            )
+            self.exposure_times = numpy.array(self.exposure_levels) / meanelectrons[wave]
 
         elif len(self.exposure_times) > 0:
             azcam.log("Using ExposureTimes")
@@ -166,16 +159,13 @@ class Ptc(TesterBase):
 
             filename = os.path.basename(api.get_image_filename())
             azcam.log(
-                "Taking PTC pair %d of %d for %.3f secs"
-                % (pair + 1, number_pairs, ExposureTime)
+                "Taking PTC pair %d of %d for %.3f secs" % (pair + 1, number_pairs, ExposureTime)
             )
 
             # measure the reference diode current
             if self.use_ref_diode:
                 dc = api.get_current(0, 1)
-                api.set_keyword(
-                    "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
-                )
+                api.set_keyword("REFCUR", dc, "Reference diode current (A)", "float", "instrument")
 
             # make exposure
             if self.flush_before_exposure:
@@ -186,9 +176,7 @@ class Ptc(TesterBase):
             # measure the reference diode current
             if self.use_ref_diode:
                 dc = api.get_current(0, 1)
-                api.set_keyword(
-                    "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
-                )
+                api.set_keyword("REFCUR", dc, "Reference diode current (A)", "float", "instrument")
 
             api.expose(ExposureTime, self.exposure_type, "PTC frame 2")
 
@@ -227,52 +215,40 @@ class Ptc(TesterBase):
             for filename in glob.glob(os.path.join(startingfolder, "ptc*.fits")):
                 shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(
-                subfolder
-            )  # move for analysis folder - assume it already exists
+            azcam.utils.curdir(subfolder)  # move for analysis folder - assume it already exists
         currentfolder = azcam.utils.curdir()
         self.analysis_folder = currentfolder  # save for other tasks
 
         firstfile, starting_seq_num = azcam.utils.find_file_in_sequence(rootname)
         seq_num = starting_seq_num
 
-        self.NumExt, self.first_ext, self.last_ext = azcam.fits.get_extensions(
-            firstfile
-        )
+        self.NumExt, self.first_ext, self.last_ext = azcam.fits.get_extensions(firstfile)
 
         # get ROI
         self.roi = azcam.utils.get_image_roi()
 
         # Overscan correct all images
         if self.overscan_correct:
-            nextfile = (
-                os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
-            )
+            nextfile = os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
             loop = 0
             azcam.log("Overscan correcting images")
             while os.path.exists(nextfile):
                 azcam.log("Overscan correct image: %s" % os.path.basename(nextfile))
                 azcam.fits.colbias(nextfile, fit_order=self.fit_order)
                 seq_num = seq_num + 1
-                nextfile = (
-                    os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
-                )
+                nextfile = os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
                 loop += 1
 
         if self.resample > 1:
             seq_num = starting_seq_num
-            nextfile = (
-                os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
-            )
+            nextfile = os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
             loop = 0
             azcam.log(f"Resampling images: {self.resample}x{self.resample} pixels")
             while os.path.exists(nextfile):
                 azcam.log("Resampling image: %s" % os.path.basename(nextfile))
                 azcam.fits.resample(nextfile, 2)
                 seq_num = seq_num + 1
-                nextfile = (
-                    os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
-                )
+                nextfile = os.path.join(currentfolder, rootname + "%04d" % seq_num) + ".fits"
                 loop += 1
 
         # bias image used for gain calc
@@ -319,9 +295,7 @@ class Ptc(TesterBase):
             self.sdevs.append([float(x) for x in sdev])
             self.noises.append([float(x) for x in noise])
 
-            nextfile = (
-                os.path.join(currentfolder, rootname + "%04d" % (seq_num + 1)) + ".fits"
-            )
+            nextfile = os.path.join(currentfolder, rootname + "%04d" % (seq_num + 1)) + ".fits"
 
         self.num_chans = len(self.means[0])
         self.num_points = len(self.means)
@@ -583,14 +557,10 @@ class Ptc(TesterBase):
                         s,
                         xy=(0.04, 0.9 - 0.07 * chan),
                         xycoords="axes fraction",
-                        bbox=dict(
-                            boxstyle="round,pad=0.1", fc="lightyellow", alpha=1.0
-                        ),
+                        bbox=dict(boxstyle="round,pad=0.1", fc="lightyellow", alpha=1.0),
                     )
                 except numpy.linalg.LinAlgError:
-                    azcam.log(
-                        f"Could not fit line to channel {chan} PTC data within limits"
-                    )
+                    azcam.log(f"Could not fit line to channel {chan} PTC data within limits")
 
             # gain plot
             plt.figure(fignum_gain)

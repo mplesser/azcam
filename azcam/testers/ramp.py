@@ -4,15 +4,12 @@ import math
 import numpy
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
-from azcam.fits import pyfits
+from azcam.functions.fits import pyfits
 from azcam.console import api
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Ramp(TesterBase):
+class Ramp(Tester):
     """
     Ramp image acquisition and analysis for fast PTC measurements.
     """
@@ -199,9 +196,7 @@ class Ramp(TesterBase):
             sdevs = []
             for row in range(nrows):
                 roi = [self.first_col - 1, self.last_col, row, row + 1]
-                sdev = data_ffci[ext][roi[2] : roi[3]][
-                    roi[0] : roi[1]
-                ].std() / math.sqrt(2.0)
+                sdev = data_ffci[ext][roi[2] : roi[3]][roi[0] : roi[1]].std() / math.sqrt(2.0)
                 fmean = data_mean[ext][roi[2] : roi[3]][roi[0] : roi[1]].mean()
                 sdevs.append(sdev)
                 means.append(fmean)

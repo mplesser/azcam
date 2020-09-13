@@ -5,15 +5,12 @@ import glob
 import numpy
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Qe(TesterBase):
+class Qe(Tester):
     """
     Quantum Efficiency (QE) acquisition and analysis.
     """
@@ -35,9 +32,7 @@ class Qe(TesterBase):
         self.grades = {}  # QE grade {wavelength:grade}
 
         self.exposure_levels = {}  # Exposure levels {wave:level} [e/pix]
-        self.exposure_times = {
-            500: 0.5
-        }  # Exposure times {wave:seconds]  (when no exposure_levels)
+        self.exposure_times = {500: 0.5}  # Exposure times {wave:seconds]  (when no exposure_levels)
         self.means = []  # Mean counts
         self.qe = {}  # QE values
         self.wavelengths = []  # Wavelengths for QE measurements
@@ -130,16 +125,12 @@ class Qe(TesterBase):
 
         # take bias image
         api.set_par("imageroot", "qe.")
-        azcam.log(
-            "Taking bias image %s..." % os.path.basename(api.get_image_filename())
-        )
+        azcam.log("Taking bias image %s..." % os.path.basename(api.get_image_filename()))
 
         # measure the reference diode current with shutter closed
         if self.use_ref_diode:
             dc = api.get_current(0, 0)
-            api.set_keyword(
-                "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
-            )
+            api.set_keyword("REFCUR", dc, "Reference diode current (A)", "float", "instrument")
 
         # clear device
         api.tests()
@@ -168,9 +159,7 @@ class Qe(TesterBase):
             # measure the reference diode current
             if self.use_ref_diode:
                 dc = api.get_current(0, 1)
-                api.set_keyword(
-                    "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
-                )
+                api.set_keyword("REFCUR", dc, "Reference diode current (A)", "float", "instrument")
 
             # make exposure
             if self.flush_before_exposure:
@@ -274,9 +263,7 @@ class Qe(TesterBase):
             for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
                 shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(
-                subfolder
-            )  # move for analysis folder - assume it already exists
+            azcam.utils.curdir(subfolder)  # move for analysis folder - assume it already exists
         else:
             subfolder = startingfolder
 
@@ -303,9 +290,7 @@ class Qe(TesterBase):
             zerofilename = os.path.join(curfolder, zerofilename) + ".fits"
             zmeans = azcam.fits.mean(zerofilename)
             try:
-                spheredarkcurrent = float(
-                    azcam.fits.get_keyword(zerofilename, "REFCUR")
-                )
+                spheredarkcurrent = float(azcam.fits.get_keyword(zerofilename, "REFCUR"))
             except Exception:
                 spheredarkcurrent = 0.0
 
@@ -475,9 +460,7 @@ class Qe(TesterBase):
             SequenceNumber = SequenceNumber + 1
             if self.include_dark_images:
                 SequenceNumber = SequenceNumber + 1
-            nextfile = (
-                os.path.join(curfolder, rootname + "%04d" % SequenceNumber) + ".fits"
-            )
+            nextfile = os.path.join(curfolder, rootname + "%04d" % SequenceNumber) + ".fits"
 
         # analyze grades for each wavelength
         for wave in self.wavelengths:

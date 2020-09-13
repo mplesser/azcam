@@ -10,19 +10,16 @@ import scipy.ndimage.filters
 import scipy.optimize
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
-from azcam.fits import pyfits
+from azcam.functions.fits import pyfits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 # constants
 CON1 = 2.0 * numpy.sqrt(2.0 * numpy.log(2.0))  # 2.355 for sigma <=> FWHM
 
 
-class Fe55(TesterBase):
+class Fe55(Tester):
     """
     Fe55 X-ray signal acquisition and analysis.
     """
@@ -188,9 +185,7 @@ class Fe55(TesterBase):
             for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
                 shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(
-                subfolder
-            )  # move for analysis folder - assume it already exists
+            azcam.utils.curdir(subfolder)  # move for analysis folder - assume it already exists
         else:
             pass
 
@@ -224,10 +219,7 @@ class Fe55(TesterBase):
 
         # Correct fe55 image
         if self.overscan_correct or self.zero_correct:
-            filename = (
-                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                + ".fits"
-            )
+            filename = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
             NumExt, first_ext, last_ext = azcam.fits.get_extensions(filename)
 
             # zero_correct image first
@@ -244,10 +236,7 @@ class Fe55(TesterBase):
                 azcam.log("overscan_correct image: %s" % os.path.basename(filename))
                 azcam.fits.colbias(filename, fit_order=self.fit_order)
         else:
-            filename = (
-                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                + ".fits"
-            )
+            filename = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
 
         self.grade = "UNKNOWN"
         azcam.log("Analyzing image %s" % os.path.basename(filename))
@@ -306,9 +295,7 @@ class Fe55(TesterBase):
 
         if self.threshold == 0:
             if azcam.testers.bias.valid:
-                self.threshold = [
-                    self.noise_threshold * sd for sd in azcam.testers.bias.sdev
-                ]
+                self.threshold = [self.noise_threshold * sd for sd in azcam.testers.bias.sdev]
 
         # process each channel
         self.chansanalyzed = 0
@@ -328,13 +315,9 @@ class Fe55(TesterBase):
             self.imbufs.append(imbuf)
 
             # new code for clusters
-            data_max = scipy.ndimage.filters.maximum_filter(
-                imbuf, self.neighborhood_size
-            )
+            data_max = scipy.ndimage.filters.maximum_filter(imbuf, self.neighborhood_size)
             maxima = imbuf == data_max
-            data_min = scipy.ndimage.filters.minimum_filter(
-                imbuf, self.neighborhood_size
-            )
+            data_min = scipy.ndimage.filters.minimum_filter(imbuf, self.neighborhood_size)
             diff = (data_max - data_min) > self.threshold
             maxima[diff == 0] = 0
 
@@ -439,9 +422,7 @@ class Fe55(TesterBase):
                         reply = self._fit_gauss_elliptical(
                             [xevents[i], yevents[i]], imbuf[r1:r2, c1:c2]
                         )  # was box
-                        fwhm = self.pixel_size * math.sqrt(
-                            0.5 * (reply[5] ** 2 + reply[6] ** 2)
-                        )
+                        fwhm = self.pixel_size * math.sqrt(0.5 * (reply[5] ** 2 + reply[6] ** 2))
 
                         sigma = fwhm / CON1
                         sigmas.append(sigma)
@@ -626,9 +607,7 @@ class Fe55(TesterBase):
         # copy analysis output to starting fold
         if startingfolder != subfolder:
             try:
-                shutil.copy(
-                    "fe55.fits", startingfolder
-                )  # filename perhaps, but overwrites
+                shutil.copy("fe55.fits", startingfolder)  # filename perhaps, but overwrites
             except Exception:
                 pass
             for f in list(self.plot_files.values()):

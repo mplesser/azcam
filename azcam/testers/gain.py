@@ -5,14 +5,13 @@ import os
 import numpy
 
 import azcam
-import azcam.fits
-from azcam.fits import pyfits
+from azcam.functions.fits import pyfits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Gain(TesterBase):
+class Gain(Tester):
     """
     Acquire and analyze gain (PTC point) data.
     """
@@ -85,9 +84,7 @@ class Gain(TesterBase):
 
         if self.exposure_time == -1:
             ExposureTime = api.get_exposuretime()
-            azcam.log(
-                f"Exposure time not specified, using current value of {ExposureTime:0.3f}"
-            )
+            azcam.log(f"Exposure time not specified, using current value of {ExposureTime:0.3f}")
         else:
             ExposureTime = self.exposure_time
 
@@ -220,8 +217,7 @@ class Gain(TesterBase):
             if self.system_noise_correction != []:
                 for chan in range(NumExt):
                     rn = math.sqrt(
-                        noise[chan] ** 2
-                        - gain[chan] * self.system_noise_correction[chan] ** 2
+                        noise[chan] ** 2 - gain[chan] * self.system_noise_correction[chan] ** 2
                     )
                     noise[chan] = rn
 

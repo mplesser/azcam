@@ -21,7 +21,6 @@ class Header(object):
         self.comments = {}  # header comments dictionary {keyword:comment}
         self.typestrings = {}  # header typestrings dictionary {keyword:typestring)
         self.items = []  # list of header objects
-        self.enabled = 1  # enabled state
 
         self.filename = ""  # image header filename
 

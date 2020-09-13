@@ -1,5 +1,5 @@
 import azcam
-from azcam.api_console import API
+from azcam.functions.api_console import API
 
 api = API()
 

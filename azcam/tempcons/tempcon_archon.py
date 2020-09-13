@@ -12,11 +12,10 @@ class TempConArchon(TempCon):
     Requires MOD2 to be the HEATERX board.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.enabled = 1
         self.num_temp_reads = 1
         self.control_temperature = -120.0
 
@@ -30,9 +29,6 @@ class TempConArchon(TempCon):
         Ignored if heater board is installed.
         Temperature is temperature to set in Celsius.
         """
-
-        if not self.enabled:
-            return
 
         return
 

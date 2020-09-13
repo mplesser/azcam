@@ -14,11 +14,12 @@ class ControllerQHY(Controller):
     The controller class for QHY174 cameras using ASCOM.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.name = "qhy174"
+        self.controller_class = "qhy"
+        self.controller_type = "qhy174"
 
         #: video gain flag
         self.video_gain = 1
@@ -26,14 +27,26 @@ class ControllerQHY(Controller):
         #: True if image data from ControllserServer is binary (not a file)
         self.binary_image_data = 1
 
-        self.controller_class = "qhy"
-        self.controller_type = "qhy174"
-
         self.shutter_state = 0
 
         # ASCOM
         self.driver = "ASCOM.QHYCCD.Camera"
         self.camera = None
+
+    def initialize(self):
+        """
+        Initialize the controller interface.
+        """
+
+        # x = win32com.client.Dispatch("ASCOM.Utilities.Chooser")
+        # x.DeviceType = "Camera"
+        # self.driver = x.Choose(None)
+        self.camera = win32com.client.Dispatch(self.driver)
+        self.camera.connected = True
+
+        self.initialized = 1
+
+        return
 
     def reset(self):
         """
@@ -50,21 +63,6 @@ class ControllerQHY(Controller):
         self.set_roi()
 
         self.set_exposuretime(azcam.db.exposure.exposure_time)
-
-        return
-
-    def initialize(self):
-        """
-        Initialize the controller interface.
-        """
-
-        # x = win32com.client.Dispatch("ASCOM.Utilities.Chooser")
-        # x.DeviceType = "Camera"
-        # self.driver = x.Choose(None)
-        self.camera = win32com.client.Dispatch(self.driver)
-        self.camera.connected = True
-
-        self.initialized = 1
 
         return
 

@@ -3,14 +3,11 @@ import numpy
 import shutil
 
 import azcam
-import azcam.plot
-from azcam.plot import plt
-import azcam.fits
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Defects(TesterBase):
+class Defects(Tester):
     """
     Find and quantify image azcam.testers.defects.
     """
@@ -42,9 +39,7 @@ class Defects(TesterBase):
         # dark defects
         self.darkdefects_datafile = "darkdefects.txt"
         self.darkdefectsreport_file = "darkdefects"
-        self.dark_pixel_reject = (
-            -1
-        )  # reject superlfat dark pixels below this value from mean
+        self.dark_pixel_reject = -1  # reject superlfat dark pixels below this value from mean
         self.flat_filename = "superflat.fits"  # flat image for dark pixels
         self.dark_defects_grade = "FAIL"
         self.dark_rejected_pixels = -1
@@ -56,9 +51,7 @@ class Defects(TesterBase):
         self.report_file = "defects"
         self.defects_mask_filename = "DefectsMask.fits"
         self.total_rejected_pixels = -1
-        self.allowable_rejected_pixels = (
-            -1
-        )  # allowable total number of defective pixels
+        self.allowable_rejected_pixels = -1  # allowable total number of defective pixels
         self.allowable_bad_fraction = -1  # allowable total fraction of defective pixels
 
         self.report_include_plots = 0  # include plots in report file
@@ -75,9 +68,7 @@ class Defects(TesterBase):
         else:
             self.grade = "FAIL"
 
-        self.total_rejected_pixels = (
-            self.dark_rejected_pixels + self.bright_rejected_pixels
-        )
+        self.total_rejected_pixels = self.dark_rejected_pixels + self.bright_rejected_pixels
 
         # make total defects mask
         self.make_defects_mask()

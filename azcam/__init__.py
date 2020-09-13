@@ -7,9 +7,16 @@ import socket
 # bring these into azcam namespace so importing not required
 from .exceptions import AzcamError, AzcamWarning
 from .database import db
-from .logging import log
 from .image import Image
-from . import utils
+
+# bring in functions
+from .functions import logging
+from .functions import utils
+from .functions import plot
+from .functions import fits
+
+# bring in for convenience
+from .functions.logging import log
 
 # save this machine's hostname and ip address
 db.hostname = socket.gethostname()

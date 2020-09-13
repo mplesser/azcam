@@ -6,26 +6,17 @@ from typing import List
 
 import azcam
 from azcam.header import Header
+from azcam.baseobject import Objects
 
 
-class TempCon(object):
+class TempCon(Objects):
     """
     Temperature control class.
     """
 
-    def __init__(self, obj_id="tempcon"):
+    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
 
-        #: temperature controller name
-        self.name = ""
-
-        #: temperature controller ID
-        self.obj_id = obj_id
-
-        #: True if temperature control is initialized
-        self.initialized = 0
-
-        #: True if temperature control is enabled
-        self.enabled = 0
+        super().__init__(obj_id, obj_name)
 
         #: control or set temperature at which to regulate
         self.control_temperature = 0.0
@@ -59,11 +50,6 @@ class TempCon(object):
         # add keywords
         self.define_keywords()
 
-        # save object
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cmd_objects[obj_id] = self
-        azcam.db.cli_cmds[obj_id] = self
-
         return
 
     def initialize(self):
@@ -75,6 +61,7 @@ class TempCon(object):
             return
 
         if not self.enabled:
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         # self.temperature_offsets = self.number_sensors * [0.0]
@@ -110,9 +97,7 @@ class TempCon(object):
 
         return
 
-    def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
-    ) -> None:
+    def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
 
@@ -144,9 +129,7 @@ class TempCon(object):
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
 
         if self.log_temps:
-            azcam.log(
-                f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0
-            )
+            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
 
         return temps
 
@@ -269,57 +252,3 @@ class TempCon(object):
         t = self.header.get_type_string(self.header.typestrings[keyword])
 
         return [temp, self.header.comments[keyword], t]
-
-    def read_header(self) -> List[List]:
-        """
-        Reads, records, and returns the current header.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type
-        """
-
-        header = []
-        keywords = self.header.get_all_keywords()
-
-        for key in keywords:
-            reply = self.get_keyword(key)
-            list1 = [key, reply[0], reply[1], reply[2]]
-            header.append(list1)
-
-        return header
-
-    def update_header(self) -> None:
-        """
-        Update headers, reading current data.
-        """
-
-        if not self.enabled:
-            self.header.delete_all_keywords()
-            return
-
-        if not self.initialized:
-            self.initialize()
-
-        # update header
-        self.define_keywords()
-        self.read_header()
-
-        return
-
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
-        """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
-        """
-
-        self.header.set_keyword(keyword, value, comment, typestring)
-
-        return
-
-    def delete_keyword(self, keyword):
-        """
-        Delete a keyword.
-        """
-
-        self.header.delete_keyword(keyword)
-
-        return

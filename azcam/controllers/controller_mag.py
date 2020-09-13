@@ -24,11 +24,9 @@ class ControllerMag(Controller):
     The controller class for Magellan controllers.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        super().__init__(*args)
-
-        self.name = "mag1"
+        super().__init__(obj_id, obj_name)
 
         #: selected video channel(s) for switched systems
         self.video_select = 0

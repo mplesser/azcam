@@ -538,6 +538,25 @@ class API(object):
     # keywords
     # *******************************************************
 
+    def update_header(self, object_name: str = "controller") -> str:
+        """
+        Update the header of an object.
+        This command usually reads hardware to get the lastest keyword values.
+
+        :param object_name: object to which keyword belongs
+        """
+
+        return self.rcommand(f"{object_name}.update_header")
+
+    def read_header(self, object_name: str = "controller"):
+        """
+        Reads each keyword in the header and returns the header with the updated values.
+        This command usually does not read hardware to get the lastest keyword values.
+        Returns a list of header lists: [[keyword, value, comment, type]].
+        """
+
+        return self.rcommand(f"{object_name}.read_header")
+
     def set_keyword(
         self,
         keyword: str,
@@ -559,13 +578,14 @@ class API(object):
         """
 
         return self.rcommand(
-            f'{key_object}.header.set_keyword {keyword} {key_value} "{key_comment}" {key_type}'
+            f'{key_object}.set_keyword {keyword} {key_value} "{key_comment}" {key_type}'
         )
 
     def get_keyword(self, keyword: str, key_object: str = "controller") -> str:
         """
         Return a keyword value and its comment.
         The comment always returned in quotes, even if empty.
+        Hardware is not usually read by this commands, use update_header first.
 
         :param keyword: keyword name
         :param key_object: object to which keyword belongs
@@ -582,7 +602,7 @@ class API(object):
         :param key_object: object to which keyword belongs
         """
 
-        return self.rcommand(f"{key_object}.header.delete_keyword {keyword}")
+        return self.rcommand(f"{key_object}.delete_keyword {keyword}")
 
     # *******************************************************
     # focalplane

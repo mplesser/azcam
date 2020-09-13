@@ -1,12 +1,11 @@
 import numpy
 
 import azcam
-import azcam.fits
-from azcam.fits import pyfits
-from azcam.testers.testerbase import TesterBase
+from azcam.functions.fits import pyfits
+from azcam.testers.basetester import Tester
 
 
-class Eper(TesterBase):
+class Eper(Tester):
     """
     EPER - Extended Pixel Edge Response analysis.
     """
@@ -45,9 +44,7 @@ class Eper(TesterBase):
         Not supported, use superflat image set
         """
 
-        raise azcam.AzcamError(
-            "EPER acquire not supported - use superflat to acquire data"
-        )
+        raise azcam.AzcamError("EPER acquire not supported - use superflat to acquire data")
 
     def analyze(self):
         """
@@ -91,9 +88,7 @@ class Eper(TesterBase):
                 filename, "BIASSEC", chan + 1
             )
 
-            _, LastDataCol, _, LastDataRow = azcam.fits.get_section(
-                filename, "DATASEC", chan + 1
-            )
+            _, LastDataCol, _, LastDataRow = azcam.fits.get_section(filename, "DATASEC", chan + 1)
 
             # BIASSEC keyword does not contain overscan row info
             FirstBiasRow = LastDataRow + 1
@@ -136,9 +131,7 @@ class Eper(TesterBase):
 
             # sumhdata=imbuf[:,LastDataCol].sum()
             sumhdata = imbuf[0:LastBiasRow, LastDataCol].sum()
-            meanhdata = sumhdata / len(
-                imbuf[0:LastBiasRow, LastDataCol]
-            )  # mean per pixel
+            meanhdata = sumhdata / len(imbuf[0:LastBiasRow, LastDataCol])  # mean per pixel
 
             # sumhbias=imbuf[:,FirstBiasCol:FirstBiasCol+self.number_bias_cols+1].sum()
             sumhbias = imbuf[

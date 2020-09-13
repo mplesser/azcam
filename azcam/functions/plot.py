@@ -3,7 +3,6 @@ import time
 
 import numpy
 import matplotlib
-import matplotlib.pyplot as plt
 from matplotlib import pylab
 
 import azcam

@@ -14,11 +14,10 @@ class TempConArc(TempCon):
     This is used for Gen1, Gen2, and Gen3 ARC controllers.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.enabled = 1
         self.num_temp_reads = 5
         self.control_temperature = +25.0
 
@@ -34,6 +33,7 @@ class TempConArc(TempCon):
         """
 
         if not self.enabled:
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         TEMPSET = 0x01C
@@ -140,9 +140,7 @@ class TempConArc(TempCon):
         counts = avecount / self.num_temp_reads
 
         # convert from counts to Celsius
-        temp = self.convert_counts_to_temp(
-            self.temperature_cals[temperature_id], counts
-        )
+        temp = self.convert_counts_to_temp(self.temperature_cals[temperature_id], counts)
 
         temp = self.apply_corrections(temp, temperature_id)
 
@@ -258,11 +256,7 @@ class TempConArc(TempCon):
         if calflag == 0:  # DT670 counts to Celsius
 
             # convert counts to voltage
-            voltage = (
-                ((VOLTMAX - VOLTMIN) / (COUNTMAX - COUNTMIN + 1))
-                * (counts - 2048)
-                / GAIN
-            )
+            voltage = ((VOLTMAX - VOLTMIN) / (COUNTMAX - COUNTMIN + 1)) * (counts - 2048) / GAIN
 
             if voltage > VMAX:
                 temp = -999.9
@@ -311,11 +305,7 @@ class TempConArc(TempCon):
         elif calflag == 3:  # 1N914 diode voltage to Celsius
 
             # convert counts to voltage
-            voltage = (
-                ((VOLTMAX - VOLTMIN) / (COUNTMAX - COUNTMIN + 1))
-                * (counts - 2048)
-                / GAIN
-            )
+            voltage = ((VOLTMAX - VOLTMIN) / (COUNTMAX - COUNTMIN + 1)) * (counts - 2048) / GAIN
 
             temp = (
                 NOAO[0]
@@ -350,14 +340,9 @@ class TempConArc(TempCon):
 
             inp = temperature + 273.13  # C to K
             voltage = (
-                NOAOINV[3]
-                + inp * NOAOINV[2]
-                + pow(inp, 2) * NOAOINV[1]
-                + pow(inp, 3) * NOAOINV[0]
+                NOAOINV[3] + inp * NOAOINV[2] + pow(inp, 2) * NOAOINV[1] + pow(inp, 3) * NOAOINV[0]
             )
-            counts = ((COUNTMAX - COUNTMIN + 1) / (VOLTMAX - VOLTMIN)) * (
-                voltage * GAIN
-            ) + 2048
+            counts = ((COUNTMAX - COUNTMIN + 1) / (VOLTMAX - VOLTMIN)) * (voltage * GAIN) + 2048
 
         else:
             raise azcam.AzcamError("convert_temp_to_counts invalid calflag")

@@ -4,7 +4,6 @@ Client-side commands for Archon controller.
 
 
 import azcam
-import azcam.fits
 from azcam.console import api
 
 

@@ -3,10 +3,10 @@ import os
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class PocketPump(TesterBase):
+class PocketPump(Tester):
     """
     Pocket pumping (trap) acquisition and analysis.
     """
@@ -118,9 +118,7 @@ class PocketPump(TesterBase):
         # take a reference flat of same time
         azcam.log("Taking non-pumped reference exposure")
         try:
-            api.expose(
-                self.exposure_time, self.exposure_type, "pocket pump reference flat"
-            )
+            api.expose(self.exposure_time, self.exposure_type, "pocket pump reference flat")
 
         except Exception as message:
             api.set_par("TimingFile", timingfile_org)
