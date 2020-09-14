@@ -196,7 +196,9 @@ class Ramp(Tester):
             sdevs = []
             for row in range(nrows):
                 roi = [self.first_col - 1, self.last_col, row, row + 1]
-                sdev = data_ffci[ext][roi[2] : roi[3]][roi[0] : roi[1]].std() / math.sqrt(2.0)
+                sdev = data_ffci[ext][roi[2] : roi[3]][
+                    roi[0] : roi[1]
+                ].std() / math.sqrt(2.0)
                 fmean = data_mean[ext][roi[2] : roi[3]][roi[0] : roi[1]].mean()
                 sdevs.append(sdev)
                 means.append(fmean)
@@ -243,7 +245,7 @@ class Ramp(Tester):
         plotstyle = azcam.plot.style_dot
 
         # setup PTC figure
-        f1 = plt.figure(1)
+        f1 = azcam.plot.plt.figure(1)
         f1.clf()  # clear old data
         f1.text(
             0.5,
@@ -260,14 +262,14 @@ class Ramp(Tester):
             wspace=wspace,
             hspace=hspace,
         )
-        fig1 = plt.subplot(1, 1, 1)
+        fig1 = azcam.plot.plt.subplot(1, 1, 1)
         fig1.xaxis.grid(1, which="both")  # log lines
         fig1.yaxis.grid(1)
 
         # axes
-        plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
-        plt.ylabel("Noise [DN]", fontsize=mediumfont)
-        ax = plt.gca()
+        azcam.plot.plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
+        azcam.plot.plt.ylabel("Noise [DN]", fontsize=mediumfont)
+        ax = azcam.plot.plt.gca()
         for label in ax.yaxis.get_ticklabels():
             label.set_fontsize(smallfont)
         for label in ax.xaxis.get_ticklabels():
@@ -275,7 +277,7 @@ class Ramp(Tester):
             label.set_fontsize(smallfont)
 
         # setup gain figure
-        fig2 = plt.figure(2)
+        fig2 = azcam.plot.plt.figure(2)
         fig2.clf()  # clear old data
         fig2.text(
             0.5,
@@ -294,7 +296,7 @@ class Ramp(Tester):
         )
 
         # ax1 is mean at bottom, ax2 is row number on top
-        ax1 = plt.subplot(1, 1, 1)
+        ax1 = azcam.plot.plt.subplot(1, 1, 1)
         ax1.grid(1)
         ax1.set_ylabel(r"$\rm{Gain\ [e^{-}/DN]}$", fontsize=mediumfont)
         ax1.set_xlabel(r"$\rm{Mean\ [DN]}$", fontsize=mediumfont)
@@ -327,28 +329,28 @@ class Ramp(Tester):
                 mm.append(max(m))
 
             # ptc plot
-            plt.figure(1)
+            azcam.plot.plt.figure(1)
             if self.logplot:
-                plt.loglog(
+                azcam.plot.plt.loglog(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                plt.ylim(1)
-                plt.xlim(1, 100000)
+                azcam.plot.plt.ylim(1)
+                azcam.plot.plt.xlim(1, 100000)
             else:
-                plt.plot(
+                azcam.plot.plt.plot(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                plt.ylim(0)
-                plt.xlim(0, 65000)
+                azcam.plot.plt.ylim(0)
+                azcam.plot.plt.xlim(0, 65000)
 
             # Gain plot
-            plt.figure(2)
+            azcam.plot.plt.figure(2)
             ax2.plot(
                 list(range(self.num_points)),
                 g,

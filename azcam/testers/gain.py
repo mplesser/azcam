@@ -84,7 +84,9 @@ class Gain(Tester):
 
         if self.exposure_time == -1:
             ExposureTime = api.get_exposuretime()
-            azcam.log(f"Exposure time not specified, using current value of {ExposureTime:0.3f}")
+            azcam.log(
+                f"Exposure time not specified, using current value of {ExposureTime:0.3f}"
+            )
         else:
             ExposureTime = self.exposure_time
 
@@ -217,7 +219,8 @@ class Gain(Tester):
             if self.system_noise_correction != []:
                 for chan in range(NumExt):
                     rn = math.sqrt(
-                        noise[chan] ** 2 - gain[chan] * self.system_noise_correction[chan] ** 2
+                        noise[chan] ** 2
+                        - gain[chan] * self.system_noise_correction[chan] ** 2
                     )
                     noise[chan] = rn
 

@@ -538,7 +538,7 @@ class API(object):
     # keywords
     # *******************************************************
 
-    def update_header(self, object_name: str = "controller") -> str:
+    def update_header(self, object_name: str = "controller"):
         """
         Update the header of an object.
         This command usually reads hardware to get the lastest keyword values.
@@ -550,8 +550,7 @@ class API(object):
 
     def read_header(self, object_name: str = "controller"):
         """
-        Reads each keyword in the header and returns the header with the updated values.
-        This command usually does not read hardware to get the lastest keyword values.
+        Reads each keyword in the header and returns the keyword value.
         Returns a list of header lists: [[keyword, value, comment, type]].
         """
 

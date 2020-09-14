@@ -63,7 +63,9 @@ class Bias(Tester):
         api.set_par("imagetype", "zero")  # for get_image_filename()
         for i in range(self.number_images_acquire):
             filename = os.path.basename(api.get_image_filename())
-            azcam.log(f"Taking bias image {i + 1}/{self.number_images_acquire}: {filename}")
+            azcam.log(
+                f"Taking bias image {i + 1}/{self.number_images_acquire}: {filename}"
+            )
             api.expose(0, "zero", "bias image")
             if i < self.number_images_acquire - 1:
                 time.sleep(self.delay)
@@ -116,7 +118,9 @@ class Bias(Tester):
 
             self.imagelist.append(nextfile)
 
-            mean, sdev, _ = azcam.fits.stat(nextfile, self.roi[0])  # use first ROI not overscan
+            mean, sdev, _ = azcam.fits.stat(
+                nextfile, self.roi[0]
+            )  # use first ROI not overscan
             mr = []
             sr = []
             for _ in range(first_ext, last_ext):
@@ -127,11 +131,16 @@ class Bias(Tester):
             self.sdevs.append(sdev)
 
             sequence_number = sequence_number + 1
-            nextfile = os.path.join(startingfolder, rootname + f"{sequence_number:04d}") + ".fits"
+            nextfile = (
+                os.path.join(startingfolder, rootname + f"{sequence_number:04d}")
+                + ".fits"
+            )
 
         # make superbias (median combined with no overscan correction)
         azcam.log(f"Creating superbias image: {self.superbias_filename}")
-        azcam.fits.combine(self.imagelist, self.superbias_filename, "median", overscan_correct=0)
+        azcam.fits.combine(
+            self.imagelist, self.superbias_filename, "median", overscan_correct=0
+        )
 
         # get mean values over all images for each image section
         numext = max(1, numext)

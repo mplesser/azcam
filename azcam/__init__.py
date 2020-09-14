@@ -1,5 +1,5 @@
 """
-azcam observation control
+azcam.__init__
 """
 
 import socket
@@ -23,4 +23,5 @@ db.hostname = socket.gethostname()
 db.hostip = socket.gethostbyname(db.hostname)
 
 # clean namespace
-del database, socket, exceptions
+del database, socket, exceptions, image
+del functions, send_image, focalplane, header

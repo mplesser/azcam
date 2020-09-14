@@ -255,8 +255,12 @@ class Dark(Tester):
                 self.MaskedImage,
                 copy=False,
             )
-            self.num_rejected_bright_pixels = totalpixels - numpy.ma.count(self.MaskedImage)
-            azcam.log(f"Number of rejected bright pixels: {self.num_rejected_bright_pixels}")
+            self.num_rejected_bright_pixels = totalpixels - numpy.ma.count(
+                self.MaskedImage
+            )
+            azcam.log(
+                f"Number of rejected bright pixels: {self.num_rejected_bright_pixels}"
+            )
 
         # get number of pixels not masked
         self.total_pixels = numpy.ma.count(self.MaskedImage)
@@ -410,7 +414,9 @@ class Dark(Tester):
         ax.set_xlabel("Dark Signal [e/pix/sec]")
         ax.set_ylabel("Pixel Fraction")
         azcam.plot.plt.ylim(0.5, 1.0)
-        ax.set_yticks([0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00])
+        ax.set_yticks(
+            [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00]
+        )
         azcam.plot.plt.xlim(0.0, self.mean_dark_signal * 10.0)
 
         if self.mean_dark_spec != -1:
@@ -418,13 +424,17 @@ class Dark(Tester):
                 x=self.mean_dark_signal, linestyle="-", color="green", label="Mean"
             )
             azcam.plot.plt.legend(loc="upper right")
-            azcam.plot.plt.axvline(x=self.mean_dark_spec, linestyle="--", color="red", label="Spec")
+            azcam.plot.plt.axvline(
+                x=self.mean_dark_spec, linestyle="--", color="red", label="Spec"
+            )
             azcam.plot.plt.legend(loc="upper right")
         if self.dark_limit != -1:
             azcam.plot.plt.axhline(
                 y=self.dark_fraction, linestyle="--", color="red", label="Fraction"
             )
-            azcam.plot.plt.axvline(x=self.dark_limit, linestyle="--", color="blue", label="Limit")
+            azcam.plot.plt.axvline(
+                x=self.dark_limit, linestyle="--", color="blue", label="Limit"
+            )
             azcam.plot.plt.legend(loc="upper right")
 
         azcam.plot.plt.title("Dark Signal Cummulative Histogram")
@@ -492,7 +502,9 @@ class Dark(Tester):
 
         lines.append("")
         if "cumm_hist" in self.report_plots:
-            lines.append(f"![Cumulative Histogram]({os.path.abspath(self.cumm_hist_plot)})  ")
+            lines.append(
+                f"![Cumulative Histogram]({os.path.abspath(self.cumm_hist_plot)})  "
+            )
             lines.append("*Cumulative Histogram.*")
             lines.append("")
 

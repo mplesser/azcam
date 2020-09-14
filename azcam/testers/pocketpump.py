@@ -118,7 +118,9 @@ class PocketPump(Tester):
         # take a reference flat of same time
         azcam.log("Taking non-pumped reference exposure")
         try:
-            api.expose(self.exposure_time, self.exposure_type, "pocket pump reference flat")
+            api.expose(
+                self.exposure_time, self.exposure_type, "pocket pump reference flat"
+            )
 
         except Exception as message:
             api.set_par("TimingFile", timingfile_org)

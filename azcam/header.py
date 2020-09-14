@@ -13,7 +13,7 @@ class Header(object):
     in azcam objects such as *controller* and *instrument*.
     """
 
-    def __init__(self, title: str = ""):
+    def __init__(self, title: str = "", template=None):
 
         self.title = {}  # header title dictionary {index:title_line}
         self.keywords = {}  # header keywords dictionary {keyword:keywordstring}
@@ -26,6 +26,10 @@ class Header(object):
 
         if title != "":
             self.set_title(title)
+
+        if template is not None:
+            azcam.db.exposure.imageheaderfile = template
+            self.read_file(template)
 
     def set_header(self, object_name, order=-1):
         """

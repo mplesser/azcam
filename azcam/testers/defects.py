@@ -39,7 +39,9 @@ class Defects(Tester):
         # dark defects
         self.darkdefects_datafile = "darkdefects.txt"
         self.darkdefectsreport_file = "darkdefects"
-        self.dark_pixel_reject = -1  # reject superlfat dark pixels below this value from mean
+        self.dark_pixel_reject = (
+            -1
+        )  # reject superlfat dark pixels below this value from mean
         self.flat_filename = "superflat.fits"  # flat image for dark pixels
         self.dark_defects_grade = "FAIL"
         self.dark_rejected_pixels = -1
@@ -51,7 +53,9 @@ class Defects(Tester):
         self.report_file = "defects"
         self.defects_mask_filename = "DefectsMask.fits"
         self.total_rejected_pixels = -1
-        self.allowable_rejected_pixels = -1  # allowable total number of defective pixels
+        self.allowable_rejected_pixels = (
+            -1
+        )  # allowable total number of defective pixels
         self.allowable_bad_fraction = -1  # allowable total fraction of defective pixels
 
         self.report_include_plots = 0  # include plots in report file
@@ -68,7 +72,9 @@ class Defects(Tester):
         else:
             self.grade = "FAIL"
 
-        self.total_rejected_pixels = self.dark_rejected_pixels + self.bright_rejected_pixels
+        self.total_rejected_pixels = (
+            self.dark_rejected_pixels + self.bright_rejected_pixels
+        )
 
         # make total defects mask
         self.make_defects_mask()
@@ -169,14 +175,14 @@ class Defects(Tester):
             azcam.log(s)
 
         # save dark mask
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Dark Pixel Rejection Mask")
+        azcam.plot.plt.title("Dark Pixel Rejection Mask")
         self.dark_mask = numpy.ma.getmask(self.MaskedImage).astype("uint8")
-        implot = plt.imshow(self.dark_mask)
+        implot = azcam.plot.plt.imshow(self.dark_mask)
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "DarkPixelRejectionMask")
 
         # write mask as FITS
@@ -253,14 +259,14 @@ class Defects(Tester):
         )
 
         # save dark mask
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Bright Pixel Rejection Mask")
+        azcam.plot.plt.title("Bright Pixel Rejection Mask")
         self.bright_mask = numpy.ma.getmask(self.MaskedImage).astype("uint8")
-        implot = plt.imshow(self.bright_mask)
+        implot = azcam.plot.plt.imshow(self.bright_mask)
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "BrightPixelRejectionMask")
 
         # write mask as FITS
@@ -357,13 +363,13 @@ class Defects(Tester):
         # combine masks, values may be > 1
         self.defects_mask = self.bright_mask + self.dark_mask  # + self.EdgeMask
 
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Pixel Rejection Mask")
-        implot = plt.imshow(self.defects_mask.astype("uint8"))
+        azcam.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
@@ -479,13 +485,13 @@ class Defects(Tester):
         Plot the defective pixel mask.
         """
 
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Pixel Rejection Mask")
-        implot = plt.imshow(self.defects_mask.astype("uint8"))
+        azcam.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "PixelRejectionMask")
 
         return

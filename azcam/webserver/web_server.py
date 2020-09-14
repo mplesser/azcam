@@ -6,6 +6,7 @@ Import this after all configuration has been completed.
 
 import sys
 import threading
+import logging
 from urllib.parse import urlparse
 
 from flask import Flask, jsonify, request, render_template
@@ -168,8 +169,6 @@ class WebServer(object):
         cli.show_server_banner = lambda *x: None
 
         if 1:
-            import logging
-
             log1 = logging.getLogger("werkzeug")
             log1.setLevel(logging.ERROR)
 

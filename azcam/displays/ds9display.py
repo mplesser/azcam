@@ -106,7 +106,9 @@ class Ds9Display(Display):
         # cmd = '\"'+self.xpaaccess_app+'\" -v ds9 '
         # args=['-v','ds9']
         # p=subprocess.Popen([cmd,args],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-        p = subprocess.Popen([cmd, "-v", "ds9"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p = subprocess.Popen(
+            [cmd, "-v", "ds9"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         # output = os.popen(cmd).readlines()
         # 1output=p.stdout.readlines()
         output, errors = p.communicate()
@@ -225,7 +227,9 @@ class Ds9Display(Display):
         if coordinate_type == "":
             coordinate_type = self.coordinate_type
 
-        Rois = self.get_regions(coordinate_type)  # this is a list of roi's, each [shape, roi]
+        Rois = self.get_regions(
+            coordinate_type
+        )  # this is a list of roi's, each [shape, roi]
         if not Rois:
             return []
 
@@ -547,7 +551,13 @@ class Ds9Display(Display):
                 s = self.xpaset_app + " " + ds9 + "fits iraf < " + filename
             else:
                 if extension_number == -1:
-                    s = self.xpaset_app + " " + ds9 + "fits mosaicimage iraf < " + filename
+                    s = (
+                        self.xpaset_app
+                        + " "
+                        + ds9
+                        + "fits mosaicimage iraf < "
+                        + filename
+                    )
                 else:
                     s = (
                         self.xpaset_app

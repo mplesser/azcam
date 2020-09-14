@@ -63,5 +63,5 @@ def gf():
     return
 
 
-# add to CLI dict
+# add to CLI dictionary
 azcam.db.cli_cmds.update({"sav": sav, "bf": bf, "sroi": sroi, "sf": sf, "gf": gf})

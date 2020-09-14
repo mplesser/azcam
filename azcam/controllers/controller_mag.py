@@ -208,27 +208,6 @@ class ControllerMag(Controller):
 
         return
 
-    # *** header ***
-
-    def read_header(self):
-        """
-        Returns the current controller header.
-        Does not look up info as controller header should be updated as needed during exposure process.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
-        """
-
-        # get the header
-        header = []
-        reply = self.header.get_all_keywords()
-
-        for key in reply:
-            reply1 = self.header.get_keyword(key)
-            list1 = [key, reply1[0], reply1[1], reply1[2]]
-            header.append(list1)
-
-        return header
-
     def flush(self, Cycles=1):
         """
         Flush or clear out the detector 'Cycles' times.

@@ -1,10 +1,10 @@
 import json
 
-import azcam.testers.report
 import azcam
+from azcam.testers.report import Report
 
 
-class Tester(object):
+class Tester(Report):
     """
     Base class inherited by all tester classes.
     """
@@ -112,7 +112,7 @@ class Tester(object):
         """
 
         # Make report file
-        azcam.testers.report.make_mdfile(report_file, lines)
-        azcam.testers.report.md2pdf(report_file, create_html=self.create_html)
+        self.make_mdfile(report_file, lines)
+        self.md2pdf(report_file, create_html=self.create_html)
 
         return

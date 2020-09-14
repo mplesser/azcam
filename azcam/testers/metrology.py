@@ -142,8 +142,12 @@ class Metrology(Tester):
             azcam.log("Quantile\tHeight")
             for i, p in enumerate(self.quantile_percents):
                 azcam.log("%5.01f\t\t%.04f" % (p, self.quantile_values[i]))
-        self.z_halfband = (self.quantile_values[self.qfh1] - self.quantile_values[self.qfh0]) / 2.0
-        self.z_mid = (self.quantile_values[self.qfh1] + self.quantile_values[self.qfh0]) / 2.0
+        self.z_halfband = (
+            self.quantile_values[self.qfh1] - self.quantile_values[self.qfh0]
+        ) / 2.0
+        self.z_mid = (
+            self.quantile_values[self.qfh1] + self.quantile_values[self.qfh0]
+        ) / 2.0
         azcam.log("%s\t\t%.04f" % ("Z-mid", self.z_mid))
         azcam.log("%s\t%.04f" % ("Z-mid_HalfBand", self.z_halfband))
 
@@ -179,10 +183,12 @@ class Metrology(Tester):
             for i, p in enumerate(self.quantile_percents):
                 azcam.log("%5.01f\t\t%.01f" % (p, self.flatness_quantile_values[i]))
         self.f_halfband = (
-            self.flatness_quantile_values[self.qfh1] - self.flatness_quantile_values[self.qfh0]
+            self.flatness_quantile_values[self.qfh1]
+            - self.flatness_quantile_values[self.qfh0]
         ) / 2.0
         self.fmid = (
-            self.flatness_quantile_values[self.qfh1] + self.flatness_quantile_values[self.qfh0]
+            self.flatness_quantile_values[self.qfh1]
+            + self.flatness_quantile_values[self.qfh0]
         ) / 2.0
         azcam.log("%s\t\t%.04f" % ("F-mid", self.fmid))
         azcam.log("%s\t%.04f" % ("F-mid_HalfBand", self.f_halfband))
@@ -280,10 +286,10 @@ class Metrology(Tester):
         ]
         grid_z = griddata((self.x, self.y), zz, (grid_x, grid_y), method="cubic")
 
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        ax = plt.axes(projection="3d")
+        ax = azcam.plot.plt.axes(projection="3d")
         ax.plot_surface(
             grid_x,
             grid_y,
@@ -299,7 +305,7 @@ class Metrology(Tester):
         ax.set_xlabel("X [mm]")
         ax.set_ylabel("Y [mm]")
         ax.set_zlabel("Z [mm]")
-        plt.title("Surface Plot with Best Fit Plane")
+        azcam.plot.plt.title("Surface Plot with Best Fit Plane")
         ax.view_init(elev=25.0, azim=-55)  # improve perspective
 
         # least squares plane plot on surface plot
@@ -324,11 +330,11 @@ class Metrology(Tester):
         azcam.plot.save_figure(fignum, self.SurfacePlot)
 
         # height histogram plot
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Height Histogram Plot")
-        plt.hist(
+        azcam.plot.plt.title("Height Histogram Plot")
+        azcam.plot.plt.hist(
             self.z,
             bins="auto",
             facecolor="green",
@@ -336,7 +342,7 @@ class Metrology(Tester):
             histtype="stepfilled",
             rwidth=0.8,
         )
-        ax = plt.gca()
+        ax = azcam.plot.plt.gca()
         ax.set_xlabel("Z (mm)")
         ax.xaxis.set_major_formatter(FormatStrFormatter("%.03f"))
         ax.set_ylabel("Points")
@@ -359,7 +365,7 @@ class Metrology(Tester):
             names = ["Z-mid"]
             colors = ["b", "r", "r"]
         for i, xline in enumerate(xlines):
-            plt.axvline(x=xline, linewidth=1, color=colors[i])
+            azcam.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
             ypos = 0.9 * ax.get_ylim()[1]
             if names[i] in ["Z_nom", "Z-L", "Z-U"]:
                 ypos = 0.9 * ax.get_ylim()[1]
@@ -378,11 +384,11 @@ class Metrology(Tester):
         azcam.plot.save_figure(fignum, self.HistogramHeightPlot)
 
         # flatness histogram plot
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Flatness Histogram Plot")
-        plt.hist(
+        azcam.plot.plt.title("Flatness Histogram Plot")
+        azcam.plot.plt.hist(
             self.flatnessresiduals,
             bins="auto",
             facecolor="green",
@@ -390,7 +396,7 @@ class Metrology(Tester):
             histtype="stepfilled",
             rwidth=0.8,
         )
-        ax = plt.gca()
+        ax = azcam.plot.plt.gca()
         ax.set_xlabel("Relative Z (mm)")
         ax.xaxis.set_major_formatter(FormatStrFormatter("%.03f"))
         ax.set_ylabel("Points")
@@ -401,7 +407,7 @@ class Metrology(Tester):
         names = ["FSpec-L", "FSpec-U"]
         colors = ["r", "r"]
         for i, xline in enumerate(xlines):
-            plt.axvline(x=xline, linewidth=1, color=colors[i])
+            azcam.plot.plt.axvline(x=xline, linewidth=1, color=colors[i])
             ypos = 0.9 * ax.get_ylim()[1]
             ax.text(
                 xline,
@@ -416,18 +422,18 @@ class Metrology(Tester):
         azcam.plot.save_figure(fignum, self.HistogramFlatnessPlot)
 
         # color Z value plot
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        # ax = plt.gca()
-        ax = plt.gca()
+        # ax = azcam.plot.plt.gca()
+        ax = azcam.plot.plt.gca()
         ax.set_xlabel("X [mm]")
         ax.set_ylabel("Y [mm]")
-        plt.title("Color Z Plot")
-        # plt.scatter(self.x, self.y, s=40, c=self.z, marker="s", lw=0)
+        azcam.plot.plt.title("Color Z Plot")
+        # azcam.plot.plt.scatter(self.x, self.y, s=40, c=self.z, marker="s", lw=0)
         N = int(len(self.z) ** 0.5)
         self.z2 = self.z.reshape(N, N)
-        plt.imshow(
+        azcam.plot.plt.imshow(
             self.z2,
             extent=(
                 numpy.amin(self.x),
@@ -438,16 +444,16 @@ class Metrology(Tester):
             interpolation="quadric",
             cmap="viridis",
         )
-        plt.axis("equal")
+        azcam.plot.plt.axis("equal")
 
-        cb = plt.colorbar(format="%.03f")
+        cb = azcam.plot.plt.colorbar(format="%.03f")
         cb.set_label("Height [mm]")
         labels = []
         if 0:
             for l in self.z:
                 labels.append("%.03f" % float(l))
             for label, x1, y1 in zip(labels, self.x, self.y):
-                plt.annotate(
+                azcam.plot.plt.annotate(
                     label,
                     xy=(x1, y1),
                     textcoords="data",
@@ -459,39 +465,41 @@ class Metrology(Tester):
         azcam.plot.save_figure(fignum, self.ColorZPlot)
 
         # box and whisker plot
-        fig, ax = plt.subplots()
+        fig, ax = azcam.plot.plt.subplots()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         ax.set_ylabel("Z [mm]")
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.03f"))
-        plt.title("Box and Whisker Plot")
+        azcam.plot.plt.title("Box and Whisker Plot")
         ax.boxplot(self.z, notch=True)
-        plt.xticks([])
+        azcam.plot.plt.xticks([])
         azcam.plot.save_figure(fignum, self.WiskerPlot)
 
         # show standard drift
         if self.standard_correct:
-            fig = plt.figure()
+            fig = azcam.plot.plt.figure()
             fignum = fig.number
             azcam.plot.move_window(fignum)
-            ax = plt.gca()
-            plt.title("Z-Standard Drift")
+            ax = azcam.plot.plt.gca()
+            azcam.plot.plt.title("Z-Standard Drift")
             ax.set_xlabel("Row")
             ax.set_ylabel("Z [microns]")
-            ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # integer row numbers
+            ax.xaxis.set_major_locator(
+                azcam.plot.plt.MaxNLocator(integer=True)
+            )  # integer row numbers
             drift_1 = self.standard1_z - self.standard_zheight
-            plt.plot(drift_1)
+            azcam.plot.plt.plot(drift_1)
             drift_2 = self.standard2_z - self.standard_zheight
-            plt.plot(drift_2)
+            azcam.plot.plt.plot(drift_2)
             drift_3 = self.standard3_z - self.standard_zheight
-            plt.plot(drift_3)
+            azcam.plot.plt.plot(drift_3)
             drift_4 = self.standard4_z - self.standard_zheight
-            plt.plot(drift_4)
+            azcam.plot.plt.plot(drift_4)
             drift_mean = self.zstandard - self.standard_zheight
-            plt.plot(drift_mean)
+            azcam.plot.plt.plot(drift_mean)
             azcam.plot.save_figure(fignum, self.StandardPlot)
 
-        plt.show()
+        azcam.plot.plt.show()
 
         return
 
@@ -596,12 +604,16 @@ class Metrology(Tester):
             lines.append(s)
         lines.append("")
 
-        lines.append(f"![Z-Height Histogram]({os.path.abspath(self.HistogramHeightPlot)})  ")
+        lines.append(
+            f"![Z-Height Histogram]({os.path.abspath(self.HistogramHeightPlot)})  "
+        )
         lines.append("")
         lines.append(f"Z-Height Histogram.")
         lines.append("")
 
-        lines.append(f"![Flatness Histogram]({os.path.abspath(self.HistogramFlatnessPlot)})  ")
+        lines.append(
+            f"![Flatness Histogram]({os.path.abspath(self.HistogramFlatnessPlot)})  "
+        )
         lines.append("")
         lines.append(f"Flatness Histogram.")
         lines.append("")
@@ -664,7 +676,9 @@ class Metrology(Tester):
         zoffset = 0.0
 
         # raw output datafile
-        with open(f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w") as fout:
+        with open(
+            f"{os.path.splitext(os.path.basename(filename))[0]}_out.csv", "w"
+        ) as fout:
 
             for line in lines:
                 line = line.strip()
@@ -843,7 +857,9 @@ class Metrology(Tester):
 
                     zs_mean = numpy.array(zstandard).mean()
                     self.zstandard.append(zs_mean)
-                    zoffset = zs_mean - self.standard_zheight  # this updates current value
+                    zoffset = (
+                        zs_mean - self.standard_zheight
+                    )  # this updates current value
 
                 # write line to CSV file
                 self.csv_tokens_raw = [
@@ -933,7 +949,9 @@ class Metrology(Tester):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref1 Diameter") or line.startswith("Ref1 Roundness"):
+                elif line.startswith("Ref1 Diameter") or line.startswith(
+                    "Ref1 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -943,7 +961,9 @@ class Metrology(Tester):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref2 Diameter") or line.startswith("Ref2 Roundness"):
+                elif line.startswith("Ref2 Diameter") or line.startswith(
+                    "Ref2 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -953,7 +973,9 @@ class Metrology(Tester):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref3 Diameter") or line.startswith("Ref3 Roundness"):
+                elif line.startswith("Ref3 Diameter") or line.startswith(
+                    "Ref3 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")
@@ -963,7 +985,9 @@ class Metrology(Tester):
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[3:]])
                     fout.write(f"{lineout},\n")
 
-                elif line.startswith("Ref4 Diameter") or line.startswith("Ref4 Roundness"):
+                elif line.startswith("Ref4 Diameter") or line.startswith(
+                    "Ref4 Roundness"
+                ):
                     lineout = " ".join([f"{x}" for x in tokens[:2]])
                     lineout = lineout + "," + ",".join([f"{x}" for x in tokens[2:]])
                     fout.write(f"{lineout},\n")

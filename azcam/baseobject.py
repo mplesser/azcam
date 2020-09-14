@@ -103,7 +103,6 @@ class Objects(object):
     def read_header(self):
         """
         Returns the current header.
-        Does not look up info as header should be updated as needed during exposure process.
         Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
         Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """

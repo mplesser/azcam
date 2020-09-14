@@ -71,7 +71,9 @@ class Superflat(Tester):
 
             meanelectrons = azcam.testers.detcal.mean_electrons
 
-            self.exposure_times = numpy.array(self.exposure_levels) / meanelectrons[wave]
+            self.exposure_times = (
+                numpy.array(self.exposure_levels) / meanelectrons[wave]
+            )
         elif len(self.exposure_times) > 0:
             azcam.log("Using ExposureTimes")
         else:
@@ -162,7 +164,9 @@ class Superflat(Tester):
                 azcam.fits.colbias(nextfile, fit_order=self.fit_order)
 
             SequenceNumber = SequenceNumber + 1
-            nextfile = os.path.join(subfolder, rootname + "%04d" % SequenceNumber) + ".fits"
+            nextfile = (
+                os.path.join(subfolder, rootname + "%04d" % SequenceNumber) + ".fits"
+            )
             loop += 1
 
         # median combine all images
@@ -182,14 +186,14 @@ class Superflat(Tester):
         else:
             superflat_image.set_scaling(self.system_gain, gain.zero_mean)
         superflat_image.assemble(1)
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         superflat_image.scale_type = self.scale_type
         superflat_image.scale_factor = self.scale_factor
         azcam.plot.plot_image(superflat_image, self.scale_type, self.scale_factor)
-        plt.title("Superflat Combined Image")
-        plt.show()
+        azcam.plot.plt.title("Superflat Combined Image")
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "superflatimage")
         superflat_image.overwrite = 1
         superflat_image.save_data_format = "float32"  # could be >16 bits with scaling
@@ -201,7 +205,9 @@ class Superflat(Tester):
             shutil.copy(self.superflat_filename, startingfolder)
             shutil.copy(self.scaled_superflat_filename, startingfolder)
             shutil.copy("superflatimage.png", startingfolder)
-            self.superflat_filename = os.path.join(startingfolder, self.superflat_filename)
+            self.superflat_filename = os.path.join(
+                startingfolder, self.superflat_filename
+            )
             self.scaled_superflat_filename = os.path.join(
                 startingfolder, self.scaled_superflat_filename
             )
