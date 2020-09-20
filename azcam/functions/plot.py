@@ -4,6 +4,7 @@ import time
 import numpy
 import matplotlib
 from matplotlib import pylab
+from matplotlib import pyplot as plt
 
 import azcam
 

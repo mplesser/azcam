@@ -13,6 +13,8 @@ class DetChar(Report):
 
     def __init__(self, obj_id="detchar"):
 
+        super().__init__()
+
         self.obj_id = obj_id
         self.name = ""
 
@@ -45,9 +47,7 @@ class DetChar(Report):
             pass
         azcam.utils.curdir(newfolder)
 
-        datestring = datetime.datetime.strftime(
-            datetime.datetime.now(), "%d%b%y"
-        ).lower()
+        datestring = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y").lower()
         try:
             os.mkdir(datestring)
         except FileExistsError:

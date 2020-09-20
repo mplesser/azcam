@@ -10,7 +10,7 @@ import azcam.sockets
 
 class API(object):
     """
-    Default API interface for console application.
+    API interface for console application.
     """
 
     def __init__(self):
@@ -422,14 +422,16 @@ class API(object):
 
         return self.rcommand(f"instrument.set_wavelength {wavelength} {wavelength_id}")
 
-    def get_wavelength(self, wavelength_id: int = 0) -> int:
+    def get_wavelength(self, wavelength_id: int = 0) -> float:
         """
         Get instrument wavelength.
 
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        return self.rcommand(f"instrument.get_wavelength {wavelength_id}")
+        reply = float(self.rcommand(f"instrument.get_wavelength {wavelength_id}"))
+
+        return reply
 
     # *******************************************************
     # focus

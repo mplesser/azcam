@@ -11,6 +11,8 @@ class Tester(Report):
 
     def __init__(self, obj_id="tester", obj_name=None):
 
+        super().__init__()
+
         #: tester ID
         self.id = obj_id
 

@@ -73,7 +73,7 @@ cmdserver.start()
 # ****************************************************************
 # define names to imported into namespace (for CLI)
 # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.server.api})
 
 # ****************************************************************
 # finish
