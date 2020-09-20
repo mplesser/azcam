@@ -6,6 +6,7 @@ import os
 
 import azcam
 import azcam.server
+from azcam.server import api
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.telescopes.telescope import Telescope
@@ -73,7 +74,7 @@ cmdserver.start()
 # ****************************************************************
 # define names to imported into namespace (for CLI)
 # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.server.api})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
 
 # ****************************************************************
 # finish

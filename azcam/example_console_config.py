@@ -9,6 +9,7 @@ import threading
 
 import azcam
 import azcam.console
+from azcam.console import api
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
 from azcam.genpars import GenPars
@@ -70,7 +71,7 @@ dthread.start()  # thread just for speed
 # ****************************************************************
 # try to connect to azcam
 # ****************************************************************
-connected = azcam.console.api.connect()  # default host and port
+connected = api.connect()  # default host and port
 if connected:
     azcam.log("Connected to azcamserver")
 else:
@@ -108,7 +109,7 @@ azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
 # ****************************************************************
 # define names to imported into namespace when using cli
 # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": azcam.console.api})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
 
 # ****************************************************************
 # clean namespace
