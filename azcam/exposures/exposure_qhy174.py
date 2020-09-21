@@ -52,12 +52,8 @@ class ExposureQHY(Exposure):
         azcam.db.controller.start_exposure()
 
         # wait for integration
+        print("waiting for integration...")
         time.sleep(self.exposure_time)
-
-        # wait for readout
-        time.sleep(2)
-        while not azcam.db.controller.is_imageready():
-            time.sleep(1)
 
         # exposure finished
         if imagetype == "zero":
@@ -80,8 +76,13 @@ class ExposureQHY(Exposure):
 
         self.exposure_flag = azcam.db.exposureflags["READ"]
 
-        # allow readout to complete
+        # wait for readout
+        print("waiting for readout...")
         time.sleep(self.readout_delay)
+        while not azcam.db.controller.is_imageready():
+            time.sleep(1)
+
+        # allow readout to complete
         self.image.valid = 1
 
         imagetype = self.image_type.lower()
@@ -137,8 +138,8 @@ class ExposureQHY(Exposure):
             self.image.overwrite = self.filename.overwrite
             self.image.test_image = self.filename.test_image
 
-            self.hdu.writeto(self.filename.get_name())
-            # self.image.write_file(local_file, self.filetype)
+            # self.hdu.writeto(self.filename.get_name())
+            self.image.write_file(local_file, self.filetype)
 
             azcam.log("Writing finished", level=2)
 

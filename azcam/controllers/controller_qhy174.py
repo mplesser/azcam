@@ -131,11 +131,6 @@ class ControllerQHY(Controller):
         # self.camera.NumY = 1200
 
         self.camera.StartExposure(self.exposure_time, self.shutter_state)
-        # time.sleep(3)
-        # flag = self.camera.ImageReady
-        flag = self.is_imageready(1)
-        if flag:
-            print("image ready")
 
         return
 

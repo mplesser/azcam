@@ -24,9 +24,7 @@ class SendImage(object):
         self.size_x = 0
         self.size_y = 0
 
-    def azcam_imageserver(
-        self, filename, remote_imageserver_host, remote_imageserver_port
-    ):
+    def azcam_imageserver(self, filename, remote_imageserver_host, remote_imageserver_port):
         """
         Send image to azcam image server.
         """
@@ -40,9 +38,7 @@ class SendImage(object):
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
         dataserver_socket.settimeout(self.timeout)
-        dataserver_socket.connect(
-            (remote_imageserver_host, int(remote_imageserver_port))
-        )
+        dataserver_socket.connect((remote_imageserver_host, int(remote_imageserver_port)))
 
         if self.remote_imageserver_filename != "":
             remotefile = self.remote_imageserver_filename
@@ -89,9 +85,7 @@ class SendImage(object):
         reply = dataserver_socket.send(buff)
 
         if reply != len(buff):
-            raise azcam.AzcamError(
-                "Did not send entire image file data to remote image server"
-            )
+            raise azcam.AzcamError("Did not send entire image file data to remote image server")
 
         # get 16 char ASCII final return status from image server
         reply = dataserver_socket.recv(16).decode()
@@ -127,9 +121,7 @@ class SendImage(object):
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
         dataserver_socket.settimeout(self.timeout)
-        dataserver_socket.connect(
-            (remote_imageserver_host, int(remote_imageserver_port))
-        )
+        dataserver_socket.connect((remote_imageserver_host, int(remote_imageserver_port)))
 
         if self.remote_imageserver_filename != "":
             remotefile = self.remote_imageserver_filename
@@ -140,9 +132,7 @@ class SendImage(object):
             if self.overwrite or self.test_image:
                 remotefile = "!" + remotefile
 
-        azcam.log(
-            "Sending image to %s as %s" % (self.remote_imageserver_host, remotefile)
-        )
+        azcam.log("Sending image to %s as %s" % (self.remote_imageserver_host, remotefile))
 
         # send header
         # file types: 0 FITS, 1 MEF, 2 binary
@@ -170,17 +160,11 @@ class SendImage(object):
         # check header return status codes (updated 14jul11)
         if retstat != 0:
             if retstat == 1:  # overwrite existing name wihtout flag
-                raise azcam.AzcamError(
-                    "Remote image server could not create image filename"
-                )
+                raise azcam.AzcamError("Remote image server could not create image filename")
             elif retstat == 2:  # not enough space
-                raise azcam.AzcamError(
-                    "Remote image server does not have enough disk space"
-                )
+                raise azcam.AzcamError("Remote image server does not have enough disk space")
             elif retstat == 3:  #
-                raise azcam.AzcamError(
-                    "Remote image server reports folder does not exist"
-                )
+                raise azcam.AzcamError("Remote image server reports folder does not exist")
             else:
                 raise azcam.AzcamError("Unknown error from remote image server")
 
