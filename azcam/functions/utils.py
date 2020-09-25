@@ -748,7 +748,7 @@ def find_file_in_sequence(FileRoot, FileNumber=1):
 def archive(foldername="", filetype="tar"):
     """
     Make a tarfile from a folder or file.
-    Type can be "tar" or "tar.gz".
+    Type can be "tar", "tar.gz", or "zip".
     Return tarfile filename.
     """
 
@@ -772,6 +772,12 @@ def archive(foldername="", filetype="tar"):
         tar = tarfile.open(filename, "w:")
         tar.add(foldername)
         tar.close()
+
+    elif filetype == "zip":
+
+        filename = foldername
+        shutil.make_archive(filename, "zip", foldername)
+        filename = filename + ".zip"
 
     else:
         raise azcam.AzcamError("unsupported archive file type")
