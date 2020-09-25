@@ -10,23 +10,19 @@ import numpy
 import subprocess
 from typing import List
 
-from astropy.io import fits as pyfits
-
 import azcam
+from azcam.functions.fits import pyfits
 from azcam.displays.display import Display
 
 
 class Ds9Display(Display):
     """
-    azcam's interface to SAO's ds9 image display tool.
+    Azcam's interface to SAO's ds9 image display tool.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="display", obj_name="ds9"):
 
-        super().__init__(*args)
-
-        #: display ID
-        self.name = "ds9"
+        super().__init__(obj_id, obj_name)
 
         #: display Host, as a string hex code
         self.host = "0"
@@ -462,6 +458,21 @@ class Ds9Display(Display):
 
         return
 
+    def zoom(self, scale=0):
+        """
+        Set display zoom factor relative to current zoom.
+
+        :param int Scale: Scale factor for zoom, 0 "to fit"
+        :return None:
+        """
+
+        s = "to fit" if scale == 0 else str(scale)
+        try:
+            cmd = "zoom " + s
+            self.xpaset(cmd)
+        except Exception:
+            return
+
     def _set_crosshair(self, clear_rois=0):
         """
         Set the ds9 pointer to a crosshair.
@@ -503,23 +514,8 @@ class Ds9Display(Display):
 
         return
 
-    def zoom(self, scale=0):
-        """
-        Set display zoom factor relative to current zoom.
-
-        :param int Scale: Scale factor for zoom, 0 "to fit"
-        :return None:
-        """
-
-        s = "to fit" if scale == 0 else str(scale)
-        try:
-            cmd = "zoom " + s
-            self.xpaset(cmd)
-        except Exception:
-            return
-
     # *************************************************************************************************
-    #   image display
+    #   display image
     # *************************************************************************************************
     def display(self, image, extension_number=-1):
         """
@@ -719,6 +715,9 @@ class Ds9Display(Display):
         except Exception:
             return []
 
+    # *************************************************************************************************
+    #   save displayed image
+    # *************************************************************************************************
     def save_image(self, filename="display.png"):
         """
         Save displayed image as a PNG snapshot.
@@ -762,7 +761,6 @@ class Ds9Display(Display):
     # *************************************************************************************************
     #   XPA commands
     # *************************************************************************************************
-
     def xpaget(self, command):
         """
         Issue xpaget command for ds9.

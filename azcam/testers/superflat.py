@@ -3,15 +3,14 @@ import glob
 import shutil
 
 import numpy
-import matplotlib.pyplot as plt
 
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Superflat(TesterBase):
+class Superflat(Tester):
     """
     Flat field image acquisition and analysis.
     """
@@ -187,14 +186,14 @@ class Superflat(TesterBase):
         else:
             superflat_image.set_scaling(self.system_gain, gain.zero_mean)
         superflat_image.assemble(1)
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         superflat_image.scale_type = self.scale_type
         superflat_image.scale_factor = self.scale_factor
         azcam.plot.plot_image(superflat_image, self.scale_type, self.scale_factor)
-        plt.title("Superflat Combined Image")
-        plt.show()
+        azcam.plot.plt.title("Superflat Combined Image")
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "superflatimage")
         superflat_image.overwrite = 1
         superflat_image.save_data_format = "float32"  # could be >16 bits with scaling

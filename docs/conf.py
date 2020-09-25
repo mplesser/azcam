@@ -255,7 +255,9 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [(master_doc, "azcam.tex", u"azcam Documentation", u"Michael Lesser", "manual")]
+latex_documents = [
+    (master_doc, "azcam.tex", u"azcam Documentation", u"Michael Lesser", "manual")
+]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -329,7 +331,10 @@ def remove_module_docstring(app, what, name, obj, options, lines):
 def setup(app):
     app.add_config_value(
         "recommonmark_config",
-        {"url_resolver": lambda url: github_doc_root + url, "auto_toc_tree_section": "Contents",},
+        {
+            "url_resolver": lambda url: github_doc_root + url,
+            "auto_toc_tree_section": "Contents",
+        },
         True,
     )
     app.add_transform(AutoStructify)

@@ -2,15 +2,14 @@ import os
 import math
 
 import numpy
-import matplotlib.pyplot as plt
-from astropy.io import fits as pyfits
 
 import azcam
+from azcam.functions.fits import pyfits
 from azcam.console import api
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Ramp(TesterBase):
+class Ramp(Tester):
     """
     Ramp image acquisition and analysis for fast PTC measurements.
     """
@@ -246,7 +245,7 @@ class Ramp(TesterBase):
         plotstyle = azcam.plot.style_dot
 
         # setup PTC figure
-        f1 = plt.figure(1)
+        f1 = azcam.plot.plt.figure(1)
         f1.clf()  # clear old data
         f1.text(
             0.5,
@@ -263,14 +262,14 @@ class Ramp(TesterBase):
             wspace=wspace,
             hspace=hspace,
         )
-        fig1 = plt.subplot(1, 1, 1)
+        fig1 = azcam.plot.plt.subplot(1, 1, 1)
         fig1.xaxis.grid(1, which="both")  # log lines
         fig1.yaxis.grid(1)
 
         # axes
-        plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
-        plt.ylabel("Noise [DN]", fontsize=mediumfont)
-        ax = plt.gca()
+        azcam.plot.plt.xlabel("Mean Signal [DN]", fontsize=mediumfont)
+        azcam.plot.plt.ylabel("Noise [DN]", fontsize=mediumfont)
+        ax = azcam.plot.plt.gca()
         for label in ax.yaxis.get_ticklabels():
             label.set_fontsize(smallfont)
         for label in ax.xaxis.get_ticklabels():
@@ -278,7 +277,7 @@ class Ramp(TesterBase):
             label.set_fontsize(smallfont)
 
         # setup gain figure
-        fig2 = plt.figure(2)
+        fig2 = azcam.plot.plt.figure(2)
         fig2.clf()  # clear old data
         fig2.text(
             0.5,
@@ -297,7 +296,7 @@ class Ramp(TesterBase):
         )
 
         # ax1 is mean at bottom, ax2 is row number on top
-        ax1 = plt.subplot(1, 1, 1)
+        ax1 = azcam.plot.plt.subplot(1, 1, 1)
         ax1.grid(1)
         ax1.set_ylabel(r"$\rm{Gain\ [e^{-}/DN]}$", fontsize=mediumfont)
         ax1.set_xlabel(r"$\rm{Mean\ [DN]}$", fontsize=mediumfont)
@@ -330,28 +329,28 @@ class Ramp(TesterBase):
                 mm.append(max(m))
 
             # ptc plot
-            plt.figure(1)
+            azcam.plot.plt.figure(1)
             if self.logplot:
-                plt.loglog(
+                azcam.plot.plt.loglog(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                plt.ylim(1)
-                plt.xlim(1, 100000)
+                azcam.plot.plt.ylim(1)
+                azcam.plot.plt.xlim(1, 100000)
             else:
-                plt.plot(
+                azcam.plot.plt.plot(
                     m,
                     sdev,
                     plotstyle[chan % self.num_chans],
                     markersize=marksize,
                 )
-                plt.ylim(0)
-                plt.xlim(0, 65000)
+                azcam.plot.plt.ylim(0)
+                azcam.plot.plt.xlim(0, 65000)
 
             # Gain plot
-            plt.figure(2)
+            azcam.plot.plt.figure(2)
             ax2.plot(
                 list(range(self.num_points)),
                 g,

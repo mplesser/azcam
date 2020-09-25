@@ -1,5 +1,5 @@
 """
-Contains the CameraServerInterface class.
+Contains the AzCam CameraServerInterface class.
 """
 
 import azcam
@@ -8,7 +8,7 @@ import azcam.sockets
 
 class CameraServerInterface(object):
     """
-    The ControllerServer interface.
+    The azcam camera server interface class for ARC and Magellan controllers.
     """
 
     def __init__(self, host: str = "", port: int = 0) -> bool:
@@ -41,9 +41,12 @@ class CameraServerInterface(object):
         if self.demo_mode:
             reply = ["DEMO", 0]
         else:
-            reply = self.socketserver.command(command, terminator)
-
-        return reply
+            try:
+                reply = self.socketserver.command(command, terminator)
+                return reply
+            except Exception as e:
+                if e.error_code == 2:
+                    raise azcam.AzcamError("Could not connect to camserver")
 
     def test(self):
         """
@@ -89,7 +92,7 @@ class CameraServerInterface(object):
         finally:
             self.delete_file(filename)  # try and delete file even if error
 
-        if azcam.utils.check_reply(reply):
+        if self.check_reply(reply):
             raise azcam.AzcamError(f"Reply: {filename}")
 
         return
@@ -152,3 +155,35 @@ class CameraServerInterface(object):
             self.socketserver.close()  # close socket as it is reset in CS
 
         return
+
+    def check_reply(self, status):
+        """
+        Check if a list or string begins with ERROR.
+        If ERROR then return True and sets the internal ErrorStatus.
+
+        :return bool: True if error occurred
+        """
+
+        # if None, do nothing
+        if status is None:
+            return False
+
+        # if status is a string check beginning of string
+        if type(status) == str:
+            if status.startswith("ERROR"):
+                message = status.lstrip("ERROR").strip()
+                azcam.utils.set_error_status("ERROR", message)
+                return True
+            else:
+                azcam.utils.set_error_status()
+                return False
+
+        # now status must be a list
+        if status[0] == "ERROR":
+            if len(status) == 1:
+                status.append("Unknown error")
+            azcam.utils.set_error_status(status[0], status[1])
+            return True
+        else:
+            azcam.utils.set_error_status()
+            return False

@@ -8,6 +8,7 @@ import os
 from typing import Any, List
 
 import numpy
+import numpy.polynomial.polynomial as poly
 from astropy.io import fits as pyfits
 
 import azcam
@@ -396,7 +397,7 @@ def combine(
     out_filename: str = "combined.fits",
     combination_type: str = "median",
     overscan_correct: int = 1,
-    fit_order = 3,
+    fit_order=3,
 ) -> None:
     """
     Make a combination of a list of FITS filenames.
@@ -858,10 +859,8 @@ def _line_fit(xdata, ydata, order=1, fit_min=0, fit_max=-1):
     yydata = ydata[fit_min:fit_max]
 
     # generate line y values
-    polycoeffs = numpy.polyfit(
-        xxdata, yydata, order
-    )  # [slope,intercept] using just fit_min:fit_max
-    yfit = numpy.polyval(polycoeffs, xdata)  # fit for all data, not just xxdata
+    polycoeffs = poly.polyfit(xxdata, yydata, order)  # [slope,intercept] using just fit_min:fit_max
+    yfit = poly.polyval(xdata, polycoeffs)  # fit for all data, not just xxdata
 
     # calculate residuals
     residuals = []

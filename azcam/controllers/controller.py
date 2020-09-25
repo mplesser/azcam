@@ -4,29 +4,20 @@ Contains the base Controller class.
 
 import azcam
 from azcam.header import Header
+from azcam.baseobject import Objects
 
 
-class Controller(object):
+class Controller(Objects):
     """
-    Base controller class for Azcam.
+    The base controller class for azcam-supported controllers.
     """
 
-    def __init__(self, obj_id="controller"):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        #: controller name
-        self.name = ""
+        super().__init__(obj_id, obj_name)
 
-        #: controller ID
-        self.obj_id = obj_id
-
-        #: True when controller is enabled
-        self.enabled = 1
-        #: True when contorller is initialized
-        self.initialized = 0
         #: interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0
-        # True when controller has been reset
-        self.is_reset = 0
 
         # create the controller Header object but name it "Camera"
         self.header = Header("Camera")
@@ -40,11 +31,6 @@ class Controller(object):
 
         self.reset_flag = 0
 
-        # save object
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cmd_objects[obj_id] = self
-        azcam.db.cli_cmds[obj_id] = self
-
     def set_roi(self):
         """
         Sets ROI parameters values in the controller based on focalplane parameters.
@@ -56,8 +42,8 @@ class Controller(object):
         """
         Sets the shutter state during an exposure.
         Flag is:
-        open -> close shutter during exposure
-        close -> open shutter during exposure
+        open or 1 -> close shutter during exposure
+        close or 0 -> open shutter during exposure
         """
 
         return
@@ -69,44 +55,10 @@ class Controller(object):
 
         return
 
-    def update_header(self):
+    def flush(self, Cycles=1):
         """
-        Update header.
-        Normally controller keywords are set during reset.
-        """
-
-        return
-
-    def get_keyword(self, keyword):
-        """
-        Return a keyword value and its comment.
-        Comment always returned in double quotes, even if empty.
-        """
-
-        return self.header.get_keyword(keyword)
-
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
-        """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
-        """
-
-        self.header.set_keyword(keyword, value, comment, typestring)
-
-        return
-
-    def delete_keyword(self, keyword):
-        """
-        Delete a keyword.
-        """
-
-        self.header.delete_keyword(keyword)
-
-        return
-
-    def stop_idle(self):
-        """
-        Stop idle clocking.
+        Flush or clear out the detector.
+        Returns after clearing is finished which could take many seconds.
         """
 
         return

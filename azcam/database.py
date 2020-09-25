@@ -34,9 +34,6 @@ class AzcamDatabase(object):
     #: True to filter log messages to include console output
     _logconsole = 1
 
-    #: qt application
-    qtapp = None
-
     #: last error status
     errorstatus = ["OK", ""]
 

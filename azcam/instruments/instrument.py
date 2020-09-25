@@ -6,26 +6,17 @@ import time
 
 import azcam
 from azcam.header import Header
+from azcam.baseobject import Objects
 
 
-class Instrument(object):
+class Instrument(Objects):
     """
     The base Instrument class.
     """
 
-    def __init__(self, obj_id="instrument"):
+    def __init__(self, obj_id="instrument", obj_name="Instrument"):
 
-        #: instrument name
-        self.name = ""
-
-        #: instrument ID
-        self.obj_id = obj_id
-
-        # True if instrument is initialized
-        self.initialized = False
-
-        # True if instrument is enabled
-        self.enabled = True
+        super().__init__(obj_id, obj_name)
 
         # active comparisons
         self.active_comps = []
@@ -39,34 +30,6 @@ class Instrument(object):
         # instrument header object
         self.header = Header("Instrument")
         self.header.set_header("instrument", 3)
-
-        # save object
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cmd_objects[obj_id] = self
-        azcam.db.cli_cmds[obj_id] = self
-
-        return
-
-    def initialize(self):
-        """
-        Initialize the instrument.
-        """
-
-        if self.initialized:
-            return
-
-        if not self.enabled:
-            azcam.AzcamWarning("Instrument is not enabled")
-            return
-
-        self.initialized = 1
-
-        return
-
-    def reset(self):
-        """
-        Reset instrument object.
-        """
 
         return
 
@@ -85,92 +48,6 @@ class Instrument(object):
         """
         Optional tempcon.call after exposure finishes.
         """
-
-        return
-
-    # ***************************************************************************
-    # header
-    # ***************************************************************************
-    def define_keywords(self):
-        """
-        Sets up instrument header keywords dictionary, if not already defined.
-        """
-
-        if len(self.header.keywords) != 0:
-            return
-
-        keywords = []
-
-        # add keywords to header
-        if keywords:
-            for key in self.keywords:
-                self.header.set_keyword(
-                    key, "", self.header.comments[key], self.header.typestrings[key]
-                )
-
-        return
-
-    def update_header(self):
-        """
-        Update the header, reading current data.
-        Deletes all keywords if the Instrument is not enabled.
-        """
-
-        # delete all keywords if not enabled
-        if not self.enabled:
-            self.header.delete_all_keywords()
-            return
-
-        if not self.initialized:
-            self.initialize()
-
-        self.define_keywords()
-
-        self.read_header()
-
-        return
-
-    def read_header(self):
-        """
-        Reads each keyword in the header and returns the header with the updated values.
-        Returns a list of header lists: [[keyword, value, comment, type]].
-        """
-
-        header = []
-        reply = self.header.get_all_keywords()
-
-        for key in reply:
-            reply = self.get_keyword(key)
-            if reply is not None:
-                list1 = [key, reply[0], reply[1], reply[2]]  # key, value, comment, type
-                header.append(list1)
-
-        return header
-
-    def get_keyword(self, keyword):
-        """
-        Return a keyword value and its comment.
-        Comment always returned in double quotes, even if empty.
-        """
-
-        return self.header.get_keyword(keyword)
-
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
-        """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
-        """
-
-        self.header.set_keyword(keyword, value, comment, typestring)
-
-        return
-
-    def delete_keyword(self, keyword):
-        """
-        Delete a keyword.
-        """
-
-        self.header.delete_keyword(keyword)
 
         return
 

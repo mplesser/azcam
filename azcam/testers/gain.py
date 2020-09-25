@@ -3,15 +3,15 @@ import shutil
 import os
 
 import numpy
-from astropy.io import fits as pyfits
 
 import azcam
+from azcam.functions.fits import pyfits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Gain(TesterBase):
+class Gain(Tester):
     """
     Acquire and analyze gain (PTC point) data.
     """

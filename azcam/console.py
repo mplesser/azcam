@@ -1,9 +1,10 @@
 import azcam
+
+azcam.db.app_type = 2  # console
+
 from azcam.api_console import API
 
 api = API()
-
-azcam.db.app_type = 2  # console
 
 #: image parameters
 azcam.db.imageparnames = [

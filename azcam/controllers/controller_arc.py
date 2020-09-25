@@ -11,13 +11,12 @@ from azcam.controllers.camera_server import CameraServerInterface
 
 class ControllerArc(Controller):
     """
-    Defines the ARC controller commands.
-    This is used for Gen1, Gen2, and Gen3 ARC controllers.
+    The controller class for ARC Gen1, Gen2, and Gen3 controllers.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
         self.controller_class = "arc"
 
@@ -124,13 +123,10 @@ class ControllerArc(Controller):
         self.timing_board_installed = 1
         if self.timing_board == "gen1":
             self.controller_type = "gen1"
-            self.name = "arc_gen1"
         elif self.timing_board == "gen2":
             self.controller_type = "gen2"
-            self.name = "arc_gen2"
         elif self.timing_board == "arc22":
             self.controller_type = "gen3"
-            self.name = "arc_gen3"
         else:
             raise azcam.AzcamError(f"Unrecognized timing board {self.timing_board}")
 
@@ -150,6 +146,13 @@ class ControllerArc(Controller):
         """
         Initialize controller hardware, loading PCI code as needed.
         """
+
+        if self.initialized:
+            return
+
+        if not self.enabled:
+            azcam.AzcamWarning(f"{self.name} is not enabled")
+            return
 
         self.set_boards()
 
@@ -188,7 +191,7 @@ class ControllerArc(Controller):
         reply = self.camserver.command("resetcontroller")
 
         # if error...
-        if azcam.utils.check_reply(reply):
+        if self.camserver.check_reply(reply):
             if reply[0] == "135":
                 raise azcam.AzcamError(
                     "Controller reset error - PCI bus error 135, try resetting PCI card"
@@ -352,27 +355,6 @@ class ControllerArc(Controller):
         self.write_memory("X", self.TIMINGBOARD, self.X_STATUS, bits)
 
         return
-
-    # *** header ***
-
-    def read_header(self):
-        """
-        Returns the current controller header.
-        Does not look up info as controller header should be updated as needed during exposure process.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
-        """
-
-        # get the header
-        header = []
-        reply = self.header.get_all_keywords()
-
-        for key in reply:
-            reply1 = self.header.get_keyword(key)
-            list1 = [key, reply1[0], reply1[1], reply1[2]]
-            header.append(list1)
-
-        return header
 
     # *** video ***
 
@@ -696,7 +678,10 @@ class ControllerArc(Controller):
             raise azcam.AzcamError(
                 "Command set_bias_number not supported for this controller"
             )
-        elif self.video_boards[0] in ["arc48", "arc47"]:  # assume all board types are the same
+        elif self.video_boards[0] in [
+            "arc48",
+            "arc47",
+        ]:  # assume all board types are the same
             self.board_command(
                 "SBN", self.TIMINGBOARD, BoardNumber, Type, DAC, DacValue
             )

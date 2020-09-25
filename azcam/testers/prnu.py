@@ -7,10 +7,10 @@ import numpy
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Prnu(TesterBase):
+class Prnu(Tester):
     """
     Photo-Response Non-Uniformity (PRNU) acquisition and analysis.
     """
@@ -196,7 +196,8 @@ class Prnu(TesterBase):
             if self.use_edge_mask:
                 if azcam.testers.defects.valid:
                     self.MaskedImage = numpy.ma.masked_where(
-                        azcam.testers.defects.defects_mask, prnuimage.buffer,
+                        azcam.testers.defects.defects_mask,
+                        prnuimage.buffer,
                     )
                 else:
                     azcam.testers.defects.make_edge_mask(

@@ -18,11 +18,14 @@ EXP_DONE = 5
 
 
 class ControllerArchon(Controller):
-    def __init__(self, *args):
+    """
+    The controller class for STA Archon controllers.
+    """
 
-        super().__init__(*args)
+    def __init__(self, obj_id="controller", obj_name="Controller"):
 
-        self.name = "archon"
+        super().__init__(obj_id, obj_name)
+
         self.controller_class = "archon"
         self.controller_type = "archon"
 
@@ -124,16 +127,11 @@ class ControllerArchon(Controller):
         # Image data received from the Archom controller in Direct Mode
         self.imagedata = 0
 
-        self.is_reset = 0
-
         # video gain flag
         self.video_gain = 1
 
         # True to lower voltages when integrating
         self.lower_voltages = 0
-
-        # True when controller is enabled
-        self.enabled = 1
 
         # For timing
         self.frame_time = 0
@@ -145,10 +143,6 @@ class ControllerArchon(Controller):
 
         self.pixels = 0
         self.lines = 0
-
-        # set to define interface initialization state (False->closed, True->opened)
-        self.initialized = False
-        self.is_reset = 0
 
         # video gain flag
         self.video_gain = 1
@@ -192,7 +186,7 @@ class ControllerArchon(Controller):
         # Raw data received from the Archom controller
         self.rawdata = 0
 
-        # controller server
+        # camera server
         self.camserver = azcam.sockets.SocketInterface()
         self.camserver.host = ""
         self.camserver.port = 4242
@@ -222,10 +216,58 @@ class ControllerArchon(Controller):
 
         return
 
+    def archon_command(self, Command):
+        """
+        Send a command to the Archon controller.
+        """
+
+        if not self.camserver.open():
+            raise azcam.AzcamError("Could not open connection to controller")
+
+        self.camserver.lastcmd_id = self.camserver.cmd_id
+        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
+        preCmd = ">%02X" % (self.camserver.cmd_id)
+        preResp = "<%02X" % (self.camserver.cmd_id)
+        cmd = preCmd + Command
+
+        self.camserver.send(cmd, "\r\n")
+
+        if Command not in ["WARMBOOT", "REBOOT"]:
+            reply = self.camserver.recv(-1)
+            status = reply.split(" ")[0]
+
+            # check if the reply is synchronized
+            if status[0:3] == preResp:
+                return reply[3:]
+            else:
+                if reply[0] == "?":
+                    raise azcam.AzcamError("Archon response not valid")
+                else:
+                    raise azcam.AzcamError("Archon response out of sync")
+
+        else:
+            return None  # no Archon reponse is OK
+
+    def archon_bin_command(self, command):
+        """
+        Send binary command to the Archon controller.
+        """
+
+        self.camserver.lastcmd_id = self.camserver.cmd_id
+        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
+
+        preCmd = ">%02X" % (self.camserver.cmd_id)
+        cmd = preCmd + command
+
+        self.camserver.send(cmd, "\r\n")
+
+        return
+
     def reboot(self):
         """
         Send REBOOT command.
         """
+
         cmd = "REBOOT"
         self.archon_command(cmd)
 
@@ -680,7 +722,7 @@ class ControllerArchon(Controller):
 
     def power_on(self, wait=1):
         """
-        Turns power on        """
+        Turns power on"""
 
         cmd = "POWERON"
 
@@ -1626,62 +1668,5 @@ class ControllerArchon(Controller):
                 endCfg = 1
 
         self.ConfigArchonCnt = len(self.ConfigArchon)
-
-        return
-
-    def archon_command(self, Command):
-        """
-        Send a command to the Archon controller.
-        """
-
-        if not self.camserver.open():
-            raise azcam.AzcamError("Could not open connection to controller")
-
-        self.camserver.lastcmd_id = self.camserver.cmd_id
-        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
-        preCmd = ">%02X" % (self.camserver.cmd_id)
-        preResp = "<%02X" % (self.camserver.cmd_id)
-        cmd = preCmd + Command
-
-        self.camserver.send(cmd, "\r\n")
-
-        if Command not in ["WARMBOOT", "REBOOT"]:
-            reply = self.camserver.recv(-1)
-            status = reply.split(" ")[0]
-
-            # check if the reply is synchronized
-            if status[0:3] == preResp:
-                return reply[3:]
-            else:
-                if reply[0] == "?":
-                    raise azcam.AzcamError("Archon response not valid")
-                else:
-                    raise azcam.AzcamError("Archon response out of sync")
-
-        else: 
-            return None  # no Archon reponse is OK
-
-    def archon_bin_command(self, command):
-        """
-        Send binary command to the Archon controller.
-        """
-
-        self.camserver.lastcmd_id = self.camserver.cmd_id
-        self.camserver.cmd_id = (self.camserver.cmd_id + 1) & 0xFF
-
-        preCmd = ">%02X" % (self.camserver.cmd_id)
-        cmd = preCmd + command
-
-        self.camserver.send(cmd, "\r\n")
-
-        return
-
-    def flush(self, cycles=1):
-        """
-        Flush or clear out the detector.
-        Returns after clearing is finished which could take many seconds.
-        """
-
-        # not supported
 
         return

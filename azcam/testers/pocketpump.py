@@ -3,10 +3,10 @@ import os
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class PocketPump(TesterBase):
+class PocketPump(Tester):
     """
     Pocket pumping (trap) acquisition and analysis.
     """

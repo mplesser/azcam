@@ -7,10 +7,10 @@ import numpy
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class DetCal(TesterBase):
+class DetCal(Tester):
     """
     Detector calibration routines to:
      - find and set video offsets

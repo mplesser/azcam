@@ -1,18 +1,19 @@
-
 import os
 import datetime
 
 import azcam
 from azcam.console import api
-import azcam.testers
+from azcam.testers.report import Report
 
 
-class DetChar(object):
+class DetChar(Report):
     """
     Base DetChar class.
     """
 
     def __init__(self, obj_id="detchar"):
+
+        super().__init__()
 
         self.obj_id = obj_id
         self.name = ""
@@ -64,7 +65,7 @@ class DetChar(object):
         """
 
         # Make report file
-        azcam.testers.report.make_mdfile(report_file, lines)
-        azcam.testers.report.md2pdf(report_file, create_html=self.create_html)
+        self.make_mdfile(report_file, lines)
+        self.md2pdf(report_file, create_html=self.create_html)
 
         return

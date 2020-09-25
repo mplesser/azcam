@@ -28,7 +28,8 @@ class UDPinterface(object):
 
     def get_ip(self, hostName):
         """
-        Sends UDP Get ID request (port 2400) and looks for a hostName, then returns IP address if found.
+        Sends UDP Get ID request (port 2400) and looks for a hostName,
+        then returns IP address if found.
         """
 
         azcam.log("Resolving " + hostName + " IP Address")

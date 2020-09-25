@@ -223,6 +223,6 @@ class GenPars(object):
         """
 
         azcam.utils.update_pars(1)
-        azcam.db.genpars.parfile_write()
+        self.parfile_write()
 
         return

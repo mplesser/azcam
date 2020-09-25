@@ -1,21 +1,25 @@
 import json
 
-import azcam.testers.report
 import azcam
+from azcam.testers.report import Report
 
 
-class TesterBase(object):
+class Tester(Report):
     """
-    Base class inherited by all detchar classes.
+    Base class inherited by all tester classes.
     """
 
-    def __init__(self, obj_id=None):
+    def __init__(self, obj_id="tester", obj_name=None):
 
-        #: tester name
-        self.name = ""
+        super().__init__()
 
         #: tester ID
-        self.obj_id = obj_id
+        self.id = obj_id
+
+        if obj_name is None:
+            self.name = self.id
+        else:
+            self.name = obj_name
 
         # acquistion
         self.number_images_acquire = 1  # number of images to acquire
@@ -37,10 +41,10 @@ class TesterBase(object):
 
         self.create_html = True
 
-        setattr(azcam.db, obj_id, self)
-        azcam.db.cli_cmds[obj_id] = self
-
         self.fit_order = 3  # fit order for overscan correction
+
+        setattr(azcam.db, self.id, self)
+        azcam.db.cli_cmds[self.id] = self
 
     def acquire(self):
         """
@@ -110,7 +114,7 @@ class TesterBase(object):
         """
 
         # Make report file
-        azcam.testers.report.make_mdfile(report_file, lines)
-        azcam.testers.report.md2pdf(report_file, create_html=self.create_html)
+        self.make_mdfile(report_file, lines)
+        self.md2pdf(report_file, create_html=self.create_html)
 
         return

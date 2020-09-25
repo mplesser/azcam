@@ -14,11 +14,10 @@ class ExposureMag(Exposure):
     Defines the exposure class for Magellan controllers which makes an exposure.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="exposure", obj_name="Exposure"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.id = "mag"
         self.receive_data = ReceiveData(self)
         self.exp_start = 0
         self.curr_delay = 0
@@ -110,7 +109,7 @@ class ExposureMag(Exposure):
         azcam.log("Readout started")
 
         reply = azcam.db.controller.start_readout()
-        if azcam.utils.check_reply(reply):
+        if azcam.db.controller.camserver.check_reply(reply):
             return reply
 
         # Wait for end of readout
@@ -124,10 +123,11 @@ class ExposureMag(Exposure):
             self.exposure_flag = azcam.db.exposureflags["NONE"]
 
         # transfer image data already read from controller
-        reply = self.receive_data.receive_image_data(
-            self.image.focalplane.numpix_image * 2
-        )
-        if azcam.utils.check_reply(reply):
+        try:
+            reply = self.receive_data.receive_image_data(
+                self.image.focalplane.numpix_image * 2
+            )
+        except azcam.AzcamError:
             self.exposure_flag = azcam.db.exposureflags["ABORT"]
 
         self.image.valid = 1  # new
@@ -188,8 +188,6 @@ class ExposureMag(Exposure):
             self.image.overwrite = self.filename.overwrite
             self.image.test_image = self.filename.test_image
             reply = self.image.write_file(local_file, self.filetype)
-            if azcam.utils.check_reply(reply):
-                return reply
             azcam.log("Writing finished", level=2)
 
             # set flag that image now written to disk

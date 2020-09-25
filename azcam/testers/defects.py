@@ -2,14 +2,12 @@ import os
 import numpy
 import shutil
 
-import matplotlib.pyplot as plt
-
 import azcam
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Defects(TesterBase):
+class Defects(Tester):
     """
     Find and quantify image azcam.testers.defects.
     """
@@ -177,14 +175,14 @@ class Defects(TesterBase):
             azcam.log(s)
 
         # save dark mask
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Dark Pixel Rejection Mask")
+        azcam.plot.plt.title("Dark Pixel Rejection Mask")
         self.dark_mask = numpy.ma.getmask(self.MaskedImage).astype("uint8")
-        implot = plt.imshow(self.dark_mask)
+        implot = azcam.plot.plt.imshow(self.dark_mask)
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "DarkPixelRejectionMask")
 
         # write mask as FITS
@@ -261,14 +259,14 @@ class Defects(TesterBase):
         )
 
         # save dark mask
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Bright Pixel Rejection Mask")
+        azcam.plot.plt.title("Bright Pixel Rejection Mask")
         self.bright_mask = numpy.ma.getmask(self.MaskedImage).astype("uint8")
-        implot = plt.imshow(self.bright_mask)
+        implot = azcam.plot.plt.imshow(self.bright_mask)
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "BrightPixelRejectionMask")
 
         # write mask as FITS
@@ -365,13 +363,13 @@ class Defects(TesterBase):
         # combine masks, values may be > 1
         self.defects_mask = self.bright_mask + self.dark_mask  # + self.EdgeMask
 
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Pixel Rejection Mask")
-        implot = plt.imshow(self.defects_mask.astype("uint8"))
+        azcam.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
@@ -487,13 +485,13 @@ class Defects(TesterBase):
         Plot the defective pixel mask.
         """
 
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
-        plt.title("Pixel Rejection Mask")
-        implot = plt.imshow(self.defects_mask.astype("uint8"))
+        azcam.plot.plt.title("Pixel Rejection Mask")
+        implot = azcam.plot.plt.imshow(self.defects_mask.astype("uint8"))
         implot.set_cmap("gray")
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "PixelRejectionMask")
 
         return

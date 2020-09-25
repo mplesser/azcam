@@ -14,11 +14,10 @@ class TempConArc(TempCon):
     This is used for Gen1, Gen2, and Gen3 ARC controllers.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.enabled = 1
         self.num_temp_reads = 5
         self.control_temperature = +25.0
 
@@ -34,6 +33,7 @@ class TempConArc(TempCon):
         """
 
         if not self.enabled:
+            azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
         TEMPSET = 0x01C
@@ -168,7 +168,7 @@ class TempConArc(TempCon):
 
           * 0 => convert DT670  counts to degrees C
           * 1 => convert AD590  counts to degrees C
-          * 2 => convert 1N4148 counts to degrees C	(not used?)
+          * 2 => convert 1N4148 counts to degrees C
           * 3 => convert 1N914  counts to degrees C
         """
 

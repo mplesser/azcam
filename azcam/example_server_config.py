@@ -6,6 +6,7 @@ import os
 
 import azcam
 import azcam.server
+from azcam.server import api
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.telescopes.telescope import Telescope
@@ -33,7 +34,7 @@ azcam.db.systemfolder = os.path.dirname(__file__)
 # enable logging
 # ****************************************************************
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", "azcam.log")
-azcam.utils.start_logging(azcam.db.logfile, "123")
+azcam.logging.start_logging(azcam.db.logfile, "123")
 azcam.log(f"Configuring azcam for {azcam.db.systemname}")
 
 # ****************************************************************
@@ -73,7 +74,7 @@ cmdserver.start()
 # ****************************************************************
 # define names to imported into namespace (for CLI)
 # ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db})
+azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
 
 # ****************************************************************
 # finish

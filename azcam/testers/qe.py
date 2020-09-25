@@ -3,15 +3,14 @@ import shutil
 import glob
 
 import numpy
-import matplotlib.pyplot as plt
 
 import azcam
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 
-class Qe(TesterBase):
+class Qe(Tester):
     """
     Quantum Efficiency (QE) acquisition and analysis.
     """
@@ -557,7 +556,7 @@ class Qe(TesterBase):
         hspace = 0.2
 
         # make figure
-        fig = plt.figure()
+        fig = azcam.plot.plt.figure()
         fignum = fig.number
         azcam.plot.move_window(fignum)
         if self.plot_title == "":
@@ -584,15 +583,15 @@ class Qe(TesterBase):
             wspace=wspace,
             hspace=hspace,
         )
-        ax = plt.gca()
+        ax = azcam.plot.plt.gca()
         ax.grid(1)
-        plt.xlabel(r"$\rm{Wavelength\ (nm)}$", fontsize=bigfont)
-        plt.ylabel(r"$\rm{Measured\ QE}$", fontsize=bigfont)
+        azcam.plot.plt.xlabel(r"$\rm{Wavelength\ (nm)}$", fontsize=bigfont)
+        azcam.plot.plt.ylabel(r"$\rm{Measured\ QE}$", fontsize=bigfont)
 
-        ax.yaxis.set_major_locator(plt.MaxNLocator(11))
+        ax.yaxis.set_major_locator(azcam.plot.plt.MaxNLocator(11))
         x = 2 * max(self.wavelengths) - min(self.wavelengths) + 1
         x = int(x / 100.0)
-        ax.xaxis.set_major_locator(plt.MaxNLocator(x))
+        ax.xaxis.set_major_locator(azcam.plot.plt.MaxNLocator(x))
 
         if self.mean_temp != 999:
             labels = [r"$\rm{Mean\ Temp\ =\ %.0f\ C}$" % self.mean_temp]
@@ -609,20 +608,22 @@ class Qe(TesterBase):
         qevals = []
         for w in waves:
             qevals.append(self.qe[w])
-        plt.errorbar(waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls="")
-        plt.ylim(0, 100)
+        azcam.plot.plt.errorbar(
+            waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls=""
+        )
+        azcam.plot.plt.ylim(0, 100)
         if len(self.plot_limits) == 2:
-            plt.xlim(self.plot_limits[0], self.plot_limits[1])
+            azcam.plot.plt.xlim(self.plot_limits[0], self.plot_limits[1])
 
         # plot specs
         if len(self.qe_specs) > 0:
             for wave in self.qe_specs:
                 x = wave
                 y = self.qe_specs[wave] * 100.0
-                plt.plot(x, y, ls="", marker="_", markersize=5, color="red")
+                azcam.plot.plt.plot(x, y, ls="", marker="_", markersize=5, color="red")
 
         # save figure
-        plt.show()
+        azcam.plot.plt.show()
         azcam.plot.save_figure(fignum, "qe.png")
 
         return

@@ -13,7 +13,7 @@ class Header(object):
     in azcam objects such as *controller* and *instrument*.
     """
 
-    def __init__(self, title: str = ""):
+    def __init__(self, title: str = "", template=None):
 
         self.title = {}  # header title dictionary {index:title_line}
         self.keywords = {}  # header keywords dictionary {keyword:keywordstring}
@@ -21,12 +21,15 @@ class Header(object):
         self.comments = {}  # header comments dictionary {keyword:comment}
         self.typestrings = {}  # header typestrings dictionary {keyword:typestring)
         self.items = []  # list of header objects
-        self.enabled = 1  # enabled state
 
         self.filename = ""  # image header filename
 
         if title != "":
             self.set_title(title)
+
+        if template is not None:
+            azcam.db.exposure.imageheaderfile = template
+            self.read_file(template)
 
     def set_header(self, object_name, order=-1):
         """
@@ -53,13 +56,9 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = "=================================================================="
 
         return
 
@@ -260,6 +259,13 @@ class Header(object):
         else:
             attributetypestring = "float"
         return attributetypestring
+
+    def update(self):
+        """
+        Update header.
+        """
+
+        return
 
     def read_file(self, filename=""):
         """

@@ -10,7 +10,7 @@ import azcam.sockets
 
 class API(object):
     """
-    Default API interface for console application.
+    API interface for console application.
     """
 
     def __init__(self):
@@ -123,13 +123,19 @@ class API(object):
 
         return self.rcommand(f'exposure.expose1 {exposure_time} {image_type} "{image_title}"')
 
-    def begin_exposure(self) -> None:
+    def begin_exposure(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
         """
         Initiates the first part of an exposure, through image flushing.
         This is an advanced function.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand("exposure.begin_exposure")
+        return self.rcommand(f'exposure.begin {exposure_time} {image_type} "{image_title}"')
 
     def integrate_exposure(self) -> None:
         """
@@ -137,7 +143,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.integrate_exposure")
+        return self.rcommand("exposure.integrate")
 
     def readout_exposure(self) -> None:
         """
@@ -145,7 +151,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.readout_exposure")
+        return self.rcommand("exposure.readout")
 
     def end_exposure(self) -> None:
         """
@@ -153,7 +159,7 @@ class API(object):
         This is an advanced function.
         """
 
-        return self.rcommand("exposure.end_exposure")
+        return self.rcommand("exposure.end")
 
     def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
         """
@@ -413,14 +419,16 @@ class API(object):
 
         return self.rcommand(f"instrument.set_wavelength {wavelength} {wavelength_id}")
 
-    def get_wavelength(self, wavelength_id: int = 0) -> int:
+    def get_wavelength(self, wavelength_id: int = 0) -> float:
         """
         Get instrument wavelength.
 
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        return self.rcommand(f"instrument.get_wavelength {wavelength_id}")
+        reply = float(self.rcommand(f"instrument.get_wavelength {wavelength_id}"))
+
+        return reply
 
     # *******************************************************
     # focus
@@ -444,9 +452,14 @@ class API(object):
         :param focus_type: focus type (absolute or step)
         """
 
-        return self.rcommand(
-            f"instrument.set_focus {focus_value} {focus_id} {focus_component} {focus_type}"
-        )
+        if focus_component == "instrument":
+            self.rcommand(f"instrument.set_focus {focus_value} {focus_id} {focus_type}")
+        elif focus_component == "telescope":
+            self.rcommand(f"telescope.set_focus {focus_value} {focus_id} {focus_type}")
+        else:
+            raise azcam.AzcamError("unknown focus_component")
+
+        return
 
     def get_focus(self, focus_id: int = 0, focus_component: str = "instrument") -> float:
         """
@@ -456,7 +469,12 @@ class API(object):
         :param focus_component: focus type (typically instrument or telecope)
         """
 
-        reply = self.rcommand(f"instrument.get_focus {focus_id} {focus_component}")
+        if focus_component == "instrument":
+            reply = self.rcommand(f"instrument.get_focus {focus_id}")
+        elif focus_component == "telescope":
+            reply = self.rcommand(f"telescope.get_focus {focus_id}")
+        else:
+            raise azcam.AzcamError("unknown focus_component")
 
         return float(reply)
 
@@ -519,6 +537,24 @@ class API(object):
     # keywords
     # *******************************************************
 
+    def update_header(self, object_name: str = "controller"):
+        """
+        Update the header of an object.
+        This command usually reads hardware to get the lastest keyword values.
+
+        :param object_name: object to which keyword belongs
+        """
+
+        return self.rcommand(f"{object_name}.update_header")
+
+    def read_header(self, object_name: str = "controller"):
+        """
+        Reads each keyword in the header and returns the keyword value.
+        Returns a list of header lists: [[keyword, value, comment, type]].
+        """
+
+        return self.rcommand(f"{object_name}.read_header")
+
     def set_keyword(
         self,
         keyword: str,
@@ -547,6 +583,7 @@ class API(object):
         """
         Return a keyword value and its comment.
         The comment always returned in quotes, even if empty.
+        Hardware is not usually read by this commands, use update_header first.
 
         :param keyword: keyword name
         :param key_object: object to which keyword belongs
@@ -674,7 +711,7 @@ class API(object):
     def abort(self):
         """
         Sets the global exposure abort flag and tries to abort a remote server exposure.
-            """
+        """
 
         azcam.db.abortflag = 1
 

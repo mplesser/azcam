@@ -1,11 +1,11 @@
 import numpy
-from astropy.io import fits as pyfits
 
 import azcam
-from azcam.testers.testerbase import TesterBase
+from azcam.functions.fits import pyfits
+from azcam.testers.basetester import Tester
 
 
-class Eper(TesterBase):
+class Eper(Tester):
     """
     EPER - Extended Pixel Edge Response analysis.
     """

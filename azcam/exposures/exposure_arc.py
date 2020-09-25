@@ -7,7 +7,8 @@ import threading
 import time
 
 import azcam
-from azcam.exposures.exposure import Exposure, ReceiveData
+from azcam.exposures.exposure import Exposure
+from azcam.exposures.receive_data import ReceiveData
 
 
 class ExposureArc(Exposure):
@@ -15,11 +16,10 @@ class ExposureArc(Exposure):
     Defines the exposure class for ARC controllers which makes an exposure.
     """
 
-    def __init__(self, *args):
+    def __init__(self, obj_id="exposure", obj_name="Exposure"):
 
-        super().__init__(*args)
+        super().__init__(obj_id, obj_name)
 
-        self.name = "arc"
         self.receive_data = ReceiveData(self)
 
     def integrate(self):
@@ -49,10 +49,8 @@ class ExposureArc(Exposure):
 
         """
         # do this for any return below
-        if azcam.utils.check_reply(reply):
-            if CHANGEVOLTAGES:  # return OD volatges
-                azcam.db.controller.board_command("RMP", azcam.db.controller.TIMINGBOARD, 1)
-            return reply
+        if CHANGEVOLTAGES:  # return OD volatges
+            azcam.db.controller.board_command("RMP", azcam.db.controller.TIMINGBOARD, 1)
         """
         self.dark_time_start = time.time()
 
@@ -363,6 +361,8 @@ class ExposureArc(Exposure):
             Delay = self.par_delay
             azcam.db.controller.header.delete_keyword("TdiDelay")
 
-        azcam.db.controller.write_memory("Y", azcam.db.controller.TIMINGBOARD, 0x20, Delay)
+        azcam.db.controller.write_memory(
+            "Y", azcam.db.controller.TIMINGBOARD, 0x20, Delay
+        )
 
         return

@@ -41,6 +41,8 @@ class CommandServer(socketserver.ThreadingTCPServer):
         self.socketnames = {}
         self.use_clientname = 1  # log client name with command
 
+        self.default_object = None
+
         azcam.db.cmdserver = self
 
         azcam.db.currentclient = 0
@@ -91,22 +93,26 @@ class CommandServer(socketserver.ThreadingTCPServer):
 
         self.server.shutdown()
         self.is_running = 0
-
         return
 
-    def rcommand(self, command: str, **kwargs) -> str:
+    def rcommand(self, command: str, **kwargs):
         """
         Parse and execute a command string with optional arguments.
         Returns the reply string, always starting with OK or ERROR.
         """
 
         # parse command string
-        tokens = azcam.utils.parse(command, 0)  # parse
+        tokens = azcam.utils.parse(command, 0)
         cmd = tokens[0]
 
         # command must be of form object.command
-        if "." in cmd:
-            cmdobject, cmdcommand = cmd.split(".")
+        if ("." in cmd) or (self.default_object is not None):
+
+            if "." in cmd:
+                cmdobject, cmdcommand = cmd.split(".")
+            else:
+                cmdobject = self.default_object
+                cmdcommand = cmd
             if cmdobject in azcam.db.cmd_objects:
                 cmd = azcam.db.cmd_objects[cmdobject]
                 cmd = getattr(cmd, cmdcommand)
@@ -293,7 +299,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # ************************************************************************
                 if command_string != "":
 
-                    # execute command, catching all errors so server does not crash
+                    # execute command
                     reply = azcam.db.cmdserver.rcommand(command_string)
 
                     # log reply
@@ -326,7 +332,8 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
 
         if self.cmdserver.log_connections and self.cmdserver.verbose:
             azcam.log(
-                f"Client connection made from {str(self.client_address)}", prefix="cmd> ",
+                f"Client connection made from {str(self.client_address)}",
+                prefix="cmd> ",
             )
 
         return socketserver.BaseRequestHandler.setup(self)

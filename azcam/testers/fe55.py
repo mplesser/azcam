@@ -5,22 +5,21 @@ import os
 import shutil
 
 import numpy
-import matplotlib.pyplot as plt
 import scipy.ndimage
 import scipy.ndimage.filters
 import scipy.optimize
-from astropy.io import fits as pyfits
 
 import azcam
+from azcam.functions.fits import pyfits
 from azcam.console import api
 import azcam.testers
-from azcam.testers.testerbase import TesterBase
+from azcam.testers.basetester import Tester
 
 # constants
 CON1 = 2.0 * numpy.sqrt(2.0 * numpy.log(2.0))  # 2.355 for sigma <=> FWHM
 
 
-class Fe55(TesterBase):
+class Fe55(Tester):
     """
     Fe55 X-ray signal acquisition and analysis.
     """
@@ -186,7 +185,9 @@ class Fe55(TesterBase):
             for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
                 shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(subfolder)  # move for analysis folder - assume it already exists
+            azcam.utils.curdir(
+                subfolder
+            )  # move for analysis folder - assume it already exists
         else:
             pass
 
@@ -220,7 +221,10 @@ class Fe55(TesterBase):
 
         # Correct fe55 image
         if self.overscan_correct or self.zero_correct:
-            filename = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
+            filename = (
+                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
+                + ".fits"
+            )
             NumExt, first_ext, last_ext = azcam.fits.get_extensions(filename)
 
             # zero_correct image first
@@ -237,7 +241,10 @@ class Fe55(TesterBase):
                 azcam.log("overscan_correct image: %s" % os.path.basename(filename))
                 azcam.fits.colbias(filename, fit_order=self.fit_order)
         else:
-            filename = os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
+            filename = (
+                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
+                + ".fits"
+            )
 
         self.grade = "UNKNOWN"
         azcam.log("Analyzing image %s" % os.path.basename(filename))
@@ -296,7 +303,9 @@ class Fe55(TesterBase):
 
         if self.threshold == 0:
             if azcam.testers.bias.valid:
-                self.threshold = [self.noise_threshold * sd for sd in azcam.testers.bias.sdev]
+                self.threshold = [
+                    self.noise_threshold * sd for sd in azcam.testers.bias.sdev
+                ]
 
         # process each channel
         self.chansanalyzed = 0
@@ -316,9 +325,13 @@ class Fe55(TesterBase):
             self.imbufs.append(imbuf)
 
             # new code for clusters
-            data_max = scipy.ndimage.filters.maximum_filter(imbuf, self.neighborhood_size)
+            data_max = scipy.ndimage.filters.maximum_filter(
+                imbuf, self.neighborhood_size
+            )
             maxima = imbuf == data_max
-            data_min = scipy.ndimage.filters.minimum_filter(imbuf, self.neighborhood_size)
+            data_min = scipy.ndimage.filters.minimum_filter(
+                imbuf, self.neighborhood_size
+            )
             diff = (data_max - data_min) > self.threshold
             maxima[diff == 0] = 0
 
@@ -327,8 +340,8 @@ class Fe55(TesterBase):
 
             # show events
             if self.show_events:
-                plt.figure()
-                plt.imshow(labeled, cmap="gray")
+                azcam.plot.plt.figure()
+                azcam.plot.plt.imshow(labeled, cmap="gray")
 
             # these arrays are for each channel
             xevents, yevents, zevents, fwhms, sigmas, gaussians = [], [], [], [], [], []
@@ -423,7 +436,9 @@ class Fe55(TesterBase):
                         reply = self._fit_gauss_elliptical(
                             [xevents[i], yevents[i]], imbuf[r1:r2, c1:c2]
                         )  # was box
-                        fwhm = self.pixel_size * math.sqrt(0.5 * (reply[5] ** 2 + reply[6] ** 2))
+                        fwhm = self.pixel_size * math.sqrt(
+                            0.5 * (reply[5] ** 2 + reply[6] ** 2)
+                        )
 
                         sigma = fwhm / CON1
                         sigmas.append(sigma)
@@ -608,7 +623,9 @@ class Fe55(TesterBase):
         # copy analysis output to starting fold
         if startingfolder != subfolder:
             try:
-                shutil.copy("fe55.fits", startingfolder)  # filename perhaps, but overwrites
+                shutil.copy(
+                    "fe55.fits", startingfolder
+                )  # filename perhaps, but overwrites
             except Exception:
                 pass
             for f in list(self.plot_files.values()):
@@ -737,26 +754,31 @@ class Fe55(TesterBase):
 
         # plot raw events
         if "events" in self.make_plots:
-            fig_events = plt.figure()
+            fig_events = azcam.plot.plt.figure()
             fignum = fig_events.number
             azcam.plot.move_window(fignum)
             fig_events.suptitle(r"$\rm{X-Ray\ Events}$", fontsize=large_font)
             fig_events.tight_layout()
             fig_events.subplots_adjust(
-                left=pleft, bottom=pbottom, right=pright, top=ptop, wspace=wspace, hspace=hspace,
+                left=pleft,
+                bottom=pbottom,
+                right=pright,
+                top=ptop,
+                wspace=wspace,
+                hspace=hspace,
             )
 
             chan = 0
             plotnum = 1
             for _ in range(nrows):
                 for _ in range(ncols):
-                    plt.subplot(nrows, ncols, plotnum)
+                    azcam.plot.plt.subplot(nrows, ncols, plotnum)
                     if self.num_chans == 1:
                         s1 = ""
                     else:
                         s1 = "Chan " + str(chan + 1)
-                    plt.title(s1, fontsize=medium_font)
-                    ax = plt.gca()
+                    azcam.plot.plt.title(s1, fontsize=medium_font)
+                    ax = azcam.plot.plt.gca()
 
                     median = numpy.median(self.imbufs[chan])
                     if median < 0:
@@ -767,20 +789,24 @@ class Fe55(TesterBase):
                         m2 = int(median * 5.0)
 
                     if 1:
-                        plt.imshow(
-                            self.imbufs[chan], cmap="gray", interpolation="none", vmin=m1, vmax=m2,
+                        azcam.plot.plt.imshow(
+                            self.imbufs[chan],
+                            cmap="gray",
+                            interpolation="none",
+                            vmin=m1,
+                            vmax=m2,
                         )
                         nc = len(self.imbufs[chan][0])
                         nr = len(self.imbufs[chan])
-                        plt.xlim(1, nc)
-                        plt.ylim(1, nr)
-                        _, labels = plt.xticks()
-                        plt.setp(labels, rotation=45)
+                        azcam.plot.plt.xlim(1, nc)
+                        azcam.plot.plt.ylim(1, nr)
+                        _, labels = azcam.plot.plt.xticks()
+                        azcam.plot.plt.setp(labels, rotation=45)
 
                     if 1:
                         # mark valid events on events plot
-                        plt.autoscale(False)
-                        plt.scatter(
+                        azcam.plot.plt.autoscale(False)
+                        azcam.plot.plt.scatter(
                             self.xevents[chan],
                             self.yevents[chan],
                             s=10,
@@ -805,26 +831,31 @@ class Fe55(TesterBase):
             azcam.plot.save_figure(fignum, f"{self.plot_files['events']}")
 
         if "histogram" in self.make_plots:
-            fig_hist = plt.figure()
+            fig_hist = azcam.plot.plt.figure()
             fignum = fig_hist.number
             azcam.plot.move_window(fignum)
             fig_hist.suptitle(r"$\rm{X-Ray\ Histograms}$", fontsize=large_font)
             fig_hist.subplots_adjust(
-                left=pleft, bottom=pbottom, right=pright, top=ptop, wspace=wspace, hspace=hspace,
+                left=pleft,
+                bottom=pbottom,
+                right=pright,
+                top=ptop,
+                wspace=wspace,
+                hspace=hspace,
             )
 
             chan = 0
             plotnum = 1
             for _ in range(nrows):
                 for _ in range(ncols):
-                    plt.subplot(nrows, ncols, plotnum)
+                    azcam.plot.plt.subplot(nrows, ncols, plotnum)
                     if self.num_chans == 1:
                         s1 = ""
                     else:
                         s1 = "Chan " + str(chan)
-                    plt.title(s1, fontsize=medium_font)
-                    ax = plt.gca()
-                    plt.plot(self.hist_x[chan], self.hist_y[chan], "b-")
+                    azcam.plot.plt.title(s1, fontsize=medium_font)
+                    ax = azcam.plot.plt.gca()
+                    azcam.plot.plt.plot(self.hist_x[chan], self.hist_y[chan], "b-")
                     ax.set_yscale("linear")
                     for label in ax.xaxis.get_ticklabels():
                         label.set_rotation(45)
@@ -833,14 +864,16 @@ class Fe55(TesterBase):
                         ax.set_xlabel("Value")
                         ax.set_ylabel("Num. Events")
                     ax.grid(True)
-                    _, labels = plt.xticks()
-                    plt.setp(labels, rotation=45)
+                    _, labels = azcam.plot.plt.xticks()
+                    azcam.plot.plt.setp(labels, rotation=45)
 
-                    # plt.xlim(zmedian/2.,zmedian*2.)
-                    # plt.xlim(self.z[chan].min()-100, self.z[chan].max() + 200)
+                    # azcam.plot.plt.xlim(zmedian/2.,zmedian*2.)
+                    # azcam.plot.plt.xlim(self.z[chan].min()-100, self.z[chan].max() + 200)
 
                     hist_max = self.xray_lines["K-alpha"] / self.system_gain[chan]
-                    plt.axvline(x=hist_max, linewidth=1, color="k", linestyle="--")
+                    azcam.plot.plt.axvline(
+                        x=hist_max, linewidth=1, color="k", linestyle="--"
+                    )
 
                     chan += 1
                     plotnum += 1
@@ -854,12 +887,17 @@ class Fe55(TesterBase):
             last_row = len(self.imbufs[0])
 
             # HCTE
-            fig_cte = plt.figure()
+            fig_cte = azcam.plot.plt.figure()
             fignum = fig_cte.number
             azcam.plot.move_window(fignum)
             fig_cte.suptitle(r"$\rm{HCTE}$", fontsize=large_font)
             fig_cte.subplots_adjust(
-                left=pleft, bottom=pbottom, right=pright, top=ptop, wspace=wspace, hspace=hspace,
+                left=pleft,
+                bottom=pbottom,
+                right=pright,
+                top=ptop,
+                wspace=wspace,
+                hspace=hspace,
             )
             fig_cte.subplots_adjust(hspace=0.40, wspace=0.30)
 
@@ -867,23 +905,29 @@ class Fe55(TesterBase):
             plotnum = 1
             for _ in range(nrows):
                 for _ in range(ncols):
-                    plt.subplot(nrows, ncols, plotnum)
+                    azcam.plot.plt.subplot(nrows, ncols, plotnum)
                     if self.num_chans == 1:
                         s1 = ""
                     else:
                         s1 = "Chan " + str(chan + 1)
-                    plt.title(s1, fontsize=medium_font)
-                    ax = plt.gca()
+                    azcam.plot.plt.title(s1, fontsize=medium_font)
+                    ax = azcam.plot.plt.gca()
 
-                    plt.title("Chan %d" % chan)
+                    azcam.plot.plt.title("Chan %d" % chan)
 
-                    plt.plot(self.event_data[chan][1], self.z[chan], "ro", markersize=2)
-                    plt.plot(list(range(1, last_col + 1)), self.fit_yhcte[chan], "b-")
-                    plt.ylim(self.z[chan].min() - 100, self.z[chan].max() + 200)
-                    plt.xlim(1, last_col)
+                    azcam.plot.plt.plot(
+                        self.event_data[chan][1], self.z[chan], "ro", markersize=2
+                    )
+                    azcam.plot.plt.plot(
+                        list(range(1, last_col + 1)), self.fit_yhcte[chan], "b-"
+                    )
+                    azcam.plot.plt.ylim(
+                        self.z[chan].min() - 100, self.z[chan].max() + 200
+                    )
+                    azcam.plot.plt.xlim(1, last_col)
 
                     s = "%0.6f" % (self.hcte[chan])
-                    plt.annotate(
+                    azcam.plot.plt.annotate(
                         s,
                         xy=(0.15, 0.85),
                         xycoords="axes fraction",
@@ -892,8 +936,8 @@ class Fe55(TesterBase):
 
                     # ax.xaxis.set_ticks([])
                     # ax.yaxis.set_ticks([])
-                    _, labels = plt.xticks()
-                    plt.setp(labels, rotation=45)
+                    _, labels = azcam.plot.plt.xticks()
+                    azcam.plot.plt.setp(labels, rotation=45)
 
                     azcam.plot.update()
                     chan += 1
@@ -904,35 +948,46 @@ class Fe55(TesterBase):
             azcam.plot.save_figure(fignum, "%s" % self.plot_files["hcte"])
 
             # VCTE
-            fig_cte = plt.figure()
+            fig_cte = azcam.plot.plt.figure()
             fignum = fig_cte.number
             azcam.plot.move_window(fignum)
             fig_cte.suptitle(r"$\rm{VCTE}$", fontsize=large_font)
             fig_cte.subplots_adjust(
-                left=pleft, bottom=pbottom, right=pright, top=ptop, wspace=wspace, hspace=hspace,
+                left=pleft,
+                bottom=pbottom,
+                right=pright,
+                top=ptop,
+                wspace=wspace,
+                hspace=hspace,
             )
             fig_cte.subplots_adjust(hspace=0.40, wspace=0.30)
             chan = 0
             plotnum = 1
             for _ in range(nrows):
                 for _ in range(ncols):
-                    plt.subplot(nrows, ncols, plotnum)
+                    azcam.plot.plt.subplot(nrows, ncols, plotnum)
                     if self.num_chans == 1:
                         s1 = ""
                     else:
                         s1 = "Chan " + str(chan + 1)
-                    plt.title(s1, fontsize=medium_font)
-                    ax = plt.gca()
+                    azcam.plot.plt.title(s1, fontsize=medium_font)
+                    ax = azcam.plot.plt.gca()
 
-                    plt.title("Chan %d" % chan)
+                    azcam.plot.plt.title("Chan %d" % chan)
 
-                    plt.plot(self.event_data[chan][0], self.z[chan], "ro", markersize=2)
-                    plt.plot(list(range(1, last_row + 1)), self.fit_yvcte[chan], "b-")
-                    plt.ylim(self.z[chan].min() - 100, self.z[chan].max() + 200)
-                    plt.xlim(1, last_row)
+                    azcam.plot.plt.plot(
+                        self.event_data[chan][0], self.z[chan], "ro", markersize=2
+                    )
+                    azcam.plot.plt.plot(
+                        list(range(1, last_row + 1)), self.fit_yvcte[chan], "b-"
+                    )
+                    azcam.plot.plt.ylim(
+                        self.z[chan].min() - 100, self.z[chan].max() + 200
+                    )
+                    azcam.plot.plt.xlim(1, last_row)
 
                     s = "%0.6f" % (self.vcte[chan])
-                    plt.annotate(
+                    azcam.plot.plt.annotate(
                         s,
                         xy=(0.15, 0.85),
                         xycoords="axes fraction",
@@ -941,8 +996,8 @@ class Fe55(TesterBase):
 
                     # ax.xaxis.set_ticks([])
                     # ax.yaxis.set_ticks([])
-                    _, labels = plt.xticks()
-                    plt.setp(labels, rotation=45)
+                    _, labels = azcam.plot.plt.xticks()
+                    azcam.plot.plt.setp(labels, rotation=45)
 
                     azcam.plot.update()
                     chan += 1
@@ -952,7 +1007,7 @@ class Fe55(TesterBase):
             self.plot_titles["vcte"] = "VCTE"
             azcam.plot.save_figure(fignum, "%s" % self.plot_files["vcte"])
 
-        plt.show()
+        azcam.plot.plt.show()
 
         return
 
