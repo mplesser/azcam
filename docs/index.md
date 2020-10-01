@@ -153,7 +153,7 @@ The report commands are helpful when generating reports.
 ```
 ### Tester Classes
 
-The report commands are helpful when generating reports. 
+The tester classes are used to aaquire and analyze images to characterize sensor performance. 
     
 ```eval_rst
 .. toctree::
@@ -175,7 +175,7 @@ There are several folder names which are usually defined, although their use may
 When a python virtual environment is used, it is typically contained in a folder named `../venvs/azcam`.
 
 ### Dependencies
-AzCam currently uses *Python 3.7*. Important dependancies include:
+AzCam currently uses *Python 3.8*. Important dependancies include:
 
   * *numpy*
   * *astropy*
