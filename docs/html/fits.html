@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Plot Commands" href="plot.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Fits Class</li>
     
@@ -196,398 +199,6 @@
 </pre></div>
 </div>
 <span class="target" id="module-azcam.fits"></span><p>Contains FITS image manipulation commands.</p>
-<dl class="py function">
-<dt id="azcam.fits.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename1</span></em>, <em class="sig-param"><span class="n">filename2</span></em>, <em class="sig-param"><span class="n">filename3</span></em>, <em class="sig-param"><span class="n">datatype</span><span class="o">=</span><span class="default_value">'uint16'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add two images.
-:type filename1: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param filename1: image filename
-:type filename2: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param filename2: may be an image filename or a constant.
-:type filename3: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:type datatype: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param datatype: valid datatype string for resultant data type</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.add_history">
-<code class="sig-name descname">add_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">history_string</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.add_history" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a HISTORY line containing ‘history_string’ to the image.
-Used to record actions performed on an image. A 20 character time stamp
-is added as a prefix, and the result is split across up to three cards
-if it is too long to fit in one. Any extra text is truncated.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>history_string</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to add as a HISTORY keyword</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.arith">
-<code class="sig-name descname">arith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename1</span></em>, <em class="sig-param"><span class="n">operator</span></em>, <em class="sig-param"><span class="n">filename2</span></em>, <em class="sig-param"><span class="n">filename3</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">datatype</span><span class="o">=</span><span class="default_value">'uint16'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.arith" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simple image manipulation of FITS files.
-Converts back to unsigned 16 bit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>operator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – ‘+’,’-‘,’/’,’*’</p></li>
-<li><p><strong>filename2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – may be an image filename or a constant.</p></li>
-<li><p><strong>filename3</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – optional, must be an image filename.  If not specified, result goes into filename1.</p></li>
-<li><p><strong>datatype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – valid datatype string for resultant data type</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.colbias">
-<code class="sig-name descname">colbias</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">fit_order</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">margin_cols</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.colbias" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove column bias from a FITS file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>fit_order</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – polynomial fit order, use 0 to remove median not fitted value</p></li>
-<li><p><strong>margin_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of overscan columns to skip before correction</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_list</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">out_filename</span><span class="o">=</span><span class="default_value">'combined.fits'</span></em>, <em class="sig-param"><span class="n">combination_type</span><span class="o">=</span><span class="default_value">'median'</span></em>, <em class="sig-param"><span class="n">overscan_correct</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fit_order</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.combine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a combination of a list of FITS filenames.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_list</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of filenames to combine</p></li>
-<li><p><strong>out_filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – output filename</p></li>
-<li><p><strong>combination_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – combination type, “median”, “sum”, or “mean”</p></li>
-<li><p><strong>overscan_correct</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – &gt; 0 to correct overscan with specified fir order before combination</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.div">
-<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename1</span></em>, <em class="sig-param"><span class="n">filename2</span></em>, <em class="sig-param"><span class="n">filename3</span></em>, <em class="sig-param"><span class="n">datatype</span><span class="o">=</span><span class="default_value">'uint16'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Divide Image1 by Image2.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>operator</strong> – ‘+’,’-‘,’/’,’*’</p></li>
-<li><p><strong>filename2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – may be an image filename or a constant.</p></li>
-<li><p><strong>filename3</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – optional, must be an image filename.  If not specified, result goes into filename1.</p></li>
-<li><p><strong>datatype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – valid datatype string for resultant data type</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.edit_keyword">
-<code class="sig-name descname">edit_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.edit_keyword" title="Permalink to this definition">¶</a></dt>
-<dd><p>Edits a header keyword value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>keyword</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – keyword name</p></li>
-<li><p><strong>value</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>) – new value of keyword</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.file_exists">
-<code class="sig-name descname">file_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.file_exists" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True is the file exists, else False.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_all_data">
-<code class="sig-name descname">get_all_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_all_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return all pixel data from image.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_data">
-<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return data (pixel values) from an ROI in an image for every entension.
-NOT FINISHED!</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>roi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – ROI</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_extensions">
-<code class="sig-name descname">get_extensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_extensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions
-and extension number limits FOR THE RANGE command [range(first_ext,last_ext)].
-NumExt is 0 for a standard FITS file and &gt;0 for MEF.  The first data extension for an
-MEF file is 1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_header">
-<code class="sig-name descname">get_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the image header as a pyfits header object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_history">
-<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_history" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the HISTOR header lines.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_keyword">
-<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_keyword" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a header keyword value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>keyword</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – keyword name</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.get_section">
-<code class="sig-name descname">get_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">section</span></em>, <em class="sig-param"><span class="n">extension</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.get_section" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract image section pixel values from a FITS keyword to a list.
-Format is always zero-based: [first_col,last_col,first_row,last_row].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>section</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – section name (like “CCDSEC”)</p></li>
-<li><p><strong>extension</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – image extension number</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.maximum">
-<code class="sig-name descname">maximum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.maximum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute maximum of an image ROI for every extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>roi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – ROI</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.mean">
-<code class="sig-name descname">mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute mean of an image ROI in every extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>roi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – ROI</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.minimum">
-<code class="sig-name descname">minimum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.minimum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute minimum of an image ROI for every extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>roi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – ROI</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.mult">
-<code class="sig-name descname">mult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename1</span></em>, <em class="sig-param"><span class="n">filename2</span></em>, <em class="sig-param"><span class="n">filename3</span></em>, <em class="sig-param"><span class="n">datatype</span><span class="o">=</span><span class="default_value">'uint16'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.mult" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiple two images.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>operator</strong> – ‘+’,’-‘,’/’,’*’</p></li>
-<li><p><strong>filename2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – may be an image filename or a constant.</p></li>
-<li><p><strong>filename3</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – optional, must be an image filename.  If not specified, result goes into filename1.</p></li>
-<li><p><strong>datatype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – valid datatype string for resultant data type</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.resample">
-<code class="sig-name descname">resample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">resample</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.resample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resample an image by combining adjacent pixels.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>resample</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of pixels to combine in each dimension</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.sdev">
-<code class="sig-name descname">sdev</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.sdev" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute standard deviation of an image ROI in every extension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>roi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – ROI</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.stat">
-<code class="sig-name descname">stat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.stat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute mean and sdev image statistics of ROI in every extension.
-Returns [[means], [sdevs], ROI]
-:type filename: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>
-:param filename: image filename
-:type roi: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>
-:param roi: ROI</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.fits.sub">
-<code class="sig-name descname">sub</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename1</span></em>, <em class="sig-param"><span class="n">filename2</span></em>, <em class="sig-param"><span class="n">filename3</span></em>, <em class="sig-param"><span class="n">datatype</span><span class="o">=</span><span class="default_value">'uint16'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.fits.sub" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtract filename2 from filename1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image filename</p></li>
-<li><p><strong>operator</strong> – ‘+’,’-‘,’/’,’*’</p></li>
-<li><p><strong>filename2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – may be an image filename or a constant.</p></li>
-<li><p><strong>filename3</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – optional, must be an image filename.  If not specified, result goes into filename1.</p></li>
-<li><p><strong>datatype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – valid datatype string for resultant data type</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
 
@@ -610,11 +221,19 @@ Returns [[means], [sdevs], ROI]
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -625,7 +244,6 @@ Returns [[means], [sdevs], ROI]
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

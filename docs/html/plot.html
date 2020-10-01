@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Utility Commands" href="utils.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Plot Commands</li>
     
@@ -191,118 +194,7 @@
   <div class="section" id="plot-commands">
 <h1>Plot Commands<a class="headerlink" href="#plot-commands" title="Permalink to this headline">¶</a></h1>
 <p>The plot commands arehelpful for general plotting using matplotlib.</p>
-<span class="target" id="module-azcam.plot"></span><dl class="py function">
-<dt id="azcam.plot.clear_data">
-<code class="sig-name descname">clear_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.clear_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clears plotdata from tools().</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.close_figure">
-<code class="sig-name descname">close_figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figures</span><span class="o">=</span><span class="default_value">'all'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.close_figure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Close plot figure and their windows.
-Default is all.
-:param Figures:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.display">
-<code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">azimage</span></em>, <em class="sig-param"><span class="n">cmap</span><span class="o">=</span><span class="default_value">'gray'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.display" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a matplotlib display of an azcam image.
-cmap is color map, try cm.*
-:param Cmap:
-:param Image:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.get_data">
-<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.get_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns plotdata from tools().
-Initial plotdata is {‘KeyPressed’:’’,’MouseButton’:-1,’X’:-1.0,’Y’:-1.0}</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.line">
-<code class="sig-name descname">line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interactive: Plot a line on a plot figure.
-print() allowed here as interactive only.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>Figure</strong> – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.move_window">
-<code class="sig-name descname">move_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_number</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.move_window" title="Permalink to this definition">¶</a></dt>
-<dd><p>Moves a figure to position x,y in screen pixels.
-:param y: Use None for auto
-:param x: Use None for auto
-:param figure_number: &gt;= 1</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.on_moveevent">
-<code class="sig-name descname">on_moveevent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.on_moveevent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the x and y pixel coords for plots.
-:param event:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.plot_image">
-<code class="sig-name descname">plot_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">azimage</span></em>, <em class="sig-param"><span class="n">scale_type</span><span class="o">=</span><span class="default_value">'useimage'</span></em>, <em class="sig-param"><span class="n">scale_factor</span><span class="o">=</span><span class="default_value">'useimage'</span></em>, <em class="sig-param"><span class="n">cmap</span><span class="o">=</span><span class="default_value">'gray'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.plot_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot an Azcam image buffer nicely.
-scaletype is sdev, minmax, scaled,absolute.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.rescale">
-<code class="sig-name descname">rescale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axes_values</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sub_plot</span><span class="o">=</span><span class="default_value">111</span></em>, <em class="sig-param"><span class="n">figure_number</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.rescale" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replot a figure with new axes limits.
-AxisValues is [xmin,xmax,ymin,ymax].
-SubPlot is pylab subplot integer, as NumRows+NumCols+Number (111, 221, etc).
-figure_number is the figure number (starts at 1).
-During prompt, hit return to leave as is.
-:param figure_number:
-:param SubPlot:
-:param AxesValues:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.save_figure">
-<code class="sig-name descname">save_figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_number</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">figure_name</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.save_figure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save a plotted figure to disk.
-If FigureName is not specified then the name is ‘Figure’+figure_number.
-:param figure_number:
-:param FigureName:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.set_figure">
-<code class="sig-name descname">set_figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_number</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">subplot</span><span class="o">=</span><span class="default_value">'111'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.set_figure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the active figure and plot for subsequent plot commands.
-A single plot is ‘111’, a top plot of 2 is ‘211’ and the bottom is ‘212’.
-:param Subplot:
-:param figure_number:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.tools">
-<code class="sig-name descname">tools</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_number</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.tools" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts interactive plotting tool for a Figure.
-Updates data fron plot events.
-Data may be read from get_data().
-:param figure_number:</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="azcam.plot.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.plot.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use this method in a loop to update a plot in real-time.</p>
-</dd></dl>
-
-</div>
+<span class="target" id="module-azcam.plot"></span></div>
 
 
            </div>
@@ -324,11 +216,19 @@ Data may be read from get_data().
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -339,7 +239,6 @@ Data may be read from get_data().
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

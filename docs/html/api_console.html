@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Report Commands" href="report.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>API for Console</li>
     
@@ -196,7 +199,7 @@ as <code class="docutils literal notranslate"><span class="pre">azcam.api.comman
 <dt id="azcam.api_console.API">
 <em class="property">class </em><code class="sig-name descname">API</code><a class="headerlink" href="#azcam.api_console.API" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Default API interface for console application.</p>
+<p>API interface for console application.</p>
 <dl class="py method">
 <dt id="azcam.api_console.API.abort">
 <code class="sig-name descname">abort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.abort" title="Permalink to this definition">¶</a></dt>
@@ -216,12 +219,19 @@ as <code class="docutils literal notranslate"><span class="pre">azcam.api.comman
 
 <dl class="py method">
 <dt id="azcam.api_console.API.begin_exposure">
-<code class="sig-name descname">begin_exposure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.begin_exposure" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">begin_exposure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exposure_time</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">image_type</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">image_title</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.begin_exposure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiates the first part of an exposure, through image flushing.
 This is an advanced function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exposure_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the exposure time in seconds</p></li>
+<li><p><strong>image_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – type of exposure (‘zero’, ‘object’, ‘flat’, …)</p></li>
+<li><p><strong>image_title</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – image title, usually surrounded by double quotes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -449,7 +459,8 @@ Advanced Use only!</p>
 <dt id="azcam.api_console.API.get_keyword">
 <code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">key_object</span><span class="o">=</span><span class="default_value">'controller'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.get_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a keyword value and its comment.
-The comment always returned in quotes, even if empty.</p>
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -528,7 +539,7 @@ If temperatures cannot be read, then a list of -999.99 is returned.</p>
 <dd class="field-odd"><p><strong>wavelength_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – wavelength ID flag  (use negative value for a list of all wavelengths)</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -615,6 +626,13 @@ This is an advanced function.</p>
 <dd><p>Send a command to a server process using the ‘server’ object in the database.
 This command traps all errors and returns exceptions and as error string.</p>
 <p>Returns None or a string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.api_console.API.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">object_name</span><span class="o">=</span><span class="default_value">'controller'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p>
 </dd></dl>
 
 <dl class="py method">
@@ -962,6 +980,18 @@ Returns immediately, not waiting for readout to finish.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt id="azcam.api_console.API.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">object_name</span><span class="o">=</span><span class="default_value">'controller'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.api_console.API.update_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>object_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – object to which keyword belongs</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -986,11 +1016,19 @@ Returns immediately, not waiting for readout to finish.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1001,7 +1039,6 @@ Returns immediately, not waiting for readout to finish.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

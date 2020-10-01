@@ -21,24 +21,29 @@ Useful links include:
 * Python programming language <https://www.python.org>
   
 ## Usage
-Most of AzCam's functionality is available only after importing configuration code which defines a system's hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.
+Most of AzCam's functionality is available only after importing configuration code which defines a system's hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation. 
 
-There are several operation modes of azcam. One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware. Another is the console, usually called *azcamconsole*, which is usually implemented as an IPython command window that is able to communicate with *azcamserver* and is used to acquire and analyze image data through the command line and python code. 
+There are several operation modes of azcam. One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware. Another is the console, usually called *azcamconsole*, which is usually implemented as an IPython command window that is able to communicate with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
+
+There is an *api* object which is a general interface to the most common commands.  It is implemented for both the server and console environments.
+
+On the server side a very useful object is the database *db* which contains references to many  objects and paramaters.  So the instrument might be referenced in a script or command line as *db.instrument*.
   
-Using the *azcam_itl* environment as an example, the server-side code to get the current system wavelength is:
+Generally an azcam environment must be configured for a specific hardware system, such as a specific telescope or laboratory. Examples are *azcam_itl* and *azcam-bok*.  
 
-    from server_azcam_itl import exposure, instrument  # configures the server
-    wavelength = instrument.get_wavelength()
-    exposure.expose(30., 'dark', "a dark image title")
+For the generic environment, which is not very useful as it does not know what hardware to communicate with, the server-side code to get the current system wavelength and take an exposure is:
 
-For a console application (which usually connects to a separate server application), this would be:
+    from azcam.server import api, db
+    wavelength = db.instrument.get_wavelength()
+    api.expose(30., 'dark', "a dark image title")
 
-    import console_azcam_itl  # configures the console
-    from azcam import api
+For the generic console application (which usually connects to a separate server application), this would be:
+
+    from azcam.console import api
     wavelength = api.get_wavelength()
-    api.exposure.expose(30., 'dark', "a dark image title")
+    api.expose(30., 'dark', "a dark image title")
 
-   Example configuration code can be loaded with either of the commands:
+Example configuration code can be loaded with either of the commands:
     
     import azcam.example_server_config
     import azcam.example_console_config

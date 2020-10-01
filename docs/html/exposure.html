@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Controller Class" href="controller.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Exposure Class</li>
     
@@ -198,8 +201,8 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
 <em>exposure.objects_reset</em> list are reset.</p>
 <dl class="py class">
 <dt id="azcam.exposures.exposure.Exposure">
-<em class="property">class </em><code class="sig-name descname">Exposure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'exposure'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.exposures.receive_data.ReceiveData</span></code></p>
+<em class="property">class </em><code class="sig-name descname">Exposure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'exposure'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Exposure'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
 <p>The Azcam Exposure class.
 Only required attributes and stub methods are defined here. Additional
 methods and attributes are added as needed in exposure-specific classes
@@ -277,10 +280,22 @@ An image is ready when written to disk if SaveFile is true, or when valid if Sav
 <dd><p>starting clock dark time of exposure</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up header keywords dictionary if not already defined.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="azcam.exposures.exposure.Exposure.deinterlace_mode">
 <code class="sig-name descname">deinterlace_mode</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.deinterlace_mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>deinterlace mode; 1 = generic mode; x = ODI mode</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a keyword.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -455,6 +470,13 @@ Gets imagetypes from detector and instrument.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.get_par">
 <code class="sig-name descname">get_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.get_par" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the value of a parameter from the local azcamparameters dictionary.
@@ -525,12 +547,6 @@ NumberExposures is the number of exposures to make, -1 loop forever</p>
 <dd><p>Initialize exposure.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="azcam.exposures.exposure.Exposure.initialized">
-<code class="sig-name descname">initialized</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.initialized" title="Permalink to this definition">¶</a></dt>
-<dd><p>True when initialized</p>
-</dd></dl>
-
 <dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.integrate">
 <code class="sig-name descname">integrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.integrate" title="Permalink to this definition">¶</a></dt>
@@ -541,24 +557,6 @@ NumberExposures is the number of exposures to make, -1 loop forever</p>
 <dt id="azcam.exposures.exposure.Exposure.is_exposure_sequence">
 <code class="sig-name descname">is_exposure_sequence</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.is_exposure_sequence" title="Permalink to this definition">¶</a></dt>
 <dd><p>True when in an exposure sequence</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="azcam.exposures.exposure.Exposure.mock_data">
-<code class="sig-name descname">mock_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.mock_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate mock data for demo mode.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="azcam.exposures.exposure.Exposure.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>exposure name</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="azcam.exposures.exposure.Exposure.obj_id">
-<code class="sig-name descname">obj_id</code><a class="headerlink" href="#azcam.exposures.exposure.Exposure.obj_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>exposure id</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -604,6 +602,14 @@ Really sets a flag which is read in expose().</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.read_header_file">
 <code class="sig-name descname">read_header_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.read_header_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read header tempalte file.</p>
@@ -616,23 +622,10 @@ Really sets a flag which is read in expose().</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.exposures.exposure.Exposure.receive_image_data">
-<code class="sig-name descname">receive_image_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataSize</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.receive_image_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Receive binary image data from controller server.
-dataSize is bytes.
-new version: 15May2015 Zareba</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.record_current_times">
 <code class="sig-name descname">record_current_times</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.record_current_times" title="Permalink to this definition">¶</a></dt>
 <dd><p>Record the current times and data info in the header.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="azcam.exposures.exposure.Exposure.request_data">
-<code class="sig-name descname">request_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datacnt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.request_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.reset">
@@ -807,6 +800,13 @@ zero, object, dark, flat.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.exposures.exposure.Exposure.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a keyword value and comment.
+typestring is one of ‘str’, ‘int’, or ‘float’.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.set_par">
 <code class="sig-name descname">set_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.set_par" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the value of a parameter in the local azcamparameters dictionary.
@@ -930,8 +930,8 @@ title is the image title.</p>
 <dl class="py method">
 <dt id="azcam.exposures.exposure.Exposure.update_header">
 <code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.exposures.exposure.Exposure.update_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update header.
-Really the exposure object has no useful header so this does nothing.</p>
+<dd><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -964,11 +964,19 @@ Really the exposure object has no useful header so this does nothing.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -979,7 +987,6 @@ Really the exposure object has no useful header so this does nothing.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

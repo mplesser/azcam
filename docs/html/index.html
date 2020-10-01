@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Image Class" href="image.html" /> 
@@ -49,7 +50,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> azcam
+            <a href="#" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -121,6 +123,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -159,7 +162,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
       <li>AzCam Documentation</li>
     
@@ -205,17 +208,19 @@
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Most of AzCam’s functionality is available only after importing configuration code which defines a system’s hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.</p>
 <p>There are several operation modes of azcam. One is the server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware. Another is the console, usually called <em>azcamconsole</em>, which is usually implemented as an IPython command window that is able to communicate with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.</p>
-<p>Using the <em>azcam_itl</em> environment as an example, the server-side code to get the current system wavelength is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">server_azcam_itl</span> <span class="kn">import</span> <span class="n">exposure</span><span class="p">,</span> <span class="n">instrument</span>  <span class="c1"># configures the server</span>
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
-<span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
+<p>There is an <em>api</em> object which is a general interface to the most common commands.  It is implemented for both the server and console environments.</p>
+<p>On the server side a very useful object is the database <em>db</em> which contains references to many  objects and paramaters.  So the instrument might be referenced in a script or command line as <em>db.instrument</em>.</p>
+<p>Generally an azcam environment must be configured for a specific hardware system, such as a specific telescope or laboratory. Examples are <em>azcam_itl</em> and <em>azcam-bok</em>.</p>
+<p>For the generic environment, which is not very useful as it does not know what hardware to communicate with, the server-side code to get the current system wavelength and take an exposure is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam.server</span> <span class="kn">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">db</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
+<span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For a console application (which usually connects to a separate server application), this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">console_azcam_itl</span>  <span class="c1"># configures the console</span>
-<span class="kn">from</span> <span class="nn">azcam</span> <span class="kn">import</span> <span class="n">api</span>
+<p>For the generic console application (which usually connects to a separate server application), this would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam.console</span> <span class="kn">import</span> <span class="n">api</span>
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
-<span class="n">api</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Example configuration code can be loaded with either of the commands:</p>
@@ -410,11 +415,19 @@ below describe some of these commands. Availability depends on configuration.</p
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -425,7 +438,6 @@ below describe some of these commands. Availability depends on configuration.</p
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

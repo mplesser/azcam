@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tester Classes" href="testers.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Report Commands</li>
     
@@ -196,39 +199,45 @@
 <span class="n">report</span><span class="o">.</span><span class="n">make_rstfile</span><span class="p">(</span><span class="s2">&quot;rstfile.rst&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<span class="target" id="module-azcam.testers.report"></span><p>Report generation commands.</p>
-<dl class="py function">
-<dt id="azcam.testers.report.make_mdfile">
-<code class="sig-name descname">make_mdfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">md_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.make_mdfile" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-azcam.testers.report"></span><p>Report generation class.</p>
+<dl class="py class">
+<dt id="azcam.testers.report.Report">
+<em class="property">class </em><code class="sig-name descname">Report</code><a class="headerlink" href="#azcam.testers.report.Report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report generation methods.</p>
+<dl class="py method">
+<dt id="azcam.testers.report.Report.make_mdfile">
+<code class="sig-name descname">make_mdfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">md_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.make_mdfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a markdown file from lines.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="azcam.testers.report.make_rstfile">
-<code class="sig-name descname">make_rstfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rst_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.make_rstfile" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="azcam.testers.report.Report.make_rstfile">
+<code class="sig-name descname">make_rstfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rst_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.make_rstfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an RST file from lines.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="azcam.testers.report.md2pdf">
-<code class="sig-name descname">md2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">create_html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.md2pdf" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="azcam.testers.report.Report.md2pdf">
+<code class="sig-name descname">md2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">create_html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.md2pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a PDF from a markdown file.
 Filename extension is optional.
 Optionally also create an html file.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="azcam.testers.report.merge_pdf">
-<code class="sig-name descname">merge_pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_files</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_file</span><span class="o">=</span><span class="default_value">'combined.pdf'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.merge_pdf" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="azcam.testers.report.Report.merge_pdf">
+<code class="sig-name descname">merge_pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_files</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_file</span><span class="o">=</span><span class="default_value">'combined.pdf'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.merge_pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge multiple PDF files into one.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="azcam.testers.report.rst2pdf">
-<code class="sig-name descname">rst2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.rst2pdf" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt id="azcam.testers.report.Report.rst2pdf">
+<code class="sig-name descname">rst2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.rst2pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a PDF from an RST file.
 Filename extension is optional.
 Also create an html file (currently required).</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -253,11 +262,19 @@ Also create an html file (currently required).</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -268,7 +285,6 @@ Also create an html file (currently required).</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

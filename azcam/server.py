@@ -1,5 +1,6 @@
 import azcam
 from azcam.api_server import API
+from azcam import db
 
 #: list of objects available to cmdserver
 azcam.db.cmd_objects = {}

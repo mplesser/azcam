@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Instrument Class" href="instrument.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>TempCon Class</li>
     
@@ -194,8 +197,8 @@
 The class is usually instantiated as the <em>tempcon</em> object in the server.</p>
 <dl class="py class">
 <dt id="azcam.tempcons.tempcon.TempCon">
-<em class="property">class </em><code class="sig-name descname">TempCon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'tempcon'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="sig-name descname">TempCon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'tempcon'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Tempcon'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
 <p>Temperature control class.</p>
 <dl class="py method">
 <dt id="azcam.tempcons.tempcon.TempCon.apply_corrections">
@@ -247,12 +250,6 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 <dt id="azcam.tempcons.tempcon.TempCon.delete_keyword">
 <code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.delete_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a keyword.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.enabled">
-<code class="sig-name descname">enabled</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.enabled" title="Permalink to this definition">¶</a></dt>
-<dd><p>True if temperature control is enabled</p>
 </dd></dl>
 
 <dl class="py method">
@@ -337,21 +334,9 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.initialized">
-<code class="sig-name descname">initialized</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.initialized" title="Permalink to this definition">¶</a></dt>
-<dd><p>True if temperature control is initialized</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="azcam.tempcons.tempcon.TempCon.log_temps">
 <code class="sig-name descname">log_temps</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.log_temps" title="Permalink to this definition">¶</a></dt>
 <dd><p>log temperatures</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>temperature controller name</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -360,23 +345,12 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 <dd><p>number of temperature sensors</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.obj_id">
-<code class="sig-name descname">obj_id</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.obj_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>temperature controller ID</p>
-</dd></dl>
-
 <dl class="py method">
 <dt id="azcam.tempcons.tempcon.TempCon.read_header">
 <code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.read_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads, records, and returns the current header.
+<dd><p>Returns the current header.
 Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>]</p>
-</dd>
-</dl>
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -486,12 +460,8 @@ Scaling is <strong>new = old * scale + offset</strong></p>
 <dl class="py method">
 <dt id="azcam.tempcons.tempcon.TempCon.update_header">
 <code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.update_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update headers, reading current data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
+<dd><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p>
 </dd></dl>
 
 </dd></dl>
@@ -518,11 +488,19 @@ Scaling is <strong>new = old * scale + offset</strong></p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -533,7 +511,6 @@ Scaling is <strong>new = old * scale + offset</strong></p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

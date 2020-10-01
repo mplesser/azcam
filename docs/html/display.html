@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Fits Class" href="fits.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> azcam
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
           
 
           
@@ -80,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -122,6 +124,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +163,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Display Class</li>
     
@@ -201,9 +204,15 @@ directly from the command line, e.g. <code class="docutils literal notranslate">
 </div>
 <dl class="py class">
 <dt id="azcam.displays.ds9display.Ds9Display">
-<em class="property">class </em><code class="sig-name descname">Ds9Display</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Ds9Display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'display'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'ds9'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.displays.display.Display</span></code></p>
-<p>azcam’s interface to SAO’s ds9 image display tool.</p>
+<p>Azcam’s interface to SAO’s ds9 image display tool.</p>
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up header keywords dictionary if not already defined.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="azcam.displays.ds9display.Ds9Display.delete_all_rois">
 <code class="sig-name descname">delete_all_rois</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.delete_all_rois" title="Permalink to this definition">¶</a></dt>
@@ -212,6 +221,12 @@ directly from the command line, e.g. <code class="docutils literal notranslate">
 <dt class="field-odd">Return None</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a keyword.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -304,6 +319,13 @@ If not servers are found, the returned list is empty.</p>
 <dd class="field-even"><p>[status,[pixel1,pixel2,…]] for ROI</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -419,15 +441,17 @@ Also sets display.mean and display.sdev global variables.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.displays.ds9display.Ds9Display.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>display ID</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="azcam.displays.ds9display.Ds9Display.port">
 <code class="sig-name descname">port</code><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.port" title="Permalink to this definition">¶</a></dt>
 <dd><p>display Port, as a string decimal code</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -443,7 +467,7 @@ Also sets display.mean and display.sdev global variables.</p>
 <dl class="py method">
 <dt id="azcam.displays.ds9display.Ds9Display.reset">
 <code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reset dispaly object.</p>
+<dd><p>Reset object.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -515,6 +539,13 @@ Also sets display.mean and display.sdev global variables.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a keyword value and comment.
+typestring is one of ‘str’, ‘int’, or ‘float’.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="azcam.displays.ds9display.Ds9Display.show_stats">
 <code class="sig-name descname">show_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_number</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.show_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interactive: Print stats from an ROI in a real-time loop until <em>q</em> is pressed.
@@ -533,6 +564,13 @@ print() is allowed here as interactive only.</p>
 <dt id="azcam.displays.ds9display.Ds9Display.size_x">
 <code class="sig-name descname">size_x</code><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.size_x" title="Permalink to this definition">¶</a></dt>
 <dd><p>image size for binary images</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.displays.ds9display.Ds9Display.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.displays.ds9display.Ds9Display.update_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -601,11 +639,19 @@ Returns data as a list of space deliminated items.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, University of Arizona
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -616,7 +662,6 @@ Returns data as a list of space deliminated items.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

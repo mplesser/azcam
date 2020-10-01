@@ -9,7 +9,7 @@ Usage Example:
     bias.analyze()
 
 ```eval_rst
-.. autoclass:: azcam.testers.testerbase
+.. autoclass:: azcam.testers.basetester
    :members:
    :undoc-members:
    :show-inheritance:
