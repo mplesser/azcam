@@ -3,6 +3,7 @@ API commands for server application.
 """
 
 import azcam
+from azcam import db
 
 
 class API(object):
@@ -12,7 +13,9 @@ class API(object):
 
     def __init__(self):
 
-        pass
+        setattr(azcam.db, "api", self)
+        azcam.db.cmd_objects["api"] = self
+        azcam.db.cli_cmds["api"] = self
 
     def test(self):
         """
@@ -22,3 +25,10 @@ class API(object):
         azcam.log("I do nothing")
 
         return
+
+    def get_status(self):
+        """
+        Get current exposure status.
+        """
+
+        return db.exposure.get_status()

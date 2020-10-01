@@ -1,8 +1,8 @@
-$(document).ready(function () {
-    
+$(document).ready(function() {
+
     // getstatus function
-    function getstatus(){
-        $.getJSON('/api/exposure/get_status', {}, function(data) {
+    function getstatus() {
+        $.getJSON('/api/get_status', {}, function(data) {
             $("#imagetitle").text(data.data.imagetitle);
             $("#imagefilename").text(data.data.filename);
             $("#imagetype").text(data.data.imagetype);
@@ -23,7 +23,7 @@ $(document).ready(function () {
     }
 
     // set timer to get status
-    setInterval(getstatus, 1000);  
+    setInterval(getstatus, 1000);
 
-    
+
 }); // end ready

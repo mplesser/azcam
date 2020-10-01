@@ -1,11 +1,13 @@
 import azcam
 from azcam.api_server import API
 
-api = API()
-azcam.db.app_type = 1  # server
-
 #: list of objects available to cmdserver
 azcam.db.cmd_objects = {}
+
+#: create api object
+api = API()
+
+azcam.db.app_type = 1  # server
 
 #: azcamparameters
 azcam.db.parameters = {

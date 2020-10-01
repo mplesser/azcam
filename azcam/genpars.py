@@ -114,11 +114,15 @@ class GenPars(object):
         """
 
         if type(par_dict) == str:
-            par_dict = self.par_dict[par_dict]
+            if self.par_dict is not None:
+                par_dict = self.par_dict.get(par_dict)
 
         # check if a value exists in dictionary
-        if par_dict.get(attribute):
-            default = par_dict.get(attribute)
+        if par_dict is not None:
+            if par_dict.get(attribute):
+                default = par_dict.get(attribute)
+        else:
+            par_dict = {}
 
         if value == "prompt":
             if prompt_string == "":

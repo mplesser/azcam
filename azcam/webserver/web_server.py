@@ -5,11 +5,13 @@ Import this after all configuration has been completed.
 """
 
 import sys
+import os
 import threading
 import logging
 from urllib.parse import urlparse
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
+from werkzeug.utils import secure_filename
 
 import azcam
 
@@ -28,7 +30,7 @@ class WebServer(object):
         app = Flask(__name__, template_folder="")
         self.app = app
 
-        self.logcommands = 1
+        self.logcommands = 0
 
         self.mock_mode = 0
 
@@ -37,11 +39,14 @@ class WebServer(object):
         updates_home = "updates.html"
         status_home = "status.html"
         exptool_home = "exptool.html"
+        observe_home = "webobs.html"
 
         #: port for webserver
         self.webport = azcam.db.cmdserver.port + 1
 
         azcam.db.webserver = self
+
+        self.upload_folder = "/data/uploads"
 
         self.is_running = 0
 
@@ -64,28 +69,51 @@ class WebServer(object):
         def exptool():
             return render_template(exptool_home)
 
+        @app.route("/webobs", methods=["GET"])
+        def webobs():
+            table_data = [
+                list(range(17)),
+            ]
+            return render_template(observe_home, table_data=table_data)
+
+        @app.route("/favicon.ico")
+        def favicon():
+            return send_from_directory(
+                os.path.join(app.root_path, "static"),
+                "favicon.ico",
+                mimetype="image/vnd.microsoft.icon",
+            )
+
+        @app.route("/webobs/upload", methods=["POST"])
+        def upload_file():
+            if request.method == "POST":
+                print("posted upload")
+                f = request.files["file"]
+                f.save(os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(f.filename)))
+                return self.make_response("upload file", "file uploaded successfully")
+
         # ******************************************************************************
-        # api commands
+        # object commands - .../object/command
         # ******************************************************************************
-        @app.route("/api/<path:command>", methods=["GET"])
+        @app.route("/<path:command>", methods=["GET", "POST"])
         def api(command):
             """
-            Remote web api commands. such as: /api/exposure/reset
+            Remote web api commands. such as: /api/expose or /exposure/reset
             """
 
             url = request.url
             if self.logcommands:
-                if "api/exposure/get_status" not in url:
+                if "api/get_status" not in url:
                     azcam.log(url, prefix="Web-> ")
             if self.mock_mode:
                 reply = "mock data"
             else:
-                reply = self.webapi(url)
-                if self.logcommands and "api/exposure/get_status" not in url:
+                reply = self.webcommand(url)
+                if self.logcommands and "api/get_status" not in url:
                     azcam.log(reply, prefix="Web->   ")
             return self.make_response(command, reply)
 
-    def webapi(self, url):
+    def webcommand(self, url):
         """
         Parse a web URL and make call to proper object method, returning reply.
         """
@@ -95,11 +123,13 @@ class WebServer(object):
             reply = caller() if kwargs is None else caller(**kwargs)
 
         except azcam.AzcamError as e:
+            azcam.log(f"webcommand error: {e}")
             if e.error_code == 4:
                 reply = "remote call not allowed"
             else:
-                reply = f"webapi error: {repr(e)}"
+                reply = f"webcommand error: {repr(e)}"
         except Exception as e:
+            azcam.log(e)
             reply = f"invalid API command: {url}"
 
         return reply
@@ -110,13 +140,15 @@ class WebServer(object):
         """
 
         s = urlparse(url)
-        p = s.path[5:]  # remove /api/
+        # p = s.path[5:]  # remove /api/
+        p = s.path[1:]
 
         try:
-            obj, method = p.split("/")
+            tokens = p.split("/")
         except Exception as e:
             raise e("Invalid API command")
 
+        obj, method = tokens[:2]
         args = s.query.split("&")
 
         if args == [""]:
@@ -177,11 +209,13 @@ class WebServer(object):
             self.app.jinja_env.auto_reload = True
             self.app.config["TEMPLATES_AUTO_RELOAD"] = True
             self.app.config["JSONIFY_PRETTYPRINT_REGULAR"] = False
+            self.app.config["UPLOAD_FOLDER"] = self.upload_folder
             self.app.run(debug=True, threaded=False, host="0.0.0.0", port=self.webport)
         else:
             self.app.jinja_env.auto_reload = True
             self.app.config["TEMPLATES_AUTO_RELOAD"] = True
             self.app.config["JSONIFY_PRETTYPRINT_REGULAR"] = True
+            self.app.config["UPLOAD_FOLDER"] = self.upload_folder
             self.webthread = threading.Thread(
                 target=self.app.run,
                 kwargs={"threaded": True, "host": "0.0.0.0", "port": self.webport},
