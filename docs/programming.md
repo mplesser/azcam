@@ -101,7 +101,7 @@ The following support applications may also be useful when operating Azcam.
   * *focus* is a package which supports acquire a focus exposure.
 
 ## Python
-The current version of Azcam requires Python version 3.6.x. See http://www.python.org for all things pythonic.
+The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.
 
 ## Dependencies
 Some Azcam commands require python packages which are not installed by default. These must be downloaded 

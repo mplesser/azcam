@@ -95,8 +95,10 @@ The following support applications may also be useful when operating Azcam.
 
   * *Azcamtool* is a graphical user interface (GUI) useful for operating Azcam in a point and click mode. It is not required, but is highly recommended.
   * *EngineeringTool* performs very low level (and dangerous!) controller functions.
-  * *AzcamImageServer* is a stand-alone python image server which can receive images on a remote machine. This is especially useful for receiving images on computer running Linux.
+  * *AzcamImageServer* is a stand-alone python image server which can receive images on a remote machine. This is especially useful for receiving images on computers running Linux.
   * *Ds9Tools* is a set of tools useful when using SAO's ds9 display program.
+  * *osberve* is an observing script package supporting a GUi and a command line interface.
+  * *focus* is a package which supports acquire a focus exposure.
 
 ## Python
 The current version of Azcam requires Python version 3.6.x. See http://www.python.org for all things pythonic.
