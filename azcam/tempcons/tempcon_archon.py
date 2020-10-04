@@ -40,11 +40,11 @@ class TempConArchon(TempCon):
         """
 
         # return bad_temp_value if no utlity board
-        if not azcam.db.controller.heater_board_installed:
+        if not azcam.api.controller.heater_board_installed:
             return 3 * [self.bad_temp_value]
 
         # Don't read hardware while exposure is in progess, return last values read
-        flag = azcam.db.exposure.exposure_flag
+        flag = azcam.api.exposure.exposure_flag
         if flag != azcam.db.exposureflags["NONE"]:
             return self.last_temps
 
@@ -76,10 +76,10 @@ class TempConArchon(TempCon):
             # azcam.AzcamWarning("Tempcon not initialized")
             return -999.9
 
-        if not azcam.db.controller.heater_board_installed:
+        if not azcam.api.controller.heater_board_installed:
             return self.bad_temp_value
 
-        if not azcam.db.controller.is_reset:
+        if not azcam.api.controller.is_reset:
             return self.bad_temp_value
 
         # define dictionary entry
@@ -93,14 +93,14 @@ class TempConArchon(TempCon):
             return "ERROR bad temperature_id"
 
         # Don't read hardware while exposure is in progess
-        flag = azcam.db.exposure.exposure_flag
+        flag = azcam.api.exposure.exposure_flag
         if flag != azcam.db.exposureflags["NONE"]:
             return self.last_temps[temperature_id]
 
         # read temperature
         avetemp = 0
         for _ in range(self.num_temp_reads):
-            temp = float(azcam.db.controller.get_status()[Address])
+            temp = float(azcam.api.controller.get_status()[Address])
             avetemp += temp
         temp = avetemp / self.num_temp_reads
 

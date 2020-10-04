@@ -4,8 +4,7 @@ import shutil
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -83,57 +82,57 @@ class Ptc(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("ptc")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
         # set wavelength
         if self.wavelength > 0:
             wave = int(self.wavelength)
-            wave1 = api.get_wavelength()
+            wave1 = azcam.api.get_wavelength()
             wave1 = int(wave1)
             if wave1 != wave:
                 azcam.log(f"Setting wavelength to {wave} nm")
-                api.set_wavelength(wave)
-                wave1 = api.get_wavelength()
+                azcam.api.set_wavelength(wave)
+                wave1 = azcam.api.get_wavelength()
                 wave1 = int(wave1)
             azcam.log(f"Current wavelength is {wave1} nm")
 
-        api.set_par("imageroot", "ptc.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "ptc.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
-        api.set_par("imagetype", "zero")
-        filename = os.path.basename(api.get_image_filename())
+        azcam.api.set_par("imagetype", "zero")
+        filename = os.path.basename(azcam.api.get_image_filename())
         azcam.log("Taking PTC bias: %s" % filename)
 
         # measure the reference diode current with shutter closed
         if self.use_ref_diode:
-            dc = api.get_current(0, 0)
-            api.set_keyword(
+            dc = azcam.api.get_current(0, 0)
+            azcam.api.set_keyword(
                 "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
             )
 
-        api.expose(0, "zero", "PTC bias")
+        azcam.api.expose(0, "zero", "PTC bias")
 
         # determine ExposureTimes
-        if azcam.testers.detcal.valid and len(self.exposure_levels) > 0:
+        if azcam.api.detcal.valid and len(self.exposure_levels) > 0:
             azcam.log("Using exposure_levels")
             if self.wavelength == -1:
-                wave = api.get_wavelength()
+                wave = azcam.api.get_wavelength()
                 wave = int(wave)
             else:
                 wave = self.wavelength
 
-            meanelectrons = azcam.testers.detcal.mean_electrons
+            meanelectrons = azcam.api.detcal.mean_electrons
             self.exposure_times = (
                 numpy.array(self.exposure_levels) / meanelectrons[wave]
             )
@@ -156,12 +155,12 @@ class Ptc(Tester):
             raise azcam.AzcamError("could not determine exposure times")
 
         # loop through pairs
-        api.set_par("imagetype", self.exposure_type)
+        azcam.api.set_par("imagetype", self.exposure_type)
         number_pairs = len(self.exposure_times)
 
         for pair, ExposureTime in enumerate(self.exposure_times):
 
-            filename = os.path.basename(api.get_image_filename())
+            filename = os.path.basename(azcam.api.get_image_filename())
             azcam.log(
                 "Taking PTC pair %d of %d for %.3f secs"
                 % (pair + 1, number_pairs, ExposureTime)
@@ -169,32 +168,32 @@ class Ptc(Tester):
 
             # measure the reference diode current
             if self.use_ref_diode:
-                dc = api.get_current(0, 1)
-                api.set_keyword(
+                dc = azcam.api.get_current(0, 1)
+                azcam.api.set_keyword(
                     "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
                 )
 
             # make exposure
             if self.flush_before_exposure:
-                api.tests()
-            api.expose(ExposureTime, self.exposure_type, "PTC frame 1")
-            filename = os.path.basename(api.get_image_filename())
+                azcam.api.tests()
+            azcam.api.expose(ExposureTime, self.exposure_type, "PTC frame 1")
+            filename = os.path.basename(azcam.api.get_image_filename())
 
             # measure the reference diode current
             if self.use_ref_diode:
-                dc = api.get_current(0, 1)
-                api.set_keyword(
+                dc = azcam.api.get_current(0, 1)
+                azcam.api.set_keyword(
                     "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
                 )
 
-            api.expose(ExposureTime, self.exposure_type, "PTC frame 2")
+            azcam.api.expose(ExposureTime, self.exposure_type, "PTC frame 2")
 
         # close
         try:
-            api.delete_keyword("REFCUR", "instrument")
+            azcam.api.delete_keyword("REFCUR", "instrument")
         except Exception:
             pass
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("PTC sequence finished")
 
         return
@@ -293,7 +292,7 @@ class Ptc(Tester):
             ExposureTime = float(azcam.fits.get_keyword(flat1filename, "EXPTIME"))
             self.exposure_times.append(ExposureTime)
 
-            gain, noise, mean, sdev = azcam.testers.gain.measure_gain(
+            gain, noise, mean, sdev = azcam.api.gain.measure_gain(
                 zerofilename, flat1filename, flat2filename
             )
             s = "Exposure Time: %-8.3f Mean: %.0f  File: %s" % (

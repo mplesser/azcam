@@ -2,14 +2,14 @@ import os
 import numpy
 import shutil
 
-import azcam
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
 
 class Defects(Tester):
     """
-    Find and quantify image azcam.testers.defects.
+    Find and quantify image azcam.api.defects.
     """
 
     def __init__(self):
@@ -118,7 +118,7 @@ class Defects(Tester):
         CurrentFolder = azcam.utils.curdir()
 
         # reject dark pixels from superflat
-        # azcam.testers.superflat.analyze() should have been run already
+        # azcam.api.superflat.analyze() should have been run already
         s = "Rejecting illuminated pixels below %.3f of mean" % self.dark_pixel_reject
         azcam.log(s)
 
@@ -130,7 +130,7 @@ class Defects(Tester):
 
         # scale by gain
         superflatimage.set_scaling(
-            azcam.testers.gain.get_system_gain(), None
+            azcam.api.gain.get_system_gain(), None
         )  # no offsets as ColBiased
         superflatimage.assemble(1)  # now in electrons
 
@@ -217,7 +217,7 @@ class Defects(Tester):
         self.bright_defects_grade = "PASS"  # will change on FAIL
         self.bright_rejected_pixels = 0
 
-        # reject bright pixels from azcam.testers.dark.fits median combined and colbiased image
+        # reject bright pixels from azcam.api.dark.fits median combined and colbiased image
         s = "Rejecting bright pixels above %.3f e/pix/sec" % self.bright_pixel_reject
         azcam.log(s)
 
@@ -228,7 +228,7 @@ class Defects(Tester):
         darkimage = azcam.Image(darkfilename)
 
         # Assemble and scale by gain
-        darkimage.set_scaling(azcam.testers.gain.get_system_gain(), None)
+        darkimage.set_scaling(azcam.api.gain.get_system_gain(), None)
         darkimage.assemble(1)
 
         # scale darkimage data by exposure time and binning to get per pixel per second

@@ -15,7 +15,8 @@ class API(object):
 
     def __init__(self):
 
-        pass
+        setattr(azcam.db, "api", self)
+        azcam.db.cli_cmds["api"] = self
 
     # *******************************************************
     # communications
@@ -108,7 +109,9 @@ class API(object):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand(f'exposure.expose {exposure_time} {image_type} "{image_title}"')
+        return self.rcommand(
+            f'exposure.expose {exposure_time} {image_type} "{image_title}"'
+        )
 
     def expose1(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -121,7 +124,9 @@ class API(object):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand(f'exposure.expose1 {exposure_time} {image_type} "{image_title}"')
+        return self.rcommand(
+            f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
+        )
 
     def begin_exposure(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -135,7 +140,9 @@ class API(object):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self.rcommand(f'exposure.begin {exposure_time} {image_type} "{image_title}"')
+        return self.rcommand(
+            f'exposure.begin {exposure_time} {image_type} "{image_title}"'
+        )
 
     def integrate_exposure(self) -> None:
         """
@@ -161,7 +168,9 @@ class API(object):
 
         return self.rcommand("exposure.end")
 
-    def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
+    def sequence(
+        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
+    ) -> Optional[str]:
         """
         Take an exposure sequence.
 
@@ -176,7 +185,9 @@ class API(object):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self.rcommand(f"exposure.sequence {number_exposures} {flush_array} {delay}")
+        return self.rcommand(
+            f"exposure.sequence {number_exposures} {flush_array} {delay}"
+        )
 
     def sequence1(
         self, number_exposures: int = 1, flush_array: int = -1, delay=-1
@@ -195,7 +206,9 @@ class API(object):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self.rcommand(f"exposure.sequence1 {number_exposures} {flush_array} {delay}")
+        return self.rcommand(
+            f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
+        )
 
     def guide(self, number_exposures: int = 1) -> Optional[str]:
         """
@@ -292,7 +305,10 @@ class API(object):
         return self.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
-        self, number_exposures: int = 1, exposure_time: float = 1.0, image_type: str = "zero",
+        self,
+        number_exposures: int = 1,
+        exposure_time: float = 1.0,
+        image_type: str = "zero",
     ) -> Optional[str]:
         """
         Make test exposures, which overwrite previous test images.
@@ -308,7 +324,9 @@ class API(object):
 
         for _ in range(int(number_exposures)):
             try:
-                reply = self.rcommand(f'exposure.expose {exposure_time} {image_type} "test image"')
+                reply = self.rcommand(
+                    f'exposure.expose {exposure_time} {image_type} "test image"'
+                )
             except Exception as e:
                 self.set_par("imagetest", testflag)
                 raise (e)
@@ -390,7 +408,9 @@ class API(object):
 
         return self.rcommand(f"instrument.get_filter {filter_id}")
 
-    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
+    def get_current(
+        self, diode_id: int = 0, shutter_state: int = 1
+    ) -> Union[str, float]:
         """
         Returns a list of instrument diode currents.
 
@@ -461,7 +481,9 @@ class API(object):
 
         return
 
-    def get_focus(self, focus_id: int = 0, focus_component: str = "instrument") -> float:
+    def get_focus(
+        self, focus_id: int = 0, focus_component: str = "instrument"
+    ) -> float:
         """
         Get the current focus position.
 
@@ -591,7 +613,9 @@ class API(object):
 
         return self.rcommand(f"{key_object}.get_keyword {keyword}")
 
-    def delete_keyword(self, keyword: str, key_object: str = "controller") -> Optional[str]:
+    def delete_keyword(
+        self, keyword: str, key_object: str = "controller"
+    ) -> Optional[str]:
         """
         Delete a keyword from a header.
         The keyword is set in the controller header by default.
@@ -796,3 +820,6 @@ class API(object):
             azcam.utils.curdir(folder)
 
         return
+
+
+api = API()

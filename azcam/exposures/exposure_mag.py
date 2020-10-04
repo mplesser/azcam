@@ -38,14 +38,14 @@ class ExposureMag(Exposure):
             shutterstate = "open"  # other types are comps, so open shutter
 
         if shutterstate == "open":
-            azcam.db.controller.set_shutter(1)
+            azcam.api.controller.set_shutter(1)
 
         # start exposure
         if imagetype != "zero":
             azcam.log("Integration started")
 
         self.exp_start = time.time()
-        azcam.db.controller.start_exposure()
+        azcam.api.controller.start_exposure()
         self.dark_time_start = time.time()
 
         # Mag controller pause/resume not supported but abort is
@@ -58,14 +58,14 @@ class ExposureMag(Exposure):
                         self.exposure_sequence_number = 1
                         self.exposure_flag = azcam.db.exposureflags["EXPOSING"]
                     else:
-                        azcam.db.controller.exposure_abort()
+                        azcam.api.controller.exposure_abort()
                     break
                 time.sleep(0.1)
                 self.exposure_time_remaining = self.exposure_time_remaining - 0.1
         else:
             time.sleep(self.exposure_time)
 
-        azcam.db.controller.set_shutter(0)  # until shutter issue is solved
+        azcam.api.controller.set_shutter(0)  # until shutter issue is solved
 
         # exposure finished
         if imagetype == "zero":
@@ -77,7 +77,7 @@ class ExposureMag(Exposure):
             self.exposure_flag = azcam.db.exposureflags["READ"]
 
         if shutterstate == "open":
-            azcam.db.controller.set_shutter(0)
+            azcam.api.controller.set_shutter(0)
 
         if self.image_type.lower() != "zero":
             azcam.log("integration finished", level=2)
@@ -103,13 +103,13 @@ class ExposureMag(Exposure):
         imagetype = self.image_type.lower()
 
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter(1)
+            azcam.api.controller.set_shutter(1)
 
         # start readout
         azcam.log("Readout started")
 
-        reply = azcam.db.controller.start_readout()
-        if azcam.db.controller.camserver.check_reply(reply):
+        reply = azcam.api.controller.start_readout()
+        if azcam.api.controller.camserver.check_reply(reply):
             return reply
 
         # Wait for end of readout
@@ -133,7 +133,7 @@ class ExposureMag(Exposure):
         self.image.valid = 1  # new
 
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter(0)
+            azcam.api.controller.set_shutter(0)
 
         if self.exposure_flag == azcam.db.exposureflags["ABORT"]:
             azcam.log("Readout aborted")
@@ -203,7 +203,7 @@ class ExposureMag(Exposure):
         if self.display_image:
             try:
                 azcam.log("Displaying image")
-                azcam.db.display.display(self.image)
+                azcam.api.display.display(self.image)
             except Exception:
                 pass
 

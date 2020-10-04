@@ -3,8 +3,7 @@ import glob
 import os
 import shutil
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -78,44 +77,44 @@ class Dark(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("dark")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
-        api.set_par("imageroot", "dark.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "dark.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # loop through images
         for imgnum in range(self.number_images_acquire):
 
             # pre-dark bias
-            api.set_par("imagetype", "dark")  # for GetFilename
-            filename = os.path.basename(api.get_image_filename())
+            azcam.api.set_par("imagetype", "dark")  # for GetFilename
+            filename = os.path.basename(azcam.api.get_image_filename())
             azcam.log(f"Taking pre-dark image: {filename}")
-            temp = api.get_temperature()
+            temp = azcam.api.get_temperature()
             azcam.log(f"Current temperatures: {temp}")
-            api.expose(0, "zero", "pre-dark bias image")
+            azcam.api.expose(0, "zero", "pre-dark bias image")
 
             # take dark image
-            api.set_par("imagetype", "dark")
-            filename = os.path.basename(api.get_image_filename())
+            azcam.api.set_par("imagetype", "dark")
+            filename = os.path.basename(azcam.api.get_image_filename())
             azcam.log(
                 f"Taking dark image {imgnum + 1} for {self.exposure_time:0.3f} seconds: {filename}"
             )
-            temp = api.get_temperature()
+            temp = azcam.api.get_temperature()
             azcam.log(f"  Current temperatures: {temp}")
-            api.expose(self.exposure_time, "dark", "dark image")
+            azcam.api.expose(self.exposure_time, "dark", "dark image")
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("Dark sequence finished")
 
         return
@@ -152,7 +151,7 @@ class Dark(Tester):
         _, StartingSequence = azcam.utils.find_file_in_sequence(rootname)
 
         # get gain and ROI
-        self.system_gain = azcam.testers.gain.get_system_gain()
+        self.system_gain = azcam.api.gain.get_system_gain()
         self.roi = azcam.utils.get_image_roi()
 
         # get bias image
@@ -193,7 +192,7 @@ class Dark(Tester):
 
         # "debias" correct with residuals after colbias
         if self.zero_correct:
-            debiased = azcam.testers.bias.debiased_filename
+            debiased = azcam.api.bias.debiased_filename
             biassub = "biassub.fits"
             azcam.fits.sub(masterdark, debiased, biassub)
             os.remove(masterdark)
@@ -237,14 +236,14 @@ class Dark(Tester):
 
         # use mask from defects object (may be edge only)
         if self.use_edge_mask:
-            if azcam.testers.defects.valid:
+            if azcam.api.defects.valid:
                 self.MaskedImage = numpy.ma.masked_where(
-                    azcam.testers.defects.defects_mask,
+                    azcam.api.defects.defects_mask,
                     self.darkimage.buffer,
                 )
             else:
-                azcam.testers.defects.make_edge_mask(self.darkimage.buffer)
-                self.MaskedImage = azcam.testers.defects.MaskedImage
+                azcam.api.defects.make_edge_mask(self.darkimage.buffer)
+                self.MaskedImage = azcam.api.defects.MaskedImage
         else:
             self.MaskedImage = numpy.ma.masked_invalid(self.darkimage.buffer)
 

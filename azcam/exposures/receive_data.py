@@ -42,7 +42,7 @@ class ReceiveData(object):
         new version: 15May2015 Zareba
         """
 
-        if azcam.db.controller.camserver.demo_mode:
+        if azcam.api.controller.camserver.demo_mode:
             self.mock_data()
             return
 
@@ -50,7 +50,7 @@ class ReceiveData(object):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         self.socket.connect(
-            (azcam.db.controller.camserver.host, azcam.db.controller.camserver.port)
+            (azcam.api.controller.camserver.host, azcam.api.controller.camserver.port)
         )
 
         azcam.log(f"Receiving image data: {dataSize} bytes", level=3)
@@ -79,14 +79,14 @@ class ReceiveData(object):
         while (dataCnt < dataSize) and (repCnt < 50):
 
             # check if aborted by user (from abort() - controller.abort()
-            if azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
+            if azcam.api.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
 
                 # if in a sequence then let this readout finish
                 if self.exposure.is_exposure_sequence:
                     pass  # return will not be an error
                 else:
                     # break out of read loop
-                    azcam.db.controller.readout_abort()  # stop ControllerServer
+                    azcam.api.controller.readout_abort()  # stop ControllerServer
                     break
 
             getData = self.request_data(
@@ -129,7 +129,7 @@ class ReceiveData(object):
             self.pixels_remaining = 0
             azcam.log("Image data received")
         else:
-            if not azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
+            if not azcam.api.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
                 s = "ERROR in ReceiveImageData: Received %d of %d bytes" % (
                     dataCnt,
                     dataSize,
@@ -218,7 +218,7 @@ class ReceiveData(object):
         ix = self.exposure.image.focalplane.numcols_image
         iy = self.exposure.image.focalplane.numrows_image
 
-        for AmpPos in range(azcam.db.exposure.image.focalplane.numamps_image):
+        for AmpPos in range(azcam.api.exposure.image.focalplane.numamps_image):
             self.exposure.image.data[AmpPos] = numpy.linspace(
                 0, 65355, int(iy * ix / self.image.focalplane.numamps_image)
             )

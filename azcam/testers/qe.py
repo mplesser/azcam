@@ -4,8 +4,7 @@ import glob
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -83,24 +82,24 @@ class Qe(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, subfolder = azcam.utils.make_file_folder("qe")
-        api.set_par("imagefolder", subfolder)
+        azcam.api.set_par("imagefolder", subfolder)
 
-        bin1 = api.get_par("colbin")
-        bin2 = api.get_par("rowbin")
+        bin1 = azcam.api.get_par("colbin")
+        bin2 = azcam.api.get_par("rowbin")
         binning = bin1 * bin2
 
         # Get exposure times
-        if azcam.testers.detcal.valid and len(self.exposure_levels) > 0:
+        if azcam.api.detcal.valid and len(self.exposure_levels) > 0:
             azcam.log("Using exposure_levels")
             waves = list(self.exposure_levels.keys())
             self.exposure_times = {}
             waves.sort()
 
-            meanelectrons = azcam.testers.detcal.mean_electrons
+            meanelectrons = azcam.api.detcal.mean_electrons
 
             for wave in waves:
                 wave = int(float(wave))
@@ -112,36 +111,36 @@ class Qe(Tester):
         else:
             raise azcam.AzcamError("could not determine exposure times")
 
-        api.set_par("imageroot", "qe.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imagesequencenumber", 1)  # start at sequence number 1
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "qe.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imagesequencenumber", 1)  # start at sequence number 1
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # binning
-        api.roi_reset()  # use entire device
-        api.set_roi(-1, -1, -1, -1, self.binning, self.binning)
+        azcam.api.roi_reset()  # use entire device
+        azcam.api.set_roi(-1, -1, -1, -1, self.binning, self.binning)
 
-        # api.set_shutter(1, 1)  # open instrument shutter
+        # azcam.api.set_shutter(1, 1)  # open instrument shutter
 
         # take bias image
-        api.set_par("imageroot", "qe.")
+        azcam.api.set_par("imageroot", "qe.")
         azcam.log(
-            "Taking bias image %s..." % os.path.basename(api.get_image_filename())
+            "Taking bias image %s..." % os.path.basename(azcam.api.get_image_filename())
         )
 
         # measure the reference diode current with shutter closed
         if self.use_ref_diode:
-            dc = api.get_current(0, 0)
-            api.set_keyword(
+            dc = azcam.api.get_current(0, 0)
+            azcam.api.set_keyword(
                 "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
             )
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
-        api.expose(0, "zero", "QE bias")
+        azcam.api.expose(0, "zero", "QE bias")
 
         waves = self.wavelengths
         for wave in waves:
@@ -150,33 +149,33 @@ class Qe(Tester):
             etime = self.exposure_times[wave]
             title = str(wave) + " nm QE flat for " + str(etime) + " secs"
             azcam.log(f"Setting wavelength to {wave}")
-            api.set_wavelength(wave)
+            azcam.api.set_wavelength(wave)
 
             azcam.log(
                 "Taking %d nm QE image for %.3f seconds: %s..."
-                % (wave, etime, os.path.basename(api.get_image_filename()))
+                % (wave, etime, os.path.basename(azcam.api.get_image_filename()))
             )
 
             # make sure at proper wavelength
-            w = api.get_wavelength()
+            w = azcam.api.get_wavelength()
             w = int(w)
             azcam.log(f"Actual wavelength is {w}")
 
             # measure the reference diode current
             if self.use_ref_diode:
-                dc = api.get_current(0, 1)
-                api.set_keyword(
+                dc = azcam.api.get_current(0, 1)
+                azcam.api.set_keyword(
                     "REFCUR", dc, "Reference diode current (A)", "float", "instrument"
                 )
 
             # make exposure
             if self.flush_before_exposure:
-                api.tests()
+                azcam.api.tests()
 
             if self.include_dark_images:
-                api.expose(etime, "dark", f"{title}")
+                azcam.api.expose(etime, "dark", f"{title}")
 
-            api.expose(etime, "flat", f"{title}")
+            azcam.api.expose(etime, "flat", f"{title}")
 
         # copy diode cal file to local folder
         try:
@@ -204,10 +203,10 @@ class Qe(Tester):
 
         # finish
         try:
-            api.delete_keyword("REFCUR", "instrument")
+            azcam.api.delete_keyword("REFCUR", "instrument")
         except Exception:
             pass
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("QE sequence finished")
 
         return
@@ -281,7 +280,7 @@ class Qe(Tester):
         SequenceNumber = StartingSequence
 
         # scale by gain
-        gain = azcam.testers.gain
+        gain = azcam.api.gain
         if gain.valid:
             self.system_gain = gain.system_gain
         else:
@@ -396,13 +395,13 @@ class Qe(Tester):
 
             # use mask from defects object
             if self.use_edge_mask:
-                if azcam.testers.defects.valid:
+                if azcam.api.defects.valid:
                     self.MaskedImage = numpy.ma.masked_where(
-                        azcam.testers.defects.defects_mask, qeimage.buffer
+                        azcam.api.defects.defects_mask, qeimage.buffer
                     )
                 else:
-                    azcam.testers.defects.make_edge_mask(qeimage.buffer)
-                    self.MaskedImage = azcam.testers.defects.MaskedImage
+                    azcam.api.defects.make_edge_mask(qeimage.buffer)
+                    self.MaskedImage = azcam.api.defects.MaskedImage
             else:
                 self.MaskedImage = numpy.ma.masked_invalid(qeimage.buffer)
 

@@ -39,9 +39,9 @@ class ExposureQHY(Exposure):
             shutterstate = "open"  # other types are comps, so open shutter
 
         if shutterstate == "open":
-            azcam.db.controller.set_shutter_state(1)
+            azcam.api.controller.set_shutter_state(1)
         else:
-            azcam.db.controller.set_shutter_state(0)
+            azcam.api.controller.set_shutter_state(0)
 
         # start exposure
         if imagetype != "zero":
@@ -49,7 +49,7 @@ class ExposureQHY(Exposure):
 
         self.exp_start = time.time()
         self.dark_time_start = self.exp_start
-        azcam.db.controller.start_exposure()
+        azcam.api.controller.start_exposure()
 
         # wait for integration
         print("waiting for integration...")
@@ -79,7 +79,7 @@ class ExposureQHY(Exposure):
         # wait for readout
         print("waiting for readout...")
         time.sleep(self.readout_delay)
-        while not azcam.db.controller.is_imageready():
+        while not azcam.api.controller.is_imageready():
             time.sleep(1)
 
         # allow readout to complete
@@ -87,7 +87,7 @@ class ExposureQHY(Exposure):
 
         imagetype = self.image_type.lower()
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter_state(0)
+            azcam.api.controller.set_shutter_state(0)
 
         if self.exposure_flag == azcam.db.exposureflags["ABORT"]:
             azcam.log("Readout aborted")
@@ -102,12 +102,14 @@ class ExposureQHY(Exposure):
         Completes an exposure by writing file and displaying image.
         """
 
-        self.hdu = pyfits.PrimaryHDU(azcam.db.controller.camera.ImageArray)
+        self.hdu = pyfits.PrimaryHDU(azcam.api.controller.camera.ImageArray)
 
         self.exposure_flag = azcam.db.exposureflags["WRITING"]
 
         if self.image.remote_imageserver_flag:
-            local_file = self.temp_image_file + "." + self.filename.get_extension(self.filetype)
+            local_file = (
+                self.temp_image_file + "." + self.filename.get_extension(self.filetype)
+            )
             try:
                 os.remove(local_file)
             except FileNotFoundError:
@@ -126,8 +128,12 @@ class ExposureQHY(Exposure):
         # update controller header with keywords which might have changed
         et = float(int(self.exposure_time_actual * 1000.0) / 1000.0)
         dt = float(int(self.dark_time * 1000.0) / 1000.0)
-        azcam.db.headers["exposure"].set_keyword("EXPTIME", et, "Exposure time (seconds)", float)
-        azcam.db.headers["exposure"].set_keyword("DARKTIME", dt, "Dark time (seconds)", float)
+        azcam.db.headers["exposure"].set_keyword(
+            "EXPTIME", et, "Exposure time (seconds)", float
+        )
+        azcam.db.headers["exposure"].set_keyword(
+            "DARKTIME", dt, "Dark time (seconds)", float
+        )
 
         # write file(s) to disk
         if self.save_file:
@@ -156,7 +162,7 @@ class ExposureQHY(Exposure):
         if self.display_image:
             try:
                 azcam.log("Displaying image")
-                azcam.db.display.display(self.image)
+                azcam.api.display.display(self.image)
             except Exception:
                 pass
 
@@ -173,4 +179,4 @@ class ExposureQHY(Exposure):
         Return remaining exposure time (in seconds).
         """
 
-        return azcam.db.controller.update_exposuretime_remaining()
+        return azcam.api.controller.update_exposuretime_remaining()

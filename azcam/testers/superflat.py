@@ -4,8 +4,7 @@ import shutil
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -47,29 +46,29 @@ class Superflat(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
         currentfolder = azcam.utils.curdir()
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
         # set wavelength
         if self.wavelength > 0:
             wave = int(self.wavelength)
-            wave1 = api.get_wavelength()
+            wave1 = azcam.api.get_wavelength()
             wave1 = int(wave1)
             if wave1 != wave:
                 azcam.log(f"Setting wavelength to {wave} nm")
-                api.set_wavelength(wave)
-                wave1 = api.get_wavelength()
+                azcam.api.set_wavelength(wave)
+                wave1 = azcam.api.get_wavelength()
                 wave1 = int(wave1)
             azcam.log(f"Current wavelength is {wave1} nm")
 
         # Try exposure_level to get ExposureTime
-        if azcam.testers.detcal.valid and len(self.exposure_levels) > 0:
+        if azcam.api.detcal.valid and len(self.exposure_levels) > 0:
             azcam.log("Using exposure_levels")
 
-            meanelectrons = azcam.testers.detcal.mean_electrons
+            meanelectrons = azcam.api.detcal.mean_electrons
 
             self.exposure_times = (
                 numpy.array(self.exposure_levels) / meanelectrons[wave]
@@ -81,15 +80,17 @@ class Superflat(Tester):
 
         for setnum, exposuretime in enumerate(self.exposure_times):
 
-            api.set_par("imageroot", "superflat.")  # for automatic data analysis
-            api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-            api.set_par("imageautoname", 0)  # manually set name
-            api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-            api.set_par("imagetest", 0)  # turn off TestImage
+            azcam.api.set_par("imageroot", "superflat.")  # for automatic data analysis
+            azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+            azcam.api.set_par("imageautoname", 0)  # manually set name
+            azcam.api.set_par(
+                "imageautoincrementsequencenumber", 1
+            )  # inc sequence numbers
+            azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
             # create new subfolder
             currentfolder, newfolder = azcam.utils.make_file_folder("superflat", 1, 1)
-            api.set_par("imagefolder", newfolder)
+            azcam.api.set_par("imagefolder", newfolder)
 
             for loop in range(self.number_images_acquire[setnum]):
                 exposuretime = self.exposure_times[setnum]
@@ -98,10 +99,10 @@ class Superflat(Tester):
                     "Taking SuperFlat image %d of %d for %.3f seconds"
                     % (loop + 1, self.number_images_acquire[setnum], exposuretime)
                 )
-                api.expose(exposuretime, self.exposure_type, "superflat flat")
+                azcam.api.expose(exposuretime, self.exposure_type, "superflat flat")
 
             # finish this set
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.restore_imagepars(impars, currentfolder)
 
         # finish
         azcam.log("Superflat sequence finished")
@@ -153,7 +154,7 @@ class Superflat(Tester):
 
             # "debias" correct with residuals after colbias
             if self.zero_correct:
-                debiased = azcam.testers.bias.debiased_filename
+                debiased = azcam.api.bias.debiased_filename
                 biassub = "biassub.fits"
                 azcam.fits.sub(nextfile, debiased, biassub)
                 os.remove(nextfile)
@@ -174,7 +175,7 @@ class Superflat(Tester):
         azcam.fits.combine(filelist, self.superflat_filename, self.combination_type)
 
         # make superflat image scaled by gain
-        gain = azcam.testers.gain
+        gain = azcam.api.gain
         if gain.valid:
             self.system_gain = gain.system_gain
         else:

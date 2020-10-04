@@ -219,9 +219,9 @@ class Exposure(Objects):
         """
 
         if azcam.db.get("instrument") is not None:
-            azcam.db.instrument.exposure_start()
+            azcam.api.instrument.exposure_start()
         if azcam.db.get("telescope") is not None:
-            azcam.db.telescope.exposure_start()
+            azcam.api.telescope.exposure_start()
 
         return
 
@@ -231,9 +231,9 @@ class Exposure(Objects):
         """
 
         if azcam.db.get("instrument") is not None:
-            azcam.db.instrument.exposure_finish()
+            azcam.api.instrument.exposure_finish()
         if azcam.db.get("telescope") is not None:
-            azcam.db.telescope.exposure_finish()
+            azcam.api.telescope.exposure_finish()
 
         return
 
@@ -352,8 +352,8 @@ class Exposure(Objects):
         number_exposures = int(number_exposures)
 
         # system must be reset once before an exposure can be made
-        if not azcam.db.controller.is_reset:
-            azcam.db.controller.reset()
+        if not azcam.api.controller.is_reset:
+            azcam.api.controller.reset()
 
         azcam.utils.set_error_status()
 
@@ -433,7 +433,7 @@ class Exposure(Objects):
 
         # system must be reset once before an exposure can be made
         x = self.is_exposure_sequence  # save this flag which is lost by reset
-        if not azcam.db.controller.is_reset:
+        if not azcam.api.controller.is_reset:
             self.reset()
             self.is_exposure_sequence = x
 
@@ -503,7 +503,7 @@ class Exposure(Objects):
                 shutterstate = self.shutter_dict[imagetype]
             except KeyError:
                 shutterstate = "open"  # other types are comps, so open shutter
-            azcam.db.controller.set_shutter_state(shutterstate)
+            azcam.api.controller.set_shutter_state(shutterstate)
 
             if not self.comp_exposure:
                 self.set_keyword("IMAGETYP", imagetype, "Image type", str)
@@ -511,23 +511,23 @@ class Exposure(Objects):
         self.delete_keyword("COMPLAMP")
 
         # set comp lamps, turn on, set keyword
-        if self.comp_exposure and azcam.db.instrument.enabled:
+        if self.comp_exposure and azcam.api.instrument.enabled:
             if self.comp_sequence:  # lamps already on
                 pass
             else:
-                azcam.db.instrument.set_active_comps(imagetype)
-                if not azcam.db.instrument.shutter_strobe:
-                    azcam.db.instrument.comps_on()
-            lampnames = " ".join(azcam.db.instrument.get_active_comps())
+                azcam.api.instrument.set_active_comps(imagetype)
+                if not azcam.api.instrument.shutter_strobe:
+                    azcam.api.instrument.comps_on()
+            lampnames = " ".join(azcam.api.instrument.get_active_comps())
             self.set_keyword("COMPLAMP", lampnames, "Comp lamp names", str)
             self.set_keyword("IMAGETYP", "comp", "Image type", str)
-            azcam.db.instrument.comps_delay()  # delay for lamp warmup
+            azcam.api.instrument.comps_delay()  # delay for lamp warmup
         else:
             if not self.guide_mode:
                 if (azcam.db.get("instrument") is not None) and azcam.db.get(
                     "instrument"
                 ).enabled:
-                    azcam.db.instrument.set_active_comps()  # reset
+                    azcam.api.instrument.set_active_comps()  # reset
                 self.set_keyword("IMAGETYP", imagetype, "Image type", str)
 
         # update all headers with current data
@@ -543,7 +543,7 @@ class Exposure(Objects):
         if self.flush_array:
             self.flush()
         else:
-            azcam.db.controller.stop_idle()
+            azcam.api.controller.stop_idle()
 
         # record current time and date in header
         self.record_current_times()
@@ -591,7 +591,7 @@ class Exposure(Objects):
 
         azcam.log("Flushing")
 
-        return azcam.db.controller.flush(int(Cycles))
+        return azcam.api.controller.flush(int(Cycles))
 
     def sequence(self, number_exposures=1, flush_array_flag=-1, delay=-1):
         """
@@ -629,17 +629,17 @@ class Exposure(Objects):
         self.flush_array = FlushArray
 
         self.comp_sequence = (
-            self.check_comparison_imagetype() and azcam.db.instrument.enabled
+            self.check_comparison_imagetype() and azcam.api.instrument.enabled
         )
 
         if self.comp_sequence:
             azcam.log("Starting comparison sequence")
-            azcam.db.instrument.set_active_comps(self.image_type)
-            if azcam.db.instrument.shutter_strobe:
+            azcam.api.instrument.set_active_comps(self.image_type)
+            if azcam.api.instrument.shutter_strobe:
                 pass  # these instruments use shutter to turn on comps
             else:
-                azcam.db.instrument.comps_on()
-            azcam.db.instrument.comps_delay()  # delay for lamp warmup if needed
+                azcam.api.instrument.comps_on()
+            azcam.api.instrument.comps_delay()  # delay for lamp warmup if needed
 
         for i in range(number_exposures):
 
@@ -664,7 +664,7 @@ class Exposure(Objects):
 
         # turn off comps
         if self.comp_sequence:
-            azcam.db.instrument.comps_off()
+            azcam.api.instrument.comps_off()
             self.comp_sequence = 0
 
         self.flush_array = currentflush
@@ -747,9 +747,9 @@ class Exposure(Objects):
         """
 
         if shutter_id == 0:
-            azcam.db.controller.set_shutter(state)
+            azcam.api.controller.set_shutter(state)
         elif shutter_id == 1:
-            azcam.db.instrument.set_shutter(state)
+            azcam.api.instrument.set_shutter(state)
 
         return
 
@@ -762,7 +762,7 @@ class Exposure(Objects):
 
         number_rows = int(float(number_rows))
 
-        azcam.db.controller.parshift(number_rows)
+        azcam.api.controller.parshift(number_rows)
 
         return
 
@@ -775,7 +775,7 @@ class Exposure(Objects):
         Return number of remaining pixels to be read (counts down).
         """
 
-        reply = azcam.db.controller.get_pixels_remaining()
+        reply = azcam.api.controller.get_pixels_remaining()
         self.pixels_remaining = reply
 
         return reply
@@ -789,8 +789,8 @@ class Exposure(Objects):
         Return current exposure time in seconds.
         """
 
-        if azcam.db.controller.is_reset:
-            self.exposure_time = azcam.db.controller.get_exposuretime()
+        if azcam.api.controller.is_reset:
+            self.exposure_time = azcam.api.controller.get_exposuretime()
 
         return self.exposure_time
 
@@ -802,7 +802,7 @@ class Exposure(Objects):
         self.exposure_time = float(exposure_time)
         self.exposure_time_actual = self.exposure_time  # may be changed later
 
-        azcam.db.controller.set_exposuretime(self.exposure_time)
+        azcam.api.controller.set_exposuretime(self.exposure_time)
 
         self.header.set_keyword(
             "EXPREQ", exposure_time, "Exposure time requested (seconds)", float
@@ -818,9 +818,9 @@ class Exposure(Objects):
         Return remaining exposure time (in seconds).
         """
 
-        if azcam.db.controller.is_reset:
+        if azcam.api.controller.is_reset:
             self.exposure_time_remaining = (
-                azcam.db.controller.update_exposuretime_remaining()
+                azcam.api.controller.update_exposuretime_remaining()
             )
 
         return self.exposure_time_remaining
@@ -992,7 +992,7 @@ class Exposure(Objects):
         l1 = self.image_types
 
         try:
-            l2 = azcam.db.instrument.get_all_comps()
+            l2 = azcam.api.instrument.get_all_comps()
         except Exception:
             return l1
 
@@ -1023,7 +1023,7 @@ class Exposure(Objects):
             self.temp_image_file = os.path.normpath(self.temp_image_file)
             self.temp_image_file = "%s%d" % (
                 self.temp_image_file,
-                azcam.db.cmdserver.port,
+                azcam.api.cmdserver.port,
             )  # make unique for multiple processes
 
         return
@@ -1143,7 +1143,7 @@ class Exposure(Objects):
         )
 
         # update controller parameters
-        controller = azcam.db.controller
+        controller = azcam.api.controller
         controller.detpars.ns_total = self.image.focalplane.ns_total
         controller.detpars.ns_predark = self.image.focalplane.ns_predark
         controller.detpars.ns_underscan = self.image.focalplane.ns_underscan
@@ -1201,7 +1201,7 @@ class Exposure(Objects):
         )
 
         # update controller parameters
-        controller = azcam.db.controller
+        controller = azcam.api.controller
         controller.detpars.numdet_x = self.image.focalplane.numdet_x
         controller.detpars.numdet_y = self.image.focalplane.numdet_y
         controller.detpars.numamps_x = self.image.focalplane.numamps_x
@@ -1266,7 +1266,7 @@ class Exposure(Objects):
         )
 
         # update controller parameters
-        controller = azcam.db.controller
+        controller = azcam.api.controller
         controller.detpars.first_col = self.image.focalplane.first_col
         controller.detpars.last_col = self.image.focalplane.last_col
         controller.detpars.first_row = self.image.focalplane.first_row
@@ -1459,9 +1459,9 @@ class Exposure(Objects):
         if expstate is None:
             expstate = ""
 
-        if azcam.db.tempcon.enabled:
+        if azcam.api.tempcon.enabled:
             try:
-                camtemp, dewtemp = azcam.db.tempcon.get_temperatures()[0:2]
+                camtemp, dewtemp = azcam.api.tempcon.get_temperatures()[0:2]
                 camtemp = f"{camtemp:.1f}"
                 dewtemp = f"{dewtemp:.1f}"
             except Exception as e:

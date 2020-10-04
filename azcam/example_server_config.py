@@ -4,9 +4,7 @@ Example server configuration script.
 
 import os
 
-import azcam
-import azcam.server
-from azcam.server import api
+from azcam.server import azcam
 import azcam.shortcuts_server
 from azcam.displays.ds9display import Ds9Display
 from azcam.telescopes.telescope import Telescope
@@ -35,7 +33,7 @@ azcam.db.systemfolder = os.path.dirname(__file__)
 # ****************************************************************
 azcam.db.logfile = os.path.join(azcam.db.datafolder, "logs", "azcam.log")
 azcam.logging.start_logging(azcam.db.logfile, "123")
-azcam.log(f"Configuring azcam for {azcam.db.systemname}")
+azcam.log(f"Configuring {azcam.db.systemname}")
 
 # ****************************************************************
 # define objects
@@ -66,15 +64,10 @@ except FileNotFoundError:
 # ****************************************************************
 cmdserver = CommandServer()
 cmdserver.port = 2402
-azcam.log(f"Starting command server listening on port {cmdserver.port}")
+azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
 cmdserver.welcome_message = "Welcome - connected to the azcam command server"
-azcam.db.cmdserver.logcommands = 1
+azcam.api.cmdserver.logcommands = 1
 cmdserver.start()
-
-# ****************************************************************
-# define names to imported into namespace (for CLI)
-# ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
 
 # ****************************************************************
 # finish

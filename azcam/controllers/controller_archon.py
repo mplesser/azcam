@@ -1384,7 +1384,7 @@ class ControllerArchon(Controller):
         if self.dict_frame == {} or self.read_buffer == 0:
             return 0
 
-        fp = azcam.db.exposure.get_focalplane()
+        fp = azcam.api.exposure.get_focalplane()
         numseramps = fp[2]
         numamps = fp[0] * fp[1] * fp[2] * fp[3]
         naxis1 = int(self.dict_frame[f"BUF{self.read_buffer}WIDTH"])
@@ -1541,7 +1541,7 @@ class ControllerArchon(Controller):
         self.newframe = 0
 
         # Set exposure flag to INTEGRATING
-        azcam.db.exposure.exposure_flag = azcam.db.exposureflags["EXPOSING"]
+        azcam.api.exposure.exposure_flag = azcam.db.exposureflags["EXPOSING"]
 
         # wait for frame to change in buffers
         azcam.log("Integrating", level=1)
@@ -1568,7 +1568,7 @@ class ControllerArchon(Controller):
                 # azcam.log(f"Integrating: {(time.time() - self.exp_start):.1f} secs", level=2)
 
             # check for abort
-            if azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
+            if azcam.api.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
                 stop = 1
 
             # Check if time out occured
@@ -1582,13 +1582,13 @@ class ControllerArchon(Controller):
                 time.sleep(0.5)
 
         # check for abort
-        if azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
+        if azcam.api.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
             self.archon_status = EXP_DONE
             azcam.AzcamWarning("Exposure aborted")
             return
 
         # Set exposure flag to READOUT
-        azcam.db.exposure.exposure_flag = azcam.db.exposureflags["READOUT"]
+        azcam.api.exposure.exposure_flag = azcam.db.exposureflags["READOUT"]
 
         self.read_buffer = self.newframe
 
@@ -1622,7 +1622,7 @@ class ControllerArchon(Controller):
                 )
 
             # check for abort
-            if azcam.db.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
+            if azcam.api.exposure.exposure_flag == azcam.db.exposureflags["ABORT"]:
                 dataReady = -1
                 break
 
@@ -1634,7 +1634,7 @@ class ControllerArchon(Controller):
             et = (t2 - t1) / 1.0e8
         elif self.noint_ms > 0:
             et = self.noint_ms / 1000.0
-        azcam.db.exposure.exposure_time_actual = et
+        azcam.api.exposure.exposure_time_actual = et
 
         if dataReady == 1:
             self.archon_status = EXP_DONE

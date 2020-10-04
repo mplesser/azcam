@@ -39,11 +39,11 @@ class TempConArc(TempCon):
         TEMPSET = 0x01C
 
         # ignore if no utlity board
-        if not azcam.db.controller.utility_board_installed:
+        if not azcam.api.controller.utility_board_installed:
             return
 
         # ignore if controller is not reset
-        if not azcam.db.controller.is_reset:
+        if not azcam.api.controller.is_reset:
             return
 
         if temperature is None:
@@ -54,8 +54,8 @@ class TempConArc(TempCon):
         temperature_id = int(temperature_id)
         self.control_temperature_number = temperature_id
         counts = self.convert_temp_to_counts(2, self.control_temperature)
-        azcam.db.controller.write_memory(
-            "Y", azcam.db.controller.UTILITYBOARD, TEMPSET, int(counts)
+        azcam.api.controller.write_memory(
+            "Y", azcam.api.controller.UTILITYBOARD, TEMPSET, int(counts)
         )
 
         return
@@ -68,11 +68,11 @@ class TempConArc(TempCon):
         """
 
         # return bad_temp_value if no utlity board
-        if not azcam.db.controller.utility_board_installed:
+        if not azcam.api.controller.utility_board_installed:
             return 3 * [self.bad_temp_value]
 
         # Don't read hardware while exposure is in progess, return last values read
-        flag = azcam.db.exposure.exposure_flag
+        flag = azcam.api.exposure.exposure_flag
         if flag != azcam.db.exposureflags["NONE"]:
             return self.last_temps
 
@@ -104,10 +104,10 @@ class TempConArc(TempCon):
             # azcam.AzcamWarning("Tempcon not initialized")
             return -999.9
 
-        if not azcam.db.controller.utility_board_installed:
+        if not azcam.api.controller.utility_board_installed:
             return self.bad_temp_value
 
-        if not azcam.db.controller.is_reset:
+        if not azcam.api.controller.is_reset:
             return self.bad_temp_value
 
         # define DSP address
@@ -121,7 +121,7 @@ class TempConArc(TempCon):
             return "ERROR bad TemperatureID"
 
         # Don't read hardware while exposure is in progess
-        flag = azcam.db.exposure.exposure_flag
+        flag = azcam.api.exposure.exposure_flag
         if flag != azcam.db.exposureflags["NONE"]:
             return self.last_temps[temperature_id]
 
@@ -130,8 +130,8 @@ class TempConArc(TempCon):
         avecount = 0
         try:
             for _ in range(self.num_temp_reads):
-                reply = azcam.db.controller.board_command(
-                    cmd, azcam.db.controller.UTILITYBOARD, 0x400000 | Address
+                reply = azcam.api.controller.board_command(
+                    cmd, azcam.api.controller.UTILITYBOARD, 0x400000 | Address
                 )  # Y space
                 counts = int(reply[1])
                 avecount += counts

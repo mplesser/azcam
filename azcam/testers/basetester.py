@@ -43,7 +43,7 @@ class Tester(Report):
 
         self.fit_order = 3  # fit order for overscan correction
 
-        setattr(azcam.db, self.id, self)
+        setattr(azcam.api, self.id, self)
         azcam.db.cli_cmds[self.id] = self
 
     def acquire(self):

@@ -37,7 +37,7 @@ class TempConMag(TempCon):
 
         itemp1 = itemp = 0.0
         for _ in range(self.num_temp_reads):  # multiple reads for average
-            status = azcam.db.controller.magio("gcam_get_temp", 0)
+            status = azcam.api.controller.magio("gcam_get_temp", 0)
             itemp1 = int(status[1])  # get temp in DN
             itemp = itemp + itemp1
         itemp = itemp / self.num_temp_reads  # make average

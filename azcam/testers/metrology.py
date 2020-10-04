@@ -7,7 +7,7 @@ from scipy.interpolate import griddata
 import scipy.optimize
 import numpy
 
-import azcam
+from azcam.console import azcam
 from azcam.testers.basetester import Tester
 
 

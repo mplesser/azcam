@@ -4,8 +4,7 @@ import os
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -75,39 +74,40 @@ class Linearity(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("linearity")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
-        api.set_par("imageroot", "linearity.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "linearity.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
         azcam.log(
-            "Taking Linearity bias: %s" % os.path.basename(api.get_image_filename())
+            "Taking Linearity bias: %s"
+            % os.path.basename(azcam.api.get_image_filename())
         )
-        api.expose(0, "zero", "Linearity bias")
+        azcam.api.expose(0, "zero", "Linearity bias")
 
-        api.set_par("imagetype", self.exposure_type)
+        azcam.api.set_par("imagetype", self.exposure_type)
 
         # Try exposure_level to get ExposureTime
         if len(self.exposure_levels) > 0:  # exposure_levels specified
-            detcal = azcam.testers.detcal
+            detcal = azcam.api.detcal
             if detcal == 0:
                 azcam.log("Detector not calibrated, cannot use exposure_level")
             else:
-                if not azcam.testers.detcal.valid:
+                if not azcam.api.detcal.valid:
                     azcam.log("Detector not calibrated, cannot use exposure_level")
                 else:
-                    meanelectrons = azcam.testers.detcal.mean_electrons
+                    meanelectrons = azcam.api.detcal.mean_electrons
 
                     if self.wavelength == -1:
-                        wave = api.get_wavelength()
+                        wave = azcam.api.get_wavelength()
                         wave = int(wave)
                         self.exposure_times = (
                             numpy.array(self.exposure_levels) / meanelectrons[wave]
@@ -145,13 +145,13 @@ class Linearity(Tester):
                     exp + 1,
                     NumberExposures,
                     exptime,
-                    os.path.basename(api.get_image_filename()),
+                    os.path.basename(azcam.api.get_image_filename()),
                 )
             )
-            api.expose(exptime, self.exposure_type, "Linearity flat")
+            azcam.api.expose(exptime, self.exposure_type, "Linearity flat")
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("Linearity sequence finished")
 
         return
@@ -219,7 +219,7 @@ class Linearity(Tester):
         # "debias" correct with residuals after colbias
         SequenceNumber = StartingSequence
         if self.zero_correct:
-            debiased = azcam.testers.bias.debiased_filename
+            debiased = azcam.api.bias.debiased_filename
             biassub = "biassub.fits"
 
             nextfile = (

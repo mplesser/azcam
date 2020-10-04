@@ -30,7 +30,7 @@ class WebServer(object):
         app = Flask(__name__, template_folder="")
         self.app = app
 
-        self.logcommands = 0
+        self.logcommands = 1
 
         self.mock_mode = 0
 
@@ -42,9 +42,9 @@ class WebServer(object):
         observe_home = "webobs.html"
 
         #: port for webserver
-        self.webport = azcam.db.cmdserver.port + 1
+        self.webport = azcam.api.cmdserver.port + 1
 
-        azcam.db.webserver = self
+        azcam.api.webserver = self
 
         self.upload_folder = "/data/uploads"
 
@@ -84,34 +84,42 @@ class WebServer(object):
                 mimetype="image/vnd.microsoft.icon",
             )
 
-        @app.route("/webobs/upload", methods=["POST"])
-        def upload_file():
-            if request.method == "POST":
-                print("posted upload")
-                f = request.files["file"]
-                f.save(os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(f.filename)))
-                return self.make_response("upload file", "file uploaded successfully")
-
         # ******************************************************************************
-        # object commands - .../object/command
+        # API commands - .../api//object/command
         # ******************************************************************************
-        @app.route("/<path:command>", methods=["GET", "POST"])
+        @app.route("/api/<path:command>", methods=["GET"])
         def api(command):
             """
-            Remote web api commands. such as: /api/expose or /exposure/reset
+            Remote web api commands. such as: /api/expose or /api/exposure/reset
             """
 
             url = request.url
             if self.logcommands:
-                if "api/get_status" not in url:
+                if "api/exposure/get_status" in url or "api/webobs/watchdog" in url:
+                    pass
+                else:
                     azcam.log(url, prefix="Web-> ")
             if self.mock_mode:
                 reply = "mock data"
             else:
                 reply = self.webcommand(url)
-                if self.logcommands and "api/get_status" not in url:
+                if self.logcommands:
+                    if "api/exposure/get_status" in url or "api/webobs/watchdog" in url:
+                        pass
+                else:
                     azcam.log(reply, prefix="Web->   ")
             return self.make_response(command, reply)
+
+        @app.route("/api/webobs/upload", methods=["POST"])
+        def upload_file():
+            url = request.url
+            if self.logcommands:
+                azcam.log(url, prefix="Web-> ")
+            f = request.files["file"]
+            f.save(
+                os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(f.filename))
+            )
+            return self.make_response("upload file", "file uploaded successfully")
 
     def webcommand(self, url):
         """
@@ -140,8 +148,8 @@ class WebServer(object):
         """
 
         s = urlparse(url)
-        # p = s.path[5:]  # remove /api/
-        p = s.path[1:]
+        p = s.path[5:]  # remove /api/
+        # p = s.path[1:]
 
         try:
             tokens = p.split("/")

@@ -21,7 +21,3 @@ from .functions.logging import log
 # save this machine's hostname and ip address
 db.hostname = socket.gethostname()
 db.hostip = socket.gethostbyname(db.hostname)
-
-# clean namespace
-del database, socket, exceptions, image
-del functions, send_image, focalplane, header

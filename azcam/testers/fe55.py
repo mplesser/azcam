@@ -9,9 +9,8 @@ import scipy.ndimage
 import scipy.ndimage.filters
 import scipy.optimize
 
-import azcam
+from azcam.console import azcam
 from azcam.functions.fits import pyfits
-from azcam.console import api
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -112,20 +111,20 @@ class Fe55(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("fe55")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
-        api.set_par("imageroot", "fe55.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "fe55.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # loop through images
         for imgnum in range(self.number_images_acquire):
@@ -136,22 +135,22 @@ class Fe55(Tester):
             )
 
             # take bias image
-            api.set_par("imagetype", "zero")
+            azcam.api.set_par("imagetype", "zero")
             azcam.log("Taking bias image")
-            api.expose(0, "zero", "bias image")
+            azcam.api.expose(0, "zero", "bias image")
 
             # take x-ray image
-            api.set_par("imagetype", "fe55")
+            azcam.api.set_par("imagetype", "fe55")
             azcam.log("Taking Fe-55 image")
-            api.expose(self.exposure_time, "fe55", "Fe55 image")
+            azcam.api.expose(self.exposure_time, "fe55", "Fe55 image")
 
         if self.acquire_darks:
-            api.set_par("imagetype", "dark")
+            azcam.api.set_par("imagetype", "dark")
             azcam.log("Taking dark image")
-            api.expose(self.exposure_time, "dark", "dark image")
+            azcam.api.expose(self.exposure_time, "dark", "dark image")
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("Fe-55 finished")
 
         return
@@ -229,7 +228,7 @@ class Fe55(Tester):
 
             # zero_correct image first
             if self.zero_correct:
-                debiased = azcam.testers.bias.debiased_filename
+                debiased = azcam.api.bias.debiased_filename
                 azcam.log("zero_correct image: %s" % os.path.basename(filename))
                 zerosub = "zerosub.fits"
                 azcam.fits.sub(filename, debiased, zerosub)
@@ -297,14 +296,14 @@ class Fe55(Tester):
 
         # new gain estimate
         if self.gain_estimate == []:
-            self.gain_estimate = azcam.testers.gain.system_gain
+            self.gain_estimate = azcam.api.gain.system_gain
             if self.gain_estimate == []:
                 self.gain_estimate = NumExt * [1.0]
 
         if self.threshold == 0:
-            if azcam.testers.bias.valid:
+            if azcam.api.bias.valid:
                 self.threshold = [
-                    self.noise_threshold * sd for sd in azcam.testers.bias.sdev
+                    self.noise_threshold * sd for sd in azcam.api.bias.sdev
                 ]
 
         # process each channel

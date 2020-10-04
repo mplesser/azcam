@@ -96,7 +96,7 @@ class ControllerMag(Controller):
 
         self.set_roi()
 
-        self.set_exposuretime(azcam.db.exposure.exposure_time)
+        self.set_exposuretime(azcam.api.exposure.exposure_time)
 
         self.set_read_lock()
 
@@ -315,7 +315,9 @@ class ControllerMag(Controller):
         """
 
         self.camserver.load_file(BoardNumber, filename)
-        self.header.set_keyword("DSPFILE", os.path.basename(filename), "DSP code filename", str)
+        self.header.set_keyword(
+            "DSPFILE", os.path.basename(filename), "DSP code filename", str
+        )
 
         return
 
@@ -349,7 +351,7 @@ class ControllerMag(Controller):
         reply = self.camserver.get("ExposureTimeRemaining")
         elapsed = int(reply[1])  # milliseconds
         print(elapsed)
-        return max(0, azcam.db.exposure.exposure_time * 1000 - elapsed) / 1000.0
+        return max(0, azcam.api.exposure.exposure_time * 1000 - elapsed) / 1000.0
 
     # *** readout ***
 

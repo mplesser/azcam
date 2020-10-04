@@ -414,35 +414,35 @@ def get_par(parameter):
 
     # special cases
     if parameter == "imagefilename":
-        value = azcam.db.exposure.filename.get_name()
+        value = azcam.api.exposure.filename.get_name()
         return value
     elif parameter == "imagetitle":
-        value = azcam.db.exposure.get_image_title()
+        value = azcam.api.exposure.get_image_title()
         return value
     elif parameter == "exposuretime":
-        value = azcam.db.exposure.get_exposuretime()
+        value = azcam.api.exposure.get_exposuretime()
         return value
     elif parameter == "exposurecompleted":
-        value = azcam.db.exposure.finished()
+        value = azcam.api.exposure.finished()
         return value
     elif parameter == "exposuretimeremaining":
-        value = azcam.db.exposure.get_exposuretime_remaining()
+        value = azcam.api.exposure.get_exposuretime_remaining()
         return value
     elif parameter == "pixelsremaining":
-        value = azcam.db.exposure.get_pixels_remaining()
+        value = azcam.api.exposure.get_pixels_remaining()
         return value
     elif parameter == "camtemp":
-        value = azcam.db.tempcon.get_temperatures()[0]
+        value = azcam.api.tempcon.get_temperatures()[0]
         return value
     elif parameter == "dewtemp":
-        value = azcam.db.tempcon.get_temperatures()[1]
+        value = azcam.api.tempcon.get_temperatures()[1]
         return value
     elif parameter == "temperatures":
-        camtemp = azcam.db.tempcon.get_temperatures()[0]
-        dewtemp = azcam.db.tempcon.get_temperatures()[1]
+        camtemp = azcam.api.tempcon.get_temperatures()[0]
+        dewtemp = azcam.api.tempcon.get_temperatures()[1]
         return [camtemp, dewtemp]
     elif parameter == "logcommands":
-        value = azcam.db.cmdserver.logcommands
+        value = azcam.api.cmdserver.logcommands
         return value
     elif parameter == "wd":
         value = azcam.utils.curdir()
@@ -468,9 +468,9 @@ def get_par(parameter):
         value = getattr(azcam.db, tokens[1], None)
         return value
 
-    # object must be on objects dictionary
+    # object must be in api
     else:
-        obj = azcam.db.get(object1)
+        obj = azcam.api.get(object1)
         for i in range(1, numtokens):
             obj = getattr(obj, tokens[i])
         value = obj  # last time is value
@@ -491,19 +491,19 @@ def set_par(parameter, value=None):
 
     # special cases
     if parameter == "imagefilename":
-        azcam.db.exposure.filename.set_name(value)
+        azcam.api.exposure.filename.set_name(value)
         return None
     elif parameter == "imagetitle":
         if value is None or value == "":
-            azcam.db.exposure.set_image_title("")
+            azcam.api.exposure.set_image_title("")
         else:
-            azcam.db.exposure.set_image_title(f"{value}")
+            azcam.api.exposure.set_image_title(f"{value}")
         return None
     elif parameter == "exposuretime":
-        azcam.db.exposure.set_exposuretime(value)
+        azcam.api.exposure.set_exposuretime(value)
         return None
     elif parameter == "logcommands":
-        azcam.db.cmdserver.logcommands = int(value)
+        azcam.api.cmdserver.logcommands = int(value)
         return None
 
     # parameter must be in parameters
@@ -513,7 +513,7 @@ def set_par(parameter, value=None):
         azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
         return None
 
-    # object must be on database
+    # object must be on API
     tokens = attribute.split(".")
     numtokens = len(tokens)
     if numtokens < 2:
@@ -525,11 +525,11 @@ def set_par(parameter, value=None):
     object1 = tokens[0]
 
     if object1 == "db":
-        setattr(azcam.db, tokens[1], value)
+        setattr(azcam.api, tokens[1], value)
 
     # run through sub-objects
     else:
-        obj = azcam.db.get(object1)
+        obj = azcam.api.get(object1)
         for i in range(1, numtokens - 1):
             obj = getattr(obj, tokens[i])
         # last time is actual object
@@ -546,9 +546,9 @@ def get_attr(object_name, attribute):
 
     if "." in object_name:
         cmdobject, cmdcommand = object_name.split(".")
-        object_id = getattr(getattr(azcam.db, cmdobject), cmdcommand)
+        object_id = getattr(getattr(azcam.api, cmdobject), cmdcommand)
     else:
-        object_id = getattr(azcam.db, object_name)
+        object_id = getattr(azcam.api, object_name)
 
     if object_id is None:
         raise azcam.AzcamError(f"Unsupported object: {object_name}")
@@ -573,11 +573,11 @@ def get_image_roi():
     roi = []
 
     try:
-        reply = azcam.db.display.get_rois(0, "image")
+        reply = azcam.api.display.get_rois(0, "image")
     except AttributeError:
         raise azcam.AzcamError("cannot get ROI - display not found")
     roi.append(reply)
-    reply = azcam.db.display.get_rois(1, "image")
+    reply = azcam.api.display.get_rois(1, "image")
     if reply:
         roi.append(reply)
     else:
@@ -603,7 +603,7 @@ def set_image_roi(roi=[]):
     # use display ROIs
     roi = []
     try:
-        reply = azcam.db.display.get_rois(-1, "image")
+        reply = azcam.api.display.get_rois(-1, "image")
     except AttributeError:
         raise azcam.AzcamError("cannot set ROI - no display found")
 

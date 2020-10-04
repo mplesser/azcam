@@ -4,8 +4,7 @@ import time
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -60,32 +59,32 @@ class DetCal(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         if self.overwrite:
             if os.path.exists("detcal"):
                 shutil.rmtree("detcal")
         startingfolder, subfolder = azcam.utils.make_file_folder("detcal")
-        api.set_par("imagefolder", subfolder)
+        azcam.api.set_par("imagefolder", subfolder)
         azcam.utils.curdir(subfolder)
 
-        api.set_par("imageincludesequencenumber", 1)  # don't use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imagetest", 0)  # turn off TestImage
-        api.set_par("imageoverwrite", 1)
+        azcam.api.set_par("imageincludesequencenumber", 1)  # don't use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageoverwrite", 1)
 
         # get gain and ROI
-        self.system_gain = azcam.testers.gain.get_system_gain()
+        self.system_gain = azcam.api.gain.get_system_gain()
         self.roi = azcam.utils.get_image_roi()
 
-        gain = azcam.testers.gain
+        gain = azcam.api.gain
 
         self.system_gain = gain.system_gain
         self.zero_mean = gain.zero_mean
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
         self.mean_counts = {}
         self.mean_electrons = {}
@@ -97,13 +96,13 @@ class DetCal(Tester):
 
             # set wavelength
             wave = int(wave)
-            wave1 = api.get_wavelength()
+            wave1 = azcam.api.get_wavelength()
             wave1 = int(wave1)
             if wave1 != wave:
                 azcam.log(f"Setting wavelength to {wave} nm")
-                api.set_wavelength(wave)
+                azcam.api.set_wavelength(wave)
                 time.sleep(self.wavelength_delay)
-                wave1 = api.get_wavelength()
+                wave1 = azcam.api.get_wavelength()
                 wave1 = int(wave1)
             azcam.log(f"Current wavelength is {wave1} nm")
 
@@ -114,10 +113,10 @@ class DetCal(Tester):
             except Exception:
                 et = 1.0
             while doloop:
-                api.set_par("imagetype", self.exposure_type)
+                azcam.api.set_par("imagetype", self.exposure_type)
                 azcam.log(f"Taking flat for {et:0.3f} seconds")
-                flatfilename = api.get_image_filename()
-                api.expose(et, self.exposure_type, "detcal flat")
+                flatfilename = azcam.api.get_image_filename()
+                azcam.api.expose(et, self.exposure_type, "detcal flat")
 
                 # get counts
                 bin1 = int(azcam.fits.get_keyword(flatfilename, "CCDBIN1"))
@@ -160,7 +159,7 @@ class DetCal(Tester):
         self.valid = True
 
         # finish
-        api.restore_imagepars(impars, startingfolder)
+        azcam.api.restore_imagepars(impars, startingfolder)
         azcam.log("detector calibration sequence finished")
 
         return

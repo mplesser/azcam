@@ -5,7 +5,6 @@ Defines: sav, bf, sroi, sf, gf
 
 
 import azcam
-from azcam.console import api
 
 
 def sav():
@@ -42,7 +41,7 @@ def sf():
     """Shortcut to set imagefolder to current folder"""
 
     folder = azcam.utils.curdir()
-    api.set_par("imagefolder", folder)
+    azcam.api.set_par("imagefolder", folder)
 
     return
 
@@ -53,7 +52,7 @@ def gf():
     Also issues sav() command to save folder location.
     """
 
-    folder = api.get_par("imagefolder")
+    folder = azcam.api.get_par("imagefolder")
     if folder is None:
         return
     azcam.utils.curdir(folder)

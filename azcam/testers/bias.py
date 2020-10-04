@@ -2,8 +2,7 @@ import os
 import shutil
 import time
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 from azcam.testers.basetester import Tester
 
 
@@ -44,34 +43,34 @@ class Bias(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("bias")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
-        api.set_par("imageroot", "bias.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "bias.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # take bias images
-        api.set_par("imagetype", "zero")  # for get_image_filename()
+        azcam.api.set_par("imagetype", "zero")  # for get_image_filename()
         for i in range(self.number_images_acquire):
-            filename = os.path.basename(api.get_image_filename())
+            filename = os.path.basename(azcam.api.get_image_filename())
             azcam.log(
                 f"Taking bias image {i + 1}/{self.number_images_acquire}: {filename}"
             )
-            api.expose(0, "zero", "bias image")
+            azcam.api.expose(0, "zero", "bias image")
             if i < self.number_images_acquire - 1:
                 time.sleep(self.delay)
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("Bias sequence finished")
 
         return

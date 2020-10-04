@@ -1,7 +1,6 @@
 import os
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -48,90 +47,92 @@ class PocketPump(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
-        api.set_par("imageroot", "pocketpump.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)
+        azcam.api.set_par("imageroot", "pocketpump.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)
 
         # create and move to new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
         azcam.log(f"Setting wavelength to {self.wavelength}")
-        api.set_wavelength(self.wavelength)
+        azcam.api.set_wavelength(self.wavelength)
 
         # set proper timing code, reset, and clear device
-        timingfile_org = api.get_par("TimingFile")
+        timingfile_org = azcam.api.get_par("TimingFile")
         timcode = os.path.dirname(timingfile_org)
         timcode = os.path.join(timcode, self.pocketpump_timing_file)
         timcode = timcode.replace("\\", "/")
         azcam.log("PocketPump timing code will be: %s" % timcode)
-        api.set_par("TimingFile", timcode)
-        api.reset()
-        api.tests(2)
+        azcam.api.set_par("TimingFile", timcode)
+        azcam.api.reset()
+        azcam.api.tests(2)
 
         # take a bias
         azcam.log("Taking first pocketpump bias")
         try:
-            api.expose(0, "zero", "pocketpump first bias")
+            azcam.api.expose(0, "zero", "pocketpump first bias")
         except Exception as message:
-            api.set_par("TimingFile", timingfile_org)
-            api.reset()
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.set_par("TimingFile", timingfile_org)
+            azcam.api.reset()
+            azcam.api.restore_imagepars(impars, currentfolder)
             raise message
 
         # setup exposure
         azcam.log("Pocketpump setup")
-        api.begin_exposure(self.exposure_time, self.exposure_type, "pocket pump")
+        azcam.api.begin_exposure(self.exposure_time, self.exposure_type, "pocket pump")
 
         # integrate
         azcam.log("Pocketpump integration")
-        api.integrate_exposure()
+        azcam.api.integrate_exposure()
 
         # pocket pump
         azcam.log("Pocket pumping...")
         for _ in range(self.number_cycles):
-            api.parshift(-1 * self.shift_rows)  # reverse par shift is a complete cycle
+            azcam.api.parshift(
+                -1 * self.shift_rows
+            )  # reverse par shift is a complete cycle
 
         # readout
         azcam.log("Readout")
-        api.readout_exposure()
+        azcam.api.readout_exposure()
 
         # write image and display
-        api.end_exposure()
+        azcam.api.end_exposure()
         azcam.log("Pocket pumped exposure completed")
 
         # take a bias
         azcam.log("Taking second pocketpump bias")
         try:
-            api.expose(0, "zero", "pocketpump second bias")
+            azcam.api.expose(0, "zero", "pocketpump second bias")
         except Exception as message:
-            api.set_par("TimingFile", timingfile_org)
-            api.reset()
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.set_par("TimingFile", timingfile_org)
+            azcam.api.reset()
+            azcam.api.restore_imagepars(impars, currentfolder)
             return message
 
         # take a reference flat of same time
         azcam.log("Taking non-pumped reference exposure")
         try:
-            api.expose(
+            azcam.api.expose(
                 self.exposure_time, self.exposure_type, "pocket pump reference flat"
             )
 
         except Exception as message:
-            api.set_par("TimingFile", timingfile_org)
-            api.reset()
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.set_par("TimingFile", timingfile_org)
+            azcam.api.reset()
+            azcam.api.restore_imagepars(impars, currentfolder)
             raise message
 
         # finish
-        api.set_par("TimingFile", timingfile_org)
-        api.reset()
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.set_par("TimingFile", timingfile_org)
+        azcam.api.reset()
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("PocketPump sequence finished")
 
         return
@@ -145,28 +146,28 @@ class PocketPump(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
-        api.set_par("imageroot", "pocketpump.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)
+        azcam.api.set_par("imageroot", "pocketpump.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)
 
         # create and move to new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
         azcam.log(f"Setting wavelength to {self.wavelength}")
-        api.set_wavelength(self.wavelength)
+        azcam.api.set_wavelength(self.wavelength)
 
         # Get exposure time
         binning = 1
-        if azcam.testers.detcal.valid and self.exposure_level != -1:
+        if azcam.api.detcal.valid and self.exposure_level != -1:
             azcam.log("Using exposure_level")
 
-            meanelectrons = azcam.testers.detcal.mean_electrons
+            meanelectrons = azcam.api.detcal.mean_electrons
 
             et = self.exposure_level / meanelectrons[self.wavelength] / binning
         elif self.exposure_time != -1:
@@ -177,45 +178,45 @@ class PocketPump(Tester):
 
         # flush well
         azcam.log("Flushing")
-        api.tests(2)
+        azcam.api.tests(2)
 
         # take a bias
         azcam.log("Taking first pocketpump bias")
         try:
-            api.expose(0, "zero", "pocketpump first bias")
+            azcam.api.expose(0, "zero", "pocketpump first bias")
         except Exception as message:
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.restore_imagepars(impars, currentfolder)
             raise message
 
         # turn on pocketpumping
-        api.rcommand("controller.set_pocket_pumping 1")
+        azcam.api.rcommand("controller.set_pocket_pumping 1")
 
         # expose
         azcam.log("Taking pocketpump flat")
-        api.expose(et, "flat", "pocketpump flat")
+        azcam.api.expose(et, "flat", "pocketpump flat")
 
         # turn off pocketpumping
-        api.rcommand("controller.set_pocket_pumping 0")
+        azcam.api.rcommand("controller.set_pocket_pumping 0")
 
         # take a bias
         azcam.log("Taking second pocketpump bias")
         try:
-            api.expose(0, "zero", "pocketpump second bias")
+            azcam.api.expose(0, "zero", "pocketpump second bias")
         except Exception as message:
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.restore_imagepars(impars, currentfolder)
             raise message
 
         # take a reference flat of same time
         azcam.log("Taking non-pumped reference exposure")
         try:
-            api.expose(et, self.exposure_type, "pocket pump reference flat")
+            azcam.api.expose(et, self.exposure_type, "pocket pump reference flat")
 
         except Exception as message:
-            api.restore_imagepars(impars, currentfolder)
+            azcam.api.restore_imagepars(impars, currentfolder)
             raise message
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("PocketPump sequence finished")
 
         return

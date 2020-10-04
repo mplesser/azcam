@@ -17,7 +17,7 @@ class MonitorInterface(object):
         # Get the AzCam Monitor host (local host)
         self.monitor_host = azcam.db.hostname
         # Command port
-        self.command_port = azcam.db.cmdserver.port
+        self.command_port = azcam.api.cmdserver.port
 
         # Process fileds:
         # Process ID
@@ -60,7 +60,6 @@ class MonitorInterface(object):
             + " "
             + str(self.watchdog)
         )
-        azcam.log("Monitor-azcam register: " + cmd)
         # create a new socket for sending register command
         udp_socketReg = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

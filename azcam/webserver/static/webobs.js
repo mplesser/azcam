@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     // get_status function which runs on a timer
     function watchdog() {
-        $.getJSON('/webobs/watchdog', {}, function(data) {
+        $.getJSON('/api/webobs/watchdog', {}, function(data) {
             $("#timestamp").text(data.data.timestamp);
             $("#message").text(data.data.message);
             if (data.data.currentrow > 0) {
@@ -40,7 +40,7 @@ $("#upload_btn").click(function() {
 
 function LoadScript() {
     var scriptname = $("#scriptname").val();
-    var cmd = "/webobs/load_script?scriptname=" + scriptname;
+    var cmd = "/api/webobs/load_script?scriptname=" + scriptname;
     $("#message").text("Loading script");
     $.getJSON(cmd, {},
         function(data) {
@@ -85,7 +85,7 @@ function LoadScript() {
 }
 
 function RunScript() {
-    var cmd = "/webobs/run";
+    var cmd = "/api/webobs/run";
     $("#message").text("Running script");
     $.getJSON(cmd, {},
         function(data) {
@@ -98,7 +98,7 @@ function RunScript() {
 };
 
 /* function Upload() {
-    // action = "http://localhost:2403/webobs/upload"
+    // action = "http://localhost:2403/api/webobs/upload"
     // method = "POST"
     // enctype = "multipart/form-data"
     // alert("upload");
@@ -123,7 +123,7 @@ function Upload() {
     var form_data = new FormData($('#upload_form')[0]);
     $.ajax({
         type: 'POST',
-        url: '/webobs/upload',
+        url: '/api/webobs/upload',
         data: form_data,
         contentType: false,
         cache: false,

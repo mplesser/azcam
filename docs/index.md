@@ -1,10 +1,6 @@
 # AzCam Documentation
 
-AzCam is a software environment for the acquisition and analysis of image data from scientific CCD/CMOS cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquiistion and analysis environments.
-
-AzCam is implemented as a base python package (*azcam*) and typically requires additional add-on packages and scripts to create a functional environment.
-
-This documentation was built for azcam version 20.2.
+AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
 ```eval_rst
 .. toctree::
@@ -21,38 +17,34 @@ Useful links include:
 * Python programming language <https://www.python.org>
   
 ## Usage
-Most of AzCam's functionality is available only after importing configuration code which defines a system's hardware resources. Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation. 
+Most of AzCam's functionality is available only after loading configuration or environment code which defines a system's hardware resources (such as *azcam-itl* or *azcam-bok*). Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object.
 
-There are several operation modes of azcam. One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware. Another is the console, usually called *azcamconsole*, which is usually implemented as an IPython command window that is able to communicate with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
+There are two three main operational modes of azcam:
+ - One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
+ - Another is the console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
+ - The final mode is through client applications, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. 
 
-There is an *api* object which is a general interface to the most common commands.  It is implemented for both the server and console environments.
+For the generic environment, which is not very useful as it does not implement any actual hardware, the server-side code to get the current system wavelength and take an exposure is:
 
-On the server side a very useful object is the database *db* which contains references to many  objects and paramaters.  So the instrument might be referenced in a script or command line as *db.instrument*.
-  
-Generally an azcam environment must be configured for a specific hardware system, such as a specific telescope or laboratory. Examples are *azcam_itl* and *azcam-bok*.  
-
-For the generic environment, which is not very useful as it does not know what hardware to communicate with, the server-side code to get the current system wavelength and take an exposure is:
-
-    from azcam.server import api, db
-    wavelength = db.instrument.get_wavelength()
+    import azcam
+    from azcam.server import api
+    wavelength = api.instrument.get_wavelength()
     api.expose(30., 'dark', "a dark image title")
 
-For the generic console application (which usually connects to a separate server application), this would be:
+For the generic console application (which usually connects to a separate *azcamserver* application), this would be:
 
-    from azcam.console import api
+    import azcam
+    from azcam.server import api
     wavelength = api.get_wavelength()
     api.expose(30., 'dark', "a dark image title")
 
-Example configuration code can be loaded with either of the commands:
-    
-    import azcam.example_server_config
-    import azcam.example_console_config
+Example configuration code can be found in `azcam.example_server_config1` and `azcam.example_console_config`.
 
 When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, **after** configuring the environment, execute the command:
 
     from azcam.cli import *
 
-This provides direct access to objects such as *exposure*, *controller*, *db*, and shortcuts in *azcamserver*, or *api*, *db*,  and shortcuts in *azcamconsole*. 
+This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
 
 ## Server Operation
 AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like *azcamtool* or a pyhton command line interface using azcam's console code.
@@ -61,7 +53,7 @@ The azcam command structure provides a fairly uniform interface which can be use
 
 Local CLI or script example:
 
-`expose.exposure(2.5, 'flat', 'an image title')`
+`exposure.expose(2.5, 'flat', 'an image title')`
 
 Remote socket connection example:
 

@@ -118,7 +118,7 @@ class CameraServerInterface(object):
 
         if self.demo_mode:
             if Parameter == "ExposureTimeRemaining":
-                parval = azcam.db.exposure.exposure_time * 1000
+                parval = azcam.api.exposure.exposure_time * 1000
                 reply = ["OK", parval]
             else:
                 reply = ["OK", 0]

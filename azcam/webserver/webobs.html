@@ -5,25 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <link rel="shortcut icon" href="static/favicon.ico">
-
     <title>Observe</title>
 </head>
 
 <body>
-
     <div class="jumbotron text-center">
         <h2 id="title" class="display-5">AzCam Observe</h2>
     </div>
-
     <div class="container">
-
         <div class="card border-primary">
             <div class="card-body">
-
                 <div class="row">
                     <div class="btn-toolbar">
                         <button type="button" class="btn btn-primary mr-1" id="load_script_btn">Load Script</button>
@@ -34,20 +28,15 @@
                         <button type="button" class="btn btn-danger mr-1" id="abort_btn">Abort Script</button>
                         <button type="button" class="btn btn-info mr-1" id="pause_resume_btn">Pause/Resume</button>
                     </div>
-
                 </div>
-
                 <div class="row mt-2 mb-2">
                     <label for="num_cycles">Number of Script Cycles:</label>
                     <input type="number" id="num_cycles" class="number_box ml-2" title="number of cycles to run script" min="1">
                 </div>
-
-
                 <form method="POST" id="upload_form" enctype="multipart/form-data">
-                    <input type="file" name="file" id="scriptname" />
-                    <input type="submit" value="Load Script" id="upload_btn" />
+                    <input type="file" name="file" id="scriptname">
+                    <input type="submit" value="Load Script" id="upload_btn">
                 </form>
-
                 <!--                     <div class="row">
                         <div class="file-field">
                             <div class="btn btn-secondary">
@@ -61,12 +50,9 @@
             <!-- end card body -->
         </div>
         <!-- end card -->
-
         <div class="card border-primary mt-2">
             <div class="card-body">
-
                 <table class="table table-bordered table-striped .table-responsive table-sm m-0 p-0" id="script_table">
-
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -88,9 +74,7 @@
                             <th scope="col">Move Focus</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
                         {% for row in table_data %}
                         <tr>
                             {% for col in row %}
@@ -98,31 +82,22 @@
                             {% endfor %}
                         </tr>
                         {% endfor %}
-
                     </tbody>
-
-
                 </table>
                 <!-- end table -->
-
             </div>
             <!-- end card body -->
         </div>
         <!-- end card -->
-
         <div id="timestamp"></div>
         <span id="message" class="form-control;">messages</span>
-
-
     </div>
     <!-- end container -->
-
     <!-- code  -->
     <script src="static/jquery-3.4.1.min.js"></script>
     <script src="static/popper.min.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/webobs.js"></script>
-
 </body>
 
 </html>

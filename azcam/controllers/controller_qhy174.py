@@ -81,7 +81,7 @@ class ControllerQHY(Controller):
 
         self.set_roi()
 
-        self.set_exposuretime(azcam.db.exposure.exposure_time)
+        self.set_exposuretime(azcam.api.exposure.exposure_time)
 
         return
 

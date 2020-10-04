@@ -4,8 +4,7 @@ import shutil
 
 import numpy
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 import azcam.testers
 from azcam.testers.basetester import Tester
 
@@ -52,26 +51,26 @@ class Prnu(Tester):
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("prnu")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # clear device
-        api.tests()
+        azcam.api.tests()
 
-        api.set_par("imageroot", "prnu.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "prnu.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
-        api.set_par("imagetype", "zero")
-        filename = os.path.basename(api.get_image_filename())
+        azcam.api.set_par("imagetype", "zero")
+        filename = os.path.basename(azcam.api.get_image_filename())
         azcam.log("Taking PRNU bias: %s" % filename)
-        api.expose(0, "zero", "PRNU bias")
+        azcam.api.expose(0, "zero", "PRNU bias")
 
         waves = list(self.exposures.keys())
         waves.sort()
@@ -81,20 +80,20 @@ class Prnu(Tester):
 
             if wavelength > 0:
                 azcam.log(f"Moving to wavelength: {int(wavelength)}")
-                api.set_wavelength(wavelength)
-                wave = api.get_wavelength()
+                azcam.api.set_wavelength(wavelength)
+                wave = azcam.api.get_wavelength()
                 wave = int(wave)
                 azcam.log(f"Current wavelength: {wave}")
-            filename = os.path.basename(api.get_image_filename())
+            filename = os.path.basename(azcam.api.get_image_filename())
             azcam.log(
                 f"Taking PRNU image for {exposuretime:.3f} seconds at {wavelength:.1f} nm"
             )
-            api.expose(
+            azcam.api.expose(
                 exposuretime, self.exposure_type, f"PRNU image {wavelength:.1f} nm"
             )
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
         azcam.log("PRNU sequence finished")
 
         return
@@ -145,7 +144,7 @@ class Prnu(Tester):
         )
 
         # scale by gain values
-        gain = azcam.testers.gain
+        gain = azcam.api.gain
         if gain.valid:
             self.system_gain = gain.system_gain
         else:
@@ -175,7 +174,7 @@ class Prnu(Tester):
 
             # "debias" correct with residuals after colbias
             if self.zero_correct:
-                debiased = azcam.testers.bias.debiased_filename
+                debiased = azcam.api.bias.debiased_filename
                 biassub = "biassub.fits"
                 azcam.fits.sub(nextfile, debiased, biassub)
                 os.remove(nextfile)
@@ -194,16 +193,16 @@ class Prnu(Tester):
 
             # use mask from defects object
             if self.use_edge_mask:
-                if azcam.testers.defects.valid:
+                if azcam.api.defects.valid:
                     self.MaskedImage = numpy.ma.masked_where(
-                        azcam.testers.defects.defects_mask,
+                        azcam.api.defects.defects_mask,
                         prnuimage.buffer,
                     )
                 else:
-                    azcam.testers.defects.make_edge_mask(
+                    azcam.api.defects.make_edge_mask(
                         prnuimage.buffer
-                    )  # azcam.testers.defects.MaskedImage and azcam.testers.defects.EdgeMask
-                    self.MaskedImage = azcam.testers.defects.MaskedImage
+                    )  # azcam.api.defects.MaskedImage and azcam.api.defects.EdgeMask
+                    self.MaskedImage = azcam.api.defects.MaskedImage
             else:
                 self.MaskedImage = numpy.ma.masked_invalid(prnuimage.buffer)
 

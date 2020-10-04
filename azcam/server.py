@@ -1,12 +1,7 @@
 import azcam
-from azcam.api_server import API
-from azcam import db
 
 #: list of objects available to cmdserver
 azcam.db.cmd_objects = {}
-
-#: create api object
-api = API()
 
 azcam.db.app_type = 1  # server
 
@@ -83,3 +78,7 @@ azcam.db.parameters = {
     "verbosity": "db.verbosity",
     "hostname": "db.hostname",
 }
+
+from .api_server import api
+
+setattr(azcam, "api", api)

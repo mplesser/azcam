@@ -34,23 +34,25 @@ class ExposureArc(Exposure):
         # flag to change OD voltages during integration > 1 second
         CHANGEVOLTAGES = (
             self.image_type.lower() != "zero"
-            and azcam.db.controller.lower_voltages
+            and azcam.api.controller.lower_voltages
             and self.exposure_time > 1.0
         )
 
         if CHANGEVOLTAGES:
             # lower OD's
-            azcam.db.controller.board_command("RMP", azcam.db.controller.TIMINGBOARD, 0)
+            azcam.api.controller.board_command(
+                "RMP", azcam.api.controller.TIMINGBOARD, 0
+            )
 
         # start exposure
         if imagetype != "zero":
             azcam.log("Integration started")
-        azcam.db.controller.start_exposure()
+        azcam.api.controller.start_exposure()
 
         """
         # do this for any return below
         if CHANGEVOLTAGES:  # return OD volatges
-            azcam.db.controller.board_command("RMP", azcam.db.controller.TIMINGBOARD, 1)
+            azcam.api.controller.board_command("RMP", azcam.api.controller.TIMINGBOARD, 1)
         """
         self.dark_time_start = time.time()
 
@@ -78,7 +80,7 @@ class ExposureArc(Exposure):
             if loopcount > 20:
                 azcam.log("ERROR Integration time stuck")
                 self.exposure_flag = azcam.db.exposureflags["ABORT"]
-                azcam.db.controller.exposure_abort()
+                azcam.api.controller.exposure_abort()
                 break
             elif (
                 self.exposure_flag == azcam.db.exposureflags["ABORT"]
@@ -89,18 +91,18 @@ class ExposureArc(Exposure):
                     self.exposure_sequence_number = 1
                     self.exposure_flag = azcam.db.exposureflags["EXPOSING"]
                 else:
-                    azcam.db.controller.exposure_abort()
+                    azcam.api.controller.exposure_abort()
                     break
             elif (
                 self.exposure_flag == azcam.db.exposureflags["PAUSE"]
             ):  # PauseExposure received
-                azcam.db.controller.exposure_pause()
+                azcam.api.controller.exposure_pause()
                 self.exposure_flag = azcam.db.exposureflags["PAUSED"]
                 azcam.log("Integration paused")
             elif (
                 self.exposure_flag == azcam.db.exposureflags["RESUME"]
             ):  # ResumeExposure received
-                azcam.db.controller.exposure_resume()
+                azcam.api.controller.exposure_resume()
                 self.exposure_flag = azcam.db.exposureflags["EXPOSING"]
                 reply = self.get_exposuretime_remaining()
                 remtime = reply
@@ -130,18 +132,20 @@ class ExposureArc(Exposure):
 
         # return OD voltages
         if CHANGEVOLTAGES:
-            azcam.db.controller.board_command("RMP", azcam.db.controller.TIMINGBOARD, 1)
+            azcam.api.controller.board_command(
+                "RMP", azcam.api.controller.TIMINGBOARD, 1
+            )
             time.sleep(0.5)  # delay for voltages to come up
 
         # turn off comp lamps
         if not self.comp_sequence:
             if self.comp_exposure:
-                if not azcam.db.instrument.shutter_strobe:
-                    azcam.db.instrument.comps_off()
-                azcam.db.instrument.set_active_comps("shutter")
+                if not azcam.api.instrument.shutter_strobe:
+                    azcam.api.instrument.comps_off()
+                azcam.api.instrument.set_active_comps("shutter")
 
         # extra close shutter command
-        reply = azcam.db.controller.set_shutter(0)
+        reply = azcam.api.controller.set_shutter(0)
 
         # set times
         self.exposure_time_remaining = 0
@@ -165,13 +169,13 @@ class ExposureArc(Exposure):
         imagetype = self.image_type.lower()
 
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter(1)
+            azcam.api.controller.set_shutter(1)
 
         if self.tdi_mode:
             self.set_tdi_delay(True)
 
         # start readout
-        azcam.db.controller.start_readout()
+        azcam.api.controller.start_readout()
         self.exposure_flag = azcam.db.exposureflags["READOUT"]
         azcam.log("Readout started")
 
@@ -191,7 +195,7 @@ class ExposureArc(Exposure):
         self.image.valid = 1
 
         if imagetype == "ramp":
-            azcam.db.controller.set_shutter(0)
+            azcam.api.controller.set_shutter(0)
 
         if self.tdi_mode:
             self.set_tdi_delay(False)
@@ -303,12 +307,12 @@ class ExposureArc(Exposure):
 
         # reset idle if no flush
         if not self.flush_array:
-            azcam.db.controller.start_idle()
+            azcam.api.controller.start_idle()
 
         # display image
         if self.display_image and not self.write_async:
             azcam.log("Displaying image")
-            azcam.db.display.display(self.image)
+            azcam.api.display.display(self.image)
 
         # increment file sequence number if image was written
         if self.save_file:
@@ -325,13 +329,13 @@ class ExposureArc(Exposure):
         """
 
         if (
-            azcam.db.controller.controller_type == "gen2"
+            azcam.api.controller.controller_type == "gen2"
             and self.exposure_flag == azcam.db.exposureflags["READ"]
         ):
             raise azcam.AzcamError("Abort readout not supported for this controller")
 
         if (
-            azcam.db.controller.controller_type == "gen1"
+            azcam.api.controller.controller_type == "gen1"
             and self.exposure_flag == azcam.db.exposureflags["READ"]
         ):
             raise azcam.AzcamError("Abort readout not supported for this controller")
@@ -354,15 +358,15 @@ class ExposureArc(Exposure):
 
         if Flag:
             Delay = self.tdi_delay
-            azcam.db.controller.header.set_keyword(
+            azcam.api.controller.header.set_keyword(
                 "TdiDelay", Delay, "TDI delay multiplier", int
             )
         else:
             Delay = self.par_delay
-            azcam.db.controller.header.delete_keyword("TdiDelay")
+            azcam.api.controller.header.delete_keyword("TdiDelay")
 
-        azcam.db.controller.write_memory(
-            "Y", azcam.db.controller.TIMINGBOARD, 0x20, Delay
+        azcam.api.controller.write_memory(
+            "Y", azcam.api.controller.TIMINGBOARD, 0x20, Delay
         )
 
         return

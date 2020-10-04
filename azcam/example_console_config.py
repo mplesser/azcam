@@ -7,9 +7,7 @@ import sys
 import datetime
 import threading
 
-import azcam
-import azcam.console
-from azcam.console import api
+from azcam.console import azcam
 import azcam.shortcuts_console
 from azcam.displays.ds9display import Ds9Display
 from azcam.genpars import GenPars
@@ -71,7 +69,7 @@ dthread.start()  # thread just for speed
 # ****************************************************************
 # try to connect to azcam
 # ****************************************************************
-connected = api.connect()  # default host and port
+connected = azcam.api.connect()  # default host and port
 if connected:
     azcam.log("Connected to azcamserver")
 else:
@@ -105,17 +103,6 @@ except FileNotFoundError:
 # add scripts to sys.path for Run
 # ****************************************************************
 azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
-
-# ****************************************************************
-# define names to imported into namespace when using cli
-# ****************************************************************
-azcam.db.cli_cmds.update({"azcam": azcam, "db": azcam.db, "api": api})
-
-# ****************************************************************
-# clean namespace
-# # ****************************************************************
-del azcam.focalplane, azcam.displays, azcam.sockets, azcam.shortcuts_console
-del azcam.header, azcam.image
 
 # ****************************************************************
 # finish

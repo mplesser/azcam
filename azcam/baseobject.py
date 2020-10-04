@@ -28,11 +28,13 @@ class Objects(object):
         # True when object has been reset
         self.is_reset = 0
 
-        # save object
-        setattr(azcam.db, self.id, self)
-        if azcam.db.app_type == 1:  # server only
-            azcam.db.cmd_objects[self.id] = self
+        # add object to api and cli_cmds
+        setattr(azcam.api, self.id, self)
         azcam.db.cli_cmds[self.id] = self
+
+        # add object to cmd_objects if server-side
+        if azcam.db.app_type == 1:
+            azcam.db.cmd_objects[self.id] = self
 
     def initialize(self):
         """
@@ -112,7 +114,9 @@ class Objects(object):
         reply = self.header.get_all_keywords()
 
         for key in reply:
-            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
+            reply1 = self.get_keyword(
+                key
+            )  # this calls object's get_keyword to get updated values
             list1 = [key, reply1[0], reply1[1], reply1[2]]
             header.append(list1)
 

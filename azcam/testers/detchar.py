@@ -1,8 +1,7 @@
 import os
 import datetime
 
-import azcam
-from azcam.console import api
+from azcam.console import azcam
 from azcam.testers.report import Report
 
 
@@ -21,7 +20,7 @@ class DetChar(Report):
         self.is_setup = 0
         self.create_html = True
 
-        setattr(azcam.db, obj_id, self)
+        setattr(azcam.api, obj_id, self)
         azcam.db.cli_cmds[obj_id] = self
 
     def initdata(self, serial_number=-1):
@@ -47,7 +46,9 @@ class DetChar(Report):
             pass
         azcam.utils.curdir(newfolder)
 
-        datestring = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y").lower()
+        datestring = datetime.datetime.strftime(
+            datetime.datetime.now(), "%d%b%y"
+        ).lower()
         try:
             os.mkdir(datestring)
         except FileExistsError:
@@ -55,7 +56,7 @@ class DetChar(Report):
         azcam.utils.curdir(datestring)
 
         imagefolder = azcam.utils.curdir()
-        api.set_par("imagefolder", imagefolder)
+        azcam.api.set_par("imagefolder", imagefolder)
 
         return
 

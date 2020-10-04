@@ -3,9 +3,8 @@ import math
 
 import numpy
 
-import azcam
+from azcam.console import azcam
 from azcam.functions.fits import pyfits
-from azcam.console import api
 from azcam.testers.basetester import Tester
 
 
@@ -51,40 +50,40 @@ class Ramp(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("ramp")
-        api.set_par("imagefolder", newfolder)
+        azcam.api.set_par("imagefolder", newfolder)
 
         # save pars to be changed
         impars = {}
-        api.save_imagepars(impars)
+        azcam.api.save_imagepars(impars)
 
         # flush detector
-        api.tests()
+        azcam.api.tests()
 
-        api.set_par("imageroot", "ramp.")  # for automatic data analysis
-        api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
-        api.set_par("imageautoname", 0)  # manually set name
-        api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
-        api.set_par("imagetest", 0)  # turn off TestImage
+        azcam.api.set_par("imageroot", "ramp.")  # for automatic data analysis
+        azcam.api.set_par("imageincludesequencenumber", 1)  # use sequence numbers
+        azcam.api.set_par("imageautoname", 0)  # manually set name
+        azcam.api.set_par("imageautoincrementsequencenumber", 1)  # inc sequence numbers
+        azcam.api.set_par("imagetest", 0)  # turn off TestImage
 
         # get bias image
-        api.set_par("imagetype", "zero")
-        zerofile = api.get_image_filename()
+        azcam.api.set_par("imagetype", "zero")
+        zerofile = azcam.api.get_image_filename()
         azcam.log("Taking bias image %s " % os.path.basename(zerofile))
-        api.expose(0, "zero", "ramp bias")
+        azcam.api.expose(0, "zero", "ramp bias")
 
         # take data images
-        api.set_par("imagetype", "ramp")
-        file1 = api.get_image_filename()
+        azcam.api.set_par("imagetype", "ramp")
+        file1 = azcam.api.get_image_filename()
         azcam.log("Taking ramp image 1 %s" % os.path.basename(file1))
-        api.expose(BaseExposureTime, "ramp", "ramp image 1")
+        azcam.api.expose(BaseExposureTime, "ramp", "ramp image 1")
 
-        file2 = api.get_image_filename()
+        file2 = azcam.api.get_image_filename()
         azcam.log("Taking ramp image 2 %s" % os.path.basename(file2))
-        api.flush(2)
-        api.expose(BaseExposureTime, "ramp", "ramp image 2")
+        azcam.api.flush(2)
+        azcam.api.expose(BaseExposureTime, "ramp", "ramp image 2")
 
         # finish
-        api.restore_imagepars(impars, currentfolder)
+        azcam.api.restore_imagepars(impars, currentfolder)
 
         return
 

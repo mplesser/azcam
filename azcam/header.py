@@ -28,7 +28,7 @@ class Header(object):
             self.set_title(title)
 
         if template is not None:
-            azcam.db.exposure.imageheaderfile = template
+            azcam.api.exposure.imageheaderfile = template
             self.read_file(template)
 
     def set_header(self, object_name, order=-1):
@@ -56,9 +56,13 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[0] = "=================================================================="
+        self.title[
+            0
+        ] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[2] = "=================================================================="
+        self.title[
+            2
+        ] = "=================================================================="
 
         return
 
