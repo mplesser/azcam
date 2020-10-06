@@ -177,7 +177,7 @@ class Exposure(Objects):
 
         # call initialize() method on other objects
         for obj in self.objects_init:
-            azcam.db.get(obj).initialize()
+            azcam.api.get(obj).initialize()
 
         self.initialized = 1
 
@@ -205,7 +205,7 @@ class Exposure(Objects):
 
         # call reset() method on other objects
         for obj in self.objects_reset:
-            azcam.db.get(obj).reset()
+            azcam.api.get(obj).reset()
 
         return
 
