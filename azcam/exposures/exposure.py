@@ -880,7 +880,7 @@ class Exposure(Objects):
             if objectname == "controller":  # skip as already up to date
                 continue
             try:
-                azcam.db.get(
+                azcam.api.get(
                     objectname
                 ).update_header()  # dont crash so all headers get updated
             except Exception:
@@ -1617,7 +1617,7 @@ class Exposure(Objects):
 
     def read_header_file(self, filename):
         """
-        Read header tempalte file.
+        Read header template file.
         """
 
         return azcam.db.headers["system"].read_file(filename)
