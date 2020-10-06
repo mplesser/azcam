@@ -18,7 +18,7 @@ $(document).ready(function() {
     Initialize();
 
     // set timer for get_status
-    setInterval(watchdog, 1000);
+    setInterval(watchdog, 500);
 
 }); // end ready function
 

@@ -18,12 +18,8 @@ class WebObs(object):
 
         self.debug = 1  #: True to NOT execute commands
         self.number_cycles = 1  #: Number of times to run the script.
-        self.move_telescope_during_readout = (
-            0  #: True to move the telescope during camera readout
-        )
-        self.increment_status = (
-            0  #: True to increment status count if command in completed
-        )
+        self.move_telescope_during_readout = 0  #: True to move the telescope during camera readout
+        self.increment_status = 0  #: True to increment status count if command in completed
 
         self.script_file = ""  #: filename of observing commands cript file
 
@@ -57,9 +53,7 @@ class WebObs(object):
             "webobs", "script_file", "default", "", "observing_script.txt"
         )
 
-        number_cycles = azcam.db.genpars.get_par(
-            "webobs", "number_cycles", "default", "", 1
-        )
+        number_cycles = azcam.db.genpars.get_par("webobs", "number_cycles", "default", "", 1)
         self.number_cycles = int(number_cycles)
 
         self.column_order = [
@@ -223,11 +217,7 @@ class WebObs(object):
             tokens = azcam.utils.parse(line)
 
             # comment line, special case
-            if (
-                line.startswith("#")
-                or line.startswith("!")
-                or line.startswith("comment")
-            ):
+            if line.startswith("#") or line.startswith("!") or line.startswith("comment"):
                 cmd = "comment"
                 arg = line[1:].strip()
 
@@ -402,7 +392,7 @@ class WebObs(object):
         self._abort_script = 0
 
         # save pars to be changed
-        impars = {}
+        # impars = {}
 
         # log start info
         s = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -413,9 +403,7 @@ class WebObs(object):
         for loop in range(self.number_cycles):
 
             if self.number_cycles > 1:
-                azcam.log(
-                    "*** Script cycle %d of %d ***" % (loop + 1, self.number_cycles)
-                )
+                azcam.log("*** Script cycle %d of %d ***" % (loop + 1, self.number_cycles))
 
             for linenumber, command in enumerate(self.commands):
 
@@ -424,9 +412,7 @@ class WebObs(object):
                 line = command["line"]
                 status = command["status"]
 
-                azcam.log(
-                    "Command %03d/%03d: %s" % (linenumber, len(self.commands), line)
-                )
+                azcam.log("Command %03d/%03d: %s" % (linenumber, len(self.commands), line))
 
                 # execute the command
                 try:
@@ -459,7 +445,7 @@ class WebObs(object):
 
         # finish
         self.current_line = 0
-        azcam.console.api.restore_imagepars(impars)
+        # azcam.api.restore_imagepars(impars)
         self._abort_script = 0  # clear abort status
 
         return
@@ -545,7 +531,7 @@ class WebObs(object):
             pass
 
         elif cmd == "stepfocus":
-            reply = azcam.console.api.step_focus(arg)
+            reply = azcam.api.step_focus(arg)
 
         elif cmd == "movefilter":
             pass
@@ -561,14 +547,9 @@ class WebObs(object):
             return "OK"
 
         elif cmd == "steptel":
-            azcam.log(
-                "offsetting telescope in arcsecs - RA: %s, DEC: %s"
-                % (raoffset, decoffset)
-            )
+            azcam.log("offsetting telescope in arcsecs - RA: %s, DEC: %s" % (raoffset, decoffset))
             try:
-                reply = azcam.console.api.rcommand(
-                    f"telescope.offset {raoffset} {decoffset}"
-                )
+                reply = azcam.api.telescope.offset(raoffset, decoffset)
                 return "OK"
             except azcam.AzcamError as e:
                 return f"ERROR {e}"
@@ -598,12 +579,12 @@ class WebObs(object):
         if movefocus_flag:
             azcam.log("Moving to focus: %s" % focus)
             if not self.DummyMode:
-                reply = azcam.console.api.set_focus(focus)
+                reply = azcam.api.set_focus(focus)
                 # reply, stop = check_exit(reply, 1)
                 stop = self._abort_gui
                 if stop:
                     return "STOP"
-                reply = azcam.console.api.get_focus()
+                reply = azcam.api.get_focus()
                 azcam.log("Focus reply:: %s" % repr(reply))
                 # reply, stop = check_exit(reply, 1)
                 stop = self._abort_gui
@@ -615,8 +596,8 @@ class WebObs(object):
             if wave != self.current_filter:
                 azcam.log("Moving to filter: %s" % wave)
                 if not self.debug:
-                    azcam.console.api.set_filter(wave)
-                    reply = azcam.console.api.get_filter()
+                    azcam.api.set_filter(wave)
+                    reply = azcam.api.get_filter()
                     self.current_filter = reply
             else:
                 azcam.log("Filter %s already in beam" % self.current_filter)
@@ -626,9 +607,7 @@ class WebObs(object):
             azcam.log("Moving telescope now to RA: %s, DEC: %s" % (ra, dec))
             if not self.debug:
                 try:
-                    reply = azcam.console.api.rcommand(
-                        f"telescope.move {ra} {dec} {epoch}"
-                    )
+                    reply = azcam.api.telescope.move(ra, dec, epoch)
                 except azcam.AzcamError as e:
                     return f"ERROR {e}"
 
@@ -648,10 +627,10 @@ class WebObs(object):
                             return "STOP"
 
                 if cmd != "test":
-                    azcam.console.api.set_par("imagetest", 0)
+                    azcam.api.set_par("imagetest", 0)
                 else:
-                    azcam.console.api.set_par("imagetest", 1)
-                filename = azcam.console.api.get_image_filename()
+                    azcam.api.set_par("imagetest", 1)
+                filename = azcam.api.get_image_filename()
 
                 if cmd == "test":
                     azcam.log(
@@ -673,13 +652,11 @@ class WebObs(object):
 
                     if 1:
                         # if not self.debug:
-                        reply = azcam.console.api.expose1(
-                            exptime, imagetype, title
-                        )  # immediate return
+                        reply = azcam.api.expose1(exptime, imagetype, title)  # immediate return
                         time.sleep(2)  # wait for Expose process to start
                         cycle = 1
                         while 1:
-                            flag = azcam.console.api.get_par("ExposureFlag")
+                            flag = azcam.api.get_par("ExposureFlag")
                             if flag is None:
                                 azcam.log("Could not get exposure status, quitting...")
                                 stop = 1
@@ -695,14 +672,10 @@ class WebObs(object):
                                     check_header = 1
                                     while check_header:
                                         header_updating = int(
-                                            azcam.console.api.get_par(
-                                                "exposureupdatingheader"
-                                            )
+                                            azcam.api.get_par("exposureupdatingheader")
                                         )
                                         if header_updating:
-                                            azcam.log(
-                                                "Waiting for header to finish updating..."
-                                            )
+                                            azcam.log("Waiting for header to finish updating...")
                                             time.sleep(0.5)
                                         else:
                                             check_header = 0
@@ -711,9 +684,8 @@ class WebObs(object):
                                         % (raNext, decNext)
                                     )
                                     try:
-                                        reply = azcam.console.api.rcommand(
-                                            "telescope.move_start %s %s %s"
-                                            % (raNext, decNext, epochNext)
+                                        reply = azcam.api.telescope.move_start(
+                                            raNext, decNext, epochNext
                                         )
                                     except azcam.AzcamError as e:
                                         return f"ERROR {e}"
@@ -728,7 +700,7 @@ class WebObs(object):
                             cycle += 1
                 else:
                     if not self.debug:
-                        azcam.console.api.expose(exptime, imagetype, title)
+                        azcam.api.expose(exptime, imagetype, title)
 
                 # reply, stop = check_exit(reply)
                 stop = self._abort_gui
