@@ -100,10 +100,5 @@ except FileNotFoundError:
     azcam.AzcamWarning("Parameter file not found")
 
 # ****************************************************************
-# add scripts to sys.path for Run
-# ****************************************************************
-azcam.utils.add_searchfolder(os.path.join(azcam.db.systemfolder, "scripts"))
-
-# ****************************************************************
 # finish
 azcam.log("Configuration complete")

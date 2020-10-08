@@ -11,7 +11,7 @@ class API(object):
     def __init__(self) -> None:
         pass
 
-    def get(self, name):
+    def _get(self, name):
         """
         Returns an API object by name.
         Returns None if api.name is not defined.

@@ -17,7 +17,7 @@ class MonitorInterface(object):
         # Get the AzCam Monitor host (local host)
         self.monitor_host = azcam.db.hostname
         # Command port
-        self.command_port = azcam.api.cmdserver.port
+        self.command_port = azcam.db.cmdserver.port
 
         # Process fileds:
         # Process ID
@@ -64,9 +64,7 @@ class MonitorInterface(object):
         udp_socketReg = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         udp_socketReg.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-        udp_socketReg.sendto(
-            bytes(cmd, "utf-8"), (self.monitor_host, self.register_port)
-        )
+        udp_socketReg.sendto(bytes(cmd, "utf-8"), (self.monitor_host, self.register_port))
 
         udp_socketReg.close()
 

@@ -66,7 +66,7 @@ cmdserver = CommandServer()
 cmdserver.port = 2402
 azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
 cmdserver.welcome_message = "Welcome - connected to the azcam command server"
-azcam.api.cmdserver.logcommands = 1
+azcam.db.cmdserver.logcommands = 1
 cmdserver.start()
 
 # ****************************************************************

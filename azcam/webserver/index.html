@@ -2,53 +2,43 @@
 <html lang="en">
 
 <head>
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>AzCam Home</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AzCam Home</title>
 
-   <!-- Bootstrap -->
-   <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="static/style.css">
-   <link rel="shortcut icon" href="static/favicon.ico">
+    <!-- Bootstrap -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="static/favicon.ico">
 </head>
 
 <body>
 
-   <div class="jumbotron text-center">
-      <h2 id="title" class="display-5">AzCam Home</h2>
-   </div>
+    <div class="jumbotron text-center" style="margin: 0px; padding: 0px; color: blue;">
+        <h2 id="title" class="display-5" style="margin: 5px; padding: 5px; background-color: none;">AzCam Home</h2>
+    </div>
 
-   <div class="container">
+    <div class="container">
 
-         <div class="card">
+        <div class="card">
             <div class="card-body">
-               <h4 class="card-title">Status</h4>
-               <h6 class="card-subtitle mb-2 text-muted">Camera Status</h6>
-               <p class="card-text">Click the Sttaus button below to open a new tab with current camera status. The tew tab which may be dragged to a new window if desired.</p>
-               <a href="http://localhost:2403/status" target="_blank" class="btn btn-primary">Status</a>
+                <h4 class="card-title">Help</h4>
+                <p>The links below open new tabs with useful information relating to observing.</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="https://mplesser.github.io/azcam/" target="_blank" class="card-link">AzCam Software</a></li>
+                    <li class="list-group-item"><a href="https://github.com/mplesser/focus#readme" target="_blank" class="card-link">AzCam focus code</a></li>
+                    <li class="list-group-item"><a href="https://github.com/mplesser/observe#readme" target="_blank" class="card-link">AzCam observe code</a></li>
+                </ul>
             </div>
-         </div>
+        </div>
 
-         <div class="card">
-            <div class="card-body">
-               <h4 class="card-title">Help</h4>
-               <p>The links below open new tabs with useful information relating to observing.</p>
-               <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><a href="https://mplesser.github.io/azcam/" target="_blank" class="card-link">AzCam Software</a></li>
-                  <li class="list-group-item"><a href="http://www.as.arizona.edu/observing" target="_blank" class="card-link">Steward Observatory Observing</a></li>
-                  <li class="list-group-item"><a href="https://github.com/mplesser/focus#readme" target="_blank" class="card-link">AzCam focus code</a></li>
-                  <li class="list-group-item"><a href="https://github.com/mplesser/observe#readme" target="_blank" class="card-link">AzCam observe code</a></li>
-               </ul>
-            </div>
-         </div>
+    </div>
+    <!-- end container -->
 
-   </div> <!-- end container -->
-
-   <!-- code -->
-   <script src="static/jquery-3.4.1.min.js"></script>
-   <script src="static/popper.min.js"></script>
-   <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- code -->
+    <script src="static/jquery-3.4.1.min.js"></script>
+    <script src="static/popper.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

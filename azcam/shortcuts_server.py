@@ -21,9 +21,9 @@ def sav():
 def p():
     """Shortcut to toggle cmdserver printing."""
 
-    old = azcam.api.cmdserver.logcommands
+    old = azcam.db.cmdserver.logcommands
     new = not old
-    azcam.api.cmdserver.logcommands = new
+    azcam.db.cmdserver.logcommands = new
     print("cmdserver logcommands is now %s" % ("ON" if new else "OFF"))
 
     return

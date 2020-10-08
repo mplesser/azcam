@@ -442,7 +442,7 @@ def get_par(parameter):
         dewtemp = azcam.api.tempcon.get_temperatures()[1]
         return [camtemp, dewtemp]
     elif parameter == "logcommands":
-        value = azcam.api.cmdserver.logcommands
+        value = azcam.db.cmdserver.logcommands
         return value
     elif parameter == "wd":
         value = azcam.utils.curdir()
@@ -470,7 +470,7 @@ def get_par(parameter):
 
     # object must be in api
     else:
-        obj = azcam.api.get(object1)
+        obj = azcam.api._get(object1)
         for i in range(1, numtokens):
             obj = getattr(obj, tokens[i])
         value = obj  # last time is value
@@ -503,7 +503,7 @@ def set_par(parameter, value=None):
         azcam.api.exposure.set_exposuretime(value)
         return None
     elif parameter == "logcommands":
-        azcam.api.cmdserver.logcommands = int(value)
+        azcam.db.cmdserver.logcommands = int(value)
         return None
 
     # parameter must be in parameters
@@ -529,7 +529,7 @@ def set_par(parameter, value=None):
 
     # run through sub-objects
     else:
-        obj = azcam.api.get(object1)
+        obj = azcam.api._get(object1)
         for i in range(1, numtokens - 1):
             obj = getattr(obj, tokens[i])
         # last time is actual object

@@ -15,7 +15,6 @@ from werkzeug.utils import secure_filename
 
 import azcam
 
-
 # url= "http://locahost:2402/api/instrument/set_filter?filter=1&filter_id=2"
 
 
@@ -29,22 +28,17 @@ class WebServer(object):
         # create flask app
         app = Flask(__name__, template_folder="")
         self.app = app
+        azcam.db.webapp = app
 
-        self.logcommands = 1
+        self.logcommands = 0
 
         self.mock_mode = 0
 
         # define pages
         index_home = "index.html"
-        updates_home = "updates.html"
-        status_home = "status.html"
-        exptool_home = "exptool.html"
-        observe_home = "webobs.html"
 
         #: port for webserver
-        self.webport = azcam.api.cmdserver.port + 1
-
-        azcam.api.webserver = self
+        self.webport = None
 
         self.upload_folder = "/data/uploads"
 
@@ -54,27 +48,8 @@ class WebServer(object):
         # home pages
         # ******************************************************************************
         @app.route("/", methods=["GET"])
-        def index():
+        def home():
             return render_template(index_home)
-
-        @app.route("/updates", methods=["GET"])
-        def updates():
-            return render_template(updates_home)
-
-        @app.route("/status", methods=["GET"])
-        def status():
-            return render_template(status_home)
-
-        @app.route("/exptool", methods=["GET"])
-        def exptool():
-            return render_template(exptool_home)
-
-        @app.route("/webobs", methods=["GET"])
-        def webobs():
-            table_data = [
-                list(range(17)),
-            ]
-            return render_template(observe_home, table_data=table_data)
 
         @app.route("/favicon.ico")
         def favicon():
@@ -95,7 +70,7 @@ class WebServer(object):
 
             url = request.url
             if self.logcommands:
-                if "api/exposure/get_status" in url or "api/webobs/watchdog" in url:
+                if "api/exposure/get_status" in url:
                     pass
                 else:
                     azcam.log(url, prefix="Web-> ")
@@ -104,22 +79,11 @@ class WebServer(object):
             else:
                 reply = self.webcommand(url)
                 if self.logcommands:
-                    if "api/exposure/get_status" in url or "api/webobs/watchdog" in url:
+                    if "api/exposure/get_status" in url:
                         pass
-                else:
-                    azcam.log(reply, prefix="Web->   ")
+                    else:
+                        azcam.log(reply, prefix="Web->   ")
             return self.make_response(command, reply)
-
-        @app.route("/api/webobs/upload", methods=["POST"])
-        def upload_file():
-            url = request.url
-            if self.logcommands:
-                azcam.log(url, prefix="Web-> ")
-            f = request.files["file"]
-            f.save(
-                os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(f.filename))
-            )
-            return self.make_response("upload file", "file uploaded successfully")
 
     def webcommand(self, url):
         """
@@ -201,6 +165,8 @@ class WebServer(object):
         """
         Start web server.
         """
+
+        self.webport = azcam.db.cmdserver.port + 1
 
         azcam.log(f"Starting webserver - listening on port {self.webport}")
 
