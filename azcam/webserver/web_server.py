@@ -131,11 +131,12 @@ class WebServer(object):
                 arg, par = arg1.split("=")
                 kwargs[arg] = par
 
-        # security check
-        if obj not in azcam.db.cmd_objects:
-            raise azcam.AzcamError(f"remote call not allowed: {obj}", 4)
+        try:
+            objid = getattr(azcam.api, obj)
+        except Exception as e:
+            raise azcam.AzcamError(f"remote call not allowed in API: {obj}", 4)
 
-        caller = getattr(azcam.db.cmd_objects[obj], method)
+        caller = getattr(objid, method)
 
         return caller, kwargs
 

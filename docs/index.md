@@ -24,21 +24,21 @@ There are two three main operational modes of azcam:
  - Another is the console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
  - The final mode is through client applications, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. 
 
-For the generic environment, which is not very useful as it does not implement any actual hardware, the server-side code to get the current system wavelength and take an exposure is:
+For the *azcam-itl* environment, as an example, the server-side code to get the current system wavelength and take an exposure is:
 
     import azcam
-    from azcam.server import api
-    wavelength = api.instrument.get_wavelength()
-    api.expose(30., 'dark', "a dark image title")
+    import azcam_itl.server  # this configures the ITL environment
+    wavelength = azcam.api.instrument.get_wavelength()
+    azcam.api.expose(30., 'dark', "a dark image title")
 
-For the generic console application (which usually connects to a separate *azcamserver* application), this would be:
+For the *azcam-itl* console application (which usually connects to a separate *azcamserver* application), this would be:
 
     import azcam
-    from azcam.server import api
-    wavelength = api.get_wavelength()
-    api.expose(30., 'dark', "a dark image title")
+    import azcam_itl.console
+    wavelength = azcam.api.get_wavelength()
+    azcam.api.expose(30., 'dark', "a dark image title")
 
-Example configuration code can be found in `azcam.example_server_config1` and `azcam.example_console_config`.
+Example configuration code can be found in `azcam.example_server_config` and `azcam.example_console_config`.
 
 When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, **after** configuring the environment, execute the command:
 

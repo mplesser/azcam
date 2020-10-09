@@ -1,8 +1,5 @@
 import azcam
 
-#: list of objects available to cmdserver
-azcam.db.cmd_objects = {}
-
 azcam.db.app_type = 1  # server
 
 #: azcamparameters

@@ -113,25 +113,23 @@ class CommandServer(socketserver.ThreadingTCPServer):
             else:
                 cmdobject = self.default_object
                 cmdcommand = cmd
-            if cmdobject in azcam.db.cmd_objects:
-                cmd = azcam.db.cmd_objects[cmdobject]
-                cmd = getattr(cmd, cmdcommand)
-                kwargs = {}
-                l1 = len(tokens)
-                if l1 > 1:
-                    args = tokens[1:]
-                    if "=" in args[0]:
-                        # assume all keywords for now
-                        kwargs = {}
-                        for argtoken in args:
-                            keyword, value = argtoken.split("=")
-                            kwargs[keyword] = value
-                        args = []
-                else:
+
+            cmd = getattr(azcam.api, cmdobject)
+            cmd = getattr(cmd, cmdcommand)
+            kwargs = {}
+            l1 = len(tokens)
+            if l1 > 1:
+                args = tokens[1:]
+                if "=" in args[0]:
+                    # assume all keywords for now
+                    kwargs = {}
+                    for argtoken in args:
+                        keyword, value = argtoken.split("=")
+                        kwargs[keyword] = value
                     args = []
-                reply = cmd(*args, **kwargs)  # execute
             else:
-                return "ERROR invalid object for remote command"
+                args = []
+            reply = cmd(*args, **kwargs)  # execute
         else:
             s = f"ERROR {cmd} not recognized"
             azcam.log(s)
