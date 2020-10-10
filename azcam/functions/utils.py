@@ -12,6 +12,8 @@ import hashlib
 import fnmatch
 import shutil
 from typing import List
+import importlib
+import pkgutil
 
 # keyboard checking is optional
 try:
@@ -21,9 +23,21 @@ except Exception:
 
 import azcam
 
-# **************************************************************************************************
-# file and folder commands
-# **************************************************************************************************
+
+def find_plugins():
+    """
+    Find all azcam plugins.
+    """
+
+    discovered_plugins = {}
+    for finder, name, ispkg in pkgutil.iter_modules():
+        if name.startswith("azcam_"):
+            mod = importlib.import_module(name)
+            discovered_plugins[name] = mod
+
+    return discovered_plugins
+
+
 def curdir(folder=""):
     """
     Gets and sets the working folder.
