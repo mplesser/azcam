@@ -4,27 +4,19 @@ These classes acquire and analyze image sensor characterization data.
 
 Usage Example:
 
-    from azcam.testers import bias
+    from azcam_testers import bias
     bias.acquire()
     bias.analyze()
 
 ```eval_rst
-.. autoclass:: azcam.testers.basetester
+.. autoclass:: azcam_testers.basetester
    :members:
    :undoc-members:
    :show-inheritance:
    :inherited-members:
 ```
 ```eval_rst
-.. autoclass:: azcam.testers.detchar
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
-
-```eval_rst
-.. autoclass:: azcam.testers.bias.Bias
+.. autoclass:: azcam_testers.detchar
    :members:
    :undoc-members:
    :show-inheritance:
@@ -32,7 +24,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.dark.Dark
+.. autoclass:: azcam_testers.bias.Bias
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,7 +32,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.defects.Defects
+.. autoclass:: azcam_testers.dark.Dark
    :members:
    :undoc-members:
    :show-inheritance:
@@ -48,7 +40,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.detcal.DetCal
+.. autoclass:: azcam_testers.defects.Defects
    :members:
    :undoc-members:
    :show-inheritance:
@@ -56,7 +48,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.eper.Eper
+.. autoclass:: azcam_testers.detcal.DetCal
    :members:
    :undoc-members:
    :show-inheritance:
@@ -64,7 +56,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.fe55.Fe55
+.. autoclass:: azcam_testers.eper.Eper
    :members:
    :undoc-members:
    :show-inheritance:
@@ -72,7 +64,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.gain.Gain
+.. autoclass:: azcam_testers.fe55.Fe55
    :members:
    :undoc-members:
    :show-inheritance:
@@ -80,7 +72,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.linearity.Linearity
+.. autoclass:: azcam_testers.gain.Gain
    :members:
    :undoc-members:
    :show-inheritance:
@@ -88,7 +80,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.metrology.Metrology
+.. autoclass:: azcam_testers.linearity.Linearity
    :members:
    :undoc-members:
    :show-inheritance:
@@ -96,7 +88,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.pocketpump.PocketPump
+.. autoclass:: azcam_testers.metrology.Metrology
    :members:
    :undoc-members:
    :show-inheritance:
@@ -104,7 +96,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.prnu.Prnu
+.. autoclass:: azcam_testers.pocketpump.PocketPump
    :members:
    :undoc-members:
    :show-inheritance:
@@ -112,7 +104,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.ptc.Ptc
+.. autoclass:: azcam_testers.prnu.Prnu
    :members:
    :undoc-members:
    :show-inheritance:
@@ -120,7 +112,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.qe.Qe
+.. autoclass:: azcam_testers.ptc.Ptc
    :members:
    :undoc-members:
    :show-inheritance:
@@ -128,7 +120,7 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.ramp.Ramp
+.. autoclass:: azcam_testers.qe.Qe
    :members:
    :undoc-members:
    :show-inheritance:
@@ -136,7 +128,15 @@ Usage Example:
 ```
 
 ```eval_rst
-.. autoclass:: azcam.testers.superflat.Superflat
+.. autoclass:: azcam_testers.ramp.Ramp
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+```
+
+```eval_rst
+.. autoclass:: azcam_testers.superflat.Superflat
    :members:
    :undoc-members:
    :show-inheritance:
