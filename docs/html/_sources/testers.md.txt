@@ -4,7 +4,7 @@ These classes acquire and analyze image sensor characterization data.
 
 Usage Example:
 
-    from azcam.testers import bias
+    from azcam_testers import bias
     bias.acquire()
     bias.analyze()
 
