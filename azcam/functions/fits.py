@@ -112,9 +112,7 @@ def add_history(filename: str, history_string: str, extension: int = 0) -> None:
     :param extension: image extension number
     """
 
-    value = (
-        time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
-    )
+    value = time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
     if len(value) > 70:
         value = value[:70] + "\n" + value[70:]
     if len(value) > 141:
@@ -340,8 +338,7 @@ def _is_image_extension(hdulist, extension: int) -> bool:
     """
 
     return (
-        "XTENSION" in hdulist[extension].header
-        and hdulist[extension].header["XTENSION"] == "IMAGE"
+        "XTENSION" in hdulist[extension].header and hdulist[extension].header["XTENSION"] == "IMAGE"
     )
 
 
@@ -630,7 +627,7 @@ def maximum(filename: str = "test", roi: str = []) -> List:
 
 def get_data(filename: str = "test", roi: str = []) -> List:
     """
-    Return data (pixel values) from an ROI in an image for every entension.
+    Return data (pixel values) from an ROI in an image for every extension.
     NOT FINISHED!
 
     :param filename: image filename
@@ -682,16 +679,12 @@ def resample(filename: str = "test", resample: int = 2) -> None:
     filename = azcam.utils.make_image_filename(filename)
     numext, first_ext, last_ext = get_extensions(filename)
 
-    with pyfits.open(
-        filename, "update", memmap=False
-    ) as hdul:  # memap solves lock issue
+    with pyfits.open(filename, "update", memmap=False) as hdul:  # memap solves lock issue
         for chan in range(first_ext, last_ext):
             data = hdul[chan].data
             dims = [hdul[chan].header["NAXIS1"], hdul[chan].header["NAXIS2"]]
             d2 = data.reshape(dims[1], dims[0])
-            d2_binned = _bin_ndarray(
-                d2, (int(dims[1] / resample), int(dims[0] / resample)), "sum"
-            )
+            d2_binned = _bin_ndarray(d2, (int(dims[1] / resample), int(dims[0] / resample)), "sum")
             hdul[chan].header["NAXIS1"] = int(dims[0] / resample)
             hdul[chan].header["NAXIS2"] = int(dims[1] / resample)
             hdul[chan].data = d2_binned
@@ -791,9 +784,7 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
 
             Median.append([])  # first hdu will be 1
             for row in range(row1, row2 + 1):
-                Median[i].append(
-                    numpy.median(im[i].data[row : row + 1, col1 : col2 + 1])
-                )
+                Median[i].append(numpy.median(im[i].data[row : row + 1, col1 : col2 + 1]))
 
             if fit_order > 0:
                 slope, xdata, yfit, resids, residspercent = _line_fit(
@@ -816,10 +807,7 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
 
         # new due to lock
         history_string = "COLBIAS data was column overscan corrected"
-        value = (
-            time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time()))
-            + history_string
-        )
+        value = time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
         if len(value) > 70:
             value = value[:70] + "\n" + value[70:]
         if len(value) > 141:
@@ -875,9 +863,7 @@ def _line_fit(xdata, ydata, order=1, fit_min=0, fit_max=-1):
     yydata = ydata[fit_min:fit_max]
 
     # generate line y values
-    polycoeffs = poly.polyfit(
-        xxdata, yydata, order
-    )  # [slope,intercept] using just fit_min:fit_max
+    polycoeffs = poly.polyfit(xxdata, yydata, order)  # [slope,intercept] using just fit_min:fit_max
     yfit = poly.polyval(xdata, polycoeffs)  # fit for all data, not just xxdata
 
     # calculate residuals
