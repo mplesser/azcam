@@ -8,7 +8,7 @@ import datetime
 import threading
 
 from azcam.console import azcam
-import azcam.shortcuts_console
+import azcam.shortcuts
 from azcam.displays.ds9display import Ds9Display
 from azcam.genpars import GenPars
 

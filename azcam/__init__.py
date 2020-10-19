@@ -1,7 +1,3 @@
-"""
-azcam.__init__
-"""
-
 import socket
 
 # bring these into azcam namespace so importing not required

@@ -5,7 +5,7 @@ Example server configuration script.
 import os
 
 from azcam.server import azcam
-import azcam.shortcuts_server
+import azcam.shortcuts
 from azcam.displays.ds9display import Ds9Display
 from azcam.telescopes.telescope import Telescope
 from azcam.instruments.instrument import Instrument

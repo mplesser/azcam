@@ -5,7 +5,6 @@ requirements = [
     "numpy",
     "matplotlib",
     "astropy",
-    "PySide2",
     "scipy",
     "pypdf2",
     "pdfkit",
