@@ -5,10 +5,6 @@ requirements = [
     "numpy",
     "matplotlib",
     "astropy",
-    "scipy",
-    "pypdf2",
-    "pdfkit",
-    "markdown",
 ]
 
 
@@ -17,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="azcam",
-    version="20.3",
+    version="20.4",
     description="azcam",
     long_description=long_description,
     author="Michael Lesser",
