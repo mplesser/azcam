@@ -18,7 +18,7 @@ import sys
 import recommonmark
 from recommonmark.transform import AutoStructify
 
-version = "20.2"
+version = "20.4"
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

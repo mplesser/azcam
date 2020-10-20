@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Report Commands &mdash; azcam 20.2 documentation</title>
+  <title>Report Commands &mdash; azcam 20.4 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                20.2
+                20.4
               </div>
             
           
@@ -195,44 +195,44 @@
 <h1>Report Commands<a class="headerlink" href="#report-commands" title="Permalink to this headline">¶</a></h1>
 <p>The report commands are helpful when generating reports.</p>
 <p>Usage Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam.testers</span> <span class="kn">import</span> <span class="n">report</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam_testers</span> <span class="kn">import</span> <span class="n">report</span>
 <span class="n">report</span><span class="o">.</span><span class="n">make_rstfile</span><span class="p">(</span><span class="s2">&quot;rstfile.rst&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<span class="target" id="module-azcam.testers.report"></span><p>Report generation class.</p>
+<span class="target" id="module-azcam_testers.report"></span><p>Report generation class.</p>
 <dl class="py class">
-<dt id="azcam.testers.report.Report">
-<em class="property">class </em><code class="sig-name descname">Report</code><a class="headerlink" href="#azcam.testers.report.Report" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report">
+<em class="property">class </em><code class="sig-name descname">Report</code><a class="headerlink" href="#azcam_testers.report.Report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Report generation methods.</p>
 <dl class="py method">
-<dt id="azcam.testers.report.Report.make_mdfile">
-<code class="sig-name descname">make_mdfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">md_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.make_mdfile" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report.make_mdfile">
+<code class="sig-name descname">make_mdfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">md_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam_testers.report.Report.make_mdfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a markdown file from lines.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.testers.report.Report.make_rstfile">
-<code class="sig-name descname">make_rstfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rst_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.make_rstfile" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report.make_rstfile">
+<code class="sig-name descname">make_rstfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rst_file</span></em>, <em class="sig-param"><span class="n">lines</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam_testers.report.Report.make_rstfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an RST file from lines.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.testers.report.Report.md2pdf">
-<code class="sig-name descname">md2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">create_html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.md2pdf" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report.md2pdf">
+<code class="sig-name descname">md2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">create_html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam_testers.report.Report.md2pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a PDF from a markdown file.
 Filename extension is optional.
 Optionally also create an html file.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.testers.report.Report.merge_pdf">
-<code class="sig-name descname">merge_pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_files</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_file</span><span class="o">=</span><span class="default_value">'combined.pdf'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.merge_pdf" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report.merge_pdf">
+<code class="sig-name descname">merge_pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_files</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">output_file</span><span class="o">=</span><span class="default_value">'combined.pdf'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam_testers.report.Report.merge_pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge multiple PDF files into one.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.testers.report.Report.rst2pdf">
-<code class="sig-name descname">rst2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.testers.report.Report.rst2pdf" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam_testers.report.Report.rst2pdf">
+<code class="sig-name descname">rst2pdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam_testers.report.Report.rst2pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a PDF from an RST file.
 Filename extension is optional.
 Also create an html file (currently required).</p>
