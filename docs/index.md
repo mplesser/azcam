@@ -143,16 +143,6 @@ The report commands are helpful when generating reports.
 
    report
 ```
-### Tester Classes
-
-The tester classes are used to aaquire and analyze images to characterize sensor performance. 
-    
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   testers
-```
 
 ## Configuration
 
