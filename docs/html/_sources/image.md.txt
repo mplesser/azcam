@@ -18,6 +18,10 @@ Usage Example:
    :inherited-members:
 ```
 
+# SendImage Class
+
+This class defines AzCam's code to send image data to a remote image server.
+
 ```eval_rst
 .. autoclass:: azcam.image.SendImage
    :members:

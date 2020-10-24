@@ -88,10 +88,11 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home - AzCam Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
@@ -110,7 +111,25 @@
 <li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#header-commands">Header Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#focalplane">Focalplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#cameraserver">CameraServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-dsp-code">Azcam DSP Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -220,6 +239,8 @@
 </li>
       <li><a href="fits.html#azcam.functions.fits.add_history">add_history() (in module azcam.functions.fits)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.add_searchfolder">add_searchfolder() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="programming.html#azcam.focalplane.FocalPlane.amp_config">amp_config (FocalPlane attribute)</a>
 </li>
       <li><a href="programming.html#azcam.focalplane.FocalPlane.ampcfg">ampcfg (FocalPlane attribute)</a>
@@ -236,10 +257,12 @@
 </li>
       <li><a href="tempcon.html#azcam.tempcons.tempcon.TempCon.apply_corrections">apply_corrections() (TempCon method)</a>
 </li>
-      <li><a href="fits.html#azcam.functions.fits.arith">arith() (in module azcam.functions.fits)</a>
+      <li><a href="utils.html#azcam.functions.utils.archive">archive() (in module azcam.functions.utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="fits.html#azcam.functions.fits.arith">arith() (in module azcam.functions.fits)</a>
+</li>
       <li><a href="image.html#azcam.image.Image.array_type">array_type (Image attribute)</a>
 </li>
       <li><a href="image.html#azcam.image.Image.asm_header">asm_header (Image attribute)</a>
@@ -271,10 +294,10 @@
 </li>
       </ul></li>
       <li>
-    azcam.utils
+    azcam.functions.utils
 
       <ul>
-        <li><a href="utils.html#module-azcam.utils">module</a>
+        <li><a href="utils.html#module-azcam.functions.utils">module</a>
 </li>
       </ul></li>
       <li><a href="image.html#azcam.image.SendImage.azcam_imageserver">azcam_imageserver() (SendImage method)</a>
@@ -315,6 +338,12 @@
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.check_image_ready">check_image_ready() (Exposure method)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.check_keyboard">check_keyboard() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.checksum">checksum() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.cleanup_files">cleanup_files() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="plot.html#azcam.functions.plot.clear_data">clear_data() (in module azcam.functions.plot)</a>
 </li>
       <li><a href="plot.html#azcam.functions.plot.close_figure">close_figure() (in module azcam.functions.plot)</a>
@@ -327,10 +356,10 @@
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.comp_exposure">comp_exposure (Exposure attribute)</a>
 </li>
-      <li><a href="exposure.html#azcam.exposures.exposure.Exposure.comp_sequence">comp_sequence (Exposure attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="exposure.html#azcam.exposures.exposure.Exposure.comp_sequence">comp_sequence (Exposure attribute)</a>
+</li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.completed">completed (Exposure attribute)</a>
 </li>
       <li><a href="instrument.html#azcam.instruments.instrument.Instrument.comps_delay">comps_delay() (Instrument method)</a>
@@ -348,6 +377,10 @@
       <li><a href="controller.html#azcam.controllers.controller.Controller">Controller (class in azcam.controllers.controller)</a>
 </li>
       <li><a href="programming.html#azcam.header.Header.copy_all_items">copy_all_items() (Header method)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.count_files">count_files() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.curdir">curdir() (in module azcam.functions.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -515,6 +548,8 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils.html#azcam.functions.utils.file_browser">file_browser() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="fits.html#azcam.functions.fits.file_exists">file_exists() (in module azcam.functions.fits)</a>
 </li>
       <li><a href="image.html#azcam.image.Image.filename">filename (Image attribute)</a>
@@ -523,15 +558,23 @@
 </li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.find_displays">find_displays() (Ds9Display method)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.find_file">find_file() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.find_file_in_sequence">find_file_in_sequence() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.find_plugins">find_plugins() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.finish">finish() (Exposure method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.finished">finished() (Exposure method)</a>
 </li>
       <li><a href="programming.html#azcam.focalplane.FocalPlane.first_col">first_col (FocalPlane attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="programming.html#azcam.focalplane.FocalPlane.first_row">first_row (FocalPlane attribute)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.fix_path">fix_path() (in module azcam.functions.utils)</a>
 </li>
       <li><a href="api_console.html#azcam.api_console.API.flush">flush() (API method)</a>
 
@@ -574,7 +617,11 @@
       <li><a href="instrument.html#azcam.instruments.instrument.Instrument.get_all_wavelengths">get_all_wavelengths() (Instrument method)</a>
 </li>
       <li><a href="api_console.html#azcam.api_console.API.get_attr">get_attr() (API method)</a>
+
+      <ul>
+        <li><a href="utils.html#azcam.functions.utils.get_attr">(in module azcam.functions.utils)</a>
 </li>
+      </ul></li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.get_box">get_box() (Ds9Display method)</a>
 </li>
       <li><a href="api_console.html#azcam.api_console.API.get_control_temperature">get_control_temperature() (API method)</a>
@@ -597,6 +644,10 @@
         <li><a href="plot.html#azcam.functions.plot.get_data">(in module azcam.functions.plot)</a>
 </li>
       </ul></li>
+      <li><a href="utils.html#azcam.functions.utils.get_datatype">get_datatype() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.get_error_status">get_error_status() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.get_exposureflag">get_exposureflag() (Exposure method)</a>
 </li>
       <li><a href="api_console.html#azcam.api_console.API.get_exposuretime">get_exposuretime() (API method)</a>
@@ -651,12 +702,14 @@
 </li>
       <li><a href="api_console.html#azcam.api_console.API.get_image_filename">get_image_filename() (API method)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.get_image_roi">get_image_roi() (in module azcam.functions.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.get_image_title">get_image_title() (Exposure method)</a>
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.get_image_type">get_image_type() (Exposure method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_console.html#azcam.api_console.API.get_image_types">get_image_types() (API method)</a>
 
       <ul>
@@ -693,6 +746,8 @@
 
       <ul>
         <li><a href="exposure.html#azcam.exposures.exposure.Exposure.get_par">(Exposure method)</a>
+</li>
+        <li><a href="utils.html#azcam.functions.utils.get_par">(in module azcam.functions.utils)</a>
 </li>
       </ul></li>
       <li><a href="api_console.html#azcam.api_console.API.get_pixels_remaining">get_pixels_remaining() (API method)</a>
@@ -851,6 +906,10 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils.html#azcam.functions.utils.make_file_folder">make_file_folder() (in module azcam.functions.utils)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.make_image_filename">make_image_filename() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="fits.html#azcam.functions.fits.maximum">maximum() (in module azcam.functions.fits)</a>
 </li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.mean">mean (Ds9Display attribute)</a>
@@ -859,6 +918,8 @@
 </li>
       <li><a href="fits.html#azcam.functions.fits.minimum">minimum() (in module azcam.functions.fits)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
@@ -867,11 +928,9 @@
 </li>
         <li><a href="plot.html#module-azcam.functions.plot">azcam.functions.plot</a>
 </li>
-        <li><a href="utils.html#module-azcam.utils">azcam.utils</a>
+        <li><a href="utils.html#module-azcam.functions.utils">azcam.functions.utils</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="plot.html#azcam.functions.plot.move_window">move_window() (in module azcam.functions.plot)</a>
 </li>
       <li><a href="fits.html#azcam.functions.fits.mult">mult() (in module azcam.functions.fits)</a>
@@ -956,6 +1015,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.par_delay">par_delay (Exposure attribute)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.parse">parse() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="api_console.html#azcam.api_console.API.parshift">parshift() (API method)</a>
 
       <ul>
@@ -977,6 +1038,8 @@
       <li><a href="plot.html#azcam.functions.plot.plot_image">plot_image() (in module azcam.functions.plot)</a>
 </li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.port">port (Ds9Display attribute)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.prompt">prompt() (in module azcam.functions.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1062,6 +1125,8 @@
 </li>
       <li><a href="programming.html#azcam.focalplane.FocalPlane.row_bin">row_bin (FocalPlane attribute)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.run_script">run_script() (in module azcam.functions.utils)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1136,6 +1201,8 @@
 </li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.set_display">set_display() (Ds9Display method)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.set_error_status">set_error_status() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="api_console.html#azcam.api_console.API.set_exposuretime">set_exposuretime() (API method)</a>
 
       <ul>
@@ -1194,6 +1261,8 @@
 </li>
       <li><a href="api_console.html#azcam.api_console.API.set_image_filename">set_image_filename() (API method)</a>
 </li>
+      <li><a href="utils.html#azcam.functions.utils.set_image_roi">set_image_roi() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.set_image_title">set_image_title() (Exposure method)</a>
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.set_image_type">set_image_type() (Exposure method)</a>
@@ -1228,6 +1297,8 @@
 
       <ul>
         <li><a href="exposure.html#azcam.exposures.exposure.Exposure.set_par">(Exposure method)</a>
+</li>
+        <li><a href="utils.html#azcam.functions.utils.set_par">(in module azcam.functions.utils)</a>
 </li>
       </ul></li>
       <li><a href="instrument.html#azcam.instruments.instrument.Instrument.set_pressure">set_pressure() (Instrument method)</a>
@@ -1282,6 +1353,8 @@
         <li><a href="instrument.html#azcam.instruments.instrument.Instrument.set_wavelength">(Instrument method)</a>
 </li>
       </ul></li>
+      <li><a href="utils.html#azcam.functions.utils.show_menu">show_menu() (in module azcam.functions.utils)</a>
+</li>
       <li><a href="display.html#azcam.displays.ds9display.Ds9Display.show_stats">show_stats() (Ds9Display method)</a>
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.shutter_dict">shutter_dict (Exposure attribute)</a>
@@ -1389,6 +1462,8 @@
       <li><a href="programming.html#azcam.focalplane.FocalPlane.update_header_keywords">update_header_keywords() (FocalPlane method)</a>
 </li>
       <li><a href="exposure.html#azcam.exposures.exposure.Exposure.update_headers">update_headers() (Exposure method)</a>
+</li>
+      <li><a href="utils.html#azcam.functions.utils.update_pars">update_pars() (in module azcam.functions.utils)</a>
 </li>
   </ul></td>
 </tr></table>

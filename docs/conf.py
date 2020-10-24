@@ -145,7 +145,7 @@ html_theme_options = {
     "style_external_links": False,
     # "vcs_pageview_mode": "",
     # Toc options
-    "collapse_navigation": True,
+    "collapse_navigation": False,
     "sticky_navigation": True,
     "navigation_depth": 4,
     "includehidden": True,
@@ -255,9 +255,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, "azcam.tex", u"azcam Documentation", u"Michael Lesser", "manual")
-]
+latex_documents = [(master_doc, "azcam.tex", u"azcam Documentation", u"Michael Lesser", "manual")]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.

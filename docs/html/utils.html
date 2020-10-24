@@ -90,10 +90,11 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Home - AzCam Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
@@ -112,7 +113,25 @@
 <li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#header-commands">Header Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#focalplane">Focalplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#cameraserver">CameraServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-dsp-code">Azcam DSP Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -189,7 +208,333 @@
 <h1>Utility Commands<a class="headerlink" href="#utility-commands" title="Permalink to this headline">¶</a></h1>
 <p>The <em>azcam.utils</em> module contains general purpose python functions used throughout azcam.</p>
 <p>These commands are not available remotely (i.e. over a socket connection).</p>
-<span class="target" id="module-azcam.utils"></span><p>General support commands for throughout azcam code.</p>
+<span class="target" id="module-azcam.functions.utils"></span><p>General support commands for throughout azcam code.</p>
+<dl class="py function">
+<dt id="azcam.functions.utils.add_searchfolder">
+<code class="sig-name descname">add_searchfolder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">search_folder</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_subfolders</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.add_searchfolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends search_folder (and by default all its subfolders) to the current python search path.
+Default is current folder and its subfolders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>search_folder</strong> – Name of folder to add to sys.path</p></li>
+<li><p><strong>include_subfolders</strong> – True to include all subfolders in sys.path</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.archive">
+<code class="sig-name descname">archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">foldername</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">filetype</span><span class="o">=</span><span class="default_value">'tar'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a tarfile from a folder or file.
+Type can be “tar”, “tar.gz”, or “zip”.
+Return tarfile filename.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.check_keyboard">
+<code class="sig-name descname">check_keyboard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Wait</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.check_keyboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks user’s keyboard for a key press.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Wait</strong> (<em>bool</em>) – True to wait until a key is pressed</p>
+</dd>
+<dt class="field-even">Return str</dt>
+<dd class="field-even"><p>Key which was pressed or empty string none.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.checksum">
+<code class="sig-name descname">checksum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a checksum file in the working folder.
+Return filename and checksum value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.cleanup_files">
+<code class="sig-name descname">cleanup_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.cleanup_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleanup folders after data analysis.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.count_files">
+<code class="sig-name descname">count_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.count_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of files in path (default is current folder).
+Folders are not included.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.curdir">
+<code class="sig-name descname">curdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.curdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets and sets the working folder.
+If folder==’’, return the current working folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder</strong> (<em>str</em>) – Name of folder</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.file_browser">
+<code class="sig-name descname">file_browser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Path</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">SelectString</span><span class="o">=</span><span class="default_value">'*.*'</span></em>, <em class="sig-param"><span class="n">Label</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.file_browser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filebrowser GUI to select files.  This is the tcl/tk version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Path</strong> (<em>str</em>) – Starting path for selection</p></li>
+<li><p><strong>SelectString</strong> (<em>str</em>) – Selection string like [(‘all files’,(‘<em>.</em>’))] for filtering file names or <em>folder</em> to select folders</p></li>
+<li><p><strong>Label</strong> (<em>str</em>) – Dialog box label</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>List of selected files/folders or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.find_file">
+<code class="sig-name descname">find_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">include_curdir</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.find_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the absolute filename for a file in the current search path.
+Set include_curdir True to add curdir() to search path.
+Raises FileNotFoundError if file not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Name of file</p></li>
+<li><p><strong>include_curdir</strong> (<em>bool</em>) – True to include current folder in sys.path</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cleaned path name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.find_file_in_sequence">
+<code class="sig-name descname">find_file_in_sequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">FileRoot</span></em>, <em class="sig-param"><span class="n">FileNumber</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.find_file_in_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Nth file in an image sequence where N is FileNumber (-1 for first file).
+FileRoot is the the image file root name.
+Returns (filename,sequencenumber).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.find_plugins">
+<code class="sig-name descname">find_plugins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.find_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all azcam plugins.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.fix_path">
+<code class="sig-name descname">fix_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Path</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">no_drive_letter</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.fix_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a nice absolute path, hopefully leaving only forward slashes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Path</strong> (<em>str</em>) – Name of path to cleanup</p></li>
+<li><p><strong>no_drive_letter</strong> (<em>bool</em>) – Removes leading drive letter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cleaned path name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.get_attr">
+<code class="sig-name descname">get_attr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">object_name</span></em>, <em class="sig-param"><span class="n">attribute</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.get_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of an object’s attribute.
+Advanced Use only!</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.get_datatype">
+<code class="sig-name descname">get_datatype</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.get_datatype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the data type for an object and set the type if possible. A string such as “1.23”
+will result in a type “float” and “2” will result in type “int”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – object to be typed</p>
+</dd>
+<dt class="field-even">Return [type, value]</dt>
+<dd class="field-even"><p>list of data type as a code and object with that type</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.get_error_status">
+<code class="sig-name descname">get_error_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.get_error_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns and clears the global <em>errorstatus</em> list database parameter.</p>
+<p>return list: [‘OK’,’’] or [‘ERROR’,’an error string’].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.get_image_roi">
+<code class="sig-name descname">get_image_roi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.get_image_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data and noise regions of interest in image image coordinates.
+Check for ROI’s in the following order:</p>
+<ul class="simple">
+<li><p>azcam.db.imageroi if defined</p></li>
+<li><p>display.roi if defined</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.get_par">
+<code class="sig-name descname">get_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.get_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of a parameter from the local azcamparameters dictionary.
+Returns None on error.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.make_file_folder">
+<code class="sig-name descname">make_file_folder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subfolder</span></em>, <em class="sig-param"><span class="n">increment</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">use_number</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.make_file_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new subfolder in the current FileFolder.
+subfolder - subfolder name to create
+increment - if True, subfolder name may be incremented to create a unique name (e.g. ptc1, ptc2, ptc3…)
+use_number - if True, starts with ‘1’ after Subfolder name (e.g. report1 not report)
+Returns [currentfolder,newfolder, with newfolder=’ERROR’ if a failure occurs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.make_image_filename">
+<code class="sig-name descname">make_image_filename</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imagefile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.make_image_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute file imagefile, with forward slashes.
+Appends “.fits” if no extension is included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>imagefile</strong> (<em>str</em>) – Image filename to be expanded</p>
+</dd>
+<dt class="field-even">Return str</dt>
+<dd class="field-even"><p>Expanded image filename</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.parse">
+<code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">String</span></em>, <em class="sig-param"><span class="n">SetType</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a string into tokens using the standard azcam rules.
+If setType is true, try and set data data type for each token.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>String</strong> (<em>str</em>) – String to be parsed into tokens</p></li>
+<li><p><strong>SetType</strong> (<em>bool</em>) – True to try and set <em>type</em> of each token</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return lsit</dt>
+<dd class="field-even"><p>list of parsed tokens</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.prompt">
+<code class="sig-name descname">prompt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PromptMessage</span><span class="o">=</span><span class="default_value">'Enter a string'</span></em>, <em class="sig-param"><span class="n">Default</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a message and waits for user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PromptMessage</strong> (<em>str</em>) – String to be printed</p></li>
+<li><p><strong>Default</strong> (<em>str</em>) – String to be returned if no value is entered</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return str</dt>
+<dd class="field-even"><p>String entered or Default</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.run_script">
+<code class="sig-name descname">run_script</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">script_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.run_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a script, either with absolute path or assumes it is in the search path.
+This method is exposed as the <em>Run</em> command when using IPython.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>script_name</strong> (<em>str</em>) – filename of script to run</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.set_error_status">
+<code class="sig-name descname">set_error_status</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ErrorFlag</span><span class="o">=</span><span class="default_value">'OK'</span></em>, <em class="sig-param"><span class="n">Message</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.set_error_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the global <em>errorstatus</em> list database parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ErrorFlag</strong> (<em>list</em>) – value to set global errorstatus flag. “OK” by default.</p></li>
+<li><p><strong>Message</strong> (<em>str</em>) – value to set global error status message. Empty by default.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.set_image_roi">
+<code class="sig-name descname">set_image_roi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.set_image_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the image region of interest.
+If roi is not specified, use display ROI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>roi</strong> (<em>list</em>) – ROI list or []</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.set_par">
+<code class="sig-name descname">set_par</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.set_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of a parameter in the local azcamparameters dictionary.
+Returns None on error.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.show_menu">
+<code class="sig-name descname">show_menu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">configs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.show_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interative: Show a menu and wait for selection.
+“blank” may be used to display an empty line.
+print() is allowed here as interactive only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>configs</strong> (<em>dict</em>) – Dictionary of strings which are menu items</p>
+</dd>
+<dt class="field-even">Return str</dt>
+<dd class="field-even"><p>Number of item selected or empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="azcam.functions.utils.update_pars">
+<code class="sig-name descname">update_pars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">write</span></em>, <em class="sig-param"><span class="n">par_dict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.functions.utils.update_pars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update azcam parameters to/from a genpars dictionary.
+write True =&gt; write values into dictionary.
+write False =&gt; set values from dictionary.</p>
+</dd></dl>
+
 </div>
 
 

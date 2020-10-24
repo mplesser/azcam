@@ -5,7 +5,7 @@ The *azcam.utils* module contains general purpose python functions used througho
 These commands are not available remotely (i.e. over a socket connection).
 
 ```eval_rst
-.. automodule:: azcam.utils
+.. automodule:: azcam.functions.utils
    :members:
    :undoc-members:
 ```

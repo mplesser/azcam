@@ -1,4 +1,4 @@
-# AzCam Documentation
+# General
 
 AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
@@ -6,7 +6,7 @@ AzCam is a software environment for the acquisition and analysis of image data f
 .. toctree::
    :hidden:
 
-   Home - AzCam Documentation <self>
+   Home <self>
 ```
 
 ## Help
@@ -95,12 +95,12 @@ as ``from shortcuts_console import *``.
   * **sf** to try and set image folder to the current directory.
   * **bf** to browse for a file or folder.  
 
-## Commands and Objects
+# Commands and Objects
 There are many commands and classes (which create objects and their methods) which are 
 available to manipulate hardware, data, images, and exposures. The links listed 
 below describe some of these commands. Availability depends on configuration.
 
-### General
+## General
 These classes and commands are useful both in the server and in a console application.
 
 ```eval_rst
@@ -113,7 +113,7 @@ These classes and commands are useful both in the server and in a console applic
    plot
 ```
 
-These commands are intended to be used only with other *AzCam* code.
+The *utility* commands are intended to be used only with other *azcam* code.
 ```eval_rst
 .. toctree::
    :maxdepth: 1
@@ -121,7 +121,7 @@ These commands are intended to be used only with other *AzCam* code.
    utils
 ```
 
-### Server Classes
+## Server Classes
 These classes are server-side only and are useed to define or control a system.
 
 ```eval_rst
@@ -135,29 +135,29 @@ These classes are server-side only and are useed to define or control a system.
    telescope
 ```
 
-### Console API
+## Console API
 These commands are used in a console application which may be connected via a socket to the server.
 
 ```eval_rst
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    api_console
 ```
 
-## Configuration
+# Configuration
 
-### Folders
+## Folders
 There are several folder names which are usually defined, although their use may be optional for some systems:
 
   * *systemfolder* - the main folder where configuration data is located
   * *datafolder* - the root folder where data and parameters are saved, write access is required
   * *projectfolder* - related to systemfolder, but for a specific project rather the the entire system (optional)
  
-### Virtual Environment
+## Virtual Environment
 When a python virtual environment is used, it is typically contained in a folder named `../venvs/azcam`.
 
-### Dependencies
+## Dependencies
 AzCam currently uses *Python 3.8*. Important dependancies include:
 
   * *numpy*
@@ -180,9 +180,12 @@ There are many other dependencies depending on configuration. Examples are:
   * *pyserial*
 
 ## Programming
+
+This section contains misc informationa about *azcam* programming.
+
 ```eval_rst
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    programming
 ```

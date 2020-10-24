@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>AzCam Documentation &mdash; azcam 20.4 documentation</title>
+  <title>General &mdash; azcam 20.4 documentation</title>
   
 
   
@@ -89,10 +89,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Home - AzCam Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
@@ -111,7 +112,25 @@
 <li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#header-commands">Header Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#focalplane">Focalplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#cameraserver">CameraServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-dsp-code">Azcam DSP Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -158,7 +177,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>AzCam Documentation</li>
+      <li>General</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,8 +201,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="azcam-documentation">
-<h1>AzCam Documentation<a class="headerlink" href="#azcam-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="general">
+<h1>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h1>
 <p>AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -272,23 +291,25 @@ as <code class="docutils literal notranslate"><span class="pre">from</span> <spa
 <li><p><strong>bf</strong> to browse for a file or folder.</p></li>
 </ul>
 </div>
+</div>
 <div class="section" id="commands-and-objects">
-<h2>Commands and Objects<a class="headerlink" href="#commands-and-objects" title="Permalink to this headline">¶</a></h2>
+<h1>Commands and Objects<a class="headerlink" href="#commands-and-objects" title="Permalink to this headline">¶</a></h1>
 <p>There are many commands and classes (which create objects and their methods) which are
 available to manipulate hardware, data, images, and exposures. The links listed
 below describe some of these commands. Availability depends on configuration.</p>
-<div class="section" id="general">
-<h3>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h2>General<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>These classes and commands are useful both in the server and in a console application.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
 </ul>
 </div>
-<p>These commands are intended to be used only with other <em>AzCam</em> code.</p>
+<p>The <em>utility</em> commands are intended to be used only with other <em>azcam</em> code.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
@@ -296,7 +317,7 @@ below describe some of these commands. Availability depends on configuration.</p
 </div>
 </div>
 <div class="section" id="server-classes">
-<h3>Server Classes<a class="headerlink" href="#server-classes" title="Permalink to this headline">¶</a></h3>
+<h2>Server Classes<a class="headerlink" href="#server-classes" title="Permalink to this headline">¶</a></h2>
 <p>These classes are server-side only and are useed to define or control a system.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -309,7 +330,7 @@ below describe some of these commands. Availability depends on configuration.</p
 </div>
 </div>
 <div class="section" id="console-api">
-<h3>Console API<a class="headerlink" href="#console-api" title="Permalink to this headline">¶</a></h3>
+<h2>Console API<a class="headerlink" href="#console-api" title="Permalink to this headline">¶</a></h2>
 <p>These commands are used in a console application which may be connected via a socket to the server.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -319,9 +340,9 @@ below describe some of these commands. Availability depends on configuration.</p
 </div>
 </div>
 <div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="folders">
-<h3>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h3>
+<h2>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h2>
 <p>There are several folder names which are usually defined, although their use may be optional for some systems:</p>
 <ul class="simple">
 <li><p><em>systemfolder</em> - the main folder where configuration data is located</p></li>
@@ -330,11 +351,11 @@ below describe some of these commands. Availability depends on configuration.</p
 </ul>
 </div>
 <div class="section" id="virtual-environment">
-<h3>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h3>
+<h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h2>
 <p>When a python virtual environment is used, it is typically contained in a folder named <code class="docutils literal notranslate"><span class="pre">../venvs/azcam</span></code>.</p>
 </div>
 <div class="section" id="dependencies">
-<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>AzCam currently uses <em>Python 3.8</em>. Important dependancies include:</p>
 <ul class="simple">
 <li><p><em>numpy</em></p></li>
@@ -357,30 +378,12 @@ below describe some of these commands. Availability depends on configuration.</p
 <li><p><em>pyserial</em></p></li>
 </ul>
 </div>
-</div>
 <div class="section" id="programming">
 <h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
+<p>This section contains misc informationa about <em>azcam</em> programming.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#commands">Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#header-commands">Header Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#focalplane">Focalplane</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#attributes">Attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#cameraserver">CameraServer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-dsp-code">Azcam DSP Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
 </ul>
 </div>
 </div>
