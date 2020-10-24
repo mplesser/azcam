@@ -7,7 +7,7 @@ Usage Example:
     rois = azcam.fits.col_bias("test.fits")
 
 ```eval_rst
-.. automodule:: azcam.fits
+.. automodule:: azcam.functions.fits
    :members:
    :undoc-members:
 ```

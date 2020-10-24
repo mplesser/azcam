@@ -111,9 +111,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="report.html">Report Commands</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
 </ul>
 
@@ -201,14 +198,29 @@
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Most of AzCam’s functionality is available only after loading configuration or environment code which defines a system’s hardware resources (such as <em>azcam-itl</em> or <em>azcam-bok</em>). Once configured, the system is controlled by class instances (objects) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.  Most of these objects are exposed through the <em>azcam.api</em> object.  There is also a database of parameters maintained in the <em>azcam.db</em> object.</p>
+<p>Most of AzCam’s functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system’s hardware resources.  Examples include:</p>
+<ul class="simple">
+<li><p>azcam-arc</p></li>
+<li><p>azcam-archon</p></li>
+<li><p>azcam-mag</p></li>
+<li><p>azcam-bok</p></li>
+<li><p>azcam-mont4k</p></li>
+</ul>
+<p>Once configured, the system is controlled by class instances (objects) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.  Most of these objects are exposed through the <em>azcam.api</em> object.  There is also a database of parameters maintained in the <em>azcam.db</em> object.</p>
 <p>There are two three main operational modes of azcam:</p>
 <ul class="simple">
 <li><p>One is the server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware.</p></li>
 <li><p>Another is the console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.</p></li>
-<li><p>The final mode is through client applications, which communicate with <em>azcamserver</em> over sockets or the web API. There are multiple clients written in a variety of languages.</p></li>
+<li><p>The final mode is through client applications, which communicate with <em>azcamserver</em> over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:</p>
+<ul>
+<li><p>azcam-tool</p></li>
+<li><p>azcam-webobs</p></li>
+<li><p>azcam-status</p></li>
+<li><p>azcam-exptool</p></li>
 </ul>
-<p>For the <em>azcam-itl</em> environment, as an example, the server-side code to get the current system wavelength and take an exposure is:</p>
+</li>
+</ul>
+<p>As an example, for the <em>azcam-itl</em> environment, the server-side code to get the current system wavelength and take an exposure is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">azcam_itl.server</span>  <span class="c1"># this configures the ITL environment</span>
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
@@ -302,15 +314,6 @@ below describe some of these commands. Availability depends on configuration.</p
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="report-commands">
-<h3>Report Commands<a class="headerlink" href="#report-commands" title="Permalink to this headline">¶</a></h3>
-<p>The report commands are helpful when generating reports.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="report.html">Report Commands</a></li>
 </ul>
 </div>
 </div>

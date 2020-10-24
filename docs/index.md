@@ -17,14 +17,26 @@ Useful links include:
 * Python programming language <https://www.python.org>
   
 ## Usage
-Most of AzCam's functionality is available only after loading configuration or environment code which defines a system's hardware resources (such as *azcam-itl* or *azcam-bok*). Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object.
+Most of AzCam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
+
+  - azcam-arc
+  - azcam-archon
+  - azcam-mag
+  - azcam-bok
+  - azcam-mont4k
+   
+Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object.
 
 There are two three main operational modes of azcam:
  - One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
  - Another is the console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
- - The final mode is through client applications, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. 
+ - The final mode is through client applications, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:
+   - azcam-tool
+   - azcam-webobs
+   - azcam-status
+   - azcam-exptool
 
-For the *azcam-itl* environment, as an example, the server-side code to get the current system wavelength and take an exposure is:
+As an example, for the *azcam-itl* environment, the server-side code to get the current system wavelength and take an exposure is:
 
     import azcam
     import azcam_itl.server  # this configures the ITL environment
@@ -131,17 +143,6 @@ These commands are used in a console application which may be connected via a so
    :maxdepth: 2
    
    api_console
-```
-
-### Report Commands
-
-The report commands are helpful when generating reports. 
-    
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   report
 ```
 
 ## Configuration
