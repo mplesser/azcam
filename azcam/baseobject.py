@@ -110,7 +110,9 @@ class Objects(object):
         reply = self.header.get_all_keywords()
 
         for key in reply:
-            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
+            reply1 = self.get_keyword(
+                key
+            )  # this calls object's get_keyword to get updated values
             list1 = [key, reply1[0], reply1[1], reply1[2]]
             header.append(list1)
 

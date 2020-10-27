@@ -6,7 +6,6 @@ import os
 
 from azcam.server import azcam
 import azcam.shortcuts
-from azcam.displays.ds9display import Ds9Display
 from azcam.telescopes.telescope import Telescope
 from azcam.instruments.instrument import Instrument
 from azcam.controllers.controller import Controller
@@ -14,6 +13,7 @@ from azcam.tempcons.tempcon import TempCon
 from azcam.exposures.exposure import Exposure
 from azcam.cmdserver import CommandServer
 from azcam.genpars import GenPars
+from azcam_ds9.ds9display import Ds9Display
 
 print("Loading example server configuration")
 
