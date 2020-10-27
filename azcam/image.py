@@ -2,17 +2,17 @@
 Contains the Image class.
 """
 
-import warnings
-import os
 import math
+import os
 import time
+import warnings
 
 import numpy
 
 import azcam
+from azcam.focalplane import FocalPlane
 from azcam.functions.fits import pyfits
 from azcam.header import Header
-from azcam.focalplane import FocalPlane
 from azcam.send_image import SendImage
 
 """

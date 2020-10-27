@@ -4,13 +4,13 @@ Configure and start Flask web server application.
 Import this after all configuration has been completed.
 """
 
-import sys
-import os
-import threading
 import logging
+import os
+import sys
+import threading
 from urllib.parse import urlparse
 
-from flask import Flask, jsonify, request, render_template, send_from_directory
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from werkzeug.utils import secure_filename
 
 import azcam

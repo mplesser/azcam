@@ -5,8 +5,8 @@ Contains the base Instrument class.
 import time
 
 import azcam
-from azcam.header import Header
 from azcam.baseobject import Objects
+from azcam.header import Header
 
 
 class Instrument(Objects):

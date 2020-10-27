@@ -3,8 +3,8 @@ Contains the base Telescope class.
 """
 
 import azcam
-from azcam.header import Header
 from azcam.baseobject import Objects
+from azcam.header import Header
 
 
 class Telescope(Objects):

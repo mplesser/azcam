@@ -2,9 +2,9 @@
 Contains FITS image manipulation commands.
 """
 
-import warnings
-import time
 import os
+import time
+import warnings
 from typing import Any, List
 
 import numpy

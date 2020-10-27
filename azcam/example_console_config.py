@@ -2,15 +2,16 @@
 Example console configuration script.
 """
 
+import datetime
 import os
 import sys
-import datetime
 import threading
 
-from azcam.console import azcam
-import azcam.shortcuts
-from azcam.genpars import GenPars
 from azcam_ds9.ds9display import Ds9Display
+
+import azcam.shortcuts
+from azcam.console import azcam
+from azcam.genpars import GenPars
 
 print("Loading example console configuration")
 

@@ -2,8 +2,8 @@
 Contains the SocketInterface class.
 """
 
-import socket
 import shlex
+import socket
 import time
 
 import azcam

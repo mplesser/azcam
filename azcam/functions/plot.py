@@ -1,8 +1,8 @@
-import warnings
 import time
+import warnings
 
-import numpy
 import matplotlib
+import numpy
 from matplotlib import pylab
 from matplotlib import pyplot as plt
 

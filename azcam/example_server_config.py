@@ -4,16 +4,17 @@ Example server configuration script.
 
 import os
 
-from azcam.server import azcam
-import azcam.shortcuts
-from azcam.telescopes.telescope import Telescope
-from azcam.instruments.instrument import Instrument
-from azcam.controllers.controller import Controller
-from azcam.tempcons.tempcon import TempCon
-from azcam.exposures.exposure import Exposure
-from azcam.cmdserver import CommandServer
-from azcam.genpars import GenPars
 from azcam_ds9.ds9display import Ds9Display
+
+import azcam.shortcuts
+from azcam.cmdserver import CommandServer
+from azcam.controllers.controller import Controller
+from azcam.exposures.exposure import Exposure
+from azcam.genpars import GenPars
+from azcam.instruments.instrument import Instrument
+from azcam.server import azcam
+from azcam.telescopes.telescope import Telescope
+from azcam.tempcons.tempcon import TempCon
 
 print("Loading example server configuration")
 

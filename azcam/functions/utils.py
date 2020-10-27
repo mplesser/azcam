@@ -2,18 +2,18 @@
 General support commands for throughout azcam code.
 """
 
+import fnmatch
+import hashlib
+import importlib
 import os
-import sys
+import pkgutil
 import shlex
+import shutil
+import sys
+import tarfile
 import tkinter
 import tkinter.filedialog
-import tarfile
-import hashlib
-import fnmatch
-import shutil
 from typing import List
-import importlib
-import pkgutil
 
 # keyboard checking is optional
 try:

@@ -2,8 +2,8 @@
 # Allows sending UDP register request to the AzCam Monitor application
 # After registration the communication with the AzCam Monitor is based on TCP/IP.
 
-import socket
 import os
+import socket
 
 import azcam
 

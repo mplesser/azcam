@@ -2,7 +2,7 @@
 API commands for console application.
 """
 
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
 import azcam
 import azcam.api_azcam

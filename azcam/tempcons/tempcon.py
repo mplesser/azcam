@@ -5,8 +5,8 @@ Contains the base TempCon class.
 from typing import List
 
 import azcam
-from azcam.header import Header
 from azcam.baseobject import Objects
+from azcam.header import Header
 
 
 class TempCon(Objects):

@@ -2,19 +2,19 @@
 Contains the base Exposure class.
 """
 
+import datetime
 import os
 import threading
 import time
-import datetime
 
 import numpy
 
 import azcam
-from azcam.image import Image
-from azcam.header import Header
+from azcam.baseobject import Objects
 from azcam.exposures.filename import Filename
 from azcam.exposures.obstime import ObsTime
-from azcam.baseobject import Objects
+from azcam.header import Header
+from azcam.image import Image
 
 
 class Exposure(Objects):

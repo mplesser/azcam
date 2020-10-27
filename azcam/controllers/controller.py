@@ -3,8 +3,8 @@ Contains the base Controller class.
 """
 
 import azcam
-from azcam.header import Header
 from azcam.baseobject import Objects
+from azcam.header import Header
 
 
 class Controller(Objects):

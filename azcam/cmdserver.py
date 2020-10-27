@@ -2,11 +2,11 @@
 Contains the CommandServer class for azcam's socket command interface.
 """
 
-import threading
-import socketserver
 import os
-import time
 import socket
+import socketserver
+import threading
+import time
 
 import azcam
 
