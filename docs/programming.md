@@ -5,7 +5,7 @@ for advanced users only.
 
 ## Versioning
 Because Azcam consists of many different modules and plugins, there is no single version 
-number or date which uniquely identifies all the code. The best indicator of the version is to 
+number or date which uniquely identifies all the code. One indicator of the current version is to 
 issue the command ``azcam.utils.get_par("version")``.
 
 ## Conventions
@@ -16,10 +16,6 @@ machines. If back slashes are needed, they must be doubled as in c:\\data. Strin
 be enclosed in quotation marks, as in get_par('version'). Quotation marks must match ('version" is 
 not acceptable). A quotation mark may be included in a string by preceding it with a backslash 
 ("I am Mike\'s dog.")
-
-## Commands
-Commands can be imported into modules in the standard pythonic manner, such as ``from 
-azcam.fits import colbias``.
 
 ## Objects
 Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
@@ -93,12 +89,12 @@ The ``log()`` function supports levels which determine if the log message should
 ## Azcam Apps
 The following support applications may also be useful when operating Azcam.
 
-  * *Azcamtool* is a graphical user interface (GUI) useful for operating Azcam in a point and click mode. It is not required, but is highly recommended.
+  * *azcam-tool* is a graphical user interface (GUI) useful for operating Azcam in a point and click mode. It is not required, but is highly recommended.
   * *EngineeringTool* performs very low level (and dangerous!) controller functions.
   * *AzcamImageServer* is a stand-alone python image server which can receive images on a remote machine. This is especially useful for receiving images on computers running Linux.
-  * *Ds9Tools* is a set of tools useful when using SAO's ds9 display program.
-  * *osberve* is an observing script package supporting a GUi and a command line interface.
-  * *focus* is a package which supports acquire a focus exposure.
+  * *azcam-ds9* is a set of tools useful when using SAO's ds9 display program.
+  * *azcam-observe* is an observing script package supporting a GUi and a command line interface.
+  * *azcam-focus* is a package which supports acquire a focus exposure.
 
 ## Python
 The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.
@@ -112,46 +108,30 @@ The current non-default packages are currently:
   * Numeric python for data manipulation - numpy <http://www.numpy.org>
   * Plotting - `matplotlib <https://matplotlib.org>
 
-For code which use a Qt graphical interface, 
-PyQt <https://www.riverbankcomputing.com/software/pyqt/intro> is required.
-You may need to add *c:\python37* and/or *c:\python37\Scripts* to the Windows PATH environment variable,
-
-## CameraServer
-*CameraServers* are separate executable programs which manage direct interaction with 
-controller hardware on some systems. Communication with a CameraServer takes place over sockets via 
-communication protocols defined between *azcam* and a specific CameraServer program. These 
-CameraServers are necessary when specialized drivers for the camera hardware are required.  They are 
-usually written in C/C++. 
-
 ## National Instruments LabVIEW
 The runtime LabVIEW installer must be downloaded to your computer and executed to install the 
 LabVIEW Run-Time Engine which is required by Azcam LabVIEW code (such as Obstool). Administrator 
-privileges may be required for installation. LabVIEW installers should be obtained directly from National Instruments, <http://www.ni.com>. Azcam currently uses LabVIEW 2014.
+privileges may be required for installation. LabVIEW installers should be obtained directly
+from National Instruments, <http://www.ni.com>. Azcam currently uses LabVIEW 2014.
 
 ## Ports
-Azcam reserves ten socket ports for each Azcam process. The ports are used for the 
-various server functions and may not 
-actually be all used on a computer. The CommandServer port is typically the base port each Azcam process and the remaining 
-ports are incremented by one. The default command server port is 2402 for the first Azcam process, 2412 for the second process, 
-2422 for the third, and so on. More complex systems often use many ports which the most basic systems have one a command sever port and a controller sever port.
+Azcam reserves ten socket ports for each Azcam process. The ports are used for the various
+server functions and may not actually be all used on a computer. The CommandServer port is
+typically the base port each Azcam process and the remaining ports are incremented by one.
+The default command server port is 2402 for the first Azcam process, 2412 for the second process,
+2422 for the third, and so on. More complex systems often use many ports which the most basic
+systems have one a command sever port and a controller sever port.
 
-  * CommandServerPort - 2402
-  * WebServerPort - 2403
-  * InstrumentServerPort - 2404
-  * ControllerServerPort - 2405
-  * PowerServerPort - 2406
+  * cmdserver port - 2402
+  * web server port - 2403
+  * instrument server port - 2404
+  * controller server port - 2405
+  * power server port - 2406
   * Reserved - 2407
   * Reserved - 2408
   * Reserved - 2409
   * Reserved - 2410
   * Reserved - 2411
-
-## Azcam DSP Code
-The DSP code which runs in the ARC and Magellan controllers is assembled and linked with Motorola software tools. These tools should be installed in *../MotorolaDSPtools/* on a Windows machine, as required by the batch files which assemble and link the DSP source code.
-
-While the Azcam application code for the ARC timing board is typically downloaded during camera initialization, the boot code must be compatible for this to work properly. Therefore Azcam DSP code must be burned into the timing board EEPROMs before use. The Azcam timing DSP code is quite different from the ARC code and is required for Azcam operation. The PCI fiber optic interface board and the utility board use the original ARC code and does not need to be changed. Note this applies to gen3 systems only, the gen1 and gen2 situation is more complex.
-
-For the Magellan systems, there is only one DSP file which must be downloaded during initialization. Note that *xxx.s* files are loaded for the Magellan systems while *xxx.lod* files are loaded for ARC systems.
 
 ## Misc Notes
 These notes may be of some help setting up systems.
