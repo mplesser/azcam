@@ -209,13 +209,13 @@
 <p>This class defines Azcam’s temperature controller interface.
 The class is usually instantiated as the <em>tempcon</em> object in the server.</p>
 <dl class="py class">
-<dt id="azcam.tempcons.tempcon.TempCon">
-<em class="property">class </em><code class="sig-name descname">TempCon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'tempcon'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Tempcon'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon">
+<em class="property">class </em><code class="sig-name descname">TempCon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'tempcon'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Tempcon'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
 <p>Temperature control class.</p>
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.apply_corrections">
-<code class="sig-name descname">apply_corrections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature</span></em>, <em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.apply_corrections" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.apply_corrections">
+<code class="sig-name descname">apply_corrections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature</span></em>, <em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.apply_corrections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Correct the temperatures for offset and scale is temperature correction is enabled.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -231,26 +231,26 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.bad_temp_value">
-<code class="sig-name descname">bad_temp_value</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.bad_temp_value" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.bad_temp_value">
+<code class="sig-name descname">bad_temp_value</code><a class="headerlink" href="#azcam.tempcon.TempCon.bad_temp_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>value returned when temperature read is bad</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.control_temperature">
-<code class="sig-name descname">control_temperature</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.control_temperature" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.control_temperature">
+<code class="sig-name descname">control_temperature</code><a class="headerlink" href="#azcam.tempcon.TempCon.control_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>control or set temperature at which to regulate</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.control_temperature_number">
-<code class="sig-name descname">control_temperature_number</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.control_temperature_number" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.control_temperature_number">
+<code class="sig-name descname">control_temperature_number</code><a class="headerlink" href="#azcam.tempcon.TempCon.control_temperature_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>control temperature number (which temp is regulated)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.define_keywords">
-<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.define_keywords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines temperature control keywords if they are not already defined.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -260,14 +260,14 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.delete_keyword">
-<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.delete_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a keyword.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.exposure_finish">
-<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.exposure_finish" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.exposure_finish">
+<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.exposure_finish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom commands after exposure finishes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -277,8 +277,8 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.exposure_start">
-<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.exposure_start" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.exposure_start">
+<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.exposure_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom commands before exposure starts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -288,8 +288,8 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.get_control_temperature">
-<code class="sig-name descname">get_control_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.get_control_temperature" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.get_control_temperature">
+<code class="sig-name descname">get_control_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.get_control_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the control temperature (set point).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -302,8 +302,8 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.get_keyword">
-<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.get_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a temperature keyword value and returns it as [value, comment, type string].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -316,8 +316,8 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.get_temperature">
-<code class="sig-name descname">get_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.get_temperature" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.get_temperature">
+<code class="sig-name descname">get_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.get_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a system temperature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -330,8 +330,8 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.get_temperatures">
-<code class="sig-name descname">get_temperatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.get_temperatures" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.get_temperatures">
+<code class="sig-name descname">get_temperatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.get_temperatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all system temperatures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -341,34 +341,34 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize the temperature control interface.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.log_temps">
-<code class="sig-name descname">log_temps</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.log_temps" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.log_temps">
+<code class="sig-name descname">log_temps</code><a class="headerlink" href="#azcam.tempcon.TempCon.log_temps" title="Permalink to this definition">¶</a></dt>
 <dd><p>log temperatures</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.number_sensors">
-<code class="sig-name descname">number_sensors</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.number_sensors" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.number_sensors">
+<code class="sig-name descname">number_sensors</code><a class="headerlink" href="#azcam.tempcon.TempCon.number_sensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>number of temperature sensors</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.read_header">
-<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.read_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.read_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current header.
 Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
 Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset tempcon object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -378,8 +378,8 @@ Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.set_calibrations">
-<code class="sig-name descname">set_calibrations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cals</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.set_calibrations" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.set_calibrations">
+<code class="sig-name descname">set_calibrations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cals</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.set_calibrations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set calibration curves for temperature sensors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -404,8 +404,8 @@ for each sensor’s temperature conversion.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.set_control_temperature">
-<code class="sig-name descname">set_control_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.set_control_temperature" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.set_control_temperature">
+<code class="sig-name descname">set_control_temperature</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">temperature_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.set_control_temperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the control temperature (set point).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -421,8 +421,8 @@ for each sensor’s temperature conversion.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.set_corrections">
-<code class="sig-name descname">set_corrections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_offsets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">temperature_scales</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.set_corrections" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.set_corrections">
+<code class="sig-name descname">set_corrections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temperature_offsets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">temperature_scales</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.set_corrections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set temperature correction values and enable correction.
 If both parameters are None then correction is disabled.</p>
 <dl class="field-list simple">
@@ -439,40 +439,40 @@ If both parameters are None then correction is disabled.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.set_keyword">
-<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.set_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a keyword value and comment.
 typestring is one of ‘str’, ‘int’, or ‘float’.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.temperature_cals">
-<code class="sig-name descname">temperature_cals</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.temperature_cals" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.temperature_cals">
+<code class="sig-name descname">temperature_cals</code><a class="headerlink" href="#azcam.tempcon.TempCon.temperature_cals" title="Permalink to this definition">¶</a></dt>
 <dd><p>calibration flags for each temperature</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.temperature_correction">
-<code class="sig-name descname">temperature_correction</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.temperature_correction" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.temperature_correction">
+<code class="sig-name descname">temperature_correction</code><a class="headerlink" href="#azcam.tempcon.TempCon.temperature_correction" title="Permalink to this definition">¶</a></dt>
 <dd><p>True to correct temperature offset and scale for each temperature
 Scaling is <strong>new = old * scale + offset</strong></p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.temperature_offsets">
-<code class="sig-name descname">temperature_offsets</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.temperature_offsets" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.temperature_offsets">
+<code class="sig-name descname">temperature_offsets</code><a class="headerlink" href="#azcam.tempcon.TempCon.temperature_offsets" title="Permalink to this definition">¶</a></dt>
 <dd><p>temperature offset corrections for each temperature</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="azcam.tempcons.tempcon.TempCon.temperature_scales">
-<code class="sig-name descname">temperature_scales</code><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.temperature_scales" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.temperature_scales">
+<code class="sig-name descname">temperature_scales</code><a class="headerlink" href="#azcam.tempcon.TempCon.temperature_scales" title="Permalink to this definition">¶</a></dt>
 <dd><p>temperature scale corrections</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.tempcons.tempcon.TempCon.update_header">
-<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcons.tempcon.TempCon.update_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.tempcon.TempCon.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.tempcon.TempCon.update_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the header, reading current data.
 Deletes all keywords if the object is not enabled.</p>
 </dd></dl>

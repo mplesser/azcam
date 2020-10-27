@@ -11,8 +11,8 @@ import numpy
 
 import azcam
 from azcam.baseobject import Objects
-from azcam.exposures.filename import Filename
-from azcam.exposures.obstime import ObsTime
+from azcam.filename import Filename
+from azcam.obstime import ObsTime
 from azcam.header import Header
 from azcam.image import Image
 

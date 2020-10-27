@@ -209,71 +209,71 @@
 <p>This class defines Azcam’s telescope interfaces.
 One class is usually instantiated as the <em>telescope</em> object in the server.</p>
 <dl class="py class">
-<dt id="azcam.telescopes.telescope.Telescope">
-<em class="property">class </em><code class="sig-name descname">Telescope</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'telescope'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Telescope'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope">
+<em class="property">class </em><code class="sig-name descname">Telescope</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'telescope'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Telescope'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
 <p>Base telescope class.</p>
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.define_keywords">
-<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.define_keywords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets up header keywords dictionary if not already defined.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.delete_keyword">
-<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.delete_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a keyword.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.exposure_finish">
-<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.exposure_finish" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.exposure_finish">
+<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.exposure_finish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional call after exposure finishes.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.exposure_start">
-<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.exposure_start" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.exposure_start">
+<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.exposure_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional call before exposure starts.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.get_keyword">
-<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.get_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a keyword value and its comment.
 Comment always returned in double quotes, even if empty.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the telescope interface.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.read_header">
-<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.read_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.read_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current header.
 Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
 Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset telescope object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.set_keyword">
-<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.set_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a keyword value and comment.
 typestring is one of ‘str’, ‘int’, or ‘float’.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.telescopes.telescope.Telescope.update_header">
-<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescopes.telescope.Telescope.update_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.telescope.Telescope.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.telescope.Telescope.update_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the header, reading current data.
 Deletes all keywords if the object is not enabled.</p>
 </dd></dl>

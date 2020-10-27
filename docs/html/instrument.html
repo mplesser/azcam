@@ -221,13 +221,13 @@ API for instruments.</p>
 a single method in the instrument server which translates web command strings into the <em>command parser</em> commands
 which are accepted by the instrument server’s <em>cmdserver</em>.</p>
 <dl class="py class">
-<dt id="azcam.instruments.instrument.Instrument">
-<em class="property">class </em><code class="sig-name descname">Instrument</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'instrument'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Instrument'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument">
+<em class="property">class </em><code class="sig-name descname">Instrument</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'instrument'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Instrument'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
 <p>The base Instrument class.</p>
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.comps_delay">
-<code class="sig-name descname">comps_delay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delay_time</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.comps_delay" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.comps_delay">
+<code class="sig-name descname">comps_delay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">delay_time</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.comps_delay" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delays for delay_time for comparison lamp warmup.
 May internally set delay based on comp selection.
 delay_time is in seconds.
@@ -235,88 +235,88 @@ comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.comps_off">
-<code class="sig-name descname">comps_off</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.comps_off" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.comps_off">
+<code class="sig-name descname">comps_off</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.comps_off" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn off active comparisons.
 comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.comps_on">
-<code class="sig-name descname">comps_on</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.comps_on" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.comps_on">
+<code class="sig-name descname">comps_on</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.comps_on" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn on active comparisons.
 comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.define_keywords">
-<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.define_keywords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets up header keywords dictionary if not already defined.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.delete_keyword">
-<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.delete_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a keyword.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.exposure_finish">
-<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.exposure_finish" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.exposure_finish">
+<code class="sig-name descname">exposure_finish</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.exposure_finish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional tempcon.call after exposure finishes.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.exposure_start">
-<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.exposure_start" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.exposure_start">
+<code class="sig-name descname">exposure_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.exposure_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional call before exposure starts.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_active_comps">
-<code class="sig-name descname">get_active_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_active_comps" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_active_comps">
+<code class="sig-name descname">get_active_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_active_comps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the active comparison lamps.
 comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_all_comps">
-<code class="sig-name descname">get_all_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_all_comps" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_all_comps">
+<code class="sig-name descname">get_all_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_all_comps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all valid comparison names.
 Useful for clients to determine which type of comparison exposures are supported.
 comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_all_filters">
-<code class="sig-name descname">get_all_filters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_all_filters" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_all_filters">
+<code class="sig-name descname">get_all_filters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_all_filters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of all available/loaded filters.
 filter_id is the filter mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_all_focus_positions">
-<code class="sig-name descname">get_all_focus_positions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_all_focus_positions" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_all_focus_positions">
+<code class="sig-name descname">get_all_focus_positions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_all_focus_positions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of all focus positions.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_all_pressures">
-<code class="sig-name descname">get_all_pressures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_all_pressures" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_all_pressures">
+<code class="sig-name descname">get_all_pressures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_all_pressures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of all instrument pressures.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_all_wavelengths">
-<code class="sig-name descname">get_all_wavelengths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_all_wavelengths" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_all_wavelengths">
+<code class="sig-name descname">get_all_wavelengths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_all_wavelengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of valid wavelengths.
 Used for filter and LED based systems.
 wavelength_id is the wavelength mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_current">
-<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current_id</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">shutter_state</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_current" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_current">
+<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current_id</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">shutter_state</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_current" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read electrometer diode current in Amps.
 current_id = 0 is the sphere (Reference) diode.
 current_id = 1 is the calibrated diode or DUT.
@@ -324,78 +324,78 @@ ShutterState is 0, 1 to close/open shutter during read or 2 unchanged.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_filter">
-<code class="sig-name descname">get_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_filter" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_filter">
+<code class="sig-name descname">get_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current/loaded filter, typically the filter in the beam.
 filter_id is the filter mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_focus">
-<code class="sig-name descname">get_focus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">focus_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_focus" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_focus">
+<code class="sig-name descname">get_focus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">focus_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_focus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the current instrument focus position.
 focus_id is the focus mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_keyword">
-<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a keyword value and its comment.
 Comment always returned in double quotes, even if empty.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_pressure">
-<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pressure_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_pressure" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_pressure">
+<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pressure_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_pressure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read an instrument pressure.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.get_wavelength">
-<code class="sig-name descname">get_wavelength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.get_wavelength" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.get_wavelength">
+<code class="sig-name descname">get_wavelength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.get_wavelength" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current wavelength.
 wavelength_id is the wavelength mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize the object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.read_header">
-<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.read_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.read_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current header.
 Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
 Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_active_comps">
-<code class="sig-name descname">set_active_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_active_comps" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_active_comps">
+<code class="sig-name descname">set_active_comps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comp_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_active_comps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set comparisons which are to be turned on and off with comps_on() and comps_off().
 comp_names is a single string or a list of strings to be set as active.
 comp_id is the comparison mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_filter">
-<code class="sig-name descname">set_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_name</span></em>, <em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_filter" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_filter">
+<code class="sig-name descname">set_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filter_name</span></em>, <em class="sig-param"><span class="n">filter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the current/loaded filter, typically the filter in the beam.
 filter_name is the filter name to set.
 filter_id is the filter mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_focus">
-<code class="sig-name descname">set_focus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">focus_position</span></em>, <em class="sig-param"><span class="n">focus_id</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">focus_type</span><span class="o">=</span><span class="default_value">'absolute'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_focus" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_focus">
+<code class="sig-name descname">set_focus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">focus_position</span></em>, <em class="sig-param"><span class="n">focus_id</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">focus_type</span><span class="o">=</span><span class="default_value">'absolute'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_focus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move (or step) the instrument focus.
 focus_position is the focus position or step size.
 focus_id is the focus mechanism ID.
@@ -403,37 +403,37 @@ focus_type is “absolute” or “step”.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_keyword">
-<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_keyword" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set a keyword value and comment.
 typestring is one of ‘str’, ‘int’, or ‘float’.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_pressure">
-<code class="sig-name descname">set_pressure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pressure</span></em>, <em class="sig-param"><span class="n">pressure_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_pressure" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_pressure">
+<code class="sig-name descname">set_pressure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pressure</span></em>, <em class="sig-param"><span class="n">pressure_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_pressure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets an instrument pressure.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_shutter">
-<code class="sig-name descname">set_shutter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">shutter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_shutter" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_shutter">
+<code class="sig-name descname">set_shutter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">shutter_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_shutter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open or close the instrument shutter.
 state is 1 for open and 0 for close.
 shutter_id is the shutter mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.set_wavelength">
-<code class="sig-name descname">set_wavelength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength</span></em>, <em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.set_wavelength" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.set_wavelength">
+<code class="sig-name descname">set_wavelength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wavelength</span></em>, <em class="sig-param"><span class="n">wavelength_id</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.set_wavelength" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the current wavelength, typically for a filter or grating.
 wavelength is the wavelength value.
 wavelength_id is the wavelength mechanism ID.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="azcam.instruments.instrument.Instrument.update_header">
-<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instruments.instrument.Instrument.update_header" title="Permalink to this definition">¶</a></dt>
+<dt id="azcam.instrument.Instrument.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.instrument.Instrument.update_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the header, reading current data.
 Deletes all keywords if the object is not enabled.</p>
 </dd></dl>

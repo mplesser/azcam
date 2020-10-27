@@ -20,7 +20,7 @@ a single method in the instrument server which translates web command strings in
 which are accepted by the instrument server's *cmdserver*.
 
 ```eval_rst
-.. autoclass:: azcam.instruments.instrument.Instrument
+.. autoclass:: azcam.instrument.Instrument
     :members:
     :undoc-members:
     :show-inheritance:

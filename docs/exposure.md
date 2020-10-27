@@ -9,7 +9,7 @@ The *exposure* object often coordinates the actions of the hardware objects such
 *exposure.objects_reset* list are reset.
 
 ```eval_rst
-.. autoclass:: azcam.exposures.exposure.Exposure
+.. autoclass:: azcam.exposure.Exposure
     :members:
     :undoc-members:
     :show-inheritance:
