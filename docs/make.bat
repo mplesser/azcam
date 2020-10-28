@@ -7,8 +7,8 @@ if "%SPHINXBUILD%" == "" (
 )
 
 set SOURCEDIR=.
-set BUILDDIR=.
-REM set BUILDDIR=_build
+REM set BUILDDIR=.
+set BUILDDIR=_build
 
 set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% .
 set I18NSPHINXOPTS=%SPHINXOPTS% .
