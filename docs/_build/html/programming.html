@@ -1,0 +1,982 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Programming &mdash; azcam 20.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API for Console" href="api_console.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> azcam
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fits.html">Fits Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Plot Commands</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objects">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#header-commands">Header Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focalplane">Focalplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#azcam-apps">Azcam Apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#national-instruments-labview">National Instruments LabVIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ports">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#misc-notes">Misc Notes</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">azcam</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Programming</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+      
+        <a href="api_console.html" class="btn btn-neutral float-left" title="API for Console" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="programming">
+<h1>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h1>
+<p>This document describes Azcam installation, configuration, and programming. It is intended
+for advanced users only.</p>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>Because Azcam consists of many different modules and plugins, there is no single version
+number or date which uniquely identifies all the code. One indicator of the current version is to
+issue the command <code class="docutils literal notranslate"><span class="pre">azcam.utils.get_par(&quot;version&quot;)</span></code>.</p>
+</div>
+<div class="section" id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+<p>Modules (files), objects (such as <em>controller</em>), command names (methods) and attributes (parameters) are all lowercase.
+Commands must have parentheses following their names even if no
+attributes are required. Filenames should be given with forward slash (‘/’) separators, even on Windows
+machines. If back slashes are needed, they must be doubled as in c:\data. Strings must
+be enclosed in quotation marks, as in get_par(‘version’). Quotation marks must match (‘version” is
+not acceptable). A quotation mark may be included in a string by preceding it with a backslash
+(“I am Mike’s dog.”)</p>
+</div>
+<div class="section" id="objects">
+<h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
+<p>Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands
+provide control of all aspects of Azcam. These commands (methods) interact with hardware such as controllers,
+instruments, temperature controllers, and telescopes as well as with more virtual objects such as the
+exposures, images, databases, time, communication interfaces, etc.
+The required command syntax is <code class="docutils literal notranslate"><span class="pre">object.command(args)</span></code> where <code class="docutils literal notranslate"><span class="pre">object</span></code> is the object name (such as
+<em>controller</em>, <em>instrument</em>, or <em>telescope</em>) and <code class="docutils literal notranslate"><span class="pre">command()</span></code> is the command to be sent. If <code class="docutils literal notranslate"><span class="pre">command()</span></code>
+uses arguments, they are specified as comma separated values of the appropriate type,
+such as <code class="docutils literal notranslate"><span class="pre">object.command('ITL',1.234,45)</span></code>. For example, to send the command initialize to the
+instrument, use <code class="docutils literal notranslate"><span class="pre">instrument.initialize()</span></code>. To send the <code class="docutils literal notranslate"><span class="pre">get_focus</span></code> command to the telescope,
+use <code class="docutils literal notranslate"><span class="pre">telescope.get_focus()</span></code>.</p>
+</div>
+<div class="section" id="header-commands">
+<h2>Header Commands<a class="headerlink" href="#header-commands" title="Permalink to this headline">¶</a></h2>
+<p>Azcam uses object specific keyword indexed dictionary to maintain textual informational about some objects. These are typically
+called headers as they are used to provide information in image headers. The keywords and their corresponding values, data type,
+and comment field are stored in each of the controller, instrument, and telescope header
+dictionary. These dictionaries are manipulated by commands both from clients and internally in Azcam. Most of the
+values are written to the image file header (such as a FITS header) when an exposure begins.</p>
+<p>The header information is accessed through methods such as
+<code class="docutils literal notranslate"><span class="pre">controller.header.get_all_keywords()</span></code> to get a list of all keywords and
+<code class="docutils literal notranslate"><span class="pre">instrument.get_keyword('FILTER1')</span></code> to get the currentvalue for the keyword.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">read_header()</span></code> method of each object will actively read hardware to obtain
+information (such as <code class="docutils literal notranslate"><span class="pre">controller.read_header()</span></code> or <code class="docutils literal notranslate"><span class="pre">instrument.read_header()</span></code>).</p>
+<p>In general there is a method of the same name in both the header class and the actual object’s class, such as <code class="docutils literal notranslate"><span class="pre">controller.header.get_keyword()</span></code> and <code class="docutils literal notranslate"><span class="pre">controller.get_keyword()</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.header</span></code> version reads the current data as stored in the header dictionary while the object’s version usually reads actual hardware values and then stores that data in the header dictionary.</p>
+<p>The telescope and instrument dictionaries are considered temporary and re-read every time an exposure starts. This
+is so that rapidly changing data values do not become stale. Most dictionary information is written to the image file header if the selected image format supports headers. When an object such as an instrument or telescope is disabled, the corresponding object database information is deleted and no longer updated.</p>
+<p>Below is the documentation for the Header class.</p>
+<dl class="py class">
+<dt id="azcam.header.Header">
+<em class="property">class </em><code class="sig-name descname">Header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines the Header class which is used to create and manipulate headers contained
+in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
+<dl class="py method">
+<dt id="azcam.header.Header.copy_all_items">
+<code class="sig-name descname">copy_all_items</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ptr_header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.copy_all_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy all items from the specified header object to the current image header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keywords</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">comments</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">typestrings</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines keywords, if they are not already defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.delete_all_items">
+<code class="sig-name descname">delete_all_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.delete_all_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all header items</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.delete_all_keywords">
+<code class="sig-name descname">delete_all_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.delete_all_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all keywords.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a keyword.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.get_all_keywords">
+<code class="sig-name descname">get_all_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.get_all_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all keyword names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.get_info">
+<code class="sig-name descname">get_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.get_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.get_string">
+<code class="sig-name descname">get_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.get_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the entire header as a single formatted string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.get_type_string">
+<code class="sig-name descname">get_type_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pythontype</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.get_type_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a string indicating the python data type pythontype.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.read_file">
+<code class="sig-name descname">read_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a header file and import the data into the header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.set_header">
+<code class="sig-name descname">set_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">object_name</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets object_name in the global header dictionary.
+order defines how headers are written in image files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a keyword value and comment.
+typestring is one of ‘str’, ‘int’, or ‘float’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.set_keyword_string">
+<code class="sig-name descname">set_keyword_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keystring</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.set_keyword_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set keyword data from a single string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.set_title">
+<code class="sig-name descname">set_title</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.set_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the title of the header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.header.Header.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.header.Header.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update header.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="focalplane">
+<h2>Focalplane<a class="headerlink" href="#focalplane" title="Permalink to this headline">¶</a></h2>
+<p>Below is the documentation for the FocalPlane class which is  used internally to define all aspects of the focal plane and sensor configuration.</p>
+<dl class="py class">
+<dt id="azcam.focalplane.FocalPlane">
+<em class="property">class </em><code class="sig-name descname">FocalPlane</code><a class="headerlink" href="#azcam.focalplane.FocalPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines the FocalPlane class which describes a cameras focalplane and detectors.</p>
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.BL_COLUNDER">
+<code class="sig-name descname">BL_COLUNDER</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.BL_COLUNDER" title="Permalink to this definition">¶</a></dt>
+<dd><p>bias location constants</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.amp_config">
+<code class="sig-name descname">amp_config</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.amp_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>amplifier readout orientation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.ampcfg">
+<code class="sig-name descname">ampcfg</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.ampcfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>ampliefier readout orientation - new as an array</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.amppix1">
+<code class="sig-name descname">amppix1</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.amppix1" title="Permalink to this definition">¶</a></dt>
+<dd><p>amplifier’s positions in pixels along X axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.amppix2">
+<code class="sig-name descname">amppix2</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.amppix2" title="Permalink to this definition">¶</a></dt>
+<dd><p>amplifier’s positions in pixels along Y axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.ampvispix_x">
+<code class="sig-name descname">ampvispix_x</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.ampvispix_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>unbinned number of visible pixels per amplifier along X axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.ampvispix_y">
+<code class="sig-name descname">ampvispix_y</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.ampvispix_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>unbinned number of visible pixels per amplifier along Y axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.col_bin">
+<code class="sig-name descname">col_bin</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.col_bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>column binning</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines focal plane keywords, if they are not already defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.delete_all_items">
+<code class="sig-name descname">delete_all_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.delete_all_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all header items</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.detnum">
+<code class="sig-name descname">detnum</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.detnum" title="Permalink to this definition">¶</a></dt>
+<dd><p>detector number for each detector</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.detpos_x">
+<code class="sig-name descname">detpos_x</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.detpos_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>detector position in x direction in pixels</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.detpos_y">
+<code class="sig-name descname">detpos_y</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.detpos_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>detector position in y direction in pixels</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.extname">
+<code class="sig-name descname">extname</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.extname" title="Permalink to this definition">¶</a></dt>
+<dd><p>extension name for each amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.extnum">
+<code class="sig-name descname">extnum</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.extnum" title="Permalink to this definition">¶</a></dt>
+<dd><p>extension number for each amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.extpos_x">
+<code class="sig-name descname">extpos_x</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.extpos_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>amplifier’s positions along X axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.extpos_y">
+<code class="sig-name descname">extpos_y</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.extpos_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>amplifier’s positions along Y axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.first_col">
+<code class="sig-name descname">first_col</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.first_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>first column</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.first_row">
+<code class="sig-name descname">first_row</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.first_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>first row</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.gapx">
+<code class="sig-name descname">gapx</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.gapx" title="Permalink to this definition">¶</a></dt>
+<dd><p>gapx is the sum of all gaps on the left side of the amplifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.gapy">
+<code class="sig-name descname">gapy</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.gapy" title="Permalink to this definition">¶</a></dt>
+<dd><p>gapy is the sum of all gaps below the amplifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.get_focalplane">
+<code class="sig-name descname">get_focalplane</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.get_focalplane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the focal plane configuration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.get_format">
+<code class="sig-name descname">get_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.get_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of current detector format parameters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.get_roi">
+<code class="sig-name descname">get_roi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roi_num</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.get_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the ROI parameters for the roi_num specified.
+Currently only one ROI (0) is supported.
+Returned list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.jpgext">
+<code class="sig-name descname">jpgext</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.jpgext" title="Permalink to this definition">¶</a></dt>
+<dd><p>extension number order for each amplifier when creating binary image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.last_col">
+<code class="sig-name descname">last_col</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.last_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>last column</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.last_row">
+<code class="sig-name descname">last_row</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.last_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>last row</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.num_amps_det">
+<code class="sig-name descname">num_amps_det</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.num_amps_det" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of total amps per detector</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.num_detectors">
+<code class="sig-name descname">num_detectors</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.num_detectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of detectors</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.num_par_amps_det">
+<code class="sig-name descname">num_par_amps_det</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.num_par_amps_det" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of parallel amps per detector</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.num_ser_amps_det">
+<code class="sig-name descname">num_ser_amps_det</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.num_ser_amps_det" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of serial amps per detector</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numamps_image">
+<code class="sig-name descname">numamps_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numamps_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of total amps per image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numamps_x">
+<code class="sig-name descname">numamps_x</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numamps_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of amplifiers along X axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numamps_y">
+<code class="sig-name descname">numamps_y</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numamps_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of amplifiers along Y axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numbytes_image">
+<code class="sig-name descname">numbytes_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numbytes_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of bytes per image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numcols_amp">
+<code class="sig-name descname">numcols_amp</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numcols_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of columns per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numcols_image">
+<code class="sig-name descname">numcols_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numcols_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of columns per image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numcols_overscan">
+<code class="sig-name descname">numcols_overscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numcols_overscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of colums in overscan</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numcols_underscan">
+<code class="sig-name descname">numcols_underscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numcols_underscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of colums in underscan</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numdet_x">
+<code class="sig-name descname">numdet_x</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numdet_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of detectors along X axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numdet_y">
+<code class="sig-name descname">numdet_y</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numdet_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of detectors along Y axis</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numpix_amp">
+<code class="sig-name descname">numpix_amp</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numpix_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of pixels per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numpix_det">
+<code class="sig-name descname">numpix_det</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numpix_det" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of pixels per detector</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numpix_image">
+<code class="sig-name descname">numpix_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numpix_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of pixels in image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numrows_amp">
+<code class="sig-name descname">numrows_amp</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numrows_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of row per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numrows_image">
+<code class="sig-name descname">numrows_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numrows_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of rows per image</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numrows_overscan">
+<code class="sig-name descname">numrows_overscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numrows_overscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of rows in overscan</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numrows_underscan">
+<code class="sig-name descname">numrows_underscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numrows_underscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of rows in underscan</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numviscols_amp">
+<code class="sig-name descname">numviscols_amp</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numviscols_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of visible columns per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numviscols_image">
+<code class="sig-name descname">numviscols_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numviscols_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of visible columns per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numvisrows_amp">
+<code class="sig-name descname">numvisrows_amp</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numvisrows_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of visible rows per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.numvisrows_image">
+<code class="sig-name descname">numvisrows_image</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.numvisrows_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>number of visible rows per amplifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.refpix1">
+<code class="sig-name descname">refpix1</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.refpix1" title="Permalink to this definition">¶</a></dt>
+<dd><p>reference (zeropoint) position X (in pixels)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.refpix2">
+<code class="sig-name descname">refpix2</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.refpix2" title="Permalink to this definition">¶</a></dt>
+<dd><p>reference (zeropoint) position Y (in pixels)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.roi_reset">
+<code class="sig-name descname">roi_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.roi_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets detector ROI values to full frame, current binning.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.row_bin">
+<code class="sig-name descname">row_bin</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.row_bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>row binning</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_amp_positions">
+<code class="sig-name descname">set_amp_positions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_amp_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates amplifiers positions including gaps between amplifiers and CCDs
+New: Zareba 23Mar2012</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_default_values">
+<code class="sig-name descname">set_default_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_default_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default values for focalplane variables</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_extension_extnum">
+<code class="sig-name descname">set_extension_extnum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extnum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_extension_extnum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_extension_name">
+<code class="sig-name descname">set_extension_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_extension_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_extension_position">
+<code class="sig-name descname">set_extension_position</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_extension_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the extension position of each amplifier.
+xy is [[X,Y]] in index numbers, starting at [1,1].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_focalplane">
+<code class="sig-name descname">set_focalplane</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">numdet_x</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">numdet_y</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">numamps_x</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">numamps_y</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">amp_config</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_focalplane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets focal plane configuration. Use after set_format() and before set_roi().
+This command replaces SetConfiguration.
+Default focalplane values are set here.
+numdet_x defines number of detectors in Column direction.
+numdet_y defines number of detectors in Row direction.
+numamps_x defines number of amplifiers in Column direction.
+numamps_y defines number of amplifiers in Row direction.
+amp_config defines each amplifier’s orientation (ex: ‘1223’).
+0 - normal
+1 - flip x
+2 - flip y
+3 - flip x and y</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_format">
+<code class="sig-name descname">set_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ns_total</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">ns_predark</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">ns_underscan</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">ns_overscan</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">np_total</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">np_predark</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">np_underscan</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">np_overscan</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">np_frametransfer</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the detector format.
+ns_total is the number of visible columns.
+ns_predark is the number of physical dark underscan columns.
+ns_underscan is the desired number of desired dark underscan columns.
+ns_overscan is the number of dark overscan columns.
+np_total is the number of visible rows.
+np_predark is the number of physical dark underscan rows.
+np_underscan is the number of desired dark underscan rows.
+np_overscan is the number of desired dark overscan rows.
+np_frametransfer is the rows to frame transfer shift.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_jpg_order">
+<code class="sig-name descname">set_jpg_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indices</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_jpg_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set JPG image positions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_ref_pixel">
+<code class="sig-name descname">set_ref_pixel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_ref_pixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the reference pixel.
+xy is [X,Y] in pixels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.set_roi">
+<code class="sig-name descname">set_roi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_col</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">last_col</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">first_row</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">last_row</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">col_bin</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">row_bin</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">roi_num</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.set_roi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the ROI values for a specified ROI.
+Currently only one ROI (0) is supported.
+These values are for the entire focal plane, not just one detector.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.update_ext_keywords">
+<code class="sig-name descname">update_ext_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.update_ext_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update focal plane keywords for single extension</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.update_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update headers, reading current data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.focalplane.FocalPlane.update_header_keywords">
+<code class="sig-name descname">update_header_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.focalplane.FocalPlane.update_header_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update focal plane keywords in header</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.xoverscan">
+<code class="sig-name descname">xoverscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.xoverscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>overscan skips</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="azcam.focalplane.FocalPlane.xunderscan">
+<code class="sig-name descname">xunderscan</code><a class="headerlink" href="#azcam.focalplane.FocalPlane.xunderscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>underscan skips</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<p>Parameters may be read with the <code class="docutils literal notranslate"><span class="pre">azcam.api.get_par()</span></code> command and written with the <code class="docutils literal notranslate"><span class="pre">azcam.api.set_par()</span></code>
+command. For example, <code class="docutils literal notranslate"><span class="pre">azcam.api.get_par('imagetype')</span></code> returns the current image type.</p>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">azcam.log()</span></code> function should be used for output instead of python’s <code class="docutils literal notranslate"><span class="pre">print()</span></code> function. This function is mapped to the <em>azcam</em> namespace from <code class="docutils literal notranslate"><span class="pre">azcam.utils.log()</span></code>.
+This is important due to the multithreading nature of Azcam.  The output of the <code class="docutils literal notranslate"><span class="pre">log()</span></code> function can be defined by code, and is typically both the
+console and a rotating log file. It is possible to also direct <code class="docutils literal notranslate"><span class="pre">log()</span></code> output to a web application, a syslog handler, or other applications.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">log()</span></code> function supports levels which determine if the log message should actually be output. If the level value is greater than or equal to the value of <code class="docutils literal notranslate"><span class="pre">azcam.db[&quot;verbosity&quot;]</span></code> then the message string is output. The default level is one, as
+<code class="docutils literal notranslate"><span class="pre">azcam.log(&quot;test</span> <span class="pre">message&quot;,</span> <span class="pre">level</span> <span class="pre">=</span> <span class="pre">1)</span></code>.  The level meanings are:</p>
+<ul class="simple">
+<li><p>level = 0: silent</p></li>
+<li><p>level = 1: normal</p></li>
+<li><p>level = 2: added information</p></li>
+<li><p>level = 3: debug</p></li>
+</ul>
+</div>
+<div class="section" id="azcam-apps">
+<h2>Azcam Apps<a class="headerlink" href="#azcam-apps" title="Permalink to this headline">¶</a></h2>
+<p>The following support applications may also be useful when operating Azcam.</p>
+<ul class="simple">
+<li><p><em>azcam-tool</em> is a graphical user interface (GUI) useful for operating Azcam in a point and click mode. It is not required, but is highly recommended.</p></li>
+<li><p><em>EngineeringTool</em> performs very low level (and dangerous!) controller functions.</p></li>
+<li><p><em>AzcamImageServer</em> is a stand-alone python image server which can receive images on a remote machine. This is especially useful for receiving images on computers running Linux.</p></li>
+<li><p><em>azcam-ds9</em> is a set of tools useful when using SAO’s ds9 display program.</p></li>
+<li><p><em>azcam-observe</em> is an observing script package supporting a GUi and a command line interface.</p></li>
+<li><p><em>azcam-focus</em> is a package which supports acquire a focus exposure.</p></li>
+</ul>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.</p>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Some Azcam commands require python packages which are not installed by default. These must be downloaded
+and installed according to their individual instructions. Not all commands require all these packages.
+The current non-default packages are currently:</p>
+<ul class="simple">
+<li><p>FITS image file manipulation - astropy.io.fits <a class="reference external" href="http://docs.astropy.org/en/stable/io/fits/index.html">http://docs.astropy.org/en/stable/io/fits/index.html</a></p></li>
+<li><p>Numeric python for data manipulation - numpy <a class="reference external" href="http://www.numpy.org">http://www.numpy.org</a></p></li>
+<li><p>Plotting - `matplotlib <a class="reference external" href="https://matplotlib.org">https://matplotlib.org</a></p></li>
+</ul>
+</div>
+<div class="section" id="national-instruments-labview">
+<h2>National Instruments LabVIEW<a class="headerlink" href="#national-instruments-labview" title="Permalink to this headline">¶</a></h2>
+<p>The runtime LabVIEW installer must be downloaded to your computer and executed to install the
+LabVIEW Run-Time Engine which is required by Azcam LabVIEW code (such as Obstool). Administrator
+privileges may be required for installation. LabVIEW installers should be obtained directly
+from National Instruments, <a class="reference external" href="http://www.ni.com">http://www.ni.com</a>. Azcam currently uses LabVIEW 2014.</p>
+</div>
+<div class="section" id="ports">
+<h2>Ports<a class="headerlink" href="#ports" title="Permalink to this headline">¶</a></h2>
+<p>Azcam reserves ten socket ports for each Azcam process. The ports are used for the various
+server functions and may not actually be all used on a computer. The CommandServer port is
+typically the base port each Azcam process and the remaining ports are incremented by one.
+The default command server port is 2402 for the first Azcam process, 2412 for the second process,
+2422 for the third, and so on. More complex systems often use many ports which the most basic
+systems have one a command sever port and a controller sever port.</p>
+<ul class="simple">
+<li><p>cmdserver port - 2402</p></li>
+<li><p>web server port - 2403</p></li>
+<li><p>instrument server port - 2404</p></li>
+<li><p>controller server port - 2405</p></li>
+<li><p>power server port - 2406</p></li>
+<li><p>Reserved - 2407</p></li>
+<li><p>Reserved - 2408</p></li>
+<li><p>Reserved - 2409</p></li>
+<li><p>Reserved - 2410</p></li>
+<li><p>Reserved - 2411</p></li>
+</ul>
+</div>
+<div class="section" id="misc-notes">
+<h2>Misc Notes<a class="headerlink" href="#misc-notes" title="Permalink to this headline">¶</a></h2>
+<p>These notes may be of some help setting up systems.</p>
+<ul class="simple">
+<li><p>To allow system time update with azcamtime.py (for Windows PC):</p>
+<ul>
+<li><p>gpedit may be required</p></li>
+<li><p>Computer Configuration\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Change the system time</p></li>
+<li><p>gpupdate /force</p></li>
+</ul>
+</li>
+<li><p>Useful Tricks</p>
+<ul>
+<li><p>Alt-F4 windows reboot for advanced options such as driver security</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="api_console.html" class="btn btn-neutral float-left" title="API for Console" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, University of Arizona
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
