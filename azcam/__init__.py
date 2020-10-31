@@ -1,5 +1,7 @@
 import socket
 
+from azcam.api_azcam import api
+
 from .database import db
 # bring these into azcam namespace so importing not required
 from .exceptions import AzcamError, AzcamWarning
