@@ -1508,7 +1508,7 @@ class Exposure(Objects):
             message = self.message
 
         # debug
-        if 0:
+        if 1:
             self.pgress += 5.0
             if self.pgress > 100:
                 self.pgress = 0
