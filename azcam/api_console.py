@@ -18,7 +18,11 @@ class API(azcam.api_azcam.API):
 
         super().__init__()
 
-        self.instrument = Instrument()
+        # self.controller = Controller()
+        # self.exposure = Exposure()
+        self.instrument = Instrument(self)
+        # self.telescope = Telescope()
+        # self.tempcon = Tempcon()
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_cmds["api"] = self
@@ -828,7 +832,8 @@ class API(azcam.api_azcam.API):
 
 
 class Instrument(object):
-    def __init__(self) -> None:
+    def __init__(self, parent) -> None:
+        self.parent = parent
         pass
 
     def get_wavelength(self, wavelength_id: int = 0) -> float:
@@ -838,7 +843,9 @@ class Instrument(object):
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        reply = float(self.rcommand(f"instrument.get_wavelength {wavelength_id}"))
+        reply = float(
+            self.parent.rcommand(f"instrument.get_wavelength {wavelength_id}")
+        )
 
         return reply
 
