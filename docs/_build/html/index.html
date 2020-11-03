@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Image Class" href="image.html" /> 
+    <link rel="next" title="Exposure Class" href="exposure.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,6 +92,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
@@ -102,17 +109,12 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_console.html">Console API</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#virtual-environment">Virtual Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
@@ -122,7 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#id1">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
@@ -150,7 +152,7 @@
 
       <div class="wy-nav-content">
         
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
         
           
 
@@ -188,7 +190,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="image.html" class="btn btn-neutral float-right" title="Image Class" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="exposure.html" class="btn btn-neutral float-right" title="Exposure Class" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
   </div>
@@ -203,8 +205,9 @@
 <p>AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <div class="toctree-wrapper compound">
 </div>
+</div>
 <div class="section" id="help">
-<h2>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
 <p>AzCam is often used with IPython.  Help is then avaialble by typing <code class="docutils literal notranslate"><span class="pre">?xxx</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx?</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx??</span></code> or <code class="docutils literal notranslate"><span class="pre">help(xxx)</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is an azcam class, command, or object instance.</p>
 <p>Useful links include:</p>
 <ul class="simple">
@@ -213,7 +216,7 @@
 </ul>
 </div>
 <div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>Most of AzCam’s functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system’s hardware resources.  Examples include:</p>
 <ul class="simple">
 <li><p>azcam-arc</p></li>
@@ -258,7 +261,7 @@
 <p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts.</p>
 </div>
 <div class="section" id="server-operation">
-<h2>Server Operation<a class="headerlink" href="#server-operation" title="Permalink to this headline">¶</a></h2>
+<h1>Server Operation<a class="headerlink" href="#server-operation" title="Permalink to this headline">¶</a></h1>
 <p>AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like <em>azcamtool</em> or a pyhton command line interface using azcam’s console code.</p>
 <p>The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second “flat field” exposure is:</p>
 <p>Local CLI or script example:</p>
@@ -270,9 +273,22 @@
 <p>Web pages which are served by <em>azcamserver</em> are found at URL’s such as:</p>
 <p><code class="docutils literal notranslate"><span class="pre">http://hostname:2403/status</span></code> <br>
 <code class="docutils literal notranslate"><span class="pre">http://hostname:2403/exptool</span></code>.</p>
+<div class="section" id="server-classes">
+<h2>Server Classes<a class="headerlink" href="#server-classes" title="Permalink to this headline">¶</a></h2>
+<p>These classes are server-side only and are useed to define or control a system.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section" id="shortcuts">
-<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<h1>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h1>
 <p>When using IPython, the auto parenthesis mode allows typing commands without
 requiring the normal python syntax of command(par1, par2, …). The equivalent
 shortcut or alias syntax is command par1 par2. With Ipython in this mode all commands can
@@ -288,14 +304,11 @@ as <code class="docutils literal notranslate"><span class="pre">from</span> <spa
 <li><p><strong>bf</strong> to browse for a file or folder.</p></li>
 </ul>
 </div>
-</div>
 <div class="section" id="commands-and-objects">
 <h1>Commands and Objects<a class="headerlink" href="#commands-and-objects" title="Permalink to this headline">¶</a></h1>
 <p>There are many commands and classes (which create objects and their methods) which are
 available to manipulate hardware, data, images, and exposures. The links listed
 below describe some of these commands. Availability depends on configuration.</p>
-<div class="section" id="id1">
-<h2>General<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>These classes and commands are useful both in the server and in a console application.</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -313,33 +326,17 @@ below describe some of these commands. Availability depends on configuration.</p
 </ul>
 </div>
 </div>
-<div class="section" id="server-classes">
-<h2>Server Classes<a class="headerlink" href="#server-classes" title="Permalink to this headline">¶</a></h2>
-<p>These classes are server-side only and are useed to define or control a system.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
-</ul>
-</div>
-</div>
 <div class="section" id="console-api">
-<h2>Console API<a class="headerlink" href="#console-api" title="Permalink to this headline">¶</a></h2>
+<h1>Console API<a class="headerlink" href="#console-api" title="Permalink to this headline">¶</a></h1>
 <p>These commands are used in a console application which may be connected via a socket to the server.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_console.html">Console API</a></li>
 </ul>
 </div>
 </div>
-</div>
-<div class="section" id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="folders">
-<h2>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configuration-folders">
+<h1>Configuration Folders<a class="headerlink" href="#configuration-folders" title="Permalink to this headline">¶</a></h1>
 <p>There are several folder names which are usually defined, although their use may be optional for some systems:</p>
 <ul class="simple">
 <li><p><em>systemfolder</em> - the main folder where configuration data is located</p></li>
@@ -347,42 +344,13 @@ below describe some of these commands. Availability depends on configuration.</p
 <li><p><em>projectfolder</em> - related to systemfolder, but for a specific project rather the the entire system (optional)</p></li>
 </ul>
 </div>
-<div class="section" id="virtual-environment">
-<h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h2>
-<p>When a python virtual environment is used, it is typically contained in a folder named <code class="docutils literal notranslate"><span class="pre">../venvs/azcam</span></code>.</p>
-</div>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>AzCam currently uses <em>Python 3.8</em>. Important dependancies include:</p>
-<ul class="simple">
-<li><p><em>numpy</em></p></li>
-<li><p><em>astropy</em></p></li>
-<li><p><em>loguru</em></p></li>
-</ul>
-<p>There are many other dependencies depending on configuration. Examples are:</p>
-<ul class="simple">
-<li><p><em>ipython</em></p></li>
-<li><p><em>scipy</em></p></li>
-<li><p><em>matplotlib</em></p></li>
-<li><p><em>pandas</em></p></li>
-<li><p><em>keyring</em></p></li>
-<li><p><em>flask</em></p></li>
-<li><p><em>PyPDF2</em></p></li>
-<li><p><em>rst2pdf</em></p></li>
-<li><p><em>pdfkit</em></p></li>
-<li><p><em>markdown</em></p></li>
-<li><p><em>mysql-connector</em></p></li>
-<li><p><em>pyserial</em></p></li>
-</ul>
-</div>
 <div class="section" id="programming">
-<h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
-<p>This section contains misc informationa about <em>azcam</em> programming.</p>
+<h1>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h1>
+<p>The link below contains informationa about <em>azcam</em> programming.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a></li>
 </ul>
-</div>
 </div>
 </div>
 
@@ -394,7 +362,7 @@ below describe some of these commands. Availability depends on configuration.</p
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="image.html" class="btn btn-neutral float-right" title="Image Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="exposure.html" class="btn btn-neutral float-right" title="Exposure Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

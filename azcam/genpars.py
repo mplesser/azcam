@@ -21,8 +21,6 @@ class GenPars(object):
 
         # save object
         setattr(azcam.db, "genpars", self)
-        setattr(azcam.api, "genpars", self)
-        azcam.db.cli_cmds["genpars"] = self
 
     def parfile_read(self, parfilename: str = None) -> None:
         """

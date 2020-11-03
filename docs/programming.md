@@ -3,6 +3,31 @@
 This document describes Azcam installation, configuration, and programming. It is intended 
 for advanced users only.
 
+## Dependencies
+AzCam currently uses *Python 3.8*. Important dependancies include:
+
+  * *numpy*
+  * *astropy*
+  * *loguru*
+
+There are many other dependencies depending on configuration. Examples are:
+
+  * *ipython*
+  * *scipy*
+  * *matplotlib*
+  * *pandas*
+  * *keyring*
+  * *flask*
+  * *PyPDF2*
+  * *rst2pdf*
+  * *pdfkit*
+  * *markdown*
+  * *mysql-connector*
+  * *pyserial*
+
+## Virtual Environment
+When a python virtual environment is used, it is typically contained in a folder named `../venvs/azcam`.
+
 ## Versioning
 Because Azcam consists of many different modules and plugins, there is no single version 
 number or date which uniquely identifies all the code. One indicator of the current version is to 

@@ -9,14 +9,14 @@ AzCam is a software environment for the acquisition and analysis of image data f
    Home <self>
 ```
 
-## Help
+# Help
 AzCam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an azcam class, command, or object instance.
 
 Useful links include:
 * IPython <https://ipython.org>
 * Python programming language <https://www.python.org>
   
-## Usage
+# Usage
 Most of AzCam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
 
   - azcam-arc
@@ -58,7 +58,7 @@ When working in a command line environment, it is often convenient to import com
 
 This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
 
-## Server Operation
+# Server Operation
 AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like *azcamtool* or a pyhton command line interface using azcam's console code.
 
 The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:
@@ -80,7 +80,21 @@ Web pages which are served by *azcamserver* are found at URL's such as:
 `http://hostname:2403/status` <br>
 `http://hostname:2403/exptool`.
 
-## Shortcuts
+## Server Classes
+These classes are server-side only and are useed to define or control a system.
+
+```eval_rst
+.. toctree::
+   :maxdepth: 1
+
+   exposure
+   controller
+   tempcon
+   instrument
+   telescope
+```
+
+# Shortcuts
 When using IPython, the auto parenthesis mode allows typing commands without 
 requiring the normal python syntax of command(par1, par2, ...). The equivalent 
 shortcut or alias syntax is command par1 par2. With Ipython in this mode all commands can 
@@ -100,7 +114,6 @@ There are many commands and classes (which create objects and their methods) whi
 available to manipulate hardware, data, images, and exposures. The links listed 
 below describe some of these commands. Availability depends on configuration.
 
-## General
 These classes and commands are useful both in the server and in a console application.
 
 ```eval_rst
@@ -121,21 +134,7 @@ The *utility* commands are intended to be used only with other *azcam* code.
    utils
 ```
 
-## Server Classes
-These classes are server-side only and are useed to define or control a system.
-
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   exposure
-   controller
-   tempcon
-   instrument
-   telescope
-```
-
-## Console API
+# Console API
 These commands are used in a console application which may be connected via a socket to the server.
 
 ```eval_rst
@@ -145,43 +144,16 @@ These commands are used in a console application which may be connected via a so
    api_console
 ```
 
-# Configuration
-
-## Folders
+# Configuration Folders
 There are several folder names which are usually defined, although their use may be optional for some systems:
 
   * *systemfolder* - the main folder where configuration data is located
   * *datafolder* - the root folder where data and parameters are saved, write access is required
   * *projectfolder* - related to systemfolder, but for a specific project rather the the entire system (optional)
  
-## Virtual Environment
-When a python virtual environment is used, it is typically contained in a folder named `../venvs/azcam`.
+# Programming
 
-## Dependencies
-AzCam currently uses *Python 3.8*. Important dependancies include:
-
-  * *numpy*
-  * *astropy*
-  * *loguru*
-
-There are many other dependencies depending on configuration. Examples are:
-
-  * *ipython*
-  * *scipy*
-  * *matplotlib*
-  * *pandas*
-  * *keyring*
-  * *flask*
-  * *PyPDF2*
-  * *rst2pdf*
-  * *pdfkit*
-  * *markdown*
-  * *mysql-connector*
-  * *pyserial*
-
-## Programming
-
-This section contains misc informationa about *azcam* programming.
+The link below contains informationa about *azcam* programming.
 
 ```eval_rst
 .. toctree::

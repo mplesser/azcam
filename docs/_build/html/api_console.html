@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API for Console &mdash; azcam 20.4 documentation</title>
+  <title>Console API &mdash; azcam 20.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Programming" href="programming.html" />
-    <link rel="prev" title="Telescope Class" href="telescope.html" /> 
+    <link rel="prev" title="Utility Commands" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,6 +93,13 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
@@ -102,18 +109,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
-</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API for Console</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Console API</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="programming.html">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#virtual-environment">Virtual Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#conventions">Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#objects">Objects</a></li>
@@ -123,7 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="programming.html#logging">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#azcam-apps">Azcam Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="programming.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html#id1">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#national-instruments-labview">National Instruments LabVIEW</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#ports">Ports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="programming.html#misc-notes">Misc Notes</a></li>
@@ -151,7 +153,7 @@
 
       <div class="wy-nav-content">
         
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
         
           
 
@@ -175,7 +177,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>API for Console</li>
+      <li>Console API</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -192,7 +194,7 @@
         <a href="programming.html" class="btn btn-neutral float-right" title="Programming" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="telescope.html" class="btn btn-neutral float-left" title="Telescope Class" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utility Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -201,8 +203,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="api-for-console">
-<h1>API for Console<a class="headerlink" href="#api-for-console" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="console-api">
+<h1>Console API<a class="headerlink" href="#console-api" title="Permalink to this headline">¶</a></h1>
 <p>The <em>api_console</em> class contains a command set which can be called from a console application to send the equivalent command to a server process.  Commands are typically accessed in and console process
 as <code class="docutils literal notranslate"><span class="pre">azcam.api.commandname(parameters)</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">azcam.api.get_wavelength()</span></code>.</p>
 <dl class="py class">
@@ -1017,7 +1019,7 @@ This command usually reads hardware to get the lastest keyword values.</p>
         <a href="programming.html" class="btn btn-neutral float-right" title="Programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="telescope.html" class="btn btn-neutral float-left" title="Telescope Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utility Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

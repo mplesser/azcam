@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="API for Console" href="api_console.html" /> 
+    <link rel="prev" title="Console API" href="api_console.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,6 +92,13 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="image.html">Image Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image.html#sendimage-class">SendImage Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="display.html">Display Class</a></li>
@@ -102,17 +109,12 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility Commands</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="exposure.html">Exposure Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tempcon.html">TempCon Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="instrument.html">Instrument Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="telescope.html">Telescope Class</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api_console.html">API for Console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_console.html">Console API</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-environment">Virtual Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conventions">Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#objects">Objects</a></li>
@@ -122,7 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#azcam-apps">Azcam Apps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#national-instruments-labview">National Instruments LabVIEW</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ports">Ports</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#misc-notes">Misc Notes</a></li>
@@ -150,7 +152,7 @@
 
       <div class="wy-nav-content">
         
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
         
           
 
@@ -189,7 +191,7 @@
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
       
-        <a href="api_console.html" class="btn btn-neutral float-left" title="API for Console" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api_console.html" class="btn btn-neutral float-left" title="Console API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -202,6 +204,34 @@
 <h1>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h1>
 <p>This document describes Azcam installation, configuration, and programming. It is intended
 for advanced users only.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>AzCam currently uses <em>Python 3.8</em>. Important dependancies include:</p>
+<ul class="simple">
+<li><p><em>numpy</em></p></li>
+<li><p><em>astropy</em></p></li>
+<li><p><em>loguru</em></p></li>
+</ul>
+<p>There are many other dependencies depending on configuration. Examples are:</p>
+<ul class="simple">
+<li><p><em>ipython</em></p></li>
+<li><p><em>scipy</em></p></li>
+<li><p><em>matplotlib</em></p></li>
+<li><p><em>pandas</em></p></li>
+<li><p><em>keyring</em></p></li>
+<li><p><em>flask</em></p></li>
+<li><p><em>PyPDF2</em></p></li>
+<li><p><em>rst2pdf</em></p></li>
+<li><p><em>pdfkit</em></p></li>
+<li><p><em>markdown</em></p></li>
+<li><p><em>mysql-connector</em></p></li>
+<li><p><em>pyserial</em></p></li>
+</ul>
+</div>
+<div class="section" id="virtual-environment">
+<h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>When a python virtual environment is used, it is typically contained in a folder named <code class="docutils literal notranslate"><span class="pre">../venvs/azcam</span></code>.</p>
+</div>
 <div class="section" id="versioning">
 <h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
 <p>Because Azcam consists of many different modules and plugins, there is no single version
@@ -854,8 +884,8 @@ console and a rotating log file. It is possible to also direct <code class="docu
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.</p>
 </div>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Dependencies<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Some Azcam commands require python packages which are not installed by default. These must be downloaded
 and installed according to their individual instructions. Not all commands require all these packages.
 The current non-default packages are currently:</p>
@@ -922,7 +952,7 @@ systems have one a command sever port and a controller sever port.</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="api_console.html" class="btn btn-neutral float-left" title="API for Console" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api_console.html" class="btn btn-neutral float-left" title="Console API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

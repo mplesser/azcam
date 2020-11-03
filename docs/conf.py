@@ -128,8 +128,8 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-# html_theme = 'alabaster'
-# html_theme = 'sphinxdoc'
+# html_theme = "alabaster"
+# html_theme = "sphinxdoc"
 html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -143,7 +143,7 @@ html_theme_options = {
     "logo_only": False,
     "display_version": True,
     "prev_next_buttons_location": "both",
-    "style_external_links": False,
+    "style_external_links": True,
     # "vcs_pageview_mode": "",
     # Toc options
     "collapse_navigation": False,
