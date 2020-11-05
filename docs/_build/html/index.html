@@ -205,23 +205,11 @@
 <p>AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <div class="toctree-wrapper compound">
 </div>
-</div>
-<div class="section" id="help">
-<h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
-<p>AzCam is often used with IPython.  Help is then avaialble by typing <code class="docutils literal notranslate"><span class="pre">?xxx</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx?</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx??</span></code> or <code class="docutils literal notranslate"><span class="pre">help(xxx)</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is an azcam class, command, or object instance.</p>
-<p>Useful links include:</p>
-<ul class="simple">
-<li><p>IPython <a class="reference external" href="https://ipython.org">https://ipython.org</a></p></li>
-<li><p>Python programming language <a class="reference external" href="https://www.python.org">https://www.python.org</a></p></li>
-</ul>
-</div>
-<div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>Most of AzCam’s functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system’s hardware resources.  Examples include:</p>
 <ul class="simple">
 <li><p>azcam-arc</p></li>
 <li><p>azcam-archon</p></li>
-<li><p>azcam-mag</p></li>
+<li><p>azcam-ds9</p></li>
 <li><p>azcam-bok</p></li>
 <li><p>azcam-mont4k</p></li>
 </ul>
@@ -239,17 +227,20 @@
 </ul>
 </li>
 </ul>
-<p>As an example, for the <em>azcam-itl</em> environment, the server-side code to get the current system wavelength and take an exposure is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam</span>
-<span class="kn">import</span> <span class="nn">azcam_itl.server</span>  <span class="c1"># this configures the ITL environment</span>
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
-<span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>For the <em>azcam-itl</em> console application (which usually connects to a separate <em>azcamserver</em> application), this would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">azcam</span>
+<p>As an example, to get the current system wavelength and take an exposure, the commands using the <em>azcam-itl</em> environment are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># server-side (azcamserver)</span>
+<span class="kn">import</span> <span class="nn">azcam</span>
+<span class="kn">import</span> <span class="nn">azcam_itl.server</span>
+
+<span class="n">OR</span>
+
+<span class="c1"># client-side (azcamconsole)</span>
+<span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">azcam_itl.console</span>
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
+
+<span class="n">And</span> <span class="n">then</span><span class="p">:</span>
+
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
 <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -259,6 +250,15 @@
 </pre></div>
 </div>
 <p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts.</p>
+</div>
+<div class="section" id="help">
+<h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
+<p>AzCam is often used with IPython.  Help is then avaialble by typing <code class="docutils literal notranslate"><span class="pre">?xxx</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx?</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx??</span></code> or <code class="docutils literal notranslate"><span class="pre">help(xxx)</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is an azcam class, command, or object instance.</p>
+<p>Useful links include:</p>
+<ul class="simple">
+<li><p>IPython <a class="reference external" href="https://ipython.org">https://ipython.org</a></p></li>
+<li><p>Python programming language <a class="reference external" href="https://www.python.org">https://www.python.org</a></p></li>
+</ul>
 </div>
 <div class="section" id="server-operation">
 <h1>Server Operation<a class="headerlink" href="#server-operation" title="Permalink to this headline">¶</a></h1>

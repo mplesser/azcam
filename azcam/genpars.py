@@ -20,6 +20,7 @@ class GenPars(object):
         self.par_dict: dict = {}
 
         # save object
+        setattr(azcam.api, "genpars", self)
         setattr(azcam.db, "genpars", self)
 
     def parfile_read(self, parfilename: str = None) -> None:

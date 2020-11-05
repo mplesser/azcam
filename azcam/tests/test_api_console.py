@@ -13,8 +13,8 @@ def test_rcommand(command="get_par version"):
 
 
 def test_abort_exposure():
-    assert api.abort_exposure() is None
+    assert api.exposure.abort_exposure() is None
 
 
 def test_initialize():
-    assert api.initialize() is None
+    assert api.exposure.initialize() is None

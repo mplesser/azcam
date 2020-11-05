@@ -18,11 +18,11 @@ class API(azcam.api_azcam.API):
 
         super().__init__()
 
-        # self.controller = Controller()
-        # self.exposure = Exposure()
+        self.controller = Controller(self)
+        self.exposure = Exposure(self)
         self.instrument = Instrument(self)
-        # self.telescope = Telescope()
-        # self.tempcon = Tempcon()
+        self.telescope = Telescope(self)
+        self.tempcon = Tempcon(self)
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_cmds["api"] = self
@@ -81,488 +81,40 @@ class API(azcam.api_azcam.API):
 
         return  # can't get here
 
-    # *******************************************************
-    # exposures
-    # *******************************************************
-
-    def abort_exposure(self) -> Optional[str]:
-        """
-        Abort an exposure in progress.
-        """
-
-        return self.rcommand("exposure.abort")
-
-    def initialize(self) -> None:
-        """
-        Initialize exposure.
-        """
-
-        return self.rcommand("exposure.initialize")
-
-    def reset(self) -> None:
-        """
-        Reset exposure.
-        """
-
-        return self.rcommand("exposure.reset")
-
-    def expose(
-        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
-    ) -> Optional[str]:
-        """
-        Make a complete exposure.
-        If arguments are not specified, then previous exposure_time and imagetype values are used.
-
-        :param exposure_time: the exposure time in seconds
-        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
-        :param image_title: image title, usually surrounded by double quotes
-        """
-
-        return self.rcommand(
-            f'exposure.expose {exposure_time} {image_type} "{image_title}"'
-        )
-
-    def expose1(
-        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
-    ) -> Optional[str]:
-        """
-        Make a complete exposure with immediate return to caller.
-
-        :param exposure_time: the exposure time in seconds
-        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
-        :param image_title: image title, usually surrounded by double quotes
-        """
-
-        return self.rcommand(
-            f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
-        )
-
-    def begin_exposure(
-        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
-    ) -> Optional[str]:
-        """
-        Initiates the first part of an exposure, through image flushing.
-        This is an advanced function.
-
-        :param exposure_time: the exposure time in seconds
-        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
-        :param image_title: image title, usually surrounded by double quotes
-        """
-
-        return self.rcommand(
-            f'exposure.begin {exposure_time} {image_type} "{image_title}"'
-        )
-
-    def integrate_exposure(self) -> None:
-        """
-        Integrate exposure.
-        This is an advanced function.
-        """
-
-        return self.rcommand("exposure.integrate")
-
-    def readout_exposure(self) -> None:
-        """
-        Readout the exposure.
-        This is an advanced function.
-        """
-
-        return self.rcommand("exposure.readout")
-
-    def end_exposure(self) -> None:
-        """
-        Completes an exposure by writing file and displaying image.
-        This is an advanced function.
-        """
-
-        return self.rcommand("exposure.end")
-
-    def sequence(
-        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
-    ) -> Optional[str]:
-        """
-        Take an exposure sequence.
-
-        :param number_exposures:  number of exposures to make
-        :param flush_array:  flag defining detector flushing
-
-        * -1 => current value defined by exposure.exposure_sequence_flush [default]
-        * 0 => flush for each exposure
-        * 1 => flush after first exposure only
-        * 2 => no flush
-
-        :param delay: delay between exposures in seconds (-1 => no change)
-        """
-
-        return self.rcommand(
-            f"exposure.sequence {number_exposures} {flush_array} {delay}"
-        )
-
-    def sequence1(
-        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
-    ) -> Optional[str]:
-        """
-        Take an exposure sequence with immediate return.
-
-        :param number_exposures:  number of exposures to make.
-        :param flush_array:  flag defining detector flushing
-
-        * -1 => current value defined by exposure.exposure_sequence_flush [default]
-        * 0 => flush for each exposure
-        * 1 => flush after first exposure only
-        * 2 => no flush
-
-        :param delay: delay between exposures in seconds (-1 => no change)
-        """
-
-        return self.rcommand(
-            f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
-        )
-
-    def guide(self, number_exposures: int = 1) -> Optional[str]:
-        """
-        Make a complete guider exposure sequence.
-
-        :param number_exposures: number of exposures to make, -1 loop forever
-        """
-
-        return self.rcommand(f"exposure.guide {number_exposures}")
-
-    def guide1(self, number_exposures: int = 1) -> Optional[str]:
-        """
-        guide() with immediate return.
-
-        :param number_exposures: number of exposures to make, -1 loop forever
-        """
-
-        return self.rcommand(f"exposure.guide1 {number_exposures}")
-
-    def flush(self, cycles: int = 1) -> Optional[str]:
-        """
-        Flush/clear detector.
-
-        :param cycles:  number of times to flush the detector.
-        """
-
-        return self.rcommand(f"exposure.flush {cycles}")
-
-    def start_readout(self):
-        """
-        Start immediate readout of an exposing image.
-        Returns immediately, not waiting for readout to finish.
-        """
-
-        return self.rcommand("exposure.start_readout")
-
-    def get_image_types(self) -> List[str]:
-        """
-        Return a list of valid image types.
-        """
-
-        return self.rcommand("exposure.get_image_types")
-
-    def roi_reset(self) -> Optional[str]:
-        """
-        Resets detector ROI values to full frame, current binning.
-        """
-
-        return self.rcommand("exposure.roi_reset")
-
-    def get_exposuretime(self) -> Union[str, float]:
-        """
-        Return current exposure time in seconds.
-        """
-
-        reply = self.rcommand("exposure.get_exposuretime")
-
-        return float(reply)
-
-    def get_exposuretime_remaining(self) -> Union[str, float]:
-        """
-        Return current exposure time in seconds.
-        """
-
-        reply = self.rcommand("exposure.get_exposuretime_remaining")
-
-        return float(reply)
-
-    def set_exposuretime(self, exposure_time: float) -> Optional[str]:
-        """
-        Set current exposure time in seconds.
-
-        :param exposure_time: exposure time in seconds.
-        """
-
-        return self.rcommand(f"exposure.set_exposuretime {exposure_time}")
-
-    def get_pixels_remaining(self) -> Union[str, int]:
-        """
-        Return current number of pixels remaing in readout.
-        """
-
-        reply = self.rcommand("exposure.get_pixels_remaining")
-
-        return int(reply)
-
-    def parshift(self, number_rows: int) -> Optional[str]:
-        """
-        Shift detector by number_rows.
-
-        :param number_rows: number of rows to shift (positive is toward readout, negative is away)
-        """
-
-        return self.rcommand(f"exposure.parshift {number_rows}")
-
-    def tests(
-        self,
-        number_exposures: int = 1,
-        exposure_time: float = 1.0,
-        image_type: str = "zero",
-    ) -> Optional[str]:
-        """
-        Make test exposures, which overwrite previous test images.
-
-        :param number_exposures: number of exposures to take
-        :param exposure_time: exposure time in seconds
-        :param image_type: image type
-        """
-
-        testflag = self.get_par("imagetest")
-        self.set_par("imagetest", 1)
-        reply = "OK"
-
-        for _ in range(int(number_exposures)):
-            try:
-                reply = self.rcommand(
-                    f'exposure.expose {exposure_time} {image_type} "test image"'
-                )
-            except Exception as e:
-                self.set_par("imagetest", testflag)
-                raise (e)
-
-        self.set_par("imagetest", testflag)
-
-        return reply
-
-    def pause_exposure(self) -> Optional[str]:
-        """
-        Pause an exposure in progress (integration only).
-        """
-
-        return self.rcommand("exposure.pause_exposure")
-
-    def resume_exposure(self) -> Optional[str]:
-        """
-        Resume a paused exposure.
-        """
-
-        return self.rcommand("exposure.resume_exposure")
-
-    def get_image_filename(self) -> str:
-        """
-        Return the current exposure image filename.
-        :returns: imaeg filename
-        """
-
-        return self.rcommand("exposure.get_filename")
-
-    def set_image_filename(self, filename: str) -> Optional[str]:
+    # ************************************************************************************************
+    # image parameter commands
+    # ************************************************************************************************
+    def save_imagepars(self, imagepars={}):
         """
-        Set the filename of the exposure image.
-        Always use forward slashes.
-        Not fully functional.
-
-        :param filename: image filename
-        """
-
-        return self.rcommand(f"exposure.set_filename {filename}")
-
-    # *******************************************************
-    # shutter
-    # *******************************************************
-
-    def set_shutter(self, state: int = 0, shutter_id: int = 0) -> Optional[str]:
-        """
-        Open or close a shutter.
-
-        :param state:
-        :param shutter_id: Shutter ID flag
-
-        * 0 => controller shutter.
-        * 1 => instrument shutter.
-        """
-
-        return self.rcommand(f"exposure.set_shutter {state} {shutter_id}")
-
-    # *******************************************************
-    # instrument
-    # *******************************************************
-
-    def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
-        """
-        Set instrument filter position.
-
-        :param filter_name: filter value to set
-        :param filter_id: filter ID flag
-        """
-
-        return self.rcommand(f"instrument.set_filter {filter_name} {filter_id}")
-
-    def get_filter(self, filter_id: int = 0) -> str:
-        """
-        Get instrument filter position.
-
-        :param filter_id: filter ID flag (use negative value for a list of all filters)
-        """
-
-        return self.rcommand(f"instrument.get_filter {filter_id}")
-
-    def get_current(
-        self, diode_id: int = 0, shutter_state: int = 1
-    ) -> Union[str, float]:
-        """
-        Returns a list of instrument diode currents.
-
-        :param diode_id: diode ID flag (system dependent)
-        :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
-        """
-
-        reply = self.rcommand(f"instrument.get_current {diode_id} {shutter_state}")
-
-        return float(reply)
-
-    # *******************************************************
-    # wavelengths
-    # *******************************************************
-
-    def set_wavelength(
-        self, wavelength: float, wavelength_id: int = 0, nd: int = -1
-    ) -> Optional[str]:
-        """
-        Set wavelength, optionally changing neutral density.
-
-        :param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
-        :param wavelength_id: wavelength ID flag
-        :param nd: neutral density value to set
-        """
-
-        return self.rcommand(f"instrument.set_wavelength {wavelength} {wavelength_id}")
-
-    def get_wavelength(self, wavelength_id: int = 0) -> float:
-        """
-        Get instrument wavelength.
-
-        :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
-        """
-
-        reply = float(self.rcommand(f"instrument.get_wavelength {wavelength_id}"))
-
-        return reply
-
-    # *******************************************************
-    # focus
-    # *******************************************************
-    # TODO: step_focus
-
-    def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_component: str = "instrument",
-        focus_type: str = "absolute",
-    ) -> None:
-        """
-        Set instrument focus position. The focus value may be an absolute position
-        or a relative step if supported by hardware.
-
-        :param focus_value: focus position
-        :param focus_id: focus sensor ID flag
-        :param focus_component: focus type (typically instrument or telecope)
-        :param focus_type: focus type (absolute or step)
+        Save current image parameters.
+        imagepars is a dictionary.
         """
 
-        if focus_component == "instrument":
-            self.rcommand(f"instrument.set_focus {focus_value} {focus_id} {focus_type}")
-        elif focus_component == "telescope":
-            self.rcommand(f"telescope.set_focus {focus_value} {focus_id} {focus_type}")
-        else:
-            raise azcam.AzcamError("unknown focus_component")
+        for par in azcam.db.imageparnames:
+            imagepars[par] = self.get_par(par)
 
         return
 
-    def get_focus(
-        self, focus_id: int = 0, focus_component: str = "instrument"
-    ) -> float:
+    def restore_imagepars(self, imagepars, folder=""):
         """
-        Get the current focus position.
-
-        :param focus_id: focus sensor ID flag
-        :param focus_component: focus type (typically instrument or telecope)
+        Restore image parameters from dictionary.
+        imagepars is a dictionary set with save_imagepars().
         """
 
-        if focus_component == "instrument":
-            reply = self.rcommand(f"instrument.get_focus {focus_id}")
-        elif focus_component == "telescope":
-            reply = self.rcommand(f"telescope.get_focus {focus_id}")
-        else:
-            raise azcam.AzcamError("unknown focus_component")
+        for par in azcam.db.imageparnames:
+            impar = imagepars[par]
+            if impar == "":
+                impar = '""'
+            imagepars[par] = impar
+            if par == "imagetitle":
+                impar = f'"{impar}"'
+            self.set_par(par, impar)
 
-        return float(reply)
+        # return to folder
+        if folder != "":
+            azcam.utils.curdir(folder)
 
-    # *******************************************************
-    # pressure
-    # *******************************************************
-
-    def get_pressure(self, pressure_id: int = 0) -> List[float]:
-        """
-        Return a list of all system pressures.
-
-        :param pressure_id: pressure sensor ID flag
-        """
-
-        reply = self.rcommand(f"instrument.get_pressure {pressure_id}")
-
-        return [float(x) for x in reply]
-
-    # *******************************************************
-    # temperature
-    # *******************************************************
-
-    def get_temperature(self) -> Union[str, List[float]]:
-        """
-        Return a list of all system temperatures as defined in configuration setup.
-        Values are in degrees Celsius and may be formatted for display.
-        If temperatures cannot be read, then a list of -999.99 is returned.
-        """
-
-        reply = self.rcommand("tempcon.get_temperatures")
-
-        return [float(x) for x in reply]
-
-    def set_control_temperature(
-        self, control_temperature: float, temperature_id: int = 0
-    ) -> Optional[str]:
-        """
-        Set control temperature.
-
-        :param control_temperature: control (set) temperature in Celsius
-        :param temperature_id: temperature sensor ID flag
-        """
-
-        return self.rcommand(
-            f"tempcon.set_control_temperature {control_temperature} {temperature_id}"
-        )
-
-    def get_control_temperature(self, temperature_id: int = 0) -> Union[str, float]:
-        """
-        Get control temperature in degress Celsius.
-
-        :param temperature_id: temperature ID flag
-        """
-
-        reply = self.rcommand(f"tempcon.get_control_temperature {temperature_id}")
-
-        return float(reply)
+        return
 
     # *******************************************************
     # keywords
@@ -635,16 +187,581 @@ class API(azcam.api_azcam.API):
 
         return self.rcommand(f"{key_object}.delete_keyword {keyword}")
 
-    # *******************************************************
-    # focalplane
-    # *******************************************************
+
+# ************************************************************************************************
+# Controller class
+# ************************************************************************************************
+
+
+class Controller(object):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        pass
+
+    def set_shutter(self, state: int = 0) -> Optional[str]:
+        """
+        Open or close a shutter.
+
+        :param state:
+
+        """
+
+        return self._parent.rcommand(f"controller.set_shutter {state}")
+
+
+# ************************************************************************************************
+# Instrument class
+# ************************************************************************************************
+
+
+class Instrument(object):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        pass
+
+    def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
+        """
+        Set instrument filter position.
+
+        :param filter_name: filter value to set
+        :param filter_id: filter ID flag
+        """
+
+        return self._parent.rcommand(f"instrument.set_filter {filter_name} {filter_id}")
+
+    def get_filter(self, filter_id: int = 0) -> str:
+        """
+        Get instrument filter position.
+
+        :param filter_id: filter ID flag (use negative value for a list of all filters)
+        """
+
+        return self._parent.rcommand(f"instrument.get_filter {filter_id}")
+
+    def get_current(
+        self, diode_id: int = 0, shutter_state: int = 1
+    ) -> Union[str, float]:
+        """
+        Returns a list of instrument diode currents.
+
+        :param diode_id: diode ID flag (system dependent)
+        :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
+        """
+
+        reply = self._parent.rcommand(
+            f"instrument.get_current {diode_id} {shutter_state}"
+        )
+
+        return float(reply)
+
+    def set_wavelength(
+        self, wavelength: float, wavelength_id: int = 0, nd: int = -1
+    ) -> Optional[str]:
+        """
+        Set wavelength, optionally changing neutral density.
+
+        :param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
+        :param wavelength_id: wavelength ID flag
+        :param nd: neutral density value to set
+        """
+
+        return self._parent.rcommand(
+            f"instrument.set_wavelength {wavelength} {wavelength_id}"
+        )
+
+    def get_wavelength(self, wavelength_id: int = 0) -> float:
+        """
+        Get instrument wavelength.
+
+        :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
+        """
+
+        reply = float(
+            self._parent.rcommand(f"instrument.get_wavelength {wavelength_id}")
+        )
+
+        return reply
+
+    def set_focus(
+        self,
+        focus_value: float,
+        focus_id: int = 0,
+        focus_type: str = "absolute",
+    ) -> None:
+        """
+        Set instrument focus position. The focus value may be an absolute position
+        or a relative step if supported by hardware.
+
+        :param focus_value: focus position
+        :param focus_id: focus sensor ID flag
+        :param focus_type: focus type (absolute or step)
+        """
+
+        self._parent.rcommand(
+            f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
+        )
+
+        return
+
+    def get_focus(
+        self,
+        focus_id: int = 0,
+    ) -> float:
+        """
+        Get the current focus position.
+
+        :param focus_id: focus sensor ID flag
+        """
+
+        reply = self._parent.rcommand(f"instrument.get_focus {focus_id}")
+
+        return float(reply)
+
+    def get_pressures(self, pressure_id: int = 0) -> List[float]:
+        """
+        Return a list of all system pressures.
+
+        :param pressure_id: pressure sensor ID flag
+        """
+
+        reply = self._parent.rcommand(f"instrument.get_pressure {pressure_id}")
+
+        return [float(x) for x in reply]
+
+    def set_shutter(self, state: int = 0, shutter_id: int = 0) -> Optional[str]:
+        """
+        Open or close a shutter.
+
+        :param state:
+        :param shutter_id: Shutter ID flag
+
+        """
+
+        return self._parent.rcommand(f"instrument.set_shutter {state} {shutter_id}")
+
+
+# ************************************************************************************************
+# Telescope class
+# ************************************************************************************************
+
+
+class Telescope(object):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        pass
+
+    def get_focus(self, focus_id: int = 0) -> float:
+        """
+        Get the current focus position.
+
+        :param focus_id: focus sensor ID flag
+        """
+
+        reply = self._parent.rcommand(f"telescope.get_focus {focus_id}")
+
+        return float(reply)
+
+    def set_focus(
+        self,
+        focus_value: float,
+        focus_id: int = 0,
+        focus_type: str = "absolute",
+    ) -> None:
+        """
+        Set instrument focus position. The focus value may be an absolute position
+        or a relative step if supported by hardware.
+
+        :param focus_value: focus position
+        :param focus_id: focus sensor ID flag
+        :param focus_type: focus type (absolute or step)
+        """
+
+        self.rcommand(f"telescope.set_focus {focus_value} {focus_id} {focus_type}")
+
+        return
+
+    def get_focus(self, focus_id: int = 0) -> float:
+        """
+        Get the current focus position.
+
+        :param focus_id: focus sensor ID flag
+        """
+
+        reply = self._parent.rcommand(f"telescope.get_focus {focus_id}")
+
+        return float(reply)
+
+
+# ************************************************************************************************
+# Tempcon class
+# ************************************************************************************************
+
+
+class Tempcon(object):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        pass
+
+    def get_temperatures(self) -> Union[str, List[float]]:
+        """
+        Return a list of all system temperatures as defined in configuration setup.
+        Values are in degrees Celsius and may be formatted for display.
+        If temperatures cannot be read, then a list of -999.99 is returned.
+        """
+
+        reply = self._parent.rcommand("tempcon.get_temperatures")
+
+        return [float(x) for x in reply]
+
+    def set_control_temperature(
+        self, control_temperature: float, temperature_id: int = 0
+    ) -> Optional[str]:
+        """
+        Set control temperature.
+
+        :param control_temperature: control (set) temperature in Celsius
+        :param temperature_id: temperature sensor ID flag
+        """
+
+        return self._parent.rcommand(
+            f"tempcon.set_control_temperature {control_temperature} {temperature_id}"
+        )
+
+    def get_control_temperature(self, temperature_id: int = 0) -> Union[str, float]:
+        """
+        Get control temperature in degress Celsius.
+
+        :param temperature_id: temperature ID flag
+        """
+
+        reply = self._parent.rcommand(
+            f"tempcon.get_control_temperature {temperature_id}"
+        )
+
+        return float(reply)
+
+
+# ************************************************************************************************
+# Exposure class
+# ************************************************************************************************
+
+
+class Exposure(object):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        pass
+
+    def set_shutter(self, state: int = 0, shutter_id: int = 0) -> Optional[str]:
+        """
+        Open or close a shutter.
+
+        :param state:
+        :param shutter_id: Shutter ID flag
+
+        * 0 => controller shutter.
+        * 1 => instrument shutter.
+        """
+
+        return self._parent.rcommand(f"exposure.set_shutter {state} {shutter_id}")
+
+    def abort_exposure(self) -> Optional[str]:
+        """
+        Abort an exposure in progress.
+        """
+
+        return self._parent.rcommand("exposure.abort")
+
+    def initialize(self) -> None:
+        """
+        Initialize exposure.
+        """
+
+        return self._parent.rcommand("exposure.initialize")
+
+    def reset(self) -> None:
+        """
+        Reset exposure.
+        """
+
+        return self._parent.rcommand("exposure.reset")
+
+    def expose(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
+        """
+        Make a complete exposure.
+        If arguments are not specified, then previous exposure_time and imagetype values are used.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
+        """
+
+        return self._parent.rcommand(
+            f'exposure.expose {exposure_time} {image_type} "{image_title}"'
+        )
+
+    def expose1(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
+        """
+        Make a complete exposure with immediate return to caller.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
+        """
+
+        return self._parent.rcommand(
+            f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
+        )
+
+    def begin_exposure(
+        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
+    ) -> Optional[str]:
+        """
+        Initiates the first part of an exposure, through image flushing.
+        This is an advanced function.
+
+        :param exposure_time: the exposure time in seconds
+        :param image_type: type of exposure ('zero', 'object', 'flat', ...)
+        :param image_title: image title, usually surrounded by double quotes
+        """
+
+        return self._parent.rcommand(
+            f'exposure.begin {exposure_time} {image_type} "{image_title}"'
+        )
+
+    def integrate_exposure(self) -> None:
+        """
+        Integrate exposure.
+        This is an advanced function.
+        """
+
+        return self._parent.rcommand("exposure.integrate")
+
+    def readout_exposure(self) -> None:
+        """
+        Readout the exposure.
+        This is an advanced function.
+        """
+
+        return self._parent.rcommand("exposure.readout")
+
+    def end_exposure(self) -> None:
+        """
+        Completes an exposure by writing file and displaying image.
+        This is an advanced function.
+        """
+
+        return self._parent.rcommand("exposure.end")
+
+    def sequence(
+        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
+    ) -> Optional[str]:
+        """
+        Take an exposure sequence.
+
+        :param number_exposures:  number of exposures to make
+        :param flush_array:  flag defining detector flushing
+
+        * -1 => current value defined by exposure.exposure_sequence_flush [default]
+        * 0 => flush for each exposure
+        * 1 => flush after first exposure only
+        * 2 => no flush
+
+        :param delay: delay between exposures in seconds (-1 => no change)
+        """
+
+        return self._parent.rcommand(
+            f"exposure.sequence {number_exposures} {flush_array} {delay}"
+        )
+
+    def sequence1(
+        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
+    ) -> Optional[str]:
+        """
+        Take an exposure sequence with immediate return.
+
+        :param number_exposures:  number of exposures to make.
+        :param flush_array:  flag defining detector flushing
+
+        * -1 => current value defined by exposure.exposure_sequence_flush [default]
+        * 0 => flush for each exposure
+        * 1 => flush after first exposure only
+        * 2 => no flush
+
+        :param delay: delay between exposures in seconds (-1 => no change)
+        """
+
+        return self._parent.rcommand(
+            f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
+        )
+
+    def guide(self, number_exposures: int = 1) -> Optional[str]:
+        """
+        Make a complete guider exposure sequence.
+
+        :param number_exposures: number of exposures to make, -1 loop forever
+        """
+
+        return self._parent.rcommand(f"exposure.guide {number_exposures}")
+
+    def guide1(self, number_exposures: int = 1) -> Optional[str]:
+        """
+        guide() with immediate return.
+
+        :param number_exposures: number of exposures to make, -1 loop forever
+        """
+
+        return self._parent.rcommand(f"exposure.guide1 {number_exposures}")
+
+    def flush(self, cycles: int = 1) -> Optional[str]:
+        """
+        Flush/clear detector.
+
+        :param cycles:  number of times to flush the detector.
+        """
+
+        return self._parent.rcommand(f"exposure.flush {cycles}")
+
+    def start_readout(self):
+        """
+        Start immediate readout of an exposing image.
+        Returns immediately, not waiting for readout to finish.
+        """
+
+        return self._parent.rcommand("exposure.start_readout")
+
+    def get_image_types(self) -> List[str]:
+        """
+        Return a list of valid image types.
+        """
+
+        return self._parent.rcommand("exposure.get_image_types")
+
+    def roi_reset(self) -> Optional[str]:
+        """
+        Resets detector ROI values to full frame, current binning.
+        """
+
+        return self._parent.rcommand("exposure.roi_reset")
+
+    def get_exposuretime(self) -> Union[str, float]:
+        """
+        Return current exposure time in seconds.
+        """
+
+        reply = self._parent.rcommand("exposure.get_exposuretime")
+
+        return float(reply)
+
+    def get_exposuretime_remaining(self) -> Union[str, float]:
+        """
+        Return current exposure time in seconds.
+        """
+
+        reply = self._parent.rcommand("exposure.get_exposuretime_remaining")
+
+        return float(reply)
+
+    def set_exposuretime(self, exposure_time: float) -> Optional[str]:
+        """
+        Set current exposure time in seconds.
+
+        :param exposure_time: exposure time in seconds.
+        """
+
+        return self._parent.rcommand(f"exposure.set_exposuretime {exposure_time}")
+
+    def get_pixels_remaining(self) -> Union[str, int]:
+        """
+        Return current number of pixels remaing in readout.
+        """
+
+        reply = self._parent.rcommand("exposure.get_pixels_remaining")
+
+        return int(reply)
+
+    def parshift(self, number_rows: int) -> Optional[str]:
+        """
+        Shift detector by number_rows.
+
+        :param number_rows: number of rows to shift (positive is toward readout, negative is away)
+        """
+
+        return self._parent.rcommand(f"exposure.parshift {number_rows}")
+
+    def tests(
+        self,
+        number_exposures: int = 1,
+        exposure_time: float = 1.0,
+        image_type: str = "zero",
+    ) -> Optional[str]:
+        """
+        Make test exposures, which overwrite previous test images.
+
+        :param number_exposures: number of exposures to take
+        :param exposure_time: exposure time in seconds
+        :param image_type: image type
+        """
+
+        testflag = self.get_par("imagetest")
+        self.set_par("imagetest", 1)
+        reply = "OK"
+
+        for _ in range(int(number_exposures)):
+            try:
+                reply = self._parent.rcommand(
+                    f'exposure.expose {exposure_time} {image_type} "test image"'
+                )
+            except Exception as e:
+                self.set_par("imagetest", testflag)
+                raise (e)
+
+        self.set_par("imagetest", testflag)
+
+        return reply
+
+    def pause_exposure(self) -> Optional[str]:
+        """
+        Pause an exposure in progress (integration only).
+        """
+
+        return self._parent.rcommand("exposure.pause_exposure")
+
+    def resume_exposure(self) -> Optional[str]:
+        """
+        Resume a paused exposure.
+        """
+
+        return self._parent.rcommand("exposure.resume_exposure")
+
+    def get_image_filename(self) -> str:
+        """
+        Return the current exposure image filename.
+        :returns: imaeg filename
+        """
+
+        return self._parent.rcommand("exposure.get_filename")
+
+    def set_image_filename(self, filename: str) -> Optional[str]:
+        """
+        Set the filename of the exposure image.
+        Always use forward slashes.
+        Not fully functional.
+
+        :param filename: image filename
+        """
+
+        return self._parent.rcommand(f"exposure.set_filename {filename}")
 
     def get_roi(self) -> List:
         """
         Return detector ROI.
         """
 
-        return self.rcommand("exposure.get_roi")
+        return self._parent.rcommand("exposure.get_roi")
 
     def set_roi(
         self,
@@ -662,7 +779,7 @@ class API(azcam.api_azcam.API):
         These values are for the entire focal plane, not just one detector.
         """
 
-        return self.rcommand(
+        return self._parent.rcommand(
             f"exposure.set_roi {first_col} {last_col} {first_row} {last_row} {col_bin} {row_bin} {roi_number}"
         )
 
@@ -671,7 +788,7 @@ class API(azcam.api_azcam.API):
         Returns the current focal plane configuration.
         """
 
-        return self.rcommand("exposure.get_focalplane")
+        return self._parent.rcommand("exposure.get_focalplane")
 
     def set_focalplane(
         self,
@@ -697,7 +814,7 @@ class API(azcam.api_azcam.API):
         3 - flip x and y
         """
 
-        return self.rcommand(
+        return self._parent.rcommand(
             f"exposure.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} {amp_config}"
         )
 
@@ -706,7 +823,7 @@ class API(azcam.api_azcam.API):
         Return the current detector format parameters.
         """
 
-        return self.rcommand("exposure.get_format")
+        return self._parent.rcommand("exposure.get_format")
 
     def set_format(
         self,
@@ -734,7 +851,7 @@ class API(azcam.api_azcam.API):
         np_frametransfer is the rows to frame transfer shift.
         """
 
-        return self.rcommand(
+        return self._parent.rcommand(
             (
                 f"exposure.set_format {ns_total} {ns_predark} {ns_underscan} {ns_overscan} "
                 f"{np_total} {np_predark} {np_underscan} {np_overscan} {np_frametransfer}"
@@ -750,7 +867,7 @@ class API(azcam.api_azcam.API):
 
         # send abort to server, error OK
         try:
-            self.rcommand("abort")
+            self._parent.rcommand("exposure.abort")
         except Exception as e:
             azcam.log(f"abort error: {e}")
 
@@ -765,7 +882,7 @@ class API(azcam.api_azcam.API):
         parameter = parameter.lower()
         value = None
 
-        reply = self.rcommand(f"exposure.get_par {parameter}")
+        reply = self._parent.rcommand(f"exposure.get_par {parameter}")
         _, value = azcam.utils.get_datatype(reply)
 
         return value
@@ -781,73 +898,9 @@ class API(azcam.api_azcam.API):
 
         parameter = parameter.lower()
 
-        self.rcommand(f"exposure.set_par {parameter} {value}")
+        self._parent.rcommand(f"exposure.set_par {parameter} {value}")
 
         return
-
-    def get_attr(self, obj, attribute):
-        """
-        Get the value of an object's attribute on remote server.
-        Advanced Use only!
-        """
-
-        command_string = f"get_attr {obj} {attribute}"
-
-        return self.rcommand(command_string)
-
-    # ************************************************************************************************
-    # image parameter commands
-    # ************************************************************************************************
-    def save_imagepars(self, imagepars={}):
-        """
-        Save current image parameters.
-        imagepars is a dictionary.
-        """
-
-        for par in azcam.db.imageparnames:
-            imagepars[par] = self.get_par(par)
-
-        return
-
-    def restore_imagepars(self, imagepars, folder=""):
-        """
-        Restore image parameters from dictionary.
-        imagepars is a dictionary set with save_imagepars().
-        """
-
-        for par in azcam.db.imageparnames:
-            impar = imagepars[par]
-            if impar == "":
-                impar = '""'
-            imagepars[par] = impar
-            if par == "imagetitle":
-                impar = f'"{impar}"'
-            self.set_par(par, impar)
-
-        # return to folder
-        if folder != "":
-            azcam.utils.curdir(folder)
-
-        return
-
-
-class Instrument(object):
-    def __init__(self, parent) -> None:
-        self.parent = parent
-        pass
-
-    def get_wavelength(self, wavelength_id: int = 0) -> float:
-        """
-        Get instrument wavelength.
-
-        :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
-        """
-
-        reply = float(
-            self.parent.rcommand(f"instrument.get_wavelength {wavelength_id}")
-        )
-
-        return reply
 
 
 # create instance

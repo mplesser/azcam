@@ -9,19 +9,11 @@ AzCam is a software environment for the acquisition and analysis of image data f
    Home <self>
 ```
 
-# Help
-AzCam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an azcam class, command, or object instance.
-
-Useful links include:
-* IPython <https://ipython.org>
-* Python programming language <https://www.python.org>
-  
-# Usage
 Most of AzCam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
 
   - azcam-arc
   - azcam-archon
-  - azcam-mag
+  - azcam-ds9
   - azcam-bok
   - azcam-mont4k
    
@@ -36,18 +28,21 @@ There are two three main operational modes of azcam:
    - azcam-status
    - azcam-exptool
 
-As an example, for the *azcam-itl* environment, the server-side code to get the current system wavelength and take an exposure is:
+As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* environment are:
 
+    # server-side (azcamserver)
     import azcam
-    import azcam_itl.server  # this configures the ITL environment
-    wavelength = azcam.api.instrument.get_wavelength()
-    azcam.api.expose(30., 'dark', "a dark image title")
+    import azcam_itl.server
 
-For the *azcam-itl* console application (which usually connects to a separate *azcamserver* application), this would be:
+    OR
 
+    # client-side (azcamconsole)
     import azcam
     import azcam_itl.console
-    wavelength = azcam.api.get_wavelength()
+
+    And then:
+
+    wavelength = azcam.api.instrument.get_wavelength()
     azcam.api.expose(30., 'dark', "a dark image title")
 
 Example configuration code can be found in `azcam.example_server_config` and `azcam.example_console_config`.
@@ -57,6 +52,13 @@ When working in a command line environment, it is often convenient to import com
     from azcam.cli import *
 
 This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
+
+# Help
+AzCam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an azcam class, command, or object instance.
+
+Useful links include:
+* IPython <https://ipython.org>
+* Python programming language <https://www.python.org>
 
 # Server Operation
 AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like *azcamtool* or a pyhton command line interface using azcam's console code.

@@ -6,13 +6,13 @@ import os
 
 from azcam_ds9.ds9display import Ds9Display
 
+from azcam.server import azcam
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.controller import Controller
 from azcam.exposure import Exposure
 from azcam.genpars import GenPars
 from azcam.instrument import Instrument
-from azcam.server import azcam
 from azcam.telescope import Telescope
 from azcam.tempcon import TempCon
 
