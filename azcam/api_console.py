@@ -485,6 +485,10 @@ class Exposure(object):
 
         return self._parent.rcommand("exposure.reset")
 
+    def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
+
+        return self._parent.rcommand(f"exposure.test {exposure_time} {shutter_state}")
+
     def expose(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
     ) -> Optional[str]:
