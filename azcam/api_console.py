@@ -91,7 +91,7 @@ class API(azcam.api_azcam.API):
         """
 
         for par in azcam.db.imageparnames:
-            imagepars[par] = self.get_par(par)
+            imagepars[par] = self.exposure.get_par(par)
 
         return
 
@@ -108,7 +108,7 @@ class API(azcam.api_azcam.API):
             imagepars[par] = impar
             if par == "imagetitle":
                 impar = f'"{impar}"'
-            self.set_par(par, impar)
+            self.exposure.set_par(par, impar)
 
         # return to folder
         if folder != "":
