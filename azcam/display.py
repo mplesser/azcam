@@ -4,6 +4,7 @@ Contains the Ds9Display class.
 
 import azcam
 from azcam.baseobject import Objects
+from azcam.header import Header
 
 
 class Display(Objects):
@@ -14,6 +15,10 @@ class Display(Objects):
     def __init__(self, obj_id="display", obj_name="Display"):
 
         super().__init__(obj_id, obj_name)
+
+        # create the display Header object
+        self.header = Header("Display")
+        self.header.set_header("display", 2)
 
         # set default display server
         self.default_display = 0
@@ -43,3 +48,15 @@ class Display(Objects):
         """
 
         return
+
+    def display(self, image, extension_number=-1):
+        """
+        Display a file on the image display.
+        If specified for an MEF file, only extension_number is displayed.
+
+        :param image: a filename or an image object
+        :param int extension_number: FITS extension number of image, -1 for all
+        :return None:
+        """
+
+        raise NotImplementedError

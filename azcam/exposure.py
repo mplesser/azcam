@@ -877,7 +877,9 @@ class Exposure(Objects):
 
         # all headers to be updated must be in azcam.db['headers']
         for objectname in azcam.db.headers:
-            if objectname == "controller":  # skip as already up to date
+            if (
+                objectname == "controller" or objectname == "system"
+            ):  # skip as already up to date
                 continue
             try:
                 azcam.api._get(

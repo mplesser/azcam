@@ -202,10 +202,10 @@
             
   <div class="section" id="general">
 <h1>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h1>
-<p>AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
+<p>Azcam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <div class="toctree-wrapper compound">
 </div>
-<p>Most of AzCam’s functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system’s hardware resources.  Examples include:</p>
+<p>Most of azcam’s functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system’s hardware resources.  Examples include:</p>
 <ul class="simple">
 <li><p>azcam-arc</p></li>
 <li><p>azcam-archon</p></li>
@@ -245,7 +245,7 @@
 </pre></div>
 </div>
 <p>Example configuration code can be found in <code class="docutils literal notranslate"><span class="pre">azcam.example_server_config</span></code> and <code class="docutils literal notranslate"><span class="pre">azcam.example_console_config</span></code>.</p>
-<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, <strong>after</strong> configuring the environment, execute the command:</p>
+<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
@@ -253,7 +253,7 @@
 </div>
 <div class="section" id="help">
 <h1>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
-<p>AzCam is often used with IPython.  Help is then avaialble by typing <code class="docutils literal notranslate"><span class="pre">?xxx</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx?</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx??</span></code> or <code class="docutils literal notranslate"><span class="pre">help(xxx)</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is an azcam class, command, or object instance.</p>
+<p>Azcam is often used with IPython.  Help is then avaialble by typing <code class="docutils literal notranslate"><span class="pre">?xxx</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx?</span></code>, <code class="docutils literal notranslate"><span class="pre">xxx??</span></code> or <code class="docutils literal notranslate"><span class="pre">help(xxx)</span></code> where <code class="docutils literal notranslate"><span class="pre">xxx</span></code> is an azcam class, command, or object instance.</p>
 <p>Useful links include:</p>
 <ul class="simple">
 <li><p>IPython <a class="reference external" href="https://ipython.org">https://ipython.org</a></p></li>
@@ -262,7 +262,7 @@
 </div>
 <div class="section" id="server-operation">
 <h1>Server Operation<a class="headerlink" href="#server-operation" title="Permalink to this headline">¶</a></h1>
-<p>AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like <em>azcamtool</em> or a pyhton command line interface using azcam’s console code.</p>
+<p>Azcam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like <em>azcam-tool</em> or a python command line interface using azcam’s console code.</p>
 <p>The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second “flat field” exposure is:</p>
 <p>Local CLI or script example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">exposure.expose(2.5,</span> <span class="pre">'flat',</span> <span class="pre">'an</span> <span class="pre">image</span> <span class="pre">title')</span></code></p>
@@ -296,7 +296,7 @@ use this syntax, there are a few especially useful command line commands which
 are listed below. Most aliases are implemeted from a command such
 as <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">shortcuts_console</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
 <ul class="simple">
-<li><p><strong>sav</strong> to save the current AzCamConsole state</p></li>
+<li><p><strong>sav</strong> to save the current parameters to the parameter file</p></li>
 <li><p><strong>p</strong> to toggle the command line printout of client commands and responses</p></li>
 <li><p><strong>Run</strong> to run a command in the python search path, usually for scripts (note the upper case R to distinguish it from IPython’s built-in run magic command).</p></li>
 <li><p><strong>gf</strong> to try and go to current image folder.</p></li>

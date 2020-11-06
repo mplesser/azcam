@@ -19,8 +19,8 @@ class Controller(Objects):
         #: interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0
 
-        # create the controller Header object but name it "Camera"
-        self.header = Header("Camera")
+        # create the controller Header object
+        self.header = Header("Controller")
         self.header.set_header("controller", 2)
 
         self.exposure_time = 0

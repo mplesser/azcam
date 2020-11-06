@@ -1271,6 +1271,9 @@ class Image(object):
         # for item in database 'headers'].keys():
         for item in azcam.db.headerorder:
             item = azcam.db.headers[item]
+            cheader = item.get_info()
+            if cheader == []:
+                continue
             # first add the comment lines
             for comm in item.title:
                 # add the comment line
@@ -1278,9 +1281,6 @@ class Image(object):
                 curpos = curpos + 1
 
             # add the keywords
-
-            reply = item.get_info()
-            cheader = reply
             for head in cheader:
                 if head[0].lower() == "comment":
                     hdu.header.add_comment(head[1], after=curpos)
@@ -1338,6 +1338,9 @@ class Image(object):
         # all these keywords are written after exposure is done (controller, instrument, telscope, temperature)
         curpos = len(hdu.header)
         for item in self.header.items:
+            cheader = item.header.get_info()
+            if cheader == []:
+                continue
             # first add the comment lines
             for comm in item.header.title:
                 # add the comment line
@@ -1345,8 +1348,6 @@ class Image(object):
                 curpos = curpos + 1
 
             # add the keywords
-
-            cheader = item.header.get_info()
             for head in cheader:
                 if head[0].lower() == "comment":
                     hdu.header.add_comment(head[1], after=curpos)

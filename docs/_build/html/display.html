@@ -214,6 +214,96 @@ directly from the command line, e.g. <code class="docutils literal notranslate">
 <span class="n">azcam</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">fits</span><span class="s1">&#39;)</span>
 </pre></div>
 </div>
+<dl class="py class">
+<dt id="azcam.display.Display">
+<em class="property">class </em><code class="sig-name descname">Display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">'display'</span></em>, <em class="sig-param"><span class="n">obj_name</span><span class="o">=</span><span class="default_value">'Display'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">azcam.baseobject.Objects</span></code></p>
+<p>azcam’s interface to SAO’s ds9 image display tool.</p>
+<dl class="py method">
+<dt id="azcam.display.Display.define_keywords">
+<code class="sig-name descname">define_keywords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.define_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up header keywords dictionary if not already defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.delete_keyword">
+<code class="sig-name descname">delete_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.delete_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a keyword.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.display">
+<code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">extension_number</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a file on the image display.
+If specified for an MEF file, only extension_number is displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – a filename or an image object</p></li>
+<li><p><strong>extension_number</strong> (<em>int</em>) – FITS extension number of image, -1 for all</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.get_keyword">
+<code class="sig-name descname">get_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.get_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.set_display">
+<code class="sig-name descname">set_display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">display_number</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.set_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the current display by number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>display_number</strong> (<em>int</em>) – Number for display to be used (0-&gt;N)</p>
+</dd>
+<dt class="field-even">Return None</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.set_keyword">
+<code class="sig-name descname">set_keyword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">comment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typestring</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.set_keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a keyword value and comment.
+typestring is one of ‘str’, ‘int’, or ‘float’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="azcam.display.Display.update_header">
+<code class="sig-name descname">update_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#azcam.display.Display.update_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

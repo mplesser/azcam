@@ -108,6 +108,8 @@ class Objects(object):
         # get the header
         header = []
         reply = self.header.get_all_keywords()
+        if reply == []:
+            return
 
         for key in reply:
             reply1 = self.get_keyword(
