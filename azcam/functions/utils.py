@@ -954,3 +954,40 @@ def make_file_folder(subfolder, increment=True, use_number=False):
     newfolder = azcam.utils.fix_path(newfolder)
 
     return [currentfolder, newfolder]
+
+
+# ************************************************************************************************
+# image parameter commands
+# ************************************************************************************************
+def save_imagepars(imagepars={}):
+    """
+    Save current image parameters.
+    imagepars is a dictionary.
+    """
+
+    for par in azcam.db.imageparnames:
+        imagepars[par] = azcam.api.exposure.get_par(par)
+
+    return
+
+
+def restore_imagepars(imagepars, folder=""):
+    """
+    Restore image parameters from dictionary.
+    imagepars is a dictionary set with save_imagepars().
+    """
+
+    for par in azcam.db.imageparnames:
+        impar = imagepars[par]
+        if impar == "":
+            impar = '""'
+        imagepars[par] = impar
+        if par == "imagetitle":
+            impar = f'"{impar}"'
+        azcam.api.exposure.set_par(par, impar)
+
+    # return to folder
+    if folder != "":
+        curdir(folder)
+
+    return

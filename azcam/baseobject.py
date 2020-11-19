@@ -128,6 +128,13 @@ class Objects(object):
 
         return self.header.get_keyword(keyword)
 
+    def get_all_keywords(self):
+        """
+        Return a list of all keyword names.
+        """
+
+        return self.header.get_all_keywords()
+
     def set_keyword(self, keyword, value, comment=None, typestring=None):
         """
         Set a keyword value and comment.
@@ -146,3 +153,20 @@ class Objects(object):
         self.header.delete_keyword(keyword)
 
         return
+
+    def get_info(self):
+        """
+        Returns header info.
+        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        """
+
+        header = []
+        keywords = self.get_all_keywords()
+
+        for key in keywords:
+            reply = self.get_keyword(key)
+            list1 = [key, reply[0], reply[1], reply[2]]
+            header.append(list1)
+
+        return header

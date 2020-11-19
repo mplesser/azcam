@@ -262,7 +262,25 @@ class Header(object):
             attributetypestring = "int"
         else:
             attributetypestring = "float"
+
         return attributetypestring
+
+    def convert_type(self, value, pythontype):
+        """
+        Convert a value to a specific type.
+        """
+
+        if pythontype == str or pythontype not in [int, float]:
+            typestring = "str"
+            value = str(value)
+        elif pythontype == int:
+            typestring = "int"
+            value = int(value)
+        else:
+            typestring = "float"
+            value = float(value)
+
+        return value, typestring
 
     def update(self):
         """

@@ -23,67 +23,36 @@ class API(azcam.api_azcam.API):
         self.instrument = Instrument(self)
         self.telescope = Telescope(self)
         self.tempcon = Tempcon(self)
+        self.system = SystemHeader(self)
+
         self.serverconn = ServerConnection()
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_cmds["api"] = self
 
-    # ************************************************************************************************
-    # image parameter commands
-    # ************************************************************************************************
-    def save_imagepars(self, imagepars={}):
-        """
-        Save current image parameters.
-        imagepars is a dictionary.
-        """
 
-        for par in azcam.db.imageparnames:
-            imagepars[par] = self.exposure.get_par(par)
-
-        return
-
-    def restore_imagepars(self, imagepars, folder=""):
-        """
-        Restore image parameters from dictionary.
-        imagepars is a dictionary set with save_imagepars().
-        """
-
-        for par in azcam.db.imageparnames:
-            impar = imagepars[par]
-            if impar == "":
-                impar = '""'
-            imagepars[par] = impar
-            if par == "imagetitle":
-                impar = f'"{impar}"'
-            self.exposure.set_par(par, impar)
-
-        # return to folder
-        if folder != "":
-            azcam.utils.curdir(folder)
-
-        return
+class HeaderMethods(object):
+    def __init__(self) -> None:
+        pass
 
     # *******************************************************
     # keywords
     # *******************************************************
-
-    def update_header(self, object_name: str = "controller"):
+    def update_header(self):
         """
         Update the header of an object.
         This command usually reads hardware to get the lastest keyword values.
-
-        :param object_name: object to which keyword belongs
         """
 
-        return self.serverconn.rcommand(f"{object_name}.update_header")
+        return self._parent.serverconn.rcommand(f"{self.object_name}.update_header")
 
-    def read_header(self, object_name: str = "controller"):
+    def read_header(self):
         """
         Reads each keyword in the header and returns the keyword value.
         Returns a list of header lists: [[keyword, value, comment, type]].
         """
 
-        return self.serverconn.rcommand(f"{object_name}.read_header")
+        return self._parent.serverconn.rcommand(f"{self.object_name}.read_header")
 
     def set_keyword(
         self,
@@ -91,7 +60,6 @@ class API(azcam.api_azcam.API):
         key_value: str,
         key_comment: str = "",
         key_type: str = "str",
-        key_object: str = "controller",
     ) -> Optional[str]:
         """
         Set a keyword value and comment.
@@ -102,14 +70,13 @@ class API(azcam.api_azcam.API):
         :param key_value: keyword value
         :param key_comment: comment string for keyword
         :param key_type: keyword type
-        :param key_object: object to which keyword belongs
         """
 
-        return self.serverconn.rcommand(
-            f'{key_object}.set_keyword {keyword} {key_value} "{key_comment}" {key_type}'
+        return self._parent.serverconn.rcommand(
+            f'{self.object_name}.set_keyword {keyword} {key_value} "{key_comment}" {key_type}'
         )
 
-    def get_keyword(self, keyword: str, key_object: str = "controller") -> str:
+    def get_keyword(self, keyword: str) -> str:
         """
         Return a keyword value and its comment.
         The comment always returned in quotes, even if empty.
@@ -119,31 +86,75 @@ class API(azcam.api_azcam.API):
         :param key_object: object to which keyword belongs
         """
 
-        return self.serverconn.rcommand(f"{key_object}.get_keyword {keyword}")
+        return self._parent.serverconn.rcommand(
+            f"{self.object_name}.get_keyword {keyword}"
+        )
 
-    def delete_keyword(
-        self, keyword: str, key_object: str = "controller"
-    ) -> Optional[str]:
+    def delete_keyword(self, keyword: str) -> Optional[str]:
         """
         Delete a keyword from a header.
         The keyword is set in the controller header by default.
 
         :param keyword: keyword name
-        :param key_object: object to which keyword belongs
         """
 
-        return self.serverconn.rcommand(f"{key_object}.delete_keyword {keyword}")
+        return self._parent.serverconn.rcommand(
+            f"{self.object_name}.delete_keyword {keyword}"
+        )
+
+    def get_all_keywords(self):
+        """
+        Return a list of all keyword names.
+        """
+
+        reply = self._parent.serverconn.rcommand(f"{self.object_name}.get_all_keywords")
+
+        return reply
+
+    def get_info(self):
+        """
+        Returns header info.
+        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        """
+
+        header = []
+        keywords = self.get_all_keywords()
+
+        for key in keywords:
+            reply = self.get_keyword(key)
+            list1 = [key, reply[0], reply[1], reply[2]]
+            header.append(list1)
+
+        return header
+
+    def get_string(self):
+        """
+        Returns the entire header as a single formatted string.
+        """
+
+        lines = ""
+
+        header = self.get_info()
+        for telem in header:
+            line = telem[0] + " " + str(telem[1]) + " " + str(telem[2]) + "\n"
+            lines += line
+
+        return lines
 
 
-# ************************************************************************************************
-# Controller class
-# ************************************************************************************************
-
-
-class Controller(object):
+class SystemHeader(HeaderMethods):
     def __init__(self, parent) -> None:
         self._parent = parent
-        pass
+        self.object_name = "system"
+
+
+class Controller(HeaderMethods):
+    def __init__(self, parent) -> None:
+        self._parent = parent
+        self.object_name = "controller"
+
+        super().__init__()
 
     def set_shutter(self, state: int = 0) -> Optional[str]:
         """
@@ -161,10 +172,11 @@ class Controller(object):
 # ************************************************************************************************
 
 
-class Instrument(object):
+class Instrument(HeaderMethods):
     def __init__(self, parent) -> None:
         self._parent = parent
-        pass
+        self.object_name = "instrument"
+        super().__init__()
 
     def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
         """
@@ -300,10 +312,11 @@ class Instrument(object):
 # ************************************************************************************************
 
 
-class Telescope(object):
+class Telescope(HeaderMethods):
     def __init__(self, parent) -> None:
         self._parent = parent
-        pass
+        self.object_name = "telescope"
+        super().__init__()
 
     def get_focus(self, focus_id: int = 0) -> float:
         """
@@ -354,10 +367,11 @@ class Telescope(object):
 # ************************************************************************************************
 
 
-class Tempcon(object):
+class Tempcon(HeaderMethods):
     def __init__(self, parent) -> None:
         self._parent = parent
-        pass
+        self.object_name = "tempcon"
+        super().__init__()
 
     def get_temperatures(self) -> Union[str, List[float]]:
         """
@@ -403,10 +417,11 @@ class Tempcon(object):
 # ************************************************************************************************
 
 
-class Exposure(object):
+class Exposure(HeaderMethods):
     def __init__(self, parent) -> None:
         self._parent = parent
-        pass
+        self.object_name = "exposure"
+        super().__init__()
 
     def set_shutter(self, state: int = 0, shutter_id: int = 0) -> Optional[str]:
         """
@@ -931,7 +946,3 @@ class ServerConnection(object):
             raise azcam.AzcamError(f"invalid server response: {reply}")
 
         return  # can't get here
-
-
-# create instance
-api = API()

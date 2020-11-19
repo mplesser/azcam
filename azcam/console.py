@@ -15,6 +15,7 @@ azcam.db.imageparnames = [
     "imagefolder",
 ]
 
-from .api_console import api
+from .api_console import API
 
+api = API()
 setattr(azcam, "api", api)
