@@ -72,9 +72,17 @@ class HeaderMethods(object):
         :param key_type: keyword type
         """
 
-        return self._parent.serverconn.rcommand(
-            f'{self.object_name}.set_keyword {keyword} {key_value} "{key_comment}" {key_type}'
-        )
+        if type(key_value) == str:
+            if " " in key_value:
+                key_value = f'"{key_value}"'
+
+        if type(key_comment) == str:
+            if " " in key_comment:
+                key_comment = f'"{key_comment}"'
+
+        s = f"{self.object_name}.set_keyword {keyword} {key_value} {key_comment} {key_type}"
+
+        return self._parent.serverconn.rcommand(s)
 
     def get_keyword(self, keyword: str) -> str:
         """
