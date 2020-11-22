@@ -1,8 +1,8 @@
 """
 Contains the base System class.
+The System class contains custom code for a specific system, 
+including "system header" commands. 
 """
-
-from typing import List
 
 from azcam.baseobject import Objects
 from azcam.header import Header
@@ -17,11 +17,9 @@ class System(Objects):
 
         super().__init__("system", system_name)
 
-        # create the temp control Header object
         self.header = Header(system_name, template_file)
         self.header.set_header("system", 0)
 
-        # add keywords
         self.define_keywords()
 
         return

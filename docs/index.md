@@ -17,7 +17,7 @@ Most of azcam's functionality is available only after installing *extension pack
   - azcam-bok
   - azcam-mont4k
    
-Once configured, the system is controlled by class instances (objects) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object.
+Once configured, the system is controlled by class instances (*objects*) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object 
 
 There are two three main operational modes of azcam:
  - One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
@@ -28,7 +28,9 @@ There are two three main operational modes of azcam:
    - azcam-status
    - azcam-exptool
 
-As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* environment are:
+While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` object, often available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever.
+
+As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* extension are:
 
     # server-side (azcamserver)
     import azcam
@@ -83,7 +85,7 @@ Web pages which are served by *azcamserver* are found at URL's such as:
 `http://hostname:2403/exptool`.
 
 ## Server Classes
-These classes are server-side only and are useed to define or control a system.
+These classes are useed to define and control a system.
 
 ```eval_rst
 .. toctree::
@@ -111,12 +113,12 @@ as ``from shortcuts_console import *``.
   * **sf** to try and set image folder to the current directory.
   * **bf** to browse for a file or folder.  
 
-# Commands and Objects
-There are many commands and classes (which create objects and their methods) which are 
-available to manipulate hardware, data, images, and exposures. The links listed 
-below describe some of these commands. Availability depends on configuration.
+# Code Descriptions
+There are many functions and classes which are available to manipulate hardware, 
+data images, and exposures. The links listed below describe some of these commands.
+Availability depends on configuration.
 
-These classes and commands are useful both in the server and in a console application.
+The classes and commands listed here are useful both in the server and in a console application.
 
 ```eval_rst
 .. toctree::
@@ -128,7 +130,7 @@ These classes and commands are useful both in the server and in a console applic
    plot
 ```
 
-The *utility* commands are intended to be used only with other *azcam* code.
+The *utility* commands are intended to be used only within other *azcam* code.
 ```eval_rst
 .. toctree::
    :maxdepth: 1

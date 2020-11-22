@@ -76,6 +76,12 @@ azcam.db.parameters = {
     "hostname": "db.hostname",
 }
 
-from .api_server import api
+from .api_server import API
+
+api = API()
 
 setattr(azcam, "api", api)
+
+# clean namespace (never used directly again)
+del azcam.api_server
+del azcam.api_azcam

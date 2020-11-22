@@ -5,7 +5,6 @@ API commands for console application.
 from typing import List, Optional, Union
 
 import azcam
-import azcam.api_azcam
 import azcam.sockets
 
 

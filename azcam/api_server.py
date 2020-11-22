@@ -5,7 +5,8 @@ API interface for azcamserver.
 import sys
 
 import azcam
-import azcam.api_azcam
+
+# import azcam.api_azcam
 
 
 class API(azcam.api_azcam.API):
@@ -18,7 +19,3 @@ class API(azcam.api_azcam.API):
         super().__init__()
 
         azcam.db.cli_cmds["api"] = self
-
-
-# create instance
-api = API()
