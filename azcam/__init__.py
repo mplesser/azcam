@@ -1,6 +1,6 @@
 import socket
 
-from .logging import logger
+from .logging import Logger
 from .database import db
 
 # bring these into azcam namespace so importing not required
@@ -9,8 +9,9 @@ from .exceptions import AzcamError, AzcamWarning
 # bring in functions
 from . import fits, plot, utils
 
-log = logger.log  # to allow azcam.log()
-db.logger = logger
+# logging
+db.logger = Logger()
+log = db.logger.log  # to allow azcam.log()
 
 # save this machine's hostname and ip address
 db.hostname = socket.gethostname()

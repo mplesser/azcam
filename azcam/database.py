@@ -16,23 +16,14 @@ class AzcamDatabase(object):
     #: verbosity level for messages
     verbosity = 1
 
-    #: display prefix in log messages
-    use_logprefix = 1
-
     #: abort flag, True if an abort has occurred
     abortflag = 0
-
-    #: logger
-    logger = None
 
     #: object which provides header corrdinates
     coord_object = "telescope"
 
     #: folders
     datafolder = ""
-
-    #: True to filter log messages to include console output
-    _logconsole = 1
 
     #: last error status
     errorstatus = ["OK", ""]

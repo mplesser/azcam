@@ -9,15 +9,17 @@ class Logger(object):
 
         self.logfile = "azcam.log"
         self.logger = loguru.logger
+        self.use_logprefix = 1
+        self._log_to_console = 1
 
-    def log(self, message, *args, prefix="Log-> ", level=1, logconsole=1):
+    def log(self, message, *args, prefix="Log-> ", level=1, log_to_console=1):
         """
         Send a message to the logging system.
         :param str message: String message to be logged
         :param str args: Additional string message to be logged
         :param str prefix: Prefix to be prepended to logged message, ex: 'log> '
         :param int level: verbosity level for output
-        :param bool logconsole: set to False to not log to console
+        :param bool log_to_console: set to False to not log to console
         :return None:
 
         Message is output to logger if level > db.verbosity.
@@ -42,20 +44,18 @@ class Logger(object):
         if message.startswith("'") or message.startswith('"'):
             message = message[1:]
 
-        if prefix != "" and azcam.db.use_logprefix:
+        if prefix != "" and self.use_logprefix:
             message = prefix + message
 
-        if logconsole:
-            print(message)
-        else:
-            azcam.db._logconsole = logconsole
-            self.logger.info(f"{message}")
-            azcam.db._logconsole = 1
+        if not log_to_console:
+            self._log_to_console = 0
+        self.logger.info(f"{message}")
+        self._log_to_console = 1
 
         return
 
     def _logfilter(self, record):
-        return azcam.db._logconsole
+        return self._log_to_console
 
     def start_logging(self, logtype="13", host="localhost", port=2406):
         """
@@ -65,8 +65,6 @@ class Logger(object):
         :param str logtype: code for loggers to start (1 console, 2 socket, 3 file, codes may be combined as '23')
         :param Port: socket port number
         """
-
-        azcam.db.logger = loguru.logger
 
         # remove default logger for customization
         try:
@@ -98,7 +96,3 @@ class Logger(object):
             )
 
         return
-
-
-# instance
-logger = Logger()
