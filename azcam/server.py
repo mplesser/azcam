@@ -84,4 +84,3 @@ setattr(azcam, "api", api)
 
 # clean namespace (never used directly again)
 del azcam.api_server
-del azcam.api_azcam

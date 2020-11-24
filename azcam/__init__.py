@@ -1,14 +1,13 @@
 import socket
 
 from .logging import logger
-from .api_azcam import api
 from .database import db
 
 # bring these into azcam namespace so importing not required
 from .exceptions import AzcamError, AzcamWarning
 
 # bring in functions
-from .functions import fits, plot, utils
+from . import fits, plot, utils
 
 log = logger.log  # to allow azcam.log()
 db.logger = logger
@@ -21,4 +20,3 @@ db.hostip = socket.gethostbyname(db.hostname)
 del socket
 del database
 del exceptions
-del functions

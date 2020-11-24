@@ -11,7 +11,7 @@ import numpy
 
 import azcam
 from azcam.focalplane import FocalPlane
-from azcam.functions.fits import pyfits
+from azcam.fits import pyfits
 from azcam.header import Header
 from azcam.send_image import SendImage
 

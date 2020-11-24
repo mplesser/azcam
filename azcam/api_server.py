@@ -9,7 +9,7 @@ import azcam
 # import azcam.api_azcam
 
 
-class API(azcam.api_azcam.API):
+class API(object):
     """
     API interface for server application.
     """
@@ -19,3 +19,16 @@ class API(azcam.api_azcam.API):
         super().__init__()
 
         azcam.db.cli_cmds["api"] = self
+
+    def _get(self, name):
+        """
+        Returns an API object by name.
+        Returns None if api.name is not defined.
+        """
+
+        try:
+            obj = getattr(self, name)
+        except AttributeError:
+            obj = None
+
+        return obj

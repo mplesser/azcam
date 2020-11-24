@@ -8,7 +8,7 @@ import azcam
 import azcam.sockets
 
 
-class API(azcam.api_azcam.API):
+class API(object):
     """
     API interface for console application.
     """
@@ -28,6 +28,19 @@ class API(azcam.api_azcam.API):
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_cmds["api"] = self
+
+    def _get(self, name):
+        """
+        Returns an API object by name.
+        Returns None if api.name is not defined.
+        """
+
+        try:
+            obj = getattr(self, name)
+        except AttributeError:
+            obj = None
+
+        return obj
 
 
 class HeaderMethods(object):
