@@ -1,0 +1,579 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>AzCam</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.196e0c26.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#general" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            AzCam
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              General
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AzCam
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="." class="md-nav__link md-nav__link--active">
+      General
+    </a>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="ORG_index/" class="md-nav__link">
+      Welcome to MkDocs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="api_console/" class="md-nav__link">
+      Console API
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="controller/" class="md-nav__link">
+      Controller Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="display/" class="md-nav__link">
+      Display Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="exposure/" class="md-nav__link">
+      Exposure Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="fits/" class="md-nav__link">
+      Fits Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="image/" class="md-nav__link">
+      Image Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="instrument/" class="md-nav__link">
+      Instrument Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="plot/" class="md-nav__link">
+      Plot Commands
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="programming/" class="md-nav__link">
+      Programming
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="telescope/" class="md-nav__link">
+      Telescope Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="tempcon/" class="md-nav__link">
+      TempCon Class
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="utils/" class="md-nav__link">
+      Utility Commands
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="general">General</h1>
+<p>Azcam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:hidden:</span>
+
+   Home &lt;self&gt;
+</code></pre></div>
+
+
+<p>Most of azcam's functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system's hardware resources.  Examples include:</p>
+<ul>
+<li>azcam-arc</li>
+<li>azcam-archon</li>
+<li>azcam-ds9</li>
+<li>azcam-bok</li>
+<li>azcam-mont4k</li>
+</ul>
+<p>Once configured, the system is controlled by class instances (<em>objects</em>) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, <em>system</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.  Most of these objects are exposed through the <em>azcam.api</em> object.  There is also a database of parameters maintained in the <em>azcam.db</em> object </p>
+<p>There are two three main operational modes of azcam:
+ - One is the server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware.
+ - Another is the console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.
+ - The final mode is through client applications, which communicate with <em>azcamserver</em> over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:
+   - azcam-tool
+   - azcam-webobs
+   - azcam-status
+   - azcam-exptool</p>
+<p>While there are multiple pythonic ways to access the object instances in code, it is common to use the <code>api</code> object, often available as <code>azcam.api</code>. On there server side the <code>controller</code> object, for example, can be accessed as <code>api.controller</code>.  On the client side, the <code>api</code> object maps to the standard objects but with only a reduced set of exposed methods.  So while <code>api.exposure.reset</code> may available to server and client code, <code>api.exposure.set_video_gain</code> may only be available on the sever.</p>
+<p>As an example, to get the current system wavelength and take an exposure, the commands using the <em>azcam-itl</em> extension are:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
+<span class="kn">import</span> <span class="nn">azcam</span>
+<span class="kn">import</span> <span class="nn">azcam_itl.server</span>
+
+<span class="n">OR</span>
+
+<span class="c1"># client-side (azcamconsole)</span>
+<span class="kn">import</span> <span class="nn">azcam</span>
+<span class="kn">import</span> <span class="nn">azcam_itl.console</span>
+
+<span class="n">And</span> <span class="n">then</span><span class="p">:</span>
+
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
+<span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Example configuration code can be found in <code>azcam.example_server_config</code> and <code>azcam.example_console_config</code>.</p>
+<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+
+
+<p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. </p>
+<h1 id="help">Help</h1>
+<p>Azcam is often used with IPython.  Help is then avaialble by typing <code>?xxx</code>, <code>xxx?</code>, <code>xxx??</code> or <code>help(xxx)</code> where <code>xxx</code> is an azcam class, command, or object instance.</p>
+<p>Useful links include:
+* IPython <a href="https://ipython.org">https://ipython.org</a>
+* Python programming language <a href="https://www.python.org">https://www.python.org</a></p>
+<h1 id="server-operation">Server Operation</h1>
+<p>Azcam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like <em>azcam-tool</em> or a python command line interface using azcam's console code.</p>
+<p>The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:</p>
+<p>Local CLI or script example:</p>
+<p><code>exposure.expose(2.5, 'flat', 'an image title')</code></p>
+<p>Remote socket connection example:</p>
+<p><code>exposure.expose 2.5 flat "an image title"</code></p>
+<p>Web (http) connection example:</p>
+<p><code>http://hostname:2403/api/exposure/expose?exposure_time=2.5&amp;image_type=flat&amp;image_title=an+image+title</code></p>
+<p>Web pages which are served by <em>azcamserver</em> are found at URL's such as:</p>
+<p><code>http://hostname:2403/status</code> <br>
+<code>http://hostname:2403/exptool</code>.</p>
+<h2 id="server-classes">Server Classes</h2>
+<p>These classes are useed to define and control a system.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 1
+
+   exposure
+   controller
+   tempcon
+   instrument
+   telescope
+</code></pre></div>
+
+
+<h1 id="shortcuts">Shortcuts</h1>
+<p>When using IPython, the auto parenthesis mode allows typing commands without 
+requiring the normal python syntax of command(par1, par2, ...). The equivalent 
+shortcut or alias syntax is command par1 par2. With Ipython in this mode all commands can 
+use this syntax, there are a few especially useful command line commands which 
+are listed below. Most aliases are implemeted from a command such 
+as <code>from shortcuts_console import *</code>.</p>
+<ul>
+<li><strong>sav</strong> to save the current parameters to the parameter file</li>
+<li><strong>p</strong> to toggle the command line printout of client commands and responses</li>
+<li><strong>Run</strong> to run a command in the python search path, usually for scripts (note the upper case R to distinguish it from IPython's built-in run magic command).</li>
+<li><strong>gf</strong> to try and go to current image folder.</li>
+<li><strong>sf</strong> to try and set image folder to the current directory.</li>
+<li><strong>bf</strong> to browse for a file or folder.  </li>
+</ul>
+<h1 id="code-descriptions">Code Descriptions</h1>
+<p>There are many functions and classes which are available to manipulate hardware, 
+data images, and exposures. The links listed below describe some of these commands.
+Availability depends on configuration.</p>
+<p>The classes and commands listed here are useful both in the server and in a console application.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 1
+
+   image
+   display
+   fits
+   plot
+</code></pre></div>
+
+
+<p>The <em>utility</em> commands are intended to be used only within other <em>azcam</em> code.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 1
+
+   utils
+</code></pre></div>
+
+
+<h1 id="console-api">Console API</h1>
+<p>These commands are used in a console application which may be connected via a socket to the server.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 1
+
+   api_console
+</code></pre></div>
+
+
+<h1 id="configuration-folders">Configuration Folders</h1>
+<p>There are several folder names which are usually defined, although their use may be optional for some systems:</p>
+<ul>
+<li><em>systemfolder</em> - the main folder where configuration data is located</li>
+<li><em>datafolder</em> - the root folder where data and parameters are saved, write access is required</li>
+<li><em>projectfolder</em> - related to systemfolder, but for a specific project rather the the entire system (optional)</li>
+</ul>
+<h1 id="programming">Programming</h1>
+<p>The link below contains informationa about <em>azcam</em> programming.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 1
+
+   programming
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+        
+          <a href="ORG_index/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Welcome to MkDocs
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

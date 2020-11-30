@@ -1,4 +1,2 @@
-sphinx
-sphinx_autodoc_typehints
-sphinx_rtd_theme
-recommonmark
+mkdocs-material
+mkautodoc

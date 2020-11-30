@@ -1,0 +1,15 @@
+site_name: AzCam
+
+theme:
+  name: material
+  palette:
+    primary: 'blue'
+    
+markdown_extensions:
+  - admonition
+  - codehilite
+  - mkautodoc
+
+extra_css:
+    - css/custom.css
+    
