@@ -14,6 +14,7 @@ markdown_extensions:
   - admonition
   - codehilite
   - mkautodoc
+  - attr_list
 
 extra_css:
     - css/custom.css

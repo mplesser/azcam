@@ -108,17 +108,17 @@ Availability depends on configuration.
 
 The classes and commands listed here are useful both in the server and in a console application.
 
-- [image](image.md)
-- [display](display.md)
-- [fits](fits.md)
-- [plot](plot.md)
+- [Image class](image.md)
+- [Display class](display.md)
+- [Fits commands](fits.md)
+- [Plot command](plot.md)
 
 The *utility* commands are intended to be used only within other *azcam* code.
 
 - [utils](utils.md)
 
 # Console API
-These commands are used in a console application which may be connected via a socket to the server.
+These methods are used in console applications which are often connected to the server via a socket.
 
 - [api_console](api_console.md)
 
@@ -131,7 +131,7 @@ There are several folder names which are usually defined, although their use may
  
 # Programming
 
-The link below contains informationa about *azcam* programming.
+The link below contains information about *azcam* programming.
 
-- [programming](programming.md)
+- [Programming](programming.md)
 
