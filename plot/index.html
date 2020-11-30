@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -368,10 +354,522 @@
                 
                 <h1 id="plot-commands">Plot Commands</h1>
 <p>The plot commands arehelpful for general plotting using matplotlib. </p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> azcam.functions.plot
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
+<div class="autodoc">
+<div class="autodoc-signature"><code>azcam.<strong>plot</strong></code></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>azcam</strong></code></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>clear_data</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Clears plotdata from tools().</p></div>
+<div class="autodoc-signature"><code><strong>close_figure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figures='all'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Close plot figure and their windows.
+Default is all.
+:param Figures:</p></div>
+<div class="autodoc-signature"><code><strong>display</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">azimage</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cmap='gray'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a matplotlib display of an azcam image.
+cmap is color map, try cm.*
+:param Cmap:
+:param Image:</p></div>
+<div class="autodoc-signature"><code><strong>get_data</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns plotdata from tools().
+Initial plotdata is {'KeyPressed':'','MouseButton':-1,'X':-1.0,'Y':-1.0}</p></div>
+<div class="autodoc-signature"><code><strong>line</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figure=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Interactive: Plot a line on a plot figure.
+print() allowed here as interactive only.</p>
+<p>:param Figure:</p></div>
+<div class="autodoc-signature"><code><strong>matplotlib</strong></code></div>
+<div class="autodoc-docstring"><p>This is an object-oriented plotting library.</p>
+<p>A procedural interface is provided by the companion pyplot module,
+which may be imported directly, e.g.::</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </code></pre></div>
+
+
+<p>or using ipython::</p>
+<div class="codehilite"><pre><span></span><code><span class="err">ipython</span>
+</code></pre></div>
+
+
+<p>at your terminal, followed by::</p>
+<div class="codehilite"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">%</span><span class="n">matplotlib</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</code></pre></div>
+
+
+<p>at the ipython shell prompt.</p>
+<p>For the most part, direct use of the object-oriented library is
+encouraged when programming; pyplot is primarily for working
+interactively.  The
+exceptions are the pyplot commands :func:<code>~matplotlib.pyplot.figure</code>,
+:func:<code>~matplotlib.pyplot.subplot</code>,
+:func:<code>~matplotlib.pyplot.subplots</code>, and
+:func:<code>~pyplot.savefig</code>, which can greatly simplify scripting.</p>
+<p>Modules include:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Axes&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="k">class</span><span class="p">.</span>  <span class="n">Most</span> <span class="n">pyplot</span>
+    <span class="n">commands</span> <span class="k">are</span> <span class="n">wrappers</span> <span class="k">for</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Axes&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">methods</span><span class="p">.</span>  <span class="n">The</span> <span class="n">axes</span> <span class="n">module</span> <span class="k">is</span> <span class="n">the</span> <span class="n">highest</span> <span class="k">level</span> <span class="k">of</span> <span class="n">OO</span> <span class="k">access</span> <span class="k">to</span>
+    <span class="n">the</span> <span class="n">library</span><span class="p">.</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Figure&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="k">class</span><span class="p">.</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;artist&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;artist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Artist&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="n">base</span> <span class="k">class</span> <span class="k">for</span>
+    <span class="k">all</span> <span class="n">classes</span> <span class="n">that</span> <span class="n">draw</span> <span class="n">things</span><span class="p">.</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Line2D&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="k">class</span> <span class="k">for</span>
+    <span class="n">drawing</span> <span class="n">lines</span> <span class="k">and</span> <span class="n">markers</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;patches&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">classes</span> <span class="k">for</span> <span class="n">drawing</span> <span class="n">polygons</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;</code></span><span class="p">,</span>
+    <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWithDash&lt;/span&gt;&lt;span class="o"&gt;</code></span><span class="p">,</span> <span class="k">and</span>
+    <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Annotate&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="n">classes</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">defines</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AxesImage&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="k">and</span>
+    <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FigureImage&lt;/span&gt;&lt;span class="o"&gt;</code></span> <span class="n">classes</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;collections&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">classes</span> <span class="k">for</span> <span class="n">efficient</span> <span class="n">drawing</span> <span class="k">of</span> <span class="n">groups</span> <span class="k">of</span> <span class="n">lines</span> <span class="k">or</span> <span class="n">polygons</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;colors&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">classes</span> <span class="k">for</span> <span class="n">interpreting</span> <span class="n">color</span> <span class="n">specifications</span> <span class="k">and</span> <span class="k">for</span> <span class="n">making</span>
+    <span class="n">colormaps</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cm&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">colormaps</span> <span class="k">and</span> <span class="n">the</span> <span class="p">:</span><span class="k">class</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ScalarMappable&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">mixin</span> <span class="k">class</span> <span class="k">for</span> <span class="n">providing</span> <span class="n">color</span> <span class="n">mapping</span> <span class="n">functionality</span> <span class="k">to</span> <span class="n">other</span>
+    <span class="n">classes</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ticker&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">classes</span> <span class="k">for</span> <span class="n">calculating</span> <span class="n">tick</span> <span class="n">mark</span> <span class="n">locations</span> <span class="k">and</span> <span class="k">for</span> <span class="n">formatting</span>
+    <span class="n">tick</span> <span class="n">labels</span>
+
+<span class="p">:</span><span class="k">mod</span><span class="p">:</span><span class="o"><code>&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;backends&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">a</span> <span class="n">subpackage</span> <span class="k">with</span> <span class="n">modules</span> <span class="k">for</span> <span class="n">various</span> <span class="n">gui</span> <span class="n">libraries</span> <span class="k">and</span> <span class="k">output</span>
+    <span class="n">formats</span>
+</code></pre></div>
+
+
+<p>The base matplotlib namespace includes:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">:</span><span class="k">data</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rcParams&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">a</span> <span class="k">global</span> <span class="k">dictionary</span> <span class="k">of</span> <span class="k">default</span> <span class="n">configuration</span> <span class="n">settings</span><span class="p">.</span>  <span class="n">It</span> <span class="k">is</span>
+    <span class="n">initialized</span> <span class="k">by</span> <span class="n">code</span> <span class="n">which</span> <span class="n">may</span> <span class="n">be</span> <span class="n">overridden</span> <span class="k">by</span> <span class="n">a</span> <span class="n">matplotlibrc</span>
+    <span class="n">file</span><span class="p">.</span>
+
+<span class="p">:</span><span class="n">func</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rc&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">a</span> <span class="k">function</span> <span class="k">for</span> <span class="n">setting</span> <span class="n">groups</span> <span class="k">of</span> <span class="n">rcParams</span> <span class="k">values</span>
+
+<span class="p">:</span><span class="n">func</span><span class="p">:</span><span class="o"><code>~&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;use&lt;/span&gt;&lt;span class="o"&gt;</code></span>
+    <span class="n">a</span> <span class="k">function</span> <span class="k">for</span> <span class="n">setting</span> <span class="n">the</span> <span class="n">matplotlib</span> <span class="n">backend</span><span class="p">.</span>  <span class="k">If</span> <span class="n">used</span><span class="p">,</span> <span class="n">this</span>
+    <span class="k">function</span> <span class="n">must</span> <span class="n">be</span> <span class="k">called</span> <span class="k">immediately</span> <span class="k">after</span> <span class="n">importing</span> <span class="n">matplotlib</span>
+    <span class="k">for</span> <span class="n">the</span> <span class="k">first</span> <span class="k">time</span><span class="p">.</span>  <span class="k">In</span> <span class="n">particular</span><span class="p">,</span> <span class="n">it</span> <span class="n">must</span> <span class="n">be</span> <span class="k">called</span>
+    <span class="o"><strong></span><span class="k">before</span><span class="o"></strong></span> <span class="n">importing</span> <span class="n">pyplot</span> <span class="p">(</span><span class="k">if</span> <span class="n">pyplot</span> <span class="k">is</span> <span class="n">imported</span><span class="p">).</span>
+</code></pre></div>
+
+
+<p>matplotlib was initially written by John D. Hunter (1968-2012) and is now
+developed and maintained by a host of others.</p>
+<p>Occasionally the internal documentation (python docstrings) will refer
+to MATLAB&reg;, a registered trademark of The MathWorks, Inc.</p></div>
+<div class="autodoc-signature"><code><strong>move_window</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figure_number=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">x=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">y=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Moves a figure to position x,y in screen pixels.
+:param y: Use None for auto
+:param x: Use None for auto
+:param figure_number: &gt;= 1</p></div>
+<div class="autodoc-signature"><code><strong>numpy</strong></code></div>
+<div class="autodoc-docstring"><h1 id="numpy">NumPy</h1>
+<p>Provides
+  1. An array object of arbitrary homogeneous items
+  2. Fast mathematical operations over arrays
+  3. Linear Algebra, Fourier Transforms, Random Number Generation</p>
+<h2 id="how-to-use-the-documentation">How to use the documentation</h2>
+<p>Documentation is available in two forms: docstrings provided
+with the code, and a loose standing reference guide, available from
+<code>the NumPy homepage &lt;https://www.scipy.org&gt;</code><em>.</p>
+<p>We recommend exploring the docstrings using
+<code>IPython &lt;https://ipython.org&gt;</code></em>, an advanced Python shell with
+TAB-completion and introspection capabilities.  See below for further
+instructions.</p>
+<p>The docstring examples assume that <code>numpy</code> has been imported as <code>np</code>::</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import numpy as np</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Code snippets are indicated by three greater-than signs::</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>x = 42
+x = x + 1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Use the built-in <code>help</code> function to view a function's docstring::</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>help(np.sort)
+  ... # doctest: +SKIP</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>For some objects, <code>np.info(obj)</code> may provide additional help.  This is
+particularly true if you see the line "Help on ufunc object:" at the top
+of the help() page.  Ufuncs are implemented in C, not Python, for speed.
+The native Python help() does not know how to view their help, but our
+np.info() function does.</p>
+<p>To search for documents containing a keyword, do::</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>np.lookfor('keyword')
+  ... # doctest: +SKIP</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>General-purpose documents like a glossary and help on the basic concepts
+of numpy are available under the <code>doc</code> sub-module::</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from numpy import doc
+help(doc)
+  ... # doctest: +SKIP</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="available-subpackages">Available subpackages</h2>
+<p>doc
+    Topical documentation on broadcasting, indexing, etc.
+lib
+    Basic functions used by several sub-packages.
+random
+    Core Random Tools
+linalg
+    Core Linear Algebra Tools
+fft
+    Core FFT routines
+polynomial
+    Polynomial tools
+testing
+    NumPy testing tools
+f2py
+    Fortran to Python Interface Generator.
+distutils
+    Enhancements to distutils with support for
+    Fortran compilers support and more.</p>
+<h2 id="utilities">Utilities</h2>
+<p>test
+    Run numpy unittests
+show_config
+    Show numpy build configuration
+dual
+    Overwrite certain functions with high-performance Scipy tools
+matlib
+    Make everything matrices.
+<strong>version</strong>
+    NumPy version string</p>
+<h2 id="viewing-documentation-using-ipython">Viewing documentation using IPython</h2>
+<p>Start IPython with the NumPy profile (<code>ipython -p numpy</code>), which will
+import <code>numpy</code> under the alias <code>np</code>.  Then, use the <code>cpaste</code> command to
+paste examples into the shell.  To see which functions are available in
+<code>numpy</code>, type <code>np.&lt;TAB&gt;</code> (where <code>&lt;TAB&gt;</code> refers to the TAB key), or use
+<code>np.<em>cos</em>?&lt;ENTER&gt;</code> (where <code>&lt;ENTER&gt;</code> refers to the ENTER key) to narrow
+down the list.  To view the docstring for a function, use
+<code>np.cos?&lt;ENTER&gt;</code> (to view the docstring) and <code>np.cos??&lt;ENTER&gt;</code> (to view
+the source code).</p>
+<h2 id="copies-vs-in-place-operation">Copies vs. in-place operation</h2>
+<p>Most of the functions in <code>numpy</code> return a copy of the array argument
+(e.g., <code>np.sort</code>).  In-place versions of these functions are often
+available as array methods, i.e. <code>x = np.array([1,2,3]); x.sort()</code>.
+Exceptions to this rule are documented.</p></div>
+<div class="autodoc-signature"><code><strong>on_moveevent</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">event</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the x and y pixel coords for plots.
+:param event:</p></div>
+<div class="autodoc-signature"><code><strong>plot_image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">azimage</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">scale_type='useimage'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">scale_factor='useimage'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cmap='gray'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Plot an Azcam image buffer nicely.
+scaletype is sdev, minmax, scaled,absolute.</p></div>
+<div class="autodoc-signature"><code><strong>plt</strong></code></div>
+<div class="autodoc-docstring"><p><code>matplotlib.pyplot</code> is a state-based interface to matplotlib. It provides
+a MATLAB-like way of plotting.</p>
+<p>pyplot is mainly intended for interactive plots and simple cases of
+programmatic plot generation::</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>The object-oriented API is recommended for more complex plots.</p></div>
+<div class="autodoc-signature"><code><strong>pylab</strong></code></div>
+<div class="autodoc-docstring"><p>This is a procedural interface to the matplotlib object-oriented
+plotting library.</p>
+<p>The following plotting commands are provided; the majority have
+MATLAB |reg| [<em>]_ analogs and similar arguments.</p>
+<p>.. |reg| unicode:: 0xAE</p>
+<p>_Plotting commands
+  acorr     - plot the autocorrelation function
+  annotate  - annotate something in the figure
+  arrow     - add an arrow to the axes
+  axes      - Create a new axes
+  axhline   - draw a horizontal line across axes
+  axvline   - draw a vertical line across axes
+  axhspan   - draw a horizontal bar across axes
+  axvspan   - draw a vertical bar across axes
+  axis      - Set or return the current axis limits
+  autoscale - turn axis autoscaling on or off, and apply it
+  bar       - make a bar chart
+  barh      - a horizontal bar chart
+  broken_barh - a set of horizontal bars with gaps
+  box       - set the axes frame on/off state
+  boxplot   - make a box and whisker plot
+  violinplot - make a violin plot
+  cla       - clear current axes
+  clabel    - label a contour plot
+  clf       - clear a figure window
+  clim      - adjust the color limits of the current image
+  close     - close a figure window
+  colorbar  - add a colorbar to the current figure
+  cohere    - make a plot of coherence
+  contour   - make a contour plot
+  contourf  - make a filled contour plot
+  csd       - make a plot of cross spectral density
+  delaxes   - delete an axes from the current figure
+  draw      - Force a redraw of the current figure
+  errorbar  - make an errorbar graph
+  figlegend - make legend on the figure rather than the axes
+  figimage  - make a figure image
+  figtext   - add text in figure coords
+  figure   - create or change active figure
+  fill     - make filled polygons
+  findobj  - recursively find all objects matching some criteria
+  gca      - return the current axes
+  gcf      - return the current figure
+  gci      - get the current image, or None
+  getp      - get a graphics property
+  grid     - set whether gridding is on
+  hist     - make a histogram
+  ioff     - turn interaction mode off
+  ion      - turn interaction mode on
+  isinteractive - return True if interaction mode is on
+  imread   - load image file into array
+  imsave   - save array as an image file
+  imshow   - plot image data
+  legend   - make an axes legend
+  locator_params - adjust parameters used in locating axis ticks
+  loglog   - a log log plot
+  matshow  - display a matrix in a new figure preserving aspect
+  margins  - set margins used in autoscaling
+  pause    - pause for a specified interval
+  pcolor   - make a pseudocolor plot
+  pcolormesh - make a pseudocolor plot using a quadrilateral mesh
+  pie      - make a pie chart
+  plot     - make a line plot
+  plot_date - plot dates
+  plotfile  - plot column data from an ASCII tab/space/comma delimited file
+  pie      - pie charts
+  polar    - make a polar plot on a PolarAxes
+  psd      - make a plot of power spectral density
+  quiver   - make a direction field (arrows) plot
+  rc       - control the default params
+  rgrids   - customize the radial grids and labels for polar
+  savefig  - save the current figure
+  scatter  - make a scatter plot
+  setp      - set a graphics property
+  semilogx - log x axis
+  semilogy - log y axis
+  show     - show the figures
+  specgram - a spectrogram plot
+  spy      - plot sparsity pattern using markers or image
+  stem     - make a stem plot
+  subplot  - make one subplot (numrows, numcols, axesnum)
+  subplots - make a figure with a set of (numrows, numcols) subplots
+  subplots_adjust - control the subplot positions of current figure
+  subplot_tool - launch the subplot configuration tool
+  suptitle   - add a figure title
+  table    - add a table to the plot
+  text     - add some text at location (x, y) to the current axes
+  thetagrids - customize the radial theta grids and labels for polar
+  tick_params - control the appearance of ticks and tick labels
+  ticklabel_format - control the format of tick labels
+  title    - add a title to the current axes
+  tricontour - make a contour plot on a triangular grid
+  tricontourf - make a filled contour plot on a triangular grid
+  tripcolor - make a pseudocolor plot on a triangular grid
+  triplot - plot a triangular grid
+  xcorr   - plot the autocorrelation function of x and y
+  xlim     - set/get the xlimits
+  ylim     - set/get the ylimits
+  xticks   - set/get the xticks
+  yticks   - set/get the yticks
+  xlabel   - add an xlabel to the current axes
+  ylabel   - add a ylabel to the current axes</p>
+<p>autumn - set the default colormap to autumn
+  bone   - set the default colormap to bone
+  cool   - set the default colormap to cool
+  copper - set the default colormap to copper
+  flag   - set the default colormap to flag
+  gray   - set the default colormap to gray
+  hot    - set the default colormap to hot
+  hsv    - set the default colormap to hsv
+  jet    - set the default colormap to jet
+  pink   - set the default colormap to pink
+  prism  - set the default colormap to prism
+  spring - set the default colormap to spring
+  summer - set the default colormap to summer
+  winter - set the default colormap to winter</p>
+<p>_Event handling</p>
+<p>connect - register an event handler
+  disconnect - remove a connected event handler</p>
+<p>_Matrix commands</p>
+<p>cumprod   - the cumulative product along a dimension
+  cumsum    - the cumulative sum along a dimension
+  detrend   - remove the mean or besdt fit line from an array
+  diag      - the k-th diagonal of matrix
+  diff      - the n-th difference of an array
+  eig       - the eigenvalues and eigen vectors of v
+  eye       - a matrix where the k-th diagonal is ones, else zero
+  find      - return the indices where a condition is nonzero
+  fliplr    - flip the rows of a matrix up/down
+  flipud    - flip the columns of a matrix left/right
+  linspace  - a linear spaced vector of N values from min to max inclusive
+  logspace  - a log spaced vector of N values from min to max inclusive
+  meshgrid  - repeat x and y to make regular matrices
+  ones      - an array of ones
+  rand      - an array from the uniform distribution [0, 1]
+  randn     - an array from the normal distribution
+  rot90     - rotate matrix k</em>90 degrees counterclockwise
+  squeeze   - squeeze an array removing any dimensions of length 1
+  tri       - a triangular matrix
+  tril      - a lower triangular matrix
+  triu      - an upper triangular matrix
+  vander    - the Vandermonde matrix of vector x
+  svd       - singular value decomposition
+  zeros     - a matrix of zeros</p>
+<p>_Probability</p>
+<p>rand      - random numbers from the uniform distribution
+  randn     - random numbers from the normal distribution</p>
+<p>_Statistics</p>
+<p>amax      - the maximum along dimension m
+  amin      - the minimum along dimension m
+  corrcoef  - correlation coefficient
+  cov       - covariance matrix
+  mean      - the mean along dimension m
+  median    - the median along dimension m
+  norm      - the norm of vector x
+  prod      - the product along dimension m
+  ptp       - the max-min along dimension m
+  std       - the standard deviation along dimension m
+  asum      - the sum along dimension m
+  ksdensity - the kernel density estimate</p>
+<p>_Time series analysis</p>
+<p>bartlett  - M-point Bartlett window
+  blackman  - M-point Blackman window
+  cohere    - the coherence using average periodogram
+  csd       - the cross spectral density using average periodogram
+  fft       - the fast Fourier transform of vector x
+  hamming   - M-point Hamming window
+  hanning   - M-point Hanning window
+  hist      - compute the histogram of x
+  kaiser    - M length Kaiser window
+  psd       - the power spectral density using average periodogram
+  sinc      - the sinc function of array x</p>
+<p>_Dates</p>
+<p>date2num  - convert python datetimes to numeric representation
+  drange    - create an array of numbers for date plots
+  num2date  - convert numeric type (float days since 0001) to datetime</p>
+<p>_Other</p>
+<p>angle     - the angle of a complex array
+  load      - Deprecated--please use loadtxt.
+  loadtxt   - load ASCII data into array.
+  polyfit   - fit x, y to an n-th order polynomial
+  polyval   - evaluate an n-th order polynomial
+  roots     - the roots of the polynomial coefficients in p
+  save      - Deprecated--please use savetxt.
+  savetxt   - save an array to an ASCII file.
+  trapz     - trapezoidal integration</p>
+<p>__end</p>
+<p>.. [*] MATLAB is a registered trademark of The MathWorks, Inc.</p></div>
+<div class="autodoc-signature"><code><strong>rescale</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">axes_values=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">sub_plot=111</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">figure_number=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Replot a figure with new axes limits.
+AxisValues is [xmin,xmax,ymin,ymax].
+SubPlot is pylab subplot integer, as NumRows+NumCols+Number (111, 221, etc).
+figure_number is the figure number (starts at 1).
+During prompt, hit return to leave as is.
+:param figure_number:
+:param SubPlot:
+:param AxesValues:</p></div>
+<div class="autodoc-signature"><code><strong>save_figure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figure_number=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">figure_name=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Save a plotted figure to disk.
+If FigureName is not specified then the name is 'Figure'+figure_number.
+:param figure_number:
+:param FigureName:</p></div>
+<div class="autodoc-signature"><code><strong>set_figure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figure_number=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">subplot='111'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the active figure and plot for subsequent plot commands.
+A single plot is '111', a top plot of 2 is '211' and the bottom is '212'.
+:param Subplot:
+:param figure_number:</p></div>
+<div class="autodoc-signature"><code><strong>style_dot</strong></code></div>
+<div class="autodoc-docstring"><p>Built-in mutable sequence.</p>
+<p>If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</p></div>
+<div class="autodoc-signature"><code><strong>style_lines</strong></code></div>
+<div class="autodoc-docstring"><p>Built-in mutable sequence.</p>
+<p>If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</p></div>
+<div class="autodoc-signature"><code><strong>style_o</strong></code></div>
+<div class="autodoc-docstring"><p>Built-in mutable sequence.</p>
+<p>If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</p></div>
+<div class="autodoc-signature"><code><strong>style_x</strong></code></div>
+<div class="autodoc-docstring"><p>Built-in mutable sequence.</p>
+<p>If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</p></div>
+<div class="autodoc-signature"><code><strong>time</strong></code></div>
+<div class="autodoc-docstring"><p>This module provides various functions to manipulate time values.</p>
+<p>There are two standard representations of time.  One is the number
+of seconds since the Epoch, in UTC (a.k.a. GMT).  It may be an integer
+or a floating point number (to represent fractions of seconds).
+The Epoch is system-defined; on Unix, it is generally January 1st, 1970.
+The actual value can be retrieved by calling gmtime(0).</p>
+<p>The other representation is a tuple of 9 integers giving local time.
+The tuple items are:
+  year (including century, e.g. 1998)
+  month (1-12)
+  day (1-31)
+  hours (0-23)
+  minutes (0-59)
+  seconds (0-59)
+  weekday (0-6, Monday is 0)
+  Julian day (day in the year, 1-366)
+  DST (Daylight Savings Time) flag (-1, 0 or 1)
+If the DST flag is 0, the time is given in the regular time zone;
+if it is 1, the time is given in the DST time zone;
+if it is -1, mktime() should guess based on the date and time.</p></div>
+<div class="autodoc-signature"><code><strong>tools</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">figure_number=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Starts interactive plotting tool for a Figure.
+Updates data fron plot events.
+Data may be read from get_data().
+:param figure_number:</p></div>
+<div class="autodoc-signature"><code><strong>update</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Use this method in a loop to update a plot in real-time.</p></div>
+<div class="autodoc-signature"><code><strong>warnings</strong></code></div>
+<div class="autodoc-docstring"><p>Python part of the warnings subsystem.</p></div>
+</div>
+</div>
                 
               
               
@@ -444,7 +942,7 @@
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

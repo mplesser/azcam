@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -369,12 +355,75 @@
                 <h1 id="tempcon-class">TempCon Class</h1>
 <p>This class defines Azcam's temperature controller interface. 
 The class is usually instantiated as the <em>tempcon</em> object in the server.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.tempcon.TempCon
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.tempcon.<strong>TempCon</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='tempcon'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Tempcon'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Temperature control class.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>apply_corrections</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Correct the temperatures for offset and scale is temperature correction is enabled.</p>
+<p>:param temperature: temperatures to be corrected
+:param temperature_id: temperature ID number</p></div>
+<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Defines temperature control keywords if they are not already defined.</p></div>
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
+<div class="autodoc-signature"><code><strong>exposure_finish</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Custom commands after exposure finishes.</p></div>
+<div class="autodoc-signature"><code><strong>exposure_start</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Custom commands before exposure starts.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the control temperature (set point).</p>
+<p>:param temperature_id: temperature ID number</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read a temperature keyword value and returns it as [value, comment, type string].</p>
+<p>:param keyword: keyword name to read</p></div>
+<div class="autodoc-signature"><code><strong>get_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns a system temperature.</p>
+<p>:param temperature_id: temperature ID number</p></div>
+<div class="autodoc-signature"><code><strong>get_temperatures</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return all system temperatures.</p></div>
+<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initialize the temperature control interface.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reset tempcon object.</p></div>
+<div class="autodoc-signature"><code><strong>set_calibrations</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cals</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set calibration curves for temperature sensors.</p>
+<p>:param cals: list of flags defining each temperature sensor type</p>
+<p>The values of these flags are from the list below which define the calibration curves to use
+for each sensor's temperature conversion.</p>
+<ul>
+<li>0 =&gt; DT670  diode</li>
+<li>1 =&gt; AD590  sensor</li>
+<li>2 =&gt; 1N4148 diode</li>
+<li>3 =&gt; 1N914  diode</li>
+</ul></div>
+<div class="autodoc-signature"><code><strong>set_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the control temperature (set point).</p>
+<p>:param temperature: control temperature in Celsius. If not specified, use saved value
+:param temperature_id: temperature ID number</p></div>
+<div class="autodoc-signature"><code><strong>set_corrections</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_offsets=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_scales=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set temperature correction values and enable correction.
+If both parameters are None then correction is disabled.</p>
+<p>:param temperature_offsets: list of offsets for each temperature
+:param temperature_scales: list of scale factors for each temperature</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.
+typestring is one of 'str', 'int', or 'float'.</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p></div>
+</div>
+</div>
                 
               
               
@@ -447,7 +496,7 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

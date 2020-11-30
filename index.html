@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -179,18 +177,6 @@
       General
     </a>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
-    </a>
   </li>
 
     
@@ -249,7 +235,7 @@
 
   <li class="md-nav__item">
     <a href="fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -368,13 +354,6 @@
                 
                 <h1 id="general">General</h1>
 <p>Azcam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:hidden:</span>
-
-   Home &lt;self&gt;
-</code></pre></div>
-
-
 <p>Most of azcam's functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system's hardware resources.  Examples include:</p>
 <ul>
 <li>azcam-arc</li>
@@ -437,17 +416,13 @@
 <code>http://hostname:2403/exptool</code>.</p>
 <h2 id="server-classes">Server Classes</h2>
 <p>These classes are useed to define and control a system.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> 1
-
-   exposure
-   controller
-   tempcon
-   instrument
-   telescope
-</code></pre></div>
-
-
+<ul>
+<li><a href="exposure/">exposure</a></li>
+<li><a href="controller/">controller</a></li>
+<li><a href="tempcon/">tempcon</a></li>
+<li><a href="instrument/">instrument</a></li>
+<li><a href="telescope/">telescope</a></li>
+</ul>
 <h1 id="shortcuts">Shortcuts</h1>
 <p>When using IPython, the auto parenthesis mode allows typing commands without 
 requiring the normal python syntax of command(par1, par2, ...). The equivalent 
@@ -468,33 +443,21 @@ as <code>from shortcuts_console import *</code>.</p>
 data images, and exposures. The links listed below describe some of these commands.
 Availability depends on configuration.</p>
 <p>The classes and commands listed here are useful both in the server and in a console application.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> 1
-
-   image
-   display
-   fits
-   plot
-</code></pre></div>
-
-
+<ul>
+<li><a href="image/">image</a></li>
+<li><a href="display/">display</a></li>
+<li><a href="fits/">fits</a></li>
+<li><a href="plot/">plot</a></li>
+</ul>
 <p>The <em>utility</em> commands are intended to be used only within other <em>azcam</em> code.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> 1
-
-   utils
-</code></pre></div>
-
-
+<ul>
+<li><a href="utils/">utils</a></li>
+</ul>
 <h1 id="console-api">Console API</h1>
 <p>These commands are used in a console application which may be connected via a socket to the server.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> 1
-
-   api_console
-</code></pre></div>
-
-
+<ul>
+<li><a href="api_console/">api_console</a></li>
+</ul>
 <h1 id="configuration-folders">Configuration Folders</h1>
 <p>There are several folder names which are usually defined, although their use may be optional for some systems:</p>
 <ul>
@@ -504,11 +467,9 @@ Availability depends on configuration.</p>
 </ul>
 <h1 id="programming">Programming</h1>
 <p>The link below contains informationa about <em>azcam</em> programming.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-   <span class="nc">:maxdepth:</span> 1
-
-   programming
-</code></pre></div>
+<ul>
+<li><a href="programming/">programming</a></li>
+</ul>
                 
               
               
@@ -528,13 +489,13 @@ Availability depends on configuration.</p>
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
         
-          <a href="ORG_index/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="api_console/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Welcome to MkDocs
+                Console API
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -567,7 +528,7 @@ Availability depends on configuration.</p>
       <script>
         app = initialize({
           base: ".",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
