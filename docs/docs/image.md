@@ -10,22 +10,14 @@ Usage Example:
 
     im1 = azcam.Image('test.fits')
 
-```eval_rst
-.. autoclass:: azcam.image.Image
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
+::: azcam.image.Image
+    :docstring:
+    :members:
 
-# SendImage Class
+## SendImage Class
 
-This class defines AzCam's code to send image data to a remote image server.
+This subclass defines AzCam's code to send image data to a remote image server.
 
-```eval_rst
-.. autoclass:: azcam.image.SendImage
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
+::: azcam.image_send.SendImage
+    :docstring:
+    :members:

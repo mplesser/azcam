@@ -4,7 +4,12 @@ theme:
   name: material
   palette:
     primary: 'blue'
-    
+  logo:
+    img/logo.png
+  favicon:
+    img/favicon.ico
+  features:
+    - navigation.sections
 markdown_extensions:
   - admonition
   - codehilite

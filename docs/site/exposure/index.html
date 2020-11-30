@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -249,7 +235,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -373,12 +359,261 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
 <em>instrument</em>, etc. For example, when <em>exposure</em> is initialized the objects in the 
 <em>exposure.objects_init</em> list are initialized.  Similarly when <em>exposure</em> is reset, the objects in the 
 <em>exposure.objects_reset</em> list are reset.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.exposure.Exposure
-    <span class="nc">:members:</span>
-    <span class="nc">:undoc-members:</span>
-    <span class="nc">:show-inheritance:</span>
-    <span class="nc">:inherited-members:</span>
-</code></pre></div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.exposure.<strong>Exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='exposure'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Exposure'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>The Azcam Exposure class.
+Only required attributes and stub methods are defined here. Additional
+methods and attributes are added as needed in exposure-specific classes
+which should inherit this class.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>abort</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Abort an exposure in progress.
+Really sets a flag which is read in expose().</p></div>
+<div class="autodoc-signature"><code><strong>begin</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">imagetype=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initiates the first part of an exposure, through image flushing.
+exposure_time is in seconds.
+imagetype is one of zero, object, flat, dark, ramp, ...</p></div>
+<div class="autodoc-signature"><code><strong>check_comparison_imagetype</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">imagetype=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns 1 if imagetype is a comparision, 0 if not.
+If imagetype is not specified, checks the current type.</p></div>
+<div class="autodoc-signature"><code><strong>check_image_ready</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns True (1) if exposure image is ready and then toggles the flag off
+so that image is not detected multiple times.  Used only for clients which need to know
+when an image is ready.
+An image is ready when written to disk if SaveFile is true, or when valid if SaveFile is false.</p></div>
+<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets up header keywords dictionary if not already defined.</p></div>
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
+<div class="autodoc-signature"><code><strong>end</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Completes an exposure by writing file and displaying image.</p></div>
+<div class="autodoc-signature"><code><strong>expose</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">imagetype=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete exposure.
+exposure_time is the exposure time in seconds
+imagetype is the type of exposure ('zero', 'object', 'flat', ...)
+title is the image title.</p></div>
+<div class="autodoc-signature"><code><strong>expose1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_type=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete exposure with immediate return to caller.</p>
+<p>:param exposure_time: the exposure time in seconds
+:param image_type: type of exposure ('zero', 'object', 'flat', ...)
+:param image_title: image title, usually surrounded by double quotes</p></div>
+<div class="autodoc-signature"><code><strong>finish</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Allow custom operations at end of exposure.</p></div>
+<div class="autodoc-signature"><code><strong>finished</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>flush</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Cycles=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Flush/clear detector.
+Cycles is the number of times to flush the detector.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_exposureflag</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>get_exposuretime</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return current exposure time in seconds.</p></div>
+<div class="autodoc-signature"><code><strong>get_exposuretime_remaining</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return remaining exposure time (in seconds).</p></div>
+<div class="autodoc-signature"><code><strong>get_filename</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return current image filename.</p></div>
+<div class="autodoc-signature"><code><strong>get_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current focal plane configuration.</p></div>
+<div class="autodoc-signature"><code><strong>get_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the current detector format parameters.</p></div>
+<div class="autodoc-signature"><code><strong>get_image_title</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the current image title.
+Allows for AutoTitle.</p></div>
+<div class="autodoc-signature"><code><strong>get_image_type</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get current image type for an exposure.
+imagetype is system defines, and typically includes:
+zero, object, dark, flat.</p></div>
+<div class="autodoc-signature"><code><strong>get_image_types</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of valid imagetypes.
+Gets imagetypes from detector and instrument.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p></div>
+<div class="autodoc-signature"><code><strong>get_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the value of a parameter from the local azcamparameters dictionary.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>get_pixels_remaining</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return number of remaining pixels to be read (counts down).</p></div>
+<div class="autodoc-signature"><code><strong>get_progress</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return progress of exposure integration or readout.</p></div>
+<div class="autodoc-signature"><code><strong>get_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi_num=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns a list of the ROI parameters for the roi_num specified.
+Currently only one ROI (0) is supported.
+Returned list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).</p></div>
+<div class="autodoc-signature"><code><strong>get_status</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a variety of system status data in one dictionary.</p></div>
+<div class="autodoc-signature"><code><strong>get_test_image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns TestImage flag.</p></div>
+<div class="autodoc-signature"><code><strong>guide</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete guider exposure sequence.
+NumberExposures is the number of exposures to make, -1 loop forever</p></div>
+<div class="autodoc-signature"><code><strong>guide1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete guider exposure with an immediate return.
+NumberExposures is the number of exposures to make, -1 loop forever</p></div>
+<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initialize exposure.</p></div>
+<div class="autodoc-signature"><code><strong>integrate</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Integration.</p></div>
+<div class="autodoc-signature"><code><strong>parshift</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_rows</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Shift sensor by number_rows.</p>
+<p>:param number_rows: number of rows to shift (positive is toward readout, negative is away)</p></div>
+<div class="autodoc-signature"><code><strong>pause</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Pause an exposure in progress (integration only).
+Really sets a flag which is read in expose().</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>read_header_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read header template file.</p></div>
+<div class="autodoc-signature"><code><strong>readout</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Exposure readout.</p></div>
+<div class="autodoc-signature"><code><strong>record_current_times</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Record the current times and data info in the header.</p></div>
+<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reset exposure object.</p></div>
+<div class="autodoc-signature"><code><strong>resume</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Resume a paused exposure.
+Really sets a flag which is read in expose().</p></div>
+<div class="autodoc-signature"><code><strong>roi_reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Resets detector ROI values to full frame, current binning.</p></div>
+<div class="autodoc-signature"><code><strong>sequence</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flush_array_flag=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">delay=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Take an exposure sequence.
+Uses pre-set exposure time, image type and image title.
+NumberExposures is the number of exposures to make.
+FlushArrayFlag defines detector flushing:
+-1 =&gt; current value defined by exposure.exposure_sequence_flush [default]
+0 =&gt; flush for each exposure
+1 =&gt; flush after first exposure only
+2 =&gt; no flush
+Delay =&gt; delay between exposures in seconds
+-1 =&gt; no change</p></div>
+<div class="autodoc-signature"><code><strong>sequence1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flush_array_flag=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">delay=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Take an exposure sequence.
+Uses pre-set image type and image title.
+number_exposures is the number of exposures to make.
+flush_array_flag defines detector flushing:
+-1 =&gt; current value defined by exposure.exposure_sequence_flush [default]
+0 =&gt; flush for each exposure
+1 =&gt; flush after first exposure only
+2 =&gt; no flush
+Delay =&gt; delay between exposures in seconds
+-1 =&gt; no change</p></div>
+<div class="autodoc-signature"><code><strong>set_auto_title</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flag=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the AutoTitle flag so that image title matches lowercase imagetype.</p></div>
+<div class="autodoc-signature"><code><strong>set_data_order</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">dataOrder</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets data order</p></div>
+<div class="autodoc-signature"><code><strong>set_detgap</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">det_gap</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector gaps in pixels.</p></div>
+<div class="autodoc-signature"><code><strong>set_detnum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">det_number</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector numbers.</p></div>
+<div class="autodoc-signature"><code><strong>set_detpars</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">sensor_data</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set detector parameters from sensor data dictionary.</p></div>
+<div class="autodoc-signature"><code><strong>set_detpos</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">det_position</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector positions.</p></div>
+<div class="autodoc-signature"><code><strong>set_exposuretime</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set current exposure time in seconds.</p></div>
+<div class="autodoc-signature"><code><strong>set_extension_position</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">XY</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the extension position of each amplifier.
+XY is [[X,Y]] in index numbers, starting at [1,1].</p></div>
+<div class="autodoc-signature"><code><strong>set_extname</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ext_name</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set image extension names.</p></div>
+<div class="autodoc-signature"><code><strong>set_extnum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ext_number</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set image extension numbers.</p></div>
+<div class="autodoc-signature"><code><strong>set_filename</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the filename of the exposure image.
+Not fully working yet.</p></div>
+<div class="autodoc-signature"><code><strong>set_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">amp_config=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets focal plane configuration for subsequent exposures. Use after set_format().
+Must call set_roi() after using this command and before starting exposure.
+This command replaces SetConfiguration.
+Default focalplane values are set here.
+numdet_x defines number of detectors in Column direction.
+numdet_y defines number of detectors in Row direction.
+numamps_x defines number of amplifiers in Column direction.
+numamps_y defines number of amplifiers in Row direction.
+amp_config defines each amplifier's orientation (ex: '1223').
+0 - normal
+1 - flip x
+2 - flip y
+3 - flip x and y</p></div>
+<div class="autodoc-signature"><code><strong>set_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_frametransfer=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector format for subsequent exposures.
+Must call set_roi() after using this command and before starting exposure.
+ns_total is the number of visible columns.
+ns_predark is the number of physical dark underscan columns.
+ns_underscan is the desired number of desired dark underscan columns.
+ns_overscan is the number of dark overscan columns.
+np_total is the number of visible rows.
+np_predark is the number of physical dark underscan rows.
+np_underscan is the number of desired dark underscan rows.
+np_overscan is the number of desired dark overscan rows.
+np_frametransfer is the rows to frame transfer shift.</p></div>
+<div class="autodoc-signature"><code><strong>set_image_title</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the image title.
+Allows for AutoTitle.</p></div>
+<div class="autodoc-signature"><code><strong>set_image_type</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">imagetype='zero'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set image type for an exposure.
+imagetype is system defines, and typically includes:
+zero, object, dark, flat.</p></div>
+<div class="autodoc-signature"><code><strong>set_jpg_order</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Indices</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set JPG image positions.</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.
+typestring is one of 'str', 'int', or 'float'.</p></div>
+<div class="autodoc-signature"><code><strong>set_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the value of a parameter in the local azcamparameters dictionary.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>set_ref_pixel</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">XY</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the reference pixel.
+XY is [X,Y] in pixels.</p></div>
+<div class="autodoc-signature"><code><strong>set_remote_server</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_host=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_port=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set parameters so image files are sent to a remote image server.
+If no host is provided then reset flag to local image file.</p></div>
+<div class="autodoc-signature"><code><strong>set_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">col_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">row_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi_num=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets the ROI values for subsequent exposures.
+Currently only one ROI (0) is supported.
+These values are for the entire focal plane, not just one detector.</p></div>
+<div class="autodoc-signature"><code><strong>set_shutter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open or close a shutter.</p>
+<p>:param state:
+:param shutter_id: Shutter ID flag</p>
+<ul>
+<li>0 =&gt; controller default shutter.</li>
+<li>1 =&gt; instrument default shutter.</li>
+</ul></div>
+<div class="autodoc-signature"><code><strong>set_tdi_delay</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flag</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set TDI line delay On or Off.
+flag==True sets delay to self.tdi_delay.
+flag==Flase sets line delay to normal value, self.par_delay.</p></div>
+<div class="autodoc-signature"><code><strong>set_temp_files</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update TempImageFile and TempDisplayFile file names based on CommandServer port.</p></div>
+<div class="autodoc-signature"><code><strong>set_test_image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flag</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets TestImage flag is True, clears if False.</p></div>
+<div class="autodoc-signature"><code><strong>start</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Allow custom operations at start of exposure.</p></div>
+<div class="autodoc-signature"><code><strong>start_readout</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Start immediate readout of an exposing image.
+Returns immediately, not waiting for readout to finish.
+Really sets a flag which is read in expose().</p></div>
+<div class="autodoc-signature"><code><strong>test</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=0.0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a test exposure.
+exposure_time is the exposure time in seconds
+shutter is 0 for closed and 1 for open
+title is the image title.</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p></div>
+<div class="autodoc-signature"><code><strong>update_headers</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update all headers, reading current data.</p></div>
+</div>
+</div>
                 
               
               
@@ -418,7 +653,7 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Fits Class
+                Fits Commands
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -451,7 +686,7 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -671,24 +657,125 @@ information (such as <code>controller.read_header()</code> or <code>instrument.r
 <p>The telescope and instrument dictionaries are considered temporary and re-read every time an exposure starts. This 
 is so that rapidly changing data values do not become stale. Most dictionary information is written to the image file header if the selected image format supports headers. When an object such as an instrument or telescope is disabled, the corresponding object database information is deleted and no longer updated.</p>
 <p>Below is the documentation for the Header class.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.header.Header
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
-
-
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.header.<strong>Header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">title=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">template=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Defines the Header class which is used to create and manipulate headers contained
+in azcam objects such as <em>controller</em> and <em>instrument</em>.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>convert_type</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pythontype</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Convert a value to a specific type.</p></div>
+<div class="autodoc-signature"><code><strong>copy_all_items</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ptr_header</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Copy all items from the specified header object to the current image header.</p></div>
+<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keywords=[]</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comments={}</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestrings={}</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Defines keywords, if they are not already defined.</p></div>
+<div class="autodoc-signature"><code><strong>delete_all_items</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete all header items</p></div>
+<div class="autodoc-signature"><code><strong>delete_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete all keywords.</p></div>
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>get_type_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pythontype</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a string indicating the python data type pythontype.</p></div>
+<div class="autodoc-signature"><code><strong>read_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read a header file and import the data into the header.</p></div>
+<div class="autodoc-signature"><code><strong>set_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">object_name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">order=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets object_name in the global header dictionary.
+order defines how headers are written in image files.</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.
+typestring is one of 'str', 'int', or 'float'.</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keystring</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set keyword data from a single string.</p></div>
+<div class="autodoc-signature"><code><strong>set_title</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">title</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the title of the header.</p></div>
+<div class="autodoc-signature"><code><strong>update</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update header.</p></div>
+</div>
+</div>
 <h2 id="focalplane">Focalplane</h2>
 <p>Below is the documentation for the FocalPlane class which is  used internally to define all aspects of the focal plane and sensor configuration. </p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.focalplane.FocalPlane
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
-
-
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.focalplane.<strong>FocalPlane</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Defines the FocalPlane class which describes a cameras focalplane and detectors.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Defines focal plane keywords, if they are not already defined.</p></div>
+<div class="autodoc-signature"><code><strong>delete_all_items</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete all header items</p></div>
+<div class="autodoc-signature"><code><strong>get_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the focal plane configuration.</p></div>
+<div class="autodoc-signature"><code><strong>get_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of current detector format parameters</p></div>
+<div class="autodoc-signature"><code><strong>get_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi_num=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns a list of the ROI parameters for the roi_num specified.
+Currently only one ROI (0) is supported.
+Returned list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).</p></div>
+<div class="autodoc-signature"><code><strong>roi_reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Resets detector ROI values to full frame, current binning.</p></div>
+<div class="autodoc-signature"><code><strong>set_amp_positions</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Calculates amplifiers positions including gaps between amplifiers and CCDs
+New: Zareba 23Mar2012</p></div>
+<div class="autodoc-signature"><code><strong>set_default_values</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets default values for focalplane variables</p></div>
+<div class="autodoc-signature"><code><strong>set_extension_extnum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ext_number</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>set_extension_name</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ext_name</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>set_extension_position</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">xy</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the extension position of each amplifier.
+xy is [[X,Y]] in index numbers, starting at [1,1].</p></div>
+<div class="autodoc-signature"><code><strong>set_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">amp_config=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets focal plane configuration. Use after set_format() and before set_roi().
+This command replaces SetConfiguration.
+Default focalplane values are set here.
+numdet_x defines number of detectors in Column direction.
+numdet_y defines number of detectors in Row direction.
+numamps_x defines number of amplifiers in Column direction.
+numamps_y defines number of amplifiers in Row direction.
+amp_config defines each amplifier's orientation (ex: '1223').
+0 - normal
+1 - flip x
+2 - flip y
+3 - flip x and y</p></div>
+<div class="autodoc-signature"><code><strong>set_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_frametransfer=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector format.
+ns_total is the number of visible columns.
+ns_predark is the number of physical dark underscan columns.
+ns_underscan is the desired number of desired dark underscan columns.
+ns_overscan is the number of dark overscan columns.
+np_total is the number of visible rows.
+np_predark is the number of physical dark underscan rows.
+np_underscan is the number of desired dark underscan rows.
+np_overscan is the number of desired dark overscan rows.
+np_frametransfer is the rows to frame transfer shift.</p></div>
+<div class="autodoc-signature"><code><strong>set_jpg_order</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">indices</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set JPG image positions.</p></div>
+<div class="autodoc-signature"><code><strong>set_ref_pixel</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">xy</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the reference pixel.
+xy is [X,Y] in pixels.</p></div>
+<div class="autodoc-signature"><code><strong>set_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">col_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">row_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi_num=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets the ROI values for a specified ROI.
+Currently only one ROI (0) is supported.
+These values are for the entire focal plane, not just one detector.</p></div>
+<div class="autodoc-signature"><code><strong>update_ext_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update focal plane keywords for single extension</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update headers, reading current data.</p></div>
+<div class="autodoc-signature"><code><strong>update_header_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update focal plane keywords in header</p></div>
+</div>
+</div>
 <h2 id="attributes">Attributes</h2>
 <p>Parameters may be read with the <code>azcam.api.get_par()</code> command and written with the <code>azcam.api.set_par()</code> 
 command. For example, <code>azcam.api.get_par('imagetype')</code> returns the current image type.</p>
@@ -835,7 +922,7 @@ systems have one a command sever port and a controller sever port.</p>
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

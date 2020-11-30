@@ -13,7 +13,7 @@ import sys
 import tarfile
 import tkinter
 import tkinter.filedialog
-from typing import List
+import typing
 
 # keyboard checking is optional
 try:
@@ -181,7 +181,7 @@ def parse(String, SetType=0):
     return tokens
 
 
-def get_datatype(value) -> List:
+def get_datatype(value) -> typing.List:
     """
     Determine the data type for an object and set the type if possible. A string such as "1.23"
     will result in a type "float" and "2" will result in type "int".

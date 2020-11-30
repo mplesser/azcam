@@ -3,10 +3,6 @@
 This class defines Azcam's temperature controller interface. 
 The class is usually instantiated as the *tempcon* object in the server.
 
-```eval_rst
-.. autoclass:: azcam.tempcon.TempCon
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
+::: azcam.tempcon.TempCon
+    :docstring:
+    :members:

@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -381,12 +367,111 @@ API for instruments.</p>
 <p>Instrument servers often also support a web interface, usually for status and GUI control. There is typically
 a single method in the instrument server which translates web command strings into the <em>command parser</em> commands
 which are accepted by the instrument server's <em>cmdserver</em>.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.instrument.Instrument
-    <span class="nc">:members:</span>
-    <span class="nc">:undoc-members:</span>
-    <span class="nc">:show-inheritance:</span>
-    <span class="nc">:inherited-members:</span>
-</code></pre></div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.instrument.<strong>Instrument</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='instrument'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Instrument'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>The base Instrument class.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>comps_delay</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">delay_time=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delays for delay_time for comparison lamp warmup.
+May internally set delay based on comp selection.
+delay_time is in seconds.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>comps_off</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Turn off active comparisons.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>comps_on</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Turn on active comparisons.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets up header keywords dictionary if not already defined.</p></div>
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
+<div class="autodoc-signature"><code><strong>exposure_finish</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Optional tempcon.call after exposure finishes.</p></div>
+<div class="autodoc-signature"><code><strong>exposure_start</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Optional call before exposure starts.</p></div>
+<div class="autodoc-signature"><code><strong>get_active_comps</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of the active comparison lamps.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_comps</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return all valid comparison names.
+Useful for clients to determine which type of comparison exposures are supported.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_filters</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all available/loaded filters.
+filter_id is the filter mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_focus_positions</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all focus positions.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_pressures</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all instrument pressures.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_wavelengths</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns a list of valid wavelengths.
+Used for filter and LED based systems.
+wavelength_id is the wavelength mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_current</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">current_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_state=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read electrometer diode current in Amps.
+current_id = 0 is the sphere (Reference) diode.
+current_id = 1 is the calibrated diode or DUT.
+ShutterState is 0, 1 to close/open shutter during read or 2 unchanged.</p></div>
+<div class="autodoc-signature"><code><strong>get_filter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the current/loaded filter, typically the filter in the beam.
+filter_id is the filter mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the current instrument focus position.
+focus_id is the focus mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+Comment always returned in double quotes, even if empty.</p></div>
+<div class="autodoc-signature"><code><strong>get_pressure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pressure_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read an instrument pressure.</p></div>
+<div class="autodoc-signature"><code><strong>get_wavelength</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current wavelength.
+wavelength_id is the wavelength mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initialize the object.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current header.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reset object.</p></div>
+<div class="autodoc-signature"><code><strong>set_active_comps</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_names=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comp_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set comparisons which are to be turned on and off with comps_on() and comps_off().
+comp_names is a single string or a list of strings to be set as active.
+comp_id is the comparison mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>set_filter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the current/loaded filter, typically the filter in the beam.
+filter_name is the filter name to set.
+filter_id is the filter mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>set_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_position</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_type='absolute'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Move (or step) the instrument focus.
+focus_position is the focus position or step size.
+focus_id is the focus mechanism ID.
+focus_type is "absolute" or "step".</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.
+typestring is one of 'str', 'int', or 'float'.</p></div>
+<div class="autodoc-signature"><code><strong>set_pressure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pressure</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pressure_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets an instrument pressure.</p></div>
+<div class="autodoc-signature"><code><strong>set_shutter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open or close the instrument shutter.
+state is 1 for open and 0 for close.
+shutter_id is the shutter mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>set_wavelength</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the current wavelength, typically for a filter or grating.
+wavelength is the wavelength value.
+wavelength_id is the wavelength mechanism ID.</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p></div>
+</div>
+</div>
                 
               
               
@@ -459,7 +544,7 @@ which are accepted by the instrument server's <em>cmdserver</em>.</p>
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

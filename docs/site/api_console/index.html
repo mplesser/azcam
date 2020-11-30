@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -249,7 +235,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -369,12 +355,521 @@
                 <h1 id="console-api">Console API</h1>
 <p>The <em>api_console</em> class contains a command set which can be called from a console application to send the equivalent command to a server process.  Commands are typically accessed in and console process 
 as <code>azcam.api.commandname(parameters)</code>, e.g. <code>azcam.api.get_wavelength()</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.api_console.API
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>API</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>API interface for console application.</p></div>
+<div class="autodoc-members"></div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>HeaderMethods</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Header methods used by other many client classes.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>SystemHeader</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>System header class, mainly for image header data.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>Exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Exposure class for client.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>abort</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets the global exposure abort flag and tries to abort a remote server exposure.</p></div>
+<div class="autodoc-signature"><code><strong>abort_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Abort an exposure in progress.</p></div>
+<div class="autodoc-signature"><code><strong>begin_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_type=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initiates the first part of an exposure, through image flushing.
+This is an advanced function.</p>
+<p>:param exposure_time: the exposure time in seconds
+:param image_type: type of exposure ('zero', 'object', 'flat', ...)
+:param image_title: image title, usually surrounded by double quotes</p></div>
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>end_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Completes an exposure by writing file and displaying image.
+This is an advanced function.</p></div>
+<div class="autodoc-signature"><code><strong>expose</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_type=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete exposure.
+If arguments are not specified, then previous exposure_time and imagetype values are used.</p>
+<p>:param exposure_time: the exposure time in seconds
+:param image_type: type of exposure ('zero', 'object', 'flat', ...)
+:param image_title: image title, usually surrounded by double quotes</p></div>
+<div class="autodoc-signature"><code><strong>expose1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_type=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_title=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete exposure with immediate return to caller.</p>
+<p>:param exposure_time: the exposure time in seconds
+:param image_type: type of exposure ('zero', 'object', 'flat', ...)
+:param image_title: image title, usually surrounded by double quotes</p></div>
+<div class="autodoc-signature"><code><strong>flush</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cycles=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Flush/clear detector.</p>
+<p>:param cycles:  number of times to flush the detector.</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_exposuretime</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return current exposure time in seconds.</p></div>
+<div class="autodoc-signature"><code><strong>get_exposuretime_remaining</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return current exposure time in seconds.</p></div>
+<div class="autodoc-signature"><code><strong>get_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the current focal plane configuration.</p></div>
+<div class="autodoc-signature"><code><strong>get_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the current detector format parameters.</p></div>
+<div class="autodoc-signature"><code><strong>get_image_filename</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the current exposure image filename.
+:returns: imaeg filename</p></div>
+<div class="autodoc-signature"><code><strong>get_image_types</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of valid image types.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the value of a parameter from remote server.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>get_pixels_remaining</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return current number of pixels remaing in readout.</p></div>
+<div class="autodoc-signature"><code><strong>get_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return detector ROI.</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>guide</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a complete guider exposure sequence.</p>
+<p>:param number_exposures: number of exposures to make, -1 loop forever</p></div>
+<div class="autodoc-signature"><code><strong>guide1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>guide() with immediate return.</p>
+<p>:param number_exposures: number of exposures to make, -1 loop forever</p></div>
+<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initialize exposure.</p></div>
+<div class="autodoc-signature"><code><strong>integrate_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Integrate exposure.
+This is an advanced function.</p></div>
+<div class="autodoc-signature"><code><strong>parshift</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_rows</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Shift detector by number_rows.</p>
+<p>:param number_rows: number of rows to shift (positive is toward readout, negative is away)</p></div>
+<div class="autodoc-signature"><code><strong>pause_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Pause an exposure in progress (integration only).</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>readout_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Readout the exposure.
+This is an advanced function.</p></div>
+<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reset exposure.</p></div>
+<div class="autodoc-signature"><code><strong>resume_exposure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Resume a paused exposure.</p></div>
+<div class="autodoc-signature"><code><strong>roi_reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Resets detector ROI values to full frame, current binning.</p></div>
+<div class="autodoc-signature"><code><strong>sequence</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flush_array=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">delay=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Take an exposure sequence.</p>
+<p>:param number_exposures:  number of exposures to make
+:param flush_array:  flag defining detector flushing</p>
+<ul>
+<li>-1 =&gt; current value defined by exposure.exposure_sequence_flush [default]</li>
+<li>0 =&gt; flush for each exposure</li>
+<li>1 =&gt; flush after first exposure only</li>
+<li>2 =&gt; no flush</li>
+</ul>
+<p>:param delay: delay between exposures in seconds (-1 =&gt; no change)</p></div>
+<div class="autodoc-signature"><code><strong>sequence1</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">flush_array=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">delay=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Take an exposure sequence with immediate return.</p>
+<p>:param number_exposures:  number of exposures to make.
+:param flush_array:  flag defining detector flushing</p>
+<ul>
+<li>-1 =&gt; current value defined by exposure.exposure_sequence_flush [default]</li>
+<li>0 =&gt; flush for each exposure</li>
+<li>1 =&gt; flush after first exposure only</li>
+<li>2 =&gt; no flush</li>
+</ul>
+<p>:param delay: delay between exposures in seconds (-1 =&gt; no change)</p></div>
+<div class="autodoc-signature"><code><strong>set_exposuretime</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set current exposure time in seconds.</p>
+<p>:param exposure_time: exposure time in seconds.</p></div>
+<div class="autodoc-signature"><code><strong>set_focalplane</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numdet_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_x=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">numamps_y=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">amp_config=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets focal plane configuration for subsequent exposures. Use after set_format().
+Must call set_roi() after using this command and before starting exposure.
+This command replaces SetConfiguration.
+Default focalplane values are set here.
+numdet_x defines number of detectors in Column direction.
+numdet_y defines number of detectors in Row direction.
+numamps_x defines number of amplifiers in Column direction.
+numamps_y defines number of amplifiers in Row direction.
+amp_config defines each amplifier's orientation (ex: '1223').
+0 - normal
+1 - flip x
+2 - flip y
+3 - flip x and y</p></div>
+<div class="autodoc-signature"><code><strong>set_format</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ns_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_total=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_predark=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_underscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_overscan=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">np_frametransfer=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the detector format for subsequent exposures.
+Must call set_roi() after using this command and before starting exposure.
+ns_total is the number of visible columns.
+ns_predark is the number of physical dark underscan columns.
+ns_underscan is the desired number of desired dark underscan columns.
+ns_overscan is the number of dark overscan columns.
+np_total is the number of visible rows.
+np_predark is the number of physical dark underscan rows.
+np_underscan is the number of desired dark underscan rows.
+np_overscan is the number of desired dark overscan rows.
+np_frametransfer is the rows to frame transfer shift.</p></div>
+<div class="autodoc-signature"><code><strong>set_image_filename</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the filename of the exposure image.
+Always use forward slashes.
+Not fully functional.</p>
+<p>:param filename: image filename</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>set_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the value of a parameter in the remote server.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>set_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_col=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">first_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">last_row=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">col_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">row_bin=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi_number=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets the ROI values for subsequent exposures.
+Currently only one ROI (0) is supported.
+These values are for the entire focal plane, not just one detector.</p></div>
+<div class="autodoc-signature"><code><strong>set_shutter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open or close a shutter.</p>
+<p>:param state:
+:param shutter_id: Shutter ID flag</p>
+<ul>
+<li>0 =&gt; controller shutter.</li>
+<li>1 =&gt; instrument shutter.</li>
+</ul></div>
+<div class="autodoc-signature"><code><strong>start_readout</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Start immediate readout of an exposing image.
+Returns immediately, not waiting for readout to finish.</p></div>
+<div class="autodoc-signature"><code><strong>test</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_state=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>tests</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">number_exposures=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">exposure_time=1.0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image_type='zero'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make test exposures, which overwrite previous test images.</p>
+<p>:param number_exposures: number of exposures to take
+:param exposure_time: exposure time in seconds
+:param image_type: image type</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>Controller</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Controller class for client.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Initialize controller.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reset controller using current attributes.
+May warn that the controller could not be reset.</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>set_shutter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open or close a shutter.</p>
+<p>:param state:</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>Instrument</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Instrument class for client.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_current</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">diode_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_state=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns a list of instrument diode currents.</p>
+<p>:param diode_id: diode ID flag (system dependent)
+:param shutter_state: open (1), close (0), unchanged (2) shutter during diode read</p></div>
+<div class="autodoc-signature"><code><strong>get_filter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get instrument filter position.</p>
+<p>:param filter_id: filter ID flag (use negative value for a list of all filters)</p></div>
+<div class="autodoc-signature"><code><strong>get_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the current focus position.</p>
+<p>:param focus_id: focus sensor ID flag</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_pressures</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">pressure_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all system pressures.</p>
+<p>:param pressure_id: pressure sensor ID flag</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>get_wavelength</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get instrument wavelength.</p>
+<p>:param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>set_filter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set instrument filter position.</p>
+<p>:param filter_name: filter value to set
+:param filter_id: filter ID flag</p></div>
+<div class="autodoc-signature"><code><strong>set_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_type='absolute'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set instrument focus position. The focus value may be an absolute position
+or a relative step if supported by hardware.</p>
+<p>:param focus_value: focus position
+:param focus_id: focus sensor ID flag
+:param focus_type: focus type (absolute or step)</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>set_shutter</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">shutter_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open or close a shutter.</p>
+<p>:param state:
+:param shutter_id: Shutter ID flag</p></div>
+<div class="autodoc-signature"><code><strong>set_wavelength</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">wavelength_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">nd=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set wavelength, optionally changing neutral density.</p>
+<p>:param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
+:param wavelength_id: wavelength ID flag
+:param nd: neutral density value to set</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>Telescope</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Telescope class for client.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the current focus position.</p>
+<p>:param focus_id: focus sensor ID flag</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>set_focus</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_id=0</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">focus_type='absolute'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set instrument focus position. The focus value may be an absolute position
+or a relative step if supported by hardware.</p>
+<p>:param focus_value: focus position
+:param focus_id: focus sensor ID flag
+:param focus_type: focus type (absolute or step)</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>Tempcon</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parent</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Temperature controller (tempcon) class for client.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a keyword from a header.
+The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name</p></div>
+<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
+<div class="autodoc-signature"><code><strong>get_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get control temperature in degress Celsius.</p>
+<p>:param temperature_id: temperature ID flag</p></div>
+<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns header info.
+Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
+<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a keyword value and its comment.
+The comment always returned in quotes, even if empty.
+Hardware is not usually read by this commands, use update_header first.</p>
+<p>:param keyword: keyword name
+:param key_object: object to which keyword belongs</p></div>
+<div class="autodoc-signature"><code><strong>get_string</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the entire header as a single formatted string.</p></div>
+<div class="autodoc-signature"><code><strong>get_temperatures</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return a list of all system temperatures as defined in configuration setup.
+Values are in degrees Celsius and may be formatted for display.
+If temperatures cannot be read, then a list of -999.99 is returned.</p></div>
+<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Reads each keyword in the header and returns the keyword value.
+Returns a list of header lists: [[keyword, value, comment, type]].</p></div>
+<div class="autodoc-signature"><code><strong>set_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">control_temperature</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set control temperature.</p>
+<p>:param control_temperature: control (set) temperature in Celsius
+:param temperature_id: temperature sensor ID flag</p></div>
+<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_comment=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">key_type='str'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set a keyword value and comment.</p>
+<p>The keyword is set in the controller header by default.</p>
+<p>:param keyword: keyword name
+:param key_value: keyword value
+:param key_comment: comment string for keyword
+:param key_type: keyword type</p></div>
+<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the header of an object.
+This command usually reads hardware to get the lastest keyword values.</p></div>
+</div>
+</div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.api_console.<strong>ServerConnection</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Server connection class for client to azcamserver.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>close</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Close the socket connection to the controller server.</p></div>
+<div class="autodoc-signature"><code><strong>command</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Command</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">terminator='\n'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Communicate with the controller server.
+Opens and closes the socket each time.
+Always returns reply string as a tokenized list</p></div>
+<div class="autodoc-signature"><code><strong>connect</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">host='localhost'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">port=2402</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Connect to azcamserver.</p></div>
+<div class="autodoc-signature"><code><strong>open</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Open a socket connection to the server.
+Creates the socket and makes a connection.
+Returns True if socket is already open or if it is opened.</p></div>
+<div class="autodoc-signature"><code><strong>rcommand</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">command</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send a command to a server process using the 'server' object in the database.
+This command traps all errors and returns exceptions and as error string.</p>
+<p>Returns None or a string.</p></div>
+<div class="autodoc-signature"><code><strong>recv</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Length=-1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">terminator='\n'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Receives a reply from a socket controller as a string.
+Terminates the socket read when Length bytes are received or when the Terminator is received.
+Length is the number of bytes to receive.  -1 means receive through Terminator character.
+terminator is the terminator character.</p></div>
+<div class="autodoc-signature"><code><strong>send</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Command</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">terminator='\n'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send a command string to a socket controller.
+Appends the terminator.</p></div>
+<div class="autodoc-signature"><code><strong>set_timeout</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">timeout=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the receive timeout for this socket connection.
+-1 timeout means use current value</p></div>
+<div class="autodoc-signature"><code><strong>test</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Echo a message string from controller server.</p></div>
+</div>
+</div>
                 
               
               
@@ -393,7 +888,7 @@ as <code>azcam.api.commandname(parameters)</code>, e.g. <code>azcam.api.get_wave
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../ORG_index/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -402,7 +897,7 @@ as <code>azcam.api.commandname(parameters)</code>, e.g. <code>azcam.api.get_wave
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Welcome to MkDocs
+                General
               </div>
             </div>
           </a>
@@ -447,7 +942,7 @@ as <code>azcam.api.commandname(parameters)</code>, e.g. <code>azcam.api.get_wave
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

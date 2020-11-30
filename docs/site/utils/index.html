@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -369,10 +355,329 @@
                 <h1 id="utility-commands">Utility Commands</h1>
 <p>The <em>azcam.utils</em> module contains general purpose python functions used throughout azcam.</p>
 <p>These commands are not available remotely (i.e. over a socket connection).</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> azcam.functions.utils
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
+<div class="autodoc">
+<div class="autodoc-signature"><code>azcam.<strong>utils</strong></code></div>
+<div class="autodoc-docstring"><p>General support commands for throughout azcam code.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>add_searchfolder</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">search_folder=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">include_subfolders=True</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Appends search_folder (and by default all its subfolders) to the current python search path.
+Default is current folder and its subfolders.</p>
+<p>:param search_folder: Name of folder to add to sys.path
+:param include_subfolders: True to include all subfolders in sys.path
+:return: None</p></div>
+<div class="autodoc-signature"><code><strong>archive</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">foldername=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filetype='tar'</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a tarfile from a folder or file.
+Type can be "tar", "tar.gz", or "zip".
+Return tarfile filename.</p></div>
+<div class="autodoc-signature"><code><strong>azcam</strong></code></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>check_keyboard</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">Wait=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Checks user's keyboard for a key press.</p>
+<p>:param bool Wait: True to wait until a key is pressed
+:return str: Key which was pressed or empty string none.</p></div>
+<div class="autodoc-signature"><code><strong>checksum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Make a checksum file in the working folder.
+Return filename and checksum value.</p></div>
+<div class="autodoc-signature"><code><strong>cleanup_files</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">folder=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Cleanup folders after data analysis.</p></div>
+<div class="autodoc-signature"><code><strong>count_files</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">path=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the number of files in path (default is current folder).
+Folders are not included.</p></div>
+<div class="autodoc-signature"><code><strong>curdir</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">folder=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Gets and sets the working folder.
+If folder=='', return the current working folder.</p>
+<p>:param str folder: Name of folder
+:return: None</p></div>
+<div class="autodoc-signature"><code><strong>file_browser</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">Path=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">SelectString='<em>.</em>'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Label=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Filebrowser GUI to select files.  This is the tcl/tk version.</p>
+<p>:param str Path: Starting path for selection
+:param str SelectString: Selection string like [('all files',('<em>.</em>'))] for filtering file names or <em>folder</em> to select folders
+:param str Label: Dialog box label
+:return list: List of selected files/folders or None</p></div>
+<div class="autodoc-signature"><code><strong>find_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">include_curdir=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Find the absolute filename for a file in the current search path.
+Set include_curdir True to add curdir() to search path.
+Raises FileNotFoundError if file not found.</p>
+<p>:param str filename: Name of file
+:param bool include_curdir: True to include current folder in sys.path
+:return: Cleaned path name</p></div>
+<div class="autodoc-signature"><code><strong>find_file_in_sequence</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">FileRoot</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">FileNumber=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the Nth file in an image sequence where N is FileNumber (-1 for first file).
+FileRoot is the the image file root name.
+Returns (filename,sequencenumber).</p></div>
+<div class="autodoc-signature"><code><strong>find_plugins</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Find all azcam plugins.</p></div>
+<div class="autodoc-signature"><code><strong>fix_path</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">Path=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">no_drive_letter=1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Makes a nice absolute path, hopefully leaving only forward slashes.</p>
+<p>:param str Path: Name of path to cleanup
+:param bool no_drive_letter: Removes leading drive letter
+:return: Cleaned path name</p></div>
+<div class="autodoc-signature"><code><strong>fnmatch</strong></code></div>
+<div class="autodoc-docstring"><p>Filename matching with shell patterns.</p>
+<p>fnmatch(FILENAME, PATTERN) matches according to the local convention.
+fnmatchcase(FILENAME, PATTERN) always takes case in account.</p>
+<p>The functions operate by translating the pattern into a regular
+expression.  They cache the compiled regular expressions for speed.</p>
+<p>The function translate(PATTERN) returns a regular expression
+corresponding to PATTERN.  (It does not compile it.)</p></div>
+<div class="autodoc-signature"><code><strong>get_attr</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">object_name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">attribute</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the value of an object's attribute.
+Advanced Use only!</p></div>
+<div class="autodoc-signature"><code><strong>get_datatype</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">value</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Determine the data type for an object and set the type if possible. A string such as "1.23"
+will result in a type "float" and "2" will result in type "int".</p>
+<p>:param value: object to be typed
+:return [type, value]: list of data type as a code and object with that type</p></div>
+<div class="autodoc-signature"><code><strong>get_error_status</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns and clears the global <em>errorstatus</em> list database parameter.</p>
+<p>return list: ['OK',''] or ['ERROR','an error string'].</p></div>
+<div class="autodoc-signature"><code><strong>get_image_roi</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the data and noise regions of interest in image image coordinates.
+Check for ROI's in the following order:</p>
+<ul>
+<li>azcam.db.imageroi if defined</li>
+<li>display.roi if defined</li>
+</ul></div>
+<div class="autodoc-signature"><code><strong>get_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the value of a parameter from the local azcamparameters dictionary.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>hashlib</strong></code></div>
+<div class="autodoc-docstring"><p>hashlib module - A common interface to many hash functions.</p>
+<p>new(name, data=b'', **kwargs) - returns a new hash object implementing the
+                                given hash function; initializing the hash
+                                using the given binary data.</p>
+<p>Named constructor functions are also available, these are faster
+than using new(name):</p>
+<p>md5(), sha1(), sha224(), sha256(), sha384(), sha512(), blake2b(), blake2s(),
+sha3_224, sha3_256, sha3_384, sha3_512, shake_128, and shake_256.</p>
+<p>More algorithms may be available on your platform but the above are guaranteed
+to exist.  See the algorithms_guaranteed and algorithms_available attributes
+to find out what algorithm names can be passed to new().</p>
+<p>NOTE: If you want the adler32 or crc32 hash functions they are available in
+the zlib module.</p>
+<p>Choose your hash function wisely.  Some have known collision weaknesses.
+sha384 and sha512 will be slow on 32 bit platforms.</p>
+<p>Hash objects have these methods:
+ - update(data): Update the hash object with the bytes in data. Repeated calls
+                 are equivalent to a single call with the concatenation of all
+                 the arguments.
+ - digest():     Return the digest of the bytes passed to the update() method
+                 so far as a bytes object.
+ - hexdigest():  Like digest() except the digest is returned as a string
+                 of double length, containing only hexadecimal digits.
+ - copy():       Return a copy (clone) of the hash object. This can be used to
+                 efficiently compute the digests of datas that share a common
+                 initial substring.</p>
+<p>For example, to obtain the digest of the byte string 'Nobody inspects the
+spammish repetition':</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Nobody inspects&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot; the spammish repetition&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xbb</span><span class="s1">d</span><span class="se">\x9c\x83\xdd\x1e\xa5\xc9\xd9\xde\xc9\xa1\x8d\xf0\xff\xe9</span><span class="s1">&#39;</span>
 </code></pre></div>
+
+
+<p>More condensed:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">&gt;&gt;&gt; hashlib.sha224(b&quot;Nobody inspects the spammish repetition&quot;).hexdigest()</span>
+<span class="err">&#39;a4337bc45a8fc544c03f52dc550cd6e1e87021bc896588bd79e901e2&#39;</span>
+</code></pre></div></div>
+<div class="autodoc-signature"><code><strong>importlib</strong></code></div>
+<div class="autodoc-docstring"><p>A pure Python implementation of import.</p></div>
+<div class="autodoc-signature"><code><strong>make_file_folder</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">subfolder</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">increment=True</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">use_number=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Creates a new subfolder in the current FileFolder.
+subfolder - subfolder name to create
+increment - if True, subfolder name may be incremented to create a unique name (e.g. ptc1, ptc2, ptc3...)
+use_number - if True, starts with '1' after Subfolder name (e.g. report1 not report)
+Returns [currentfolder,newfolder, with newfolder='ERROR' if a failure occurs.</p></div>
+<div class="autodoc-signature"><code><strong>make_image_filename</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">imagefile</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Returns the absolute file imagefile, with forward slashes.
+Appends ".fits" if no extension is included.</p>
+<p>:param str imagefile: Image filename to be expanded
+:return str: Expanded image filename</p></div>
+<div class="autodoc-signature"><code><strong>msvcrt</strong></code></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-signature"><code><strong>os</strong></code></div>
+<div class="autodoc-docstring"><p>OS routines for NT or Posix depending on what system we're on.</p>
+<p>This exports:
+  - all functions from posix or nt, e.g. unlink, stat, etc.
+  - os.path is either posixpath or ntpath
+  - os.name is either 'posix' or 'nt'
+  - os.curdir is a string representing the current directory (always '.')
+  - os.pardir is a string representing the parent directory (always '..')
+  - os.sep is the (or a most common) pathname separator ('/' or '\')
+  - os.extsep is the extension separator (always '.')
+  - os.altsep is the alternate pathname separator (None or '/')
+  - os.pathsep is the component separator used in $PATH etc
+  - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
+  - os.defpath is the default search path for executables
+  - os.devnull is the file path of the null device ('/dev/null', etc.)</p>
+<p>Programs that import and use 'os' stand a better chance of being
+portable between different platforms.  Of course, they must then
+only use functions that are defined by all platforms (e.g., unlink
+and opendir), and leave all pathname manipulation to os.path
+(e.g., split and join).</p></div>
+<div class="autodoc-signature"><code><strong>parse</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">String</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">SetType=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Parse a string into tokens using the standard azcam rules.
+If setType is true, try and set data data type for each token.</p>
+<p>:param str String: String to be parsed into tokens
+:param bool SetType: True to try and set <em>type</em> of each token
+:return lsit: list of parsed tokens</p></div>
+<div class="autodoc-signature"><code><strong>pkgutil</strong></code></div>
+<div class="autodoc-docstring"><p>Utilities to support packages.</p></div>
+<div class="autodoc-signature"><code><strong>prompt</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">PromptMessage='Enter a string'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Default=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Prints a message and waits for user input.</p>
+<p>:param str PromptMessage: String to be printed
+:param str Default:  String to be returned if no value is entered
+:return str: String entered or Default</p></div>
+<div class="autodoc-signature"><code><strong>restore_imagepars</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">imagepars</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">folder=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Restore image parameters from dictionary.
+imagepars is a dictionary set with save_imagepars().</p></div>
+<div class="autodoc-signature"><code><strong>run_script</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">script_name</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Runs a script, either with absolute path or assumes it is in the search path.
+This method is exposed as the <em>Run</em> command when using IPython.</p>
+<p>:param str script_name: filename of script to run
+:return None:</p></div>
+<div class="autodoc-signature"><code><strong>save_imagepars</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">imagepars={}</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Save current image parameters.
+imagepars is a dictionary.</p></div>
+<div class="autodoc-signature"><code><strong>set_error_status</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">ErrorFlag='OK'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Message=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Sets the global <em>errorstatus</em> list database parameter.</p>
+<p>:param list ErrorFlag: value to set global errorstatus flag. "OK" by default.
+:param str Message: value to set global error status message. Empty by default.</p></div>
+<div class="autodoc-signature"><code><strong>set_image_roi</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the image region of interest.
+If roi is not specified, use display ROI.</p>
+<p>:param list roi: ROI list or []
+:return None:</p></div>
+<div class="autodoc-signature"><code><strong>set_par</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">parameter</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set the value of a parameter in the local azcamparameters dictionary.
+Returns None on error.</p></div>
+<div class="autodoc-signature"><code><strong>shlex</strong></code></div>
+<div class="autodoc-docstring"><p>A lexical analyzer class for simple shell-like syntaxes.</p></div>
+<div class="autodoc-signature"><code><strong>show_menu</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">configs</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Interative: Show a menu and wait for selection.
+"blank" may be used to display an empty line.
+print() is allowed here as interactive only.</p>
+<p>:param dict configs: Dictionary of strings which are menu items
+:return str: Number of item selected or empty.</p></div>
+<div class="autodoc-signature"><code><strong>shutil</strong></code></div>
+<div class="autodoc-docstring"><p>Utility functions for copying and archiving files and directory trees.</p>
+<p>XXX The functions here don't copy the resource fork or other metadata on Mac.</p></div>
+<div class="autodoc-signature"><code><strong>sys</strong></code></div>
+<div class="autodoc-docstring"><p>This module provides access to some objects used or maintained by the
+interpreter and to functions that interact strongly with the interpreter.</p>
+<p>Dynamic objects:</p>
+<p>argv -- command line arguments; argv[0] is the script pathname if known
+path -- module search path; path[0] is the script directory, else ''
+modules -- dictionary of loaded modules</p>
+<p>displayhook -- called to show results in an interactive session
+excepthook -- called to handle any uncaught exception other than SystemExit
+  To customize printing in an interactive session or to install a custom
+  top-level exception handler, assign other functions to replace these.</p>
+<p>stdin -- standard input file object; used by input()
+stdout -- standard output file object; used by print()
+stderr -- standard error object; used for error messages
+  By assigning other file objects (or objects that behave like files)
+  to these, it is possible to redirect all of the interpreter's I/O.</p>
+<p>last_type -- type of last uncaught exception
+last_value -- value of last uncaught exception
+last_traceback -- traceback of last uncaught exception
+  These three are only available in an interactive session after a
+  traceback has been printed.</p>
+<p>Static objects:</p>
+<p>builtin_module_names -- tuple of module names built into this interpreter
+copyright -- copyright notice pertaining to this interpreter
+exec_prefix -- prefix used to find the machine-specific Python library
+executable -- absolute path of the executable binary of the Python interpreter
+float_info -- a named tuple with information about the float implementation.
+float_repr_style -- string indicating the style of repr() output for floats
+hash_info -- a named tuple with information about the hash algorithm.
+hexversion -- version information encoded as a single integer
+implementation -- Python implementation information.
+int_info -- a named tuple with information about the int implementation.
+maxsize -- the largest supported length of containers.
+maxunicode -- the value of the largest Unicode code point
+platform -- platform identifier
+prefix -- prefix used to find the Python library
+thread_info -- a named tuple with information about the thread implementation.
+version -- the version of this interpreter as a string
+version_info -- version information as a named tuple
+dllhandle -- [Windows only] integer handle of the Python DLL
+winver -- [Windows only] version number of the Python DLL
+<em>enablelegacywindowsfsencoding -- [Windows only]
+<strong>stdin</strong> -- the original stdin; don't touch!
+<strong>stdout</strong> -- the original stdout; don't touch!
+<strong>stderr</strong> -- the original stderr; don't touch!
+<strong>displayhook</strong> -- the original displayhook; don't touch!
+<strong>excepthook</strong> -- the original excepthook; don't touch!</p>
+<p>Functions:</p>
+<p>displayhook() -- print an object to the screen, and save it in builtins.</em>
+excepthook() -- print an exception and its traceback to sys.stderr
+exc_info() -- return thread-safe information about the current exception
+exit() -- exit the interpreter by raising SystemExit
+getdlopenflags() -- returns flags to be used for dlopen() calls
+getprofile() -- get the global profiling function
+getrefcount() -- return the reference count for an object (plus one :-)
+getrecursionlimit() -- return the max recursion depth for the interpreter
+getsizeof() -- return the size of an object in bytes
+gettrace() -- get the global debug tracing function
+setcheckinterval() -- control how often the interpreter checks for events
+setdlopenflags() -- set the flags to be used for dlopen() calls
+setprofile() -- set the global profiling function
+setrecursionlimit() -- set the max recursion depth for the interpreter
+settrace() -- set the global debug tracing function</p></div>
+<div class="autodoc-signature"><code><strong>tarfile</strong></code></div>
+<div class="autodoc-docstring"><p>Read from and write to tar format archives.</p></div>
+<div class="autodoc-signature"><code><strong>tkinter</strong></code></div>
+<div class="autodoc-docstring"><p>Wrapper functions for Tcl/Tk.</p>
+<p>Tkinter provides classes which allow the display, positioning and
+control of widgets. Toplevel widgets are Tk and Toplevel. Other
+widgets are Frame, Label, Entry, Text, Canvas, Button, Radiobutton,
+Checkbutton, Scale, Listbox, Scrollbar, OptionMenu, Spinbox
+LabelFrame and PanedWindow.</p>
+<p>Properties of the widgets are specified with keyword arguments.
+Keyword arguments have the same name as the corresponding resource
+under Tk.</p>
+<p>Widgets are positioned with one of the geometry managers Place, Pack
+or Grid. These managers can be called with methods place, pack, grid
+available in every Widget.</p>
+<p>Actions are bound to events by resources (e.g. keyword argument
+command) or with the method bind.</p>
+<p>Example (Hello, World):
+import tkinter
+from tkinter.constants import *
+tk = tkinter.Tk()
+frame = tkinter.Frame(tk, relief=RIDGE, borderwidth=2)
+frame.pack(fill=BOTH,expand=1)
+label = tkinter.Label(frame, text="Hello, World")
+label.pack(fill=X, expand=1)
+button = tkinter.Button(frame,text="Exit",command=tk.destroy)
+button.pack(side=BOTTOM)
+tk.mainloop()</p></div>
+<div class="autodoc-signature"><code><strong>typing</strong></code></div>
+<div class="autodoc-docstring"><p>The typing module: Support for gradual typing as defined by PEP 484.</p>
+<p>At large scale, the structure of the module is following:
+* Imports and exports, all public names should be explicitly added to <strong>all</strong>.
+* Internal helper functions: these should never be used in code outside this module.
+* _SpecialForm and its instances (special forms): Any, NoReturn, ClassVar, Union, Optional
+* Two classes whose instances can be type arguments in addition to types: ForwardRef and TypeVar
+* The core of internal generics API: _GenericAlias and _VariadicGenericAlias, the latter is
+  currently only used by Tuple and Callable. All subscripted types like X[int], Union[int, str],
+  etc., are instances of either of these classes.
+* The public counterpart of the generics API consists of two classes: Generic and Protocol.
+* Public helper functions: get_type_hints, overload, cast, no_type_check,
+  no_type_check_decorator.
+* Generic aliases for collections.abc ABCs and few additional protocols.
+* Special types: NewType, NamedTuple, TypedDict.
+* Wrapper submodules for re and io related types.</p></div>
+<div class="autodoc-signature"><code><strong>update_pars</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">write</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">par_dict=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update azcam parameters to/from a genpars dictionary.
+write True =&gt; write values into dictionary.
+write False =&gt; set values from dictionary.</p></div>
+</div>
+</div>
                 
               
               
@@ -431,7 +736,7 @@
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

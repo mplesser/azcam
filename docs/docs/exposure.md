@@ -8,10 +8,6 @@ The *exposure* object often coordinates the actions of the hardware objects such
 *exposure.objects_init* list are initialized.  Similarly when *exposure* is reset, the objects in the 
 *exposure.objects_reset* list are reset.
 
-```eval_rst
-.. autoclass:: azcam.exposure.Exposure
+::: azcam.exposure.Exposure
+    :docstring:
     :members:
-    :undoc-members:
-    :show-inheritance:
-    :inherited-members:
-```

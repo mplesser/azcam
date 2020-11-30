@@ -19,10 +19,6 @@ Instrument servers often also support a web interface, usually for status and GU
 a single method in the instrument server which translates web command strings into the *command parser* commands
 which are accepted by the instrument server's *cmdserver*.
 
-```eval_rst
-.. autoclass:: azcam.instrument.Instrument
+::: azcam.instrument.Instrument
+    :docstring:
     :members:
-    :undoc-members:
-    :show-inheritance:
-    :inherited-members:
-```

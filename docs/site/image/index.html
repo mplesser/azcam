@@ -9,7 +9,7 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
@@ -78,8 +78,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -152,8 +151,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <img src="../img/logo.png" alt="logo">
 
     </a>
     AzCam
@@ -169,18 +167,6 @@
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       General
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../ORG_index/" class="md-nav__link">
-      Welcome to MkDocs
     </a>
   </li>
 
@@ -240,7 +226,7 @@
 
   <li class="md-nav__item">
     <a href="../fits/" class="md-nav__link">
-      Fits Class
+      Fits Commands
     </a>
   </li>
 
@@ -259,9 +245,38 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Image Class
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Image Class
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sendimage-class" class="md-nav__link">
+    SendImage Class
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -355,6 +370,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sendimage-class" class="md-nav__link">
+    SendImage Class
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -376,22 +406,46 @@ the <em>exposure.image</em> object which receives image data from a camera contr
 </code></pre></div>
 
 
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.image.Image
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
-
-
-<h1 id="sendimage-class">SendImage Class</h1>
-<p>This class defines AzCam's code to send image data to a remote image server.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> azcam.image.SendImage
-   <span class="nc">:members:</span>
-   <span class="nc">:undoc-members:</span>
-   <span class="nc">:show-inheritance:</span>
-   <span class="nc">:inherited-members:</span>
-</code></pre></div>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.image.<strong>Image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename=''</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Class to create and manipulate the standard azcam image object.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>assemble</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Trim=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Assemble .data into .buffer.</p></div>
+<div class="autodoc-signature"><code><strong>get_extension</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filetype</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Return the file extension string for a file type.</p></div>
+<div class="autodoc-signature"><code><strong>read_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read image from file.
+This version only supports FITS/MEF.</p></div>
+<div class="autodoc-signature"><code><strong>send_image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">local_filename</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send local_filename image to a remote image server.
+This method may run in an async thread.
+Server types (self.server_type) are: azcam, lbtguider, and dataserver.</p></div>
+<div class="autodoc-signature"><code><strong>set_remote_server</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_host=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_port=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set parameters so image files are sent to a remote image server.
+If no host is provided then reset flag to local image file.</p></div>
+<div class="autodoc-signature"><code><strong>set_scaling</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">gains=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">offsets=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set gains and offsets for image assembly.
+Use None for no scaling.</p></div>
+<div class="autodoc-signature"><code><strong>write_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filetype=-1</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Write image to disk file.
+filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p></div>
+</div>
+</div>
+<h2 id="sendimage-class">SendImage Class</h2>
+<p>This subclass defines AzCam's code to send image data to a remote image server.</p>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>azcam.image_send.<strong>SendImage</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Class to send image to a remote image server.</p></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>azcam_imageserver</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_host</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_port</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send image to azcam image server.</p></div>
+<div class="autodoc-signature"><code><strong>dataserver</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_host</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_port</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send image to dataserver.</p></div>
+<div class="autodoc-signature"><code><strong>lbtguider</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">GuideHost</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">GuidePort</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Send image to an LBT guider image server.</p></div>
+</div>
+</div>
                 
               
               
@@ -419,7 +473,7 @@ the <em>exposure.image</em> object which receives image data from a camera contr
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Fits Class
+                Fits Commands
               </div>
             </div>
           </a>
@@ -464,7 +518,7 @@ the <em>exposure.image</em> object which receives image data from a camera contr
       <script>
         app = initialize({
           base: "..",
-          features: [],
+          features: ['navigation.sections'],
           search: Object.assign({
             worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

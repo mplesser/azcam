@@ -3,10 +3,6 @@
 This class defines Azcam's telescope interfaces. 
 One class is usually instantiated as the *telescope* object in the server.
 
-```eval_rst
-..  autoclass:: azcam.telescope.Telescope
+::: azcam.telescope.Telescope
+    :docstring:
     :members:
-    :undoc-members:
-    :show-inheritance:
-    :inherited-members:
-```

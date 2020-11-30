@@ -75,24 +75,17 @@ is so that rapidly changing data values do not become stale. Most dictionary inf
 
 Below is the documentation for the Header class.
 
-```eval_rst
-.. autoclass:: azcam.header.Header
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
+::: azcam.header.Header
+    :docstring:
+    :members:
+
 ## Focalplane
 
 Below is the documentation for the FocalPlane class which is  used internally to define all aspects of the focal plane and sensor configuration. 
 
-```eval_rst
-.. autoclass:: azcam.focalplane.FocalPlane
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :inherited-members:
-```
+::: azcam.focalplane.FocalPlane
+    :docstring:
+    :members:
 
 ## Attributes
 Parameters may be read with the ``azcam.api.get_par()`` command and written with the ``azcam.api.set_par()`` 

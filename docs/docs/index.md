@@ -2,13 +2,6 @@
 
 Azcam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
-```eval_rst
-.. toctree::
-   :hidden:
-
-   Home <self>
-```
-
 Most of azcam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
 
   - azcam-arc
@@ -87,16 +80,11 @@ Web pages which are served by *azcamserver* are found at URL's such as:
 ## Server Classes
 These classes are useed to define and control a system.
 
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   exposure
-   controller
-   tempcon
-   instrument
-   telescope
-```
+- [exposure](exposure.md)
+- [controller](controller.md)
+- [tempcon](tempcon.md)
+- [instrument](instrument.md)
+- [telescope](telescope.md)
 
 # Shortcuts
 When using IPython, the auto parenthesis mode allows typing commands without 
@@ -120,33 +108,19 @@ Availability depends on configuration.
 
 The classes and commands listed here are useful both in the server and in a console application.
 
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-
-   image
-   display
-   fits
-   plot
-```
+- [image](image.md)
+- [display](display.md)
+- [fits](fits.md)
+- [plot](plot.md)
 
 The *utility* commands are intended to be used only within other *azcam* code.
-```eval_rst
-.. toctree::
-   :maxdepth: 1
 
-   utils
-```
+- [utils](utils.md)
 
 # Console API
 These commands are used in a console application which may be connected via a socket to the server.
 
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-   
-   api_console
-```
+- [api_console](api_console.md)
 
 # Configuration Folders
 There are several folder names which are usually defined, although their use may be optional for some systems:
@@ -159,9 +133,5 @@ There are several folder names which are usually defined, although their use may
 
 The link below contains informationa about *azcam* programming.
 
-```eval_rst
-.. toctree::
-   :maxdepth: 1
-   
-   programming
-```
+- [programming](programming.md)
+
