@@ -77,6 +77,9 @@ class TempCon(Objects):
         Reset tempcon object.
         """
 
+        if not self.enabled:
+            return
+
         self.set_control_temperature()
 
         return

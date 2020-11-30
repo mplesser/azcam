@@ -70,7 +70,7 @@ dthread.start()  # thread just for speed
 # ****************************************************************
 # try to connect to azcam
 # ****************************************************************
-connected = azcam.api.serverconn.connect()  # default host and port
+connected = azcam.api.server.connect()  # default host and port
 if connected:
     azcam.log("Connected to azcamserver")
 else:

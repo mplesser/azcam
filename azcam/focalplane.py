@@ -34,15 +34,15 @@ class FocalPlane(object):
         #: amplifier readout orientation
         self.amp_config = "0"
         #: ampliefier readout orientation - new as an array
-        self.ampcfg = [0]
+        self.amp_cfg = [0]
         #: detector number for each detector
-        self.detnum = [1]
+        self.det_number = [1]
         #: extension number for each amplifier
-        self.extnum = [1]
+        self.ext_number = [1]
         #: extension name for each amplifier
-        self.extname = ["1"]
+        self.ext_name = ["1"]
         #: extension number order for each amplifier when creating binary image
-        self.jpgext = [1]
+        self.jpg_ext = [1]
         #: detector position in x direction in pixels
         self.detpos_x = [1]
         #: detector position in y direction in pixels
@@ -233,10 +233,10 @@ class FocalPlane(object):
         """
         Update focal plane keywords for single extension
         """
-        self.header.set_keyword("AMP-CFG", self.ampcfg[0], "Amplifier configuration")
-        self.header.set_keyword("DET-NUM", self.detnum[0], "Detector number")
-        self.header.set_keyword("EXT-NUM", self.extnum[0], "extension number")
-        self.header.set_keyword("JPG-EXT", self.jpgext[0], "Image section")
+        self.header.set_keyword("AMP-CFG", self.amp_cfg[0], "Amplifier configuration")
+        self.header.set_keyword("DET-NUM", self.det_number[0], "Detector number")
+        self.header.set_keyword("EXT-NUM", self.ext_number[0], "extension number")
+        self.header.set_keyword("JPG-EXT", self.jpg_ext[0], "Image section")
         self.header.set_keyword("DET-POSX", self.detpos_x[0], "Detector position in X")
         self.header.set_keyword("DET-POSY", self.detpos_y[0], "Detector position in Y")
         self.header.set_keyword("Ext-PosX", self.extpos_x[0], "Amplifier position in X")
@@ -403,11 +403,11 @@ class FocalPlane(object):
         # special case for amp_config
         if type(amp_config) == str:
             self.amp_config = amp_config
-            self.ampcfg = []
+            self.amp_cfg = []
             for x in amp_config:
-                self.ampcfg.append(ord(x) - 48)  # convert char to integer
+                self.amp_cfg.append(ord(x) - 48)  # convert char to integer
         elif type(amp_config) == list:
-            self.ampcfg = amp_config
+            self.amp_cfg = amp_config
             self.amp_config = ""
             for x in amp_config:
                 self.amp_config += chr(x + 48)
@@ -636,7 +636,7 @@ class FocalPlane(object):
         self.amppix2 = numpy.empty(shape=[self.numamps_image], dtype="<u2")
 
         indx = 0
-        for flip in self.ampcfg:
+        for flip in self.amp_cfg:
             if flip == 0:
                 flip_x = 0
                 flip_y = 0
@@ -678,24 +678,24 @@ class FocalPlane(object):
         """
 
         # set default values for the extension names, 'im1' -> 'imN'
-        # use _WCS.py file to set nonstandard values (focalplane.extname = [...])
-        self.extname = numpy.empty(shape=[self.numamps_image], dtype="S16")
+        # use _WCS.py file to set nonstandard values (focalplane.ext_name = [...])
+        self.ext_name = numpy.empty(shape=[self.numamps_image], dtype="S16")
         for ext in range(self.numamps_image):
-            extname = "im%d" % (ext + 1)
-            self.extname[ext] = extname
-        self.extname = [y.decode() for y in self.extname]  # new
+            ext_name = "im%d" % (ext + 1)
+            self.ext_name[ext] = ext_name
+        self.ext_name = [y.decode() for y in self.ext_name]  # new
 
         # set default values for the etension numbers, 1 -> N
-        # use _WCS.py file to set nonstandard values ( focalplane.extnum = [...])
-        self.extnum = numpy.empty(shape=[self.numamps_image], dtype="<u2")
+        # use _WCS.py file to set nonstandard values ( focalplane.ext_number = [...])
+        self.ext_number = numpy.empty(shape=[self.numamps_image], dtype="<u2")
         for ext in range(self.numamps_image):
-            self.extnum[ext] = ext + 1
+            self.ext_number[ext] = ext + 1
 
         # set default values for the jpg extension values, 1 -> N
-        # use _WCS.py file to set nonstandard values (focalplane.jpgext = [...])
-        self.jpgext = numpy.empty(shape=[self.numamps_image], dtype="<u2")
+        # use _WCS.py file to set nonstandard values (focalplane.jpg_ext = [...])
+        self.jpg_ext = numpy.empty(shape=[self.numamps_image], dtype="<u2")
         for ext in range(self.numamps_image):
-            self.jpgext[ext] = ext + 1
+            self.jpg_ext[ext] = ext + 1
 
         # set default values for the gaps, 0
         self.gapx = numpy.empty(shape=[self.numamps_image], dtype="<u2")
@@ -713,8 +713,8 @@ class FocalPlane(object):
         for ext in range(self.numamps_image):
             self.extpos_y[ext] = 1
 
-        self.detnum = numpy.empty(shape=[self.numamps_image], dtype="<u2")
-        numpy.ndarray.fill(self.detnum, 1)
+        self.det_number = numpy.empty(shape=[self.numamps_image], dtype="<u2")
+        numpy.ndarray.fill(self.det_number, 1)
         self.detpos_x = numpy.empty(shape=[self.numamps_image], dtype="<u2")
         numpy.ndarray.fill(self.detpos_x, 1)
         self.detpos_y = numpy.empty(shape=[self.numamps_image], dtype="<u2")
@@ -722,15 +722,15 @@ class FocalPlane(object):
 
         return
 
-    def set_extension_name(self, extname):
-        for i, ext in enumerate(extname):
-            self.extname[i] = ext
+    def set_extension_name(self, ext_name):
+        for i, ext in enumerate(ext_name):
+            self.ext_name[i] = ext
 
         return
 
-    def set_extension_extnum(self, extnum):
-        for i, ext in enumerate(extnum):
-            self.extnum[i] = ext
+    def set_extension_extnum(self, ext_number):
+        for i, ext in enumerate(ext_number):
+            self.ext_number[i] = ext
 
         return
 
@@ -762,7 +762,7 @@ class FocalPlane(object):
         Set JPG image positions.
         """
 
-        self.jpgext = indices
+        self.jpg_ext = indices
 
         return
 
@@ -883,15 +883,13 @@ class WCS(object):
         try:
             get_ra = azcam.db.get("coord_object").header.get_keyword("RA")
             self.ra_deg = self._ra_to_deg(get_ra[0])
-        except Exception as message:
-            azcam.log(message, level=3)
+        except Exception:
             self.ra_deg = self._ra_to_deg(self.def_ra)
 
         try:
             get_dec = azcam.db.get("coord_object").header.get_keyword("DEC")
             self.dec_deg = self._dec_to_deg(get_dec[0])
-        except Exception as message:
-            azcam.log(message, level=3)
+        except Exception:
             self.dec_deg = self._dec_to_deg(self.def_dec)
 
         return

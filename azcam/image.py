@@ -13,7 +13,7 @@ import azcam
 from azcam.focalplane import FocalPlane
 from azcam.fits import pyfits
 from azcam.header import Header
-from azcam.send_image import SendImage
+from azcam.image_send import SendImage
 
 """
 TODO:
@@ -364,8 +364,8 @@ class Image(object):
         self.startLine = prescan2
         self.stopLine = ampY - prescan2 - overscan2
 
-        Ext = self.focalplane.jpgext
-        AmpFlip = self.focalplane.ampcfg
+        Ext = self.focalplane.jpg_ext
+        AmpFlip = self.focalplane.amp_cfg
 
         pixNum = 0
 
@@ -602,10 +602,10 @@ class Image(object):
         if self.itl_header == 1:
 
             # create empty arrays for focal plane values
-            self.focalplane.ampcfg = numpy.ndarray(shape=(cntExt), dtype="<u2")
-            self.focalplane.detnum = numpy.ndarray(shape=(cntExt), dtype="<u2")
-            self.focalplane.extnum = numpy.ndarray(shape=(cntExt), dtype="<u2")
-            self.focalplane.jpgext = numpy.ndarray(shape=(cntExt), dtype="<u2")
+            self.focalplane.amp_cfg = numpy.ndarray(shape=(cntExt), dtype="<u2")
+            self.focalplane.det_number = numpy.ndarray(shape=(cntExt), dtype="<u2")
+            self.focalplane.ext_number = numpy.ndarray(shape=(cntExt), dtype="<u2")
+            self.focalplane.jpg_ext = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.detpos_x = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.detpos_y = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.AmpPosX = numpy.ndarray(shape=(cntExt), dtype="<u2")
@@ -662,10 +662,10 @@ class Image(object):
 
             if NumExt == 0:
                 try:
-                    self.focalplane.ampcfg[0] = hdr["AMP-CFG"]
-                    self.focalplane.detnum[0] = hdr["DET-NUM"]
-                    self.focalplane.extnum[0] = hdr["EXT-NUM"]
-                    self.focalplane.jpgext[0] = hdr["JPG-EXT"]
+                    self.focalplane.amp_cfg[0] = hdr["AMP-CFG"]
+                    self.focalplane.det_number[0] = hdr["DET-NUM"]
+                    self.focalplane.ext_number[0] = hdr["EXT-NUM"]
+                    self.focalplane.jpg_ext[0] = hdr["JPG-EXT"]
                     self.focalplane.detpos_x[0] = hdr["DET-POSX"]
                     self.focalplane.detpos_y[0] = hdr["DET-POSY"]
                     self.focalplane.AmpPosX[0] = hdr["AMP-POSX"]
@@ -768,16 +768,16 @@ class Image(object):
                 for indx in range(1, NumExt + 1):
                     # read the focal plane keywords
                     try:
-                        self.focalplane.ampcfg[indx - 1] = self.hdulist[indx].header[
+                        self.focalplane.amp_cfg[indx - 1] = self.hdulist[indx].header[
                             "AMP-CFG"
                         ]
-                        self.focalplane.detnum[indx - 1] = self.hdulist[indx].header[
-                            "DET-NUM"
-                        ]
-                        self.focalplane.extnum[indx - 1] = self.hdulist[indx].header[
-                            "EXT-NUM"
-                        ]
-                        self.focalplane.jpgext[indx - 1] = self.hdulist[indx].header[
+                        self.focalplane.det_number[indx - 1] = self.hdulist[
+                            indx
+                        ].header["DET-NUM"]
+                        self.focalplane.ext_number[indx - 1] = self.hdulist[
+                            indx
+                        ].header["EXT-NUM"]
+                        self.focalplane.jpg_ext[indx - 1] = self.hdulist[indx].header[
                             "JPG-EXT"
                         ]
                         self.focalplane.detpos_x[indx - 1] = self.hdulist[indx].header[
@@ -893,7 +893,7 @@ class Image(object):
 
             # set amp_config - new 26oct11
             self.focalplane.amp_config = ""
-            for x in self.focalplane.ampcfg:
+            for x in self.focalplane.amp_cfg:
                 self.focalplane.amp_config += chr(x + 48)
 
         # ------------------------------------------- data -------------------------------------------------------
@@ -1013,7 +1013,7 @@ class Image(object):
         Write a standard (non-MEF) FITS file.
         """
 
-        # allow case sensitive extname
+        # allow case sensitive ext_name
         # pyfits.setExtensionNameCaseSensitive()
         pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
 
@@ -1063,7 +1063,7 @@ class Image(object):
         Write an MEF image file.
         """
 
-        # allow case sensitive extname
+        # allow case sensitive ext_name
         pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
 
         # make PHU (no data)
@@ -1078,10 +1078,10 @@ class Image(object):
         self.hdulist = pyfits.HDUList([phdu])
 
         # loop through HDU's, creating extensions and writing data
-        for extnum in range(1, numHDUs + 1):  # first HDU is 1 not 0
+        for ext_number in range(1, numHDUs + 1):  # first HDU is 1 not 0
 
             # create the extension name
-            extname = self.focalplane.extname[extnum - 1]
+            ext_name = self.focalplane.ext_name[ext_number - 1]
 
             # get the image data for this extension
             numrows_amp = self.focalplane.numrows_amp
@@ -1089,23 +1089,23 @@ class Image(object):
             data = numpy.ndarray(
                 shape=(numrows_amp, numcols_amp),
                 dtype="<u2",
-                buffer=self.data[extnum - 1],
+                buffer=self.data[ext_number - 1],
             )
 
-            hdu = pyfits.ImageHDU(data=data, name=str(extname))
+            hdu = pyfits.ImageHDU(data=data, name=str(ext_name))
             hdu.header.set("NAXIS", 2, "number of data axes")
             hdu.header.set("INHERIT", True, "extension inherits PHDU keyword/values?")
             hdu.header.set("BUNIT", "ADU", "Physical unit of array values")
 
             # add coord header cards to this extension
 
-            self._write_extension_header(extnum, hdu)
+            self._write_extension_header(ext_number, hdu)
 
             # add WCS header cards to this extension
-            self._write_wcs_keywords(extnum, hdu)
+            self._write_wcs_keywords(ext_number, hdu)
 
             # add Focal plane header cards to this extension
-            self._write_focalplane_keywords(extnum, hdu)
+            self._write_focalplane_keywords(ext_number, hdu)
 
             # hdu is read-only, so make a copy in order to scale(I have no idea why)
             hdu1 = hdu.copy()
@@ -1136,7 +1136,7 @@ class Image(object):
         04Feb2015 Zareba
         """
 
-        # allow case sensitive extname
+        # allow case sensitive ext_name
         pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
 
         # make PHU with data
@@ -1200,7 +1200,7 @@ class Image(object):
         All keywords are taken from the previously read image file.
         """
 
-        # allow case sensitive extname
+        # allow case sensitive ext_name
         pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
 
         # squeeze the data into 16 bit numbers
@@ -1359,10 +1359,10 @@ class Image(object):
 
         return
 
-    def _write_extension_header(self, extnum, hdu):
+    def _write_extension_header(self, ext_number, hdu):
         """
         Write the extension header for a FITS/MEF file.
-        extnum starts at 1 (for MEF and FITS).
+        ext_number starts at 1 (for MEF and FITS).
         Last change: 02Nov2012 Zareba
         """
 
@@ -1451,19 +1451,22 @@ class Image(object):
         )
 
         # determine amplifier orientation: new version GSZ 04.14.2011
-        ampflip = self.focalplane.ampcfg[extnum - 1]
+        ampflip = self.focalplane.amp_cfg[ext_number - 1]
 
         # calculate which part of mosaic from HDU (increments first in X)
-        ny = self.focalplane.extpos_y[extnum - 1]
-        nx = self.focalplane.extpos_x[extnum - 1]
-        detnum = self.focalplane.detnum[extnum - 1]
+        ny = self.focalplane.extpos_y[ext_number - 1]
+        nx = self.focalplane.extpos_x[ext_number - 1]
+        det_number = self.focalplane.det_number[ext_number - 1]
         hdu.header.set(
-            "IMAGEID", self.focalplane.extnum[extnum - 1], "Image ID", after=curpos
+            "IMAGEID",
+            self.focalplane.ext_number[ext_number - 1],
+            "Image ID",
+            after=curpos,
         )  # int
 
         curpos += 1
 
-        s = "ccd%d" % detnum
+        s = "ccd%d" % det_number
         hdu.header.set("CCDNAME", s, "CCD name", after=curpos)  # string
         curpos += 1
 
@@ -1582,18 +1585,18 @@ class Image(object):
         # modified: 05Sep2012 GSZ
 
         # amplifier's positions for CCDSEC
-        if self.focalplane.detpos_x[extnum - 1] > 1:
+        if self.focalplane.detpos_x[ext_number - 1] > 1:
             Nx = (
-                self.focalplane.extpos_x[extnum - 1]
-                - self.focalplane.detpos_x[extnum - 1]
+                self.focalplane.extpos_x[ext_number - 1]
+                - self.focalplane.detpos_x[ext_number - 1]
             )
         else:
             Nx = nx
 
-        if self.focalplane.detpos_y[extnum - 1] > 1:
+        if self.focalplane.detpos_y[ext_number - 1] > 1:
             Ny = (
-                self.focalplane.extpos_y[extnum - 1]
-                - self.focalplane.detpos_y[extnum - 1]
+                self.focalplane.extpos_y[ext_number - 1]
+                - self.focalplane.detpos_y[ext_number - 1]
             )
         else:
             Ny = ny
@@ -1820,55 +1823,55 @@ class Image(object):
 
             # calculate CCD to image transformation matrix and vectors
 
-            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(
+            self.focalplane.wcs.ltm_1_1[ext_number - 1] = flip_x / float(
                 self.focalplane.col_bin
             )
-            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(
+            self.focalplane.wcs.ltm_2_2[ext_number - 1] = flip_y / float(
                 self.focalplane.row_bin
             )
 
             if self.focalplane.split_physical_coords == 1:
                 # split physical coordinates
-                self.focalplane.wcs.ltv_1[extnum - 1] = (-flip_x * X_Val1 + 1) / float(
-                    self.focalplane.col_bin
-                )
-                self.focalplane.wcs.ltv_2[extnum - 1] = (-flip_y * Y_Val1 + 1) / float(
-                    self.focalplane.row_bin
-                )
+                self.focalplane.wcs.ltv_1[ext_number - 1] = (
+                    -flip_x * X_Val1 + 1
+                ) / float(self.focalplane.col_bin)
+                self.focalplane.wcs.ltv_2[ext_number - 1] = (
+                    -flip_y * Y_Val1 + 1
+                ) / float(self.focalplane.row_bin)
             else:
                 # combine physical coordinates
-                self.focalplane.wcs.ltv_1[extnum - 1] = (-flip_x * x_Val1 + 1) / float(
-                    self.focalplane.col_bin
-                )
-                self.focalplane.wcs.ltv_2[extnum - 1] = (-flip_y * y_Val1 + 1) / float(
-                    self.focalplane.row_bin
-                )
+                self.focalplane.wcs.ltv_1[ext_number - 1] = (
+                    -flip_x * x_Val1 + 1
+                ) / float(self.focalplane.col_bin)
+                self.focalplane.wcs.ltv_2[ext_number - 1] = (
+                    -flip_y * y_Val1 + 1
+                ) / float(self.focalplane.row_bin)
 
             # include LTM1_1, LTM2_2, LTV1, and LTV2
             hdu.header.set(
                 "LTM1_1",
-                self.focalplane.wcs.ltm_1_1[extnum - 1],
+                self.focalplane.wcs.ltm_1_1[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTM2_2",
-                self.focalplane.wcs.ltm_2_2[extnum - 1],
+                self.focalplane.wcs.ltm_2_2[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTV1",
-                self.focalplane.wcs.ltv_1[extnum - 1],
+                self.focalplane.wcs.ltv_1[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTV2",
-                self.focalplane.wcs.ltv_2[extnum - 1],
+                self.focalplane.wcs.ltv_2[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
@@ -1877,8 +1880,8 @@ class Image(object):
             # calculate CCD to amplifier transformation matrix and vectors
             # depends on physical coordinates
 
-            self.focalplane.wcs.atm_1_1[extnum - 1] = flip_x
-            self.focalplane.wcs.atm_2_2[extnum - 1] = flip_y
+            self.focalplane.wcs.atm_1_1[ext_number - 1] = flip_x
+            self.focalplane.wcs.atm_2_2[ext_number - 1] = flip_y
 
             Ns = self.focalplane.ampvispix_x
             Np = self.focalplane.ampvispix_y
@@ -1890,19 +1893,19 @@ class Image(object):
 
             if self.focalplane.split_physical_coords == 1:
                 # ATV1 for split physical coordinates
-                if self.focalplane.wcs.atm_1_1[extnum - 1] == 1:
-                    self.focalplane.wcs.atv1[extnum - 1] = -(Ns * (Nx - 1) + ext)
+                if self.focalplane.wcs.atm_1_1[ext_number - 1] == 1:
+                    self.focalplane.wcs.atv1[ext_number - 1] = -(Ns * (Nx - 1) + ext)
                 else:
-                    self.focalplane.wcs.atv1[extnum - 1] = Ns * Nx + ext
+                    self.focalplane.wcs.atv1[ext_number - 1] = Ns * Nx + ext
             else:
                 # ATV1 for combined physical coordinates
-                if self.focalplane.wcs.atm_1_1[extnum - 1] == 1:
-                    self.focalplane.wcs.atv1[extnum - 1] = -(
-                        Ns * (self.focalplane.extpos_x[extnum - 1] - 1) + ext
+                if self.focalplane.wcs.atm_1_1[ext_number - 1] == 1:
+                    self.focalplane.wcs.atv1[ext_number - 1] = -(
+                        Ns * (self.focalplane.extpos_x[ext_number - 1] - 1) + ext
                     )
                 else:
-                    self.focalplane.wcs.atv1[extnum - 1] = (
-                        Ns * self.focalplane.extpos_x[extnum - 1] + ext
+                    self.focalplane.wcs.atv1[ext_number - 1] = (
+                        Ns * self.focalplane.extpos_x[ext_number - 1] + ext
                     )
 
             if flip_y == -1:
@@ -1912,46 +1915,46 @@ class Image(object):
 
             if self.focalplane.split_physical_coords == 1:
                 # ATV2 for split physical coordinates
-                if self.focalplane.wcs.atm_2_2[extnum - 1] == 1:
-                    self.focalplane.wcs.atv2[extnum - 1] = -(Np * (Ny - 1) + ext)
+                if self.focalplane.wcs.atm_2_2[ext_number - 1] == 1:
+                    self.focalplane.wcs.atv2[ext_number - 1] = -(Np * (Ny - 1) + ext)
                 else:
-                    self.focalplane.wcs.atv2[extnum - 1] = Np * Ny + ext
+                    self.focalplane.wcs.atv2[ext_number - 1] = Np * Ny + ext
             else:
                 # ATV2 for combined physical coordinates
-                if self.focalplane.wcs.atm_2_2[extnum - 1] == 1:
-                    self.focalplane.wcs.atv2[extnum - 1] = -(
-                        Np * (self.focalplane.extpos_y[extnum - 1] - 1) + ext
+                if self.focalplane.wcs.atm_2_2[ext_number - 1] == 1:
+                    self.focalplane.wcs.atv2[ext_number - 1] = -(
+                        Np * (self.focalplane.extpos_y[ext_number - 1] - 1) + ext
                     )
                 else:
-                    self.focalplane.wcs.atv2[extnum - 1] = (
-                        Np * self.focalplane.extpos_y[extnum - 1] + ext
+                    self.focalplane.wcs.atv2[ext_number - 1] = (
+                        Np * self.focalplane.extpos_y[ext_number - 1] + ext
                     )
 
             # include ATM1_1, ATM2_2, ATV1, and ATV2
             hdu.header.set(
                 "ATM1_1",
-                self.focalplane.wcs.atm_1_1[extnum - 1],
+                self.focalplane.wcs.atm_1_1[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATM2_2",
-                self.focalplane.wcs.atm_2_2[extnum - 1],
+                self.focalplane.wcs.atm_2_2[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATV1",
-                self.focalplane.wcs.atv1[extnum - 1],
+                self.focalplane.wcs.atv1[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATV2",
-                self.focalplane.wcs.atv2[extnum - 1],
+                self.focalplane.wcs.atv2[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
@@ -1961,51 +1964,51 @@ class Image(object):
 
             # 09.07.12 GSZ
             # DTV1 and DTV2 set to 0 combines physical coordinates for all CCDs
-            self.focalplane.wcs.dtm_1_1[extnum - 1] = 1
-            self.focalplane.wcs.dtm_2_2[extnum - 1] = 1
+            self.focalplane.wcs.dtm_1_1[ext_number - 1] = 1
+            self.focalplane.wcs.dtm_2_2[ext_number - 1] = 1
 
             if self.focalplane.split_physical_coords == 1:
                 # DTV1 and DTV2 for split physical coordinates
-                self.focalplane.wcs.dtv_1[extnum - 1] = (
-                    (self.focalplane.detpos_x[extnum - 1] - 1)
+                self.focalplane.wcs.dtv_1[ext_number - 1] = (
+                    (self.focalplane.detpos_x[ext_number - 1] - 1)
                     * self.focalplane.ampvispix_x
                     * self.focalplane.num_par_amps_det
                 )
-                self.focalplane.wcs.dtv_2[extnum - 1] = (
-                    (self.focalplane.detpos_y[extnum - 1] - 1)
+                self.focalplane.wcs.dtv_2[ext_number - 1] = (
+                    (self.focalplane.detpos_y[ext_number - 1] - 1)
                     * self.focalplane.ampvispix_y
                     * self.focalplane.num_ser_amps_det
                 )
             else:
                 # DTV1 and DTV2 for combined physical coordinates
-                self.focalplane.wcs.dtv_1[extnum - 1] = 0
-                self.focalplane.wcs.dtv_2[extnum - 1] = 0
+                self.focalplane.wcs.dtv_1[ext_number - 1] = 0
+                self.focalplane.wcs.dtv_2[ext_number - 1] = 0
 
             # include DTM1_1, DTM2_2, DTV1, and DTV2
             hdu.header.set(
                 "DTM1_1",
-                self.focalplane.wcs.dtm_1_1[extnum - 1],
+                self.focalplane.wcs.dtm_1_1[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTM2_2",
-                self.focalplane.wcs.dtm_2_2[extnum - 1],
+                self.focalplane.wcs.dtm_2_2[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTV1",
-                self.focalplane.wcs.dtv_1[extnum - 1],
+                self.focalplane.wcs.dtv_1[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTV2",
-                self.focalplane.wcs.dtv_2[extnum - 1],
+                self.focalplane.wcs.dtv_2[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
@@ -2014,49 +2017,49 @@ class Image(object):
             # detectors with single amplifer
 
             # calculate CCD to image transformation matrix and vectors
-            self.focalplane.wcs.ltm_1_1[extnum - 1] = flip_x / float(
+            self.focalplane.wcs.ltm_1_1[ext_number - 1] = flip_x / float(
                 self.focalplane.col_bin
             )
-            self.focalplane.wcs.ltm_2_2[extnum - 1] = flip_y / float(
+            self.focalplane.wcs.ltm_2_2[ext_number - 1] = flip_y / float(
                 self.focalplane.row_bin
             )
 
-            self.focalplane.wcs.ltv_1[extnum - 1] = (
+            self.focalplane.wcs.ltv_1[ext_number - 1] = (
                 self.datasecx1
-                - self.focalplane.wcs.ltm_1_1[extnum - 1] * x_Val1
-                - 0.5 * (1 - self.focalplane.wcs.ltm_1_1[extnum - 1])
+                - self.focalplane.wcs.ltm_1_1[ext_number - 1] * x_Val1
+                - 0.5 * (1 - self.focalplane.wcs.ltm_1_1[ext_number - 1])
             )
-            self.focalplane.wcs.ltv_2[extnum - 1] = (
+            self.focalplane.wcs.ltv_2[ext_number - 1] = (
                 self.datasecy2
-                - self.focalplane.wcs.ltm_2_2[extnum - 1] * y_Val2
-                - 0.5 * (1 - self.focalplane.wcs.ltm_2_2[extnum - 1])
+                - self.focalplane.wcs.ltm_2_2[ext_number - 1] * y_Val2
+                - 0.5 * (1 - self.focalplane.wcs.ltm_2_2[ext_number - 1])
             )
 
             # include LTM1_1, LTM2_2, LTV1, and LTV2
             hdu.header.set(
                 "LTM1_1",
-                self.focalplane.wcs.ltm_1_1[extnum - 1],
+                self.focalplane.wcs.ltm_1_1[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTM2_2",
-                self.focalplane.wcs.ltm_2_2[extnum - 1],
+                self.focalplane.wcs.ltm_2_2[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTV1",
-                self.focalplane.wcs.ltv_1[extnum - 1],
+                self.focalplane.wcs.ltv_1[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "LTV2",
-                self.focalplane.wcs.ltv_2[extnum - 1],
+                self.focalplane.wcs.ltv_2[ext_number - 1],
                 "CCD to image transformation",
                 after=curpos,
             )
@@ -2065,8 +2068,8 @@ class Image(object):
             # calculate CCD to amplifier transformation matrix and vectors
             # depends on physical coordinates
 
-            self.focalplane.wcs.atm_1_1[extnum - 1] = flip_x
-            self.focalplane.wcs.atm_2_2[extnum - 1] = flip_y
+            self.focalplane.wcs.atm_1_1[ext_number - 1] = flip_x
+            self.focalplane.wcs.atm_2_2[ext_number - 1] = flip_y
 
             Ns = self.focalplane.ampvispix_x
             Np = self.focalplane.ampvispix_y
@@ -2076,13 +2079,13 @@ class Image(object):
             else:
                 ext = 0
 
-            if self.focalplane.wcs.atm_1_1[extnum - 1] == 1:
-                self.focalplane.wcs.atv1[extnum - 1] = -(
-                    Ns * (self.focalplane.extpos_x[extnum - 1] - 1) + ext
+            if self.focalplane.wcs.atm_1_1[ext_number - 1] == 1:
+                self.focalplane.wcs.atv1[ext_number - 1] = -(
+                    Ns * (self.focalplane.extpos_x[ext_number - 1] - 1) + ext
                 )
             else:
-                self.focalplane.wcs.atv1[extnum - 1] = (
-                    Ns * self.focalplane.extpos_x[extnum - 1] + ext
+                self.focalplane.wcs.atv1[ext_number - 1] = (
+                    Ns * self.focalplane.extpos_x[ext_number - 1] + ext
                 )
 
             if Ny > 1:
@@ -2090,40 +2093,40 @@ class Image(object):
             else:
                 ext = 0
 
-            if self.focalplane.wcs.atm_2_2[extnum - 1] == 1:
-                self.focalplane.wcs.atv2[extnum - 1] = -(
-                    Np * (self.focalplane.extpos_y[extnum - 1] - 1) + ext
+            if self.focalplane.wcs.atm_2_2[ext_number - 1] == 1:
+                self.focalplane.wcs.atv2[ext_number - 1] = -(
+                    Np * (self.focalplane.extpos_y[ext_number - 1] - 1) + ext
                 )
             else:
-                self.focalplane.wcs.atv2[extnum - 1] = (
-                    Np * self.focalplane.extpos_y[extnum - 1] + ext
+                self.focalplane.wcs.atv2[ext_number - 1] = (
+                    Np * self.focalplane.extpos_y[ext_number - 1] + ext
                 )
 
             # include ATM1_1, ATM2_2, ATV1, and ATV2
             hdu.header.set(
                 "ATM1_1",
-                self.focalplane.wcs.atm_1_1[extnum - 1],
+                self.focalplane.wcs.atm_1_1[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATM2_2",
-                self.focalplane.wcs.atm_2_2[extnum - 1],
+                self.focalplane.wcs.atm_2_2[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATV1",
-                self.focalplane.wcs.atv1[extnum - 1],
+                self.focalplane.wcs.atv1[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "ATV2",
-                self.focalplane.wcs.atv2[extnum - 1],
+                self.focalplane.wcs.atv2[ext_number - 1],
                 "CCD to amplifier transformation",
                 after=curpos,
             )
@@ -2132,37 +2135,37 @@ class Image(object):
             # calculate CCD to detector transformation matrix and vectors
 
             # 09.07.12 GSZ DTV1 and DTV2 are set to 0 since there is only one CCD
-            self.focalplane.wcs.dtm_1_1[extnum - 1] = 1
-            self.focalplane.wcs.dtm_2_2[extnum - 1] = 1
+            self.focalplane.wcs.dtm_1_1[ext_number - 1] = 1
+            self.focalplane.wcs.dtm_2_2[ext_number - 1] = 1
 
-            self.focalplane.wcs.dtv_1[extnum - 1] = 0
-            self.focalplane.wcs.dtv_2[extnum - 1] = 0
+            self.focalplane.wcs.dtv_1[ext_number - 1] = 0
+            self.focalplane.wcs.dtv_2[ext_number - 1] = 0
 
             # include DTM1_1, DTM2_2, DTV1, and DTV2
             hdu.header.set(
                 "DTM1_1",
-                self.focalplane.wcs.dtm_1_1[extnum - 1],
+                self.focalplane.wcs.dtm_1_1[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTM2_2",
-                self.focalplane.wcs.dtm_2_2[extnum - 1],
+                self.focalplane.wcs.dtm_2_2[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTV1",
-                self.focalplane.wcs.dtv_1[extnum - 1],
+                self.focalplane.wcs.dtv_1[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "DTV2",
-                self.focalplane.wcs.dtv_2[extnum - 1],
+                self.focalplane.wcs.dtv_2[ext_number - 1],
                 "CCD to detector transformation",
                 after=curpos,
             )
@@ -2170,10 +2173,10 @@ class Image(object):
 
         return
 
-    def _write_wcs_keywords(self, extnum, hdu):
+    def _write_wcs_keywords(self, ext_number, hdu):
         """
         Define and write the WCS keywords to the header.
-        extnum starts at 1 (for MEF and FITS).
+        ext_number starts at 1 (for MEF and FITS).
         """
 
         # check if WCS is active
@@ -2241,9 +2244,9 @@ class Image(object):
 
         curpos += 1
 
-        # ampflip = ord(self.focalplane.amp_config[extnum-1:extnum])-48   # from ascii to 0 through 3
+        # ampflip = ord(self.focalplane.amp_config[ext_number-1:ext_number])-48   # from ascii to 0 through 3
 
-        ampflip = self.focalplane.ampcfg[extnum - 1]  # from to 0 through 3
+        ampflip = self.focalplane.amp_cfg[ext_number - 1]  # from to 0 through 3
         if ampflip == 0:  # no flip
             flip_x = 1
             flip_y = 1
@@ -2259,13 +2262,13 @@ class Image(object):
 
         # calculate reference pixel position - depends on binning
         ref1 = (
-            self.focalplane.refpix1 - self.focalplane.amppix1[extnum - 1]
-        ) * self.focalplane.wcs.atm_1_1[extnum - 1]
+            self.focalplane.refpix1 - self.focalplane.amppix1[ext_number - 1]
+        ) * self.focalplane.wcs.atm_1_1[ext_number - 1]
         ref1 = (ref1 - (self.focalplane.first_col - 1)) / self.focalplane.col_bin
 
         ref2 = (
-            self.focalplane.refpix2 - self.focalplane.amppix2[extnum - 1]
-        ) * self.focalplane.wcs.atm_2_2[extnum - 1]
+            self.focalplane.refpix2 - self.focalplane.amppix2[ext_number - 1]
+        ) * self.focalplane.wcs.atm_2_2[ext_number - 1]
         ref2 = (ref2 - (self.focalplane.first_row - 1)) / self.focalplane.row_bin
 
         hdu.header.set("CRPIX1", ref1, "Coordinate reference pixel", after=curpos)
@@ -2274,25 +2277,25 @@ class Image(object):
         curpos += 1
 
         if self.focalplane.wcs.cd_matrix == 0:
-            alfa = self.focalplane.wcs.rot_deg[extnum - 1]
+            alfa = self.focalplane.wcs.rot_deg[ext_number - 1]
 
             CD1_1 = (
-                self.focalplane.wcs.scale1[extnum - 1]
+                self.focalplane.wcs.scale1[ext_number - 1]
                 * self.focalplane.col_bin
                 * math.cos(alfa * 2 * math.pi / 360.0)
             ) * flip_x
             CD1_2 = (
-                self.focalplane.wcs.scale2[extnum - 1]
+                self.focalplane.wcs.scale2[ext_number - 1]
                 * self.focalplane.row_bin
                 * (-math.sin(alfa * 2 * math.pi / 360.0))
             ) * flip_y
             CD2_1 = (
-                self.focalplane.wcs.scale1[extnum - 1]
+                self.focalplane.wcs.scale1[ext_number - 1]
                 * self.focalplane.col_bin
                 * math.sin(alfa * 2 * math.pi / 360.0)
             ) * flip_x
             CD2_2 = (
-                self.focalplane.wcs.scale2[extnum - 1]
+                self.focalplane.wcs.scale2[ext_number - 1]
                 * self.focalplane.row_bin
                 * math.cos(alfa * 2 * math.pi / 360.0)
             ) * flip_y
@@ -2308,28 +2311,28 @@ class Image(object):
         else:
             hdu.header.set(
                 "CD1_1",
-                self.focalplane.wcs.cd_1_1[extnum - 1],
+                self.focalplane.wcs.cd_1_1[ext_number - 1],
                 "Coordinate matrix",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "CD1_2",
-                self.focalplane.wcs.cd_1_2[extnum - 1],
+                self.focalplane.wcs.cd_1_2[ext_number - 1],
                 "Coordinate matrix",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "CD2_1",
-                self.focalplane.wcs.cd_2_1[extnum - 1],
+                self.focalplane.wcs.cd_2_1[ext_number - 1],
                 "Coordinate matrix",
                 after=curpos,
             )
             curpos += 1
             hdu.header.set(
                 "CD2_2",
-                self.focalplane.wcs.cd_2_2[extnum - 1],
+                self.focalplane.wcs.cd_2_2[ext_number - 1],
                 "Coordinate matrix",
                 after=curpos,
             )
@@ -2337,10 +2340,10 @@ class Image(object):
 
         return
 
-    def _write_focalplane_keywords(self, extnum, hdu):
+    def _write_focalplane_keywords(self, ext_number, hdu):
         """
         Define and write the focal plane keywords to the header.
-        extnum starts at 1 (for MEF and FITS).
+        ext_number starts at 1 (for MEF and FITS).
         """
 
         curpos = len(hdu.header)
@@ -2356,67 +2359,70 @@ class Image(object):
         curpos += 3
         hdu.header.set(
             "AMP-CFG",
-            self.focalplane.ampcfg[extnum - 1],
+            self.focalplane.amp_cfg[ext_number - 1],
             "Amplifier configuration",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "DET-NUM",
-            self.focalplane.detnum[extnum - 1],
+            self.focalplane.det_number[ext_number - 1],
             "Detector number",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "EXT-NUM",
-            self.focalplane.extnum[extnum - 1],
+            self.focalplane.ext_number[ext_number - 1],
             "extension number",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
-            "JPG-EXT", self.focalplane.jpgext[extnum - 1], "Image section", after=curpos
+            "JPG-EXT",
+            self.focalplane.jpg_ext[ext_number - 1],
+            "Image section",
+            after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "DET-POSX",
-            self.focalplane.detpos_x[extnum - 1],
+            self.focalplane.detpos_x[ext_number - 1],
             "Detector position in X",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "DET-POSY",
-            self.focalplane.detpos_y[extnum - 1],
+            self.focalplane.detpos_y[ext_number - 1],
             "Detector position in Y",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "Ext-PosX",
-            self.focalplane.extpos_x[extnum - 1],
+            self.focalplane.extpos_x[ext_number - 1],
             "Amplifier position in X",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "Ext-PosY",
-            self.focalplane.extpos_y[extnum - 1],
+            self.focalplane.extpos_y[ext_number - 1],
             "Amplifier position in Y",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "AMP-PIX1",
-            self.focalplane.amppix1[extnum - 1],
+            self.focalplane.amppix1[ext_number - 1],
             "Amplifier pixel position in X",
             after=curpos,
         )
         curpos += 1
         hdu.header.set(
             "AMP-PIX2",
-            self.focalplane.amppix2[extnum - 1],
+            self.focalplane.amppix2[ext_number - 1],
             "Amplifier pixel position in Y",
             after=curpos,
         )

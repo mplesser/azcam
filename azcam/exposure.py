@@ -1282,20 +1282,20 @@ class Exposure(Objects):
             self.set_focalplane(*detpars["focalplane"])
         if detpars.get("roi"):
             self.set_roi(*detpars["roi"])
-        if detpars.get("extension_position"):
-            self.set_extension_position(detpars["extension_position"])
+        if detpars.get("ext_position"):
+            self.set_extension_position(detpars["ext_position"])
         if detpars.get("jpg_order"):
             self.set_jpg_order(detpars["jpg_order"])
-        if detpars.get("detnum"):
-            self.set_detnum(detpars["detnum"])
-        if detpars.get("detpos"):
-            self.set_detpos(detpars["detpos"])
-        if detpars.get("detgap"):
-            self.set_detgap(detpars["detgap"])
-        if detpars.get("extname"):
-            self.set_extname(detpars["extname"])
-        if detpars.get("extnum"):
-            self.set_extnum(detpars["extnum"])
+        if detpars.get("det_number"):
+            self.set_detnum(detpars["det_number"])
+        if detpars.get("det_position"):
+            self.set_detpos(detpars["det_position"])
+        if detpars.get("det_gap"):
+            self.set_detgap(detpars["det_gap"])
+        if detpars.get("ext_name"):
+            self.set_extname(detpars["ext_name"])
+        if detpars.get("ext_number"):
+            self.set_extnum(detpars["ext_number"])
 
         if detpars.get("ctype"):
             self.image.focalplane.wcs.ctype1 = detpars["ctype"][0]
@@ -1407,7 +1407,7 @@ class Exposure(Objects):
         controller.detpars.numamps_x = self.image.focalplane.numamps_x
         controller.detpars.numamps_y = self.image.focalplane.numamps_y
         controller.detpars.amp_config = self.image.focalplane.amp_config
-        controller.detpars.ampcfg = self.image.focalplane.ampcfg
+        controller.detpars.amp_cfg = self.image.focalplane.amp_cfg
         controller.detpars.num_detectors = self.image.focalplane.num_detectors
         controller.detpars.num_ser_amps_det = self.image.focalplane.num_ser_amps_det
         controller.detpars.num_par_amps_det = self.image.focalplane.num_par_amps_det
@@ -1556,32 +1556,32 @@ class Exposure(Objects):
 
         return
 
-    def set_detnum(self, detnum):
+    def set_detnum(self, det_number):
         """
         Set the detector numbers.
         """
 
-        self.image.focalplane.detnum = detnum
+        self.image.focalplane.det_number = det_number
 
         return
 
-    def set_detgap(self, detgap):
+    def set_detgap(self, det_gap):
         """
         Set the detector gaps in pixels.
         """
 
-        for i, gap in enumerate(detgap):
+        for i, gap in enumerate(det_gap):
             self.image.focalplane.gapx[i] = gap[0]
             self.image.focalplane.gapy[i] = gap[1]
 
         return
 
-    def set_detpos(self, detpos):
+    def set_detpos(self, det_position):
         """
         Set the detector positions.
         """
 
-        for i, pos in enumerate(detpos):
+        for i, pos in enumerate(det_position):
             self.image.focalplane.detpos_x[i] = pos[0]
             self.image.focalplane.detpos_y[i] = pos[1]
 
@@ -1615,21 +1615,21 @@ class Exposure(Objects):
 
         return
 
-    def set_extname(self, extname):
+    def set_extname(self, ext_name):
         """
         Set image extension names.
         """
 
-        self.image.focalplane.set_extension_name(extname)
+        self.image.focalplane.set_extension_name(ext_name)
 
         return
 
-    def set_extnum(self, extnum):
+    def set_extnum(self, ext_number):
         """
         Set image extension numbers.
         """
 
-        self.image.focalplane.set_extension_extnum(extnum)
+        self.image.focalplane.set_extension_extnum(ext_number)
 
         return
 

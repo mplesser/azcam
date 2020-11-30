@@ -196,11 +196,6 @@ class SocketInterface(object):
         Echo a message string from controller server.
         """
 
-        return self.echo()
+        message = "this is a test message string"
 
-    def echo(self, Message="This is a server test message."):
-        """
-        Echo a message string from controller server.
-        """
-
-        return self.command(f'Echo "{str(Message)}"')
+        return self.command(f"Echo {message}")

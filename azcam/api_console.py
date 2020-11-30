@@ -24,7 +24,7 @@ class API(object):
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
 
-        self.serverconn = ServerConnection()
+        self.server = ServerConnection()
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_cmds["api"] = self
@@ -44,19 +44,20 @@ class API(object):
 
 
 class HeaderMethods(object):
+    """
+    Header methods used by other many client classes.
+    """
+
     def __init__(self) -> None:
         pass
 
-    # *******************************************************
-    # keywords
-    # *******************************************************
     def update_header(self):
         """
         Update the header of an object.
         This command usually reads hardware to get the lastest keyword values.
         """
 
-        return self._parent.serverconn.rcommand(f"{self.object_name}.update_header")
+        return self._parent.server.rcommand(f"{self.object_name}.update_header")
 
     def read_header(self):
         """
@@ -64,7 +65,7 @@ class HeaderMethods(object):
         Returns a list of header lists: [[keyword, value, comment, type]].
         """
 
-        return self._parent.serverconn.rcommand(f"{self.object_name}.read_header")
+        return self._parent.server.rcommand(f"{self.object_name}.read_header")
 
     def set_keyword(
         self,
@@ -94,7 +95,7 @@ class HeaderMethods(object):
 
         s = f"{self.object_name}.set_keyword {keyword} {key_value} {key_comment} {key_type}"
 
-        return self._parent.serverconn.rcommand(s)
+        return self._parent.server.rcommand(s)
 
     def get_keyword(self, keyword: str) -> str:
         """
@@ -106,9 +107,7 @@ class HeaderMethods(object):
         :param key_object: object to which keyword belongs
         """
 
-        return self._parent.serverconn.rcommand(
-            f"{self.object_name}.get_keyword {keyword}"
-        )
+        return self._parent.server.rcommand(f"{self.object_name}.get_keyword {keyword}")
 
     def delete_keyword(self, keyword: str) -> Optional[str]:
         """
@@ -118,7 +117,7 @@ class HeaderMethods(object):
         :param keyword: keyword name
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"{self.object_name}.delete_keyword {keyword}"
         )
 
@@ -127,7 +126,7 @@ class HeaderMethods(object):
         Return a list of all keyword names.
         """
 
-        reply = self._parent.serverconn.rcommand(f"{self.object_name}.get_all_keywords")
+        reply = self._parent.server.rcommand(f"{self.object_name}.get_all_keywords")
 
         return reply
 
@@ -164,17 +163,40 @@ class HeaderMethods(object):
 
 
 class SystemHeader(HeaderMethods):
+    """
+    System header class, mainly for image header data.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "system"
 
 
 class Controller(HeaderMethods):
+    """
+    Controller class for client.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "controller"
 
         super().__init__()
+
+    def initialize(self):
+        """
+        Initialize controller.
+        """
+
+        return self._parent.server.rcommand(f"controller.initialize")
+
+    def reset(self):
+        """
+        Reset controller using current attributes.
+        May warn that the controller could not be reset.
+        """
+
+        return self._parent.server.rcommand(f"controller.reset")
 
     def set_shutter(self, state: int = 0) -> Optional[str]:
         """
@@ -184,15 +206,14 @@ class Controller(HeaderMethods):
 
         """
 
-        return self._parent.serverconn.rcommand(f"controller.set_shutter {state}")
-
-
-# ************************************************************************************************
-# Instrument class
-# ************************************************************************************************
+        return self._parent.server.rcommand(f"controller.set_shutter {state}")
 
 
 class Instrument(HeaderMethods):
+    """
+    Instrument class for client.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "instrument"
@@ -206,7 +227,7 @@ class Instrument(HeaderMethods):
         :param filter_id: filter ID flag
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"instrument.set_filter {filter_name} {filter_id}"
         )
 
@@ -217,7 +238,7 @@ class Instrument(HeaderMethods):
         :param filter_id: filter ID flag (use negative value for a list of all filters)
         """
 
-        return self._parent.serverconn.rcommand(f"instrument.get_filter {filter_id}")
+        return self._parent.server.rcommand(f"instrument.get_filter {filter_id}")
 
     def get_current(
         self, diode_id: int = 0, shutter_state: int = 1
@@ -229,7 +250,7 @@ class Instrument(HeaderMethods):
         :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
         """
 
-        reply = self._parent.serverconn.rcommand(
+        reply = self._parent.server.rcommand(
             f"instrument.get_current {diode_id} {shutter_state}"
         )
 
@@ -246,7 +267,7 @@ class Instrument(HeaderMethods):
         :param nd: neutral density value to set
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"instrument.set_wavelength {wavelength} {wavelength_id}"
         )
 
@@ -258,9 +279,7 @@ class Instrument(HeaderMethods):
         """
 
         reply = float(
-            self._parent.serverconn.rcommand(
-                f"instrument.get_wavelength {wavelength_id}"
-            )
+            self._parent.server.rcommand(f"instrument.get_wavelength {wavelength_id}")
         )
 
         return reply
@@ -280,7 +299,7 @@ class Instrument(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self._parent.serverconn.rcommand(
+        self._parent.server.rcommand(
             f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
         )
 
@@ -296,7 +315,7 @@ class Instrument(HeaderMethods):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = self._parent.serverconn.rcommand(f"instrument.get_focus {focus_id}")
+        reply = self._parent.server.rcommand(f"instrument.get_focus {focus_id}")
 
         return float(reply)
 
@@ -307,9 +326,7 @@ class Instrument(HeaderMethods):
         :param pressure_id: pressure sensor ID flag
         """
 
-        reply = self._parent.serverconn.rcommand(
-            f"instrument.get_pressure {pressure_id}"
-        )
+        reply = self._parent.server.rcommand(f"instrument.get_pressure {pressure_id}")
 
         return [float(x) for x in reply]
 
@@ -322,17 +339,16 @@ class Instrument(HeaderMethods):
 
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"instrument.set_shutter {state} {shutter_id}"
         )
 
 
-# ************************************************************************************************
-# Telescope class
-# ************************************************************************************************
-
-
 class Telescope(HeaderMethods):
+    """
+    Telescope class for client.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "telescope"
@@ -345,7 +361,7 @@ class Telescope(HeaderMethods):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = self._parent.serverconn.rcommand(f"telescope.get_focus {focus_id}")
+        reply = self._parent.server.rcommand(f"telescope.get_focus {focus_id}")
 
         return float(reply)
 
@@ -364,7 +380,7 @@ class Telescope(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self.serverconn.rcommand(
+        self._parent.server.rcommand(
             f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
         )
 
@@ -377,17 +393,16 @@ class Telescope(HeaderMethods):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = self._parent.serverconn.rcommand(f"telescope.get_focus {focus_id}")
+        reply = self._parent.server.rcommand(f"telescope.get_focus {focus_id}")
 
         return float(reply)
 
 
-# ************************************************************************************************
-# Tempcon class
-# ************************************************************************************************
-
-
 class Tempcon(HeaderMethods):
+    """
+    Temperature controller (tempcon) class for client.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "tempcon"
@@ -400,7 +415,7 @@ class Tempcon(HeaderMethods):
         If temperatures cannot be read, then a list of -999.99 is returned.
         """
 
-        reply = self._parent.serverconn.rcommand("tempcon.get_temperatures")
+        reply = self._parent.server.rcommand("tempcon.get_temperatures")
 
         return [float(x) for x in reply]
 
@@ -414,7 +429,7 @@ class Tempcon(HeaderMethods):
         :param temperature_id: temperature sensor ID flag
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"tempcon.set_control_temperature {control_temperature} {temperature_id}"
         )
 
@@ -425,19 +440,18 @@ class Tempcon(HeaderMethods):
         :param temperature_id: temperature ID flag
         """
 
-        reply = self._parent.serverconn.rcommand(
+        reply = self._parent.server.rcommand(
             f"tempcon.get_control_temperature {temperature_id}"
         )
 
         return float(reply)
 
 
-# ************************************************************************************************
-# Exposure class
-# ************************************************************************************************
-
-
 class Exposure(HeaderMethods):
+    """
+    Exposure class for client.
+    """
+
     def __init__(self, parent) -> None:
         self._parent = parent
         self.object_name = "exposure"
@@ -454,7 +468,7 @@ class Exposure(HeaderMethods):
         * 1 => instrument shutter.
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.set_shutter {state} {shutter_id}"
         )
 
@@ -463,25 +477,25 @@ class Exposure(HeaderMethods):
         Abort an exposure in progress.
         """
 
-        return self._parent.serverconn.rcommand("exposure.abort")
+        return self._parent.server.rcommand("exposure.abort")
 
     def initialize(self) -> None:
         """
         Initialize exposure.
         """
 
-        return self._parent.serverconn.rcommand("exposure.initialize")
+        return self._parent.server.rcommand("exposure.initialize")
 
     def reset(self) -> None:
         """
         Reset exposure.
         """
 
-        return self._parent.serverconn.rcommand("exposure.reset")
+        return self._parent.server.rcommand("exposure.reset")
 
     def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.test {exposure_time} {shutter_state}"
         )
 
@@ -497,7 +511,7 @@ class Exposure(HeaderMethods):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f'exposure.expose {exposure_time} {image_type} "{image_title}"'
         )
 
@@ -512,7 +526,7 @@ class Exposure(HeaderMethods):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
         )
 
@@ -528,7 +542,7 @@ class Exposure(HeaderMethods):
         :param image_title: image title, usually surrounded by double quotes
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f'exposure.begin {exposure_time} {image_type} "{image_title}"'
         )
 
@@ -538,7 +552,7 @@ class Exposure(HeaderMethods):
         This is an advanced function.
         """
 
-        return self._parent.serverconn.rcommand("exposure.integrate")
+        return self._parent.server.rcommand("exposure.integrate")
 
     def readout_exposure(self) -> None:
         """
@@ -546,7 +560,7 @@ class Exposure(HeaderMethods):
         This is an advanced function.
         """
 
-        return self._parent.serverconn.rcommand("exposure.readout")
+        return self._parent.server.rcommand("exposure.readout")
 
     def end_exposure(self) -> None:
         """
@@ -554,7 +568,7 @@ class Exposure(HeaderMethods):
         This is an advanced function.
         """
 
-        return self._parent.serverconn.rcommand("exposure.end")
+        return self._parent.server.rcommand("exposure.end")
 
     def sequence(
         self, number_exposures: int = 1, flush_array: int = -1, delay=-1
@@ -573,7 +587,7 @@ class Exposure(HeaderMethods):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.sequence {number_exposures} {flush_array} {delay}"
         )
 
@@ -594,7 +608,7 @@ class Exposure(HeaderMethods):
         :param delay: delay between exposures in seconds (-1 => no change)
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.sequence1 {number_exposures} {flush_array} {delay}"
         )
 
@@ -605,7 +619,7 @@ class Exposure(HeaderMethods):
         :param number_exposures: number of exposures to make, -1 loop forever
         """
 
-        return self._parent.serverconn.rcommand(f"exposure.guide {number_exposures}")
+        return self._parent.server.rcommand(f"exposure.guide {number_exposures}")
 
     def guide1(self, number_exposures: int = 1) -> Optional[str]:
         """
@@ -614,7 +628,7 @@ class Exposure(HeaderMethods):
         :param number_exposures: number of exposures to make, -1 loop forever
         """
 
-        return self._parent.serverconn.rcommand(f"exposure.guide1 {number_exposures}")
+        return self._parent.server.rcommand(f"exposure.guide1 {number_exposures}")
 
     def flush(self, cycles: int = 1) -> Optional[str]:
         """
@@ -623,7 +637,7 @@ class Exposure(HeaderMethods):
         :param cycles:  number of times to flush the detector.
         """
 
-        return self._parent.serverconn.rcommand(f"exposure.flush {cycles}")
+        return self._parent.server.rcommand(f"exposure.flush {cycles}")
 
     def start_readout(self):
         """
@@ -631,28 +645,28 @@ class Exposure(HeaderMethods):
         Returns immediately, not waiting for readout to finish.
         """
 
-        return self._parent.serverconn.rcommand("exposure.start_readout")
+        return self._parent.server.rcommand("exposure.start_readout")
 
     def get_image_types(self) -> List[str]:
         """
         Return a list of valid image types.
         """
 
-        return self._parent.serverconn.rcommand("exposure.get_image_types")
+        return self._parent.server.rcommand("exposure.get_image_types")
 
     def roi_reset(self) -> Optional[str]:
         """
         Resets detector ROI values to full frame, current binning.
         """
 
-        return self._parent.serverconn.rcommand("exposure.roi_reset")
+        return self._parent.server.rcommand("exposure.roi_reset")
 
     def get_exposuretime(self) -> Union[str, float]:
         """
         Return current exposure time in seconds.
         """
 
-        reply = self._parent.serverconn.rcommand("exposure.get_exposuretime")
+        reply = self._parent.server.rcommand("exposure.get_exposuretime")
 
         return float(reply)
 
@@ -661,7 +675,7 @@ class Exposure(HeaderMethods):
         Return current exposure time in seconds.
         """
 
-        reply = self._parent.serverconn.rcommand("exposure.get_exposuretime_remaining")
+        reply = self._parent.server.rcommand("exposure.get_exposuretime_remaining")
 
         return float(reply)
 
@@ -672,7 +686,7 @@ class Exposure(HeaderMethods):
         :param exposure_time: exposure time in seconds.
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.set_exposuretime {exposure_time}"
         )
 
@@ -681,7 +695,7 @@ class Exposure(HeaderMethods):
         Return current number of pixels remaing in readout.
         """
 
-        reply = self._parent.serverconn.rcommand("exposure.get_pixels_remaining")
+        reply = self._parent.server.rcommand("exposure.get_pixels_remaining")
 
         return int(reply)
 
@@ -692,7 +706,7 @@ class Exposure(HeaderMethods):
         :param number_rows: number of rows to shift (positive is toward readout, negative is away)
         """
 
-        return self._parent.serverconn.rcommand(f"exposure.parshift {number_rows}")
+        return self._parent.server.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
         self,
@@ -714,7 +728,7 @@ class Exposure(HeaderMethods):
 
         for _ in range(int(number_exposures)):
             try:
-                reply = self._parent.serverconn.rcommand(
+                reply = self._parent.server.rcommand(
                     f'exposure.expose {exposure_time} {image_type} "test image"'
                 )
             except Exception as e:
@@ -730,14 +744,14 @@ class Exposure(HeaderMethods):
         Pause an exposure in progress (integration only).
         """
 
-        return self._parent.serverconn.rcommand("exposure.pause_exposure")
+        return self._parent.server.rcommand("exposure.pause_exposure")
 
     def resume_exposure(self) -> Optional[str]:
         """
         Resume a paused exposure.
         """
 
-        return self._parent.serverconn.rcommand("exposure.resume_exposure")
+        return self._parent.server.rcommand("exposure.resume_exposure")
 
     def get_image_filename(self) -> str:
         """
@@ -745,7 +759,7 @@ class Exposure(HeaderMethods):
         :returns: imaeg filename
         """
 
-        return self._parent.serverconn.rcommand("exposure.get_filename")
+        return self._parent.server.rcommand("exposure.get_filename")
 
     def set_image_filename(self, filename: str) -> Optional[str]:
         """
@@ -756,14 +770,14 @@ class Exposure(HeaderMethods):
         :param filename: image filename
         """
 
-        return self._parent.serverconn.rcommand(f"exposure.set_filename {filename}")
+        return self._parent.server.rcommand(f"exposure.set_filename {filename}")
 
     def get_roi(self) -> List:
         """
         Return detector ROI.
         """
 
-        return self._parent.serverconn.rcommand("exposure.get_roi")
+        return self._parent.server.rcommand("exposure.get_roi")
 
     def set_roi(
         self,
@@ -781,7 +795,7 @@ class Exposure(HeaderMethods):
         These values are for the entire focal plane, not just one detector.
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.set_roi {first_col} {last_col} {first_row} {last_row} {col_bin} {row_bin} {roi_number}"
         )
 
@@ -790,7 +804,7 @@ class Exposure(HeaderMethods):
         Returns the current focal plane configuration.
         """
 
-        return self._parent.serverconn.rcommand("exposure.get_focalplane")
+        return self._parent.server.rcommand("exposure.get_focalplane")
 
     def set_focalplane(
         self,
@@ -816,7 +830,7 @@ class Exposure(HeaderMethods):
         3 - flip x and y
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             f"exposure.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} {amp_config}"
         )
 
@@ -825,7 +839,7 @@ class Exposure(HeaderMethods):
         Return the current detector format parameters.
         """
 
-        return self._parent.serverconn.rcommand("exposure.get_format")
+        return self._parent.server.rcommand("exposure.get_format")
 
     def set_format(
         self,
@@ -853,7 +867,7 @@ class Exposure(HeaderMethods):
         np_frametransfer is the rows to frame transfer shift.
         """
 
-        return self._parent.serverconn.rcommand(
+        return self._parent.server.rcommand(
             (
                 f"exposure.set_format {ns_total} {ns_predark} {ns_underscan} {ns_overscan} "
                 f"{np_total} {np_predark} {np_underscan} {np_overscan} {np_frametransfer}"
@@ -869,7 +883,7 @@ class Exposure(HeaderMethods):
 
         # send abort to server, error OK
         try:
-            self._parent.serverconn.rcommand("exposure.abort")
+            self._parent.server.rcommand("exposure.abort")
         except Exception as e:
             azcam.log(f"abort error: {e}")
 
@@ -884,7 +898,7 @@ class Exposure(HeaderMethods):
         parameter = parameter.lower()
         value = None
 
-        reply = self._parent.serverconn.rcommand(f"exposure.get_par {parameter}")
+        reply = self._parent.server.rcommand(f"exposure.get_par {parameter}")
         _, value = azcam.utils.get_datatype(reply)
 
         return value
@@ -900,31 +914,30 @@ class Exposure(HeaderMethods):
 
         parameter = parameter.lower()
 
-        self._parent.serverconn.rcommand(f"exposure.set_par {parameter} {value}")
+        self._parent.server.rcommand(f"exposure.set_par {parameter} {value}")
 
         return
 
 
-class ServerConnection(object):
+class ServerConnection(azcam.sockets.SocketInterface):
     """
-    Connection class to azcamserver.
+    Server connection class for client to azcamserver.
     """
 
     def __init__(self) -> None:
 
+        azcam.sockets.SocketInterface.__init__(self)
         self.connected = False
 
-    # *******************************************************
-    # communications
-    # *******************************************************
     def connect(self, host="localhost", port=2402):
         """
         Connect to azcamserver.
         """
 
-        self.server = azcam.sockets.SocketInterface(host, port)
+        self.host = host
+        self.port = port
 
-        if self.server.open():
+        if self.open():
             connected = True
             self.rcommand("register console")
         else:
@@ -944,7 +957,7 @@ class ServerConnection(object):
 
         # get tokenized reply - check for comm error
         try:
-            reply = self.server.command(command)
+            reply = self.command(command)
         except azcam.AzcamError as e:
             if e.error_code == 2:
                 raise azcam.AzcamError("could not connect to server")
