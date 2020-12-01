@@ -1,44 +1,41 @@
 # Programming
 
 This document describes Azcam installation, configuration, and programming. It is intended 
-for advanced users only.
+for advanced users only.  See [this image](img/azcamarchitecture.jpg) for a graphical
+layout of AzCam.
 
 ## Dependencies
 AzCam currently uses *Python 3.8*. Important dependancies include:
 
   * *numpy*
   * *astropy*
+  * *matplotlib*
   * *loguru*
+  * *flask*
 
 There are many other dependencies depending on configuration. Examples are:
 
   * *ipython*
   * *scipy*
-  * *matplotlib*
   * *pandas*
-  * *keyring*
-  * *flask*
   * *PyPDF2*
   * *rst2pdf*
   * *pdfkit*
   * *markdown*
   * *mysql-connector*
   * *pyserial*
-
-## Virtual Environment
-When a python virtual environment is used, it is typically contained in a folder named `../venvs/azcam`.
+  * *keyring*
 
 ## Versioning
 Because Azcam consists of many different modules and plugins, there is no single version 
 number or date which uniquely identifies all the code. One indicator of the current version is to 
-issue the command ``azcam.utils.get_par("version")``.
+issue the command ``azcam.api.exposure.get_par("version")``.
 
 ## Conventions
 Modules (files), objects (such as *controller*), command names (methods) and attributes (parameters) are all lowercase.
-Commands must have parentheses following their names even if no 
-attributes are required. Filenames should be given with forward slash ('/') separators, even on Windows 
-machines. If back slashes are needed, they must be doubled as in c:\\data. Strings must 
-be enclosed in quotation marks, as in get_par('version'). Quotation marks must match ('version" is 
+Filenames should be given with forward slash ('/') separators, even on Windows 
+machines. If back slashes are needed, they must be doubled as in ``c:\\data``. Strings must 
+be enclosed in quotation marks, as in ``get_par('version')``. Quotation marks must match ('version" is 
 not acceptable). A quotation mark may be included in a string by preceding it with a backslash 
 ("I am Mike\'s dog.")
 
@@ -48,11 +45,10 @@ provide control of all aspects of Azcam. These commands (methods) interact with 
 instruments, temperature controllers, and telescopes as well as with more virtual objects such as the 
 exposures, images, databases, time, communication interfaces, etc. 
 The required command syntax is ``object.command(args)`` where ``object`` is the object name (such as 
-*controller*, *instrument*, or *telescope*) and ``command()`` is the command to be sent. If ``command()``
+*controller*, *instrument*, *telescope*, etc.) and ``command()`` is the command to be sent. If ``command()``
 uses arguments, they are specified as comma separated values of the appropriate type, 
-such as ``object.command('ITL',1.234,45)``. For example, to send the command initialize to the 
-instrument, use ``instrument.initialize()``. To send the ``get_focus`` command to the telescope, 
-use ``telescope.get_focus()``.
+such as ``object.command('ITL', 1.234,45)``. For example, the command to initialize to the 
+instrument is ``instrument.initialize()`` and the command to get instrument focus is ``telescope.get_focus()``.
 
 ## Attributes
 Parameters may be read with the ``azcam.api.exposure.get_par()`` command and written with the ``azcam.api.exposure.set_par()`` 
@@ -61,46 +57,16 @@ command. For example, ``azcam.api.exposure.get_par('imagetype')`` returns the cu
 ## Logging
 The ``azcam.log()`` function should be used for output instead of python's ``print()`` function. 
 This is important due to the multithreading nature of Azcam.  The output of the ``log()`` function 
-can be defined by code, and is typically both the
-console and a rotating log file. It is possible to also direct ``log()`` output to a web
-application, a syslog handler, or other applications.
+can be defined by code, and is typically both the console and a rotating log file.
+It is possible to also direct logging output to a web application, a syslog handler, or other applications.
 
 The ``log()`` function supports levels which determine if the log message should actually be output.
-If the level value is greater than or equal to the value of ``azcam.db["verbosity"]`` then the
-message string is output. The default level is one, as ``azcam.log("test message", level = 1)``.  The level meanings are:
-
-  * level = 0: silent
-  * level = 1: normal
-  * level = 2: added information
-  * level = 3: debug
+If the level value is greater than or equal to the value of ``azcam.db.verbosity`` then the
+message string is output. The default level is one for both ``verbosity`` and the ``log()`` command. Higher verbosity
+settings are intended for more detailed debug information.  The ``log()`` comamnd also has an argument ``log_to_console`` which can be set to zero for a single call to send a message to non-console loggers only. For example, ``azcam.log("test message", log_to_console=0)``
  
-## Azcam Apps
-The following support applications may also be useful when operating Azcam.
-
-  * *azcam-tool* is a graphical user interface (GUI) useful for operating Azcam in a point and click mode. It is not required, but is highly recommended.
-  * *EngineeringTool* performs very low level (and dangerous!) controller functions.
-  * *AzcamImageServer* is a stand-alone python image server which can receive images on a remote machine. This is especially useful for receiving images on computers running Linux.
-  * *azcam-ds9* is a set of tools useful when using SAO's ds9 display program.
-  * *azcam-observe* is an observing script package supporting a GUi and a command line interface.
-  * *azcam-focus* is a package which supports acquire a focus exposure.
-
 ## Python
 The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.
-
-## Dependencies
-Some Azcam commands require python packages which are not installed by default. These must be downloaded 
-and installed according to their individual instructions. Not all commands require all these packages. 
-The current non-default packages are currently:
-
-  * FITS image file manipulation - astropy.io.fits <http://docs.astropy.org/en/stable/io/fits/index.html>
-  * Numeric python for data manipulation - numpy <http://www.numpy.org>
-  * Plotting - `matplotlib <https://matplotlib.org>
-
-## National Instruments LabVIEW
-The runtime LabVIEW installer must be downloaded to your computer and executed to install the 
-LabVIEW Run-Time Engine which is required by Azcam LabVIEW code (such as Obstool). Administrator 
-privileges may be required for installation. LabVIEW installers should be obtained directly
-from National Instruments, <http://www.ni.com>. Azcam currently uses LabVIEW 2014.
 
 ## Ports
 Azcam reserves ten socket ports for each Azcam process. The ports are used for the various
@@ -114,12 +80,14 @@ systems have one a command sever port and a controller sever port.
   * web server port - 2403
   * instrument server port - 2404
   * controller server port - 2405
-  * power server port - 2406
+  * Reserved - 2406
   * Reserved - 2407
   * Reserved - 2408
   * Reserved - 2409
   * Reserved - 2410
   * Reserved - 2411
+
+Ports 2400 and 2401 are typically reserved for the *azcam-monitor* processes.
 
 ## Misc Notes
 These notes may be of some help setting up systems.
@@ -130,6 +98,3 @@ These notes may be of some help setting up systems.
     - gpupdate /force
   * Useful Tricks
     - Alt-F4 windows reboot for advanced options such as driver security
-
-## Architecture
-[AzCam Architecture image](img/azcamarchitecture.jpg)

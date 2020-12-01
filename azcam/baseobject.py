@@ -50,7 +50,7 @@ class Objects(object):
 
     def reset(self):
         """
-        Reset object.
+        Reset the object.
         """
 
         self.is_reset = 1

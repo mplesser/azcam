@@ -1,3 +1,4 @@
 mkdocs-material
 mkautodoc
 mkdocs-git-revision-date-plugin
+mkdocs-toc-sidebar-plugin
