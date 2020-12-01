@@ -3,19 +3,28 @@ site_name: AzCam
 theme:
   name: material
   palette:
-    primary: 'blue'
+    primary: 'indigo'
   logo:
     img/logo.png
   favicon:
     img/favicon.ico
+  icon:
+    repo: fontawesome/brands/git    
   features:
-    - navigation.sections
+    navigation.sections
+
 markdown_extensions:
   - admonition
   - codehilite
   - mkautodoc
   - attr_list
 
+plugins:
+  - search
+  - git-revision-date
+  
 extra_css:
-    - css/custom.css
+  - css/custom.css
     
+repo_url:
+  https://github.com/mplesser/azcam.git

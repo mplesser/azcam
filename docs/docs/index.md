@@ -1,25 +1,26 @@
 # General
 
-Azcam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
+AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
-Most of azcam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
+Most of AzCam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
 
-  - azcam-arc
-  - azcam-archon
-  - azcam-ds9
-  - azcam-bok
-  - azcam-mont4k
+  * [azcam-arc](https://github.com/mplesser/azcam-arc) for ARC camera controllers
+  * [azcam-archon](https://github.com/mplesser/azcam-archon) for STA Archon camera controllers
+  * [azcam-ds9](https://github.com/mplesser/azcam-ds9) for SAO ds9 image display
+  * [azcam-bok](https://github.com/mplesser/azcam-bok) for the UArizona Bok telescope environment
+  * [azcam-mont4k](https://github.com/mplesser/azcam-mont4k) for the UArizona Mont4k instrument environment
    
 Once configured, the system is controlled by class instances (*objects*) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation.  Most of these objects are exposed through the *azcam.api* object.  There is also a database of parameters maintained in the *azcam.db* object 
 
-There are two three main operational modes of azcam:
+There are two three main operational modes of AzCam:
  - One is the server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
  - Another is the console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
  - The final mode is through client applications, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:
-   - azcam-tool
-   - azcam-webobs
-   - azcam-status
-   - azcam-exptool
+
+  * [azcam-tool](https://github.com/mplesser/azcam-tool), a GUI using National Instruments LabVIEW
+  * [azcam-webobs](https://github.com/mplesser/azcam-webobs), a web-based observing script app
+  * [azcam-status](https://github.com/mplesser/azcam-status), a web-based status page
+  * [azcam-exptool](https://github.com/mplesser/azcam-exptool), a web-based exposure control app
 
 While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` object, often available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever.
 
@@ -49,16 +50,16 @@ When working in a command line environment, it is often convenient to import com
 This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
 
 # Help
-Azcam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an azcam class, command, or object instance.
+AzCam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an AzCam class, command, or object instance.
 
 Useful links include:
 * IPython <https://ipython.org>
 * Python programming language <https://www.python.org>
 
 # Server Operation
-Azcam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like *azcam-tool* or a python command line interface using azcam's console code.
+AzCam is most often used as a server application to which clients connect via ethernet sockets or from a web browser.  The clients might be a GUI like *azcam-tool* or a python command line interface using AzCam's console code.
 
-The azcam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:
+The AzCam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:
 
 Local CLI or script example:
 
@@ -77,14 +78,21 @@ Web pages which are served by *azcamserver* are found at URL's such as:
 `http://hostname:2403/status` <br>
 `http://hostname:2403/exptool`.
 
-## Server Classes
-These classes are useed to define and control a system.
+## Main Classes
+These classes are used to define and control a system.
 
 - [exposure](exposure.md)
 - [controller](controller.md)
 - [tempcon](tempcon.md)
 - [instrument](instrument.md)
 - [telescope](telescope.md)
+- [display](display.md)
+
+## Support Classes
+These classes provide support for the above classes.
+
+- [Header class](header.md)
+- [FocalPlane class](focalplane.md)
 
 # Shortcuts
 When using IPython, the auto parenthesis mode allows typing commands without 

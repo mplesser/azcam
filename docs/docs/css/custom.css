@@ -1,9 +1,13 @@
 div.autodoc-docstring {
-  padding-left: 10px;
-  margin-bottom: 10px;
-  border-left: 5px solid lightgrey;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    border-left: 5px solid lightgrey;
 }
 
 div.autodoc-members {
-  padding-left: 20px;
+    padding-left: 30px;
+}
+
+li {
+    line-height: 1.1em;
 }

@@ -54,26 +54,20 @@ such as ``object.command('ITL',1.234,45)``. For example, to send the command ini
 instrument, use ``instrument.initialize()``. To send the ``get_focus`` command to the telescope, 
 use ``telescope.get_focus()``.
 
-## Header Commands
-
-- [Header class](header.md)
-
-## Focalplane
-
-- [FocalPlane class](focalplane.md)
-
-
 ## Attributes
-Parameters may be read with the ``azcam.api.get_par()`` command and written with the ``azcam.api.set_par()`` 
-command. For example, ``azcam.api.get_par('imagetype')`` returns the current image type.
+Parameters may be read with the ``azcam.api.exposure.get_par()`` command and written with the ``azcam.api.exposure.set_par()`` 
+command. For example, ``azcam.api.exposure.get_par('imagetype')`` returns the current image type.
 
 ## Logging
-The ``azcam.log()`` function should be used for output instead of python's ``print()`` function. This function is mapped to the *azcam* namespace from ``azcam.utils.log()``.
-This is important due to the multithreading nature of Azcam.  The output of the ``log()`` function can be defined by code, and is typically both the 
-console and a rotating log file. It is possible to also direct ``log()`` output to a web application, a syslog handler, or other applications.
+The ``azcam.log()`` function should be used for output instead of python's ``print()`` function. 
+This is important due to the multithreading nature of Azcam.  The output of the ``log()`` function 
+can be defined by code, and is typically both the
+console and a rotating log file. It is possible to also direct ``log()`` output to a web
+application, a syslog handler, or other applications.
 
-The ``log()`` function supports levels which determine if the log message should actually be output. If the level value is greater than or equal to the value of ``azcam.db["verbosity"]`` then the message string is output. The default level is one, as 
-``azcam.log("test message", level = 1)``.  The level meanings are:
+The ``log()`` function supports levels which determine if the log message should actually be output.
+If the level value is greater than or equal to the value of ``azcam.db["verbosity"]`` then the
+message string is output. The default level is one, as ``azcam.log("test message", level = 1)``.  The level meanings are:
 
   * level = 0: silent
   * level = 1: normal
