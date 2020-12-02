@@ -5,7 +5,7 @@ Contains FITS image manipulation commands.
 import os
 import time
 import warnings
-from typing import Any, List
+import typing
 
 import numpy
 import numpy.polynomial.polynomial as poly
@@ -16,7 +16,10 @@ import azcam
 
 def file_exists(filename: str) -> bool:
     """
-    Returns True is the file exists, else False.
+    Args:
+        filename: filename to check if exists
+    Returns:
+        True if the file exists
     """
 
     fe = azcam.utils.make_image_filename(filename)
@@ -27,14 +30,14 @@ def file_exists(filename: str) -> bool:
 # *******************************************************************************
 # image header commands
 # *******************************************************************************
-def get_section(filename: str, section: str, extension: int = 0) -> List:
+def get_section(filename: str, section: str, extension: int = 0) -> list:
     """
     Extract image section pixel values from a FITS keyword to a list.
     Format is always zero-based: [first_col,last_col,first_row,last_row].
 
-    :param filename: image filename
-    :param section: section name (like "CCDSEC")
-    :param extension: image extension number
+    filename: image filename
+    section: section name (like "CCDSEC")
+    extension: image extension number
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -53,13 +56,13 @@ def get_section(filename: str, section: str, extension: int = 0) -> List:
     return [first_col, last_col, first_row, last_row]
 
 
-def get_keyword(filename: str, keyword: str, extension: int = 0) -> Any:
+def get_keyword(filename: str, keyword: str, extension: int = 0) -> typing.Any:
     """
     Return a header keyword value.
 
-    :param filename: image filename
-    :param keyword: keyword name
-    :param extension: image extension number
+    filename: image filename
+    keyword: keyword name
+    extension: image extension number
     """
 
     Image = azcam.utils.make_image_filename(filename)
@@ -68,14 +71,16 @@ def get_keyword(filename: str, keyword: str, extension: int = 0) -> Any:
     return hdr[keyword]
 
 
-def edit_keyword(filename: str, keyword: str, value: Any, extension: int = 0) -> None:
+def edit_keyword(
+    filename: str, keyword: str, value: typing.Any, extension: int = 0
+) -> None:
     """
     Edits a header keyword value.
 
-    :param filename: image filename
-    :param keyword: keyword name
-    :param value: new value of keyword
-    :param extension: image extension number
+    filename: image filename
+    keyword: keyword name
+    value: new value of keyword
+    extension: image extension number
     """
 
     Image = azcam.utils.make_image_filename(filename)
@@ -91,8 +96,8 @@ def get_header(filename: str, extension: int = 0):
     """
     Return the image header as a pyfits header object.
 
-    :param filename: image filename
-    :param extension: image extension number
+    filename: image filename
+    extension: image extension number
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -107,9 +112,9 @@ def add_history(filename: str, history_string: str, extension: int = 0) -> None:
     is added as a prefix, and the result is split across up to three cards
     if it is too long to fit in one. Any extra text is truncated.
 
-    :param filename: image filename
-    :param history_string: string to add as a HISTORY keyword
-    :param extension: image extension number
+    filename: image filename
+    history_string: string to add as a HISTORY keyword
+    extension: image extension number
     """
 
     value = (
@@ -136,8 +141,8 @@ def get_history(filename: str, extension: int = 0) -> str:
     """
     Returns the HISTOR header lines.
 
-    :param filename: image filename
-    :param extension: image extension number
+    filename: image filename
+    extension: image extension number
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -154,14 +159,14 @@ def get_history(filename: str, extension: int = 0) -> str:
 # **************************************************************************************************
 
 
-def get_extensions(filename: str) -> List:
+def get_extensions(filename: str) -> list:
     """
     Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions
     and extension number limits FOR THE RANGE command [range(first_ext,last_ext)].
     NumExt is 0 for a standard FITS file and >0 for MEF.  The first data extension for an
     MEF file is 1.
 
-    :param filename: image filename
+    filename: image filename
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -198,11 +203,11 @@ def arith(
     Simple image manipulation of FITS files.
     Converts back to unsigned 16 bit.
 
-    :param filename1: image filename
-    :param operator: '+','-','/','*'
-    :param filename2: may be an image filename or a constant.
-    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-    :param datatype: valid datatype string for resultant data type
+    filename1: image filename
+    operator: '+','-','/','*'
+    filename2: may be an image filename or a constant.
+    filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+    datatype: valid datatype string for resultant data type
     """
 
     MakeU16 = 1 if datatype == "uint16" else 0
@@ -348,10 +353,15 @@ def _is_image_extension(hdulist, extension: int) -> bool:
 def add(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"):
     """
     Add two images.
-    :param filename1: image filename
-    :param filename2: may be an image filename or a constant.
-    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-    :param datatype: valid datatype string for resultant data type
+
+    Arguments:
+        param filename1: image filename
+        param filename2: may be an image filename or a constant.
+        param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        param datatype: valid datatype string for resultant data type
+
+    Returns:
+        None
     """
 
     return arith(filename1, "+", filename2, filename3, datatype)
@@ -361,11 +371,11 @@ def sub(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
     """
     Subtract filename2 from filename1.
 
-    :param filename1: image filename
-    :param operator: '+','-','/','*'
-    :param filename2: may be an image filename or a constant.
-    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-    :param datatype: valid datatype string for resultant data type
+    filename1: image filename
+    operator: '+','-','/','*'
+    filename2: may be an image filename or a constant.
+    filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+    datatype: valid datatype string for resultant data type
     """
 
     return arith(filename1, "-", filename2, filename3, datatype)
@@ -375,11 +385,11 @@ def mult(filename1: str, filename2: str, filename3: str, datatype: str = "uint16
     """
     Multiple two images.
 
-    :param filename1: image filename
-    :param operator: '+','-','/','*'
-    :param filename2: may be an image filename or a constant.
-    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-    :param datatype: valid datatype string for resultant data type
+    filename1: image filename
+    operator: '+','-','/','*'
+    filename2: may be an image filename or a constant.
+    filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+    datatype: valid datatype string for resultant data type
     """
 
     return arith(filename1, "*", filename2, filename3, datatype)
@@ -389,11 +399,11 @@ def div(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
     """
     Divide Image1 by Image2.
 
-    :param filename1: image filename
-    :param operator: '+','-','/','*'
-    :param filename2: may be an image filename or a constant.
-    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-    :param datatype: valid datatype string for resultant data type
+    filename1: image filename
+    operator: '+','-','/','*'
+    filename2: may be an image filename or a constant.
+    filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+    datatype: valid datatype string for resultant data type
     """
 
     return arith(filename1, "/", filename2, filename3, datatype)
@@ -409,10 +419,10 @@ def combine(
     """
     Make a combination of a list of FITS filenames.
 
-    :param file_list: list of filenames to combine
-    :param out_filename: output filename
-    :param combination_type: combination type, "median", "sum", or "mean"
-    :param overscan_correct: > 0 to correct overscan with specified fir order before combination
+    file_list: list of filenames to combine
+    out_filename: output filename
+    combination_type: combination type, "median", "sum", or "mean"
+    overscan_correct: > 0 to correct overscan with specified fir order before combination
     """
 
     numfiles = len(file_list)
@@ -516,12 +526,12 @@ def combine(
 # *********************************************************************************************
 # pixel computations - uses ROI
 # *********************************************************************************************
-def mean(filename: str = "test", roi: List = []) -> List:
+def mean(filename: str = "test", roi: list = []) -> list:
     """
     Compute mean of an image ROI in every extension.
 
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     roi = _get_data_roi(roi)
@@ -540,12 +550,12 @@ def mean(filename: str = "test", roi: List = []) -> List:
     return means
 
 
-def sdev(filename: str = "test", roi: List = []) -> List:
+def sdev(filename: str = "test", roi: list = []) -> list:
     """
     Compute standard deviation of an image ROI in every extension.
 
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     roi = _get_data_roi(roi)
@@ -563,12 +573,12 @@ def sdev(filename: str = "test", roi: List = []) -> List:
     return sdevs
 
 
-def stat(filename: str = "test", roi: List = []) -> List:
+def stat(filename: str = "test", roi: list = []) -> list:
     """
     Compute mean and sdev image statistics of ROI in every extension.
     Returns [[means], [sdevs], ROI]
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -578,12 +588,12 @@ def stat(filename: str = "test", roi: List = []) -> List:
     return [mean1, sdev1, roi]
 
 
-def minimum(filename: str = "test", roi: str = []) -> List:
+def minimum(filename: str = "test", roi: str = []) -> list:
     """
     Compute minimum of an image ROI for every extension.
 
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     mins = []
@@ -603,12 +613,12 @@ def minimum(filename: str = "test", roi: str = []) -> List:
     return mins
 
 
-def maximum(filename: str = "test", roi: str = []) -> List:
+def maximum(filename: str = "test", roi: str = []) -> list:
     """
     Compute maximum of an image ROI for every extension.
 
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     maxs = []
@@ -628,13 +638,13 @@ def maximum(filename: str = "test", roi: str = []) -> List:
     return maxs
 
 
-def get_data(filename: str = "test", roi: str = []) -> List:
+def get_data(filename: str = "test", roi: str = []) -> list:
     """
     Return data (pixel values) from an ROI in an image for every extension.
     NOT FINISHED!
 
-    :param filename: image filename
-    :param roi: ROI
+    filename: image filename
+    roi: ROI
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -653,11 +663,11 @@ def get_data(filename: str = "test", roi: str = []) -> List:
     return datalist
 
 
-def get_all_data(filename: str = "test") -> List:
+def get_all_data(filename: str = "test") -> list:
     """
     Return all pixel data from image.
 
-    :param filename: image filename
+    filename: image filename
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -675,8 +685,8 @@ def resample(filename: str = "test", resample: int = 2) -> None:
     """
     Resample an image by combining adjacent pixels.
 
-    :param filename: image filename
-    :param resample: number of pixels to combine in each dimension
+    filename: image filename
+    resample: number of pixels to combine in each dimension
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -740,9 +750,9 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
     """
     Remove column bias from a FITS file.
 
-    :param filename: image filename
-    :param fit_order: polynomial fit order, use 0 to remove median not fitted value
-    :param margin_cols: number of overscan columns to skip before correction
+    filename: image filename
+    fit_order: polynomial fit order, use 0 to remove median not fitted value
+    margin_cols: number of overscan columns to skip before correction
     """
 
     filename = azcam.utils.make_image_filename(filename)

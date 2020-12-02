@@ -9,9 +9,21 @@ import azcam
 class Objects(object):
     """
     Base class used by main objects (controller, instrument, telescope, etc.).
+
+    Attributes:
+        self.id (str): name used to reference the object (controller, display, ...)
+        self.name (str): descriptive name for the object
+        self.enabled (bool): True (default) when object is enabled
+        self.initialized (bool): True when object has been initialized
+        self.is_reset (bool): True when object has been reset
     """
 
-    def __init__(self, obj_id, obj_name=None):
+    def __init__(self, obj_id: str, obj_name: str = None):
+        """
+        Args:
+            self.id: name used to reference the object (controller, display, ...)
+            self.name: descriptive name for the object
+        """
 
         #: id is the name used to reference the object (controller, display, ...)
         self.id = obj_id
@@ -57,9 +69,6 @@ class Objects(object):
 
         return
 
-    # ****************************************************************
-    # header
-    # ****************************************************************
     def define_keywords(self):
         """
         Sets up header keywords dictionary if not already defined.
@@ -120,10 +129,15 @@ class Objects(object):
 
         return header
 
-    def get_keyword(self, keyword):
+    def get_keyword(self, keyword: str) -> list:
         """
-        Return a keyword value and its comment.
+        Return a keyword value, its comment string, and type.
         Comment always returned in double quotes, even if empty.
+        Args:
+            keyword (str): name of keyword
+        Returns:
+            list of [keyword, comment, type]
+
         """
 
         return self.header.get_keyword(keyword)

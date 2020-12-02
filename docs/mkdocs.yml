@@ -20,10 +20,11 @@ theme:
   prev_next_buttons_location: both
 
 markdown_extensions:
-  - mkautodoc
+  - admonition
+  - codehilite
   - attr_list
   - pymdownx.highlight:
-      linenums: true
+      linenums: false
       linenums_style: pymdownx.inline
   - pymdownx.superfences
   - toc:
@@ -33,7 +34,17 @@ markdown_extensions:
 plugins:
   - search
   - git-revision-date
-
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: true
+            show_if_no_docstring: true
+      watch:
+        - ../azcam
 extra_css:
   - css/custom.css
 

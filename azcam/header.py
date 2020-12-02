@@ -11,9 +11,24 @@ class Header(object):
     """
     Defines the Header class which is used to create and manipulate headers contained
     in azcam objects such as *controller* and *instrument*.
+
+    Attributes:
+        self.title (str): header title dictionary {index:title_line}
+        self.keywords (dict): header keywords dictionary {keyword:keywordstring}
+        self.values (dict):  header values dictionary {keyword:value}
+        self.comments (dict):  header comments dictionary {keyword:comment}
+        self.typestrings (dict):  header typestrings dictionary {keyword:typestring)
+        self.items (list):  list of header objects
     """
 
     def __init__(self, title: str = "", template=None):
+        """
+        Create instance.
+
+        Args:
+            title: title of header to be used in image header
+            template: filename of template file with static header info
+        """
 
         self.title = {}  # header title dictionary {index:title_line}
         self.keywords = {}  # header keywords dictionary {keyword:keywordstring}
@@ -31,10 +46,14 @@ class Header(object):
             azcam.api.exposure.imageheaderfile = template
             self.read_file(template)
 
-    def set_header(self, object_name, order=-1):
+    def set_header(self, object_name: str, order: int = -1):
         """
         Sets object_name in the global header dictionary.
         order defines how headers are written in image files.
+
+        Arguments:
+            object_name: name of header object
+            order: order to be shown in image header (-1 next)
         """
 
         if object_name not in list(
@@ -175,10 +194,14 @@ class Header(object):
 
         return
 
-    def get_keyword(self, keyword):
+    def get_keyword(self, keyword: str) -> list:
         """
-        Return a keyword value and its comment.
+        Return a keyword value, its comment string, and type.
         Comment always returned in double quotes, even if empty.
+        Args:
+            keyword (str): name of keyword
+        Returns:
+            list of [keyword, comment, type]
         """
 
         value = self.values[keyword]

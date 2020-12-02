@@ -154,7 +154,7 @@ class GenPars(object):
 
         return
 
-    def get_datatype(self, value: any) -> typing.List:
+    def get_datatype(self, value: any) -> list:
         """
         Determine the data type for an object and set the type if possible.
         A string such as "1.23" will result in a type "float" and "2" will

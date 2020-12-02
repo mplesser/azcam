@@ -1,588 +1,1002 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
-    
-    
-      
-        <title>Image Class - AzCam</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#4051b5">
-        
-      
-    
-    
-    
-      
-        
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../css/custom.css">
-    
-    
-      
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="">
-      
-  
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#image-class" class="md-skip">
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Michael Lesser" name="author"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-6.1.6" name="generator"/>
+<title>Image Class - AzCam Documentation</title>
+<link href="../assets/stylesheets/main.6910b76c.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.196e0c26.min.css" rel="stylesheet"/>
+<meta content="#4051b5" name="theme-color"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+<link href="../css/custom.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="indigo" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#image-class">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="AzCam" class="md-header-nav__button md-logo" aria-label="AzCam">
-      
-  <img src="../img/logo.png" alt="logo">
-
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            AzCam
+<nav aria-label="Header" class="md-header-nav md-grid">
+<a aria-label="AzCam Documentation" class="md-header-nav__button md-logo" href=".." title="AzCam Documentation">
+<img alt="logo" src="../img/logo.png"/>
+</a>
+<label class="md-header-nav__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header-nav__title" data-md-component="header-title">
+<div class="md-header-nav__ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
+            AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
             
               Image Class
             
           </span>
-        </div>
-      
-    </div>
-    
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
+</div>
+</div>
+<label class="md-header-nav__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list"></ol>
 </div>
-    
-    
-      <div class="md-header-nav__source">
-        
-<a href="https://github.com/mplesser/azcam.git/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M216.29 158.39H137C97 147.9 6.51 150.63 6.51 233.18c0 30.09 15 51.23 35 61-25.1 23-37 33.85-37 49.21 0 11 4.47 21.14 17.89 26.81C8.13 383.61 0 393.35 0 411.65c0 32.11 28.05 50.82 101.63 50.82 70.75 0 111.79-26.42 111.79-73.18 0-58.66-45.16-56.5-151.63-63l13.43-21.55c27.27 7.58 118.7 10 118.7-67.89 0-18.7-7.73-31.71-15-41.07l37.41-2.84zm-63.42 241.9c0 32.06-104.89 32.1-104.89 2.43 0-8.14 5.27-15 10.57-21.54 77.71 5.3 94.32 3.37 94.32 19.11zm-50.81-134.58c-52.8 0-50.46-71.16 1.2-71.16 49.54 0 50.82 71.16-1.2 71.16zm133.3 100.51v-32.1c26.75-3.66 27.24-2 27.24-11V203.61c0-8.5-2.05-7.38-27.24-16.26l4.47-32.92H324v168.71c0 6.51.4 7.32 6.51 8.14l20.73 2.84v32.1zm52.45-244.31c-23.17 0-36.59-13.43-36.59-36.61s13.42-35.77 36.59-35.77c23.58 0 37 12.62 37 35.77s-13.42 36.61-37 36.61zM512 350.46c-17.49 8.53-43.1 16.26-66.28 16.26-48.38 0-66.67-19.5-66.67-65.46V194.75c0-5.42 1.05-4.06-31.71-4.06V154.5c35.78-4.07 50-22 54.47-66.27h38.63c0 65.83-1.34 61.81 3.26 61.81H501v40.65h-60.56v97.15c0 6.92-4.92 51.41 60.57 26.84z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    GitHub
+</div>
+</div>
+</div>
+</div>
+<div class="md-header-nav__source">
+<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    AzCam on GitHub
   </div>
 </a>
-      </div>
-    
-  </nav>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="AzCam" class="md-nav__button md-logo" aria-label="AzCam">
-      
-  <img src="../img/logo.png" alt="logo">
-
-    </a>
-    AzCam
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="AzCam Documentation" class="md-nav__button md-logo" href=".." title="AzCam Documentation">
+<img alt="logo" src="../img/logo.png"/>
+</a>
+    AzCam Documentation
   </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/mplesser/azcam.git/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M216.29 158.39H137C97 147.9 6.51 150.63 6.51 233.18c0 30.09 15 51.23 35 61-25.1 23-37 33.85-37 49.21 0 11 4.47 21.14 17.89 26.81C8.13 383.61 0 393.35 0 411.65c0 32.11 28.05 50.82 101.63 50.82 70.75 0 111.79-26.42 111.79-73.18 0-58.66-45.16-56.5-151.63-63l13.43-21.55c27.27 7.58 118.7 10 118.7-67.89 0-18.7-7.73-31.71-15-41.07l37.41-2.84zm-63.42 241.9c0 32.06-104.89 32.1-104.89 2.43 0-8.14 5.27-15 10.57-21.54 77.71 5.3 94.32 3.37 94.32 19.11zm-50.81-134.58c-52.8 0-50.46-71.16 1.2-71.16 49.54 0 50.82 71.16-1.2 71.16zm133.3 100.51v-32.1c26.75-3.66 27.24-2 27.24-11V203.61c0-8.5-2.05-7.38-27.24-16.26l4.47-32.92H324v168.71c0 6.51.4 7.32 6.51 8.14l20.73 2.84v32.1zm52.45-244.31c-23.17 0-36.59-13.43-36.59-36.61s13.42-35.77 36.59-35.77c23.58 0 37 12.62 37 35.77s-13.42 36.61-37 36.61zM512 350.46c-17.49 8.53-43.1 16.26-66.28 16.26-48.38 0-66.67-19.5-66.67-65.46V194.75c0-5.42 1.05-4.06-31.71-4.06V154.5c35.78-4.07 50-22 54.47-66.27h38.63c0 65.83-1.34 61.81 3.26 61.81H501v40.65h-60.56v97.15c0 6.92-4.92 51.41 60.57 26.84z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    GitHub
+<div class="md-nav__source">
+<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    AzCam on GitHub
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
-      General
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+      Home
     </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../classes/">
+      Classes
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../commands/">
+      Commands
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../api_console/">
       Console API
     </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../controller/" class="md-nav__link">
-      Controller Class
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../programming/">
+      Advanced
     </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../display/" class="md-nav__link">
-      Display Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../exposure/" class="md-nav__link">
-      Exposure Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../fits/" class="md-nav__link">
-      Fits Commands
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../focalplane/" class="md-nav__link">
-      FocalPlane Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../header/" class="md-nav__link">
-      Header Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Image Class
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      Image Class
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#sendimage-class" class="md-nav__link">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image">
+    azcam.image.Image
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.assemble">
+    assemble()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.get_extension">
+    get_extension()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.read_file">
+    read_file()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.send_image">
+    send_image()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.set_remote_server">
+    set_remote_server()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.set_scaling">
+    set_scaling()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image.Image.write_file">
+    write_file()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sendimage-class">
     SendImage Class
   </a>
-  
 </li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../instrument/" class="md-nav__link">
-      Instrument Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../plot/" class="md-nav__link">
-      Plot Commands
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../programming/" class="md-nav__link">
-      Programming
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../telescope/" class="md-nav__link">
-      Telescope Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../tempcon/" class="md-nav__link">
-      TempCon Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../utils/" class="md-nav__link">
-      Utility Commands
-    </a>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#sendimage-class" class="md-nav__link">
-    SendImage Class
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image_send.SendImage">
+    azcam.image_send.SendImage
   </a>
-  
 </li>
-      
-    </ul>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image_send.SendImage.azcam_imageserver">
+    azcam_imageserver()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image_send.SendImage.dataserver">
+    dataserver()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#azcam.image_send.SendImage.lbtguider">
+    lbtguider()
+  </a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                  <a href="https://github.com/mplesser/azcam.git/edit/master/docs/image.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="image-class">Image Class</h1>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<h1 id="image-class">Image Class</h1>
 <p>This class defines Azcam's image object. Within <em>azcam</em> it is also used to define 
 the <em>exposure.image</em> object which receives image data from a camera controller.</p>
 <p>The <em>Image</em> class is imported automatically into the <em>azcam</em> namespace from the 
 <em>azcam.image</em> module.</p>
 <p>Usage Example:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">im1 = azcam.Image(&#39;test.fits&#39;)</span>
+<div class="codehilite"><pre><span></span><code><span class="err">im1 = azcam.Image('test.fits')</span>
 </code></pre></div>
+<div class="doc doc-object doc-class">
+<h2 class="hidden-toc" href="#azcam.image.Image" id="azcam.image.Image" style="visibility: hidden; position: absolute;">
+</h2>
+<div class="doc doc-contents first">
+<p>Class to create and manipulate the standard azcam image object.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.assemble">
+<code class="highlight language-python">
+assemble<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Assemble .data into .buffer.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Assemble .data into .buffer.</span>
+<span class="sd">    """</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"image is not valid"</span><span class="p">)</span>
 
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.image.<strong>Image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename=''</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Class to create and manipulate the standard azcam image object.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>assemble</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">Trim=-1</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Assemble .data into .buffer.</p></div>
-<div class="autodoc-signature"><code><strong>get_extension</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filetype</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return the file extension string for a file type.</p></div>
-<div class="autodoc-signature"><code><strong>read_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Read image from file.
-This version only supports FITS/MEF.</p></div>
-<div class="autodoc-signature"><code><strong>send_image</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">local_filename</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Send local_filename image to a remote image server.
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">assembled</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># update self.asmsize</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_image</span><span class="p">)</span>
+
+    <span class="c1"># create self.buffer which is a single numpy image buffer for a fully assembled</span>
+    <span class="c1"># image [row,cols] or [y,x]) - if image is not read from file</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_file</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">"float64"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span>
+                <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float64"</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span>
+                <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float32"</span>
+            <span class="p">)</span>
+
+    <span class="n">Offsets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">offsets</span>
+    <span class="n">Scales</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span>
+
+    <span class="k">if</span> <span class="n">Trim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">prescan1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_underscan</span>
+        <span class="n">overscan1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_overscan</span>
+        <span class="n">prescan2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_underscan</span>
+        <span class="n">overscan2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_overscan</span>
+
+        <span class="c1"># update the assembled image size</span>
+
+        <span class="c1"># 12Sep13 Zareba</span>
+        <span class="n">numPre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numamps_x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_overscan</span>
+        <span class="n">numOvr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numamps_x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_underscan</span>
+        <span class="n">size_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span> <span class="o">-</span> <span class="n">numPre</span> <span class="o">-</span> <span class="n">numOvr</span>
+
+        <span class="c1"># 12Sep13 Zareba</span>
+        <span class="n">numPre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numamps_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_overscan</span>
+        <span class="n">numOvr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numamps_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_underscan</span>
+        <span class="n">size_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span> <span class="o">-</span> <span class="n">numPre</span> <span class="o">-</span> <span class="n">numOvr</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_x</span><span class="p">,</span> <span class="n">size_y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span>
+        <span class="n">imgSize</span> <span class="o">=</span> <span class="n">size_x</span> <span class="o">*</span> <span class="n">size_y</span>
+
+        <span class="c1"># reshape Buffer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="n">imgSize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">prescan1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">overscan1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">prescan2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">overscan2</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span>
+        <span class="n">imgSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span>
+
+        <span class="c1"># reschape Buffer - if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">,</span> <span class="n">imgSize</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># destination AmpX and AmpY size corrected for prescan and overscan values</span>
+    <span class="n">dstAmpX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_amp</span> <span class="o">-</span> <span class="n">prescan1</span> <span class="o">-</span> <span class="n">overscan1</span>
+    <span class="n">dstAmpY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_amp</span> <span class="o">-</span> <span class="n">prescan2</span> <span class="o">-</span> <span class="n">overscan2</span>
+
+    <span class="c1"># source AmpX and AmpY size including prescan and overscan</span>
+    <span class="n">srcAmpX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_amp</span>
+    <span class="n">srcAmpY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_amp</span>
+
+    <span class="n">ampX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numcols_amp</span>
+    <span class="n">ampY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">numrows_amp</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span> <span class="o">=</span> <span class="n">ampX</span> <span class="o">-</span> <span class="n">prescan1</span> <span class="o">-</span> <span class="n">overscan1</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">startLine</span> <span class="o">=</span> <span class="n">prescan2</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">stopLine</span> <span class="o">=</span> <span class="n">ampY</span> <span class="o">-</span> <span class="n">prescan2</span> <span class="o">-</span> <span class="n">overscan2</span>
+
+    <span class="n">Ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">jpg_ext</span>
+    <span class="n">AmpFlip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">amp_cfg</span>
+
+    <span class="n">pixNum</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">parAmps</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">num_par_amps_det</span><span class="p">):</span>
+
+        <span class="c1"># remove the prescan and overscane lines from the image</span>
+        <span class="n">extBase</span> <span class="o">=</span> <span class="n">parAmps</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">num_ser_amps_det</span>
+
+        <span class="n">srcLine</span> <span class="o">=</span> <span class="n">prescan2</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">parAmps</span> <span class="o">*</span> <span class="n">dstAmpY</span><span class="p">,</span> <span class="n">parAmps</span> <span class="o">*</span> <span class="n">dstAmpY</span> <span class="o">+</span> <span class="n">dstAmpY</span><span class="p">):</span>
+            <span class="n">lineStart</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">for</span> <span class="n">currExt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                <span class="n">extBase</span><span class="p">,</span> <span class="n">extBase</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">focalplane</span><span class="o">.</span><span class="n">num_ser_amps_det</span>
+            <span class="p">):</span>
+                <span class="c1"># copy one line from the current extension</span>
+
+                <span class="n">indx</span> <span class="o">=</span> <span class="n">Ext</span><span class="p">[</span><span class="n">currExt</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># current amplifier</span>
+                <span class="n">flip</span> <span class="o">=</span> <span class="n">AmpFlip</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>  <span class="c1"># determine flip for the current extension</span>
+
+                <span class="k">if</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># no flip</span>
+
+                    <span class="n">posX</span> <span class="o">=</span> <span class="n">srcLine</span> <span class="o">*</span> <span class="n">srcAmpX</span> <span class="o">+</span> <span class="n">prescan1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">line</span><span class="p">][</span><span class="n">lineStart</span> <span class="p">:</span> <span class="n">lineStart</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indx</span><span class="p">][</span><span class="n">posX</span> <span class="p">:</span> <span class="n">posX</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">-</span> <span class="n">Offsets</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+                    <span class="p">)</span> <span class="o">*</span> <span class="n">Scales</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+
+                    <span class="n">lineStart</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+                    <span class="n">pixNum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+
+                <span class="k">if</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># x flip: reverse the readout sequence</span>
+
+                    <span class="n">posX</span> <span class="o">=</span> <span class="n">srcLine</span> <span class="o">*</span> <span class="n">srcAmpX</span> <span class="o">+</span> <span class="n">prescan1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">line</span><span class="p">][</span><span class="n">lineStart</span> <span class="p">:</span> <span class="n">lineStart</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indx</span><span class="p">][</span><span class="n">posX</span> <span class="p">:</span> <span class="n">posX</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Offsets</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+                    <span class="p">)</span> <span class="o">*</span> <span class="n">Scales</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+
+                    <span class="n">lineStart</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+                    <span class="n">pixNum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+
+                <span class="k">if</span> <span class="n">flip</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># y flip: get the flip line</span>
+
+                    <span class="n">posX</span> <span class="o">=</span> <span class="p">(</span><span class="n">srcAmpY</span> <span class="o">-</span> <span class="n">srcLine</span> <span class="o">-</span> <span class="n">overscan2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">srcAmpX</span> <span class="o">+</span> <span class="n">prescan1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">line</span><span class="p">][</span><span class="n">lineStart</span> <span class="p">:</span> <span class="n">lineStart</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indx</span><span class="p">][</span><span class="n">posX</span> <span class="p">:</span> <span class="n">posX</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">-</span> <span class="n">Offsets</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+                    <span class="p">)</span> <span class="o">*</span> <span class="n">Scales</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+
+                    <span class="n">lineStart</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+                    <span class="n">pixNum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">flip</span> <span class="o">==</span> <span class="mi">3</span>
+                <span class="p">):</span>  <span class="c1"># xy flip; get the flip line and reverse the readout sequence</span>
+
+                    <span class="n">posX</span> <span class="o">=</span> <span class="p">(</span><span class="n">srcAmpY</span> <span class="o">-</span> <span class="n">srcLine</span> <span class="o">-</span> <span class="n">prescan2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">srcAmpX</span> <span class="o">+</span> <span class="n">prescan1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="n">line</span><span class="p">][</span><span class="n">lineStart</span> <span class="p">:</span> <span class="n">lineStart</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indx</span><span class="p">][</span><span class="n">posX</span> <span class="p">:</span> <span class="n">posX</span> <span class="o">+</span> <span class="n">dstAmpX</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Offsets</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+                    <span class="p">)</span> <span class="o">*</span> <span class="n">Scales</span><span class="p">[</span><span class="n">indx</span><span class="p">]</span>
+
+                    <span class="n">lineStart</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+                    <span class="n">pixNum</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineLen</span>
+
+            <span class="n">srcLine</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># reshape the Buffer to 2D</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">asmsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># set isAssembled</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assembled</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># set isTrimmed</span>
+    <span class="k">if</span> <span class="n">Trim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trimmed</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.get_extension">
+<code class="highlight language-python">
+get_extension<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filetype</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Return the file extension string for a file type.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filetype</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Return the file extension string for a file type.</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="n">filetype</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">"fits"</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">"bin"</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">"tif"</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">"jpg"</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">"gif"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">""</span>
+
+    <span class="k">return</span> <span class="n">extension</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.read_file">
+<code class="highlight language-python">
+read_file<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Read image from file.
+This version only supports FITS/MEF.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Read image from file.</span>
+<span class="sd">    This version only supports FITS/MEF.</span>
+<span class="sd">    """</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">filetype</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">filetypes</span><span class="p">[</span><span class="s2">"FITS"</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assembled</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">valid</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c1"># read file</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_read_fits_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.send_image">
+<code class="highlight language-python">
+send_image<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Send local_filename image to a remote image server.
 This method may run in an async thread.
-Server types (self.server_type) are: azcam, lbtguider, and dataserver.</p></div>
-<div class="autodoc-signature"><code><strong>set_remote_server</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_host=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_server_port=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set parameters so image files are sent to a remote image server.
-If no host is provided then reset flag to local image file.</p></div>
-<div class="autodoc-signature"><code><strong>set_scaling</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">gains=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">offsets=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set gains and offsets for image assembly.
-Use None for no scaling.</p></div>
-<div class="autodoc-signature"><code><strong>write_file</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filetype=-1</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Write image to disk file.
-filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p></div>
+Server types (self.server_type) are: azcam, lbtguider, and dataserver.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">send_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Send local_filename image to a remote image server.</span>
+<span class="sd">    This method may run in an async thread.</span>
+<span class="sd">    Server types (self.server_type) are: azcam, lbtguider, and dataserver.</span>
+<span class="sd">    """</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">remote_imageserver_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_filename</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">overwrite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">test_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_image</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">remote_imageserver_host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">remote_imageserver_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_port</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">display_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_image</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">filetype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filetype</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">size_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">size_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_type</span> <span class="o">==</span> <span class="s2">"azcam"</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">azcam_imageserver</span><span class="p">(</span>
+            <span class="n">local_filename</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_port</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_type</span> <span class="o">==</span> <span class="s2">"lbtguider"</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">lbtguider</span><span class="p">(</span>
+            <span class="n">local_filename</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_port</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">server_type</span> <span class="o">==</span> <span class="s2">"dataserver"</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendimage</span><span class="o">.</span><span class="n">dataserver</span><span class="p">(</span>
+            <span class="n">local_filename</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_port</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Unknown remote image server type"</span><span class="p">)</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.set_remote_server">
+<code class="highlight language-python">
+set_remote_server<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_server_host</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">remote_server_port</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Set parameters so image files are sent to a remote image server.
+If no host is provided then reset flag to local image file.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_remote_server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_server_host</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">remote_server_port</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Set parameters so image files are sent to a remote image server.</span>
+<span class="sd">    If no host is provided then reset flag to local image file.</span>
+<span class="sd">    """</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_flag</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">remote_server_host</span> <span class="o">==</span> <span class="s2">""</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span> <span class="o">=</span> <span class="n">remote_server_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">remote_server_port</span><span class="p">)</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.set_scaling">
+<code class="highlight language-python">
+set_scaling<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Set gains and offsets for image assembly.
+Use None for no scaling.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Set gains and offsets for image assembly.</span>
+<span class="sd">    Use None for no scaling.</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="n">gains</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gains</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">offsets</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">offsets</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+
+    <span class="c1"># Scales is gain (inverse electrical gain)</span>
+    <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span> <span class="o">=</span> <span class="n">gains</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offsets</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span> <span class="o">=</span> <span class="n">offsets</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image.Image.write_file">
+<code class="highlight language-python">
+write_file<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Write image to disk file.
+filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Write image to disk file.</span>
+<span class="sd">    filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</span>
+<span class="sd">    """</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+
+    <span class="c1"># delete file if it exists</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_image</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">filetype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filetype</span>
+
+    <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_fits_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_mef_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_bin_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">filetype</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_asm_fits_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Invalid filetype for Image"</span><span class="p">)</span>
+
+    <span class="c1"># optionally make a lock file indicating the image file has been written</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_lockfile</span><span class="p">:</span>
+        <span class="n">lockfile</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".bin"</span><span class="p">,</span> <span class="s2">".OK"</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">lockfile</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
 </div>
 </div>
 <h2 id="sendimage-class">SendImage Class</h2>
 <p>This subclass defines AzCam's code to send image data to a remote image server.</p>
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.image_send.<strong>SendImage</strong></code><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Class to send image to a remote image server.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>azcam_imageserver</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_host</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_port</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Send image to azcam image server.</p></div>
-<div class="autodoc-signature"><code><strong>dataserver</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_host</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">remote_imageserver_port</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Send image to dataserver.</p></div>
-<div class="autodoc-signature"><code><strong>lbtguider</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">GuideHost</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">GuidePort</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Send image to an LBT guider image server.</p></div>
-</div>
-</div>
-                
-                  
-                    
+<div class="doc doc-object doc-class">
+<h2 class="hidden-toc" href="#azcam.image_send.SendImage" id="azcam.image_send.SendImage" style="visibility: hidden; position: absolute;">
+</h2>
+<div class="doc doc-contents first">
+<p>Class to send image to a remote image server.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image_send.SendImage.azcam_imageserver">
+<code class="highlight language-python">
+azcam_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Send image to azcam image server.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image_send.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">azcam_imageserver</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span>
+<span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Send image to azcam image server.</span>
+<span class="sd">    """</span>
 
-<hr>
+    <span class="c1"># open image file on disk</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">dfile</span><span class="p">:</span>
+        <span class="n">lSize</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">buff</span> <span class="o">=</span> <span class="n">dfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># open socket to DataServer</span>
+    <span class="n">dataserver_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">remote_imageserver_port</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_filename</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="n">remotefile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_filename</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">remotefile</span> <span class="o">=</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_image</span><span class="p">:</span>
+        <span class="n">remotefile</span> <span class="o">=</span> <span class="s2">"!"</span> <span class="o">+</span> <span class="n">remotefile</span>
+
+    <span class="c1"># send header</span>
+    <span class="c1"># file types: 0 FITS, 1 MEF, 2 binary</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%16d</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">lSize</span><span class="p">,</span>
+        <span class="n">remotefile</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filetype</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_image</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%-256s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">s1</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">256</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Could not send image header to remote image server"</span><span class="p">)</span>
+
+    <span class="c1"># get 16 char ASCII header return status from image server</span>
+    <span class="c1"># reply = dataserver_socket.recv(16)</span>
+    <span class="c1"># if len(reply) != 16:</span>
+    <span class="c1">#    raise azcam.AzcamError("Did not receive header return status from remote image server")</span>
+    <span class="c1"># retstat=int(reply[:1])</span>
+    <span class="c1"># retstat=int(reply)</span>
+    <span class="n">retstat</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># check header return status codes</span>
+    <span class="k">if</span> <span class="n">retstat</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">retstat</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Bad reply from remote image server"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retstat</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Remote ImageServer not create image filename"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retstat</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>  <span class="c1">#</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Folder does not exist on remote machine"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Unknown error from remote image server"</span><span class="p">)</span>
+
+    <span class="c1"># send file data</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">reply</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buff</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span>
+            <span class="s2">"Did not send entire image file data to remote image server"</span>
+        <span class="p">)</span>
+
+    <span class="c1"># get 16 char ASCII final return status from image server</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="c1"># if len(reply) != 2:</span>
+    <span class="c1">#    raise AzcamError("did not receive entire return status from remote image server")</span>
+
+    <span class="n">retstat</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">reply</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># check final return status error codes</span>
+    <span class="k">if</span> <span class="n">retstat</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Bad final return status from remote image server"</span><span class="p">)</span>
+
+    <span class="c1"># close socket</span>
+    <span class="c1"># time.sleep()</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image_send.SendImage.dataserver">
+<code class="highlight language-python">
+dataserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Send image to dataserver.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image_send.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">dataserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Send image to dataserver.</span>
+<span class="sd">    """</span>
+
+    <span class="n">ImageSendBufferSize</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">32</span>
+
+    <span class="c1"># open image file on disk</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">dfile</span><span class="p">:</span>
+        <span class="n">lSize</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">buff</span> <span class="o">=</span> <span class="n">dfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># open socket to DataServer</span>
+    <span class="n">dataserver_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">remote_imageserver_port</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_filename</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="n">remotefile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_filename</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_image</span><span class="p">:</span>
+            <span class="n">remotefile</span> <span class="o">=</span> <span class="s2">"!"</span> <span class="o">+</span> <span class="n">remotefile</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">remotefile</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_image</span><span class="p">:</span>
+            <span class="n">remotefile</span> <span class="o">=</span> <span class="s2">"!"</span> <span class="o">+</span> <span class="n">remotefile</span>
+
+    <span class="n">azcam</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+        <span class="s2">"Sending image to </span><span class="si">%s</span><span class="s2"> as </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remotefile</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># send header</span>
+    <span class="c1"># file types: 0 FITS, 1 MEF, 2 binary</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%16d</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span>
+        <span class="n">lSize</span><span class="p">,</span>
+        <span class="n">remotefile</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filetype</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_x</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_y</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_image</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%-256s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">s1</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">!=</span> <span class="mi">256</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Could not send image header to remote DataServer"</span><span class="p">)</span>
+
+    <span class="c1"># get 16 char ASCII header return status from image server</span>
+    <span class="c1"># reply = dataserver_socket.recv(16)</span>
+    <span class="c1"># if len(reply) != 16:</span>
+    <span class="c1">#    raise azcam.AzcamError("Did not receive header return status from remote image server")</span>
+    <span class="c1"># retstat=int(reply[:1])</span>
+    <span class="c1"># retstat=int(reply)</span>
+    <span class="n">retstat</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># check header return status codes (updated 14jul11)</span>
+    <span class="k">if</span> <span class="n">retstat</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">retstat</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># overwrite existing name wihtout flag</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span>
+                <span class="s2">"Remote image server could not create image filename"</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retstat</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># not enough space</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span>
+                <span class="s2">"Remote image server does not have enough disk space"</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retstat</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1">#</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span>
+                <span class="s2">"Remote image server reports folder does not exist"</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"Unknown error from remote image server"</span><span class="p">)</span>
+
+    <span class="c1"># send file data, new 10Sep13</span>
+    <span class="n">numchunks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lSize</span> <span class="o">/</span> <span class="n">ImageSendBufferSize</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lSize</span> <span class="o">-</span> <span class="p">(</span><span class="n">numchunks</span> <span class="o">*</span> <span class="n">ImageSendBufferSize</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">lSize</span> <span class="o">-</span> <span class="p">(</span><span class="n">numchunks</span> <span class="o">*</span> <span class="n">ImageSendBufferSize</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">numchunks</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">remainder</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">ImageSendBufferSize</span>
+
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numchunks</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">size</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># dataserver_socket.send(str.encode(buff[start:end]))</span>
+            <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buff</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">message</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Did not send image file data to remote image server: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span>
+    <span class="k">if</span> <span class="n">remainder</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># dataserver_socket.send(str.encode(buff[end:]))</span>
+        <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buff</span><span class="p">[</span><span class="n">end</span><span class="p">:])</span>
+
+    <span class="sd">"""</span>
+<span class="sd">    # send file data</span>
+<span class="sd">    try:</span>
+<span class="sd">        reply=dataserver_socket.send(str.encode(buff))</span>
+<span class="sd">    except Exception as message:</span>
+<span class="sd">        raise azcam.AzcamError("Did not send image file data to remote image server: %s" % message)</span>
+
+<span class="sd">    if reply!=len(buff):</span>
+<span class="sd">        raise azcam.AzcamError("Did not send entire image file data to remote image server")</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># get 16 char ASCII final return status from image server</span>
+    <span class="sd">"""</span>
+<span class="sd">    try:</span>
+<span class="sd">        reply = dataserver_socket.recv(16)</span>
+<span class="sd">    except:</span>
+<span class="sd">        raise azcam.AzcamError("Did not receive return status from remote image server")</span>
+
+<span class="sd">    if len(reply) != 2:</span>
+<span class="sd">        raise azcam.AzcamError("Did not receive entire return status from remote image server")</span>
+<span class="sd">    retstat=int(reply[:1])</span>
+
+<span class="sd">    # check final return status error codes</span>
+<span class="sd">    if retstat != 0:</span>
+<span class="sd">        raise azcam.AzcamError("Bad final return status from remote image server")</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># close socket</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 3</span>
+    <span class="n">dataserver_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h2 class="doc doc-heading" id="azcam.image_send.SendImage.lbtguider">
+<code class="highlight language-python">
+lbtguider<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">)</span> </code>
+</h2>
+<div class="doc doc-contents">
+<p>Send image to an LBT guider image server.</p>
+<details class="quote">
+<summary>Source code in <code>azcam\image_send.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">lbtguider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Send image to an LBT guider image server.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># open image file on disk</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">gfile</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">gfile</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s2">"ERROR"</span><span class="p">,</span> <span class="s2">"Could not open local image file"</span><span class="p">]</span>
+        <span class="n">lSize</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">buff</span> <span class="o">=</span> <span class="n">gfile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># open socket to LBT image server</span>
+    <span class="n">GuideSocket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">GuideSocket</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">GuideSocket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">message</span><span class="p">:</span>
+        <span class="n">GuideSocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">"ERROR"</span><span class="p">,</span> <span class="s2">"LBT guider ImageServer not opened: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">message</span><span class="p">]</span>
+
+    <span class="c1"># send filesize in bytes, \r\n terminated</span>
+    <span class="n">sockBuf</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%d</span><span class="se">\r\n</span><span class="s2">"</span> <span class="o">%</span> <span class="n">lSize</span>
+    <span class="k">if</span> <span class="n">GuideSocket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sockBuf</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sockBuf</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">"ERROR"</span><span class="p">,</span> <span class="s2">"GuideSocket send error"</span><span class="p">]</span>
+
+    <span class="c1"># send file data</span>
+    <span class="k">if</span> <span class="n">GuideSocket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">buff</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buff</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">"ERROR"</span><span class="p">,</span> <span class="s2">"Could not send all image file data to LBT ImageServer"</span><span class="p">]</span>
+
+    <span class="c1"># close socket</span>
+    <span class="n">GuideSocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr/>
 <div class="md-source-date">
-  <small>
+<small>
     
       Last update: 2020-11-30
     
   </small>
 </div>
-                  
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
-        </div>
-      </main>
-      
-        
+</article>
+</div>
+</div>
+</main>
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../header/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Header Class
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../instrument/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Instrument Class
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
         
         Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
           Material for MkDocs
         </a>
-      </div>
-      
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-      
-      <script>
+</div>
+<script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+<script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+<script>
         app = initialize({
           base: "..",
           features: navigation.sections,
@@ -591,7 +1005,5 @@ filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p></div>
           }, typeof search !== "undefined" && search)
         })
       </script>
-      
-    
-  </body>
+</body>
 </html>

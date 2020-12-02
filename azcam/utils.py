@@ -181,7 +181,7 @@ def parse(String, SetType=0):
     return tokens
 
 
-def get_datatype(value) -> typing.List:
+def get_datatype(value) -> list:
     """
     Determine the data type for an object and set the type if possible. A string such as "1.23"
     will result in a type "float" and "2" will result in type "int".

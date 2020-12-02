@@ -16,7 +16,7 @@
     
     
       
-        <title>Controller Class - AzCam Documentation</title>
+        <title>Classes - AzCam Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#controller-class" class="md-skip">
+        <a href="#classes" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Controller Class
+              Classes
             
           </span>
         </div>
@@ -203,11 +203,70 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../classes/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Classes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Classes
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#main-object-classes" class="md-nav__link">
+    Main Object Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-classes" class="md-nav__link">
+    Support Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-use-classes" class="md-nav__link">
+    General Use Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#console-api" class="md-nav__link">
+    Console API
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -271,36 +330,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#azcam.controller.Controller" class="md-nav__link">
-    azcam.controller.Controller
+  <a href="#main-object-classes" class="md-nav__link">
+    Main Object Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.flush" class="md-nav__link">
-    flush()
+  <a href="#support-classes" class="md-nav__link">
+    Support Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_roi" class="md-nav__link">
-    set_roi()
+  <a href="#general-use-classes" class="md-nav__link">
+    General Use Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_shutter" class="md-nav__link">
-    set_shutter()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_shutter_state" class="md-nav__link">
-    set_shutter_state()
+  <a href="#console-api" class="md-nav__link">
+    Console API
   </a>
   
 </li>
@@ -318,121 +370,35 @@
               
                 
                 
-                <h1 id="controller-class">Controller Class</h1>
-<p>This class defines Azcam's camera controller interfaces. </p>
-<div class="doc doc-object doc-class">
-<h2 class="hidden-toc" href="#azcam.controller.Controller" id="azcam.controller.Controller" style="visibility: hidden; position: absolute;">
-        </h2>
-<div class="doc doc-contents first">
-<p>The base controller class for azcam-supported controllers.</p>
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.flush">
-
-        <code class="highlight language-python">
-flush<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<p>Flush or clear out the detector.
-Returns after clearing is finished which could take many seconds.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Flush or clear out the detector.</span>
-<span class="sd">    Returns after clearing is finished which could take many seconds.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_roi">
-
-        <code class="highlight language-python">
-set_roi<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<p>Sets ROI parameters values in the controller based on focalplane parameters.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Sets ROI parameters values in the controller based on focalplane parameters.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_shutter">
-
-        <code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<p>Open or close controller shutter.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Open or close controller shutter.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_shutter_state">
-
-        <code class="highlight language-python">
-set_shutter_state<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Flag</span><span class="o">=</span><span class="s1">'close'</span><span class="p">)</span>        </code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<p>Sets the shutter state during an exposure.
-Flag is:
-open or 1 -&gt; close shutter during exposure
-close or 0 -&gt; open shutter during exposure</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shutter_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Flag</span><span class="o">=</span><span class="s2">"close"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Sets the shutter state during an exposure.</span>
-<span class="sd">    Flag is:</span>
-<span class="sd">    open or 1 -&gt; close shutter during exposure</span>
-<span class="sd">    close or 0 -&gt; open shutter during exposure</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
+                <h1 id="classes">Classes</h1>
+<h3 id="main-object-classes">Main Object Classes</h3>
+<p>These classes are used to define and control a system.</p>
+<ul>
+<li><a href="../exposure/">exposure</a></li>
+<li><a href="../controller/">controller</a></li>
+<li><a href="../tempcon/">tempcon</a></li>
+<li><a href="../instrument/">instrument</a></li>
+<li><a href="../telescope/">telescope</a></li>
+<li><a href="../display/">display</a></li>
+</ul>
+<h3 id="support-classes">Support Classes</h3>
+<p>These classes provide support for the above classes.</p>
+<ul>
+<li><a href="../header/">Header class</a></li>
+<li><a href="../focalplane/">FocalPlane class</a></li>
+<li><a href="../baseobject/">Objects class</a></li>
+</ul>
+<h3 id="general-use-classes">General Use Classes</h3>
+<p>These classes and commands are useful both in server and console applications.</p>
+<ul>
+<li><a href="../image/">Image class</a></li>
+<li><a href="../display/">Display class</a></li>
+</ul>
+<h3 id="console-api">Console API</h3>
+<p>This class is used within console applications which may be connected to an <em>azcamserver</em> process via a socket.</p>
+<ul>
+<li><a href="../api_console/">Console API</a></li>
+</ul>
                 
                   
                     
@@ -441,7 +407,7 @@ close or 0 -&gt; open shutter during exposure</p>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-01
     
   </small>
 </div>
@@ -460,6 +426,41 @@ close or 0 -&gt; open shutter during exposure</p>
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../commands/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Commands
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

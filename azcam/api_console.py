@@ -14,6 +14,7 @@ class API(object):
     """
 
     def __init__(self):
+        """Create instance."""
 
         super().__init__()
 
