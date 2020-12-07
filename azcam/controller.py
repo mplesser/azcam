@@ -2,7 +2,8 @@
 Contains the base Controller class.
 """
 
-import azcam
+import typing
+
 from azcam.baseobject import Objects
 from azcam.header import Header
 
@@ -10,6 +11,12 @@ from azcam.header import Header
 class Controller(Objects):
     """
     The base controller class for azcam-supported controllers.
+    Attributes:
+        self.interface_type (int): 0 = demo, 4 = PCIe
+        self.header (Header object): controller header
+        self.exposure_time (float): exposure time (secs)
+        self.detpars (DetPars object):
+        self.reset_flag (bool): True if the controller has been reset
     """
 
     def __init__(self, obj_id="controller", obj_name="Controller"):
@@ -25,8 +32,6 @@ class Controller(Objects):
 
         self.exposure_time = 0
 
-        self.dewar_number = 0
-
         self.detpars = DetPars()
 
         self.reset_flag = 0
@@ -38,27 +43,31 @@ class Controller(Objects):
 
         return
 
-    def set_shutter_state(self, Flag="close"):
+    def set_shutter_state(self, flag: bool = 0):
         """
         Sets the shutter state during an exposure.
-        Flag is:
-        open or 1 -> close shutter during exposure
-        close or 0 -> open shutter during exposure
+        Args:
+            flag: True open shutter during exposure, False close shutter during exposure
         """
 
         return
 
-    def set_shutter(self, state, shutter_id=0):
+    def set_shutter(self, state: bool, shutter_id: int = 0):
         """
         Open or close controller shutter.
+        Args:
+            state: True to open shutter, False to close shutter
+            shutter_id: shutter ID number
         """
 
         return
 
-    def flush(self, Cycles=1):
+    def flush(self, cycles=1):
         """
-        Flush or clear out the detector.
-        Returns after clearing is finished which could take many seconds.
+        Flush or clear out the sensor.
+        Returns after clearing is finished, which could take many seconds.
+        Args:
+            cycles: number of times to flush sensor
         """
 
         return
@@ -68,14 +77,62 @@ class DetPars(object):
     """
     Defines detector parameters for controller shifting, image size, etc.
     These are updated by exposure.set_format, .set_focalplane, and .set_roi.
+    Attributes:
+        self.numpix_image (int):
+        self.numcols_image (int):
+        self.numrows_image (int):
+
+        self.ns_total (int):
+        self.ns_predark (int):
+        self.ns_underscan (int):
+        self.ns_overscan (int):
+        self.np_total (int):
+        self.np_predark (int):
+        self.np_underscan (int):
+        self.np_overscan (int):
+        self.np_frametransfer (int):
+
+        self.first_col (int):
+        self.last_col (int):
+        self.first_row (int):
+        self.last_row (int):
+        self.col_bin (int):
+        self.row_bin (int):
+
+        self.framet (int):
+        self.xdata (int):
+        self.xflush (int):
+        self.xpreskip (int):
+        self.xunderscan (int):
+        self.xskip (int):
+        self.xpostskip (int):
+        self.xoverscan (int):
+        self.ydata (int):
+        self.yflush (int):
+        self.ypreskip (int):
+        self.yunderscan (int):
+        self.yskip (int):
+        self.ypostskip (int):
+        self.yoverscan (int):
+
+        self.coltotal (int):
+        self.colusct (int):
+        self.coluscw (int):
+        self.coluscm (int):
+        self.coloscw (int):
+        self.coloscm (int):
+        self.rowtotal (int):
+        self.rowusct (int):
+        self.rowuscw (int):
+        self.rowuscm (int):
+        self.rowoscw (int):
+        self.rowoscm (int):
     """
 
     def __init__(self):
         """
         Create detpars database.
         """
-
-        # update these as needed from exposure
 
         self.numpix_image = 0
         self.numcols_image = 0

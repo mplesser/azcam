@@ -43,15 +43,6 @@ if azcam.db.datafolder is None:
 # allow top level only imports
 azcam.utils.add_searchfolder(azcam.db.systemfolder, 0)
 
-if azcam.db.systemname is not None:
-    # system-specific folder, like DESI
-    azcam.db.projectfolder = os.path.join(azcam.db.systemfolder, azcam.db.systemname)
-    azcam.utils.add_searchfolder(azcam.db.projectfolder, 0)  # top level only
-    parfile = f"{azcam.db.datafolder}/parameters_{azcam.db.systemname}.ini"
-else:
-    azcam.db.projectfolder = None
-    parfile = None
-
 # ****************************************************************
 # start logging
 # ****************************************************************

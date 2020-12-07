@@ -3,15 +3,29 @@ Base main object class.
 Only used by other base object classes.
 """
 
+import typing
+
 import azcam
 
 
 class Objects(object):
     """
     Base class used by main objects (controller, instrument, telescope, etc.).
+
+    Attributes:
+        self.id (str): name used to reference the object (controller, display, ...)
+        self.name (str): descriptive name for the object
+        self.enabled (bool): True (default) when object is enabled
+        self.initialized (bool): True when object has been initialized
+        self.is_reset (bool): True when object has been reset
     """
 
-    def __init__(self, obj_id, obj_name=None):
+    def __init__(self, obj_id: str, obj_name: str = None):
+        """
+        Args:
+            obj_id: name used to reference the object (controller, display, ...)
+            obj_name: descriptive name for the object
+        """
 
         #: id is the name used to reference the object (controller, display, ...)
         self.id = obj_id
@@ -50,16 +64,13 @@ class Objects(object):
 
     def reset(self):
         """
-        Reset object.
+        Reset the object.
         """
 
         self.is_reset = 1
 
         return
 
-    # ****************************************************************
-    # header
-    # ****************************************************************
     def define_keywords(self):
         """
         Sets up header keywords dictionary if not already defined.
@@ -98,11 +109,12 @@ class Objects(object):
 
         return
 
-    def read_header(self):
+    def read_header(self) -> list:
         """
         Returns the current header.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        Returns:
+            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
 
         # get the header
@@ -120,25 +132,42 @@ class Objects(object):
 
         return header
 
-    def get_keyword(self, keyword):
+    def get_keyword(self, keyword: str) -> list:
         """
-        Return a keyword value and its comment.
+        Return a keyword value, its comment string, and type.
         Comment always returned in double quotes, even if empty.
+        Args:
+            keyword: name of keyword
+        Returns:
+            list of [keyword, comment, type]
+
         """
 
         return self.header.get_keyword(keyword)
 
-    def get_all_keywords(self):
+    def get_all_keywords(self) -> list:
         """
         Return a list of all keyword names.
+        Returns:
+            list of all keywords
         """
 
         return self.header.get_all_keywords()
 
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
+    def set_keyword(
+        self,
+        keyword: str,
+        value: typing.Any,
+        comment: str = None,
+        typestring: str = None,
+    ):
         """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
+        Set a keyword value, comment, and type.
+        Args:
+            keyword: keyword
+            value: value of keyword
+            comment: comment string
+            typestring: one of 'str', 'int', or 'float'
         """
 
         self.header.set_keyword(keyword, value, comment, typestring)
@@ -148,6 +177,8 @@ class Objects(object):
     def delete_keyword(self, keyword):
         """
         Delete a keyword.
+        Args:
+            keyword: keyword
         """
 
         self.header.delete_keyword(keyword)
@@ -157,8 +188,9 @@ class Objects(object):
     def get_info(self):
         """
         Returns header info.
-        Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        Returns:
+            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
 
         header = []

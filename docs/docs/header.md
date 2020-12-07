@@ -22,4 +22,3 @@ Below is the documentation for the Header class.
 
 ::: azcam.header.Header
     :docstring:
-    :members:

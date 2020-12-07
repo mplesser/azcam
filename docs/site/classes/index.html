@@ -16,7 +16,7 @@
     
     
       
-        <title>Advanced - AzCam Documentation</title>
+        <title>Classes - AzCam Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#programming" class="md-skip">
+        <a href="#classes" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Advanced
+              Classes
             
           </span>
         </div>
@@ -203,40 +203,70 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-<<<<<<< HEAD
-    <a href="../focalplane/" class="md-nav__link">
-      FocalPlane Class
-    </a>
-  </li>
 
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
       
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../header/" class="md-nav__link">
-      Header Class
-    </a>
-  </li>
-
     
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../image/" class="md-nav__link">
-      Image Class
-=======
-    <a href="../classes/" class="md-nav__link">
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Classes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Classes
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#main-object-classes" class="md-nav__link">
+    Main Object Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-classes" class="md-nav__link">
+    Support Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-use-classes" class="md-nav__link">
+    General Use Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#console-api" class="md-nav__link">
+    Console API
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -268,112 +298,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Advanced
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../programming/" class="md-nav__link">
       Advanced
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    Dependencies
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#versioning" class="md-nav__link">
-    Versioning
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conventions" class="md-nav__link">
-    Conventions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#objects" class="md-nav__link">
-    Objects
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logging" class="md-nav__link">
-    Logging
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ports" class="md-nav__link">
-    Ports
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#misc-notes" class="md-nav__link">
-    Misc Notes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -401,71 +330,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    Dependencies
+  <a href="#main-object-classes" class="md-nav__link">
+    Main Object Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#versioning" class="md-nav__link">
-    Versioning
+  <a href="#support-classes" class="md-nav__link">
+    Support Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#conventions" class="md-nav__link">
-    Conventions
+  <a href="#general-use-classes" class="md-nav__link">
+    General Use Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#objects" class="md-nav__link">
-    Objects
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logging" class="md-nav__link">
-    Logging
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ports" class="md-nav__link">
-    Ports
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#misc-notes" class="md-nav__link">
-    Misc Notes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
+  <a href="#console-api" class="md-nav__link">
+    Console API
   </a>
   
 </li>
@@ -483,117 +370,35 @@
               
                 
                 
-                <h1 id="programming">Programming</h1>
-<p>This document describes Azcam installation, configuration, and programming. It is intended 
-for advanced users only.  See <a href="../img/azcamarchitecture.jpg">this image</a> for a graphical
-layout of AzCam.</p>
-<h2 id="dependencies">Dependencies</h2>
-<p>AzCam currently uses <em>Python 3.8</em>. Important dependancies include:</p>
+                <h1 id="classes">Classes</h1>
+<h3 id="main-object-classes">Main Object Classes</h3>
+<p>These classes are used to define and control a system.</p>
 <ul>
-<li><em>numpy</em></li>
-<li><em>astropy</em></li>
-<li><em>matplotlib</em></li>
-<li><em>loguru</em></li>
-<li><em>flask</em></li>
+<li><a href="../exposure/">exposure</a></li>
+<li><a href="../controller/">controller</a></li>
+<li><a href="../tempcon/">tempcon</a></li>
+<li><a href="../instrument/">instrument</a></li>
+<li><a href="../telescope/">telescope</a></li>
+<li><a href="../display/">display</a></li>
 </ul>
-<p>There are many other dependencies depending on configuration. Examples are:</p>
-<ul>
-<li><em>ipython</em></li>
-<li><em>scipy</em></li>
-<li><em>pandas</em></li>
-<li><em>PyPDF2</em></li>
-<li><em>rst2pdf</em></li>
-<li><em>pdfkit</em></li>
-<li><em>markdown</em></li>
-<li><em>mysql-connector</em></li>
-<li><em>pyserial</em></li>
-<li><em>keyring</em></li>
-</ul>
-<h2 id="versioning">Versioning</h2>
-<p>Because Azcam consists of many different modules and plugins, there is no single version 
-number or date which uniquely identifies all the code. One indicator of the current version is to 
-issue the command <code>azcam.api.exposure.get_par("version")</code>.</p>
-<h2 id="conventions">Conventions</h2>
-<p>Modules (files), objects (such as <em>controller</em>), command names (methods) and attributes (parameters) are all lowercase.
-Filenames should be given with forward slash ('/') separators, even on Windows 
-machines. If back slashes are needed, they must be doubled as in <code>c:\\data</code>. Strings must 
-be enclosed in quotation marks, as in <code>get_par('version')</code>. Quotation marks must match ('version" is 
-not acceptable). A quotation mark may be included in a string by preceding it with a backslash 
-("I am Mike\'s dog.")</p>
-<h2 id="objects">Objects</h2>
-<p>Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
-provide control of all aspects of Azcam. These commands (methods) interact with hardware such as controllers, 
-instruments, temperature controllers, and telescopes as well as with more virtual objects such as the 
-exposures, images, databases, time, communication interfaces, etc. 
-The required command syntax is <code>object.command(args)</code> where <code>object</code> is the object name (such as 
-<em>controller</em>, <em>instrument</em>, <em>telescope</em>, etc.) and <code>command()</code> is the command to be sent. If <code>command()</code>
-uses arguments, they are specified as comma separated values of the appropriate type, 
-<<<<<<< HEAD
-such as <code>object.command('ITL',1.234,45)</code>. For example, to send the command initialize to the 
-instrument, use <code>instrument.initialize()</code>. To send the <code>get_focus</code> command to the telescope, 
-use <code>telescope.get_focus()</code>.</p>
-<h2 id="header-commands">Header Commands</h2>
+<h3 id="support-classes">Support Classes</h3>
+<p>These classes provide support for the above classes.</p>
 <ul>
 <li><a href="../header/">Header class</a></li>
-</ul>
-<h2 id="focalplane">Focalplane</h2>
-<ul>
 <li><a href="../focalplane/">FocalPlane class</a></li>
+<li><a href="../baseobject/">Objects class</a></li>
 </ul>
-=======
-such as <code>object.command('ITL', 1.234,45)</code>. For example, the command to initialize to the 
-instrument is <code>instrument.initialize()</code> and the command to get instrument focus is <code>telescope.get_focus()</code>.</p>
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
-<h2 id="attributes">Attributes</h2>
-<p>Parameters may be read with the <code>azcam.api.exposure.get_par()</code> command and written with the <code>azcam.api.exposure.set_par()</code> 
-command. For example, <code>azcam.api.exposure.get_par('imagetype')</code> returns the current image type.</p>
-<h2 id="logging">Logging</h2>
-<p>The <code>azcam.log()</code> function should be used for output instead of python's <code>print()</code> function. 
-This is important due to the multithreading nature of Azcam.  The output of the <code>log()</code> function 
-can be defined by code, and is typically both the console and a rotating log file.
-It is possible to also direct logging output to a web application, a syslog handler, or other applications.</p>
-<p>The <code>log()</code> function supports levels which determine if the log message should actually be output.
-If the level value is greater than or equal to the value of <code>azcam.db.verbosity</code> then the
-message string is output. The default level is one for both <code>verbosity</code> and the <code>log()</code> command. Higher verbosity
-settings are intended for more detailed debug information.  The <code>log()</code> comamnd also has an argument <code>log_to_console</code> which can be set to zero for a single call to send a message to non-console loggers only. For example, <code>azcam.log("test message", log_to_console=0)</code></p>
-<h2 id="python">Python</h2>
-<p>The current version of Azcam requires Python version 3.8. See http://www.python.org for all things pythonic.</p>
-<h2 id="ports">Ports</h2>
-<p>Azcam reserves ten socket ports for each Azcam process. The ports are used for the various
-server functions and may not actually be all used on a computer. The CommandServer port is
-typically the base port each Azcam process and the remaining ports are incremented by one.
-The default command server port is 2402 for the first Azcam process, 2412 for the second process,
-2422 for the third, and so on. More complex systems often use many ports which the most basic
-systems have one a command sever port and a controller sever port.</p>
+<h3 id="general-use-classes">General Use Classes</h3>
+<p>These classes and commands are useful both in server and console applications.</p>
 <ul>
-<li>cmdserver port - 2402</li>
-<li>web server port - 2403</li>
-<li>instrument server port - 2404</li>
-<li>controller server port - 2405</li>
-<li>Reserved - 2406</li>
-<li>Reserved - 2407</li>
-<li>Reserved - 2408</li>
-<li>Reserved - 2409</li>
-<li>Reserved - 2410</li>
-<li>Reserved - 2411</li>
+<li><a href="../image/">Image class</a></li>
+<li><a href="../display/">Display class</a></li>
 </ul>
-<p>Ports 2400 and 2401 are typically reserved for the <em>azcam-monitor</em> processes.</p>
-<h2 id="misc-notes">Misc Notes</h2>
-<p>These notes may be of some help setting up systems.</p>
+<h3 id="console-api">Console API</h3>
+<p>This class is used within console applications which may be connected to an <em>azcamserver</em> process via a socket.</p>
 <ul>
-<li>To allow system time update with azcamtime.py (for Windows PC):<ul>
-<li>gpedit may be required</li>
-<li>Computer Configuration\Windows Settings\Security Settings\Local Policies\User Rights Assignment\Change the system time</li>
-<li>gpupdate /force</li>
+<li><a href="../api_console/">Console API</a></li>
 </ul>
-</li>
-<li>Useful Tricks<ul>
-<li>Alt-F4 windows reboot for advanced options such as driver security</li>
-</ul>
-</li>
-</ul>
-<h2 id="architecture">Architecture</h2>
-<p><a href="../img/azcamarchitecture.jpg">AzCam Architecture image</a></p>
                 
                   
                     
@@ -625,7 +430,7 @@ systems have one a command sever port and a controller sever port.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../api_console/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -634,11 +439,25 @@ systems have one a command sever port and a controller sever port.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Console API
+                Home
               </div>
             </div>
           </a>
         
+        
+          <a href="../commands/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Commands
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>
