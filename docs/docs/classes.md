@@ -15,7 +15,7 @@ These classes provide support for the above classes.
 
 - [Header class](header.md)
 - [FocalPlane class](focalplane.md)
-- [Objects class](baseobject.md)
+- [Objects class](baseobject.md) - (baseobject) 
 
 ### General Use Classes
 These classes and commands are useful both in server and console applications.

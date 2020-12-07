@@ -114,7 +114,7 @@ There are several folder names which are usually defined, although their use may
 
   * *systemfolder* - the main folder where configuration code is located
   * *datafolder* - the root folder where data and parameters are saved, write access is required
- 
+
 ## Programming
 
 The link below contains information about *azcam* programming and more advanced features.

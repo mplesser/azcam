@@ -66,10 +66,13 @@ class AzcamDatabase(object):
     def __init__(self):
         pass
 
-    def get(self, name):
+    def get(self, name: str) -> typing.Any:
         """
-        Returns an database object by name.
-        Returns None if db.name is not defined.
+        Returns an database attribute by name.
+        Args:
+            name: name of attribute to return
+        Returns:
+            value or None if *name* is not defined.
         """
 
         try:

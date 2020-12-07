@@ -24,10 +24,9 @@ class API(object):
         self.telescope = Telescope(self)
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
-
         self.server = ServerConnection()
 
-        setattr(azcam.db, "api", self)
+        setattr(azcam, "api", self)
         azcam.db.cli_cmds["api"] = self
 
     def _get(self, name):

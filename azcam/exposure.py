@@ -236,11 +236,11 @@ class Exposure(Objects):
         self.image_types = ["zero", "object", "flat", "dark"]
         #: dictionary of shutter states for imagetypes {imagetype:ShutterState}
         self.shutter_dict = {
-            "zero": "close",
-            "object": "open",
-            "flat": "open",
-            "dark": "close",
-            "ramp": "open",
+            "zero": 0,
+            "object": 1,
+            "flat": 1,
+            "dark": 0,
+            "ramp": 1,
         }
         #: True to flush detector before exposures
         self.flush_array = 1
@@ -700,7 +700,7 @@ class Exposure(Objects):
             try:
                 shutterstate = self.shutter_dict[imagetype]
             except KeyError:
-                shutterstate = "open"  # other types are comps, so open shutter
+                shutterstate = 1  # other types are comps, so open shutter
             azcam.api.controller.set_shutter_state(shutterstate)
 
             if not self.comp_exposure:
