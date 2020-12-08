@@ -1,3 +1,0 @@
-pytest --tb=no
-
-pause
