@@ -1,300 +1,500 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Michael Lesser" name="author"/>
-<link href="../img/favicon.ico" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-6.1.6" name="generator"/>
-<title>Fits Commands - AzCam Documentation</title>
-<link href="../assets/stylesheets/main.6910b76c.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.196e0c26.min.css" rel="stylesheet"/>
-<meta content="#4051b5" name="theme-color"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-<link href="../css/custom.css" rel="stylesheet"/>
-</head>
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="indigo" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#fits-commands">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <meta name="author" content="Michael Lesser">
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>Fits Commands - AzCam Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fits-commands" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
 <header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="AzCam Documentation" class="md-header-nav__button md-logo" href=".." title="AzCam Documentation">
-<img alt="logo" src="../img/logo.png"/>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="AzCam Documentation" class="md-header-nav__button md-logo" aria-label="AzCam Documentation">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             AzCam Documentation
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               Fits Commands
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header-nav__source">
-<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/mplesser/azcam.git" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     AzCam on GitHub
   </div>
 </a>
-</div>
-</nav>
+      </div>
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="AzCam Documentation" class="md-nav__button md-logo" href=".." title="AzCam Documentation">
-<img alt="logo" src="../img/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AzCam Documentation" class="md-nav__button md-logo" aria-label="AzCam Documentation">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
     AzCam Documentation
   </label>
-<div class="md-nav__source">
-<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mplesser/azcam.git" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     AzCam on GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="..">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../classes/">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../classes/" class="md-nav__link">
       Classes
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../commands/">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" class="md-nav__link">
       Commands
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../api_console/">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../api_console/" class="md-nav__link">
       Console API
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../programming/">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../programming/" class="md-nav__link">
       Advanced
     </a>
-</li>
-</ul>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits">
-    azcam.fits
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.fits" class="md-nav__link">
+    fits
   </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.add">
+  
+    <nav class="md-nav" aria-label="fits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.add" class="md-nav__link">
     add()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.add_history">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.add_history" class="md-nav__link">
     add_history()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.arith">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.arith" class="md-nav__link">
     arith()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.colbias">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.colbias" class="md-nav__link">
     colbias()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.combine">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.combine" class="md-nav__link">
     combine()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.div">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.div" class="md-nav__link">
     div()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.edit_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.edit_keyword" class="md-nav__link">
     edit_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.file_exists">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.file_exists" class="md-nav__link">
     file_exists()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_all_data">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_all_data" class="md-nav__link">
     get_all_data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_data">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_data" class="md-nav__link">
     get_data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_extensions">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_extensions" class="md-nav__link">
     get_extensions()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_header">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_header" class="md-nav__link">
     get_header()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_history">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_history" class="md-nav__link">
     get_history()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_keyword" class="md-nav__link">
     get_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.get_section">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_section" class="md-nav__link">
     get_section()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.maximum">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.maximum" class="md-nav__link">
     maximum()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.mean">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.mean" class="md-nav__link">
     mean()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.minimum">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.minimum" class="md-nav__link">
     minimum()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.mult">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.mult" class="md-nav__link">
     mult()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.resample">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.resample" class="md-nav__link">
     resample()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.sdev">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.sdev" class="md-nav__link">
     sdev()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.stat">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.stat" class="md-nav__link">
     stat()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.fits.sub">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.sub" class="md-nav__link">
     sub()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="fits-commands">Fits Commands</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="fits-commands">Fits Commands</h1>
 <p>This class provides FITS image support functions.</p>
 <p>Usage Example:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">rois = azcam.fits.col_bias("test.fits")</span>
+<div class="codehilite"><pre><span></span><code><span class="err">rois = azcam.fits.col_bias(&quot;test.fits&quot;)</span>
 </code></pre></div>
+
+
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#azcam.fits" id="azcam.fits" style="visibility: hidden; position: absolute;">
-</h2>
+<h2 class="doc doc-heading" id="azcam.fits">
+
+        <code>azcam.fits</code>
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Contains FITS image manipulation commands.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.add">
-<code class="highlight language-python">
-add<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.add">
+
+        <code class="highlight language-python">
+add<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Add two images.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -358,1160 +558,430 @@ add<span class="p">(</span><span class="n">filename1</span><span class="p">,</sp
 </tr>
 </tbody>
 </table>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">filename1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename3</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"uint16"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Add two images.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        param filename1: image filename</span>
-<span class="sd">        param filename2: may be an image filename or a constant.</span>
-<span class="sd">        param filename3: optional, must be an image filename.  If not specified, result goes into filename1.</span>
-<span class="sd">        param datatype: valid datatype string for resultant data type</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="n">arith</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="s2">"+"</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.add_history">
-<code class="highlight language-python">
-add_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">history_string</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.add_history">
+
+        <code class="highlight language-python">
+add_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">history_string</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Adds a HISTORY line containing 'history_string' to the image.
 Used to record actions performed on an image. A 20 character time stamp
 is added as a prefix, and the result is split across up to three cards
 if it is too long to fit in one. Any extra text is truncated.</p>
-<p>:param filename: image filename
-:param history_string: string to add as a HISTORY keyword
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add_history</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">history_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Adds a HISTORY line containing 'history_string' to the image.</span>
-<span class="sd">    Used to record actions performed on an image. A 20 character time stamp</span>
-<span class="sd">    is added as a prefix, and the result is split across up to three cards</span>
-<span class="sd">    if it is too long to fit in one. Any extra text is truncated.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param history_string: string to add as a HISTORY keyword</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S "</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span> <span class="o">+</span> <span class="n">history_string</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">:</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="mi">70</span><span class="p">:]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">141</span><span class="p">:</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">141</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="mi">141</span><span class="p">:]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">212</span><span class="p">:</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">212</span><span class="p">]</span>
-
-    <span class="c1"># write the keyword</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="n">hdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"update"</span><span class="p">)</span>
-    <span class="n">hdu</span><span class="p">[</span><span class="n">extension</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">add_history</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">hdu</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+history_string: string to add as a HISTORY keyword
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.arith">
-<code class="highlight language-python">
-arith<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.arith">
+
+        <code class="highlight language-python">
+arith<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Simple image manipulation of FITS files.
 Converts back to unsigned 16 bit.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">arith</span><span class="p">(</span>
-    <span class="n">filename1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">operator</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">filename2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">filename3</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"uint16"</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Simple image manipulation of FITS files.</span>
-<span class="sd">    Converts back to unsigned 16 bit.</span>
-
-<span class="sd">    :param filename1: image filename</span>
-<span class="sd">    :param operator: '+','-','/','*'</span>
-<span class="sd">    :param filename2: may be an image filename or a constant.</span>
-<span class="sd">    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.</span>
-<span class="sd">    :param datatype: valid datatype string for resultant data type</span>
-<span class="sd">    """</span>
-
-    <span class="n">MakeU16</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">"uint16"</span> <span class="k">else</span> <span class="mi">0</span>
-    <span class="n">header</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># header for output file</span>
-
-    <span class="c1"># open Image1</span>
-    <span class="n">filename1</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename1</span><span class="p">)</span>
-    <span class="n">numext1</span><span class="p">,</span> <span class="n">fext</span><span class="p">,</span> <span class="n">lext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename1</span><span class="p">)</span>
-    <span class="n">im1</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">lazy_load_hdus</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># this is an hdulist</span>
-    <span class="k">if</span> <span class="n">numext1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">MEF</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>  <span class="c1"># save for output file</span>
-        <span class="n">data1</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># first data index is 0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lext</span><span class="p">):</span>
-            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>  <span class="c1"># save for output</span>
-            <span class="k">if</span> <span class="n">_is_image_extension</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>  <span class="c1"># only use image data</span>
-                <span class="n">data1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">MEF</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="n">im1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>  <span class="c1"># save for output file</span>
-        <span class="n">data1</span> <span class="o">=</span> <span class="n">im1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-    <span class="c1"># make float - new</span>
-    <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data1</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">_is_image_extension</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-                <span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">data1</span> <span class="o">=</span> <span class="n">data1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">)</span>
-
-    <span class="c1"># check if filename2 is actually a number and not a filename</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename2</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-        <span class="n">data2</span> <span class="o">=</span> <span class="n">filename2</span>
-        <span class="n">SCALAR</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="c1"># open Image2 and get data</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">SCALAR</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">filename2</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename2</span><span class="p">)</span>
-        <span class="n">numext2</span><span class="p">,</span> <span class="n">fext</span><span class="p">,</span> <span class="n">lext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename2</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename2</span><span class="p">,</span> <span class="n">lazy_load_hdus</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">im2</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">numext1</span> <span class="o">!=</span> <span class="n">numext2</span><span class="p">:</span>
-                <span class="n">im2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"unequal FITS image extensions"</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-                <span class="n">data2</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lext</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">_is_image_extension</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-                        <span class="n">data2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">data2</span> <span class="o">=</span> <span class="n">im2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">)</span>
-
-    <span class="c1"># operate</span>
-    <span class="n">NewFile</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-        <span class="n">data3</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">operator</span> <span class="o">==</span> <span class="s2">"*"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data1</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">SCALAR</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">data2</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">data2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data3</span> <span class="o">=</span> <span class="n">data1</span> <span class="o">*</span> <span class="n">data2</span>
-
-    <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s2">"+"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data1</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">SCALAR</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">data2</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">data2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data3</span> <span class="o">=</span> <span class="n">data1</span> <span class="o">+</span> <span class="n">data2</span>
-    <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s2">"-"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data1</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">SCALAR</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">data2</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">data2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data3</span> <span class="o">=</span> <span class="n">data1</span> <span class="o">-</span> <span class="n">data2</span>
-    <span class="k">elif</span> <span class="n">operator</span> <span class="o">==</span> <span class="s2">"/"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data1</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">SCALAR</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">data2</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">data3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">data2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">data3</span> <span class="o">=</span> <span class="n">data1</span> <span class="o">/</span> <span class="n">data2</span>
-    <span class="c1"># write result (all data is now float32)</span>
-    <span class="k">if</span> <span class="n">filename3</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
-        <span class="n">filename3</span> <span class="o">=</span> <span class="n">filename1</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename3</span><span class="p">)</span>
-    <span class="n">filename3</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename3</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">NewFile</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-            <span class="n">phdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">hdulist</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">()</span>
-            <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phdu</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numext1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">MakeU16</span><span class="p">:</span>
-                    <span class="n">numpy</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">16</span><span class="p">,</span> <span class="n">data3</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># clip values below zero</span>
-                    <span class="n">hdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"uint16"</span><span class="p">),</span> <span class="n">header</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">hdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">ImageHDU</span><span class="p">(</span><span class="n">data3</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">header</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hdu</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data3</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">im1</span><span class="p">)):</span>
-                    <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-            <span class="n">im1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># locking issue</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">filename3</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamWarning</span><span class="p">(</span><span class="s2">"FITS file locked"</span><span class="p">)</span>
-                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">im1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="n">im3</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">data3</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
-            <span class="n">im3</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">filename3</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.colbias">
-<code class="highlight language-python">
-colbias<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.colbias">
+
+        <code class="highlight language-python">
+colbias<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Remove column bias from a FITS file.</p>
-<p>:param filename: image filename
-:param fit_order: polynomial fit order, use 0 to remove median not fitted value
-:param margin_cols: number of overscan columns to skip before correction</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">colbias</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">fit_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Remove column bias from a FITS file.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param fit_order: polynomial fit order, use 0 to remove median not fitted value</span>
-<span class="sd">    :param margin_cols: number of overscan columns to skip before correction</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="c1"># open image and get data</span>
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"update"</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-
-        <span class="c1"># if already COLBIAS then exit here</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">history</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"History"</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-                <span class="k">if</span> <span class="s2">"COLBIAS"</span> <span class="ow">in</span> <span class="n">h</span><span class="p">:</span>
-                    <span class="k">return</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">pass</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-        <span class="n">numexts</span><span class="p">,</span> <span class="n">firstext</span><span class="p">,</span> <span class="n">lastext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-        <span class="c1"># find column median value</span>
-        <span class="k">if</span> <span class="n">numexts</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">Median</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">Median</span> <span class="o">=</span> <span class="p">[[]]</span>  <span class="c1"># skip phdu</span>
-
-        <span class="c1"># get overscan info</span>
-        <span class="n">reply</span> <span class="o">=</span> <span class="n">get_keyword</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"OVRSCAN2"</span><span class="p">,</span> <span class="n">firstext</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">overscanrows</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">overscanrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
-        <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="o">=</span> <span class="n">get_section</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"BIASSEC"</span><span class="p">,</span> <span class="n">firstext</span><span class="p">)</span>
-        <span class="n">col1</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">col1</span> <span class="o">+=</span> <span class="n">margin_cols</span>
-
-        <span class="n">col2</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="n">row2</span> <span class="o">+=</span> <span class="n">overscanrows</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">firstext</span><span class="p">,</span> <span class="n">lastext</span><span class="p">):</span>
-
-            <span class="c1"># make data float32 for calculations</span>
-            <span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">)</span>
-
-            <span class="n">Median</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>  <span class="c1"># first hdu will be 1</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">Median</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">numpy</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">row</span> <span class="p">:</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col1</span> <span class="p">:</span> <span class="n">col2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-                <span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">fit_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">slope</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">resids</span><span class="p">,</span> <span class="n">residspercent</span> <span class="o">=</span> <span class="n">_line_fit</span><span class="p">(</span>
-                    <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">Median</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fit_order</span>
-                <span class="p">)</span>
-                <span class="n">yfit</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float32"</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">yfit</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Median</span><span class="p">)</span>
-
-            <span class="c1"># correct data by subtracting row by row best fit</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">fit_order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">row</span> <span class="p">:</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">yfit</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>  <span class="c1"># wraps here</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">row</span> <span class="p">:</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">Median</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">row</span><span class="p">]</span>
-
-            <span class="c1"># convert back to uint16, clipping to zero</span>
-            <span class="c1"># im[i].data=im[i].data.clip(min=0)</span>
-            <span class="c1"># im[i].data=im[i].data.astype('uint16')</span>
-
-        <span class="c1"># new due to lock</span>
-        <span class="n">history_string</span> <span class="o">=</span> <span class="s2">"COLBIAS data was column overscan corrected"</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S "</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
-            <span class="o">+</span> <span class="n">history_string</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">70</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="mi">70</span><span class="p">:]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">141</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">141</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="mi">141</span><span class="p">:]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">212</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="mi">212</span><span class="p">]</span>
-        <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">add_history</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+fit_order: polynomial fit order, use 0 to remove median not fitted value
+margin_cols: number of overscan columns to skip before correction</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.combine">
-<code class="highlight language-python">
-combine<span class="p">(</span><span class="n">file_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">out_filename</span><span class="o">=</span><span class="s1">'combined.fits'</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="s1">'median'</span><span class="p">,</span> <span class="n">overscan_correct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.combine">
+
+        <code class="highlight language-python">
+combine<span class="p">(</span><span class="n">file_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">out_filename</span><span class="o">=</span><span class="s1">'combined.fits'</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="s1">'median'</span><span class="p">,</span> <span class="n">overscan_correct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Make a combination of a list of FITS filenames.</p>
-<p>:param file_list: list of filenames to combine
-:param out_filename: output filename
-:param combination_type: combination type, "median", "sum", or "mean"
-:param overscan_correct: &gt; 0 to correct overscan with specified fir order before combination</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span>
-    <span class="n">file_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
-    <span class="n">out_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"combined.fits"</span><span class="p">,</span>
-    <span class="n">combination_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"median"</span><span class="p">,</span>
-    <span class="n">overscan_correct</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Make a combination of a list of FITS filenames.</span>
-
-<span class="sd">    :param file_list: list of filenames to combine</span>
-<span class="sd">    :param out_filename: output filename</span>
-<span class="sd">    :param combination_type: combination type, "median", "sum", or "mean"</span>
-<span class="sd">    :param overscan_correct: &gt; 0 to correct overscan with specified fir order before combination</span>
-<span class="sd">    """</span>
-
-    <span class="n">numfiles</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">numfiles</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"two or more images are required"</span><span class="p">)</span>
-
-    <span class="n">header</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># header for output file</span>
-    <span class="n">dataset</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># combined data</span>
-
-    <span class="k">for</span> <span class="n">fnum</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
-        <span class="c1"># overscan correct</span>
-        <span class="k">if</span> <span class="n">overscan_correct</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">colbias</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">fit_order</span><span class="p">)</span>
-
-        <span class="n">dataarray</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># each dataset by channel</span>
-
-        <span class="c1"># open each image and get data</span>
-        <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-            <span class="n">numexts</span><span class="p">,</span> <span class="n">firstext</span><span class="p">,</span> <span class="n">lastext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-            <span class="c1"># setup based on first image</span>
-            <span class="k">if</span> <span class="n">fnum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">numexts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">MEF</span> <span class="o">=</span> <span class="mi">1</span>
-                    <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">firstext</span><span class="p">,</span> <span class="n">lastext</span><span class="p">):</span>
-                        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
-                        <span class="n">dataarray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">MEF</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="n">header</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>  <span class="c1"># save for output file</span>
-                    <span class="n">dataarray</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">numexts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numexts</span><span class="p">):</span>
-                        <span class="n">dataarray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># dataarray=dataarray+im.data</span>
-                    <span class="n">dataarray</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-            <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataarray</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-        <span class="n">data3d</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numexts</span><span class="p">):</span>
-            <span class="n">data3d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">]))</span>
-        <span class="n">data_combined</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numexts</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"median"</span><span class="p">:</span>
-                <span class="n">data_combined</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data3d</span><span class="p">[</span><span class="n">chan</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"sum"</span><span class="p">:</span>
-                <span class="n">data_combined</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data3d</span><span class="p">[</span><span class="n">chan</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"mean"</span><span class="p">:</span>
-                <span class="n">data_combined</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data3d</span><span class="p">[</span><span class="n">chan</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">data3d</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"median"</span><span class="p">:</span>
-            <span class="n">data_combined</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data3d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"sum"</span><span class="p">:</span>
-            <span class="n">data_combined</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data3d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">combination_type</span> <span class="o">==</span> <span class="s2">"mean"</span><span class="p">:</span>
-            <span class="n">data_combined</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data3d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-        <span class="n">newdata</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numexts</span><span class="p">):</span>
-            <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_combined</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">newdata</span> <span class="o">=</span> <span class="n">data_combined</span>
-
-    <span class="c1"># write result</span>
-    <span class="k">if</span> <span class="n">MEF</span><span class="p">:</span>
-        <span class="n">phdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">hdulist</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">()</span>
-        <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phdu</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">firstext</span><span class="p">,</span> <span class="n">lastext</span><span class="p">):</span>
-            <span class="n">hdu</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">newdata</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">header</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">hdulist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hdu</span><span class="p">)</span>
-
-        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>  <span class="c1"># surpress warning</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
-            <span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">out_filename</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">hdulist</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">im1</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">newdata</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
-        <span class="n">im1</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">out_filename</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># update header</span>
-    <span class="n">add_history</span><span class="p">(</span>
-        <span class="n">out_filename</span><span class="p">,</span>
-        <span class="s2">"COMBINED Data was </span><span class="si">%s</span><span class="s2"> combined from </span><span class="si">%d</span><span class="s2"> images"</span> <span class="o">%</span> <span class="p">(</span><span class="n">combination_type</span><span class="p">,</span> <span class="n">numfiles</span><span class="p">),</span>
-        <span class="mi">0</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>file_list: list of filenames to combine
+out_filename: output filename
+combination_type: combination type, "median", "sum", or "mean"
+overscan_correct: &gt; 0 to correct overscan with specified fir order before combination</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.div">
-<code class="highlight language-python">
-div<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.div">
+
+        <code class="highlight language-python">
+div<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Divide Image1 by Image2.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">filename1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename3</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"uint16"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Divide Image1 by Image2.</span>
-
-<span class="sd">    :param filename1: image filename</span>
-<span class="sd">    :param operator: '+','-','/','*'</span>
-<span class="sd">    :param filename2: may be an image filename or a constant.</span>
-<span class="sd">    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.</span>
-<span class="sd">    :param datatype: valid datatype string for resultant data type</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="n">arith</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.edit_keyword">
-<code class="highlight language-python">
-edit_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.edit_keyword">
+
+        <code class="highlight language-python">
+edit_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Edits a header keyword value.</p>
-<p>:param filename: image filename
-:param keyword: keyword name
-:param value: new value of keyword
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">edit_keyword</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Edits a header keyword value.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param keyword: keyword name</span>
-<span class="sd">    :param value: new value of keyword</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">Image</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"update"</span><span class="p">)</span> <span class="k">as</span> <span class="n">hdulist</span><span class="p">:</span>
-        <span class="n">prihdr</span> <span class="o">=</span> <span class="n">hdulist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
-        <span class="n">prihdr</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+keyword: keyword name
+value: new value of keyword
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.file_exists">
-<code class="highlight language-python">
-file_exists<span class="p">(</span><span class="n">filename</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
-<p>Returns True is the file exists, else False.</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">file_exists</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Returns True is the file exists, else False.</span>
-<span class="sd">    """</span>
+<h3 class="doc doc-heading" id="azcam.fits.file_exists">
 
-    <span class="n">fe</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <code class="highlight language-python">
+file_exists<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
 
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fe</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
+
+      </h3>
+<div class="doc doc-contents ">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filename</code></td>
+<td><code>str</code></td>
+<td>
+<p>filename to check if exists</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool</code></td>
+<td>
+<p>True if the file exists</p>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_all_data">
-<code class="highlight language-python">
-get_all_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_all_data">
+
+        <code class="highlight language-python">
+get_all_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return all pixel data from image.</p>
-<p>:param filename: image filename</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_all_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Return all pixel data from image.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">NumExt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">datalist</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">datalist</span> <span class="o">=</span> <span class="p">[</span><span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">datalist</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_data">
-<code class="highlight language-python">
-get_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_data">
+
+        <code class="highlight language-python">
+get_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return data (pixel values) from an ROI in an image for every extension.
 NOT FINISHED!</p>
-<p>:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Return data (pixel values) from an ROI in an image for every extension.</span>
-<span class="sd">    NOT FINISHED!</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">roi</span> <span class="o">=</span> <span class="n">_get_data_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">NumExt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">datalist</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">datalist</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
-                <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">)</span>
-            <span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">datalist</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_extensions">
-<code class="highlight language-python">
-get_extensions<span class="p">(</span><span class="n">filename</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_extensions">
+
+        <code class="highlight language-python">
+get_extensions<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions
 and extension number limits FOR THE RANGE command [range(first_ext,last_ext)].
 NumExt is 0 for a standard FITS file and &gt;0 for MEF.  The first data extension for an
 MEF file is 1.</p>
-<p>:param filename: image filename</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions</span>
-<span class="sd">    and extension number limits FOR THE RANGE command [range(first_ext,last_ext)].</span>
-<span class="sd">    NumExt is 0 for a standard FITS file and &gt;0 for MEF.  The first data extension for an</span>
-<span class="sd">    MEF file is 1.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">hdulist</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hdulist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">NumExt</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">first_ext</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">last_ext</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">hdulist</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s2">"XTENSION"</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">header</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"XTENSION"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"IMAGE"</span><span class="p">:</span>
-                    <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">first_ext</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">last_ext</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">NumExt</span> <span class="o">=</span> <span class="n">n</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">]</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_header">
-<code class="highlight language-python">
-get_header<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_header">
+
+        <code class="highlight language-python">
+get_header<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return the image header as a pyfits header object.</p>
-<p>:param filename: image filename
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Return the image header as a pyfits header object.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_history">
-<code class="highlight language-python">
-get_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_history">
+
+        <code class="highlight language-python">
+get_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns the HISTOR header lines.</p>
-<p>:param filename: image filename
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Returns the HISTOR header lines.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="n">hdr</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-
-    <span class="n">history</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="s2">"HISTORY"</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_keyword">
-<code class="highlight language-python">
-get_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_keyword">
+
+        <code class="highlight language-python">
+get_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a header keyword value.</p>
-<p>:param filename: image filename
-:param keyword: keyword name
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_keyword</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Return a header keyword value.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param keyword: keyword name</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">Image</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="n">hdr</span> <span class="o">=</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">hdr</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+keyword: keyword name
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.get_section">
-<code class="highlight language-python">
-get_section<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.get_section">
+
+        <code class="highlight language-python">
+get_section<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Extract image section pixel values from a FITS keyword to a list.
 Format is always zero-based: [first_col,last_col,first_row,last_row].</p>
-<p>:param filename: image filename
-:param section: section name (like "CCDSEC")
-:param extension: image extension number</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_section</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Extract image section pixel values from a FITS keyword to a list.</span>
-<span class="sd">    Format is always zero-based: [first_col,last_col,first_row,last_row].</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param section: section name (like "CCDSEC")</span>
-<span class="sd">    :param extension: image extension number</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="c1"># get row limits</span>
-    <span class="n">datasec</span> <span class="o">=</span> <span class="n">get_keyword</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-    <span class="n">datasec</span> <span class="o">=</span> <span class="n">datasec</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"["</span><span class="p">)</span>
-    <span class="n">datasec</span> <span class="o">=</span> <span class="n">datasec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
-    <span class="n">first_col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datasec</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="n">datasec1</span> <span class="o">=</span> <span class="n">datasec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
-    <span class="n">last_col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datasec1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">first_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datasec1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">last_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datasec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"]"</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">first_col</span><span class="p">,</span> <span class="n">last_col</span><span class="p">,</span> <span class="n">first_row</span><span class="p">,</span> <span class="n">last_row</span><span class="p">]</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+section: section name (like "CCDSEC")
+extension: image extension number</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.maximum">
-<code class="highlight language-python">
-maximum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.maximum">
+
+        <code class="highlight language-python">
+maximum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Compute maximum of an image ROI for every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">maximum</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Compute maximum of an image ROI for every extension.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">maxs</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">roi</span> <span class="o">=</span> <span class="n">_get_data_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">numpy</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">under</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">)</span>
-            <span class="n">dmax</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-            <span class="n">maxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dmax</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">maxs</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.mean">
-<code class="highlight language-python">
-mean<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.mean">
+
+        <code class="highlight language-python">
+mean<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Compute mean of an image ROI in every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Compute mean of an image ROI in every extension.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">roi</span> <span class="o">=</span> <span class="n">_get_data_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">numpy</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">under</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">)</span>
-            <span class="n">mean1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-            <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">means</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.minimum">
-<code class="highlight language-python">
-minimum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.minimum">
+
+        <code class="highlight language-python">
+minimum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Compute minimum of an image ROI for every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">minimum</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Compute minimum of an image ROI for every extension.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">mins</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">roi</span> <span class="o">=</span> <span class="n">_get_data_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">numpy</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">under</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">)</span>
-            <span class="n">dmin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-            <span class="n">mins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dmin</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">mins</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.mult">
-<code class="highlight language-python">
-mult<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.mult">
+
+        <code class="highlight language-python">
+mult<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Multiple two images.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mult</span><span class="p">(</span><span class="n">filename1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename3</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"uint16"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Multiple two images.</span>
-
-<span class="sd">    :param filename1: image filename</span>
-<span class="sd">    :param operator: '+','-','/','*'</span>
-<span class="sd">    :param filename2: may be an image filename or a constant.</span>
-<span class="sd">    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.</span>
-<span class="sd">    :param datatype: valid datatype string for resultant data type</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="n">arith</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="s2">"*"</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.resample">
-<code class="highlight language-python">
-resample<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.resample">
+
+        <code class="highlight language-python">
+resample<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Resample an image by combining adjacent pixels.</p>
-<p>:param filename: image filename
-:param resample: number of pixels to combine in each dimension</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">resample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Resample an image by combining adjacent pixels.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param resample: number of pixels to combine in each dimension</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">numext</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-        <span class="n">filename</span><span class="p">,</span> <span class="s2">"update"</span><span class="p">,</span> <span class="n">memmap</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">)</span> <span class="k">as</span> <span class="n">hdul</span><span class="p">:</span>  <span class="c1"># memap solves lock issue</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"NAXIS1"</span><span class="p">],</span> <span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"NAXIS2"</span><span class="p">]]</span>
-            <span class="n">d2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">d2_binned</span> <span class="o">=</span> <span class="n">_bin_ndarray</span><span class="p">(</span>
-                <span class="n">d2</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">resample</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">resample</span><span class="p">)),</span> <span class="s2">"sum"</span>
-            <span class="p">)</span>
-            <span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"NAXIS1"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">resample</span><span class="p">)</span>
-            <span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">"NAXIS2"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">resample</span><span class="p">)</span>
-            <span class="n">hdul</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">d2_binned</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+resample: number of pixels to combine in each dimension</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.sdev">
-<code class="highlight language-python">
-sdev<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.sdev">
+
+        <code class="highlight language-python">
+sdev<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Compute standard deviation of an image ROI in every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">sdev</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Compute standard deviation of an image ROI in every extension.</span>
-
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">roi</span> <span class="o">=</span> <span class="n">_get_data_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">pyfits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">im</span><span class="p">:</span>
-        <span class="n">sdevs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">NumExt</span><span class="p">,</span> <span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span> <span class="o">=</span> <span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_ext</span><span class="p">,</span> <span class="n">last_ext</span><span class="p">):</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">sdev1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-            <span class="n">sdevs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sdev1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">sdevs</span>
-</code></pre>
-</div>
-</details>
+<p>filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.stat">
-<code class="highlight language-python">
-stat<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.stat">
+
+        <code class="highlight language-python">
+stat<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Compute mean and sdev image statistics of ROI in every extension.
 Returns [[means], [sdevs], ROI]
-:param filename: image filename
-:param roi: ROI</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test"</span><span class="p">,</span> <span class="n">roi</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Compute mean and sdev image statistics of ROI in every extension.</span>
-<span class="sd">    Returns [[means], [sdevs], ROI]</span>
-<span class="sd">    :param filename: image filename</span>
-<span class="sd">    :param roi: ROI</span>
-<span class="sd">    """</span>
-
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_image_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">mean1</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span>
-    <span class="n">sdev1</span> <span class="o">=</span> <span class="n">sdev</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">mean1</span><span class="p">,</span> <span class="n">sdev1</span><span class="p">,</span> <span class="n">roi</span><span class="p">]</span>
-</code></pre>
-</div>
-</details>
+filename: image filename
+roi: ROI</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h2 class="doc doc-heading" id="azcam.fits.sub">
-<code class="highlight language-python">
-sub<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span> </code>
-</h2>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.fits.sub">
+
+        <code class="highlight language-python">
+sub<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Subtract filename2 from filename1.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p>
-<details class="quote">
-<summary>Source code in <code>azcam\fits.py</code></summary>
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">filename1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename3</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"uint16"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Subtract filename2 from filename1.</span>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+                
+                  
+                    
 
-<span class="sd">    :param filename1: image filename</span>
-<span class="sd">    :param operator: '+','-','/','*'</span>
-<span class="sd">    :param filename2: may be an image filename or a constant.</span>
-<span class="sd">    :param filename3: optional, must be an image filename.  If not specified, result goes into filename1.</span>
-<span class="sd">    :param datatype: valid datatype string for resultant data type</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="n">arith</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<hr/>
+<hr>
 <div class="md-source-date">
-<small>
+  <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-02
     
   </small>
 </div>
-</article>
-</div>
-</div>
-</main>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
 <footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
         
         Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs
         </a>
-</div>
-</div>
-</div>
+      </div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-<script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
@@ -1520,5 +990,7 @@ sub<span class="p">(</span><span class="n">filename1</span><span class="p">,</sp
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

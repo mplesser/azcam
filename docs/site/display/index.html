@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -272,29 +284,42 @@
       
         <li class="md-nav__item">
   <a href="#azcam.display.Display" class="md-nav__link">
-    azcam.display.Display
+    Display
+  </a>
+  
+    <nav class="md-nav" aria-label="Display">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.display.Display.__init__" class="md-nav__link">
+    __init__()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.display.Display.display" class="md-nav__link">
     display()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.display.Display.initialize" class="md-nav__link">
     initialize()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.display.Display.set_display" class="md-nav__link">
     set_display()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -323,104 +348,70 @@ directly from the command line, e.g. <code>display.display('test.fits'</code>).<
 
 
 <div class="doc doc-object doc-class">
-<h2 class="hidden-toc" href="#azcam.display.Display" id="azcam.display.Display" style="visibility: hidden; position: absolute;">
-        </h2>
+<h2 class="doc doc-heading" id="azcam.display.Display">
+
+        <code>azcam.display.Display</code>
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>azcam's interface to SAO's ds9 image display tool.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.display.Display.display">
+<h3 class="doc doc-heading" id="azcam.display.Display.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'display'</span><span class="p">,</span> <span class="n">obj_name</span><span class="o">=</span><span class="s1">'Display'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.display.Display.display">
 
         <code class="highlight language-python">
 display<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">extension_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Display a file on the image display.
 If specified for an MEF file, only extension_number is displayed.</p>
 <p>:param image: a filename or an image object
 :param int extension_number: FITS extension number of image, -1 for all
 :return None:</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\display.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">extension_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Display a file on the image display.</span>
-<span class="sd">    If specified for an MEF file, only extension_number is displayed.</span>
-
-<span class="sd">    :param image: a filename or an image object</span>
-<span class="sd">    :param int extension_number: FITS extension number of image, -1 for all</span>
-<span class="sd">    :return None:</span>
-<span class="sd">    """</span>
-
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.display.Display.initialize">
+<h3 class="doc doc-heading" id="azcam.display.Display.initialize">
 
         <code class="highlight language-python">
 initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Initialize display.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\display.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Initialize display.</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
-        <span class="k">return</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
-        <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamWarning</span><span class="p">(</span><span class="s2">"Display is not enabled"</span><span class="p">)</span>
-        <span class="k">return</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_display</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_display</span><span class="p">)</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.display.Display.set_display">
+<h3 class="doc doc-heading" id="azcam.display.Display.set_display">
 
         <code class="highlight language-python">
 set_display<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display_number</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Set the current display by number.</p>
 <p>:param int display_number: Number for display to be used (0-&gt;N)
 :return None:</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\display.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display_number</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Set the current display by number.</span>
-
-<span class="sd">    :param int display_number: Number for display to be used (0-&gt;N)</span>
-<span class="sd">    :return None:</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 </div>
