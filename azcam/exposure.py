@@ -1282,8 +1282,8 @@ class Exposure(Objects):
             self.set_focalplane(*detpars["focalplane"])
         if detpars.get("roi"):
             self.set_roi(*detpars["roi"])
-        if detpars.get("extension_position"):
-            self.set_extension_position(detpars["extension_position"])
+        if detpars.get("ext_position"):
+            self.set_extension_position(detpars["ext_position"])
         if detpars.get("jpg_order"):
             self.set_jpg_order(detpars["jpg_order"])
         if detpars.get("det_number"):
