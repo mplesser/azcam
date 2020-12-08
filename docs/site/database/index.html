@@ -16,7 +16,7 @@
     
     
       
-        <title>Telescope Class - AzCam Documentation</title>
+        <title>Database - AzCam Documentation</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#telescope-class" class="md-skip">
+        <a href="#database-class" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Telescope Class
+              Database
             
           </span>
         </div>
@@ -251,11 +251,174 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../database/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Database
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Database
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase" class="md-nav__link">
+    AzcamDatabase
+  </a>
+  
+    <nav class="md-nav" aria-label="AzcamDatabase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.abortflag" class="md-nav__link">
+    abortflag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.app_type" class="md-nav__link">
+    app_type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.cli_cmds" class="md-nav__link">
+    cli_cmds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.coord_object" class="md-nav__link">
+    coord_object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.datafolder" class="md-nav__link">
+    datafolder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.errorstatus" class="md-nav__link">
+    errorstatus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.exposureflags" class="md-nav__link">
+    exposureflags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.exposureflags_rev" class="md-nav__link">
+    exposureflags_rev
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.filetypes" class="md-nav__link">
+    filetypes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.headerorder" class="md-nav__link">
+    headerorder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.headers" class="md-nav__link">
+    headers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.imageroi" class="md-nav__link">
+    imageroi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.verbosity" class="md-nav__link">
+    verbosity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.wd" class="md-nav__link">
+    wd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.get" class="md-nav__link">
+    get()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -283,44 +446,128 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope" class="md-nav__link">
-    Telescope
+  <a href="#azcam.database.AzcamDatabase" class="md-nav__link">
+    AzcamDatabase
   </a>
   
-    <nav class="md-nav" aria-label="Telescope">
+    <nav class="md-nav" aria-label="AzcamDatabase">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.__init__" class="md-nav__link">
+  <a href="#azcam.database.AzcamDatabase.abortflag" class="md-nav__link">
+    abortflag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.app_type" class="md-nav__link">
+    app_type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.cli_cmds" class="md-nav__link">
+    cli_cmds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.coord_object" class="md-nav__link">
+    coord_object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.datafolder" class="md-nav__link">
+    datafolder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.errorstatus" class="md-nav__link">
+    errorstatus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.exposureflags" class="md-nav__link">
+    exposureflags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.exposureflags_rev" class="md-nav__link">
+    exposureflags_rev
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.filetypes" class="md-nav__link">
+    filetypes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.headerorder" class="md-nav__link">
+    headerorder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.headers" class="md-nav__link">
+    headers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.imageroi" class="md-nav__link">
+    imageroi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.verbosity" class="md-nav__link">
+    verbosity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.wd" class="md-nav__link">
+    wd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.database.AzcamDatabase.__init__" class="md-nav__link">
     __init__()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.exposure_finish" class="md-nav__link">
-    exposure_finish()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.exposure_start" class="md-nav__link">
-    exposure_start()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.initialize" class="md-nav__link">
-    initialize()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.reset" class="md-nav__link">
-    reset()
+  <a href="#azcam.database.AzcamDatabase.get" class="md-nav__link">
+    get()
   </a>
   
 </li>
@@ -343,24 +590,187 @@
               
                 
                 
-                <h1 id="telescope-class">Telescope Class</h1>
-<p>This class defines Azcam's telescope interfaces. 
-One class is usually instantiated as the <em>telescope</em> object in the server.</p>
+                <h1 id="database-class">Database Class</h1>
+<p>This class defines the <code>azcam.db</code> object.</p>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="azcam.telescope.Telescope">
+<h2 class="doc doc-heading" id="azcam.database.AzcamDatabase">
 
-        <code>azcam.telescope.Telescope</code>
+        <code>azcam.database.AzcamDatabase</code>
 
 
       </h2>
 <div class="doc doc-contents first">
-<p>Base telescope class.</p>
 <div class="doc doc-children">
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.abortflag">
+
+        <code class="highlight">
+abortflag        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.app_type">
+
+        <code class="highlight">
+app_type        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.cli_cmds">
+
+        <code class="highlight">
+cli_cmds        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.coord_object">
+
+        <code class="highlight">
+coord_object        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.datafolder">
+
+        <code class="highlight">
+datafolder        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.errorstatus">
+
+        <code class="highlight">
+errorstatus        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.exposureflags">
+
+        <code class="highlight">
+exposureflags        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.exposureflags_rev">
+
+        <code class="highlight">
+exposureflags_rev        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.filetypes">
+
+        <code class="highlight">
+filetypes        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.headerorder">
+
+        <code class="highlight">
+headerorder: <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.headers">
+
+        <code class="highlight">
+headers        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.imageroi">
+
+        <code class="highlight">
+imageroi        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.verbosity">
+
+        <code class="highlight">
+verbosity        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.version">
+
+        <code class="highlight">
+version        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.wd">
+
+        <code class="highlight">
+wd        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+    </div>
+</div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.__init__">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.__init__">
 
         <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'telescope'</span><span class="p">,</span> <span class="n">obj_name</span><span class="o">=</span><span class="s1">'Telescope'</span><span class="p">)</span>        </code>
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -372,51 +782,53 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_finish">
+<h3 class="doc doc-heading" id="azcam.database.AzcamDatabase.get">
 
         <code class="highlight language-python">
-exposure_finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>        </code>
 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Optional call after exposure finishes.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_start">
-
-        <code class="highlight language-python">
-exposure_start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Optional call before exposure starts.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.initialize">
-
-        <code class="highlight language-python">
-initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Initializes the telescope interface.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.reset">
-
-        <code class="highlight language-python">
-reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Reset telescope object.</p>
+<p>Returns an database attribute by name.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>
+<p>name of attribute to return</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Any</code></td>
+<td>
+<p>value or None if <em>name</em> is not defined.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -430,7 +842,7 @@ reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-07
     
   </small>
 </div>
@@ -449,6 +861,27 @@ reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../programming/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Advanced
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

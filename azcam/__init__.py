@@ -17,6 +17,8 @@ log = db.logger.log  # to allow azcam.log()
 db.hostname = socket.gethostname()
 db.hostip = socket.gethostbyname(db.hostname)
 
+api = None
+
 # clean namespace (never used directly again)
 del socket
 del database

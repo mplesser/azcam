@@ -205,37 +205,8 @@
 
 
   <li class="md-nav__item">
-<<<<<<< HEAD
-    <a href="../focalplane/" class="md-nav__link">
-      FocalPlane Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../header/" class="md-nav__link">
-      Header Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../image/" class="md-nav__link">
-      Image Class
-=======
     <a href="../classes/" class="md-nav__link">
       Classes
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
     </a>
   </li>
 
@@ -363,17 +334,22 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
   </li>
 
     
@@ -463,13 +439,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -528,22 +497,8 @@ exposures, images, databases, time, communication interfaces, etc.
 The required command syntax is <code>object.command(args)</code> where <code>object</code> is the object name (such as 
 <em>controller</em>, <em>instrument</em>, <em>telescope</em>, etc.) and <code>command()</code> is the command to be sent. If <code>command()</code>
 uses arguments, they are specified as comma separated values of the appropriate type, 
-<<<<<<< HEAD
-such as <code>object.command('ITL',1.234,45)</code>. For example, to send the command initialize to the 
-instrument, use <code>instrument.initialize()</code>. To send the <code>get_focus</code> command to the telescope, 
-use <code>telescope.get_focus()</code>.</p>
-<h2 id="header-commands">Header Commands</h2>
-<ul>
-<li><a href="../header/">Header class</a></li>
-</ul>
-<h2 id="focalplane">Focalplane</h2>
-<ul>
-<li><a href="../focalplane/">FocalPlane class</a></li>
-</ul>
-=======
 such as <code>object.command('ITL', 1.234,45)</code>. For example, the command to initialize to the 
 instrument is <code>instrument.initialize()</code> and the command to get instrument focus is <code>telescope.get_focus()</code>.</p>
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
 <h2 id="attributes">Attributes</h2>
 <p>Parameters may be read with the <code>azcam.api.exposure.get_par()</code> command and written with the <code>azcam.api.exposure.set_par()</code> 
 command. For example, <code>azcam.api.exposure.get_par('imagetype')</code> returns the current image type.</p>
@@ -592,8 +547,6 @@ systems have one a command sever port and a controller sever port.</p>
 </ul>
 </li>
 </ul>
-<h2 id="architecture">Architecture</h2>
-<p><a href="../img/azcamarchitecture.jpg">AzCam Architecture image</a></p>
                 
                   
                     
@@ -639,6 +592,20 @@ systems have one a command sever port and a controller sever port.</p>
             </div>
           </a>
         
+        
+          <a href="../database/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Database
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>

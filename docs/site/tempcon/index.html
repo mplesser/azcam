@@ -205,37 +205,8 @@
 
 
   <li class="md-nav__item">
-<<<<<<< HEAD
-    <a href="../focalplane/" class="md-nav__link">
-      FocalPlane Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../header/" class="md-nav__link">
-      Header Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../image/" class="md-nav__link">
-      Image Class
-=======
     <a href="../classes/" class="md-nav__link">
       Classes
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
     </a>
   </li>
 
@@ -276,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -301,99 +284,112 @@
       
         <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon" class="md-nav__link">
-    azcam.tempcon.TempCon
+    TempCon
+  </a>
+  
+    <nav class="md-nav" aria-label="TempCon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.__init__" class="md-nav__link">
+    __init__()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.apply_corrections" class="md-nav__link">
     apply_corrections()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.define_keywords" class="md-nav__link">
     define_keywords()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.exposure_finish" class="md-nav__link">
     exposure_finish()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.exposure_start" class="md-nav__link">
     exposure_start()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.get_control_temperature" class="md-nav__link">
     get_control_temperature()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.get_keyword" class="md-nav__link">
     get_keyword()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.get_temperature" class="md-nav__link">
     get_temperature()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.get_temperatures" class="md-nav__link">
     get_temperatures()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.initialize" class="md-nav__link">
     initialize()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.reset" class="md-nav__link">
     reset()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.set_calibrations" class="md-nav__link">
     set_calibrations()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.set_control_temperature" class="md-nav__link">
     set_control_temperature()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.set_corrections" class="md-nav__link">
     set_corrections()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -414,337 +410,163 @@
 <p>This class defines Azcam's temperature controller interface. 
 The class is usually instantiated as the <em>tempcon</em> object in the server.</p>
 <div class="doc doc-object doc-class">
-<h2 class="hidden-toc" href="#azcam.tempcon.TempCon" id="azcam.tempcon.TempCon" style="visibility: hidden; position: absolute;">
-        </h2>
+<h2 class="doc doc-heading" id="azcam.tempcon.TempCon">
+
+        <code>azcam.tempcon.TempCon</code>
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Temperature control class.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.apply_corrections">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">,</span> <span class="n">obj_name</span><span class="o">=</span><span class="s1">'Tempcon'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.apply_corrections">
 
         <code class="highlight language-python">
 apply_corrections<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Correct the temperatures for offset and scale is temperature correction is enabled.</p>
 <p>:param temperature: temperatures to be corrected
 :param temperature_id: temperature ID number</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">apply_corrections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">temperature_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Correct the temperatures for offset and scale is temperature correction is enabled.</span>
-
-<span class="sd">    :param temperature: temperatures to be corrected</span>
-<span class="sd">    :param temperature_id: temperature ID number</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_correction</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="n">temperature</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_scales</span><span class="p">[</span><span class="n">temperature_id</span><span class="p">]</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_offsets</span><span class="p">[</span><span class="n">temperature_id</span><span class="p">]</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">temperature</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.define_keywords">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.define_keywords">
 
         <code class="highlight language-python">
 define_keywords<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Defines temperature control keywords if they are not already defined.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">define_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Defines temperature control keywords if they are not already defined.</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">keywords</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span>
-
-    <span class="c1"># add keywords</span>
-    <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"CAMTEMP"</span><span class="p">,</span> <span class="s2">"DEWTEMP"</span><span class="p">]</span>
-    <span class="n">comments</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"CAMTEMP"</span><span class="p">:</span> <span class="s2">"Camera temperature in C"</span><span class="p">,</span>
-        <span class="s2">"DEWTEMP"</span><span class="p">:</span> <span class="s2">"Dewar temperature in C"</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="n">types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"CAMTEMP"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">"DEWTEMP"</span><span class="p">:</span> <span class="nb">float</span><span class="p">}</span>
-
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">comments</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">types</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_finish">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_finish">
 
         <code class="highlight language-python">
 exposure_finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Custom commands after exposure finishes.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">exposure_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Custom commands after exposure finishes.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_start">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_start">
 
         <code class="highlight language-python">
 exposure_start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Custom commands before exposure starts.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">exposure_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Custom commands before exposure starts.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.get_control_temperature">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_control_temperature">
 
         <code class="highlight language-python">
 get_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Get the control temperature (set point).</p>
 <p>:param temperature_id: temperature ID number</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_control_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Get the control temperature (set point).</span>
-
-<span class="sd">    :param temperature_id: temperature ID number</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_temperature</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.get_keyword">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_keyword">
 
         <code class="highlight language-python">
 get_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Read a temperature keyword value and returns it as [value, comment, type string].</p>
 <p>:param keyword: keyword name to read</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Read a temperature keyword value and returns it as [value, comment, type string].</span>
-
-<span class="sd">    :param keyword: keyword name to read</span>
-<span class="sd">    """</span>
-
-    <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_temperatures</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">"CAMTEMP"</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">"DEWTEMP"</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamError</span><span class="p">(</span><span class="s2">"invalid keyword"</span><span class="p">)</span>
-
-    <span class="c1"># store value in Header</span>
-    <span class="k">if</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">"CAMTEMP"</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">"CAMTEMP"</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="s2">"Camera temperature in C"</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">keyword</span> <span class="o">==</span> <span class="s2">"DEWTEMP"</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">set_keyword</span><span class="p">(</span><span class="s2">"DEWTEMP"</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="s2">"Dewar temperature in C"</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_type_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">typestrings</span><span class="p">[</span><span class="n">keyword</span><span class="p">])</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">temp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">comments</span><span class="p">[</span><span class="n">keyword</span><span class="p">],</span> <span class="n">t</span><span class="p">]</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperature">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperature">
 
         <code class="highlight language-python">
 get_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Returns a system temperature.</p>
 <p>:param temperature_id: temperature ID number</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Returns a system temperature.</span>
-
-<span class="sd">    :param temperature_id: temperature ID number</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bad_temp_value</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperatures">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperatures">
 
         <code class="highlight language-python">
 get_temperatures<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Return all system temperatures.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_temperatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Return all system temperatures.</span>
-<span class="sd">    """</span>
-
-    <span class="n">temps</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number_sensors</span><span class="p">)]</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_temps</span><span class="p">:</span>
-        <span class="n">azcam</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"templog: </span><span class="si">{</span><span class="n">temps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">temps</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">temps</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">temps</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">logconsole</span><span class="o">=</span><span class="mi">0</span>
-        <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">temps</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.initialize">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.initialize">
 
         <code class="highlight language-python">
 initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Initialize the temperature control interface.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Initialize the temperature control interface.</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
-        <span class="k">return</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
-        <span class="n">azcam</span><span class="o">.</span><span class="n">AzcamWarning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not enabled"</span><span class="p">)</span>
-        <span class="k">return</span>
-
-    <span class="c1"># self.temperature_offsets = self.number_sensors * [0.0]</span>
-    <span class="c1"># self.temperature_scales = self.number_sensors * [1.0]</span>
-    <span class="c1"># self.temperature_cals = self.number_sensors * [3]</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.reset">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.reset">
 
         <code class="highlight language-python">
 reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Reset tempcon object.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Reset tempcon object.</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
-        <span class="k">return</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_control_temperature</span><span class="p">()</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.set_calibrations">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_calibrations">
 
         <code class="highlight language-python">
 set_calibrations<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cals</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Set calibration curves for temperature sensors.</p>
 <p>:param cals: list of flags defining each temperature sensor type</p>
@@ -756,113 +578,35 @@ for each sensor's temperature conversion.</p>
 <li>2 =&gt; 1N4148 diode</li>
 <li>3 =&gt; 1N914  diode</li>
 </ul>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_calibrations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Set calibration curves for temperature sensors.</span>
-
-<span class="sd">    :param cals: list of flags defining each temperature sensor type</span>
-
-<span class="sd">    The values of these flags are from the list below which define the calibration curves to use</span>
-<span class="sd">    for each sensor's temperature conversion.</span>
-
-<span class="sd">       * 0 =&gt; DT670  diode</span>
-<span class="sd">       * 1 =&gt; AD590  sensor</span>
-<span class="sd">       * 2 =&gt; 1N4148 diode</span>
-<span class="sd">       * 3 =&gt; 1N914  diode</span>
-<span class="sd">    """</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">temperature_cals</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cal</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cals</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_cals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cal</span><span class="p">)</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.set_control_temperature">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_control_temperature">
 
         <code class="highlight language-python">
 set_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Set the control temperature (set point).</p>
 <p>:param temperature: control temperature in Celsius. If not specified, use saved value
 :param temperature_id: temperature ID number</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_control_temperature</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">temperature_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Set the control temperature (set point).</span>
-
-<span class="sd">    :param temperature: control temperature in Celsius. If not specified, use saved value</span>
-<span class="sd">    :param temperature_id: temperature ID number</span>
-<span class="sd">    """</span>
-
-    <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">temperature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_temperature</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">control_temperature</span> <span class="o">=</span> <span class="n">temperature</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.tempcon.TempCon.set_corrections">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_corrections">
 
         <code class="highlight language-python">
 set_corrections<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temperature_scales</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Set temperature correction values and enable correction.
 If both parameters are None then correction is disabled.</p>
 <p>:param temperature_offsets: list of offsets for each temperature
 :param temperature_scales: list of scale factors for each temperature</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\tempcon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_corrections</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">temperature_offsets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">temperature_scales</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">"""</span>
-<span class="sd">    Set temperature correction values and enable correction.</span>
-<span class="sd">    If both parameters are None then correction is disabled.</span>
-
-<span class="sd">    :param temperature_offsets: list of offsets for each temperature</span>
-<span class="sd">    :param temperature_scales: list of scale factors for each temperature</span>
-<span class="sd">    """</span>
-
-    <span class="c1"># set and save values</span>
-    <span class="k">if</span> <span class="n">temperature_offsets</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">temperature_scales</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_correction</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_correction</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">temperature_offsets</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_offsets</span> <span class="o">=</span> <span class="n">temperature_offsets</span>
-    <span class="k">if</span> <span class="n">temperature_scales</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_scales</span> <span class="o">=</span> <span class="n">temperature_scales</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 </div>

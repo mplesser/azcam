@@ -205,37 +205,8 @@
 
 
   <li class="md-nav__item">
-<<<<<<< HEAD
-    <a href="../focalplane/" class="md-nav__link">
-      FocalPlane Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../header/" class="md-nav__link">
-      Header Class
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../image/" class="md-nav__link">
-      Image Class
-=======
     <a href="../classes/" class="md-nav__link">
       Classes
->>>>>>> c451e5e99814b11a8d68f1cabce8d75db82d3b96
     </a>
   </li>
 
@@ -276,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -301,36 +284,69 @@
       
         <li class="md-nav__item">
   <a href="#azcam.controller.Controller" class="md-nav__link">
-    azcam.controller.Controller
+    Controller
+  </a>
+  
+    <nav class="md-nav" aria-label="Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.controller.Controller.__init__" class="md-nav__link">
+    __init__()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.controller.Controller.flush" class="md-nav__link">
     flush()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.controller.Controller.set_roi" class="md-nav__link">
     set_roi()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.controller.Controller.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#azcam.controller.Controller.set_shutter_state" class="md-nav__link">
     set_shutter_state()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.controller.DetPars" class="md-nav__link">
+    DetPars
+  </a>
+  
+    <nav class="md-nav" aria-label="DetPars">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.controller.DetPars.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -350,113 +366,459 @@
                 <h1 id="controller-class">Controller Class</h1>
 <p>This class defines Azcam's camera controller interfaces. </p>
 <div class="doc doc-object doc-class">
-<h2 class="hidden-toc" href="#azcam.controller.Controller" id="azcam.controller.Controller" style="visibility: hidden; position: absolute;">
-        </h2>
-<div class="doc doc-contents first">
-<p>The base controller class for azcam-supported controllers.</p>
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.flush">
+<h2 class="doc doc-heading" id="azcam.controller.Controller">
 
-        <code class="highlight language-python">
-flush<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+        <code>azcam.controller.Controller</code>
 
 
       </h2>
-<div class="doc doc-contents ">
-<p>Flush or clear out the detector.
-Returns after clearing is finished which could take many seconds.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Flush or clear out the detector.</span>
-<span class="sd">    Returns after clearing is finished which could take many seconds.</span>
-<span class="sd">    """</span>
+<div class="doc doc-contents first">
+<p>The base controller class for azcam-supported controllers.</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>self.interface_type</code></td>
+<td><code>int</code></td>
+<td>
+<p>0 = demo, 4 = PCIe</p>
+</td>
+</tr>
+<tr>
+<td><code>self.header</code></td>
+<td><code>Header object</code></td>
+<td>
+<p>controller header</p>
+</td>
+</tr>
+<tr>
+<td><code>self.exposure_time</code></td>
+<td><code>float</code></td>
+<td>
+<p>exposure time (secs)</p>
+</td>
+</tr>
+<tr>
+<td><code>self.detpars</code></td>
+<td><code>DetPars object</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.reset_flag</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True if the controller has been reset</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.controller.Controller.__init__">
 
-    <span class="k">return</span>
-</code></pre>
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'controller'</span><span class="p">,</span> <span class="n">obj_name</span><span class="o">=</span><span class="s1">'Controller'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
 </div>
-</details>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.controller.Controller.flush">
+
+        <code class="highlight language-python">
+flush<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Flush or clear out the sensor.
+Returns after clearing is finished, which could take many seconds.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cycles</code></td>
+<td><code></code></td>
+<td>
+<p>number of times to flush sensor</p>
+</td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_roi">
+<h3 class="doc doc-heading" id="azcam.controller.Controller.set_roi">
 
         <code class="highlight language-python">
 set_roi<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Sets ROI parameters values in the controller based on focalplane parameters.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Sets ROI parameters values in the controller based on focalplane parameters.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_shutter">
+<h3 class="doc doc-heading" id="azcam.controller.Controller.set_shutter">
 
         <code class="highlight language-python">
 set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
 
 
-      </h2>
+      </h3>
 <div class="doc doc-contents ">
 <p>Open or close controller shutter.</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Open or close controller shutter.</span>
-<span class="sd">    """</span>
-
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True to open shutter, False to close shutter</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>shutter_id</code></td>
+<td><code>int</code></td>
+<td>
+<p>shutter ID number</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h2 class="doc doc-heading" id="azcam.controller.Controller.set_shutter_state">
+<h3 class="doc doc-heading" id="azcam.controller.Controller.set_shutter_state">
 
         <code class="highlight language-python">
-set_shutter_state<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Flag</span><span class="o">=</span><span class="s1">'close'</span><span class="p">)</span>        </code>
+set_shutter_state<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Sets the shutter state during an exposure.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flag</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True open shutter during exposure, False close shutter during exposure</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.controller.DetPars">
+
+        <code>azcam.controller.DetPars</code>
 
 
       </h2>
-<div class="doc doc-contents ">
-<p>Sets the shutter state during an exposure.
-Flag is:
-open or 1 -&gt; close shutter during exposure
-close or 0 -&gt; open shutter during exposure</p>
-<details class="quote">
-          <summary>Source code in <code>azcam\controller.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shutter_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Flag</span><span class="o">=</span><span class="s2">"close"</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Sets the shutter state during an exposure.</span>
-<span class="sd">    Flag is:</span>
-<span class="sd">    open or 1 -&gt; close shutter during exposure</span>
-<span class="sd">    close or 0 -&gt; open shutter during exposure</span>
-<span class="sd">    """</span>
+<div class="doc doc-contents first">
+<p>Defines detector parameters for controller shifting, image size, etc.
+These are updated by exposure.set_format, .set_focalplane, and .set_roi.</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>self.numpix_image</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.numcols_image</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.numrows_image</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ns_total</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ns_predark</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ns_underscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ns_overscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.np_total</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.np_predark</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.np_underscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.np_overscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.np_frametransfer</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.first_col</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.last_col</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.first_row</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.last_row</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.col_bin</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.row_bin</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.framet</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xdata</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xflush</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xpreskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xunderscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xpostskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.xoverscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ydata</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.yflush</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ypreskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.yunderscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.yskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.ypostskip</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.yoverscan</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.coltotal</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.colusct</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.coluscw</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.coluscm</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.coloscw</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.coloscm</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowtotal</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowusct</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowuscw</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowuscm</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowoscw</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>self.rowoscm</code></td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.controller.DetPars.__init__">
 
-    <span class="k">return</span>
-</code></pre>
-</div>
-</details>
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Create detpars database.</p>
 </div>
 </div>
 </div>
@@ -470,7 +832,7 @@ close or 0 -&gt; open shutter during exposure</p>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-07
     
   </small>
 </div>
