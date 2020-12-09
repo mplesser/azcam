@@ -19,9 +19,9 @@ class Controller(Objects):
         self.reset_flag (bool): True if the controller has been reset
     """
 
-    def __init__(self, obj_id="controller", obj_name="Controller"):
+    def __init__(self, obj_id="controller", name="Controller"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         #: interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0

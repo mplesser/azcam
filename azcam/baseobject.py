@@ -20,18 +20,18 @@ class Objects(object):
         self.is_reset (bool): True when object has been reset
     """
 
-    def __init__(self, obj_id: str, obj_name: str = None):
+    def __init__(self, obj_id: str, name: str = "unknown"):
         """
         Args:
             obj_id: name used to reference the object (controller, display, ...)
-            obj_name: descriptive name for the object
+            name: descriptive name for the object
         """
 
         #: id is the name used to reference the object (controller, display, ...)
         self.id = obj_id
 
         #: name is a descriptive name for the object
-        self.name = obj_name
+        self.name = name
 
         #: True when object is enabled
         self.enabled = 1

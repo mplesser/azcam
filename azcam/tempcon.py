@@ -14,9 +14,11 @@ class TempCon(Objects):
     Temperature control class.
     """
 
-    def __init__(self, obj_id="tempcon", obj_name="Tempcon"):
+    def __init__(self, obj_id="tempcon", name="Tempcon"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
+
+        self.id
 
         #: control or set temperature at which to regulate
         self.control_temperature = 0.0
@@ -64,10 +66,6 @@ class TempCon(Objects):
             azcam.AzcamWarning(f"{self.name} is not enabled")
             return
 
-        # self.temperature_offsets = self.number_sensors * [0.0]
-        # self.temperature_scales = self.number_sensors * [1.0]
-        # self.temperature_cals = self.number_sensors * [3]
-
         self.initialized = 1
 
         return
@@ -105,9 +103,9 @@ class TempCon(Objects):
     ) -> None:
         """
         Set the control temperature (set point).
-
-        :param temperature: control temperature in Celsius. If not specified, use saved value
-        :param temperature_id: temperature ID number
+        Args:
+            temperature: control temperature in Celsius. If not specified, use saved value
+            temperature_id: temperature sensor identifier
         """
 
         if temperature is None:
@@ -120,8 +118,10 @@ class TempCon(Objects):
     def get_control_temperature(self, temperature_id: int = 0) -> float:
         """
         Get the control temperature (set point).
-
-        :param temperature_id: temperature ID number
+        Args:
+            temperature_id: temperature sensor identifier
+        Returns:
+            control_temperature: control temperature
         """
 
         return self.control_temperature
@@ -129,6 +129,8 @@ class TempCon(Objects):
     def get_temperatures(self) -> List[float]:
         """
         Return all system temperatures.
+        Returns:
+            temperatures: list of temperatures read
         """
 
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
@@ -143,8 +145,10 @@ class TempCon(Objects):
     def get_temperature(self, temperature_id: int = 0) -> float:
         """
         Returns a system temperature.
-
-        :param temperature_id: temperature ID number
+        Args:
+            temperature_id: temperature sensor identifier
+        Returns:
+            temperature: temperature read
         """
 
         return self.bad_temp_value
@@ -152,9 +156,6 @@ class TempCon(Objects):
     def set_calibrations(self, cals: List[int]) -> None:
         """
         Set calibration curves for temperature sensors.
-
-        :param cals: list of flags defining each temperature sensor type
-
         The values of these flags are from the list below which define the calibration curves to use
         for each sensor's temperature conversion.
 
@@ -162,6 +163,8 @@ class TempCon(Objects):
            * 1 => AD590  sensor
            * 2 => 1N4148 diode
            * 3 => 1N914  diode
+        Args:
+            cals: list of flags defining each temperature sensor type
         """
 
         self.temperature_cals = []
@@ -178,9 +181,9 @@ class TempCon(Objects):
         """
         Set temperature correction values and enable correction.
         If both parameters are None then correction is disabled.
-
-        :param temperature_offsets: list of offsets for each temperature
-        :param temperature_scales: list of scale factors for each temperature
+        Args:
+            temperature_offsets: list of offsets for each temperature
+            temperature_scales: list of scale factors for each temperature
         """
 
         # set and save values
@@ -198,9 +201,11 @@ class TempCon(Objects):
     def apply_corrections(self, temperature: float, temperature_id: int = 0) -> None:
         """
         Correct the temperatures for offset and scale is temperature correction is enabled.
-
-        :param temperature: temperatures to be corrected
-        :param temperature_id: temperature ID number
+        Args:
+            temperature: temperatures to be corrected
+            temperature_id: temperature ID number
+        Returns:
+            corrected_temperature: temperature after correction has been appied
         """
 
         if self.temperature_correction:
@@ -234,9 +239,11 @@ class TempCon(Objects):
 
     def get_keyword(self, keyword: str) -> List:
         """
-        Read a temperature keyword value and returns it as [value, comment, type string].
-
-        :param keyword: keyword name to read
+        Read a temperature keyword value and returns it as [value, comment, type string]
+        Args:
+            keyword: name of keyword
+        Returns:
+            list of [keyword, comment, type]
         """
 
         reply = self.get_temperatures()

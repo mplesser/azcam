@@ -12,9 +12,9 @@ class Telescope(Objects):
     Base telescope class.
     """
 
-    def __init__(self, obj_id="telescope", obj_name="Telescope"):
+    def __init__(self, obj_id="telescope", name="Telescope"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         # keywords for header, list of [keyword, comment, type]
         self.keywords = {}

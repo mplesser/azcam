@@ -12,9 +12,9 @@ class Display(Objects):
     azcam's interface to SAO's ds9 image display tool.
     """
 
-    def __init__(self, obj_id="display", obj_name="Display"):
+    def __init__(self, obj_id="display", name="Display"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         # create the display Header object
         self.header = Header("Display")

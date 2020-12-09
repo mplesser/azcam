@@ -14,9 +14,9 @@ class Instrument(Objects):
     The base Instrument class.
     """
 
-    def __init__(self, obj_id="instrument", obj_name="Instrument"):
+    def __init__(self, obj_id="instrument", name="Instrument"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         # active comparisons
         self.active_comps = []

@@ -223,9 +223,9 @@ class Exposure(Objects):
     which should inherit this class.
     """
 
-    def __init__(self, obj_id="exposure", obj_name="Exposure"):
+    def __init__(self, obj_id="exposure", name="Exposure"):
 
-        super().__init__(obj_id, obj_name)
+        super().__init__(obj_id, name)
 
         #: exposure flags, may be used anywhere
         self.exposureflags = {
