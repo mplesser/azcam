@@ -227,6 +227,26 @@ class Exposure(Objects):
 
         super().__init__(obj_id, obj_name)
 
+        #: exposure flags, may be used anywhere
+        self.exposureflags = {
+            "NONE": 0,
+            "EXPOSING": 1,
+            "ABORT": 2,
+            "PAUSE": 3,
+            "RESUME": 4,
+            "READ": 5,
+            "PAUSED": 6,
+            "READOUT": 7,
+            "SETUP": 8,
+            "WRITING": 9,
+            "GUIDEERROR": 10,
+            "ERROR": 11,
+        }
+
+        azcam.db.exposureflags = self.exposureflags
+
+        self.exposureflags_rev = {v: k for k, v in self.exposureflags.items()}
+
         #: exposure flag defining state of current exposure
         self.exposure_flag = azcam.db.exposureflags["NONE"]
 

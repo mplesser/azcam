@@ -71,6 +71,37 @@ class Objects(object):
 
         return
 
+    def get(self, name: str) -> typing.Any:
+        """
+        Returns an existing attribute of this class.
+        Args:
+            name: name of attribute to return
+        Returns:
+            value: value of attribute or None if not defined
+        """
+
+        if not hasattr(self, name):
+            return
+
+        attr = getattr(self, name)
+
+        return attr
+
+    def set(self, name: str, value: typing.Any):
+        """
+        Sets an existing attribute value of this class.
+        Args:
+            name: name of attribute to set
+            value: value of attribute to set
+        """
+
+        if not hasattr(self, name):
+            return
+
+        setattr(self, name, value)
+
+        return
+
     def define_keywords(self):
         """
         Sets up header keywords dictionary if not already defined.

@@ -19,6 +19,9 @@ class Telescope(Objects):
         # keywords for header, list of [keyword, comment, type]
         self.keywords = {}
 
+        # focus position
+        self.focus_position = 0
+
         # create the temp control Header object
         self.header = Header("Telescope")
         self.header.set_header("telescope", 5)

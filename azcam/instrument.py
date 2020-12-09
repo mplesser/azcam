@@ -27,6 +27,9 @@ class Instrument(Objects):
         # keywords for header, list of [keyword, comment, type]
         self.keywords = {}
 
+        # focus position
+        self.focus_position = 0
+
         # instrument header object
         self.header = Header("Instrument")
         self.header.set_header("instrument", 3)
