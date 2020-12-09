@@ -8,7 +8,5 @@ from .api_server import API
 
 api = API()
 
-setattr(azcam, "api", api)
-
 # clean namespace (never used directly again)
 del azcam.api_server

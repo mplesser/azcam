@@ -89,6 +89,7 @@ def add_searchfolder(search_folder="", include_subfolders=True):
     """
     Appends search_folder (and by default all its subfolders) to the current python search path.
     Default is current folder and its subfolders.
+    Subfolders beginning with "_" are not included.
 
     :param search_folder: Name of folder to add to sys.path
     :param include_subfolders: True to include all subfolders in sys.path
@@ -98,8 +99,6 @@ def add_searchfolder(search_folder="", include_subfolders=True):
     if search_folder == "":
         search_folder = curdir()
 
-    # search_folder = os.path.normpath(search_folder)
-    # search_folder = os.path.abspath(search_folder)
     search_folder = azcam.utils.fix_path(search_folder)
 
     # append all subfolders of search_folder to current search path
@@ -110,10 +109,10 @@ def add_searchfolder(search_folder="", include_subfolders=True):
         for root, dirs, _ in os.walk(search_folder):
             if dirs:
                 for s in dirs:
+                    if s.startswith("_"):
+                        continue
                     sub = os.path.join(root, s)
                     sub = azcam.utils.fix_path(sub)
-                    # sub = os.path.normpath(sub)
-                    # sub = os.path.abspath(sub)
                     if sub not in sys.path:
                         sys.path.append(sub)
 

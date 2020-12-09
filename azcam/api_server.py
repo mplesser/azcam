@@ -2,8 +2,6 @@
 API interface for azcamserver.
 """
 
-import sys
-
 import azcam
 
 # import azcam.api_azcam

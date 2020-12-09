@@ -1,4 +1,5 @@
 import azcam
+from .api_console import API
 
 azcam.db.app_type = 2  # console
 
@@ -15,10 +16,7 @@ azcam.db.imageparnames = [
     "imagefolder",
 ]
 
-from .api_console import API
-
 api = API()
-# setattr(azcam, "api", api)
 
 # clean namespace (never used directly again)
 del azcam.api_console

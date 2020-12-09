@@ -13,13 +13,11 @@ from . import fits, plot, utils
 db.logger = Logger()
 log = db.logger.log  # to allow azcam.log()
 
+api = None
+
 # save this machine's hostname and ip address
 db.hostname = socket.gethostname()
 db.hostip = socket.gethostbyname(db.hostname)
 
-api = None
-
 # clean namespace (never used directly again)
-del socket
-del database
-del exceptions
+del socket, database, exceptions, Logger
