@@ -141,7 +141,7 @@ class Header(object):
 
         self.values[keyword] = value
 
-        if comment is None:
+        if comment is None or comment.lower == "none":
             if self.comments.get(keyword):  # use previous comment
                 pass
             else:
@@ -150,7 +150,7 @@ class Header(object):
             self.comments[keyword] = comment
 
         if typestring is None:
-            self.typestrings[keyword] = self.get_type_string(str)  # assume string
+            self.typestrings[keyword] = "str"
         else:
             self.typestrings[keyword] = typestring
 
@@ -182,13 +182,13 @@ class Header(object):
             value = " ".join(tokens[1:])
 
         # try to get type of value
-        t = self.get_type_string(str)  # default
+        t = "str"
         if type(value) == int:
             value = int(value)
-            t = self.get_type_string(int)
+            t = "int"
         elif type(value) == float:
             value = float(value)
-            t = self.get_type_string(float)
+            t = "float"
 
         self.set_keyword(keyword, value, comment, t)
 
@@ -208,7 +208,7 @@ class Header(object):
         comment = self.comments[keyword]
         if comment is None:
             comment = ""
-        t = self.get_type_string(self.typestrings[keyword])
+        t = self.typestrings[keyword]
 
         return [value, comment, t]
 
@@ -273,20 +273,6 @@ class Header(object):
             lines += line
 
         return lines
-
-    def get_type_string(self, pythontype):
-        """
-        Make a string indicating the python data type pythontype.
-        """
-
-        if pythontype == str or pythontype not in [int, float]:
-            attributetypestring = "str"
-        elif pythontype == int:
-            attributetypestring = "int"
-        else:
-            attributetypestring = "float"
-
-        return attributetypestring
 
     def convert_type(self, value, pythontype):
         """

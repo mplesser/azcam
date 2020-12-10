@@ -263,6 +263,6 @@ class TempCon(Objects):
             temp = float(int(temp * 1000.0) / 1000.0)
             self.header.set_keyword("DEWTEMP", temp, "Dewar temperature in C", float)
 
-        t = self.header.get_type_string(self.header.typestrings[keyword])
+        t = self.header.self.header.typestrings[keyword]
 
         return [temp, self.header.comments[keyword], t]

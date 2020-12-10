@@ -71,7 +71,7 @@ class HeaderMethods(object):
         self,
         keyword: str,
         key_value: str,
-        key_comment: str = "",
+        key_comment: str = None,
         key_type: str = "str",
     ) -> Optional[str]:
         """
@@ -92,6 +92,9 @@ class HeaderMethods(object):
         if type(key_comment) == str:
             if " " in key_comment:
                 key_comment = f'"{key_comment}"'
+
+        if key_comment is None:
+            key_comment = "None"
 
         s = f"{self.object_name}.set_keyword {keyword} {key_value} {key_comment} {key_type}"
 
