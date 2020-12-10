@@ -75,13 +75,9 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = "=================================================================="
 
         return
 
@@ -106,6 +102,8 @@ class Header(object):
     def get_all_keywords(self):
         """
         Return a list of all keyword names.
+        Returns:
+            keywords: list of all keywords
         """
 
         klist = list(self.keywords.keys())
@@ -129,8 +127,12 @@ class Header(object):
 
     def set_keyword(self, keyword, value, comment=None, typestring=None):
         """
-        Set a keyword value and comment.
-        typestring is one of 'str', 'int', or 'float'.
+        Set a keyword value, comment, and type.
+        Args:
+            keyword: keyword
+            value: value of keyword
+            comment: comment string
+            typestring: one of 'str', 'int', or 'float'
         """
 
         if keyword not in self.keywords:
@@ -141,7 +143,11 @@ class Header(object):
 
         self.values[keyword] = value
 
+<<<<<<< HEAD
         if comment is None or comment.lower == "none":
+=======
+        if comment is None or comment == "no_comment":
+>>>>>>> b7299ec553236aac8bb5223d5aa45197b7ff6a21
             if self.comments.get(keyword):  # use previous comment
                 pass
             else:
