@@ -27,7 +27,8 @@ class Filename(object):
         param object parent: reference to parent image object
         """
 
-        self.parent = parent  # calling object reference
+        # self.parent = parent  # calling object reference
+        self.parent = self  # calling object reference
 
         self.filetype = 0  # from image object
         # True to overwrite image files of the same name
@@ -49,6 +50,8 @@ class Filename(object):
 
         if parent is not None:
             self.filetype = parent.filetype
+
+        print("filename init")
 
     def get_name(self):
         """
@@ -82,25 +85,16 @@ class Filename(object):
                     + extension
                 )
             else:
-                filename = (
-                    folder + self.root + "%04d" % self.sequence_number + "." + extension
-                )
+                filename = folder + self.root + "%04d" % self.sequence_number + "." + extension
         else:
             if self.autoname:
                 filename = (
-                    folder
-                    + self.root
-                    + "."
-                    + self.parent.image_type.upper()
-                    + "."
-                    + extension
+                    folder + self.root + "." + self.parent.image_type.upper() + "." + extension
                 )
             else:
                 filename = folder + self.root + "." + extension
 
-        filename = filename.replace(
-            "..", "."
-        )  # clean up as could have two periods together
+        filename = filename.replace("..", ".")  # clean up as could have two periods together
 
         return filename
 
@@ -215,7 +209,7 @@ class ObsTime(object):
         return
 
 
-class Exposure(Objects):
+class Exposure(Objects, Filename):
     """
     The Azcam Exposure class.
     Only required attributes and stub methods are defined here. Additional
@@ -225,7 +219,9 @@ class Exposure(Objects):
 
     def __init__(self, obj_id="exposure", name="Exposure"):
 
-        super().__init__(obj_id, name)
+        Objects.__init__(self, obj_id, name)
+
+        Filename.__init__(self)
 
         #: exposure flags, may be used anywhere
         self.exposureflags = {
@@ -353,7 +349,9 @@ class Exposure(Objects):
         self.header.set_header("exposure", 1)
 
         # filename object
-        self.filename = Filename(self)
+        # self.filename = Filename(self)
+
+        self.obstime = ObsTime()
 
         # image object
         self.image = Image()
@@ -365,8 +363,6 @@ class Exposure(Objects):
         self.data_order = []
 
         self.imageheaderfile = ""
-
-        self.obstime = ObsTime()
 
         # obj_id's which are reset or initialized with exposure
         self.objects_reset = [
@@ -390,8 +386,6 @@ class Exposure(Objects):
         """
         Initialize exposure.
         """
-
-        # self.filename.folder = azcam.db.systemfolder
 
         # call initialize() method on other objects
         for obj in self.objects_init:
@@ -474,10 +468,10 @@ class Exposure(Objects):
         title is the image title.
         """
 
-        old_testimage = self.filename.test_image
+        old_testimage = self.test_image
         old_imagetype = self.image_type
         old_exposuretime = self.exposure_time
-        self.filename.test_image = 1
+        self.test_image = 1
 
         if shutter:
             shutter_state = "object"
@@ -486,7 +480,7 @@ class Exposure(Objects):
 
         self.expose(exposure_time, shutter_state, "test image")
 
-        self.filename.test_image = old_testimage
+        self.test_image = old_testimage
         self.image_type = old_imagetype
         self.exposure_time = old_exposuretime
 
@@ -542,9 +536,7 @@ class Exposure(Objects):
 
         return
 
-    def expose1(
-        self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
-    ):
+    def expose1(self, exposure_time: float = -1, image_type: str = "", image_title: str = ""):
         """
         Make a complete exposure with immediate return to caller.
 
@@ -596,9 +588,7 @@ class Exposure(Objects):
                         self.guide_status = 1  # image read OK
                         self.guide_image_copy = self.image
                     except Exception:
-                        self.guide_status = (
-                            2  # image not read OK, but don't stop guide loop
-                        )
+                        self.guide_status = 2  # image not read OK, but don't stop guide loop
                         self.image = self.guide_image_copy
 
                 # image writing
@@ -742,9 +732,7 @@ class Exposure(Objects):
             azcam.api.instrument.comps_delay()  # delay for lamp warmup
         else:
             if not self.guide_mode:
-                if (azcam.db.get("instrument") is not None) and azcam.db.get(
-                    "instrument"
-                ).enabled:
+                if (azcam.db.get("instrument") is not None) and azcam.db.get("instrument").enabled:
                     azcam.api.instrument.set_active_comps()  # reset
                 self.set_keyword("IMAGETYP", imagetype, "Image type", str)
 
@@ -846,9 +834,7 @@ class Exposure(Objects):
             FlushArray = False
         self.flush_array = FlushArray
 
-        self.comp_sequence = (
-            self.check_comparison_imagetype() and azcam.api.instrument.enabled
-        )
+        self.comp_sequence = self.check_comparison_imagetype() and azcam.api.instrument.enabled
 
         if self.comp_sequence:
             azcam.log("Starting comparison sequence")
@@ -1022,12 +1008,8 @@ class Exposure(Objects):
 
         azcam.api.controller.set_exposuretime(self.exposure_time)
 
-        self.header.set_keyword(
-            "EXPREQ", exposure_time, "Exposure time requested (seconds)", float
-        )
-        self.header.set_keyword(
-            "EXPTIME", exposure_time, "Exposure time (seconds)", float
-        )
+        self.header.set_keyword("EXPREQ", exposure_time, "Exposure time requested (seconds)", float)
+        self.header.set_keyword("EXPTIME", exposure_time, "Exposure time (seconds)", float)
 
         return
 
@@ -1037,9 +1019,7 @@ class Exposure(Objects):
         """
 
         if azcam.api.controller.is_reset:
-            self.exposure_time_remaining = (
-                azcam.api.controller.update_exposuretime_remaining()
-            )
+            self.exposure_time_remaining = azcam.api.controller.update_exposuretime_remaining()
 
         return self.exposure_time_remaining
 
@@ -1055,27 +1035,15 @@ class Exposure(Objects):
         self.obstime.update(0)
 
         # format should be YYYY-MM-DDThh:mm:ss.sss  ISO 8601
-        self.header.set_keyword(
-            "DATE-OBS", self.obstime.date[0], "UTC shutter opened", str
-        )
+        self.header.set_keyword("DATE-OBS", self.obstime.date[0], "UTC shutter opened", str)
         self.header.set_keyword(
             "DATE", self.obstime.date[0], "UTC date and time file writtten", str
         )  # OLD
-        self.header.set_keyword(
-            "TIME-OBS", self.obstime.ut[0], "UTC at start of exposure", str
-        )
-        self.header.set_keyword(
-            "UTC-OBS", self.obstime.ut[0], "UTC at start of exposure", str
-        )
-        self.header.set_keyword(
-            "UT", self.obstime.ut[0], "UTC at start of exposure", str
-        )
-        self.header.set_keyword(
-            "TIMESYS", self.obstime.time_system[0], "Time system", str
-        )
-        self.header.set_keyword(
-            "TIMEZONE", self.obstime.time_zone[0], "Local time zone", int
-        )
+        self.header.set_keyword("TIME-OBS", self.obstime.ut[0], "UTC at start of exposure", str)
+        self.header.set_keyword("UTC-OBS", self.obstime.ut[0], "UTC at start of exposure", str)
+        self.header.set_keyword("UT", self.obstime.ut[0], "UTC at start of exposure", str)
+        self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
+        self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
             "LOCTIME",
             self.obstime.local_time[0],
@@ -1095,14 +1063,10 @@ class Exposure(Objects):
 
         # all headers to be updated must be in azcam.db['headers']
         for objectname in azcam.db.headers:
-            if (
-                objectname == "controller" or objectname == "system"
-            ):  # skip as already up to date
+            if objectname == "controller" or objectname == "system":  # skip as already up to date
                 continue
             try:
-                azcam.api._get(
-                    objectname
-                ).update_header()  # dont crash so all headers get updated
+                azcam.api._get(objectname).update_header()  # dont crash so all headers get updated
             except Exception:
                 pass
 
@@ -1146,9 +1110,7 @@ class Exposure(Objects):
         """
 
         if self.auto_title:
-            if (
-                self.image_type.lower() == "object"
-            ):  # don't change object title in AutoTitle mode
+            if self.image_type.lower() == "object":  # don't change object title in AutoTitle mode
                 pass
             else:
                 if title == "":
@@ -1253,7 +1215,7 @@ class Exposure(Objects):
         Return current image filename.
         """
 
-        return self.filename.get_name()
+        return self.get_name()
 
     def set_filename(self, filename):
         """
@@ -1261,7 +1223,7 @@ class Exposure(Objects):
         Not fully working yet.
         """
 
-        self.filename.set_name(filename)
+        self.set_name(filename)
 
         return
 
@@ -1270,7 +1232,7 @@ class Exposure(Objects):
         Sets TestImage flag is True, clears if False.
         """
 
-        self.filename.test_image = flag
+        self.test_image = flag
 
         return
 
@@ -1279,7 +1241,7 @@ class Exposure(Objects):
         Returns TestImage flag.
         """
 
-        flag = self.filename.test_image
+        flag = self.test_image
 
         return ["OK", flag]
 
@@ -1396,9 +1358,7 @@ class Exposure(Objects):
 
         return self.image.focalplane.get_format()
 
-    def set_focalplane(
-        self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""
-    ):
+    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""):
         """
         Sets focal plane configuration for subsequent exposures. Use after set_format().
         Must call set_roi() after using this command and before starting exposure.
@@ -1707,8 +1667,7 @@ class Exposure(Objects):
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0
-                * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
             )
             explabel = f"{progress}%"
         elif ef == 8:
@@ -1723,7 +1682,9 @@ class Exposure(Objects):
         if self.message == "" and expstate != "":
             message = expstate
             if self.is_exposure_sequence:
-                message = f"{message} - {self.exposure_sequence_number} of {self.exposure_sequence_total}"
+                message = (
+                    f"{message} - {self.exposure_sequence_number} of {self.exposure_sequence_total}"
+                )
         else:
             message = self.message
 
@@ -1784,8 +1745,7 @@ class Exposure(Objects):
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0
-                * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
             )
             explabel = "%p%"
         elif ef == 8:

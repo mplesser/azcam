@@ -427,7 +427,7 @@ def get_par(parameter):
 
     # special cases
     if parameter == "imagefilename":
-        value = azcam.api.exposure.filename.get_name()
+        value = azcam.api.exposure.get_name()
         return value
     elif parameter == "imagetitle":
         value = azcam.api.exposure.get_image_title()
@@ -465,9 +465,7 @@ def get_par(parameter):
     try:
         attribute = azcam.db.parameters[parameter]
     except KeyError:
-        azcam.AzcamWarning(
-            f"Parameter {parameter} not available for get_par"
-        )  # don't print a message
+        azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
         return None
 
     tokens = attribute.split(".")
@@ -504,7 +502,7 @@ def set_par(parameter, value=None):
 
     # special cases
     if parameter == "imagefilename":
-        azcam.api.exposure.filename.set_name(value)
+        azcam.api.exposure.set_name(value)
         return None
     elif parameter == "imagetitle":
         if value is None or value == "":

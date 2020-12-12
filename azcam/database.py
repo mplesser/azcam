@@ -51,6 +51,7 @@ class AzcamDatabase(object):
 
     #: azcamparameters
     parameters = {
+        # exposure
         "autotitle": "exposure.auto_title",
         "imagetype": "exposure.image_type",
         "exposureflag": "exposure.exposure_flag",
@@ -59,7 +60,6 @@ class AzcamDatabase(object):
         "exposuresequencenumber": "exposure.exposure_sequence_number",
         "exposuresequenceflush": "exposure.exposure_sequence_flush",
         "exposureupdatingheader": "exposure.updating_header",
-        "writewcs": "exposure.image.write_wcs",
         "isexposuresequence": "exposure.is_exposure_sequence",
         "displayimage": "exposure.display_image",
         "savefile": "exposure.save_file",
@@ -67,22 +67,16 @@ class AzcamDatabase(object):
         "tdidelay": "exposure.tdi_delay",
         "tdimode": "exposure.tdi_mode",
         "pardelay": "exposure.par_delay",
+        "exposureguidemode": "exposure.guide_mode",
+        "exposureguidestatus": "exposure.guide_status",
+        "imagefiletype": "exposure.filetype",
+        "imageheaderfile": "exposure.imageheaderfile",
+        # image
+        "writewcs": "exposure.image.write_wcs",
         "remoteimageserverflag": "exposure.image.remote_imageserver_flag",
         "remote_imageserver_host": "exposure.image.remote_imageserver_host",
         "remote_imageserver_port": "exposure.image.remote_imageserver_port",
         "remote_imageserver_filename": "exposure.image.remote_imageserver_filename",
-        "exposureguidemode": "exposure.guide_mode",
-        "exposureguidestatus": "exposure.guide_status",
-        "imagetest": "exposure.filename.test_image",
-        "imagesequencenumber": "exposure.filename.sequence_number",
-        "imageautoincrementsequencenumber": "exposure.filename.auto_increment_sequence_number",
-        "imageincludesequencenumber": "exposure.filename.include_sequence_number",
-        "imageautoname": "exposure.filename.autoname",
-        "imageoverwrite": "exposure.filename.overwrite",
-        "imageroot": "exposure.filename.root",
-        "imagefolder": "exposure.filename.folder",
-        "imagefiletype": "exposure.filetype",
-        "imageheaderfile": "exposure.imageheaderfile",
         "imagesizex": "exposure.image.focalplane.numcols_image",
         "imagesizey": "exposure.image.focalplane.numrows_image",
         "numpiximage": "exposure.image.focalplane.numpix_image",
@@ -92,15 +86,28 @@ class AzcamDatabase(object):
         "firstrow": "exposure.image.focalplane.first_row",
         "lastcol": "exposure.image.focalplane.last_col",
         "lastrow": "exposure.image.focalplane.last_row",
+        # filename
+        "imagetest": "exposure.test_image",
+        "imagesequencenumber": "exposure.sequence_number",
+        "imageautoincrementsequencenumber": "exposure.auto_increment_sequence_number",
+        "imageincludesequencenumber": "exposure.include_sequence_number",
+        "imageautoname": "exposure.autoname",
+        "imageoverwrite": "exposure.overwrite",
+        "imageroot": "exposure.root",
+        "imagefolder": "exposure.folder",
+        # instrument
         "instrumentname": "instrument.name",
         "instrumentenabled": "instrument.enabled",
         "instrumentfocus": "instrument.focus_position",
+        # telescope
         "telescopename": "telescope.name",
         "telescopeenabled": "telescope.enabled",
         "telescopefocus": "telescope.focus_position",
+        # tempcon
         "controltemperature": "tempcon.control_temperature",
         "camtemp": "tempcon.temperatures[0]",
         "dewtemp": "tempcon.temperatures[1]",
+        # controller
         "utilityboardinstalled": "controller.utility_board_installed",
         "pciboardinstalled": "controller.pci_board_installed",
         "timingboardinstalled": "controller.timing_board_installed",
@@ -113,6 +120,7 @@ class AzcamDatabase(object):
         "timingboard": "controller.timing_board",
         "videoboards": "controller.video_boards",
         "clockboards": "controller.clock_boards",
+        # database
         "systemname": "db.systemname",
         "version": "db.version",
         "abortflag": "db.abortflag",

@@ -16,9 +16,6 @@ class Telescope(Objects):
 
         super().__init__(obj_id, name)
 
-        # keywords for header, list of [keyword, comment, type]
-        self.keywords = {}
-
         # focus position
         self.focus_position = 0
 

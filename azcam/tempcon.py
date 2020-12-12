@@ -50,6 +50,12 @@ class TempCon(Objects):
         self.header.set_header("tempcon", 4)
 
         # add keywords
+        self.header.keywords = ["CAMTEMP", "DEWTEMP"]
+        self.header.comments = {
+            "CAMTEMP": "Camera temperature in C",
+            "DEWTEMP": "Dewar temperature in C",
+        }
+        self.header.typestrings = {"CAMTEMP": "float", "DEWTEMP": "float"}
         self.define_keywords()
 
         return
@@ -98,9 +104,7 @@ class TempCon(Objects):
 
         return
 
-    def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
-    ) -> None:
+    def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
         Args:
@@ -136,9 +140,7 @@ class TempCon(Objects):
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
 
         if self.log_temps:
-            azcam.log(
-                f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0
-            )
+            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
 
         return temps
 
@@ -215,27 +217,6 @@ class TempCon(Objects):
             )
         else:
             return temperature
-
-    def define_keywords(self) -> None:
-        """
-        Defines temperature control keywords if they are not already defined.
-        """
-
-        if len(self.header.keywords) != 0:
-            return
-
-        # add keywords
-        keywords = ["CAMTEMP", "DEWTEMP"]
-        comments = {
-            "CAMTEMP": "Camera temperature in C",
-            "DEWTEMP": "Dewar temperature in C",
-        }
-        types = {"CAMTEMP": float, "DEWTEMP": float}
-
-        for key in keywords:
-            self.header.set_keyword(key, "", comments[key], types[key])
-
-        return
 
     def get_keyword(self, keyword: str) -> List:
         """

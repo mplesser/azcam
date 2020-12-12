@@ -3,6 +3,7 @@ Contains the Header class.
 """
 
 import os
+import typing
 
 import azcam
 
@@ -75,13 +76,9 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = "=================================================================="
 
         return
 
@@ -117,11 +114,8 @@ class Header(object):
 
     def define_keywords(self, keywords=[], comments={}, typestrings={}):
         """
-        Defines keywords, if they are not already defined.
+        Defines keywords.
         """
-
-        if len(self.keywords) != 0:
-            return
 
         if len(keywords) > 0:
             for key in keywords:
@@ -249,24 +243,6 @@ class Header(object):
 
         return
 
-    def get_info(self):
-        """
-        Returns header info.
-        Returns [Header[]]: Each element Header[i] contains the sublist
-        (keyword, value, comment, and type).
-        Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
-        """
-
-        header = []
-        keywords = self.get_all_keywords()
-
-        for key in keywords:
-            reply = self.get_keyword(key)
-            list1 = [key, reply[0], reply[1], reply[2]]
-            header.append(list1)
-
-        return header
-
     def get_string(self):
         """
         Returns the entire header as a single formatted string.
@@ -274,7 +250,7 @@ class Header(object):
 
         lines = ""
 
-        header = self.get_info()
+        header = self.read_header()
         for telem in header:
             line = telem[0] + " " + str(telem[1]) + " " + str(telem[2]) + "\n"
             lines += line
@@ -339,5 +315,122 @@ class Header(object):
                 self.set_keyword(keyword, value, comment, type(value))
 
         self.filename = filename
+
+        return
+
+
+class ObjectHeaderMethods(object):
+    """
+    Header methods for main objects.
+    These are called like "controller.get_keyword()".
+    """
+
+    def __init__(self) -> None:
+        pass
+
+    def define_keywords(self):
+        """
+        Sets up header keywords dictionary if not already defined.
+        """
+
+        # add keywords to header
+        for key in self.header.keywords:
+            self.header.set_keyword(
+                key, "", self.header.comments[key], self.header.typestrings[key]
+            )
+
+        return
+
+    def update_header(self):
+        """
+        Update the header, reading current data.
+        Deletes all keywords if the object is not enabled.
+        """
+
+        if not self.enabled:
+            self.header.delete_all_keywords()
+            return
+
+        if not self.initialized:
+            self.initialize()
+
+        self.define_keywords()
+
+        self.read_header()
+
+        return
+
+    def read_header(self) -> list:
+        """
+        Returns the current header.
+        May read current values using get_keyword().
+        Returns:
+            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        """
+
+        # get the header
+        header = []
+        reply = self.header.get_all_keywords()
+        if reply == []:
+            return
+
+        for key in reply:
+            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
+            list1 = [key, reply1[0], reply1[1], reply1[2]]
+            header.append(list1)
+
+        return header
+
+    def get_keyword(self, keyword: str) -> list:
+        """
+        Return a keyword value, its comment string, and type.
+        Comment always returned in double quotes, even if empty.
+        Args:
+            keyword: name of keyword
+        Returns:
+            list of [keyword, comment, type]
+
+        """
+
+        return self.header.get_keyword(keyword)
+
+    def get_all_keywords(self) -> list:
+        """
+        Return a list of all keyword names.
+        Returns:
+            keywords: list of all keywords
+        """
+
+        return self.header.get_all_keywords()
+
+    def set_keyword(
+        self,
+        keyword: str,
+        value: typing.Any,
+        comment: str = "no_comment",
+        typestring: str = None,
+    ):
+        """
+        Set a keyword value, comment, and type.
+        Args:
+            keyword: keyword
+            value: value of keyword
+            comment: comment string
+            typestring: one of 'str', 'int', or 'float'
+        """
+
+        self.header.set_keyword(keyword, value, comment, typestring)
+
+        return
+
+    def delete_keyword(self, keyword):
+        """
+        Delete a keyword.
+        Args:
+            keyword: keyword
+        """
+
+        self.header.delete_keyword(keyword)
 
         return
