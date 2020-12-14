@@ -111,8 +111,8 @@ class Image(object):
         self.sendimage = SendImage()
         self.remote_imageserver_host = ""
         self.remote_imageserver_port = 0
-        self.remote_imageserver_filename = ""
         self.remote_imageserver_flag = 0
+        self.remote_imageserver_filename = ""
         self.display_image = 0
 
         #: lbtguider, dataserver, azcam
@@ -242,17 +242,36 @@ class Image(object):
 
         return
 
-    def set_remote_server(self, remote_server_host="", remote_server_port=0):
+    def set_remote_imageserver(
+        self, remote_server_host="", remote_server_port=0, remote_filename="image"
+    ):
         """
         Set parameters so image files are sent to a remote image server.
         If no host is provided then reset flag to local image file.
         """
 
-        self.remote_imageserver_flag = 0 if remote_server_host == "" else 1
+        self.remote_imageserver_flag = 0 if remote_server_port == 0 else 1
         self.remote_imageserver_host = remote_server_host
         self.remote_imageserver_port = int(remote_server_port)
+        self.remote_imageserver_filename = remote_filename
 
         return
+
+    def get_remote_imageserver(self):
+        """
+        Get remote image server parameters.
+        Returns:
+            remote_imageserver_flag:
+            remote_imageserver_host:
+            remote_imageserver_port:
+        """
+
+        return [
+            self.remote_imageserver_flag,
+            self.remote_imageserver_host,
+            self.remote_imageserver_port,
+            self.remote_imageserver_filename,
+        ]
 
     # ******************************************************************************
     # assemble

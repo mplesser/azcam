@@ -223,6 +223,9 @@ class Exposure(Objects, Filename):
 
         Filename.__init__(self)
 
+        self.obstime = ObsTime()
+        self.image = Image()
+
         #: exposure flags, may be used anywhere
         self.exposureflags = {
             "NONE": 0,
@@ -347,14 +350,6 @@ class Exposure(Objects, Filename):
         # create the exposure header
         self.header = Header("Exposure")
         self.header.set_header("exposure", 1)
-
-        # filename object
-        # self.filename = Filename(self)
-
-        self.obstime = ObsTime()
-
-        # image object
-        self.image = Image()
 
         # flag indicating ROI has been changed
         self.new_roi = 0
@@ -1568,15 +1563,28 @@ class Exposure(Objects, Filename):
 
         return
 
-    def set_remote_server(self, remote_server_host="", remote_server_port=0):
+    def set_remote_imageserver(
+        self, remote_host="localhost", remote_port=0, remote_filename="image"
+    ):
         """
         Set parameters so image files are sent to a remote image server.
-        If no host is provided then reset flag to local image file.
+        If no port is provided then reset flag to local image file.
         """
 
-        self.image.set_remote_server(remote_server_host, remote_server_port)
+        self.image.set_remote_imageserver(remote_host, remote_port, remote_filename)
 
         return
+
+    def get_remote_server(self):
+        """
+        Get remote image server parameters.
+        Returns:
+            remote_imageserver_flag:
+            remote_imageserver_host:
+            remote_imageserver_port:
+        """
+
+        return self.image.get_remote_server()
 
     def set_extname(self, ext_name):
         """
