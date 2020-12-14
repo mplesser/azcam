@@ -53,7 +53,7 @@ class Filename(object):
 
         print("filename init")
 
-    def get_name(self):
+    def get_filename(self):
         """
         Return current filename as a single string.
         This is the filename for the next exposure to be taken.
@@ -68,7 +68,7 @@ class Filename(object):
         if not folder.endswith("/"):
             folder = folder + "/"
 
-        extension = self.get_extension(self.filetype)
+        extension = self.get_extname(self.filetype)
 
         if self.test_image:
             filename = folder.replace("\\", "/") + "test" + "." + extension
@@ -98,7 +98,7 @@ class Filename(object):
 
         return filename
 
-    def set_name(self, filename):
+    def set_filename(self, filename):
         """
         Set the filename components based on a simple filename.
         """
@@ -119,7 +119,7 @@ class Filename(object):
 
         return
 
-    def increment(self):
+    def increment_filenumber(self):
         """
         Increment the filename sequence number if AutoIncrementSequenceNumber is True and not a test image.
         """
@@ -129,7 +129,7 @@ class Filename(object):
 
         return
 
-    def get_extension(self, filetype):
+    def get_extname(self, filetype):
         """
         Return the file extension string for a file type.
         """
@@ -1207,23 +1207,6 @@ class Exposure(Objects, Filename):
                 self.temp_image_file,
                 azcam.db.cmdserver.port,
             )  # make unique for multiple processes
-
-        return
-
-    def get_filename(self):
-        """
-        Return current image filename.
-        """
-
-        return self.get_name()
-
-    def set_filename(self, filename):
-        """
-        Set the filename of the exposure image.
-        Not fully working yet.
-        """
-
-        self.set_name(filename)
 
         return
 

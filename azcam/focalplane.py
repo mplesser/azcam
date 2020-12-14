@@ -182,15 +182,6 @@ class FocalPlane(object):
         # World Coordinate System
         self.wcs = WCS(self)
 
-    def delete_all_items(self):
-        """
-        Delete all header items
-        """
-
-        self.header.delete_all_items()
-
-        return
-
     def update_header_keywords(self):
         """
         Update focal plane keywords in header

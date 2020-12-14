@@ -427,7 +427,7 @@ def get_par(parameter):
 
     # special cases
     if parameter == "imagefilename":
-        value = azcam.api.exposure.get_name()
+        value = azcam.api.exposure.get_filename()
         return value
     elif parameter == "imagetitle":
         value = azcam.api.exposure.get_image_title()
