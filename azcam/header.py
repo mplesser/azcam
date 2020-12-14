@@ -107,8 +107,11 @@ class Header(object):
             keywords: list of all keywords
         """
 
-        klist = list(self.keywords.keys())
-        klist.sort()
+        if len(self.keywords) > 0:
+            klist = list(self.keywords.keys())
+            klist.sort()
+        else:
+            klist = []
 
         return klist
 
@@ -281,6 +284,28 @@ class Header(object):
 
         return
 
+    def read_header(self) -> list:
+        """
+        Returns the current header.
+        May read current values using get_keyword().
+        Returns:
+            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
+        """
+
+        # get the header
+        header = []
+        reply = self.get_all_keywords()
+        if reply == []:
+            return header
+
+        for key in reply:
+            reply1 = self.get_keyword(key)
+            list1 = [key, reply1[0], reply1[1], reply1[2]]
+            header.append(list1)
+
+        return header
+
     def read_file(self, filename=""):
         """
         Read a header file and import the data into the header.
@@ -405,11 +430,7 @@ class ObjectHeaderMethods(object):
         return self.header.get_all_keywords()
 
     def set_keyword(
-        self,
-        keyword: str,
-        value: typing.Any,
-        comment: str = "no_comment",
-        typestring: str = None,
+        self, keyword: str, value: typing.Any, comment: str = "no_comment", typestring: str = None,
     ):
         """
         Set a keyword value, comment, and type.

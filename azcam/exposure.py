@@ -661,10 +661,7 @@ class Exposure(Objects, Filename):
 
         if self.new_roi:
             self.image.data = numpy.empty(
-                shape=[
-                    self.image.focalplane.numamps_image,
-                    self.image.focalplane.numpix_amp,
-                ],
+                shape=[self.image.focalplane.numamps_image, self.image.focalplane.numpix_amp,],
                 dtype="<u2",
             )
             self.new_roi = 0
@@ -1040,10 +1037,7 @@ class Exposure(Objects, Filename):
         self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
         self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
-            "LOCTIME",
-            self.obstime.local_time[0],
-            "Local time at start of exposure",
-            int,
+            "LOCTIME", self.obstime.local_time[0], "Local time at start of exposure", int,
         )
 
         return
@@ -1564,24 +1558,30 @@ class Exposure(Objects, Filename):
         return
 
     def set_remote_imageserver(
-        self, remote_host="localhost", remote_port=0, remote_filename="image"
+        self,
+        remote_imageserver_host="localhost",
+        remote_imageserver_port=0,
+        remote_imageserver_filename="image",
     ):
         """
         Set parameters so image files are sent to a remote image server.
         If no port is provided then reset flag to local image file.
         """
 
-        self.image.set_remote_imageserver(remote_host, remote_port, remote_filename)
+        self.image.set_remote_imageserver(
+            remote_imageserver_host, remote_imageserver_port, remote_imageserver_filename
+        )
 
         return
 
-    def get_remote_server(self):
+    def get_remote_imageserver(self):
         """
         Get remote image server parameters.
         Returns:
             remote_imageserver_flag:
             remote_imageserver_host:
             remote_imageserver_port:
+            remote_filename:
         """
 
         return self.image.get_remote_server()
@@ -1680,7 +1680,7 @@ class Exposure(Objects, Filename):
             message = self.message
 
         # debug
-        if 1:
+        if 0:
             self.pgress += 5.0
             if self.pgress > 100:
                 self.pgress = 0

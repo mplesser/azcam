@@ -5,10 +5,10 @@ Contains the FocalPlane and WCS classes.
 import numpy
 
 import azcam
-from azcam.header import Header
+from azcam.header import Header, ObjectHeaderMethods
 
 
-class FocalPlane(object):
+class FocalPlane(ObjectHeaderMethods):
     """
     Defines the FocalPlane class which describes a cameras focalplane and detectors.
     """

@@ -24,9 +24,6 @@ class Instrument(Objects):
         # True if shutter controls comps
         self.shutter_strobe = 0
 
-        # keywords for header, list of [keyword, comment, type]
-        self.keywords = {}
-
         # focus position
         self.focus_position = 0
 

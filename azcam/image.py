@@ -243,17 +243,20 @@ class Image(object):
         return
 
     def set_remote_imageserver(
-        self, remote_server_host="", remote_server_port=0, remote_filename="image"
+        self,
+        remote_imageserver_host="",
+        remote_imageserver_port=0,
+        remote_imageserver_filename="image",
     ):
         """
         Set parameters so image files are sent to a remote image server.
         If no host is provided then reset flag to local image file.
         """
 
-        self.remote_imageserver_flag = 0 if remote_server_port == 0 else 1
-        self.remote_imageserver_host = remote_server_host
-        self.remote_imageserver_port = int(remote_server_port)
-        self.remote_imageserver_filename = remote_filename
+        self.remote_imageserver_flag = 0 if remote_imageserver_port == 0 else 1
+        self.remote_imageserver_host = remote_imageserver_host
+        self.remote_imageserver_port = int(remote_imageserver_port)
+        self.remote_imageserver_filename = remote_imageserver_filename
 
         return
 
@@ -264,6 +267,7 @@ class Image(object):
             remote_imageserver_flag:
             remote_imageserver_host:
             remote_imageserver_port:
+            remote_imageserver_filename:
         """
 
         return [
@@ -452,21 +456,15 @@ class Image(object):
 
         if self.server_type == "azcam":
             self.sendimage.azcam_imageserver(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
+                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
             )
         elif self.server_type == "lbtguider":
             self.sendimage.lbtguider(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
+                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
             )
         elif self.server_type == "dataserver":
             self.sendimage.dataserver(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
+                local_filename, self.remote_imageserver_host, self.remote_imageserver_port,
             )
         else:
             raise azcam.AzcamError("Unknown remote image server type")
@@ -1000,9 +998,7 @@ class Image(object):
             numrows_amp = self.focalplane.numrows_amp
             numcols_amp = self.focalplane.numcols_amp
             data = numpy.ndarray(
-                shape=(numrows_amp, numcols_amp),
-                dtype="<u2",
-                buffer=self.data[ext_number - 1],
+                shape=(numrows_amp, numcols_amp), dtype="<u2", buffer=self.data[ext_number - 1],
             )
 
             hdu = pyfits.ImageHDU(data=data, name=str(ext_name))
@@ -1171,11 +1167,11 @@ class Image(object):
         # all these keywords are written after exposure is done (controller, instrument, telscope, temperature)
         curpos = len(hdu.header)
 
-        # for item in database 'headers'].keys():
+        # for item in database 'headers'.keys():
         for item in azcam.db.headerorder:
             item = azcam.db.headers[item]
-            cheader = item.get_info()
-            if cheader == []:
+            cheader = item.read_header()
+            if cheader == [] or cheader is None:
                 continue
             # first add the comment lines
             for comm in item.title:
@@ -1233,7 +1229,7 @@ class Image(object):
         # all these keywords are written after exposure is done (controller, instrument, telscope, temperature)
         curpos = len(hdu.header)
         for item in self.header.items:
-            cheader = item.header.get_info()
+            cheader = item.header.read_header()
             if cheader == []:
                 continue
             # first add the comment lines
@@ -1264,13 +1260,11 @@ class Image(object):
         # make nice header text
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos,
+            "==================================================================", after=curpos,
         )
         hdu.header.add_comment("Image", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos + 2,
+            "==================================================================", after=curpos + 2,
         )
         curpos = curpos + 3
 
@@ -1349,10 +1343,7 @@ class Image(object):
         nx = self.focalplane.extpos_x[ext_number - 1]
         det_number = self.focalplane.det_number[ext_number - 1]
         hdu.header.set(
-            "IMAGEID",
-            self.focalplane.ext_number[ext_number - 1],
-            "Image ID",
-            after=curpos,
+            "IMAGEID", self.focalplane.ext_number[ext_number - 1], "Image ID", after=curpos,
         )  # int
 
         curpos += 1
@@ -1405,30 +1396,17 @@ class Image(object):
                 self.focalplane.numvisrows_amp,
             )
         else:
-            s = "[1:%d,1:%d]" % (
-                self.focalplane.numviscols_amp,
-                self.focalplane.numvisrows_amp,
-            )
+            s = "[1:%d,1:%d]" % (self.focalplane.numviscols_amp, self.focalplane.numvisrows_amp,)
         hdu.header.set("BIASSEC", s, "Bias section", after=curpos)  # string
         curpos += 1
 
         # DATASEC is data region
-        s = "[%d:%d,%d:%d]" % (
-            self.datasecx1,
-            self.datasecx2,
-            self.datasecy1,
-            self.datasecy2,
-        )
+        s = "[%d:%d,%d:%d]" % (self.datasecx1, self.datasecx2, self.datasecy1, self.datasecy2,)
         hdu.header.set("DATASEC", s, "Data section", after=curpos)  # string
         curpos += 1
 
         # TRIMSEC is trim region for trimming and display
-        s = "[%d:%d,%d:%d]" % (
-            self.trimsecx1,
-            self.trimsecx2,
-            self.trimsecy1,
-            self.trimsecy2,
-        )
+        s = "[%d:%d,%d:%d]" % (self.trimsecx1, self.trimsecx2, self.trimsecy1, self.trimsecy2,)
         hdu.header.set("TRIMSEC", s, "Trim section", after=curpos)  # string
         curpos += 1
 
@@ -1438,36 +1416,16 @@ class Image(object):
 
         if ampflip == 0:
             # no flip
-            s = "[%d:%d,%d:%d]" % (
-                self.ccdsecX1,
-                self.ccdsecX2,
-                self.ccdsecY1,
-                self.ccdsecY2,
-            )
+            s = "[%d:%d,%d:%d]" % (self.ccdsecX1, self.ccdsecX2, self.ccdsecY1, self.ccdsecY2,)
         elif ampflip == 1:
             # flip in x
-            s = "[%d:%d,%d:%d]" % (
-                self.ccdsecX2,
-                self.ccdsecX1,
-                self.ccdsecY1,
-                self.ccdsecY2,
-            )
+            s = "[%d:%d,%d:%d]" % (self.ccdsecX2, self.ccdsecX1, self.ccdsecY1, self.ccdsecY2,)
         elif ampflip == 2:
             # flip in y
-            s = "[%d:%d,%d:%d]" % (
-                self.ccdsecX1,
-                self.ccdsecX2,
-                self.ccdsecY2,
-                self.ccdsecY1,
-            )
+            s = "[%d:%d,%d:%d]" % (self.ccdsecX1, self.ccdsecX2, self.ccdsecY2, self.ccdsecY1,)
         elif ampflip == 3:
             # flip both
-            s = "[%d:%d,%d:%d]" % (
-                self.ccdsecX2,
-                self.ccdsecX1,
-                self.ccdsecY2,
-                self.ccdsecY1,
-            )
+            s = "[%d:%d,%d:%d]" % (self.ccdsecX2, self.ccdsecX1, self.ccdsecY2, self.ccdsecY1,)
 
         hdu.header.set("AMPSEC", s, "Amplifier section", after=curpos)  # string
         curpos += 1
@@ -2038,13 +1996,11 @@ class Image(object):
 
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos,
+            "==================================================================", after=curpos,
         )
         hdu.header.add_comment("WCS", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos + 2,
+            "==================================================================", after=curpos + 2,
         )
         curpos = curpos + 3
         hdu.header.set("EQUINOX", self.focalplane.wcs.equinox, "Equinox of WCS", after=curpos)
@@ -2060,31 +2016,19 @@ class Image(object):
 
         if self.focalplane.wcs.ctype1.startswith("RA"):
             hdu.header.set(
-                "CRVAL1",
-                self.focalplane.wcs.ra_deg,
-                "Coordinate reference value",
-                after=curpos,
+                "CRVAL1", self.focalplane.wcs.ra_deg, "Coordinate reference value", after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CRVAL2",
-                self.focalplane.wcs.dec_deg,
-                "Coordinate reference value",
-                after=curpos,
+                "CRVAL2", self.focalplane.wcs.dec_deg, "Coordinate reference value", after=curpos,
             )
         else:
             hdu.header.set(
-                "CRVAL1",
-                self.focalplane.wcs.dec_deg,
-                "Coordinate reference value",
-                after=curpos,
+                "CRVAL1", self.focalplane.wcs.dec_deg, "Coordinate reference value", after=curpos,
             )
             curpos += 1
             hdu.header.set(
-                "CRVAL2",
-                self.focalplane.wcs.ra_deg,
-                "Coordinate reference value",
-                after=curpos,
+                "CRVAL2", self.focalplane.wcs.ra_deg, "Coordinate reference value", after=curpos,
             )
 
         curpos += 1
@@ -2193,13 +2137,11 @@ class Image(object):
 
         curpos = len(hdu.header)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos,
+            "==================================================================", after=curpos,
         )
         hdu.header.add_comment("ITL Focal plane", after=curpos + 1)
         hdu.header.add_comment(
-            "==================================================================",
-            after=curpos + 2,
+            "==================================================================", after=curpos + 2,
         )
         curpos += 3
         hdu.header.set(
@@ -2210,24 +2152,15 @@ class Image(object):
         )
         curpos += 1
         hdu.header.set(
-            "DET-NUM",
-            self.focalplane.det_number[ext_number - 1],
-            "Detector number",
-            after=curpos,
+            "DET-NUM", self.focalplane.det_number[ext_number - 1], "Detector number", after=curpos,
         )
         curpos += 1
         hdu.header.set(
-            "EXT-NUM",
-            self.focalplane.ext_number[ext_number - 1],
-            "extension number",
-            after=curpos,
+            "EXT-NUM", self.focalplane.ext_number[ext_number - 1], "extension number", after=curpos,
         )
         curpos += 1
         hdu.header.set(
-            "JPG-EXT",
-            self.focalplane.jpg_ext[ext_number - 1],
-            "Image section",
-            after=curpos,
+            "JPG-EXT", self.focalplane.jpg_ext[ext_number - 1], "Image section", after=curpos,
         )
         curpos += 1
         hdu.header.set(

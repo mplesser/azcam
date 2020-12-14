@@ -50,7 +50,7 @@ class TempCon(Objects):
         self.header.set_header("tempcon", 4)
 
         # add keywords
-        self.header.keywords = ["CAMTEMP", "DEWTEMP"]
+        self.header.keywords = {"CAMTEMP": "CAMPTEMP", "DEWTEMP": "DEWTEMP"}
         self.header.comments = {
             "CAMTEMP": "Camera temperature in C",
             "DEWTEMP": "Dewar temperature in C",
@@ -176,9 +176,7 @@ class TempCon(Objects):
         return
 
     def set_corrections(
-        self,
-        temperature_offsets: List[float] = None,
-        temperature_scales: List[float] = None,
+        self, temperature_offsets: List[float] = None, temperature_scales: List[float] = None,
     ) -> None:
         """
         Set temperature correction values and enable correction.
