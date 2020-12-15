@@ -24,6 +24,7 @@ class API(object):
         self.telescope = Telescope(self)
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
+        self.db = Database(self)
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
@@ -872,6 +873,29 @@ class Exposure(HeaderMethods):
         self._parent.server.rcommand(f"exposure.set_par {parameter} {value}")
 
         return
+
+
+class Database(object):
+    """
+    Database class for client.
+    """
+
+    def __init__(self, parent) -> None:
+        self._parent = parent
+
+    def get(self, name):
+        """
+        Get a database attribute.
+        """
+
+        return self._parent.server.rcommand(f"db.get {name}")
+
+    def set(self, name, value):
+        """
+        Set a a database attribute.
+        """
+
+        return self._parent.server.rcommand(f"db.set {name} {value}")
 
 
 class ServerConnection(azcam.sockets.SocketInterface):

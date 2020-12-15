@@ -128,7 +128,7 @@ class AzcamDatabase(object):
 
     def get(self, name: str) -> typing.Any:
         """
-        Returns an database attribute by name.
+        Returns a database attribute by name.
         Args:
             name: name of attribute to return
         Returns:
@@ -141,6 +141,21 @@ class AzcamDatabase(object):
             obj = None
 
         return obj
+
+    def set(self, name: str, value: typing.Any):
+        """
+        Sets a database attribute value.
+        Args:
+            name: name of attribute to set
+            value: value of attribute to set
+        """
+
+        if not hasattr(self, name):
+            return
+
+        setattr(self, name, value)
+
+        return
 
 
 # create instance

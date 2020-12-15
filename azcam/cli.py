@@ -11,4 +11,3 @@ for name in azcam.db.cli_cmds:
 __all__ = [x for x in azcam.db.cli_cmds.keys()]
 
 __all__.append("azcam")
-__all__.append("db")

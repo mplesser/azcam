@@ -23,7 +23,7 @@ def bf():
 azcam.db.cli_cmds.update({"bf": bf})
 
 # server
-if azcam.db.app_type == 1:
+if azcam._app_type == 1:
 
     def sf():
         """Shortcut to Set image folder"""
@@ -70,7 +70,7 @@ if azcam.db.app_type == 1:
     # add to CLI dictionary
     azcam.db.cli_cmds.update({"sav": sav, "p": p, "sf": sf, "gf": gf})
 
-elif azcam.db.app_type == 2:
+elif azcam._app_type == 2:
 
     def sf():
         """Shortcut to Set image folder"""

@@ -5,7 +5,6 @@ requirements = [
     "numpy",
     "matplotlib",
     "astropy",
-    "flask",
 ]
 
 with open("README.md", "r") as fh:

@@ -376,9 +376,9 @@ def update_pars(write, par_dict=None):
     """
 
     if par_dict is None:
-        if azcam.db.app_type == 1:
+        if azcam._app_type == 1:
             dictname = "azcamserver"
-        elif azcam.db.app_type == 2:
+        elif azcam._app_type == 2:
             dictname = "azcamconsole"
         else:
             dictname = "azcamserver"
