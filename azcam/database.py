@@ -156,7 +156,3 @@ class AzcamDatabase(object):
         setattr(self, name, value)
 
         return
-
-
-# create instance
-db = AzcamDatabase()

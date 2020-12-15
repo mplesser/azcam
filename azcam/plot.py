@@ -8,8 +8,21 @@ from matplotlib import pyplot as plt
 
 import azcam
 
+# global data
+
+plotdata = {
+    "KeyPressed": "",
+    "MouseButton": -1,
+    "X": -1.0,
+    "Y": -1.0,
+    "Xpix": -1,
+    "Ypix": -1,
+    "EnteredFigure": 0,
+    "EnteredAxes": 0,
+}
+
 # allow for interactive plots after this import
-pylab.ion()
+# pylab.ion()
 
 style_x = [
     "bx",
@@ -88,18 +101,6 @@ style_lines = [
     "gx-",
 ]
 
-# plot data
-azcam.db.plotdata = {
-    "KeyPressed": "",
-    "MouseButton": -1,
-    "X": -1.0,
-    "Y": -1.0,
-    "Xpix": -1,
-    "Ypix": -1,
-    "EnteredFigure": 0,
-    "EnteredAxes": 0,
-}
-
 
 def update():
     """
@@ -121,48 +122,59 @@ def tools(figure_number=1):
     :param figure_number:
     """
 
+    global plotdata
+
     # define event handlers
     def onmouseclick(event):
-        azcam.db.plotdata["MouseButton"] = event.button
-        azcam.db.plotdata["X"] = event.xdata
-        azcam.db.plotdata["Y"] = event.ydata
-        azcam.db.plotdata["Xpix"] = event.x
-        azcam.db.plotdata["Ypix"] = event.y
+        plotdata["MouseButton"] = event.button
+        plotdata["X"] = event.xdata
+        plotdata["Y"] = event.ydata
+        plotdata["Xpix"] = event.x
+        plotdata["Ypix"] = event.y
+
+        if 1:
+            print(plotdata)
 
         return
 
     def onmouserelease(event):
-        azcam.db.plotdata["MouseButton"] = event.button
-        azcam.db.plotdata["X"] = event.xdata
-        azcam.db.plotdata["Y"] = event.ydata
-        azcam.db.plotdata["Xpix"] = event.x
-        azcam.db.plotdata["Ypix"] = event.y
+        plotdata["MouseButton"] = event.button
+        plotdata["X"] = event.xdata
+        plotdata["Y"] = event.ydata
+        plotdata["Xpix"] = event.x
+        plotdata["Ypix"] = event.y
+
+        if 1:
+            print(plotdata)
 
         return
 
     def onkeypress(event):
-        azcam.db.plotdata["X"] = event.xdata
-        azcam.db.plotdata["Y"] = event.ydata
-        azcam.db.plotdata["Xpix"] = event.x
-        azcam.db.plotdata["Ypix"] = event.y
-        azcam.db.plotdata["KeyPressed"] = event.key
+        plotdata["X"] = event.xdata
+        plotdata["Y"] = event.ydata
+        plotdata["Xpix"] = event.x
+        plotdata["Ypix"] = event.y
+        plotdata["KeyPressed"] = event.key
+
+        if 1:
+            print(plotdata)
 
         return
 
     def enter_figure(event):
-        azcam.db.plotdata["EnteredFigure"] = 1
+        plotdata["EnteredFigure"] = 1
         return
 
     def leave_figure(event):
-        azcam.db.plotdata["EnteredFigure"] = 0
+        plotdata["EnteredFigure"] = 0
         return
 
     def enter_axes(event):
-        azcam.db.plotdata["EnteredAxes"] = 1
+        plotdata["EnteredAxes"] = 1
         return
 
     def leave_axes(event):
-        azcam.db.plotdata["EnteredAxes"] = 0
+        plotdata["EnteredAxes"] = 0
         return
 
     fig = plt.figure(figure_number)
@@ -183,7 +195,9 @@ def get_data():
     Initial plotdata is {'KeyPressed':'','MouseButton':-1,'X':-1.0,'Y':-1.0}
     """
 
-    return azcam.db.plotdata
+    global plotdata
+
+    return plotdata
 
 
 def clear_data():
@@ -191,7 +205,9 @@ def clear_data():
     Clears plotdata from tools().
     """
 
-    azcam.db.plotdata = {
+    global plotdata
+
+    plotdata = {
         "KeyPressed": "",
         "MouseButton": -1,
         "X": -1.0,

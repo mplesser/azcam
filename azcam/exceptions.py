@@ -4,8 +4,6 @@ Conatins custom exceptions and warnings for azcam.
 
 import warnings
 
-from azcam.database import db
-
 """
 AzcamError codes:
  "controller reset error, check power and fibers", error_code=1
@@ -14,7 +12,7 @@ AzcamError codes:
  "remote call not allowed", error_code=4
 """
 
-
+# ERRORS
 class AzcamError(Exception):
     def __init__(self, message, error_code=None):
         """
@@ -43,6 +41,7 @@ class AzcamError(Exception):
             print(f"AzcamError: {message}")
 
 
+# WARNINGS
 def azcam_formatwarning(msg, *a, **kargs) -> str:
     # only print the message
     return "AzcamWarning: " + str(msg) + "\n"
