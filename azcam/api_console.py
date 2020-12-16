@@ -25,6 +25,7 @@ class API(object):
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
         self.db = Database(self)
+        self.genpars = GenPars(self)
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
@@ -71,11 +72,7 @@ class HeaderMethods(object):
         return self._parent.server.rcommand(f"{self.object_name}.read_header")
 
     def set_keyword(
-        self,
-        keyword: str,
-        value: str,
-        comment: str = "no_comment",
-        typestring: str = "str",
+        self, keyword: str, value: str, comment: str = "no_comment", typestring: str = "str",
     ) -> Optional[str]:
         """
         Set a keyword value, comment, and type.
@@ -114,9 +111,7 @@ class HeaderMethods(object):
         :param keyword: keyword name
         """
 
-        return self._parent.server.rcommand(
-            f"{self.object_name}.delete_keyword {keyword}"
-        )
+        return self._parent.server.rcommand(f"{self.object_name}.delete_keyword {keyword}")
 
     def get_all_keywords(self):
         """
@@ -209,9 +204,7 @@ class Instrument(HeaderMethods):
         :param filter_id: filter ID flag
         """
 
-        return self._parent.server.rcommand(
-            f"instrument.set_filter {filter_name} {filter_id}"
-        )
+        return self._parent.server.rcommand(f"instrument.set_filter {filter_name} {filter_id}")
 
     def get_filter(self, filter_id: int = 0) -> str:
         """
@@ -222,9 +215,7 @@ class Instrument(HeaderMethods):
 
         return self._parent.server.rcommand(f"instrument.get_filter {filter_id}")
 
-    def get_current(
-        self, diode_id: int = 0, shutter_state: int = 1
-    ) -> Union[str, float]:
+    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
         """
         Returns a list of instrument diode currents.
 
@@ -232,9 +223,7 @@ class Instrument(HeaderMethods):
         :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
         """
 
-        reply = self._parent.server.rcommand(
-            f"instrument.get_current {diode_id} {shutter_state}"
-        )
+        reply = self._parent.server.rcommand(f"instrument.get_current {diode_id} {shutter_state}")
 
         return float(reply)
 
@@ -260,9 +249,7 @@ class Instrument(HeaderMethods):
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        reply = float(
-            self._parent.server.rcommand(f"instrument.get_wavelength {wavelength_id}")
-        )
+        reply = float(self._parent.server.rcommand(f"instrument.get_wavelength {wavelength_id}"))
 
         return reply
 
@@ -278,9 +265,7 @@ class Instrument(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self._parent.server.rcommand(
-            f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
-        )
+        self._parent.server.rcommand(f"instrument.set_focus {focus_value} {focus_id} {focus_type}")
 
         return
 
@@ -315,9 +300,7 @@ class Instrument(HeaderMethods):
 
         """
 
-        return self._parent.server.rcommand(
-            f"instrument.set_shutter {state} {shutter_id}"
-        )
+        return self._parent.server.rcommand(f"instrument.set_shutter {state} {shutter_id}")
 
 
 class Telescope(HeaderMethods):
@@ -353,9 +336,7 @@ class Telescope(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self._parent.server.rcommand(
-            f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
-        )
+        self._parent.server.rcommand(f"telescope.set_focus {focus_value} {focus_id} {focus_type}")
 
         return
 
@@ -413,9 +394,7 @@ class Tempcon(HeaderMethods):
         :param temperature_id: temperature ID flag
         """
 
-        reply = self._parent.server.rcommand(
-            f"tempcon.get_control_temperature {temperature_id}"
-        )
+        reply = self._parent.server.rcommand(f"tempcon.get_control_temperature {temperature_id}")
 
         return float(reply)
 
@@ -441,9 +420,7 @@ class Exposure(HeaderMethods):
         * 1 => instrument shutter.
         """
 
-        return self._parent.server.rcommand(
-            f"exposure.set_shutter {state} {shutter_id}"
-        )
+        return self._parent.server.rcommand(f"exposure.set_shutter {state} {shutter_id}")
 
     def abort_exposure(self) -> Optional[str]:
         """
@@ -468,9 +445,7 @@ class Exposure(HeaderMethods):
 
     def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
 
-        return self._parent.server.rcommand(
-            f"exposure.test {exposure_time} {shutter_state}"
-        )
+        return self._parent.server.rcommand(f"exposure.test {exposure_time} {shutter_state}")
 
     def expose(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -543,9 +518,7 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand("exposure.end")
 
-    def sequence(
-        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
-    ) -> Optional[str]:
+    def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
         """
         Take an exposure sequence.
 
@@ -659,9 +632,7 @@ class Exposure(HeaderMethods):
         :param exposure_time: exposure time in seconds.
         """
 
-        return self._parent.server.rcommand(
-            f"exposure.set_exposuretime {exposure_time}"
-        )
+        return self._parent.server.rcommand(f"exposure.set_exposuretime {exposure_time}")
 
     def get_pixels_remaining(self) -> Union[str, int]:
         """
@@ -682,10 +653,7 @@ class Exposure(HeaderMethods):
         return self._parent.server.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
-        self,
-        number_exposures: int = 1,
-        exposure_time: float = 1.0,
-        image_type: str = "zero",
+        self, number_exposures: int = 1, exposure_time: float = 1.0, image_type: str = "zero",
     ) -> Optional[str]:
         """
         Make test exposures, which overwrite previous test images.
@@ -913,6 +881,29 @@ class Database(object):
         """
 
         return self._parent.server.rcommand(f"db.set {name} {value}")
+
+
+class GenPars(object):
+    """
+    GenPars class for client.
+    """
+
+    def __init__(self, parent) -> None:
+        self._parent = parent
+
+    def get(self, name):
+        """
+        Get a database attribute.
+        """
+
+        return self._parent.server.rcommand(f"genpars.get {name}")
+
+    def set(self, name, value):
+        """
+        Set a a database attribute.
+        """
+
+        return self._parent.server.rcommand(f"genpars.set {name} {value}")
 
 
 class ServerConnection(azcam.sockets.SocketInterface):

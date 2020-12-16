@@ -19,10 +19,6 @@ class GenPars(object):
         self.parfile: str = parfile
         self.par_dict: dict = {}
 
-        # save object
-        setattr(azcam.api, "genpars", self)
-        setattr(azcam.db, "genpars", self)
-
     def parfile_read(self, parfilename: str = None) -> None:
         """
         Read a parameter file and create sub-dictionaries for saving
@@ -226,5 +222,32 @@ class GenPars(object):
 
         azcam.utils.update_pars(1)
         self.parfile_write()
+
+        return
+
+    def get(self, name: str, par_dict: str = "azcamserver") -> typing.Any:
+        """
+        Returns an existing parameter from a paramater dictionary.
+        Args:
+            name: name of parameter to return
+            par_dict: name of dictionary
+        Returns:
+            value: value of parameter or None if not defined
+        """
+
+        parameter = self.get_par(par_dict, name)
+
+        return parameter
+
+    def set(self, name: str, value: typing.Any, par_dict: str = "azcamserver") -> None:
+        """
+        Sets a parameter in a parameter dictionary.
+        Args:
+            name: name of attribute to set
+            value: value of attribute to set
+            par_dict: name of dictionary
+        """
+
+        self.set_par(par_dict, name, value)
 
         return

@@ -59,7 +59,7 @@ try:
     wd = genpars.get_par(pardict, "wd", "default")
     azcam.utils.curdir(wd)
 except FileNotFoundError:
-    azcam.log(f"Paramater file not found: {parfile}")
+    azcam.log(f"Parameter file not found: {parfile}")
 
 # ****************************************************************
 # command server
