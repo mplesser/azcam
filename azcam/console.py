@@ -15,12 +15,6 @@ from azcam.logging import Logger
 azcam.db.logger = Logger()
 azcam.log = azcam.db.logger.log  # to allow azcam.log()
 
-# exceptions: azcam.AzcamError and azcam.AzcamWarning
-from azcam.exceptions import AzcamError, AzcamWarning
-
-azcam.AzcamError = AzcamError
-azcam.AzcamWarning = AzcamWarning
-
 # local database entries
 #: image parameters
 azcam.db.imageparnames = [

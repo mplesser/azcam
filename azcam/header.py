@@ -76,9 +76,13 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[0] = "=================================================================="
+        self.title[
+            0
+        ] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[2] = "=================================================================="
+        self.title[
+            2
+        ] = "=================================================================="
 
         return
 
@@ -401,7 +405,9 @@ class ObjectHeaderMethods(object):
             return
 
         for key in reply:
-            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
+            reply1 = self.get_keyword(
+                key
+            )  # this calls object's get_keyword to get updated values
             list1 = [key, reply1[0], reply1[1], reply1[2]]
             header.append(list1)
 
@@ -430,7 +436,11 @@ class ObjectHeaderMethods(object):
         return self.header.get_all_keywords()
 
     def set_keyword(
-        self, keyword: str, value: typing.Any, comment: str = "no_comment", typestring: str = None,
+        self,
+        keyword: str,
+        value: typing.Any,
+        comment: str = "no_comment",
+        typestring: str = None,
     ):
         """
         Set a keyword value, comment, and type.

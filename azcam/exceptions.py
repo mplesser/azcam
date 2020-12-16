@@ -1,16 +1,16 @@
 """
-Conatins custom exceptions and warnings for azcam.
-"""
+Contains custom exceptions and warnings for azcam.
 
-import warnings
-
-"""
 AzcamError codes:
  "controller reset error, check power and fibers", error_code=1
  "could not open connection to server", error_code=2
  "receive image data abort", error_code=3
  "remote call not allowed", error_code=4
 """
+
+import warnings
+
+import azcam
 
 # ERRORS
 class AzcamError(Exception):
@@ -35,8 +35,8 @@ class AzcamError(Exception):
             self.error_code = error_code
             # Original error was self.errors.message
 
-        if db.logger is not None:
-            db.logger.logger.warning(f"ERR-> {message}")
+        if azcam.db.logger is not None:
+            azcam.db.logger.logger.warning(f"ERR-> {message}")
         else:
             print(f"AzcamError: {message}")
 
@@ -60,7 +60,7 @@ def AzcamWarning(message):
     # print(f"AzcamWarning: {message}")
 
     try:
-        db.logger.logger.warning(f"Warn> {message}")
+        azcam.db.logger.logger.warning(f"Warn> {message}")
     except Exception:
         print(f"AzcamWarning: {message}")
 

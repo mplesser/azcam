@@ -6,7 +6,8 @@ import os
 
 from azcam_ds9.ds9display import Ds9Display
 
-from azcam.server import azcam
+import azcam
+import azcam.server
 import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.controller import Controller

@@ -16,12 +16,6 @@ from azcam.logging import Logger
 azcam.db.logger = Logger()
 azcam.log = azcam.db.logger.log  # to allow azcam.log()
 
-# exceptions: azcam.AzcamError and azcam.AzcamWarning
-from azcam.exceptions import AzcamError, AzcamWarning
-
-azcam.AzcamError = AzcamError
-azcam.AzcamWarning = AzcamWarning
-
 # save this machine's hostname and ip address
 azcam.db.hostname = socket.gethostname()
 azcam.db.hostip = socket.gethostbyname(azcam.db.hostname)

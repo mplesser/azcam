@@ -28,6 +28,7 @@ class API(object):
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
+        azcam.db.cli_cmds["api"] = self
 
     def _get(self, name):
         """
@@ -113,7 +114,9 @@ class HeaderMethods(object):
         :param keyword: keyword name
         """
 
-        return self._parent.server.rcommand(f"{self.object_name}.delete_keyword {keyword}")
+        return self._parent.server.rcommand(
+            f"{self.object_name}.delete_keyword {keyword}"
+        )
 
     def get_all_keywords(self):
         """
@@ -206,7 +209,9 @@ class Instrument(HeaderMethods):
         :param filter_id: filter ID flag
         """
 
-        return self._parent.server.rcommand(f"instrument.set_filter {filter_name} {filter_id}")
+        return self._parent.server.rcommand(
+            f"instrument.set_filter {filter_name} {filter_id}"
+        )
 
     def get_filter(self, filter_id: int = 0) -> str:
         """
@@ -217,7 +222,9 @@ class Instrument(HeaderMethods):
 
         return self._parent.server.rcommand(f"instrument.get_filter {filter_id}")
 
-    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
+    def get_current(
+        self, diode_id: int = 0, shutter_state: int = 1
+    ) -> Union[str, float]:
         """
         Returns a list of instrument diode currents.
 
@@ -225,7 +232,9 @@ class Instrument(HeaderMethods):
         :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
         """
 
-        reply = self._parent.server.rcommand(f"instrument.get_current {diode_id} {shutter_state}")
+        reply = self._parent.server.rcommand(
+            f"instrument.get_current {diode_id} {shutter_state}"
+        )
 
         return float(reply)
 
@@ -251,15 +260,14 @@ class Instrument(HeaderMethods):
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        reply = float(self._parent.server.rcommand(f"instrument.get_wavelength {wavelength_id}"))
+        reply = float(
+            self._parent.server.rcommand(f"instrument.get_wavelength {wavelength_id}")
+        )
 
         return reply
 
     def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_type: str = "absolute",
+        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -270,14 +278,13 @@ class Instrument(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self._parent.server.rcommand(f"instrument.set_focus {focus_value} {focus_id} {focus_type}")
+        self._parent.server.rcommand(
+            f"instrument.set_focus {focus_value} {focus_id} {focus_type}"
+        )
 
         return
 
-    def get_focus(
-        self,
-        focus_id: int = 0,
-    ) -> float:
+    def get_focus(self, focus_id: int = 0,) -> float:
         """
         Get the current focus position.
 
@@ -308,7 +315,9 @@ class Instrument(HeaderMethods):
 
         """
 
-        return self._parent.server.rcommand(f"instrument.set_shutter {state} {shutter_id}")
+        return self._parent.server.rcommand(
+            f"instrument.set_shutter {state} {shutter_id}"
+        )
 
 
 class Telescope(HeaderMethods):
@@ -333,10 +342,7 @@ class Telescope(HeaderMethods):
         return float(reply)
 
     def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_type: str = "absolute",
+        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -347,7 +353,9 @@ class Telescope(HeaderMethods):
         :param focus_type: focus type (absolute or step)
         """
 
-        self._parent.server.rcommand(f"telescope.set_focus {focus_value} {focus_id} {focus_type}")
+        self._parent.server.rcommand(
+            f"telescope.set_focus {focus_value} {focus_id} {focus_type}"
+        )
 
         return
 
@@ -405,7 +413,9 @@ class Tempcon(HeaderMethods):
         :param temperature_id: temperature ID flag
         """
 
-        reply = self._parent.server.rcommand(f"tempcon.get_control_temperature {temperature_id}")
+        reply = self._parent.server.rcommand(
+            f"tempcon.get_control_temperature {temperature_id}"
+        )
 
         return float(reply)
 
@@ -431,7 +441,9 @@ class Exposure(HeaderMethods):
         * 1 => instrument shutter.
         """
 
-        return self._parent.server.rcommand(f"exposure.set_shutter {state} {shutter_id}")
+        return self._parent.server.rcommand(
+            f"exposure.set_shutter {state} {shutter_id}"
+        )
 
     def abort_exposure(self) -> Optional[str]:
         """
@@ -456,7 +468,9 @@ class Exposure(HeaderMethods):
 
     def test(self, exposure_time: float = -1, shutter_state: int = 0) -> Optional[str]:
 
-        return self._parent.server.rcommand(f"exposure.test {exposure_time} {shutter_state}")
+        return self._parent.server.rcommand(
+            f"exposure.test {exposure_time} {shutter_state}"
+        )
 
     def expose(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
@@ -529,7 +543,9 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand("exposure.end")
 
-    def sequence(self, number_exposures: int = 1, flush_array: int = -1, delay=-1) -> Optional[str]:
+    def sequence(
+        self, number_exposures: int = 1, flush_array: int = -1, delay=-1
+    ) -> Optional[str]:
         """
         Take an exposure sequence.
 
@@ -643,7 +659,9 @@ class Exposure(HeaderMethods):
         :param exposure_time: exposure time in seconds.
         """
 
-        return self._parent.server.rcommand(f"exposure.set_exposuretime {exposure_time}")
+        return self._parent.server.rcommand(
+            f"exposure.set_exposuretime {exposure_time}"
+        )
 
     def get_pixels_remaining(self) -> Union[str, int]:
         """

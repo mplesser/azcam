@@ -4,7 +4,6 @@ cli.py - use to import CLI commands into current namespace
 Usage:  from azcam.cli import *
 """
 import azcam
-from azcam import db
 
 for name in azcam.db.cli_cmds:
     globals()[name] = azcam.db.cli_cmds[name]

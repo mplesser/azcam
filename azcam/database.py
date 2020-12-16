@@ -49,6 +49,9 @@ class AzcamDatabase(object):
     #: header order in image header
     headerorder = []
 
+    #: use seaborn for plotting
+    use_seaborn = 0
+
     #: azcamparameters
     parameters = {
         # exposure

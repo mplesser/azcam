@@ -188,10 +188,18 @@ class FocalPlane(ObjectHeaderMethods):
         """
 
         self.header.set_keyword("ITL-HEAD", "OK", "ITL Header flag", str)
-        self.header.set_keyword("NUM-DETX", self.numdet_x, "Number of detectors in X", int)
-        self.header.set_keyword("NUM-DETY", self.numdet_y, "Number of detectors in Y", int)
-        self.header.set_keyword("NUM-AMPX", self.numamps_x, "Number of amplifiers in X", int)
-        self.header.set_keyword("NUM-AMPY", self.numamps_y, "Number of amplifiers in Y", int)
+        self.header.set_keyword(
+            "NUM-DETX", self.numdet_x, "Number of detectors in X", int
+        )
+        self.header.set_keyword(
+            "NUM-DETY", self.numdet_y, "Number of detectors in Y", int
+        )
+        self.header.set_keyword(
+            "NUM-AMPX", self.numamps_x, "Number of amplifiers in X", int
+        )
+        self.header.set_keyword(
+            "NUM-AMPY", self.numamps_y, "Number of amplifiers in Y", int
+        )
         self.header.set_keyword("REF-PIX1", self.refpix1, "Reference pixel 1", int)
         self.header.set_keyword("REF-PIX2", self.refpix2, "Reference pixel 2", int)
 
@@ -209,8 +217,12 @@ class FocalPlane(ObjectHeaderMethods):
         self.header.set_keyword("DET-POSY", self.detpos_y[0], "Detector position in Y")
         self.header.set_keyword("Ext-PosX", self.extpos_x[0], "Amplifier position in X")
         self.header.set_keyword("Ext-PosY", self.extpos_y[0], "Amplifier position in Y")
-        self.header.set_keyword("AMP-PIX1", self.amppix1[0], "Amplifier pixel position in X")
-        self.header.set_keyword("AMP-PIX2", self.amppix2[0], "Amplifier pixel position in Y")
+        self.header.set_keyword(
+            "AMP-PIX1", self.amppix1[0], "Amplifier pixel position in X"
+        )
+        self.header.set_keyword(
+            "AMP-PIX2", self.amppix2[0], "Amplifier pixel position in Y"
+        )
 
         return
 
@@ -325,7 +337,9 @@ class FocalPlane(ObjectHeaderMethods):
             self.np_frametransfer,
         ]
 
-    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""):
+    def set_focalplane(
+        self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""
+    ):
         """
         Sets focal plane configuration. Use after set_format() and before set_roi().
         This command replaces SetConfiguration.
@@ -375,10 +389,18 @@ class FocalPlane(ObjectHeaderMethods):
                 self.amp_config += chr(x + 48)
 
         # set the keywords in the main header
-        self.header.set_keyword("N-DET-X", self.numdet_x, "Number of detectors in X", int)
-        self.header.set_keyword("N-DET-Y", self.numdet_y, "Number of detectors in Y", int)
-        self.header.set_keyword("N-AMPS-X", self.numamps_x, "Number of amplifiers in X", int)
-        self.header.set_keyword("N-AMPS-Y", self.numamps_y, "Number of amplifiers in Y", int)
+        self.header.set_keyword(
+            "N-DET-X", self.numdet_x, "Number of detectors in X", int
+        )
+        self.header.set_keyword(
+            "N-DET-Y", self.numdet_y, "Number of detectors in Y", int
+        )
+        self.header.set_keyword(
+            "N-AMPS-X", self.numamps_x, "Number of amplifiers in X", int
+        )
+        self.header.set_keyword(
+            "N-AMPS-Y", self.numamps_y, "Number of amplifiers in Y", int
+        )
 
         # set number of detectors
         self.num_detectors = self.numdet_x * self.numdet_y
@@ -474,13 +496,17 @@ class FocalPlane(ObjectHeaderMethods):
         fr = first_row
         # calculate variables for shifting a single AMPLIFIER
         self.xunderscan = int(min(self.colusct / self.col_bin, self.coluscw))
-        self.xskip = int(min(self.colusct - self.xunderscan * self.col_bin, self.coluscm))
+        self.xskip = int(
+            min(self.colusct - self.xunderscan * self.col_bin, self.coluscm)
+        )
         self.xpreskip = self.colusct - self.xskip - self.xunderscan * self.col_bin
         self.xskip += fc - 1
         self.xdata = (lc - (fc - 1)) / self.col_bin
         self.xdata = max(0, self.xdata)
         self.xdata = int(self.xdata / self.num_ser_amps_det)
-        self.xpostskip = self.coltotal / self.numamps_x - ((fc - 1) + self.xdata * self.col_bin)
+        self.xpostskip = self.coltotal / self.numamps_x - (
+            (fc - 1) + self.xdata * self.col_bin
+        )
         self.xpostskip = int(max(0, self.xpostskip))
         self.xpostskip += self.coloscm
         self.xoverscan = self.coloscw
@@ -489,16 +515,22 @@ class FocalPlane(ObjectHeaderMethods):
         self.numcols_overscan = self.xoverscan
         self.numviscols_amp = self.xdata
         # self.numviscols_image=self.numviscols_amp*self.num_ser_amps_det*self.numamps_x  # bug? 21may15
-        self.numviscols_image = self.numviscols_amp * self.num_ser_amps_det * self.numdet_x
+        self.numviscols_image = (
+            self.numviscols_amp * self.num_ser_amps_det * self.numdet_x
+        )
 
         self.yunderscan = int(min(self.rowusct / self.row_bin, self.rowuscw))
-        self.yskip = int(min(self.rowusct - self.yunderscan * self.row_bin, self.rowuscm))
+        self.yskip = int(
+            min(self.rowusct - self.yunderscan * self.row_bin, self.rowuscm)
+        )
         self.ypreskip = self.rowusct - self.yskip - self.yunderscan * self.row_bin
         self.yskip += self.first_row - 1
         self.ydata = (lr - (fr - 1)) / self.row_bin
         self.ydata = max(0, self.ydata)
         self.ydata = int(self.ydata / self.num_par_amps_det)
-        self.ypostskip = self.rowtotal / self.numamps_y - ((fr - 1) + self.ydata * self.row_bin)
+        self.ypostskip = self.rowtotal / self.numamps_y - (
+            (fr - 1) + self.ydata * self.row_bin
+        )
         self.ypostskip = int(max(0, self.ypostskip))
         self.ypostskip += self.rowoscm
         self.yoverscan = self.rowoscw
@@ -507,7 +539,9 @@ class FocalPlane(ObjectHeaderMethods):
         self.numrows_overscan = self.yoverscan
         self.numvisrows_amp = self.ydata
         # self.numvisrows_image=self.numvisrows_amp*self.num_par_amps_det*self.numamps_y
-        self.numvisrows_image = self.numvisrows_amp * self.num_par_amps_det * self.numdet_y
+        self.numvisrows_image = (
+            self.numvisrows_amp * self.num_par_amps_det * self.numdet_y
+        )
 
         self.numpix_amp = self.numcols_amp * self.numrows_amp
 
@@ -596,10 +630,18 @@ class FocalPlane(ObjectHeaderMethods):
             size_y = self.numvisrows_amp * self.row_bin
 
             self.amppix1[indx] = (
-                (self.extpos_x[indx] - 1) * size_x + flip_x * size_x + self.gapx[indx] + 1 - flip_x
+                (self.extpos_x[indx] - 1) * size_x
+                + flip_x * size_x
+                + self.gapx[indx]
+                + 1
+                - flip_x
             )
             self.amppix2[indx] = (
-                (self.extpos_y[indx] - 1) * size_y + flip_y * size_y + self.gapy[indx] + 1 - flip_y
+                (self.extpos_y[indx] - 1) * size_y
+                + flip_y * size_y
+                + self.gapy[indx]
+                + 1
+                - flip_y
             )
 
             indx += 1
