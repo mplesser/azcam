@@ -8,6 +8,7 @@ azcam._app_type = 1  # server
 
 azcam.api = API()
 azcam.api.db = azcam.db
+azcam.db.cli_cmds.update({"db": azcam.db})
 
 # logging
 from azcam.logging import Logger
