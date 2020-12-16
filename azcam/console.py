@@ -1,16 +1,12 @@
 import azcam
-from azcam.database import AzcamDatabase
 from azcam.api_console import API
 
 azcam._app_type = 2  # console
 
-# local database
-db = AzcamDatabase()
-azcam.db = db  # temporary
-
 # api (with remote db)
 api = API()
-azcam.api = api
+azcam.api = API()
+
 # logging
 from azcam.logging import Logger
 
@@ -25,7 +21,7 @@ azcam.AzcamWarning = AzcamWarning
 
 # local database entries
 #: image parameters
-AzcamDatabase.imageparnames = [
+azcam.db.imageparnames = [
     "imageroot",
     "imageincludesequencenumber",
     "imageautoname",
@@ -38,7 +34,7 @@ AzcamDatabase.imageparnames = [
 ]
 
 #: exposure flags
-db.exposureflags = {
+azcam.db.exposureflags = {
     "NONE": 0,
     "EXPOSING": 1,
     "ABORT": 2,
@@ -55,4 +51,4 @@ db.exposureflags = {
 
 
 # clean namespace (never used directly again)
-# del azcam.api_server
+del azcam.api_console
