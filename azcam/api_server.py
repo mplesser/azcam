@@ -4,8 +4,6 @@ API interface for azcamserver.
 
 import azcam
 
-# import azcam.api_azcam
-
 
 class API(object):
     """
@@ -17,7 +15,6 @@ class API(object):
         super().__init__()
 
         setattr(azcam, "api", self)
-        azcam.db.cli_cmds["api"] = self
 
     def _get(self, name):
         """

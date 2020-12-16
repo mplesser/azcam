@@ -28,7 +28,6 @@ class API(object):
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
-        azcam.db.cli_cmds["api"] = self
 
     def _get(self, name):
         """

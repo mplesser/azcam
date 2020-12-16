@@ -8,13 +8,14 @@ azcam._app_type = 1  # server
 
 db = AzcamDatabase()
 azcam.db = db  # temporary
-azcam.api = API()
+api = API()
+azcam.api = api
 azcam.api.db = db
 
 # logging
 from azcam.logging import Logger
 
-azcam.api.db.logger = Logger()
+api.db.logger = Logger()
 azcam.log = azcam.api.db.logger.log  # to allow azcam.log()
 
 # exceptions: azcam.AzcamError and azcam.AzcamWarning
@@ -24,8 +25,8 @@ azcam.AzcamError = AzcamError
 azcam.AzcamWarning = AzcamWarning
 
 # save this machine's hostname and ip address
-azcam.api.db.hostname = socket.gethostname()
-azcam.api.db.hostip = socket.gethostbyname(db.hostname)
+api.db.hostname = socket.gethostname()
+api.db.hostip = socket.gethostbyname(db.hostname)
 
 # clean namespace (never used directly again)
 del azcam.api_server

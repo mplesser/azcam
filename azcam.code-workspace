@@ -2,6 +2,27 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "..\\azcam-arc"
+		},
+		{
+			"path": "..\\azcam-archon"
+		},
+		{
+			"path": "..\\azcam-cryocon"
+		},
+		{
+			"path": "..\\azcam-mag"
+		},
+		{
+			"path": "..\\azcam-qhy"
+		},
+		{
+			"path": "..\\azcam-sbig"
+		},
+		{
+			"path": "..\\azcam-itl"
 		}
 	],
 }

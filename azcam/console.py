@@ -9,8 +9,8 @@ db = AzcamDatabase()
 azcam.db = db  # temporary
 
 # api (with remote db)
-azcam.api = API()
-
+api = API()
+azcam.api = api
 # logging
 from azcam.logging import Logger
 
