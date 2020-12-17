@@ -370,7 +370,7 @@ def get_error_status():
 
 def update_pars(write, par_dict=None):
     """
-    Update azcam parameters to/from a genpars dictionary.
+    Update azcam parameters to/from a config dictionary.
     write True => write values into dictionary.
     write False => set values from dictionary.
     """
@@ -382,9 +382,9 @@ def update_pars(write, par_dict=None):
             dictname = "azcamconsole"
         else:
             dictname = "azcamserver"
-        par_dict = azcam.db.genpars.par_dict[dictname]
+        par_dict = azcam.api.config.par_dict[dictname]
     elif type(par_dict) == str:
-        par_dict = azcam.db.genpars.par_dict[par_dict]
+        par_dict = azcam.api.config.par_dict[par_dict]
 
     keys = par_dict.keys()
     if keys is None:

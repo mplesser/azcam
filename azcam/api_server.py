@@ -12,8 +12,6 @@ class API(object):
 
     def __init__(self):
 
-        super().__init__()
-
         setattr(azcam, "api", self)
         azcam.db.cli_cmds["api"] = self
 

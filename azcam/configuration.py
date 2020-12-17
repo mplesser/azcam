@@ -9,9 +9,9 @@ import typing
 import azcam
 
 
-class GenPars(object):
+class Config(object):
     """
-    Main class for genpars.
+    Main class for azcam parameter configuration.
     """
 
     def __init__(self, parfile: str = None):
@@ -235,7 +235,11 @@ class GenPars(object):
             value: value of parameter or None if not defined
         """
 
-        parameter = self.get_par(par_dict, name)
+        pdict = self.par_dict.get(par_dict)
+        if pdict is None:
+            return
+
+        parameter = pdict.get(name)
 
         return parameter
 

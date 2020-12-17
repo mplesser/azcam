@@ -7,6 +7,8 @@ from typing import List, Optional, Union
 import azcam
 import azcam.sockets
 
+from azcam.configuration import Config
+
 
 class API(object):
     """
@@ -25,7 +27,7 @@ class API(object):
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
         self.db = Database(self)
-        self.genpars = GenPars(self)
+        self.config = Config(self)
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
@@ -72,7 +74,11 @@ class HeaderMethods(object):
         return self._parent.server.rcommand(f"{self.object_name}.read_header")
 
     def set_keyword(
-        self, keyword: str, value: str, comment: str = "no_comment", typestring: str = "str",
+        self,
+        keyword: str,
+        value: str,
+        comment: str = "no_comment",
+        typestring: str = "str",
     ) -> Optional[str]:
         """
         Set a keyword value, comment, and type.
@@ -254,7 +260,10 @@ class Instrument(HeaderMethods):
         return reply
 
     def set_focus(
-        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
+        self,
+        focus_value: float,
+        focus_id: int = 0,
+        focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -269,7 +278,10 @@ class Instrument(HeaderMethods):
 
         return
 
-    def get_focus(self, focus_id: int = 0,) -> float:
+    def get_focus(
+        self,
+        focus_id: int = 0,
+    ) -> float:
         """
         Get the current focus position.
 
@@ -325,7 +337,10 @@ class Telescope(HeaderMethods):
         return float(reply)
 
     def set_focus(
-        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
+        self,
+        focus_value: float,
+        focus_id: int = 0,
+        focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -653,7 +668,10 @@ class Exposure(HeaderMethods):
         return self._parent.server.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
-        self, number_exposures: int = 1, exposure_time: float = 1.0, image_type: str = "zero",
+        self,
+        number_exposures: int = 1,
+        exposure_time: float = 1.0,
+        image_type: str = "zero",
     ) -> Optional[str]:
         """
         Make test exposures, which overwrite previous test images.
@@ -883,27 +901,27 @@ class Database(object):
         return self._parent.server.rcommand(f"db.set {name} {value}")
 
 
-class GenPars(object):
+class ConfigXXX(object):
     """
-    GenPars class for client.
+    Config class for client.
     """
 
     def __init__(self, parent) -> None:
         self._parent = parent
 
-    def get(self, name):
+    def get(self, name: str, par_dict: str = "azcamconsole"):
         """
-        Get a database attribute.
-        """
-
-        return self._parent.server.rcommand(f"genpars.get {name}")
-
-    def set(self, name, value):
-        """
-        Set a a database attribute.
+        Get a configuration parameter value.
         """
 
-        return self._parent.server.rcommand(f"genpars.set {name} {value}")
+        return self._parent.server.rcommand(f"config.get {name} {par_dict}")
+
+    def set(self, name, value, par_dict: str = "azcamconsole"):
+        """
+        Set a configuration parameter value.
+        """
+
+        return self._parent.server.rcommand(f"config.set {name} {value} {par_dict}")
 
 
 class ServerConnection(azcam.sockets.SocketInterface):

@@ -51,9 +51,9 @@ if azcam._app_type == 1:
 
     def sav():
         """Shortcut for parfile_write() saving current folder in database."""
-        azcam.db.genpars.set_par("azcamserver", "wd", azcam.utils.curdir())
-        azcam.utils.update_pars(1, azcam.db.genpars.par_dict["azcamserver"])
-        azcam.db.genpars.parfile_write()
+        azcam.api.config.set_par("azcamserver", "wd", azcam.utils.curdir())
+        azcam.utils.update_pars(1, azcam.api.config.par_dict["azcamserver"])
+        azcam.api.config.parfile_write()
 
         return None
 
@@ -99,9 +99,9 @@ elif azcam._app_type == 2:
     def sav():
         """Shortcut for parfile_write() saving current folder in database."""
 
-        azcam.db.genpars.set_par("azcamconsole", "wd", azcam.utils.curdir())
-        azcam.utils.update_pars(1, azcam.db.genpars.par_dict["azcamconsole"])
-        azcam.db.genpars.parfile_write()
+        azcam.api.config.set_par("azcamconsole", "wd", azcam.utils.curdir())
+        azcam.utils.update_pars(1, azcam.api.config.par_dict["azcamconsole"])
+        azcam.api.config.parfile_write()
 
         return
 

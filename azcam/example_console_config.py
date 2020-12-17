@@ -10,7 +10,6 @@ import threading
 import azcam
 import azcam.console
 import azcam.shortcuts
-from azcam.genpars import GenPars
 from azcam_ds9.ds9display import Ds9Display
 
 print("Loading example console configuration")
@@ -82,11 +81,10 @@ if azcam.db.wd is None:
 # ****************************************************************
 # read par file
 # ****************************************************************
-genpars = GenPars()
 try:
-    pardict = genpars.parfile_read(parfile)["azcamconsole"]
+    pardict = azcam.api.config.parfile_read(parfile)["azcamconsole"]
     azcam.utils.update_pars(0, pardict)
-    wd = genpars.get_par(pardict, "wd", "default")
+    wd = azcam.api.config.get_par(pardict, "wd", "default")
     azcam.utils.curdir(wd)
 except FileNotFoundError:
     azcam.AzcamWarning("Parameter file not found")

@@ -12,7 +12,6 @@ import azcam.shortcuts
 from azcam.cmdserver import CommandServer
 from azcam.controller import Controller
 from azcam.exposure import Exposure
-from azcam.genpars import GenPars
 from azcam.instrument import Instrument
 from azcam.telescope import Telescope
 from azcam.tempcon import TempCon
@@ -51,12 +50,11 @@ exposure = Exposure()
 # read par file and set working directory
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
-genpars = GenPars()
 
 try:
-    pardict = genpars.parfile_read(parfile)["azcamserver"]
+    pardict = azcam.api.config.parfile_read(parfile)["azcamserver"]
     azcam.utils.update_pars(0, pardict)
-    wd = genpars.get_par(pardict, "wd", "default")
+    wd = azcam.api.config.get_par(pardict, "wd", "default")
     azcam.utils.curdir(wd)
 except FileNotFoundError:
     azcam.log(f"Parameter file not found: {parfile}")
