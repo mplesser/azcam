@@ -8,7 +8,7 @@ from azcam_ds9.ds9display import Ds9Display
 
 import azcam
 import azcam.server
-import azcam.shortcuts
+import azcam.shortcuts_server
 from azcam.cmdserver import CommandServer
 from azcam.controller import Controller
 from azcam.exposure import Exposure

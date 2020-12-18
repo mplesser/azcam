@@ -376,12 +376,7 @@ def update_pars(write, par_dict=None):
     """
 
     if par_dict is None:
-        if azcam._app_type == 1:
-            dictname = "azcamserver"
-        elif azcam._app_type == 2:
-            dictname = "azcamconsole"
-        else:
-            dictname = "azcamserver"
+        dictname = "azcamserver"  # "azcamconsole"
         par_dict = azcam.api.config.par_dict[dictname]
     elif type(par_dict) == str:
         par_dict = azcam.api.config.par_dict[par_dict]
@@ -580,8 +575,9 @@ def get_image_roi():
     """
 
     # database roi
-    if azcam.db.imageroi != []:
-        return azcam.db.imageroi
+    if azcam.db.get("imageroi"):
+        if azcam.db.imageroi != []:
+            return azcam.db.imageroi
 
     # display.roi
     roi = []
@@ -602,7 +598,7 @@ def get_image_roi():
 
 def set_image_roi(roi=[]):
     """
-    Set the image region of interest.
+    Set the global image region of interest "db.imageroi".
     If roi is not specified, use display ROI.
 
     :param list roi: ROI list or []

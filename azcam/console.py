@@ -1,13 +1,9 @@
 import azcam
 from azcam.api_console import API
 
-azcam._app_type = 2  # console
-
 # api
 api = API()
 azcam.api = API()
-
-azcam.db.cli_cmds.update({"db": azcam.db})
 
 # logging
 from azcam.logging import Logger

@@ -1,14 +1,11 @@
 """
-Contains the azcam database db.
+Contains the local, temporary database referenced as "azcam.db".
 """
 
 import typing
 
 
 class AzcamDatabase(object):
-
-    #: version - the definitive azcam version (verify with setup.py)
-    version = "20.3"
 
     #: working directory
     wd = None
@@ -19,23 +16,11 @@ class AzcamDatabase(object):
     #: abort flag, True if an abort has occurred
     abortflag = 0
 
-    #: object which provides header corrdinates
-    coord_object = "telescope"
-
     #: folders
     datafolder = ""
 
     #: last error status
     errorstatus = ["OK", ""]
-
-    #: file type constants
-    filetypes = {"FITS": 0, "MEF": 1, "BIN": 2, "ASM": 6}
-
-    #: ROI for image analysis
-    imageroi = []
-
-    #: application type.  0 => unknown, 1 => server, 2 => console
-    app_type = 0
 
     #: list of objects available to CLI namespace
     cli_cmds = {}
@@ -48,9 +33,6 @@ class AzcamDatabase(object):
 
     #: header order in image header
     headerorder = []
-
-    #: use seaborn for plotting
-    use_seaborn = 0
 
     #: azcamparameters
     parameters = {

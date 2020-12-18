@@ -4,14 +4,13 @@ import azcam
 from azcam.api_server import API
 from azcam.configuration import Config
 
-azcam._app_type = 1  # server
-
 azcam.api = API()
-azcam.api.db = azcam.db
 azcam.db.cli_cmds.update({"db": azcam.db})
 
 azcam.api.config = Config()
-azcam.api.genpars = azcam.api.config  # temporary for azcamtool
+
+# ***** TEMPORARY for azcamtool***
+azcam.api.genpars = azcam.api.config
 
 # logging
 from azcam.logging import Logger

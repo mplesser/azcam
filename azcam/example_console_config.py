@@ -9,7 +9,7 @@ import threading
 
 import azcam
 import azcam.console
-import azcam.shortcuts
+import azcam.shortcuts_console
 from azcam_ds9.ds9display import Ds9Display
 
 print("Loading example console configuration")
