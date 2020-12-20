@@ -1,5 +1,5 @@
 """
-Script parameter handling utility.
+Configuration and parameter handling for azcam.
 """
 
 import configparser
@@ -11,15 +11,17 @@ import azcam
 
 class Config(object):
     """
-    Main class for azcam parameter configuration.
+    Main class for azcam configuration and parameter handling.
     """
 
     def __init__(self, parfile: str = None):
 
-        self.parfile: str = parfile
+        self.par_file: str = parfile
         self.par_dict: dict = {}
 
-    def parfile_read(self, parfilename: str = None) -> None:
+        self.default_pardict_name = None
+
+    def read_parfile(self, parfilename: str = None) -> None:
         """
         Read a parameter file and create sub-dictionaries for saving parameters between sessions.
 
@@ -28,11 +30,11 @@ class Config(object):
         """
 
         if parfilename is None:
-            parfilename = self.parfile
+            parfilename = self.par_file
             if parfilename is None:
                 raise FileNotFoundError("Parameter file is not defined")
 
-        self.parfile = parfilename
+        self.par_file = parfilename
 
         if not os.path.exists(parfilename):
             raise FileNotFoundError(f"Parameter file not found: {parfilename}")
@@ -53,7 +55,7 @@ class Config(object):
 
         return self.par_dict
 
-    def parfile_write(self, parfilename: str = None) -> None:
+    def write_parfile(self, parfilename: str = None) -> None:
         """
         Update a parameter file with current values.
 
@@ -62,7 +64,7 @@ class Config(object):
         """
 
         if parfilename is None:
-            parfilename = self.parfile
+            parfilename = self.par_file
             if parfilename is None:
                 raise FileNotFoundError("Parameter file is not defined")
 
@@ -115,7 +117,7 @@ class Config(object):
             if prompt_string == "":
                 prompt_string = f"Enter value for {attribute}"
             value = self.prompt(prompt_string, default)
-            _, value = self.get_datatype(value)
+            _, value = azcam.utils.get_datatype(value)
         elif value == "default":
             value = default
         else:
@@ -142,48 +144,6 @@ class Config(object):
         par_dict[attribute] = value
 
         return
-
-    def get_datatype(self, value: any) -> list:
-        """
-        Determine the data type for an object and set the type if possible.
-        A string such as "1.23" will result in a type "float" and "2" will
-        result in type "int".
-
-        :param value: object to be typed
-        :return [type, value]: list of data type (as a code) and object with
-        that type
-        """
-
-        if type(value) is str:
-
-            # string integer
-            if value.isdigit():
-                attributetype = "int"
-                value = int(value)
-                return [attributetype, value]
-            else:
-                try:
-                    value = float(value)
-                    attributetype = "float"
-                    return [attributetype, value]
-                except ValueError:
-                    pass
-
-            attributetype = "str"
-
-        elif type(value) is int:
-            attributetype = "int"
-            value = int(value)
-
-        elif type(value) is float:
-            attributetype = "float"
-            value = float(value)
-
-        # more work here
-        else:
-            attributetype = "str"
-
-        return [attributetype, value]
 
     def prompt(self, message="Enter a string", default=""):
         """
@@ -214,49 +174,25 @@ class Config(object):
         """
 
         self.update_pars(1)
-        self.parfile_write()
-
-        return
-
-    def get(self, name: str, par_dict: str = "azcamserver") -> typing.Any:
-        """
-        Returns an existing parameter from a paramater dictionary.
-        Args:
-            name: name of parameter to return
-            par_dict: name of dictionary
-        Returns:
-            value: value of parameter or None if not defined
-        """
-
-        pdict = self.par_dict.get(par_dict)
-        if pdict is None:
-            return
-
-        parameter = pdict.get(name)
-
-        return parameter
-
-    def set(self, name: str, value: typing.Any, par_dict: str = "azcamserver") -> None:
-        """
-        Sets a parameter in a parameter dictionary.
-        Args:
-            name: name of attribute to set
-            value: value of attribute to set
-            par_dict: name of dictionary
-        """
-
-        self.set_par(par_dict, name, value)
+        self.write_parfile()
 
         return
 
     def get_par(self, parameter):
         """
-        Return the value of a parameter from the local azcamparameters dictionary.
+        Return the value of a parameter in the parameters dictionary.
         Returns None on error.
         """
 
         parameter = parameter.lower()
         value = None
+
+        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
+            azcam.AzcamWarning("cannot get_par, not connected to server")
+            return
+
+        if self.default_pardict_name == "azcamconsole":
+            return azcam.api.get_remote_par(parameter)
 
         # special cases
         if parameter == "imagefilename":
@@ -317,7 +253,7 @@ class Config(object):
 
         # object must be in api
         else:
-            obj = azcam.api._get(object1)
+            obj = azcam.api.get(object1)
             for i in range(1, numtokens):
                 obj = getattr(obj, tokens[i])
             value = obj  # last time is value
@@ -326,14 +262,21 @@ class Config(object):
 
     def set_par(self, parameter, value=None):
         """
-        Set the value of a parameter in the local azcamparameters dictionary.
+        Set the value of a parameter in the parameters dictionary.
         Returns None on error.
         """
+
+        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
+            azcam.AzcamWarning("cannot set_par, not connected to server")
+            return
 
         if parameter == "":
             return None
 
         parameter = parameter.lower()
+
+        if self.default_pardict_name == "azcamconsole":
+            return azcam.api.set_remote_par(parameter)
 
         # special cases
         if parameter == "imagefilename":
@@ -375,7 +318,7 @@ class Config(object):
 
         # run through sub-objects
         else:
-            obj = azcam.api._get(object1)
+            obj = azcam.api.get(object1)
             for i in range(1, numtokens - 1):
                 obj = getattr(obj, tokens[i])
             # last time is actual object
@@ -383,19 +326,17 @@ class Config(object):
 
         return None
 
-    def update_pars(self, write, par_dict=None):
+    def update_pars(self, write, par_dictname: str = None):
         """
         Update azcam parameters to/from a config dictionary.
         write True => write values into dictionary.
         write False => set values from dictionary.
         """
 
-        if par_dict is None:
-            dictname = "azcamserver"  # "azcamconsole"
-            par_dict = azcam.api.config.par_dict[dictname]
-        elif type(par_dict) == str:
-            par_dict = azcam.api.config.par_dict[par_dict]
+        if par_dictname is None:
+            par_dictname = self.default_pardict_name
 
+        par_dict = azcam.api.config.par_dict[par_dictname]
         keys = par_dict.keys()
         if keys is None:
             return

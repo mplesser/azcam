@@ -49,8 +49,8 @@ def sav():
     """Shortcut for parfile_write() saving current folder in database."""
 
     azcam.api.config.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
-    azcam.api.config.update_pars(1, azcam.api.config.par_dict["azcamconsole"])
-    azcam.api.config.parfile_write()
+    azcam.api.config.update_pars(1, "azcamconsole")
+    azcam.api.config.write_parfile()
 
     return
 

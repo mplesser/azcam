@@ -384,7 +384,7 @@ class Exposure(Objects, Filename):
 
         # call initialize() method on other objects
         for obj in self.objects_init:
-            azcam.api._get(obj).initialize()
+            azcam.api.get(obj).initialize()
 
         self.initialized = 1
 
@@ -412,7 +412,7 @@ class Exposure(Objects, Filename):
 
         # call reset() method on other objects
         for obj in self.objects_reset:
-            azcam.api._get(obj).reset()
+            azcam.api.get(obj).reset()
 
         return
 
@@ -1061,7 +1061,7 @@ class Exposure(Objects, Filename):
             if objectname == "controller" or objectname == "system":  # skip as already up to date
                 continue
             try:
-                azcam.api._get(objectname).update_header()  # dont crash so all headers get updated
+                azcam.api.get(objectname).update_header()  # dont crash so all headers get updated
             except Exception:
                 pass
 
@@ -1631,7 +1631,7 @@ class Exposure(Objects, Filename):
             seqtotal = 0
 
         expstate = None
-        ef = azcam.utils.get_par("exposureflag")
+        ef = azcam.api.config.get_par("exposureflag")
         for expstate in azcam.db.exposureflags:
             if ef == azcam.db.exposureflags[expstate]:
                 break
@@ -1666,7 +1666,7 @@ class Exposure(Objects, Filename):
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0 * (self.get_pixels_remaining() / azcam.utils.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.api.config.get_par("numpiximage"))
             )
             explabel = f"{progress}%"
         elif ef == 8:
@@ -1705,12 +1705,12 @@ class Exposure(Objects, Filename):
             "seqcount": seqcount,
             "seqtotal": seqtotal,
             "timestamp": self._timestamp(0),
-            "imagetitle": azcam.utils.get_par("imagetitle"),
-            "imagetype": azcam.utils.get_par("imagetype"),
-            "imagetest": azcam.utils.get_par("imagetest"),
-            "exposuretime": azcam.utils.get_par("exposuretime"),
-            "colbin": azcam.utils.get_par("colbin"),
-            "rowbin": azcam.utils.get_par("rowbin"),
+            "imagetitle": azcam.api.config.get_par("imagetitle"),
+            "imagetype": azcam.api.config.get_par("imagetype"),
+            "imagetest": azcam.api.config.get_par("imagetest"),
+            "exposuretime": azcam.api.config.get_par("exposuretime"),
+            "colbin": azcam.api.config.get_par("colbin"),
+            "rowbin": azcam.api.config.get_par("rowbin"),
             "systemname": azcam.db.systemname,
             "mode": azcam.db.servermode,
         }

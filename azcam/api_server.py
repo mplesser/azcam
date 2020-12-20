@@ -15,11 +15,21 @@ class API(object):
         setattr(azcam, "api", self)
         azcam.db.cli_cmds["api"] = self
 
-    def _get(self, name):
+    def get(self, name):
         """
         Returns an API object by name.
         Returns None if api.name is not defined.
+        If name is "all" then return a list of api object names.
         """
+
+        if name == "all":
+            objects = dir(self)
+            for obj in objects[:]:
+                if obj.startswith("_"):
+                    objects.remove(obj)
+            if "get" in objects:
+                objects.remove("get")
+            return objects
 
         try:
             obj = getattr(self, name)

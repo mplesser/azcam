@@ -26,18 +26,27 @@ class API(object):
         self.telescope = Telescope(self)
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
-        self.db = Database(self)
         self.config = Config(self)
         self.server = ServerConnection()
 
         setattr(azcam, "api", self)
         azcam.db.cli_cmds["api"] = self
 
-    def _get(self, name):
+    def get(self, name):
         """
         Returns an API object by name.
         Returns None if api.name is not defined.
+        If name is "all" then return a list of api object names.
         """
+
+        if name == "all":
+            objects = dir(self)
+            for obj in objects[:]:
+                if obj.startswith("_"):
+                    objects.remove(obj)
+            if "get" in objects:
+                objects.remove("get")
+            return objects
 
         try:
             obj = getattr(self, name)
@@ -45,6 +54,35 @@ class API(object):
             obj = None
 
         return obj
+
+    def get_remote_par(self, parameter):
+        """
+        Return the value of a parameter from remote server.
+        Returns None on error.
+        """
+
+        parameter = parameter.lower()
+        value = None
+
+        reply = self.server.rcommand(f"config.get_par {parameter}")
+        _, value = azcam.utils.get_datatype(reply)
+
+        return value
+
+    def set_remote_par(self, parameter, value):
+        """
+        Set the value of a parameter in the remote server.
+        Returns None on error.
+        """
+
+        if parameter == "":
+            return None
+
+        parameter = parameter.lower()
+
+        self.server.rcommand(f"config.set_par {parameter} {value}")
+
+        return
 
 
 class HeaderMethods(object):
@@ -876,52 +914,6 @@ class Exposure(HeaderMethods):
         self._parent.server.rcommand(f"exposure.set_par {parameter} {value}")
 
         return
-
-
-class Database(object):
-    """
-    Database class for client.
-    """
-
-    def __init__(self, parent) -> None:
-        self._parent = parent
-
-    def get(self, name):
-        """
-        Get a database attribute.
-        """
-
-        return self._parent.server.rcommand(f"db.get {name}")
-
-    def set(self, name, value):
-        """
-        Set a a database attribute.
-        """
-
-        return self._parent.server.rcommand(f"db.set {name} {value}")
-
-
-class ConfigXXX(object):
-    """
-    Config class for client.
-    """
-
-    def __init__(self, parent) -> None:
-        self._parent = parent
-
-    def get(self, name: str, par_dict: str = "azcamconsole"):
-        """
-        Get a configuration parameter value.
-        """
-
-        return self._parent.server.rcommand(f"config.get {name} {par_dict}")
-
-    def set(self, name, value, par_dict: str = "azcamconsole"):
-        """
-        Set a configuration parameter value.
-        """
-
-        return self._parent.server.rcommand(f"config.set {name} {value} {par_dict}")
 
 
 class ServerConnection(azcam.sockets.SocketInterface):

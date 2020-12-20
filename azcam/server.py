@@ -9,8 +9,7 @@ azcam.db.cli_cmds.update({"db": azcam.db})
 
 azcam.api.config = Config()
 
-# ***** TEMPORARY for azcamtool***
-azcam.api.genpars = azcam.api.config
+azcam.api.config.default_pardict_name = "azcamserver"
 
 # logging
 from azcam.logging import Logger

@@ -11,6 +11,8 @@ from azcam.logging import Logger
 azcam.db.logger = Logger()
 azcam.log = azcam.db.logger.log  # to allow azcam.log()
 
+azcam.api.config.default_pardict_name = "azcamconsole"
+
 # local database entries
 #: image parameters
 azcam.db.imageparnames = [

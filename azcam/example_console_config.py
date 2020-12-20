@@ -83,8 +83,8 @@ if azcam.db.wd is None:
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
 try:
-    pardict = azcam.api.config.parfile_read(parfile)
-    azcam.api.config.update_pars(0, pardict["azcamconsole"])
+    pardict = azcam.api.config.read_parfile(parfile)
+    azcam.api.config.update_pars(0, "azcamconsole")
 except FileNotFoundError:
     azcam.AzcamWarning("Parameter file not found")
 

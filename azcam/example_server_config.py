@@ -51,7 +51,7 @@ exposure = Exposure()
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
 try:
-    pardict = azcam.api.config.parfile_read(parfile)
+    pardict = azcam.api.config.read_parfile(parfile)
     azcam.api.config.update_pars(0, pardict["azcamserver"])
 except FileNotFoundError:
     azcam.log(f"Parameter file not found: {parfile}")
