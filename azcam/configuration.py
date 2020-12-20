@@ -21,11 +21,10 @@ class Config(object):
 
     def parfile_read(self, parfilename: str = None) -> None:
         """
-        Read a parameter file and create sub-dictionaries for saving
-        parameters between sessions.
+        Read a parameter file and create sub-dictionaries for saving parameters between sessions.
 
-        :param str parfilename: Name of parameter file
-        :return: None
+        Args:
+            parfilename: Name of parameter file
         """
 
         if parfilename is None:
@@ -52,9 +51,6 @@ class Config(object):
                 name = name.lower()
                 self.par_dict[sectionname][name] = value
 
-        # update current values
-        azcam.utils.update_pars(0)
-
         return self.par_dict
 
     def parfile_write(self, parfilename: str = None) -> None:
@@ -64,9 +60,6 @@ class Config(object):
         :param str parfilename: Name of parameter file
         :return: None
         """
-
-        # update current values
-        azcam.utils.update_pars(1)
 
         if parfilename is None:
             parfilename = self.parfile
@@ -87,7 +80,7 @@ class Config(object):
 
         return
 
-    def get_par(
+    def get_script_par(
         self,
         par_dict: typing.Union[str, dict],
         attribute: any,
@@ -132,7 +125,7 @@ class Config(object):
 
         return value
 
-    def set_par(self, par_dict, attribute, value):
+    def set_script_par(self, par_dict, attribute, value):
         """
         Set a parameter from the par_dict database.
 
@@ -220,7 +213,7 @@ class Config(object):
         Save the current parameter set.
         """
 
-        azcam.utils.update_pars(1)
+        self.update_pars(1)
         self.parfile_write()
 
         return
@@ -253,5 +246,183 @@ class Config(object):
         """
 
         self.set_par(par_dict, name, value)
+
+        return
+
+    def get_par(self, parameter):
+        """
+        Return the value of a parameter from the local azcamparameters dictionary.
+        Returns None on error.
+        """
+
+        parameter = parameter.lower()
+        value = None
+
+        # special cases
+        if parameter == "imagefilename":
+            value = azcam.api.exposure.get_filename()
+            return value
+        elif parameter == "imagetitle":
+            value = azcam.api.exposure.get_image_title()
+            return value
+        elif parameter == "exposuretime":
+            value = azcam.api.exposure.get_exposuretime()
+            return value
+        elif parameter == "exposurecompleted":
+            value = azcam.api.exposure.finished()
+            return value
+        elif parameter == "exposuretimeremaining":
+            value = azcam.api.exposure.get_exposuretime_remaining()
+            return value
+        elif parameter == "pixelsremaining":
+            value = azcam.api.exposure.get_pixels_remaining()
+            return value
+        elif parameter == "camtemp":
+            value = azcam.api.tempcon.get_temperatures()[0]
+            return value
+        elif parameter == "dewtemp":
+            value = azcam.api.tempcon.get_temperatures()[1]
+            return value
+        elif parameter == "temperatures":
+            camtemp = azcam.api.tempcon.get_temperatures()[0]
+            dewtemp = azcam.api.tempcon.get_temperatures()[1]
+            return [camtemp, dewtemp]
+        elif parameter == "logcommands":
+            value = azcam.db.cmdserver.logcommands
+            return value
+        elif parameter == "wd":
+            value = azcam.utils.curdir()
+            return value
+        elif parameter == "remoteimageserverflag":
+            value = azcam.api.exposure.image.remote_imageserver_flag
+            return value
+
+        # parameter must be in parameters
+        try:
+            attribute = azcam.db.parameters[parameter]
+        except KeyError:
+            azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
+            return None
+
+        tokens = attribute.split(".")
+        numtokens = len(tokens)
+        if numtokens == 1:
+            return None
+
+        object1 = tokens[0]
+
+        if object1 == "db":
+            value = getattr(azcam.db, tokens[1], None)
+            return value
+
+        # object must be in api
+        else:
+            obj = azcam.api._get(object1)
+            for i in range(1, numtokens):
+                obj = getattr(obj, tokens[i])
+            value = obj  # last time is value
+
+        return value
+
+    def set_par(self, parameter, value=None):
+        """
+        Set the value of a parameter in the local azcamparameters dictionary.
+        Returns None on error.
+        """
+
+        if parameter == "":
+            return None
+
+        parameter = parameter.lower()
+
+        # special cases
+        if parameter == "imagefilename":
+            azcam.api.exposure.set_name(value)
+            return None
+        elif parameter == "imagetitle":
+            if value is None or value == "":
+                azcam.api.exposure.set_image_title("")
+            else:
+                azcam.api.exposure.set_image_title(f"{value}")
+            return None
+        elif parameter == "exposuretime":
+            azcam.api.exposure.set_exposuretime(value)
+            return None
+        elif parameter == "logcommands":
+            azcam.db.cmdserver.logcommands = int(value)
+            return None
+
+        # parameter must be in parameters
+        try:
+            attribute = azcam.db.parameters[parameter]
+        except KeyError:
+            azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
+            return None
+
+        # object must be on API
+        tokens = attribute.split(".")
+        numtokens = len(tokens)
+        if numtokens < 2:
+            azcam.log("%s not valid for parameter %s" % (attribute, parameter))
+            return None
+
+        # first try to set value type
+        _, value = azcam.utils.get_datatype(value)
+        object1 = tokens[0]
+
+        if object1 == "db":
+            setattr(azcam.api, tokens[1], value)
+
+        # run through sub-objects
+        else:
+            obj = azcam.api._get(object1)
+            for i in range(1, numtokens - 1):
+                obj = getattr(obj, tokens[i])
+            # last time is actual object
+            setattr(obj, tokens[-1], value)
+
+        return None
+
+    def update_pars(self, write, par_dict=None):
+        """
+        Update azcam parameters to/from a config dictionary.
+        write True => write values into dictionary.
+        write False => set values from dictionary.
+        """
+
+        if par_dict is None:
+            dictname = "azcamserver"  # "azcamconsole"
+            par_dict = azcam.api.config.par_dict[dictname]
+        elif type(par_dict) == str:
+            par_dict = azcam.api.config.par_dict[par_dict]
+
+        keys = par_dict.keys()
+        if keys is None:
+            return
+
+        if write:
+            # run before writing parfile
+            # read values into dict
+            for parname in par_dict:
+                if parname == "wd":
+                    value = azcam.utils.curdir()
+                else:
+                    value = self.get_par(parname)
+                if value is None:
+                    value = "None"
+                par_dict[parname] = value
+
+        else:
+            # after reading parfile
+            # set values from dict
+            for parname in par_dict:
+                value = par_dict[parname]
+                if parname == "wd":
+                    azcam.db.wd = value
+                    azcam.utils.curdir(value)
+
+                else:
+                    value = par_dict[parname]
+                    self.set_par(parname, value)
 
         return

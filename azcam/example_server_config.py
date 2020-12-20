@@ -50,12 +50,9 @@ exposure = Exposure()
 # read par file and set working directory
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
-
 try:
-    pardict = azcam.api.config.parfile_read(parfile)["azcamserver"]
-    azcam.utils.update_pars(0, pardict)
-    wd = azcam.api.config.get_par(pardict, "wd", "default")
-    azcam.utils.curdir(wd)
+    pardict = azcam.api.config.parfile_read(parfile)
+    azcam.api.config.update_pars(0, pardict["azcamserver"])
 except FileNotFoundError:
     azcam.log(f"Parameter file not found: {parfile}")
 

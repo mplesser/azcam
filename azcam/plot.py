@@ -144,7 +144,7 @@ def tools(figure_number=1):
         plotdata["Xpix"] = event.x
         plotdata["Ypix"] = event.y
 
-        if 1:
+        if 0:
             print(plotdata)
 
         return

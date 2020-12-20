@@ -661,7 +661,10 @@ class Exposure(Objects, Filename):
 
         if self.new_roi:
             self.image.data = numpy.empty(
-                shape=[self.image.focalplane.numamps_image, self.image.focalplane.numpix_amp,],
+                shape=[
+                    self.image.focalplane.numamps_image,
+                    self.image.focalplane.numpix_amp,
+                ],
                 dtype="<u2",
             )
             self.new_roi = 0
@@ -1037,7 +1040,10 @@ class Exposure(Objects, Filename):
         self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
         self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
-            "LOCTIME", self.obstime.local_time[0], "Local time at start of exposure", int,
+            "LOCTIME",
+            self.obstime.local_time[0],
+            "Local time at start of exposure",
+            int,
         )
 
         return
@@ -1569,7 +1575,9 @@ class Exposure(Objects, Filename):
         """
 
         self.image.set_remote_imageserver(
-            remote_imageserver_host, remote_imageserver_port, remote_imageserver_filename,
+            remote_imageserver_host,
+            remote_imageserver_port,
+            remote_imageserver_filename,
         )
 
         return
@@ -1776,7 +1784,7 @@ class Exposure(Objects, Filename):
         Returns None on error.
         """
 
-        return azcam.utils.get_par(parameter)
+        return azcam.api.config.get_par(parameter)
 
     def set_par(self, parameter, value=None):
         """
@@ -1784,7 +1792,7 @@ class Exposure(Objects, Filename):
         Returns None on error.
         """
 
-        return azcam.utils.set_par(parameter, value)
+        return azcam.api.config.set_par(parameter, value)
 
     def read_header_file(self, filename):
         """

@@ -34,8 +34,8 @@ def gf():
 
 def sav():
     """Shortcut for parfile_write() saving current folder in database."""
-    azcam.api.config.set_par("azcamserver", "wd", azcam.utils.curdir())
-    azcam.utils.update_pars(1, azcam.api.config.par_dict["azcamserver"])
+    azcam.api.config.set_script_par("azcamserver", "wd", azcam.utils.curdir())
+    azcam.api.config.update_pars(1, azcam.api.config.par_dict["azcamserver"])
     azcam.api.config.parfile_write()
 
     return None
@@ -54,4 +54,3 @@ def p():
 
 # add to CLI dictionary
 azcam.db.cli_cmds.update({"sav": sav, "p": p, "sf": sf, "gf": gf})
-
