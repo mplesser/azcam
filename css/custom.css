@@ -1,13 +1,22 @@
-div.autodoc-docstring {
-    padding-left: 10px;
-    margin-bottom: 5px;
-    border-left: 5px solid lightgrey;
-}
-
-div.autodoc-members {
-    padding-left: 30px;
-}
-
 li {
     line-height: 1.2em;
+}
+
+.doc-heading {
+    background-color: lightgray;
+    font-style: italic;
+}
+
+.doc-method {
+    background-color: transparent;
+    border-width: 1px;
+    border-style: dashed;
+    margin-bottom: 5px;
+}
+
+.doc-function {
+    background-color: transparent;
+    border-width: 1px;
+    border-style: dashed;
+    margin-bottom: 5px;
 }

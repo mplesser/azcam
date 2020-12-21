@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -264,6 +276,188 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.fits" class="md-nav__link">
+    fits
+  </a>
+  
+    <nav class="md-nav" aria-label="fits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.add" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.add_history" class="md-nav__link">
+    add_history()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.arith" class="md-nav__link">
+    arith()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.colbias" class="md-nav__link">
+    colbias()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.combine" class="md-nav__link">
+    combine()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.div" class="md-nav__link">
+    div()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.edit_keyword" class="md-nav__link">
+    edit_keyword()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.file_exists" class="md-nav__link">
+    file_exists()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_all_data" class="md-nav__link">
+    get_all_data()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_data" class="md-nav__link">
+    get_data()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_extensions" class="md-nav__link">
+    get_extensions()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_header" class="md-nav__link">
+    get_header()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_history" class="md-nav__link">
+    get_history()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_keyword" class="md-nav__link">
+    get_keyword()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.get_section" class="md-nav__link">
+    get_section()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.maximum" class="md-nav__link">
+    maximum()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.mean" class="md-nav__link">
+    mean()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.minimum" class="md-nav__link">
+    minimum()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.mult" class="md-nav__link">
+    mult()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.resample" class="md-nav__link">
+    resample()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.sdev" class="md-nav__link">
+    sdev()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.stat" class="md-nav__link">
+    stat()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.fits.sub" class="md-nav__link">
+    sub()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -278,362 +472,466 @@
                 <h1 id="fits-commands">Fits Commands</h1>
 <p>This class provides FITS image support functions.</p>
 <p>Usage Example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>rois = azcam.fits.col_bias(&quot;test.fits&quot;)
+<div class="codehilite"><pre><span></span><code><span class="err">rois = azcam.fits.col_bias(&quot;test.fits&quot;)</span>
 </code></pre></div>
-</td></tr></table>
 
-<div class="autodoc">
-<div class="autodoc-signature"><code>azcam.<strong>fits</strong></code></div>
-<div class="autodoc-docstring"><p>Contains FITS image manipulation commands.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>Any</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">*args</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">**kwds</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Internal indicator of special typing constructs.
-See _doc instance attribute for specific docs.</p></div>
-<div class="autodoc-signature"><code><strong>List</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">*args</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">**kwargs</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>The central part of internal API.</p>
-<p>This represents a generic version of type 'origin' with type arguments 'params'.
-There are two kind of these aliases: user defined and special. The special ones
-are wrappers around builtin collections and ABCs in collections.abc. These must
-have 'name' always set. If 'inst' is False, then the alias can't be instantiated,
-this is used by e.g. typing.List and typing.Dict.</p></div>
-<div class="autodoc-signature"><code><strong>add</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename2</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename3</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">datatype='uint16'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Add two images.
-:param filename1: image filename
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p></div>
-<div class="autodoc-signature"><code><strong>add_history</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">history_string</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Adds a HISTORY line containing 'history_string' to the image.
+
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="azcam.fits">
+
+        <code>azcam.fits</code>
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Contains FITS image manipulation commands.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.add">
+
+        <code class="highlight language-python">
+add<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Add two images.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>param</code></td>
+<td><code>filename1</code></td>
+<td>
+<p>image filename</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>param</code></td>
+<td><code>filename2</code></td>
+<td>
+<p>may be an image filename or a constant.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>param</code></td>
+<td><code>filename3</code></td>
+<td>
+<p>optional, must be an image filename.  If not specified, result goes into filename1.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>param</code></td>
+<td><code>datatype</code></td>
+<td>
+<p>valid datatype string for resultant data type</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code></code></td>
+<td>
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.add_history">
+
+        <code class="highlight language-python">
+add_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">history_string</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Adds a HISTORY line containing 'history_string' to the image.
 Used to record actions performed on an image. A 20 character time stamp
 is added as a prefix, and the result is split across up to three cards
 if it is too long to fit in one. Any extra text is truncated.</p>
-<p>:param filename: image filename
-:param history_string: string to add as a HISTORY keyword
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>arith</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">operator</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename2</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename3=''</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">datatype='uint16'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Simple image manipulation of FITS files.
+<p>filename: image filename
+history_string: string to add as a HISTORY keyword
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.arith">
+
+        <code class="highlight language-python">
+arith<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Simple image manipulation of FITS files.
 Converts back to unsigned 16 bit.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p></div>
-<div class="autodoc-signature"><code><strong>azcam</strong></code></div>
-<div class="autodoc-docstring"></div>
-<div class="autodoc-signature"><code><strong>colbias</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">fit_order=3</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">margin_cols=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Remove column bias from a FITS file.</p>
-<p>:param filename: image filename
-:param fit_order: polynomial fit order, use 0 to remove median not fitted value
-:param margin_cols: number of overscan columns to skip before correction</p></div>
-<div class="autodoc-signature"><code><strong>combine</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">file_list=[]</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">out_filename='combined.fits'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">combination_type='median'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">overscan_correct=1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">fit_order=3</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Make a combination of a list of FITS filenames.</p>
-<p>:param file_list: list of filenames to combine
-:param out_filename: output filename
-:param combination_type: combination type, "median", "sum", or "mean"
-:param overscan_correct: &gt; 0 to correct overscan with specified fir order before combination</p></div>
-<div class="autodoc-signature"><code><strong>div</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename2</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename3</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">datatype='uint16'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Divide Image1 by Image2.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p></div>
-<div class="autodoc-signature"><code><strong>edit_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Edits a header keyword value.</p>
-<p>:param filename: image filename
-:param keyword: keyword name
-:param value: new value of keyword
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>file_exists</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns True is the file exists, else False.</p></div>
-<div class="autodoc-signature"><code><strong>get_all_data</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return all pixel data from image.</p>
-<p>:param filename: image filename</p></div>
-<div class="autodoc-signature"><code><strong>get_data</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return data (pixel values) from an ROI in an image for every extension.
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.colbias">
+
+        <code class="highlight language-python">
+colbias<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Remove column bias from a FITS file.</p>
+<p>filename: image filename
+fit_order: polynomial fit order, use 0 to remove median not fitted value
+margin_cols: number of overscan columns to skip before correction</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.combine">
+
+        <code class="highlight language-python">
+combine<span class="p">(</span><span class="n">file_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">out_filename</span><span class="o">=</span><span class="s1">'combined.fits'</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="s1">'median'</span><span class="p">,</span> <span class="n">overscan_correct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Make a combination of a list of FITS filenames.</p>
+<p>file_list: list of filenames to combine
+out_filename: output filename
+combination_type: combination type, "median", "sum", or "mean"
+overscan_correct: &gt; 0 to correct overscan with specified fir order before combination</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.div">
+
+        <code class="highlight language-python">
+div<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Divide Image1 by Image2.</p>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.edit_keyword">
+
+        <code class="highlight language-python">
+edit_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Edits a header keyword value.</p>
+<p>filename: image filename
+keyword: keyword name
+value: new value of keyword
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.file_exists">
+
+        <code class="highlight language-python">
+file_exists<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filename</code></td>
+<td><code>str</code></td>
+<td>
+<p>filename to check if exists</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool</code></td>
+<td>
+<p>True if the file exists</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_all_data">
+
+        <code class="highlight language-python">
+get_all_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return all pixel data from image.</p>
+<p>filename: image filename</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_data">
+
+        <code class="highlight language-python">
+get_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return data (pixel values) from an ROI in an image for every extension.
 NOT FINISHED!</p>
-<p>:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>get_extensions</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions
+<p>filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_extensions">
+
+        <code class="highlight language-python">
+get_extensions<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Returns [NumExt,first_ext,last_ext] which are the number of IMAGE extensions
 and extension number limits FOR THE RANGE command [range(first_ext,last_ext)].
 NumExt is 0 for a standard FITS file and &gt;0 for MEF.  The first data extension for an
 MEF file is 1.</p>
-<p>:param filename: image filename</p></div>
-<div class="autodoc-signature"><code><strong>get_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return the image header as a pyfits header object.</p>
-<p>:param filename: image filename
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>get_history</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns the HISTOR header lines.</p>
-<p>:param filename: image filename
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a header keyword value.</p>
-<p>:param filename: image filename
-:param keyword: keyword name
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>get_section</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">section</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Extract image section pixel values from a FITS keyword to a list.
+<p>filename: image filename</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_header">
+
+        <code class="highlight language-python">
+get_header<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return the image header as a pyfits header object.</p>
+<p>filename: image filename
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_history">
+
+        <code class="highlight language-python">
+get_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Returns the HISTOR header lines.</p>
+<p>filename: image filename
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_keyword">
+
+        <code class="highlight language-python">
+get_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return a header keyword value.</p>
+<p>filename: image filename
+keyword: keyword name
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.get_section">
+
+        <code class="highlight language-python">
+get_section<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Extract image section pixel values from a FITS keyword to a list.
 Format is always zero-based: [first_col,last_col,first_row,last_row].</p>
-<p>:param filename: image filename
-:param section: section name (like "CCDSEC")
-:param extension: image extension number</p></div>
-<div class="autodoc-signature"><code><strong>maximum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Compute maximum of an image ROI for every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>mean</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Compute mean of an image ROI in every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>minimum</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Compute minimum of an image ROI for every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>mult</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename2</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename3</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">datatype='uint16'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Multiple two images.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p></div>
-<div class="autodoc-signature"><code><strong>numpy</strong></code></div>
-<div class="autodoc-docstring"><h1 id="numpy">NumPy</h1>
-<p>Provides
-  1. An array object of arbitrary homogeneous items
-  2. Fast mathematical operations over arrays
-  3. Linear Algebra, Fourier Transforms, Random Number Generation</p>
-<h2 id="how-to-use-the-documentation">How to use the documentation</h2>
-<p>Documentation is available in two forms: docstrings provided
-with the code, and a loose standing reference guide, available from
-<code>the NumPy homepage &lt;https://www.scipy.org&gt;</code><em>.</p>
-<p>We recommend exploring the docstrings using
-<code>IPython &lt;https://ipython.org&gt;</code></em>, an advanced Python shell with
-TAB-completion and introspection capabilities.  See below for further
-instructions.</p>
-<p>The docstring examples assume that <code>numpy</code> has been imported as <code>np</code>::</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import numpy as np</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>Code snippets are indicated by three greater-than signs::</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>x = 42
-x = x + 1</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>Use the built-in <code>help</code> function to view a function's docstring::</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>help(np.sort)
-  ... # doctest: +SKIP</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>For some objects, <code>np.info(obj)</code> may provide additional help.  This is
-particularly true if you see the line "Help on ufunc object:" at the top
-of the help() page.  Ufuncs are implemented in C, not Python, for speed.
-The native Python help() does not know how to view their help, but our
-np.info() function does.</p>
-<p>To search for documents containing a keyword, do::</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>np.lookfor('keyword')
-  ... # doctest: +SKIP</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>General-purpose documents like a glossary and help on the basic concepts
-of numpy are available under the <code>doc</code> sub-module::</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from numpy import doc
-help(doc)
-  ... # doctest: +SKIP</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h2 id="available-subpackages">Available subpackages</h2>
-<p>doc
-    Topical documentation on broadcasting, indexing, etc.
-lib
-    Basic functions used by several sub-packages.
-random
-    Core Random Tools
-linalg
-    Core Linear Algebra Tools
-fft
-    Core FFT routines
-polynomial
-    Polynomial tools
-testing
-    NumPy testing tools
-f2py
-    Fortran to Python Interface Generator.
-distutils
-    Enhancements to distutils with support for
-    Fortran compilers support and more.</p>
-<h2 id="utilities">Utilities</h2>
-<p>test
-    Run numpy unittests
-show_config
-    Show numpy build configuration
-dual
-    Overwrite certain functions with high-performance Scipy tools
-matlib
-    Make everything matrices.
-<strong>version</strong>
-    NumPy version string</p>
-<h2 id="viewing-documentation-using-ipython">Viewing documentation using IPython</h2>
-<p>Start IPython with the NumPy profile (<code>ipython -p numpy</code>), which will
-import <code>numpy</code> under the alias <code>np</code>.  Then, use the <code>cpaste</code> command to
-paste examples into the shell.  To see which functions are available in
-<code>numpy</code>, type <code>np.&lt;TAB&gt;</code> (where <code>&lt;TAB&gt;</code> refers to the TAB key), or use
-<code>np.<em>cos</em>?&lt;ENTER&gt;</code> (where <code>&lt;ENTER&gt;</code> refers to the ENTER key) to narrow
-down the list.  To view the docstring for a function, use
-<code>np.cos?&lt;ENTER&gt;</code> (to view the docstring) and <code>np.cos??&lt;ENTER&gt;</code> (to view
-the source code).</p>
-<h2 id="copies-vs-in-place-operation">Copies vs. in-place operation</h2>
-<p>Most of the functions in <code>numpy</code> return a copy of the array argument
-(e.g., <code>np.sort</code>).  In-place versions of these functions are often
-available as array methods, i.e. <code>x = np.array([1,2,3]); x.sort()</code>.
-Exceptions to this rule are documented.</p></div>
-<div class="autodoc-signature"><code><strong>os</strong></code></div>
-<div class="autodoc-docstring"><p>OS routines for NT or Posix depending on what system we're on.</p>
-<p>This exports:
-  - all functions from posix or nt, e.g. unlink, stat, etc.
-  - os.path is either posixpath or ntpath
-  - os.name is either 'posix' or 'nt'
-  - os.curdir is a string representing the current directory (always '.')
-  - os.pardir is a string representing the parent directory (always '..')
-  - os.sep is the (or a most common) pathname separator ('/' or '\')
-  - os.extsep is the extension separator (always '.')
-  - os.altsep is the alternate pathname separator (None or '/')
-  - os.pathsep is the component separator used in $PATH etc
-  - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
-  - os.defpath is the default search path for executables
-  - os.devnull is the file path of the null device ('/dev/null', etc.)</p>
-<p>Programs that import and use 'os' stand a better chance of being
-portable between different platforms.  Of course, they must then
-only use functions that are defined by all platforms (e.g., unlink
-and opendir), and leave all pathname manipulation to os.path
-(e.g., split and join).</p></div>
-<div class="autodoc-signature"><code><strong>poly</strong></code></div>
-<div class="autodoc-docstring"><p>=================================================
-Power Series (:mod:<code>numpy.polynomial.polynomial</code>)
-=================================================</p>
-<p>This module provides a number of objects (mostly functions) useful for
-dealing with polynomials, including a <code>Polynomial</code> class that
-encapsulates the usual arithmetic operations.  (General information
-on how this module represents and works with polynomial objects is in
-the docstring for its "parent" sub-package, <code>numpy.polynomial</code>).</p>
-<h2 id="classes">Classes</h2>
-<p>.. autosummary::
-   :toctree: generated/</p>
-<p>Polynomial</p>
-<h2 id="constants">Constants</h2>
-<p>.. autosummary::
-   :toctree: generated/</p>
-<p>polydomain
-   polyzero
-   polyone
-   polyx</p>
-<h2 id="arithmetic">Arithmetic</h2>
-<p>.. autosummary::
-   :toctree: generated/</p>
-<p>polyadd
-   polysub
-   polymulx
-   polymul
-   polydiv
-   polypow
-   polyval
-   polyval2d
-   polyval3d
-   polygrid2d
-   polygrid3d</p>
-<h2 id="calculus">Calculus</h2>
-<p>.. autosummary::
-   :toctree: generated/</p>
-<p>polyder
-   polyint</p>
-<h2 id="misc-functions">Misc Functions</h2>
-<p>.. autosummary::
-   :toctree: generated/</p>
-<p>polyfromroots
-   polyroots
-   polyvalfromroots
-   polyvander
-   polyvander2d
-   polyvander3d
-   polycompanion
-   polyfit
-   polytrim
-   polyline</p>
-<h2 id="see-also">See Also</h2>
-<p><code>numpy.polynomial</code></p></div>
-<div class="autodoc-signature"><code><strong>pyfits</strong></code></div>
-<div class="autodoc-docstring"><p>A package for reading and writing FITS files and manipulating their
-contents.</p>
-<p>A module for reading and writing Flexible Image Transport System
-(FITS) files.  This file format was endorsed by the International
-Astronomical Union in 1999 and mandated by NASA as the standard format
-for storing high energy astrophysics data.  For details of the FITS
-standard, see the NASA/Science Office of Standards and Technology
-publication, NOST 100-2.0.</p></div>
-<div class="autodoc-signature"><code><strong>resample</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">resample=2</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Resample an image by combining adjacent pixels.</p>
-<p>:param filename: image filename
-:param resample: number of pixels to combine in each dimension</p></div>
-<div class="autodoc-signature"><code><strong>sdev</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Compute standard deviation of an image ROI in every extension.</p>
-<p>:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>stat</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename='test'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">roi=[]</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Compute mean and sdev image statistics of ROI in every extension.
+<p>filename: image filename
+section: section name (like "CCDSEC")
+extension: image extension number</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.maximum">
+
+        <code class="highlight language-python">
+maximum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Compute maximum of an image ROI for every extension.</p>
+<p>filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.mean">
+
+        <code class="highlight language-python">
+mean<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Compute mean of an image ROI in every extension.</p>
+<p>filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.minimum">
+
+        <code class="highlight language-python">
+minimum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Compute minimum of an image ROI for every extension.</p>
+<p>filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.mult">
+
+        <code class="highlight language-python">
+mult<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Multiple two images.</p>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.resample">
+
+        <code class="highlight language-python">
+resample<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Resample an image by combining adjacent pixels.</p>
+<p>filename: image filename
+resample: number of pixels to combine in each dimension</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.sdev">
+
+        <code class="highlight language-python">
+sdev<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Compute standard deviation of an image ROI in every extension.</p>
+<p>filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.stat">
+
+        <code class="highlight language-python">
+stat<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Compute mean and sdev image statistics of ROI in every extension.
 Returns [[means], [sdevs], ROI]
-:param filename: image filename
-:param roi: ROI</p></div>
-<div class="autodoc-signature"><code><strong>sub</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">filename1</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename2</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">filename3</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">datatype='uint16'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Subtract filename2 from filename1.</p>
-<p>:param filename1: image filename
-:param operator: '+','-','/','*'
-:param filename2: may be an image filename or a constant.
-:param filename3: optional, must be an image filename.  If not specified, result goes into filename1.
-:param datatype: valid datatype string for resultant data type</p></div>
-<div class="autodoc-signature"><code><strong>time</strong></code></div>
-<div class="autodoc-docstring"><p>This module provides various functions to manipulate time values.</p>
-<p>There are two standard representations of time.  One is the number
-of seconds since the Epoch, in UTC (a.k.a. GMT).  It may be an integer
-or a floating point number (to represent fractions of seconds).
-The Epoch is system-defined; on Unix, it is generally January 1st, 1970.
-The actual value can be retrieved by calling gmtime(0).</p>
-<p>The other representation is a tuple of 9 integers giving local time.
-The tuple items are:
-  year (including century, e.g. 1998)
-  month (1-12)
-  day (1-31)
-  hours (0-23)
-  minutes (0-59)
-  seconds (0-59)
-  weekday (0-6, Monday is 0)
-  Julian day (day in the year, 1-366)
-  DST (Daylight Savings Time) flag (-1, 0 or 1)
-If the DST flag is 0, the time is given in the regular time zone;
-if it is 1, the time is given in the DST time zone;
-if it is -1, mktime() should guess based on the date and time.</p></div>
-<div class="autodoc-signature"><code><strong>warnings</strong></code></div>
-<div class="autodoc-docstring"><p>Python part of the warnings subsystem.</p></div>
+filename: image filename
+roi: ROI</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.fits.sub">
+
+        <code class="highlight language-python">
+sub<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Subtract filename2 from filename1.</p>
+<p>filename1: image filename
+operator: '+','-','/','*'
+filename2: may be an image filename or a constant.
+filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+datatype: valid datatype string for resultant data type</p>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
@@ -644,7 +942,7 @@ if it is -1, mktime() should guess based on the date and time.</p></div>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-08
     
   </small>
 </div>

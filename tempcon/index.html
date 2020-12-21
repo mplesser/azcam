@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -264,6 +276,118 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon" class="md-nav__link">
+    TempCon
+  </a>
+  
+    <nav class="md-nav" aria-label="TempCon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.apply_corrections" class="md-nav__link">
+    apply_corrections()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.exposure_finish" class="md-nav__link">
+    exposure_finish()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.exposure_start" class="md-nav__link">
+    exposure_start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.get_control_temperature" class="md-nav__link">
+    get_control_temperature()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.get_keyword" class="md-nav__link">
+    get_keyword()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.get_temperature" class="md-nav__link">
+    get_temperature()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.get_temperatures" class="md-nav__link">
+    get_temperatures()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.initialize" class="md-nav__link">
+    initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.reset" class="md-nav__link">
+    reset()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.set_calibrations" class="md-nav__link">
+    set_calibrations()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.set_control_temperature" class="md-nav__link">
+    set_control_temperature()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.set_corrections" class="md-nav__link">
+    set_corrections()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -278,73 +402,441 @@
                 <h1 id="tempcon-class">TempCon Class</h1>
 <p>This class defines Azcam's temperature controller interface. 
 The class is usually instantiated as the <em>tempcon</em> object in the server.</p>
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.tempcon.<strong>TempCon</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='tempcon'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Tempcon'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Temperature control class.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>apply_corrections</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Correct the temperatures for offset and scale is temperature correction is enabled.</p>
-<p>:param temperature: temperatures to be corrected
-:param temperature_id: temperature ID number</p></div>
-<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Defines temperature control keywords if they are not already defined.</p></div>
-<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
-<div class="autodoc-signature"><code><strong>exposure_finish</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Custom commands after exposure finishes.</p></div>
-<div class="autodoc-signature"><code><strong>exposure_start</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Custom commands before exposure starts.</p></div>
-<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
-<div class="autodoc-signature"><code><strong>get_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Get the control temperature (set point).</p>
-<p>:param temperature_id: temperature ID number</p></div>
-<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns header info.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Read a temperature keyword value and returns it as [value, comment, type string].</p>
-<p>:param keyword: keyword name to read</p></div>
-<div class="autodoc-signature"><code><strong>get_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns a system temperature.</p>
-<p>:param temperature_id: temperature ID number</p></div>
-<div class="autodoc-signature"><code><strong>get_temperatures</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return all system temperatures.</p></div>
-<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Initialize the temperature control interface.</p></div>
-<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns the current header.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Reset tempcon object.</p></div>
-<div class="autodoc-signature"><code><strong>set_calibrations</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cals</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set calibration curves for temperature sensors.</p>
-<p>:param cals: list of flags defining each temperature sensor type</p>
-<p>The values of these flags are from the list below which define the calibration curves to use
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.tempcon.TempCon">
+
+        <code>azcam.tempcon.TempCon</code>
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Temperature control class.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.apply_corrections">
+
+        <code class="highlight language-python">
+apply_corrections<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Correct the temperatures for offset and scale is temperature correction is enabled.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature</code></td>
+<td><code>float</code></td>
+<td>
+<p>temperatures to be corrected</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>temperature_id</code></td>
+<td><code>int</code></td>
+<td>
+<p>temperature ID number</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>
+<p>corrected_temperature: temperature after correction has been appied</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_finish">
+
+        <code class="highlight language-python">
+exposure_finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Custom commands after exposure finishes.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.exposure_start">
+
+        <code class="highlight language-python">
+exposure_start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Custom commands before exposure starts.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_control_temperature">
+
+        <code class="highlight language-python">
+get_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Get the control temperature (set point).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature_id</code></td>
+<td><code>int</code></td>
+<td>
+<p>temperature sensor identifier</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>float</code></td>
+<td>
+<p>control_temperature: control temperature</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_keyword">
+
+        <code class="highlight language-python">
+get_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Read a temperature keyword value and returns it as [value, comment, type string]</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keyword</code></td>
+<td><code>str</code></td>
+<td>
+<p>name of keyword</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>List</code></td>
+<td>
+<p>list of [keyword, comment, type]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperature">
+
+        <code class="highlight language-python">
+get_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Returns a system temperature.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature_id</code></td>
+<td><code>int</code></td>
+<td>
+<p>temperature sensor identifier</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>float</code></td>
+<td>
+<p>temperature: temperature read</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperatures">
+
+        <code class="highlight language-python">
+get_temperatures<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return all system temperatures.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>List[float]</code></td>
+<td>
+<p>temperatures: list of temperatures read</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.initialize">
+
+        <code class="highlight language-python">
+initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Initialize the temperature control interface.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.reset">
+
+        <code class="highlight language-python">
+reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Reset tempcon object.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_calibrations">
+
+        <code class="highlight language-python">
+set_calibrations<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cals</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Set calibration curves for temperature sensors.
+The values of these flags are from the list below which define the calibration curves to use
 for each sensor's temperature conversion.</p>
 <ul>
 <li>0 =&gt; DT670  diode</li>
 <li>1 =&gt; AD590  sensor</li>
 <li>2 =&gt; 1N4148 diode</li>
 <li>3 =&gt; 1N914  diode</li>
-</ul></div>
-<div class="autodoc-signature"><code><strong>set_control_temperature</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_id=0</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set the control temperature (set point).</p>
-<p>:param temperature: control temperature in Celsius. If not specified, use saved value
-:param temperature_id: temperature ID number</p></div>
-<div class="autodoc-signature"><code><strong>set_corrections</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_offsets=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">temperature_scales=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set temperature correction values and enable correction.
+</ul>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cals</code></td>
+<td><code>List[int]</code></td>
+<td>
+<p>list of flags defining each temperature sensor type</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_control_temperature">
+
+        <code class="highlight language-python">
+set_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Set the control temperature (set point).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature</code></td>
+<td><code>float</code></td>
+<td>
+<p>control temperature in Celsius. If not specified, use saved value</p>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>temperature_id</code></td>
+<td><code>int</code></td>
+<td>
+<p>temperature sensor identifier</p>
+</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.set_corrections">
+
+        <code class="highlight language-python">
+set_corrections<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">temperature_scales</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Set temperature correction values and enable correction.
 If both parameters are None then correction is disabled.</p>
-<p>:param temperature_offsets: list of offsets for each temperature
-:param temperature_scales: list of scale factors for each temperature</p></div>
-<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set a keyword value and comment.
-typestring is one of 'str', 'int', or 'float'.</p></div>
-<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Update the header, reading current data.
-Deletes all keywords if the object is not enabled.</p></div>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>temperature_offsets</code></td>
+<td><code>List[float]</code></td>
+<td>
+<p>list of offsets for each temperature</p>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>temperature_scales</code></td>
+<td><code>List[float]</code></td>
+<td>
+<p>list of scale factors for each temperature</p>
+</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
@@ -355,7 +847,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-08
     
   </small>
 </div>

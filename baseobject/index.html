@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -264,6 +276,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects" class="md-nav__link">
+    Objects
+  </a>
+  
+    <nav class="md-nav" aria-label="Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects.get" class="md-nav__link">
+    get()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects.initialize" class="md-nav__link">
+    initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects.reset" class="md-nav__link">
+    reset()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.baseobject.Objects.set" class="md-nav__link">
+    set()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -277,37 +345,222 @@
                 
                 <h1 id="objects-class">Objects Class</h1>
 <p>Below is the documentation for the base Objects class which is inherited by almost all serverside object classes. </p>
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.baseobject.<strong>Objects</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Base class used by main objects (controller, instrument, telescope, etc.).</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Sets up header keywords dictionary if not already defined.</p></div>
-<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
-<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
-<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns header info.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a keyword value and its comment.
-Comment always returned in double quotes, even if empty.</p></div>
-<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Initialize the object.</p></div>
-<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns the current header.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Reset the object.</p></div>
-<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set a keyword value and comment.
-typestring is one of 'str', 'int', or 'float'.</p></div>
-<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Update the header, reading current data.
-Deletes all keywords if the object is not enabled.</p></div>
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.baseobject.Objects">
+
+        <code>azcam.baseobject.Objects</code>
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Base class used by main objects (controller, instrument, telescope, etc.).</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>self.id</code></td>
+<td><code>str</code></td>
+<td>
+<p>name used to reference the object (controller, display, ...)</p>
+</td>
+</tr>
+<tr>
+<td><code>self.name</code></td>
+<td><code>str</code></td>
+<td>
+<p>descriptive name for the object</p>
+</td>
+</tr>
+<tr>
+<td><code>self.enabled</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True (default) when object is enabled</p>
+</td>
+</tr>
+<tr>
+<td><code>self.initialized</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True when object has been initialized</p>
+</td>
+</tr>
+<tr>
+<td><code>self.is_reset</code></td>
+<td><code>bool</code></td>
+<td>
+<p>True when object has been reset</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.baseobject.Objects.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'unknown'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>obj_id</code></td>
+<td><code>str</code></td>
+<td>
+<p>name used to reference the object (controller, display, ...)</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>
+<p>descriptive name for the object</p>
+</td>
+<td><code>'unknown'</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.baseobject.Objects.get">
+
+        <code class="highlight language-python">
+get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Returns an existing attribute of this class.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>
+<p>name of attribute to return</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Any</code></td>
+<td>
+<p>value: value of attribute or None if not defined</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.baseobject.Objects.initialize">
+
+        <code class="highlight language-python">
+initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Initialize the object.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.baseobject.Objects.reset">
+
+        <code class="highlight language-python">
+reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Reset the object.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.baseobject.Objects.set">
+
+        <code class="highlight language-python">
+set<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Sets an existing attribute value of this class.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>
+<p>name of attribute to set</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>Any</code></td>
+<td>
+<p>value of attribute to set</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
@@ -318,7 +571,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-12-01
+      Last update: 2020-12-08
     
   </small>
 </div>

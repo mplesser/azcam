@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -264,6 +276,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope" class="md-nav__link">
+    Telescope
+  </a>
+  
+    <nav class="md-nav" aria-label="Telescope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope.exposure_finish" class="md-nav__link">
+    exposure_finish()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope.exposure_start" class="md-nav__link">
+    exposure_start()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope.initialize" class="md-nav__link">
+    initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.telescope.Telescope.reset" class="md-nav__link">
+    reset()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -278,41 +346,80 @@
                 <h1 id="telescope-class">Telescope Class</h1>
 <p>This class defines Azcam's telescope interfaces. 
 One class is usually instantiated as the <em>telescope</em> object in the server.</p>
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.telescope.<strong>Telescope</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='telescope'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Telescope'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Base telescope class.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Sets up header keywords dictionary if not already defined.</p></div>
-<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
-<div class="autodoc-signature"><code><strong>exposure_finish</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Optional call after exposure finishes.</p></div>
-<div class="autodoc-signature"><code><strong>exposure_start</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Optional call before exposure starts.</p></div>
-<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
-<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns header info.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a keyword value and its comment.
-Comment always returned in double quotes, even if empty.</p></div>
-<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Initializes the telescope interface.</p></div>
-<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns the current header.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Reset telescope object.</p></div>
-<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set a keyword value and comment.
-typestring is one of 'str', 'int', or 'float'.</p></div>
-<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Update the header, reading current data.
-Deletes all keywords if the object is not enabled.</p></div>
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.telescope.Telescope">
+
+        <code>azcam.telescope.Telescope</code>
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Base telescope class.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.telescope.Telescope.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'telescope'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Telescope'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_finish">
+
+        <code class="highlight language-python">
+exposure_finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Optional call after exposure finishes.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_start">
+
+        <code class="highlight language-python">
+exposure_start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Optional call before exposure starts.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.telescope.Telescope.initialize">
+
+        <code class="highlight language-python">
+initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Initializes the telescope interface.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.telescope.Telescope.reset">
+
+        <code class="highlight language-python">
+reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Reset telescope object.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
@@ -323,7 +430,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-08
     
   </small>
 </div>

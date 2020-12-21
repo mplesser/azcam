@@ -320,6 +320,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -402,17 +414,27 @@
 <p>AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <p>Most of AzCam's functionality is available only after installing <em>extension packages</em> which contain configuration and hardware code that define a system's hardware resources.  Examples include:</p>
 <ul>
-<li><a href="https://github.com/mplesser/azcam-arc">azcam-arc</a> for ARC camera controllers</li>
-<li><a href="https://github.com/mplesser/azcam-archon">azcam-archon</a> for STA Archon camera controllers</li>
-<li><a href="https://github.com/mplesser/azcam-ds9">azcam-ds9</a> for SAO ds9 image display</li>
-<li><a href="https://github.com/mplesser/azcam-bok">azcam-bok</a> for the UArizona Bok telescope environment</li>
+<li><a href="https://github.com/mplesser/azcam-arc">azcam-arc</a> to add support for ARC camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-archon">azcam-archon</a> to add support for STA Archon camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-ds9">azcam-ds9</a> to add support for the SAO ds9 image display</li>
+<li><a href="https://github.com/mplesser/azcam-mag">azcam-mag</a> to add support for Magellan/ITL camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-cryocon">azcam-cryocon</a> to add support for CryoCon temperature controllers</li>
+<li><a href="https://github.com/mplesser/azcam-qhy174">azcam-qhy174</a> to add support for QHY174 CMOS cameras</li>
+<li><a href="https://github.com/mplesser/azcam-testers">azcam-testers</a> to add support for image sensor testing such as QE, CTE, PRNU, etc.</li>
+<li>
+<p><a href="https://github.com/mplesser/azcam-webserver">azcam-webserver</a> to add support for client web applications</p>
+</li>
+<li>
+<p><a href="https://github.com/mplesser/azcam-bok">azcam-bok</a> for the UArizona Bok telescope environment</p>
+</li>
 <li><a href="https://github.com/mplesser/azcam-mont4k">azcam-mont4k</a> for the UArizona Mont4k instrument environment</li>
+<li><a href="https://github.com/mplesser/azcam-vatt">azcam-vatt</a> for the VATT vattspec and vatt4k cameras</li>
 </ul>
-<p>Once configured, the system is controlled by class instances (<em>objects</em>) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, <em>system</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation.  Most of these objects are exposed through the <em>azcam.api</em> object.  There is also a database of parameters maintained in the <em>azcam.db</em> object </p>
-<p>There are two three main operational modes of AzCam:
- - One is the server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware.
- - Another is the console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.
- - The final mode is through client applications, which communicate with <em>azcamserver</em> over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:</p>
+<p>Once configured, the system is controlled by class instances (<em>objects</em>) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, <em>system</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation. </p>
+<p>There are three main operational modes of AzCam:
+  1. Server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware.
+  2. Console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.
+  3. Client apps, which communicate with <em>azcamserver</em> over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:</p>
 <ul>
 <li><a href="https://github.com/mplesser/azcam-tool">azcam-tool</a>, a GUI using National Instruments LabVIEW</li>
 <li><a href="https://github.com/mplesser/azcam-webobs">azcam-webobs</a>, a web-based observing script app</li>
@@ -421,22 +443,9 @@
 <li><a href="https://github.com/mplesser/azcam-focus">azcam-focus</a>, an app for acquiring focus images</li>
 <li><a href="https://github.com/mplesser/azcam-observe">azcam-observe</a>, a Qt-based observing script app</li>
 </ul>
-<p>While there are multiple pythonic ways to access the object instances in code, it is common to use the <code>api</code> object, often available as <code>azcam.api</code>. On there server side the <code>controller</code> object, for example, can be accessed as <code>api.controller</code>.  On the client side, the <code>api</code> object maps to the standard objects but with only a reduced set of exposed methods.  So while <code>api.exposure.reset</code> may available to server and client code, <code>api.exposure.set_video_gain</code> may only be available on the sever.</p>
+<p>While there are multiple pythonic ways to access the object instances in code, it is common to use the <code>api</code> instance to access most objects, available as <code>azcam.api</code>. On there server side the <code>controller</code> object, for example, can be accessed as <code>api.controller</code>.  On the client side, the <code>api</code> object maps to the standard objects but with only a reduced set of exposed methods.  So while <code>api.exposure.reset</code> may available to server and client code, <code>api.exposure.set_video_gain</code> may only be available on the sever. There is also a local database for temporary storage maintained in the <em>azcam.db</em> object.</p>
 <p>As an example, to get the current system wavelength and take an exposure, the commands using the <em>azcam-itl</em> extension are:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">azcam_itl.server</span>
 
@@ -451,13 +460,11 @@
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
 <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 
 <p>Example configuration code can be found in <code>azcam.example_server_config</code> and <code>azcam.example_console_config</code>.</p>
 <p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
-</td></tr></table>
 
 <p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. </p>
 <h2 id="help">Help</h2>
@@ -469,14 +476,12 @@
 <p>AzCam is often used as a server application to which clients connect via ethernet sockets or the web API.  The clients might be a GUI like <em>azcam-tool</em> or a python command line interface using AzCam's console code.</p>
 <p>The AzCam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second "flat field" exposure is:</p>
 <p>Local CLI or script example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s1">&#39;an image title&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s1">&#39;an image title&#39;</span><span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
 
 <p>A remote socket connection example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span> <span class="mf">2.5</span> <span class="n">flat</span> <span class="s2">&quot;an image title&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span> <span class="mf">2.5</span> <span class="n">flat</span> <span class="s2">&quot;an image title&quot;</span>
 </code></pre></div>
-</td></tr></table>
 
 <p>Web (http) connection example:</p>
 <p><code>http://hostname:2403/api/exposure/expose?exposure_time=2.5&amp;image_type=flat&amp;image_title=an+image+title</code></p>
@@ -523,7 +528,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-12-01
+      Last update: 2020-12-21
     
   </small>
 </div>

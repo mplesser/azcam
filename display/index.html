@@ -247,6 +247,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
+      Database
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -263,6 +275,55 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.display.Display" class="md-nav__link">
+    Display
+  </a>
+  
+    <nav class="md-nav" aria-label="Display">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.display.Display.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.display.Display.display" class="md-nav__link">
+    display()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.display.Display.initialize" class="md-nav__link">
+    initialize()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.display.Display.set_display" class="md-nav__link">
+    set_display()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -281,53 +342,79 @@ It is usually instantiated as the <em>display</em> object for both server and cl
 <p>Depending on system configuration, the <em>display</em> object may be available 
 directly from the command line, e.g. <code>display.display('test.fits'</code>).</p>
 <p>Usage Example:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>rois = azcam.db.display.get_rois(2, &#39;detector&#39;)  
-azcam.display.db.display(test.fits&#39;)
+<div class="codehilite"><pre><span></span><code><span class="err">rois = azcam.db.display.get_rois(2, &#39;detector&#39;)  </span>
+<span class="err">azcam.display.db.display(test.fits&#39;)</span>
 </code></pre></div>
-</td></tr></table>
 
-<div class="autodoc">
-<div class="autodoc-signature"><em>class </em><code>azcam.display.<strong>Display</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">obj_id='display'</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">obj_name='Display'</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>azcam's interface to SAO's ds9 image display tool.</p></div>
-<div class="autodoc-members">
-<div class="autodoc-signature"><code><strong>define_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Sets up header keywords dictionary if not already defined.</p></div>
-<div class="autodoc-signature"><code><strong>delete_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Delete a keyword.</p></div>
-<div class="autodoc-signature"><code><strong>display</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">image</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">extension_number=-1</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Display a file on the image display.
+
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.display.Display">
+
+        <code>azcam.display.Display</code>
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>azcam's interface to SAO's ds9 image display tool.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.display.Display.__init__">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'display'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Display'</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.display.Display.display">
+
+        <code class="highlight language-python">
+display<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">extension_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Display a file on the image display.
 If specified for an MEF file, only extension_number is displayed.</p>
 <p>:param image: a filename or an image object
 :param int extension_number: FITS extension number of image, -1 for all
-:return None:</p></div>
-<div class="autodoc-signature"><code><strong>get_all_keywords</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a list of all keyword names.</p></div>
-<div class="autodoc-signature"><code><strong>get_info</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns header info.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>get_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Return a keyword value and its comment.
-Comment always returned in double quotes, even if empty.</p></div>
-<div class="autodoc-signature"><code><strong>initialize</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Initialize display.</p></div>
-<div class="autodoc-signature"><code><strong>read_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Returns the current header.
-Returns [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p></div>
-<div class="autodoc-signature"><code><strong>reset</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Reset the object.</p></div>
-<div class="autodoc-signature"><code><strong>set_display</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">display_number</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set the current display by number.</p>
+:return None:</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.display.Display.initialize">
+
+        <code class="highlight language-python">
+initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Initialize display.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.display.Display.set_display">
+
+        <code class="highlight language-python">
+set_display<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display_number</span><span class="p">)</span>        </code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Set the current display by number.</p>
 <p>:param int display_number: Number for display to be used (0-&gt;N)
-:return None:</p></div>
-<div class="autodoc-signature"><code><strong>set_keyword</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">keyword</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">value</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">comment=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">typestring=None</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Set a keyword value and comment.
-typestring is one of 'str', 'int', or 'float'.</p></div>
-<div class="autodoc-signature"><code><strong>update_header</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
-<div class="autodoc-docstring"><p>Update the header, reading current data.
-Deletes all keywords if the object is not enabled.</p></div>
+:return None:</p>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
@@ -338,7 +425,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-11-30
+      Last update: 2020-12-08
     
   </small>
 </div>
