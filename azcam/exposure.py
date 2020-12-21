@@ -13,198 +13,8 @@ import azcam
 from azcam.baseobject import Objects
 from azcam.header import Header
 from azcam.image import Image
-
-
-class Filename(object):
-    """
-    Filename class used to manipulate image filenames.
-    """
-
-    def __init__(self, parent=None):
-        """
-        Creates a filename instance.
-
-        param object parent: reference to parent image object
-        """
-
-        # self.parent = parent  # calling object reference
-        self.parent = self  # calling object reference
-
-        self.filetype = 0  # from image object
-        # True to overwrite image files of the same name
-        self.overwrite = 0
-        # current image file folder
-        self.folder = ""
-        # current image file root name
-        self.root = "a."
-        # current image file sequence number
-        self.sequence_number = 1
-        # True to increment file sequence number after each exposure
-        self.auto_increment_sequence_number = 0
-        # True to include file sequence number in each image name
-        self.include_sequence_number = 0
-        # True to automatically name image based on imagetype
-        self.autoname = 0
-        # True when current file is a test image
-        self.test_image = 1
-
-        if parent is not None:
-            self.filetype = parent.filetype
-
-    def get_filename(self):
-        """
-        Return current filename as a single string.
-        This is the filename for the next exposure to be taken.
-
-        Always uses forward slashes for folder delimiter.
-        This name is usually the next image to be produced.
-        """
-
-        self.filetype = self.parent.filetype
-
-        folder = self.folder.replace("\\", "/")
-        if not folder.endswith("/"):
-            folder = folder + "/"
-
-        extension = self.get_extname(self.filetype)
-
-        if self.test_image:
-            filename = folder.replace("\\", "/") + "test" + "." + extension
-        elif self.include_sequence_number:
-            if self.autoname:
-                filename = (
-                    folder
-                    + self.root
-                    + "."
-                    + self.parent.image_type.upper()
-                    + "."
-                    + "%04d" % self.sequence_number
-                    + "."
-                    + extension
-                )
-            else:
-                filename = folder + self.root + "%04d" % self.sequence_number + "." + extension
-        else:
-            if self.autoname:
-                filename = (
-                    folder + self.root + "." + self.parent.image_type.upper() + "." + extension
-                )
-            else:
-                filename = folder + self.root + "." + extension
-
-        filename = filename.replace("..", ".")  # clean up as could have two periods together
-
-        return filename
-
-    def set_filename(self, filename):
-        """
-        Set the filename components based on a simple filename.
-        """
-
-        self.filetype = self.parent.filetype
-
-        filename = os.path.normpath(filename)
-        self.folder = os.path.dirname(filename)
-        if self.folder == "":
-            self.folder = "./"
-
-        f = os.path.basename(filename)
-        if f.endswith(".fits"):
-            f = f.replace(".fits", "")
-            self.filetype = 0
-        f = f.split(".")  # root is just first part
-        self.root = f[0]
-
-        return
-
-    def increment_filenumber(self):
-        """
-        Increment the filename sequence number if AutoIncrementSequenceNumber is True and not a test image.
-        """
-
-        if self.auto_increment_sequence_number and not self.test_image:
-            self.sequence_number += 1
-
-        return
-
-    def get_extname(self, filetype):
-        """
-        Return the file extension string for a file type.
-        """
-
-        if filetype == 0:
-            extension = "fits"
-        elif filetype == 1:
-            extension = "fits"
-        elif filetype == 2:
-            extension = "bin"
-        elif filetype == 3:
-            extension = "tif"
-        elif filetype == 4:
-            extension = "jpg"
-        elif filetype == 5:
-            extension = "gif"
-        elif filetype == 6:
-            extension = "fits"
-        else:
-            extension = ""
-
-        return extension
-
-
-class ObsTime(object):
-    """
-    Defines the ObsTime class.
-    """
-
-    def __init__(self):
-
-        #: UT
-        self.utc = []
-        #: UT date only
-        self.date = []
-        #: UT time only
-        self.ut = []
-        #: local time
-        self.local_time = []
-        #: local time zone
-        self.time_zone = []
-        #: time system
-        self.time_system = []
-
-        return
-
-    def update(self, index=0):
-        """
-        Save the current time parameters into the specified internal index.
-        Index is 0 for open shutter time.
-        """
-
-        if len(self.utc) < index + 1:
-            self.utc.append("")
-            self.date.append("")
-            self.ut.append("")
-            self.local_time.append("")
-            self.time_zone.append("")
-            self.time_system.append("")
-
-        # get current time and date
-        gmt = time.gmtime()
-        self.utc[index] = str(gmt[0]) + time.strftime("-%m-%d", gmt)
-
-        self.date[index] = self.utc[index]
-
-        t = time.time()
-        fracsec = int(1000 * round(t - int(t), 3))
-        self.ut[index] = time.strftime("%H:%M:%S.", gmt) + "%.3u" % fracsec
-
-        self.time_zone[index] = time.timezone / 3600
-
-        self.local_time[index] = time.strftime("%H:%M:%S", time.localtime())
-
-        self.time_system[index] = "UTC"
-
-        return
+from azcam.filename import Filename
+from azcam.obstime import ObsTime
 
 
 class Exposure(Objects, Filename):
@@ -661,10 +471,7 @@ class Exposure(Objects, Filename):
 
         if self.new_roi:
             self.image.data = numpy.empty(
-                shape=[
-                    self.image.focalplane.numamps_image,
-                    self.image.focalplane.numpix_amp,
-                ],
+                shape=[self.image.focalplane.numamps_image, self.image.focalplane.numpix_amp],
                 dtype="<u2",
             )
             self.new_roi = 0
@@ -1040,10 +847,7 @@ class Exposure(Objects, Filename):
         self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
         self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
-            "LOCTIME",
-            self.obstime.local_time[0],
-            "Local time at start of exposure",
-            int,
+            "LOCTIME", self.obstime.local_time[0], "Local time at start of exposure", int,
         )
 
         return
@@ -1575,9 +1379,7 @@ class Exposure(Objects, Filename):
         """
 
         self.image.set_remote_imageserver(
-            remote_imageserver_host,
-            remote_imageserver_port,
-            remote_imageserver_filename,
+            remote_imageserver_host, remote_imageserver_port, remote_imageserver_filename,
         )
 
         return

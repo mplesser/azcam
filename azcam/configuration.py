@@ -109,7 +109,7 @@ class Config(object):
         # check if a value exists in dictionary
         if par_dict is not None:
             if par_dict.get(attribute):
-                default = par_dict.get(attribute)
+                default = par_dict.get(attribute)  # overides method default
         else:
             par_dict = {}
 
@@ -255,7 +255,10 @@ class Config(object):
         else:
             obj = azcam.api.get(object1)
             for i in range(1, numtokens):
-                obj = getattr(obj, tokens[i])
+                try:
+                    obj = getattr(obj, tokens[i])
+                except AttributeError:
+                    azcam.AzcamWarning(f"Could not get parameter: {parameter}")
             value = obj  # last time is value
 
         return value
@@ -322,7 +325,10 @@ class Config(object):
             for i in range(1, numtokens - 1):
                 obj = getattr(obj, tokens[i])
             # last time is actual object
-            setattr(obj, tokens[-1], value)
+            try:
+                setattr(obj, tokens[-1], value)
+            except AttributeError:
+                azcam.AzcamWarning(f"Could not set parameter: {parameter}")
 
         return None
 
@@ -367,3 +373,33 @@ class Config(object):
                     self.set_par(parname, value)
 
         return
+
+    def get_remote_par(self, parameter):
+        """
+        Return the value of a parameter from remote server.
+        Returns None on error.
+        """
+
+        parameter = parameter.lower()
+        value = None
+
+        reply = azcam.api.server.rcommand(f"config.get_par {parameter}")
+        _, value = azcam.utils.get_datatype(reply)
+
+        return value
+
+    def set_remote_par(self, parameter, value):
+        """
+        Set the value of a parameter in the remote server.
+        Returns None on error.
+        """
+
+        if parameter == "":
+            return None
+
+        parameter = parameter.lower()
+
+        azcam.api.server.rcommand(f"config.set_par {parameter} {value}")
+
+        return
+

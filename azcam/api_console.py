@@ -55,35 +55,6 @@ class API(object):
 
         return obj
 
-    def get_remote_par(self, parameter):
-        """
-        Return the value of a parameter from remote server.
-        Returns None on error.
-        """
-
-        parameter = parameter.lower()
-        value = None
-
-        reply = self.server.rcommand(f"config.get_par {parameter}")
-        _, value = azcam.utils.get_datatype(reply)
-
-        return value
-
-    def set_remote_par(self, parameter, value):
-        """
-        Set the value of a parameter in the remote server.
-        Returns None on error.
-        """
-
-        if parameter == "":
-            return None
-
-        parameter = parameter.lower()
-
-        self.server.rcommand(f"config.set_par {parameter} {value}")
-
-        return
-
 
 class HeaderMethods(object):
     """
@@ -112,11 +83,7 @@ class HeaderMethods(object):
         return self._parent.server.rcommand(f"{self.object_name}.read_header")
 
     def set_keyword(
-        self,
-        keyword: str,
-        value: str,
-        comment: str = "no_comment",
-        typestring: str = "str",
+        self, keyword: str, value: str, comment: str = "no_comment", typestring: str = "str",
     ) -> Optional[str]:
         """
         Set a keyword value, comment, and type.
@@ -298,10 +265,7 @@ class Instrument(HeaderMethods):
         return reply
 
     def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_type: str = "absolute",
+        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -316,10 +280,7 @@ class Instrument(HeaderMethods):
 
         return
 
-    def get_focus(
-        self,
-        focus_id: int = 0,
-    ) -> float:
+    def get_focus(self, focus_id: int = 0,) -> float:
         """
         Get the current focus position.
 
@@ -375,10 +336,7 @@ class Telescope(HeaderMethods):
         return float(reply)
 
     def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_type: str = "absolute",
+        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -706,10 +664,7 @@ class Exposure(HeaderMethods):
         return self._parent.server.rcommand(f"exposure.parshift {number_rows}")
 
     def tests(
-        self,
-        number_exposures: int = 1,
-        exposure_time: float = 1.0,
-        image_type: str = "zero",
+        self, number_exposures: int = 1, exposure_time: float = 1.0, image_type: str = "zero",
     ) -> Optional[str]:
         """
         Make test exposures, which overwrite previous test images.

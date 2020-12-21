@@ -14,7 +14,7 @@ class TempCon(Objects):
     Temperature control class.
     """
 
-    def __init__(self, obj_id="tempcon", name="Tempcon"):
+    def __init__(self, obj_id="tempcon", name="tempcon"):
 
         super().__init__(obj_id, name)
 
@@ -104,9 +104,7 @@ class TempCon(Objects):
 
         return
 
-    def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
-    ) -> None:
+    def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
         Args:
@@ -142,9 +140,7 @@ class TempCon(Objects):
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
 
         if self.log_temps:
-            azcam.log(
-                f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0
-            )
+            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
 
         return temps
 
@@ -180,9 +176,7 @@ class TempCon(Objects):
         return
 
     def set_corrections(
-        self,
-        temperature_offsets: List[float] = None,
-        temperature_scales: List[float] = None,
+        self, temperature_offsets: List[float] = None, temperature_scales: List[float] = None,
     ) -> None:
         """
         Set temperature correction values and enable correction.
