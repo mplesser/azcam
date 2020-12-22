@@ -14,7 +14,7 @@ def test_rcommand(command="get_par version"):
 
 
 def test_abort_exposure():
-    assert azcam.api.exposure.abort_exposure() is None
+    assert azcam.api.exposure.abort() is None
 
 
 def test_initialize():
@@ -23,5 +23,5 @@ def test_initialize():
 
 def test_parameters():
     for par in azcam.db.parameters:
-        value = azcam.api.exposure.get_par(par)
+        value = azcam.api.config.get_par(par)
         print(f"{par}: {value}")

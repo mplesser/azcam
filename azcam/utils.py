@@ -758,7 +758,7 @@ def save_imagepars(imagepars={}):
     """
 
     for par in azcam.db.imageparnames:
-        imagepars[par] = azcam.api.exposure.get_par(par)
+        imagepars[par] = azcam.api.config.get_par(par)
 
     return
 
@@ -776,7 +776,7 @@ def restore_imagepars(imagepars, folder=""):
         imagepars[par] = impar
         if par == "imagetitle":
             impar = f'"{impar}"'
-        azcam.api.exposure.set_par(par, impar)
+        azcam.api.config.set_par(par, impar)
 
     # return to folder
     if folder != "":

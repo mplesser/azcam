@@ -192,7 +192,7 @@ class Config(object):
             return
 
         if self.default_pardict_name == "azcamconsole":
-            return azcam.api.get_remote_par(parameter)
+            return self.get_remote_par(parameter)
 
         # special cases
         if parameter == "imagefilename":
@@ -279,7 +279,7 @@ class Config(object):
         parameter = parameter.lower()
 
         if self.default_pardict_name == "azcamconsole":
-            return azcam.api.set_remote_par(parameter)
+            return self.set_remote_par(parameter, value)
 
         # special cases
         if parameter == "imagefilename":

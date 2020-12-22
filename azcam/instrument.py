@@ -186,7 +186,7 @@ class Instrument(Objects):
         focus_id is the focus mechanism ID.
         """
 
-        raise NotImplementedError
+        raise NotImplementedError("get_focus")
 
     def set_focus(self, focus_position, focus_id=0, focus_type="absolute"):
         """
@@ -196,7 +196,7 @@ class Instrument(Objects):
         focus_type is "absolute" or "step".
         """
 
-        raise NotImplementedError
+        raise NotImplementedError("set_focus")
 
     # ***************************************************************************
     # pressure

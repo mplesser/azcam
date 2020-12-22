@@ -433,7 +433,7 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand(f"exposure.set_shutter {state} {shutter_id}")
 
-    def abort_exposure(self) -> Optional[str]:
+    def abort(self) -> Optional[str]:
         """
         Abort an exposure in progress.
         """
@@ -489,7 +489,7 @@ class Exposure(HeaderMethods):
             f'exposure.expose1 {exposure_time} {image_type} "{image_title}"'
         )
 
-    def begin_exposure(
+    def begin(
         self, exposure_time: float = -1, image_type: str = "", image_title: str = ""
     ) -> Optional[str]:
         """
@@ -505,7 +505,7 @@ class Exposure(HeaderMethods):
             f'exposure.begin {exposure_time} {image_type} "{image_title}"'
         )
 
-    def integrate_exposure(self) -> None:
+    def integrate(self) -> None:
         """
         Integrate exposure.
         This is an advanced function.
@@ -513,7 +513,7 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand("exposure.integrate")
 
-    def readout_exposure(self) -> None:
+    def readout(self) -> None:
         """
         Readout the exposure.
         This is an advanced function.
@@ -521,7 +521,7 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand("exposure.readout")
 
-    def end_exposure(self) -> None:
+    def end(self) -> None:
         """
         Completes an exposure by writing file and displaying image.
         This is an advanced function.
