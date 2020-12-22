@@ -12,6 +12,7 @@ Most of AzCam's functionality is available only after installing *extension pack
   * [azcam-qhy174](https://github.com/mplesser/azcam-qhy174) to add support for QHY174 CMOS cameras
   * [azcam-testers](https://github.com/mplesser/azcam-testers) to add support for image sensor testing such as QE, CTE, PRNU, etc.
   * [azcam-webserver](https://github.com/mplesser/azcam-webserver) to add support for client web applications
+  * [azcam-observe](https://github.com/mplesser/azcam-observe), to add support for observing scripts
 
 
   * [azcam-bok](https://github.com/mplesser/azcam-bok) for the UArizona Bok telescope environment
@@ -26,11 +27,9 @@ There are three main operational modes of AzCam:
   3. Client apps, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:
 
   * [azcam-tool](https://github.com/mplesser/azcam-tool), a GUI using National Instruments LabVIEW
-  * [azcam-webobs](https://github.com/mplesser/azcam-webobs), a web-based observing script app
   * [azcam-status](https://github.com/mplesser/azcam-status), a web-based status page
   * [azcam-exptool](https://github.com/mplesser/azcam-exptool), a web-based exposure control app
   * [azcam-focus](https://github.com/mplesser/azcam-focus), an app for acquiring focus images
-  * [azcam-observe](https://github.com/mplesser/azcam-observe), a Qt-based observing script app
 
 While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` instance to access most objects, available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever. There is also a local database for temporary storage maintained in the *azcam.db* object.
 
