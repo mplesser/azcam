@@ -13,36 +13,5 @@ azcam.log = azcam.db.logger.log  # to allow azcam.log()
 
 azcam.api.config.default_pardict_name = "azcamconsole"
 
-# local database entries
-#: image parameters
-azcam.db.imageparnames = [
-    "imageroot",
-    "imageincludesequencenumber",
-    "imageautoname",
-    "imageautoincrementsequencenumber",
-    "imagetest",
-    "imagetype",
-    "imagetitle",
-    "imageoverwrite",
-    "imagefolder",
-]
-
-#: exposure flags
-azcam.db.exposureflags = {
-    "NONE": 0,
-    "EXPOSING": 1,
-    "ABORT": 2,
-    "PAUSE": 3,
-    "RESUME": 4,
-    "READ": 5,
-    "PAUSED": 6,
-    "READOUT": 7,
-    "SETUP": 8,
-    "WRITING": 9,
-    "GUIDEERROR": 10,
-    "ERROR": 11,
-}
-
-
 # clean namespace (never used directly again)
 del azcam.api_console

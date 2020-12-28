@@ -705,7 +705,7 @@ class Exposure(HeaderMethods):
 
         return self._parent.server.rcommand("exposure.resume_exposure")
 
-    def get_image_filename(self) -> str:
+    def get_filename(self) -> str:
         """
         Return the current exposure image filename.
         :returns: imaeg filename

@@ -138,7 +138,9 @@ class Config(object):
         """
 
         if type(par_dict) == str:
-            par_dict = self.par_dict[par_dict]
+            par_dict = self.par_dict.get(par_dict)
+            if par_dict is None:
+                par_dict = {}
 
         # get value
         par_dict[attribute] = value
@@ -402,4 +404,3 @@ class Config(object):
         azcam.api.server.rcommand(f"config.set_par {parameter} {value}")
 
         return
-

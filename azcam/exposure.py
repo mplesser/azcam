@@ -55,7 +55,7 @@ class Exposure(Objects, Filename):
         self.exposureflags_rev = {v: k for k, v in self.exposureflags.items()}
 
         #: exposure flag defining state of current exposure
-        self.exposure_flag = azcam.db.exposureflags["NONE"]
+        self.exposure_flag = self.exposureflags["NONE"]
 
         #: current image type, 'zero', 'object', 'dark', 'flat', 'ramp', etc
         self.image_type = "zero"
@@ -218,7 +218,7 @@ class Exposure(Objects, Filename):
         self.set_auto_title()
         azcam.db.abortflag = 0
         self.save_file = 1
-        self.exposure_flag = azcam.db.exposureflags["NONE"]
+        self.exposure_flag = self.exposureflags["NONE"]
 
         # call reset() method on other objects
         for obj in self.objects_reset:
@@ -263,7 +263,7 @@ class Exposure(Objects, Filename):
 
     def get_exposureflag(self):
 
-        return [self.exposure_flag, azcam.db.exposureflags_rev[self.exposure_flag]]
+        return [self.exposure_flag, self.exposureflags_rev[self.exposure_flag]]
 
     def test(self, exposure_time=0.0, shutter=0):
         """
@@ -305,34 +305,34 @@ class Exposure(Objects, Filename):
         azcam.log("Exposure started")
 
         # if last exposure was aborted, warn before clearing flag
-        if self.exposure_flag == azcam.db.exposureflags["ABORT"]:
+        if self.exposure_flag == self.exposureflags["ABORT"]:
             azcam.AzcamWarning("Previous exposure was aborted")
 
         # reset any errors at start of exposure
         azcam.utils.set_error_status()
 
         # begin
-        if self.exposure_flag != azcam.db.exposureflags["ABORT"]:
+        if self.exposure_flag != self.exposureflags["ABORT"]:
             self.begin(exposure_time, imagetype, title)
 
         # integrate
-        if self.exposure_flag != azcam.db.exposureflags["ABORT"]:
+        if self.exposure_flag != self.exposureflags["ABORT"]:
             self.integrate()
 
         # readout
         if (
-            self.exposure_flag != azcam.db.exposureflags["ABORT"]
-            and self.exposure_flag == azcam.db.exposureflags["READ"]
+            self.exposure_flag != self.exposureflags["ABORT"]
+            and self.exposure_flag == self.exposureflags["READ"]
         ):
             try:
                 self.readout()
             except azcam.AzcamError:
                 pass
         # end
-        if self.exposure_flag != azcam.db.exposureflags["ABORT"]:
+        if self.exposure_flag != self.exposureflags["ABORT"]:
             self.end()
 
-        self.exposure_flag = azcam.db.exposureflags["NONE"]
+        self.exposure_flag = self.exposureflags["NONE"]
         self.completed = 1
         azcam.log("Exposure finished")
 
@@ -387,7 +387,7 @@ class Exposure(Objects, Filename):
                 self.integrate()
 
                 # readout
-                if self.exposure_flag == azcam.db.exposureflags["READ"]:
+                if self.exposure_flag == self.exposureflags["READ"]:
                     try:
                         self.readout()
                         self.guide_status = 1  # image read OK
@@ -398,7 +398,7 @@ class Exposure(Objects, Filename):
 
                 # image writing
                 self.end()
-                self.exposure_flag = azcam.db.exposureflags["NONE"]
+                self.exposure_flag = self.exposureflags["NONE"]
             else:
                 self.expose(-1, "object", "guide image")
 
@@ -451,7 +451,7 @@ class Exposure(Objects, Filename):
             self.is_exposure_sequence = x
 
         # set exposure flag
-        self.exposure_flag = azcam.db.exposureflags["SETUP"]
+        self.exposure_flag = self.exposureflags["SETUP"]
 
         # reset flags as new data coming
         self.image.valid = 0
@@ -586,8 +586,8 @@ class Exposure(Objects, Filename):
         Really sets a flag which is read in expose().
         """
 
-        if self.exposure_flag != azcam.db.exposureflags["NONE"]:
-            self.exposure_flag = azcam.db.exposureflags["READ"]
+        if self.exposure_flag != self.exposureflags["NONE"]:
+            self.exposure_flag = self.exposureflags["READ"]
 
         return
 
@@ -710,8 +710,8 @@ class Exposure(Objects, Filename):
 
         self.paused_time_start = time.time()  # save paused clock time
 
-        if self.exposure_flag != azcam.db.exposureflags["NONE"]:
-            self.exposure_flag = azcam.db.exposureflags["PAUSE"]
+        if self.exposure_flag != self.exposureflags["NONE"]:
+            self.exposure_flag = self.exposureflags["PAUSE"]
 
         return
 
@@ -725,8 +725,8 @@ class Exposure(Objects, Filename):
             time.time() - self.paused_time_start
         ) + self.paused_time  # total paused time in seconds
 
-        if self.exposure_flag != azcam.db.exposureflags["NONE"]:
-            self.exposure_flag = azcam.db.exposureflags["RESUME"]
+        if self.exposure_flag != self.exposureflags["NONE"]:
+            self.exposure_flag = self.exposureflags["RESUME"]
 
         return
 
@@ -736,8 +736,8 @@ class Exposure(Objects, Filename):
         Really sets a flag which is read in expose().
         """
 
-        if self.exposure_flag != azcam.db.exposureflags["NONE"]:
-            self.exposure_flag = azcam.db.exposureflags["ABORT"]
+        if self.exposure_flag != self.exposureflags["NONE"]:
+            self.exposure_flag = self.exposureflags["ABORT"]
 
         return
 
@@ -847,7 +847,10 @@ class Exposure(Objects, Filename):
         self.header.set_keyword("TIMESYS", self.obstime.time_system[0], "Time system", str)
         self.header.set_keyword("TIMEZONE", self.obstime.time_zone[0], "Local time zone", int)
         self.header.set_keyword(
-            "LOCTIME", self.obstime.local_time[0], "Local time at start of exposure", int,
+            "LOCTIME",
+            self.obstime.local_time[0],
+            "Local time at start of exposure",
+            int,
         )
 
         return
@@ -1379,7 +1382,9 @@ class Exposure(Objects, Filename):
         """
 
         self.image.set_remote_imageserver(
-            remote_imageserver_host, remote_imageserver_port, remote_imageserver_filename,
+            remote_imageserver_host,
+            remote_imageserver_port,
+            remote_imageserver_filename,
         )
 
         return
@@ -1434,8 +1439,8 @@ class Exposure(Objects, Filename):
 
         expstate = None
         ef = azcam.api.config.get_par("exposureflag")
-        for expstate in azcam.db.exposureflags:
-            if ef == azcam.db.exposureflags[expstate]:
+        for expstate in self.exposureflags:
+            if ef == self.exposureflags[expstate]:
                 break
         if expstate is None:
             expstate = ""
@@ -1527,8 +1532,8 @@ class Exposure(Objects, Filename):
         progress = 0
         expstate = None
         ef = azcam.utils.get_par("exposureflag")
-        for expstate in azcam.db.exposureflags:
-            if ef == azcam.db.exposureflags[expstate]:
+        for expstate in self.exposureflags:
+            if ef == self.exposureflags[expstate]:
                 break
         if expstate is None:
             expstate = ""

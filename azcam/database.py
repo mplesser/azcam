@@ -108,6 +108,36 @@ class AzcamDatabase(object):
         "hostname": "db.hostname",
     }
 
+    # local database entries
+    #: image parameters
+    imageparnames = [
+        "imageroot",
+        "imageincludesequencenumber",
+        "imageautoname",
+        "imageautoincrementsequencenumber",
+        "imagetest",
+        "imagetype",
+        "imagetitle",
+        "imageoverwrite",
+        "imagefolder",
+    ]
+
+    #: exposure flags
+    exposureflags = {
+        "NONE": 0,
+        "EXPOSING": 1,
+        "ABORT": 2,
+        "PAUSE": 3,
+        "RESUME": 4,
+        "READ": 5,
+        "PAUSED": 6,
+        "READOUT": 7,
+        "SETUP": 8,
+        "WRITING": 9,
+        "GUIDEERROR": 10,
+        "ERROR": 11,
+    }
+
     def __init__(self):
         pass
 

@@ -189,7 +189,11 @@ def get_extensions(filename: str) -> list:
 
 
 def arith(
-    filename1: str, operator: str, filename2: str, filename3: str = "", datatype: str = "uint16",
+    filename1: str,
+    operator: str,
+    filename2: str,
+    filename3: str = "",
+    datatype: str = "uint16",
 ) -> None:
     """
     Simple image manipulation of FITS files.
@@ -838,6 +842,8 @@ def _get_data_roi(azcam_roi=[]):
             roi = azcam.db.imageroi
         else:
             roi = []
+    else:
+        roi = azcam_roi
 
     if isinstance(roi[0], list):
         roi = roi[0]  # use first roi
