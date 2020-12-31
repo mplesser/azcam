@@ -32,12 +32,14 @@ class Config(object):
         if parfilename is None:
             parfilename = self.par_file
             if parfilename is None:
-                raise FileNotFoundError("Parameter file is not defined")
+                azcam.AzcamWarning("Parameter file is not defined")
+                return
 
         self.par_file = parfilename
 
         if not os.path.exists(parfilename):
-            raise FileNotFoundError(f"Parameter file not found: {parfilename}")
+            azcam.AzcamWarning(f"Parameter file not found: {parfilename}")
+            return
 
         cp = configparser.ConfigParser()
         cp.read(parfilename)
@@ -344,7 +346,9 @@ class Config(object):
         if par_dictname is None:
             par_dictname = self.default_pardict_name
 
-        par_dict = azcam.api.config.par_dict[par_dictname]
+        par_dict = azcam.api.config.par_dict.get(par_dictname)
+        if par_dict is None:
+            return
         keys = par_dict.keys()
         if keys is None:
             return
