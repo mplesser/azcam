@@ -2,7 +2,7 @@
 
 AzCam is a software environment for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be extensively customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
-Most of AzCam's functionality is available only after installing *extension packages* which contain configuration and hardware code that define a system's hardware resources.  Examples include:
+AzCam *extension packages* define additional resources which extend AzCam's functionality. In general some of these packages must be installed to create a useful configuration. Examples include:
 
   * [azcam-arc](https://github.com/mplesser/azcam-arc) to add support for ARC camera controllers
   * [azcam-archon](https://github.com/mplesser/azcam-archon) to add support for STA Archon camera controllers
@@ -12,39 +12,40 @@ Most of AzCam's functionality is available only after installing *extension pack
   * [azcam-qhy174](https://github.com/mplesser/azcam-qhy174) to add support for QHY174 CMOS cameras
   * [azcam-testers](https://github.com/mplesser/azcam-testers) to add support for image sensor testing such as QE, CTE, PRNU, etc.
   * [azcam-webserver](https://github.com/mplesser/azcam-webserver) to add support for client web applications
-  * [azcam-observe](https://github.com/mplesser/azcam-observe), to add support for observing scripts
 
+  AzCam *environments* define code and data files used for specific hardware systems.  These are not python packages and may be cloned to any location. Examples include:
 
   * [azcam-bok](https://github.com/mplesser/azcam-bok) for the UArizona Bok telescope environment
   * [azcam-mont4k](https://github.com/mplesser/azcam-mont4k) for the UArizona Mont4k instrument environment
   * [azcam-vatt](https://github.com/mplesser/azcam-vatt) for the VATT vattspec and vatt4k cameras
-   
+
 Once configured, the system is controlled by class instances (*objects*) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation. 
 
 There are three main operational modes of AzCam:
   1. Server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
   2. Console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
-  3. Client apps, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. Examples are:
+  3. Client apps, which communicate with *azcamserver* over sockets or the web API. There are multiple clients written in a variety of languages. Examples include:
 
   * [azcam-tool](https://github.com/mplesser/azcam-tool), a GUI using National Instruments LabVIEW
   * [azcam-status](https://github.com/mplesser/azcam-status), a web-based status page
   * [azcam-exptool](https://github.com/mplesser/azcam-exptool), a web-based exposure control app
   * [azcam-focus](https://github.com/mplesser/azcam-focus), an app for acquiring focus images
+  * [azcam-observe](https://github.com/mplesser/azcam-observe) to add support for observing scripts (GUI, web, and command line support is included)
 
 While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` instance to access most objects, available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever. There is also a local database for temporary storage maintained in the *azcam.db* object.
 
-As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* extension are:
+As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* environment are:
 
 ```python
 # server-side (azcamserver)
 import azcam
-import azcam_itl.server
+import server_itl
 
 OR
 
 # client-side (azcamconsole)
 import azcam
-import azcam_itl.console
+import console_itl
 
 And then:
 
