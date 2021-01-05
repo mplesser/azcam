@@ -287,7 +287,7 @@ class Config(object):
 
         # special cases
         if parameter == "imagefilename":
-            azcam.api.exposure.set_name(value)
+            azcam.api.exposure.image.filename = value
             return None
         elif parameter == "imagetitle":
             if value is None or value == "":
