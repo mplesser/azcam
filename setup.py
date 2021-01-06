@@ -14,6 +14,7 @@ setup(
     name="azcam",
     version="21.1.1",
     description="azcam",
+    long_description_content_type="text/markdown",
     long_description=long_description,
     author="Michael Lesser",
     author_email="mlesser@arizona.edu",
