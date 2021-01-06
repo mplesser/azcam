@@ -69,16 +69,25 @@ class Filename(object):
                     + extension
                 )
             else:
-                filename = folder + self.root + "%04d" % self.sequence_number + "." + extension
+                filename = (
+                    folder + self.root + "%04d" % self.sequence_number + "." + extension
+                )
         else:
             if self.autoname:
                 filename = (
-                    folder + self.root + "." + self.parent.image_type.upper() + "." + extension
+                    folder
+                    + self.root
+                    + "."
+                    + self.parent.image_type.upper()
+                    + "."
+                    + extension
                 )
             else:
                 filename = folder + self.root + "." + extension
 
-        filename = filename.replace("..", ".")  # clean up as could have two periods together
+        filename = filename.replace(
+            "..", "."
+        )  # clean up as could have two periods together
 
         return filename
 

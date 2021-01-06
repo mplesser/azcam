@@ -191,7 +191,10 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
+        if (
+            self.default_pardict_name == "azcamconsole"
+            and not azcam.api.server.connected
+        ):
             azcam.AzcamWarning("cannot get_par, not connected to server")
             return
 
@@ -273,7 +276,10 @@ class Config(object):
         Returns None on error.
         """
 
-        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
+        if (
+            self.default_pardict_name == "azcamconsole"
+            and not azcam.api.server.connected
+        ):
             azcam.AzcamWarning("cannot set_par, not connected to server")
             return
 
