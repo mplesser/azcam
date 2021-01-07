@@ -16,6 +16,8 @@ See https://github.com/mplesser/azcam-tool.git for the standard GUI used by most
 
 Download from github: https://github.com/mplesser/azcam.git.
 
+You may need to install `python3-tk` on Linux systems [`sudo apt-get install python3-tk`].
+
 ## Startup and configuration
 
 The *AzCam* server is really only useful with a customized configuration script and  environment which defines the hardware to be controled.  Example scripts named *azcam.config_server_example* and *azcam.config_console_example* are provided for reference. They would be imported into a python or IPython session or use a startup script such as *start_azcam.py* to create a new server or console application. 
