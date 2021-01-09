@@ -12,7 +12,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="azcam",
-    version="21.1.1",
+    version="21.1.2",
     description="azcam",
     long_description_content_type="text/markdown",
     long_description=long_description,
