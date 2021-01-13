@@ -84,6 +84,9 @@ class TempCon(Objects):
         if not self.enabled:
             return
 
+        if not self.initialized:
+            self.initialize()
+
         self.set_control_temperature()
 
         return
@@ -104,9 +107,7 @@ class TempCon(Objects):
 
         return
 
-    def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
-    ) -> None:
+    def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
         Args:
@@ -142,9 +143,7 @@ class TempCon(Objects):
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
 
         if self.log_temps:
-            azcam.log(
-                f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0
-            )
+            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
 
         return temps
 
