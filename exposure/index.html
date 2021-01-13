@@ -8,11 +8,11 @@
       
       
       
-      
         <meta name="author" content="Michael Lesser">
       
+      
       <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
           
           
@@ -35,7 +35,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -87,18 +88,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Exposure Class
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -157,10 +160,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -192,6 +199,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       Home
@@ -202,6 +210,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -216,6 +225,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../commands/" class="md-nav__link">
       Commands
@@ -226,6 +236,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -240,6 +251,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../programming/" class="md-nav__link">
       Advanced
@@ -250,6 +262,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -266,7 +279,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -790,6 +804,7 @@ One class is usually instantiated as the <em>exposure</em> object in the server.
         <code>azcam.exposure.Exposure</code>
 
 
+
       </h2>
 <div class="doc doc-contents first">
 <p>The Azcam Exposure class.
@@ -800,8 +815,7 @@ which should inherit this class.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'exposure'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Exposure'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'exposure'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Exposure'</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -810,13 +824,13 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h3>
 <div class="doc doc-contents ">
 
+
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.abort">
 
-        <code class="highlight language-python">
-abort<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -828,8 +842,7 @@ Really sets a flag which is read in expose().</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.begin">
 
-        <code class="highlight language-python">
-begin<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -842,8 +855,7 @@ imagetype is one of zero, object, flat, dark, ramp, ...</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.check_comparison_imagetype">
 
-        <code class="highlight language-python">
-check_comparison_imagetype<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">check_comparison_imagetype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -855,8 +867,7 @@ If imagetype is not specified, checks the current type.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.check_image_ready">
 
-        <code class="highlight language-python">
-check_image_ready<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">check_image_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -870,8 +881,7 @@ An image is ready when written to disk if SaveFile is true, or when valid if Sav
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.end">
 
-        <code class="highlight language-python">
-end<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -882,8 +892,7 @@ end<span class="p">(</span><span class="bp">self</span><span class="p">)</span> 
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.expose">
 
-        <code class="highlight language-python">
-expose<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">expose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -897,8 +906,7 @@ title is the image title.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.expose1">
 
-        <code class="highlight language-python">
-expose1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">expose1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -912,8 +920,7 @@ expose1<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.finish">
 
-        <code class="highlight language-python">
-finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -924,20 +931,19 @@ finish<span class="p">(</span><span class="bp">self</span><span class="p">)</spa
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.finished">
 
-        <code class="highlight language-python">
-finished<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
+
 
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.flush">
 
-        <code class="highlight language-python">
-flush<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -949,20 +955,19 @@ Cycles is the number of times to flush the detector.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_exposureflag">
 
-        <code class="highlight language-python">
-get_exposureflag<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_exposureflag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
+
 
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_exposuretime">
 
-        <code class="highlight language-python">
-get_exposuretime<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_exposuretime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -973,8 +978,7 @@ get_exposuretime<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_exposuretime_remaining">
 
-        <code class="highlight language-python">
-get_exposuretime_remaining<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_exposuretime_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -985,8 +989,7 @@ get_exposuretime_remaining<span class="p">(</span><span class="bp">self</span><s
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_focalplane">
 
-        <code class="highlight language-python">
-get_focalplane<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_focalplane</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -997,8 +1000,7 @@ get_focalplane<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_format">
 
-        <code class="highlight language-python">
-get_format<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1009,8 +1011,7 @@ get_format<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_image_title">
 
-        <code class="highlight language-python">
-get_image_title<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_image_title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1022,8 +1023,7 @@ Allows for AutoTitle.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_image_type">
 
-        <code class="highlight language-python">
-get_image_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_image_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1036,8 +1036,7 @@ zero, object, dark, flat.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_image_types">
 
-        <code class="highlight language-python">
-get_image_types<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_image_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1049,8 +1048,7 @@ Gets imagetypes from detector and instrument.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_par">
 
-        <code class="highlight language-python">
-get_par<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1062,8 +1060,7 @@ Returns None on error.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_pixels_remaining">
 
-        <code class="highlight language-python">
-get_pixels_remaining<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_pixels_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1074,8 +1071,7 @@ get_pixels_remaining<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_progress">
 
-        <code class="highlight language-python">
-get_progress<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1086,8 +1082,7 @@ get_progress<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_remote_imageserver">
 
-        <code class="highlight language-python">
-get_remote_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1117,8 +1112,7 @@ remote_filename:</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_roi">
 
-        <code class="highlight language-python">
-get_roi<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roi_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roi_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1131,8 +1125,7 @@ Returned list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_status">
 
-        <code class="highlight language-python">
-get_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1143,8 +1136,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.get_test_image">
 
-        <code class="highlight language-python">
-get_test_image<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_test_image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1155,8 +1147,7 @@ get_test_image<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.guide">
 
-        <code class="highlight language-python">
-guide<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">guide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1168,8 +1159,7 @@ NumberExposures is the number of exposures to make, -1 loop forever</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.guide1">
 
-        <code class="highlight language-python">
-guide1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">guide1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1181,8 +1171,7 @@ NumberExposures is the number of exposures to make, -1 loop forever</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.initialize">
 
-        <code class="highlight language-python">
-initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1193,8 +1182,7 @@ initialize<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.integrate">
 
-        <code class="highlight language-python">
-integrate<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1205,8 +1193,7 @@ integrate<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.parshift">
 
-        <code class="highlight language-python">
-parshift<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_rows</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">parshift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_rows</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1218,8 +1205,7 @@ parshift<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.pause">
 
-        <code class="highlight language-python">
-pause<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1231,8 +1217,7 @@ Really sets a flag which is read in expose().</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.read_header_file">
 
-        <code class="highlight language-python">
-read_header_file<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">read_header_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1243,8 +1228,7 @@ read_header_file<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.readout">
 
-        <code class="highlight language-python">
-readout<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">readout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1255,8 +1239,7 @@ readout<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.record_current_times">
 
-        <code class="highlight language-python">
-record_current_times<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">record_current_times</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1267,8 +1250,7 @@ record_current_times<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.reset">
 
-        <code class="highlight language-python">
-reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1279,8 +1261,7 @@ reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.resume">
 
-        <code class="highlight language-python">
-resume<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1292,8 +1273,7 @@ Really sets a flag which is read in expose().</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.roi_reset">
 
-        <code class="highlight language-python">
-roi_reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">roi_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1304,8 +1284,7 @@ roi_reset<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.sequence">
 
-        <code class="highlight language-python">
-sequence<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array_flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array_flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1325,8 +1304,7 @@ Delay =&gt; delay between exposures in seconds
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.sequence1">
 
-        <code class="highlight language-python">
-sequence1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array_flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">sequence1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array_flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1346,8 +1324,7 @@ Delay =&gt; delay between exposures in seconds
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_auto_title">
 
-        <code class="highlight language-python">
-set_auto_title<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_auto_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1358,8 +1335,7 @@ set_auto_title<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_data_order">
 
-        <code class="highlight language-python">
-set_data_order<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataOrder</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_data_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataOrder</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1370,8 +1346,7 @@ set_data_order<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_detgap">
 
-        <code class="highlight language-python">
-set_detgap<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_gap</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_detgap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_gap</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1382,8 +1357,7 @@ set_detgap<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_detnum">
 
-        <code class="highlight language-python">
-set_detnum<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_number</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_detnum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_number</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1394,8 +1368,7 @@ set_detnum<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_detpars">
 
-        <code class="highlight language-python">
-set_detpars<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_data</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_detpars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_data</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1406,8 +1379,7 @@ set_detpars<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_detpos">
 
-        <code class="highlight language-python">
-set_detpos<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_position</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_detpos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_position</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1418,8 +1390,7 @@ set_detpos<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_exposuretime">
 
-        <code class="highlight language-python">
-set_exposuretime<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_exposuretime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1430,8 +1401,7 @@ set_exposuretime<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_extension_position">
 
-        <code class="highlight language-python">
-set_extension_position<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">XY</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_extension_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">XY</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1443,8 +1413,7 @@ XY is [[X,Y]] in index numbers, starting at [1,1].</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_extname">
 
-        <code class="highlight language-python">
-set_extname<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_name</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_extname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_name</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1455,8 +1424,7 @@ set_extname<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_extnum">
 
-        <code class="highlight language-python">
-set_extnum<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_number</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_extnum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ext_number</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1467,8 +1435,7 @@ set_extnum<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_focalplane">
 
-        <code class="highlight language-python">
-set_focalplane<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numdet_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numdet_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp_config</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_focalplane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numdet_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numdet_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp_config</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1491,8 +1458,7 @@ amp_config defines each amplifier's orientation (ex: '1223').
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_format">
 
-        <code class="highlight language-python">
-set_format<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ns_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_frametransfer</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ns_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_frametransfer</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1513,8 +1479,7 @@ np_frametransfer is the rows to frame transfer shift.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_image_title">
 
-        <code class="highlight language-python">
-set_image_title<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_image_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1526,8 +1491,7 @@ Allows for AutoTitle.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_image_type">
 
-        <code class="highlight language-python">
-set_image_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">'zero'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_image_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagetype</span><span class="o">=</span><span class="s1">'zero'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1540,8 +1504,7 @@ zero, object, dark, flat.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_jpg_order">
 
-        <code class="highlight language-python">
-set_jpg_order<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Indices</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_jpg_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Indices</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1552,8 +1515,7 @@ set_jpg_order<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_par">
 
-        <code class="highlight language-python">
-set_par<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1565,8 +1527,7 @@ Returns None on error.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_ref_pixel">
 
-        <code class="highlight language-python">
-set_ref_pixel<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">XY</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_ref_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">XY</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1578,8 +1539,7 @@ XY is [X,Y] in pixels.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_remote_imageserver">
 
-        <code class="highlight language-python">
-set_remote_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">remote_imageserver_filename</span><span class="o">=</span><span class="s1">'image'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">remote_imageserver_filename</span><span class="o">=</span><span class="s1">'image'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1591,8 +1551,7 @@ If no port is provided then reset flag to local image file.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_roi">
 
-        <code class="highlight language-python">
-set_roi<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">row_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">roi_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">row_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">roi_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1605,8 +1564,7 @@ These values are for the entire focal plane, not just one detector.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_shutter">
 
-        <code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1623,8 +1581,7 @@ set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_tdi_delay">
 
-        <code class="highlight language-python">
-set_tdi_delay<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_tdi_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1637,8 +1594,7 @@ flag==Flase sets line delay to normal value, self.par_delay.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_temp_files">
 
-        <code class="highlight language-python">
-set_temp_files<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_temp_files</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1649,8 +1605,7 @@ set_temp_files<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.set_test_image">
 
-        <code class="highlight language-python">
-set_test_image<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_test_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1661,8 +1616,7 @@ set_test_image<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.start">
 
-        <code class="highlight language-python">
-start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1673,8 +1627,7 @@ start<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.start_readout">
 
-        <code class="highlight language-python">
-start_readout<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">start_readout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1687,8 +1640,7 @@ Really sets a flag which is read in expose().</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.test">
 
-        <code class="highlight language-python">
-test<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">shutter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">shutter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1702,8 +1654,7 @@ title is the image title.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.exposure.Exposure.update_headers">
 
-        <code class="highlight language-python">
-update_headers<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">update_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -1758,15 +1709,15 @@ update_headers<span class="p">(</span><span class="bp">self</span><span class="p
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

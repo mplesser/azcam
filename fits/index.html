@@ -8,11 +8,11 @@
       
       
       
-      
         <meta name="author" content="Michael Lesser">
       
+      
       <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
           
           
@@ -35,7 +35,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -87,18 +88,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Fits Commands
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -157,10 +160,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -192,6 +199,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       Home
@@ -202,6 +210,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -216,6 +225,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../commands/" class="md-nav__link">
       Commands
@@ -226,6 +236,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -240,6 +251,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../programming/" class="md-nav__link">
       Advanced
@@ -250,6 +262,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -266,7 +279,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -475,11 +489,11 @@
 <div class="codehilite"><pre><span></span><code><span class="err">rois = azcam.fits.col_bias(&quot;test.fits&quot;)</span>
 </code></pre></div>
 
-
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="azcam.fits">
 
         <code>azcam.fits</code>
+
 
 
       </h2>
@@ -489,8 +503,7 @@
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.add">
 
-        <code class="highlight language-python">
-add<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">add</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -563,8 +576,7 @@ add<span class="p">(</span><span class="n">filename1</span><span class="p">,</sp
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.add_history">
 
-        <code class="highlight language-python">
-add_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">history_string</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">add_history</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">history_string</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -581,8 +593,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.arith">
 
-        <code class="highlight language-python">
-arith<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">arith</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -599,8 +610,7 @@ datatype: valid datatype string for resultant data type</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.colbias">
 
-        <code class="highlight language-python">
-colbias<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">colbias</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">margin_cols</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -614,8 +624,7 @@ margin_cols: number of overscan columns to skip before correction</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.combine">
 
-        <code class="highlight language-python">
-combine<span class="p">(</span><span class="n">file_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">out_filename</span><span class="o">=</span><span class="s1">'combined.fits'</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="s1">'median'</span><span class="p">,</span> <span class="n">overscan_correct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">combine</span><span class="p">(</span><span class="n">file_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">out_filename</span><span class="o">=</span><span class="s1">'combined.fits'</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="s1">'median'</span><span class="p">,</span> <span class="n">overscan_correct</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></code>
 
 
       </h3>
@@ -630,8 +639,7 @@ overscan_correct: &gt; 0 to correct overscan with specified fir order before com
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.div">
 
-        <code class="highlight language-python">
-div<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">div</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -647,8 +655,7 @@ datatype: valid datatype string for resultant data type</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.edit_keyword">
 
-        <code class="highlight language-python">
-edit_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">edit_keyword</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -663,8 +670,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.file_exists">
 
-        <code class="highlight language-python">
-file_exists<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">file_exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -712,8 +718,7 @@ file_exists<span class="p">(</span><span class="n">filename</span><span class="p
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_all_data">
 
-        <code class="highlight language-python">
-get_all_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_data</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -725,8 +730,7 @@ get_all_data<span class="p">(</span><span class="n">filename</span><span class="
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_data">
 
-        <code class="highlight language-python">
-get_data<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">get_data</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -740,8 +744,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_extensions">
 
-        <code class="highlight language-python">
-get_extensions<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_extensions</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -756,8 +759,7 @@ MEF file is 1.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_header">
 
-        <code class="highlight language-python">
-get_header<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_header</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -770,8 +772,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_history">
 
-        <code class="highlight language-python">
-get_history<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_history</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -784,8 +785,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_keyword">
 
-        <code class="highlight language-python">
-get_keyword<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_keyword</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -799,8 +799,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.get_section">
 
-        <code class="highlight language-python">
-get_section<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_section</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -815,8 +814,7 @@ extension: image extension number</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.maximum">
 
-        <code class="highlight language-python">
-maximum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">maximum</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -829,8 +827,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.mean">
 
-        <code class="highlight language-python">
-mean<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">mean</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -843,8 +840,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.minimum">
 
-        <code class="highlight language-python">
-minimum<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">minimum</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -857,8 +853,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.mult">
 
-        <code class="highlight language-python">
-mult<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">mult</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -874,8 +869,7 @@ datatype: valid datatype string for resultant data type</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.resample">
 
-        <code class="highlight language-python">
-resample<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">resample</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></code>
 
 
       </h3>
@@ -888,8 +882,7 @@ resample: number of pixels to combine in each dimension</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.sdev">
 
-        <code class="highlight language-python">
-sdev<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">sdev</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -902,8 +895,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.stat">
 
-        <code class="highlight language-python">
-stat<span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -917,8 +909,7 @@ roi: ROI</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.fits.sub">
 
-        <code class="highlight language-python">
-sub<span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">sub</span><span class="p">(</span><span class="n">filename1</span><span class="p">,</span> <span class="n">filename2</span><span class="p">,</span> <span class="n">filename3</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s1">'uint16'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -978,15 +969,15 @@ datatype: valid datatype string for resultant data type</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

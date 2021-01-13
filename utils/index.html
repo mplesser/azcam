@@ -8,11 +8,11 @@
       
       
       
-      
         <meta name="author" content="Michael Lesser">
       
+      
       <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
           
           
@@ -35,7 +35,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -87,18 +88,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Utility Commands
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -157,10 +160,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -192,6 +199,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       Home
@@ -202,6 +210,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -216,6 +225,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../commands/" class="md-nav__link">
       Commands
@@ -226,6 +236,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -240,6 +251,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../programming/" class="md-nav__link">
       Advanced
@@ -250,6 +262,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -266,7 +279,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -492,6 +506,7 @@
         <code>azcam.utils</code>
 
 
+
       </h2>
 <div class="doc doc-contents first">
 <p>General support commands for throughout azcam code.</p>
@@ -499,8 +514,7 @@
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.add_searchfolder">
 
-        <code class="highlight language-python">
-add_searchfolder<span class="p">(</span><span class="n">search_folder</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">include_subfolders</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">add_searchfolder</span><span class="p">(</span><span class="n">search_folder</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">include_subfolders</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
       </h3>
@@ -516,8 +530,7 @@ Subfolders beginning with "_" are not included.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.archive">
 
-        <code class="highlight language-python">
-archive<span class="p">(</span><span class="n">foldername</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">'tar'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">archive</span><span class="p">(</span><span class="n">foldername</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">'tar'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -530,8 +543,7 @@ Return tarfile filename.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.check_keyboard">
 
-        <code class="highlight language-python">
-check_keyboard<span class="p">(</span><span class="n">Wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">check_keyboard</span><span class="p">(</span><span class="n">Wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
       </h3>
@@ -544,8 +556,7 @@ check_keyboard<span class="p">(</span><span class="n">Wait</span><span class="o"
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.checksum">
 
-        <code class="highlight language-python">
-checksum<span class="p">(</span><span class="n">filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">checksum</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -557,8 +568,7 @@ Return filename and checksum value.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.cleanup_files">
 
-        <code class="highlight language-python">
-cleanup_files<span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">cleanup_files</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
       </h3>
@@ -569,8 +579,7 @@ cleanup_files<span class="p">(</span><span class="n">folder</span><span class="o
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.count_files">
 
-        <code class="highlight language-python">
-count_files<span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">count_files</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -582,8 +591,7 @@ Folders are not included.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.curdir">
 
-        <code class="highlight language-python">
-curdir<span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">curdir</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -597,8 +605,7 @@ If folder=='', return the current working folder.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.file_browser">
 
-        <code class="highlight language-python">
-file_browser<span class="p">(</span><span class="n">Path</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">SelectString</span><span class="o">=</span><span class="s1">'*.*'</span><span class="p">,</span> <span class="n">Label</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">file_browser</span><span class="p">(</span><span class="n">Path</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">SelectString</span><span class="o">=</span><span class="s1">'*.*'</span><span class="p">,</span> <span class="n">Label</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -613,8 +620,7 @@ file_browser<span class="p">(</span><span class="n">Path</span><span class="o">=
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.find_file">
 
-        <code class="highlight language-python">
-find_file<span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">include_curdir</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">find_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">include_curdir</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
       </h3>
@@ -630,8 +636,7 @@ Raises FileNotFoundError if file not found.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.find_file_in_sequence">
 
-        <code class="highlight language-python">
-find_file_in_sequence<span class="p">(</span><span class="n">FileRoot</span><span class="p">,</span> <span class="n">FileNumber</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">find_file_in_sequence</span><span class="p">(</span><span class="n">FileRoot</span><span class="p">,</span> <span class="n">FileNumber</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -644,8 +649,7 @@ Returns (filename,sequencenumber).</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.find_plugins">
 
-        <code class="highlight language-python">
-find_plugins<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">find_plugins</span><span class="p">()</span></code>
 
 
       </h3>
@@ -656,8 +660,7 @@ find_plugins<span class="p">()</span>        </code>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.fix_path">
 
-        <code class="highlight language-python">
-fix_path<span class="p">(</span><span class="n">Path</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">no_drive_letter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">fix_path</span><span class="p">(</span><span class="n">Path</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">no_drive_letter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -671,8 +674,7 @@ fix_path<span class="p">(</span><span class="n">Path</span><span class="o">=</sp
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.get_datatype">
 
-        <code class="highlight language-python">
-get_datatype<span class="p">(</span><span class="n">value</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_datatype</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></code>
 
 
       </h3>
@@ -686,8 +688,7 @@ will result in a type "float" and "2" will result in type "int".</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.get_error_status">
 
-        <code class="highlight language-python">
-get_error_status<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">get_error_status</span><span class="p">()</span></code>
 
 
       </h3>
@@ -699,8 +700,7 @@ get_error_status<span class="p">()</span>        </code>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.get_image_roi">
 
-        <code class="highlight language-python">
-get_image_roi<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">get_image_roi</span><span class="p">()</span></code>
 
 
       </h3>
@@ -716,8 +716,7 @@ Check for ROI's in the following order:</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.make_file_folder">
 
-        <code class="highlight language-python">
-make_file_folder<span class="p">(</span><span class="n">subfolder</span><span class="p">,</span> <span class="n">increment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_number</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">make_file_folder</span><span class="p">(</span><span class="n">subfolder</span><span class="p">,</span> <span class="n">increment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_number</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
       </h3>
@@ -732,8 +731,7 @@ Returns [currentfolder,newfolder, with newfolder='ERROR' if a failure occurs.</p
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.make_image_filename">
 
-        <code class="highlight language-python">
-make_image_filename<span class="p">(</span><span class="n">imagefile</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">make_image_filename</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span></code>
 
 
       </h3>
@@ -747,8 +745,7 @@ Appends ".fits" if no extension is included.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.parse">
 
-        <code class="highlight language-python">
-parse<span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">SetType</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">parse</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">SetType</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -763,8 +760,7 @@ If setType is true, try and set data data type for each token.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.prompt">
 
-        <code class="highlight language-python">
-prompt<span class="p">(</span><span class="n">PromptMessage</span><span class="o">=</span><span class="s1">'Enter a string'</span><span class="p">,</span> <span class="n">Default</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">prompt</span><span class="p">(</span><span class="n">PromptMessage</span><span class="o">=</span><span class="s1">'Enter a string'</span><span class="p">,</span> <span class="n">Default</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -778,8 +774,7 @@ prompt<span class="p">(</span><span class="n">PromptMessage</span><span class="o
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.restore_imagepars">
 
-        <code class="highlight language-python">
-restore_imagepars<span class="p">(</span><span class="n">imagepars</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">restore_imagepars</span><span class="p">(</span><span class="n">imagepars</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -791,8 +786,7 @@ imagepars is a dictionary set with save_imagepars().</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.run_script">
 
-        <code class="highlight language-python">
-run_script<span class="p">(</span><span class="n">script_name</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">)</span></code>
 
 
       </h3>
@@ -806,8 +800,7 @@ This method is exposed as the <em>Run</em> command when using IPython.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.save_imagepars">
 
-        <code class="highlight language-python">
-save_imagepars<span class="p">(</span><span class="n">imagepars</span><span class="o">=</span><span class="p">{})</span>        </code>
+<code class="highlight language-python"><span class="n">save_imagepars</span><span class="p">(</span><span class="n">imagepars</span><span class="o">=</span><span class="p">{})</span></code>
 
 
       </h3>
@@ -819,8 +812,7 @@ imagepars is a dictionary.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.set_error_status">
 
-        <code class="highlight language-python">
-set_error_status<span class="p">(</span><span class="n">ErrorFlag</span><span class="o">=</span><span class="s1">'OK'</span><span class="p">,</span> <span class="n">Message</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_error_status</span><span class="p">(</span><span class="n">ErrorFlag</span><span class="o">=</span><span class="s1">'OK'</span><span class="p">,</span> <span class="n">Message</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
 
       </h3>
@@ -833,8 +825,7 @@ set_error_status<span class="p">(</span><span class="n">ErrorFlag</span><span cl
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.set_image_roi">
 
-        <code class="highlight language-python">
-set_image_roi<span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="p">[])</span>        </code>
+<code class="highlight language-python"><span class="n">set_image_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="p">[])</span></code>
 
 
       </h3>
@@ -848,8 +839,7 @@ If roi is not specified, use display ROI.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.show_menu">
 
-        <code class="highlight language-python">
-show_menu<span class="p">(</span><span class="n">configs</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">show_menu</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span></code>
 
 
       </h3>
@@ -908,15 +898,15 @@ print() is allowed here as interactive only.</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

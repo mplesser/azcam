@@ -8,11 +8,11 @@
       
       
       
-      
         <meta name="author" content="Michael Lesser">
       
+      
       <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
           
           
@@ -35,7 +35,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -87,18 +88,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Instrument Class
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -157,10 +160,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -192,6 +199,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       Home
@@ -202,6 +210,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -216,6 +225,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../commands/" class="md-nav__link">
       Commands
@@ -226,6 +236,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -240,6 +251,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../programming/" class="md-nav__link">
       Advanced
@@ -250,6 +262,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -266,7 +279,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -490,6 +504,7 @@ which are accepted by the instrument server's <em>cmdserver</em>.</p>
         <code>azcam.instrument.Instrument</code>
 
 
+
       </h2>
 <div class="doc doc-contents first">
 <p>The base Instrument class.</p>
@@ -497,8 +512,7 @@ which are accepted by the instrument server's <em>cmdserver</em>.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'instrument'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Instrument'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'instrument'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Instrument'</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -507,13 +521,13 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h3>
 <div class="doc doc-contents ">
 
+
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.comps_delay">
 
-        <code class="highlight language-python">
-comps_delay<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">comps_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -527,8 +541,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.comps_off">
 
-        <code class="highlight language-python">
-comps_off<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">comps_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -540,8 +553,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.comps_on">
 
-        <code class="highlight language-python">
-comps_on<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">comps_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -553,8 +565,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.exposure_finish">
 
-        <code class="highlight language-python">
-exposure_finish<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">exposure_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -565,8 +576,7 @@ exposure_finish<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.exposure_start">
 
-        <code class="highlight language-python">
-exposure_start<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">exposure_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -577,8 +587,7 @@ exposure_start<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_active_comps">
 
-        <code class="highlight language-python">
-get_active_comps<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_active_comps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -590,8 +599,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_comps">
 
-        <code class="highlight language-python">
-get_all_comps<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_comps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -604,8 +612,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_filters">
 
-        <code class="highlight language-python">
-get_all_filters<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -617,8 +624,7 @@ filter_id is the filter mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_focus_positions">
 
-        <code class="highlight language-python">
-get_all_focus_positions<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_focus_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -629,8 +635,7 @@ get_all_focus_positions<span class="p">(</span><span class="bp">self</span><span
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_pressures">
 
-        <code class="highlight language-python">
-get_all_pressures<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -641,8 +646,7 @@ get_all_pressures<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_wavelengths">
 
-        <code class="highlight language-python">
-get_all_wavelengths<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_all_wavelengths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -655,8 +659,7 @@ wavelength_id is the wavelength mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_current">
 
-        <code class="highlight language-python">
-get_current<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -670,8 +673,7 @@ ShutterState is 0, 1 to close/open shutter during read or 2 unchanged.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_filter">
 
-        <code class="highlight language-python">
-get_filter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -683,8 +685,7 @@ filter_id is the filter mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_focus">
 
-        <code class="highlight language-python">
-get_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -696,8 +697,7 @@ focus_id is the focus mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_pressure">
 
-        <code class="highlight language-python">
-get_pressure<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -708,8 +708,7 @@ get_pressure<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_wavelength">
 
-        <code class="highlight language-python">
-get_wavelength<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -721,8 +720,7 @@ wavelength_id is the wavelength mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_active_comps">
 
-        <code class="highlight language-python">
-set_active_comps<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_active_comps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comp_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">comp_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -735,8 +733,7 @@ comp_id is the comparison mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_filter">
 
-        <code class="highlight language-python">
-set_filter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_name</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_name</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -749,8 +746,7 @@ filter_id is the filter mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_focus">
 
-        <code class="highlight language-python">
-set_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_position</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_position</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -764,8 +760,7 @@ focus_type is "absolute" or "step".</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_pressure">
 
-        <code class="highlight language-python">
-set_pressure<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -776,8 +771,7 @@ set_pressure<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_shutter">
 
-        <code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -790,8 +784,7 @@ shutter_id is the shutter mechanism ID.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.set_wavelength">
 
-        <code class="highlight language-python">
-set_wavelength<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
 
       </h3>
@@ -848,15 +841,15 @@ wavelength_id is the wavelength mechanism ID.</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

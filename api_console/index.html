@@ -1,1111 +1,1637 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Michael Lesser" name="author"/>
-<link href="../img/favicon.ico" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-6.1.6" name="generator"/>
-<title>Console API - AzCam Documentation</title>
-<link href="../assets/stylesheets/main.6910b76c.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.196e0c26.min.css" rel="stylesheet"/>
-<meta content="#4051b5" name="theme-color"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-<link href="../css/custom.css" rel="stylesheet"/>
-</head>
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="indigo" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#console-api">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Michael Lesser">
+      
+      
+      <link rel="shortcut icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
+    
+    
+      
+        <title>Console API - AzCam Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#console-api" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
 <header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="AzCam Documentation" class="md-header-nav__button md-logo" href=".." title="AzCam Documentation">
-<img alt="logo" src="../img/logo.png"/>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="AzCam Documentation" class="md-header-nav__button md-logo" aria-label="AzCam Documentation">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Console API
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header-nav__source">
-<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/mplesser/azcam.git" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     AzCam on GitHub
   </div>
 </a>
-</div>
-</nav>
+      </div>
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="AzCam Documentation" class="md-nav__button md-logo" href=".." title="AzCam Documentation">
-<img alt="logo" src="../img/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AzCam Documentation" class="md-nav__button md-logo" aria-label="AzCam Documentation">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
     AzCam Documentation
   </label>
-<div class="md-nav__source">
-<a class="md-source" href="https://github.com/mplesser/azcam.git" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mplesser/azcam.git" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     AzCam on GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="..">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../classes/">
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../classes/" class="md-nav__link">
       Classes
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../commands/">
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" class="md-nav__link">
       Commands
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         Console API
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Console API
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.API" class="md-nav__link">
     API
   </a>
-<nav aria-label="API" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API.__init__">
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.API.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API.get">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.API.get" class="md-nav__link">
     get()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods" class="md-nav__link">
     HeaderMethods
   </a>
-<nav aria-label="HeaderMethods" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.__init__">
+  
+    <nav class="md-nav" aria-label="HeaderMethods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.delete_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.delete_keyword" class="md-nav__link">
     delete_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_all_keywords">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_all_keywords" class="md-nav__link">
     get_all_keywords()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_keyword" class="md-nav__link">
     get_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_string">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_string" class="md-nav__link">
     get_string()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.read_header">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.read_header" class="md-nav__link">
     read_header()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.set_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.set_keyword" class="md-nav__link">
     set_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.update_header">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.update_header" class="md-nav__link">
     update_header()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.SystemHeader">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.SystemHeader" class="md-nav__link">
     SystemHeader
   </a>
-<nav aria-label="SystemHeader" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.SystemHeader.__init__">
+  
+    <nav class="md-nav" aria-label="SystemHeader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.SystemHeader.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure" class="md-nav__link">
     Exposure
   </a>
-<nav aria-label="Exposure" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.__init__">
+  
+    <nav class="md-nav" aria-label="Exposure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.abort">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.abort" class="md-nav__link">
     abort()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.abort_exposure">
-    abort_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.begin" class="md-nav__link">
+    begin()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.begin_exposure">
-    begin_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.end" class="md-nav__link">
+    end()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.end_exposure">
-    end_exposure()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.expose">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.expose" class="md-nav__link">
     expose()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.expose1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.expose1" class="md-nav__link">
     expose1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.flush">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.flush" class="md-nav__link">
     flush()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_exposuretime">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_exposuretime" class="md-nav__link">
     get_exposuretime()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_exposuretime_remaining">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_exposuretime_remaining" class="md-nav__link">
     get_exposuretime_remaining()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_focalplane">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_filename" class="md-nav__link">
+    get_filename()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_focalplane" class="md-nav__link">
     get_focalplane()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_format">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_format" class="md-nav__link">
     get_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_image_filename">
-    get_image_filename()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_image_types">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_image_types" class="md-nav__link">
     get_image_types()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_par">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_par" class="md-nav__link">
     get_par()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_pixels_remaining">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_pixels_remaining" class="md-nav__link">
     get_pixels_remaining()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_roi">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_roi" class="md-nav__link">
     get_roi()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.guide">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.guide" class="md-nav__link">
     guide()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.guide1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.guide1" class="md-nav__link">
     guide1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.initialize">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.initialize" class="md-nav__link">
     initialize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.integrate_exposure">
-    integrate_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.integrate" class="md-nav__link">
+    integrate()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.parshift">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.parshift" class="md-nav__link">
     parshift()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.pause_exposure">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.pause_exposure" class="md-nav__link">
     pause_exposure()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.readout_exposure">
-    readout_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.readout" class="md-nav__link">
+    readout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.reset" class="md-nav__link">
     reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.resume_exposure">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.resume_exposure" class="md-nav__link">
     resume_exposure()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.roi_reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.roi_reset" class="md-nav__link">
     roi_reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.sequence">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.sequence" class="md-nav__link">
     sequence()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.sequence1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.sequence1" class="md-nav__link">
     sequence1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_exposuretime">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_exposuretime" class="md-nav__link">
     set_exposuretime()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_focalplane">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_focalplane" class="md-nav__link">
     set_focalplane()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_format">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_format" class="md-nav__link">
     set_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_image_filename">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_image_filename" class="md-nav__link">
     set_image_filename()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_par">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_par" class="md-nav__link">
     set_par()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_roi">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_roi" class="md-nav__link">
     set_roi()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.start_readout">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.start_readout" class="md-nav__link">
     start_readout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.test">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.test" class="md-nav__link">
     test()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.tests">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.tests" class="md-nav__link">
     tests()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller" class="md-nav__link">
     Controller
   </a>
-<nav aria-label="Controller" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.__init__">
+  
+    <nav class="md-nav" aria-label="Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.initialize">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.initialize" class="md-nav__link">
     initialize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.reset" class="md-nav__link">
     reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument" class="md-nav__link">
     Instrument
   </a>
-<nav aria-label="Instrument" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.__init__">
+  
+    <nav class="md-nav" aria-label="Instrument">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_current">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_current" class="md-nav__link">
     get_current()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_filter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_filter" class="md-nav__link">
     get_filter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_focus" class="md-nav__link">
     get_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_pressures">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_pressures" class="md-nav__link">
     get_pressures()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_wavelength">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_wavelength" class="md-nav__link">
     get_wavelength()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_filter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_filter" class="md-nav__link">
     set_filter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_focus" class="md-nav__link">
     set_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_wavelength">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_wavelength" class="md-nav__link">
     set_wavelength()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope" class="md-nav__link">
     Telescope
   </a>
-<nav aria-label="Telescope" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.__init__">
+  
+    <nav class="md-nav" aria-label="Telescope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.get_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.get_focus" class="md-nav__link">
     get_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.set_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.set_focus" class="md-nav__link">
     set_focus()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon" class="md-nav__link">
     Tempcon
   </a>
-<nav aria-label="Tempcon" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.__init__">
+  
+    <nav class="md-nav" aria-label="Tempcon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.get_control_temperature">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.get_control_temperature" class="md-nav__link">
     get_control_temperature()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.get_temperatures">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.get_temperatures" class="md-nav__link">
     get_temperatures()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.set_control_temperature">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.set_control_temperature" class="md-nav__link">
     set_control_temperature()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection" class="md-nav__link">
     ServerConnection
   </a>
-<nav aria-label="ServerConnection" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.__init__">
+  
+    <nav class="md-nav" aria-label="ServerConnection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.connect">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.connect" class="md-nav__link">
     connect()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.rcommand">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.rcommand" class="md-nav__link">
     rcommand()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../programming/">
+    
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../programming/" class="md-nav__link">
       Advanced
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../database/">
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../database/" class="md-nav__link">
       Database
     </a>
-</li>
-</ul>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.API" class="md-nav__link">
     API
   </a>
-<nav aria-label="API" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API.__init__">
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.API.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.API.get">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.API.get" class="md-nav__link">
     get()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods" class="md-nav__link">
     HeaderMethods
   </a>
-<nav aria-label="HeaderMethods" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.__init__">
+  
+    <nav class="md-nav" aria-label="HeaderMethods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.delete_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.delete_keyword" class="md-nav__link">
     delete_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_all_keywords">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_all_keywords" class="md-nav__link">
     get_all_keywords()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_keyword" class="md-nav__link">
     get_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.get_string">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.get_string" class="md-nav__link">
     get_string()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.read_header">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.read_header" class="md-nav__link">
     read_header()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.set_keyword">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.set_keyword" class="md-nav__link">
     set_keyword()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.HeaderMethods.update_header">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.HeaderMethods.update_header" class="md-nav__link">
     update_header()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.SystemHeader">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.SystemHeader" class="md-nav__link">
     SystemHeader
   </a>
-<nav aria-label="SystemHeader" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.SystemHeader.__init__">
+  
+    <nav class="md-nav" aria-label="SystemHeader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.SystemHeader.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure" class="md-nav__link">
     Exposure
   </a>
-<nav aria-label="Exposure" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.__init__">
+  
+    <nav class="md-nav" aria-label="Exposure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.abort">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.abort" class="md-nav__link">
     abort()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.abort_exposure">
-    abort_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.begin" class="md-nav__link">
+    begin()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.begin_exposure">
-    begin_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.end" class="md-nav__link">
+    end()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.end_exposure">
-    end_exposure()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.expose">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.expose" class="md-nav__link">
     expose()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.expose1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.expose1" class="md-nav__link">
     expose1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.flush">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.flush" class="md-nav__link">
     flush()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_exposuretime">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_exposuretime" class="md-nav__link">
     get_exposuretime()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_exposuretime_remaining">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_exposuretime_remaining" class="md-nav__link">
     get_exposuretime_remaining()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_focalplane">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_filename" class="md-nav__link">
+    get_filename()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_focalplane" class="md-nav__link">
     get_focalplane()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_format">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_format" class="md-nav__link">
     get_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_image_filename">
-    get_image_filename()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_image_types">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_image_types" class="md-nav__link">
     get_image_types()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_par">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_par" class="md-nav__link">
     get_par()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_pixels_remaining">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_pixels_remaining" class="md-nav__link">
     get_pixels_remaining()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.get_roi">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.get_roi" class="md-nav__link">
     get_roi()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.guide">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.guide" class="md-nav__link">
     guide()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.guide1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.guide1" class="md-nav__link">
     guide1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.initialize">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.initialize" class="md-nav__link">
     initialize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.integrate_exposure">
-    integrate_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.integrate" class="md-nav__link">
+    integrate()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.parshift">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.parshift" class="md-nav__link">
     parshift()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.pause_exposure">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.pause_exposure" class="md-nav__link">
     pause_exposure()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.readout_exposure">
-    readout_exposure()
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.readout" class="md-nav__link">
+    readout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.reset" class="md-nav__link">
     reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.resume_exposure">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.resume_exposure" class="md-nav__link">
     resume_exposure()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.roi_reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.roi_reset" class="md-nav__link">
     roi_reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.sequence">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.sequence" class="md-nav__link">
     sequence()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.sequence1">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.sequence1" class="md-nav__link">
     sequence1()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_exposuretime">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_exposuretime" class="md-nav__link">
     set_exposuretime()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_focalplane">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_focalplane" class="md-nav__link">
     set_focalplane()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_format">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_format" class="md-nav__link">
     set_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_image_filename">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_image_filename" class="md-nav__link">
     set_image_filename()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_par">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_par" class="md-nav__link">
     set_par()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_roi">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_roi" class="md-nav__link">
     set_roi()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.start_readout">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.start_readout" class="md-nav__link">
     start_readout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.test">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.test" class="md-nav__link">
     test()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Exposure.tests">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Exposure.tests" class="md-nav__link">
     tests()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller" class="md-nav__link">
     Controller
   </a>
-<nav aria-label="Controller" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.__init__">
+  
+    <nav class="md-nav" aria-label="Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.initialize">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.initialize" class="md-nav__link">
     initialize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.reset">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.reset" class="md-nav__link">
     reset()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Controller.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Controller.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument" class="md-nav__link">
     Instrument
   </a>
-<nav aria-label="Instrument" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.__init__">
+  
+    <nav class="md-nav" aria-label="Instrument">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_current">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_current" class="md-nav__link">
     get_current()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_filter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_filter" class="md-nav__link">
     get_filter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_focus" class="md-nav__link">
     get_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_pressures">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_pressures" class="md-nav__link">
     get_pressures()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.get_wavelength">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.get_wavelength" class="md-nav__link">
     get_wavelength()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_filter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_filter" class="md-nav__link">
     set_filter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_focus" class="md-nav__link">
     set_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_shutter">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_shutter" class="md-nav__link">
     set_shutter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Instrument.set_wavelength">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Instrument.set_wavelength" class="md-nav__link">
     set_wavelength()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope" class="md-nav__link">
     Telescope
   </a>
-<nav aria-label="Telescope" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.__init__">
+  
+    <nav class="md-nav" aria-label="Telescope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.get_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.get_focus" class="md-nav__link">
     get_focus()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Telescope.set_focus">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Telescope.set_focus" class="md-nav__link">
     set_focus()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon" class="md-nav__link">
     Tempcon
   </a>
-<nav aria-label="Tempcon" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.__init__">
+  
+    <nav class="md-nav" aria-label="Tempcon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.get_control_temperature">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.get_control_temperature" class="md-nav__link">
     get_control_temperature()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.get_temperatures">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.get_temperatures" class="md-nav__link">
     get_temperatures()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.Tempcon.set_control_temperature">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.Tempcon.set_control_temperature" class="md-nav__link">
     set_control_temperature()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection">
+      
+        <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection" class="md-nav__link">
     ServerConnection
   </a>
-<nav aria-label="ServerConnection" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.__init__">
+  
+    <nav class="md-nav" aria-label="ServerConnection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.connect">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.connect" class="md-nav__link">
     connect()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#azcam.api_console.ServerConnection.rcommand">
+        
+          <li class="md-nav__item">
+  <a href="#azcam.api_console.ServerConnection.rcommand" class="md-nav__link">
     rcommand()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="console-api">Console API</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="console-api">Console API</h1>
 <p>The <em>API</em> class contains a command set which can be called from a console application to send the equivalent command to a server process.  Commands are typically accessed in and console process 
 as <code>azcam.api.objectname.commandname(parameters)</code>, e.g. <code>azcam.api.instrument.get_wavelength()</code>.</p>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.API">
-<code>azcam.api_console.API</code>
-</h2>
+
+        <code>azcam.api_console.API</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>API interface for console application.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.API.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Create instance.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.API.get">
-<code class="highlight language-python">
-get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns an API object by name.
 Returns None if api.name is not defined.
 If name is "all" then return a list of api object names.</p>
@@ -1116,28 +1642,38 @@ If name is "all" then return a list of api object names.</p>
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.HeaderMethods">
-<code>azcam.api_console.HeaderMethods</code>
-</h2>
+
+        <code>azcam.api_console.HeaderMethods</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Header methods used by other many client classes.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.delete_keyword">
-<code class="highlight language-python">
-delete_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">delete_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Delete a keyword from a header.
 The keyword is set in the controller header by default.</p>
 <p>:param keyword: keyword name</p>
@@ -1145,10 +1681,12 @@ The keyword is set in the controller header by default.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.get_all_keywords">
-<code class="highlight language-python">
-get_all_keywords<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_all_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a list of all keyword names.</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1171,10 +1709,12 @@ get_all_keywords<span class="p">(</span><span class="bp">self</span><span class=
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.get_keyword">
-<code class="highlight language-python">
-get_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a keyword value, its comment string, and type.
 Comment always returned in double quotes, even if empty.</p>
 <p><strong>Parameters:</strong></p>
@@ -1219,19 +1759,23 @@ Comment always returned in double quotes, even if empty.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.get_string">
-<code class="highlight language-python">
-get_string<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_string</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns the entire header as a single formatted string.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.read_header">
-<code class="highlight language-python">
-read_header<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">read_header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns the current header.</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1255,10 +1799,12 @@ Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.</p
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.set_keyword">
-<code class="highlight language-python">
-set_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'no_comment'</span><span class="p">,</span> <span class="n">typestring</span><span class="o">=</span><span class="s1">'str'</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">'no_comment'</span><span class="p">,</span> <span class="n">typestring</span><span class="o">=</span><span class="s1">'str'</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set a keyword value, comment, and type.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1309,10 +1855,12 @@ set_keyword<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.HeaderMethods.update_header">
-<code class="highlight language-python">
-update_header<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">update_header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Update the header of an object.
 This command usually reads hardware to get the lastest keyword values.</p>
 </div>
@@ -1322,67 +1870,78 @@ This command usually reads hardware to get the lastest keyword values.</p>
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.SystemHeader">
-<code>azcam.api_console.SystemHeader</code>
-</h2>
+
+        <code>azcam.api_console.SystemHeader</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>System header class, mainly for image header data.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.SystemHeader.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 </div>
 </div>
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.Exposure">
-<code>azcam.api_console.Exposure</code>
-</h2>
+
+        <code>azcam.api_console.Exposure</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Exposure class for client.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.abort">
-<code class="highlight language-python">
-abort<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Sets the global exposure abort flag and tries to abort a remote server exposure.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.abort_exposure">
-<code class="highlight language-python">
-abort_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
-<p>Abort an exposure in progress.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.begin_exposure">
-<code class="highlight language-python">
-begin_exposure<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.begin">
+
+<code class="highlight language-python"><span class="n">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Initiates the first part of an exposure, through image flushing.
 This is an advanced function.</p>
 <p>:param exposure_time: the exposure time in seconds
@@ -1391,21 +1950,25 @@ This is an advanced function.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.end_exposure">
-<code class="highlight language-python">
-end_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.end">
+
+<code class="highlight language-python"><span class="n">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Completes an exposure by writing file and displaying image.
 This is an advanced function.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.expose">
-<code class="highlight language-python">
-expose<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">expose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Make a complete exposure.
 If arguments are not specified, then previous exposure_time and imagetype values are used.</p>
 <p>:param exposure_time: the exposure time in seconds
@@ -1415,10 +1978,12 @@ If arguments are not specified, then previous exposure_time and imagetype values
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.expose1">
-<code class="highlight language-python">
-expose1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">expose1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">image_title</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Make a complete exposure with immediate return to caller.</p>
 <p>:param exposure_time: the exposure time in seconds
 :param image_type: type of exposure ('zero', 'object', 'flat', ...)
@@ -1427,198 +1992,240 @@ expose1<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.flush">
-<code class="highlight language-python">
-flush<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Flush/clear detector.</p>
 <p>:param cycles:  number of times to flush the detector.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_exposuretime">
-<code class="highlight language-python">
-get_exposuretime<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_exposuretime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return current exposure time in seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_exposuretime_remaining">
-<code class="highlight language-python">
-get_exposuretime_remaining<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_exposuretime_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return current exposure time in seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_focalplane">
-<code class="highlight language-python">
-get_focalplane<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
-<p>Returns the current focal plane configuration.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_format">
-<code class="highlight language-python">
-get_format<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
-<p>Return the current detector format parameters.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_image_filename">
-<code class="highlight language-python">
-get_image_filename<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_filename">
+
+<code class="highlight language-python"><span class="n">get_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return the current exposure image filename.
 :returns: imaeg filename</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_focalplane">
+
+<code class="highlight language-python"><span class="n">get_focalplane</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Returns the current focal plane configuration.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_format">
+
+<code class="highlight language-python"><span class="n">get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return the current detector format parameters.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_image_types">
-<code class="highlight language-python">
-get_image_types<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_image_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a list of valid image types.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_par">
-<code class="highlight language-python">
-get_par<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return the value of a parameter from remote server.
 Returns None on error.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_pixels_remaining">
-<code class="highlight language-python">
-get_pixels_remaining<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_pixels_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return current number of pixels remaing in readout.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.get_roi">
-<code class="highlight language-python">
-get_roi<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return detector ROI.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.guide">
-<code class="highlight language-python">
-guide<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">guide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Make a complete guider exposure sequence.</p>
 <p>:param number_exposures: number of exposures to make, -1 loop forever</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.guide1">
-<code class="highlight language-python">
-guide1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">guide1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>guide() with immediate return.</p>
 <p>:param number_exposures: number of exposures to make, -1 loop forever</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.initialize">
-<code class="highlight language-python">
-initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Initialize exposure.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.integrate_exposure">
-<code class="highlight language-python">
-integrate_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.integrate">
+
+<code class="highlight language-python"><span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Integrate exposure.
 This is an advanced function.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.parshift">
-<code class="highlight language-python">
-parshift<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_rows</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">parshift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_rows</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Shift detector by number_rows.</p>
 <p>:param number_rows: number of rows to shift (positive is toward readout, negative is away)</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.pause_exposure">
-<code class="highlight language-python">
-pause_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">pause_exposure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Pause an exposure in progress (integration only).</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.api_console.Exposure.readout_exposure">
-<code class="highlight language-python">
-readout_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+<h3 class="doc doc-heading" id="azcam.api_console.Exposure.readout">
+
+<code class="highlight language-python"><span class="n">readout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Readout the exposure.
 This is an advanced function.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.reset">
-<code class="highlight language-python">
-reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Reset exposure.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.resume_exposure">
-<code class="highlight language-python">
-resume_exposure<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">resume_exposure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Resume a paused exposure.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.roi_reset">
-<code class="highlight language-python">
-roi_reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">roi_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Resets detector ROI values to full frame, current binning.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.sequence">
-<code class="highlight language-python">
-sequence<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Take an exposure sequence.</p>
 <p>:param number_exposures:  number of exposures to make
 :param flush_array:  flag defining detector flushing</p>
@@ -1633,10 +2240,12 @@ sequence<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.sequence1">
-<code class="highlight language-python">
-sequence1<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">sequence1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flush_array</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Take an exposure sequence with immediate return.</p>
 <p>:param number_exposures:  number of exposures to make.
 :param flush_array:  flag defining detector flushing</p>
@@ -1651,20 +2260,24 @@ sequence1<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_exposuretime">
-<code class="highlight language-python">
-set_exposuretime<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_exposuretime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set current exposure time in seconds.</p>
 <p>:param exposure_time: exposure time in seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_focalplane">
-<code class="highlight language-python">
-set_focalplane<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numdet_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numdet_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp_config</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_focalplane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numdet_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numdet_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_x</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numamps_y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp_config</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Sets focal plane configuration for subsequent exposures. Use after set_format().
 Must call set_roi() after using this command and before starting exposure.
 This command replaces SetConfiguration.
@@ -1682,10 +2295,12 @@ amp_config defines each amplifier's orientation (ex: '1223').
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_format">
-<code class="highlight language-python">
-set_format<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ns_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_frametransfer</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ns_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ns_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_total</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_predark</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_underscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_overscan</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np_frametransfer</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set the detector format for subsequent exposures.
 Must call set_roi() after using this command and before starting exposure.
 ns_total is the number of visible columns.
@@ -1701,10 +2316,12 @@ np_frametransfer is the rows to frame transfer shift.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_image_filename">
-<code class="highlight language-python">
-set_image_filename<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_image_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set the filename of the exposure image.
 Always use forward slashes.
 Not fully functional.</p>
@@ -1713,20 +2330,24 @@ Not fully functional.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_par">
-<code class="highlight language-python">
-set_par<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_par</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set the value of a parameter in the remote server.
 Returns None on error.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_roi">
-<code class="highlight language-python">
-set_roi<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">row_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">roi_number</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_col</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">last_row</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">row_bin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">roi_number</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Sets the ROI values for subsequent exposures.
 Currently only one ROI (0) is supported.
 These values are for the entire focal plane, not just one detector.</p>
@@ -1734,10 +2355,12 @@ These values are for the entire focal plane, not just one detector.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.set_shutter">
-<code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Open or close a shutter.</p>
 <p>:param state:
 :param shutter_id: Shutter ID flag</p>
@@ -1749,28 +2372,36 @@ set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.start_readout">
-<code class="highlight language-python">
-start_readout<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">start_readout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Start immediate readout of an exposing image.
 Returns immediately, not waiting for readout to finish.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.test">
-<code class="highlight language-python">
-test<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="n">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Exposure.tests">
-<code class="highlight language-python">
-tests<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">'zero'</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">tests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_exposures</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">image_type</span><span class="o">=</span><span class="s1">'zero'</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Make test exposures, which overwrite previous test images.</p>
 <p>:param number_exposures: number of exposures to take
 :param exposure_time: exposure time in seconds
@@ -1782,47 +2413,61 @@ tests<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.Controller">
-<code>azcam.api_console.Controller</code>
-</h2>
+
+        <code>azcam.api_console.Controller</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Controller class for client.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Controller.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Controller.initialize">
-<code class="highlight language-python">
-initialize<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Initialize controller.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Controller.reset">
-<code class="highlight language-python">
-reset<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Reset controller using current attributes.
 May warn that the controller could not be reset.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Controller.set_shutter">
-<code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Open or close a shutter.</p>
 <p>:param state:</p>
 </div>
@@ -1832,28 +2477,38 @@ set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.Instrument">
-<code>azcam.api_console.Instrument</code>
-</h2>
+
+        <code>azcam.api_console.Instrument</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Instrument class for client.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.get_current">
-<code class="highlight language-python">
-get_current<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diode_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diode_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Returns a list of instrument diode currents.</p>
 <p>:param diode_id: diode ID flag (system dependent)
 :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read</p>
@@ -1861,50 +2516,60 @@ get_current<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.get_filter">
-<code class="highlight language-python">
-get_filter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Get instrument filter position.</p>
 <p>:param filter_id: filter ID flag (use negative value for a list of all filters)</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.get_focus">
-<code class="highlight language-python">
-get_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Get the current focus position.</p>
 <p>:param focus_id: focus sensor ID flag</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.get_pressures">
-<code class="highlight language-python">
-get_pressures<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a list of all system pressures.</p>
 <p>:param pressure_id: pressure sensor ID flag</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.get_wavelength">
-<code class="highlight language-python">
-get_wavelength<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Get instrument wavelength.</p>
 <p>:param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.set_filter">
-<code class="highlight language-python">
-set_filter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_name</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_name</span><span class="p">,</span> <span class="n">filter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set instrument filter position.</p>
 <p>:param filter_name: filter value to set
 :param filter_id: filter ID flag</p>
@@ -1912,10 +2577,12 @@ set_filter<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.set_focus">
-<code class="highlight language-python">
-set_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_value</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_value</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set instrument focus position. The focus value may be an absolute position
 or a relative step if supported by hardware.</p>
 <p>:param focus_value: focus position
@@ -1925,10 +2592,12 @@ or a relative step if supported by hardware.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.set_shutter">
-<code class="highlight language-python">
-set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Open or close a shutter.</p>
 <p>:param state:
 :param shutter_id: Shutter ID flag</p>
@@ -1936,10 +2605,12 @@ set_shutter<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Instrument.set_wavelength">
-<code class="highlight language-python">
-set_wavelength<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nd</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nd</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set wavelength, optionally changing neutral density.</p>
 <p>:param wavelength: wavelength value, may be a string such as 'clear' or 'dark'
 :param wavelength_id: wavelength ID flag
@@ -1951,38 +2622,50 @@ set_wavelength<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.Telescope">
-<code>azcam.api_console.Telescope</code>
-</h2>
+
+        <code>azcam.api_console.Telescope</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Telescope class for client.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Telescope.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Telescope.get_focus">
-<code class="highlight language-python">
-get_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Get the current focus position.</p>
 <p>:param focus_id: focus sensor ID flag</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Telescope.set_focus">
-<code class="highlight language-python">
-set_focus<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_value</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_value</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set instrument focus position. The focus value may be an absolute position
 or a relative step if supported by hardware.</p>
 <p>:param focus_value: focus position
@@ -1995,38 +2678,50 @@ or a relative step if supported by hardware.</p>
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.Tempcon">
-<code>azcam.api_console.Tempcon</code>
-</h2>
+
+        <code>azcam.api_console.Tempcon</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Temperature controller (tempcon) class for client.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Tempcon.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Tempcon.get_control_temperature">
-<code class="highlight language-python">
-get_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_control_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Get control temperature in degress Celsius.</p>
 <p>:param temperature_id: temperature ID flag</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Tempcon.get_temperatures">
-<code class="highlight language-python">
-get_temperatures<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">get_temperatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Return a list of all system temperatures as defined in configuration setup.
 Values are in degrees Celsius and may be formatted for display.
 If temperatures cannot be read, then a list of -999.99 is returned.</p>
@@ -2034,10 +2729,12 @@ If temperatures cannot be read, then a list of -999.99 is returned.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.Tempcon.set_control_temperature">
-<code class="highlight language-python">
-set_control_temperature<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control_temperature</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">set_control_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control_temperature</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Set control temperature.</p>
 <p>:param control_temperature: control (set) temperature in Celsius
 :param temperature_id: temperature sensor ID flag</p>
@@ -2048,37 +2745,49 @@ set_control_temperature<span class="p">(</span><span class="bp">self</span><span
 </div>
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.api_console.ServerConnection">
-<code>azcam.api_console.ServerConnection</code>
-</h2>
+
+        <code>azcam.api_console.ServerConnection</code>
+
+
+
+      </h2>
 <div class="doc doc-contents first">
 <p>Server connection class for client to azcamserver.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.ServerConnection.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h3>
-<div class="doc doc-contents">
-</div>
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.ServerConnection.connect">
-<code class="highlight language-python">
-connect<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2402</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">2402</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Connect to azcamserver.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.api_console.ServerConnection.rcommand">
-<code class="highlight language-python">
-rcommand<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span> </code>
-</h3>
-<div class="doc doc-contents">
+
+<code class="highlight language-python"><span class="n">rcommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Send a command to a server process using the 'server' object in the database.
 This command traps all errors and returns exceptions and as error string.</p>
 <p>Returns None or a string.</p>
@@ -2087,72 +2796,98 @@ This command traps all errors and returns exceptions and as error string.</p>
 </div>
 </div>
 </div>
-<hr/>
+                
+                  
+                    
+
+<hr>
 <div class="md-source-date">
-<small>
+  <small>
     
       Last update: 2020-12-08
     
   </small>
 </div>
-</article>
-</div>
-</div>
-</main>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
 <footer class="md-footer">
-<div class="md-footer-nav">
-<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
-<a class="md-footer-nav__link md-footer-nav__link--prev" href="../commands/" rel="prev">
-<div class="md-footer-nav__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</div>
-<div class="md-footer-nav__title">
-<div class="md-ellipsis">
-<span class="md-footer-nav__direction">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../commands/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
                   Previous
                 </span>
                 Commands
               </div>
-</div>
-</a>
-<a class="md-footer-nav__link md-footer-nav__link--next" href="../programming/" rel="next">
-<div class="md-footer-nav__title">
-<div class="md-ellipsis">
-<span class="md-footer-nav__direction">
+            </div>
+          </a>
+        
+        
+          <a href="../programming/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
                   Next
                 </span>
                 Advanced
               </div>
-</div>
-<div class="md-footer-nav__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
-</div>
-</a>
-</nav>
-</div>
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
         
         Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs
         </a>
-</div>
-</div>
-</div>
+      </div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-<script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

@@ -8,11 +8,11 @@
       
       
       
-      
         <meta name="author" content="Michael Lesser">
       
+      
       <link rel="shortcut icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
           
           
@@ -35,7 +35,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="indigo" data-md-color-primary="indigo" data-md-color-accent="indigo">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -87,18 +88,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             AzCam Documentation
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               Image Class
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -157,10 +160,14 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
+
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
@@ -192,6 +199,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
       Home
@@ -202,6 +210,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -216,6 +225,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../commands/" class="md-nav__link">
       Commands
@@ -226,6 +236,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -240,6 +251,7 @@
       
 
 
+
   <li class="md-nav__item">
     <a href="../programming/" class="md-nav__link">
       Advanced
@@ -250,6 +262,7 @@
       
       
       
+
 
 
   <li class="md-nav__item">
@@ -266,7 +279,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -421,11 +435,11 @@ the <em>exposure.image</em> object which receives image data from a camera contr
 <div class="codehilite"><pre><span></span><code><span class="err">im1 = azcam.Image(&#39;test.fits&#39;)</span>
 </code></pre></div>
 
-
 <div class="doc doc-object doc-class">
 <h2 class="doc doc-heading" id="azcam.image.Image">
 
         <code>azcam.image.Image</code>
+
 
 
       </h2>
@@ -435,8 +449,7 @@ the <em>exposure.image</em> object which receives image data from a camera contr
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -445,13 +458,13 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h3>
 <div class="doc doc-contents ">
 
+
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.assemble">
 
-        <code class="highlight language-python">
-assemble<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -462,8 +475,7 @@ assemble<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.get_remote_imageserver">
 
-        <code class="highlight language-python">
-get_remote_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
@@ -493,8 +505,7 @@ remote_imageserver_filename:</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.read_file">
 
-        <code class="highlight language-python">
-read_file<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -506,8 +517,7 @@ This version only supports FITS/MEF.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.send_image">
 
-        <code class="highlight language-python">
-send_image<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">send_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">)</span></code>
 
 
       </h3>
@@ -520,8 +530,7 @@ Server types (self.server_type) are: azcam, lbtguider, and dataserver.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.set_remote_imageserver">
 
-        <code class="highlight language-python">
-set_remote_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">remote_imageserver_filename</span><span class="o">=</span><span class="s1">'image'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">remote_imageserver_filename</span><span class="o">=</span><span class="s1">'image'</span><span class="p">)</span></code>
 
 
       </h3>
@@ -533,8 +542,7 @@ If no host is provided then reset flag to local image file.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.set_scaling">
 
-        <code class="highlight language-python">
-set_scaling<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gains</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
       </h3>
@@ -546,8 +554,7 @@ Use None for no scaling.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.write_file">
 
-        <code class="highlight language-python">
-write_file<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
@@ -567,6 +574,7 @@ filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p>
         <code>azcam.image_send.SendImage</code>
 
 
+
       </h2>
 <div class="doc doc-contents first">
 <p>Class to send image to a remote image server.</p>
@@ -574,8 +582,7 @@ filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image_send.SendImage.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -584,13 +591,13 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h3>
 <div class="doc doc-contents ">
 
+
     </div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image_send.SendImage.azcam_imageserver">
 
-        <code class="highlight language-python">
-azcam_imageserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">azcam_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span></code>
 
 
       </h3>
@@ -601,8 +608,7 @@ azcam_imageserver<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image_send.SendImage.dataserver">
 
-        <code class="highlight language-python">
-dataserver<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">dataserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span></code>
 
 
       </h3>
@@ -613,8 +619,7 @@ dataserver<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image_send.SendImage.lbtguider">
 
-        <code class="highlight language-python">
-lbtguider<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">lbtguider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">)</span></code>
 
 
       </h3>
@@ -669,15 +674,15 @@ lbtguider<span class="p">(</span><span class="bp">self</span><span class="p">,</
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: navigation.sections,
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
