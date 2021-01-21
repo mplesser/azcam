@@ -533,7 +533,7 @@
   3. Applications, as descrived above. Client apps communicate with <em>azcamserver</em> over sockets or the web API.</p>
 <h2 id="operation">Operation</h2>
 <p>While there are multiple pythonic ways to access the object instances in code, it is common to use the <code>api</code> instance to access most objects, available as <code>azcam.api</code>. On there server side the <code>controller</code> object, for example, can be accessed as <code>api.controller</code>.  On the client side, the <code>api</code> object maps to the standard objects but with only a reduced set of exposed methods.  So while <code>api.exposure.reset</code> may available to server and client code, <code>api.exposure.set_video_gain</code> may only be available on the sever. There is also a local database for temporary storage maintained in the <em>azcam.db</em> object.</p>
-<p>As an example, to get the current system wavelength and take an exposure, the commands using the <em>azcam-itl</em> environment are:</p>
+<p>As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the <em>azcam_itl</em> environment has been added to the python search path.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">server_itl</span>
@@ -546,13 +546,17 @@
 
 <span class="n">And</span> <span class="n">then</span><span class="p">:</span>
 
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">get_wavelength</span><span class="p">()</span>
-<span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">30.</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s2">&quot;a dark image title&quot;</span><span class="p">)</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
+<span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Example configuration code can be found in <code>azcam.example_server_config</code> and <code>azcam.example_console_config</code>.</p>
 <p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
+<p>And then the code above could be executed as:
+<div class="highlight"><pre><span></span><code><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
+<span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
+</code></pre></div></p>
 <p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. </p>
 <h2 id="help">Help</h2>
 <p>AzCam is often used with IPython.  Help is then avaialble by typing <code>?xxx</code>, <code>xxx?</code>, <code>xxx??</code> or <code>help(xxx)</code> where <code>xxx</code> is an AzCam class, command, or object instance.</p>
@@ -613,7 +617,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-01-05
+      Last update: 2021-01-13
     
   </small>
 </div>
