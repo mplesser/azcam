@@ -41,7 +41,7 @@ There are three main operational modes of AzCam:
 ## Operation
 While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` instance to access most objects, available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever. There is also a local database for temporary storage maintained in the *azcam.db* object.
 
-As an example, to get the current system wavelength and take an exposure, the commands using the *azcam-itl* environment are:
+As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the *azcam_itl* environment has been added to the python search path.
 
 ```python
 # server-side (azcamserver)
@@ -56,8 +56,8 @@ import console_itl
 
 And then:
 
-wavelength = azcam.api.instrument.get_wavelength()
-azcam.api.expose(30., 'dark', "a dark image title")
+wavelength = azcam.api.instrument.set_wavelength(450)
+azcam.api.exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
 Example configuration code can be found in `azcam.example_server_config` and `azcam.example_console_config`.
@@ -66,6 +66,12 @@ When working in a command line environment, it is often convenient to import com
 
 ```python
 from azcam.cli import *
+```
+
+And then the code above could be executed as:
+```python
+instrument.set_wavelength(450)
+exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
 This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
