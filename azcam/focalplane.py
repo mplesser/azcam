@@ -11,6 +11,7 @@ from azcam.header import Header, ObjectHeaderMethods
 class FocalPlane(ObjectHeaderMethods):
     """
     Defines the FocalPlane class which describes a cameras focalplane and detectors.
+    It is used by the Image() object.
     """
 
     def __init__(self):
@@ -180,10 +181,12 @@ class FocalPlane(ObjectHeaderMethods):
         self.rowoscm = 0
         self.framet = 0
 
-        self.new_roi = 0
+        # self.new_roi = 0
 
         # World Coordinate System
         self.wcs = WCS(self)
+
+        self.define_keywords()
 
     def update_header_keywords(self):
         """
@@ -235,7 +238,7 @@ class FocalPlane(ObjectHeaderMethods):
         """
 
         # update header
-        self.define_keywords()
+        # self.define_keywords()
         self.update_header_keywords()
 
         return

@@ -147,13 +147,19 @@ class Image(object):
         self.array_type = 0
 
         #: Allows saving data using other data format than BITPIX2
-        self.save_data_format = 0
+        self.save_data_format = 16
 
         self.focalplane = FocalPlane()
 
         #: read a file if specified when instance created
         if filename != "":
             self.read_file(filename)
+
+    def set_scaling(self, gains=None, offsets=None):
+        """
+        Set gains and offsets for image assembly.
+        Use None for no scaling.
+        """
 
         self.num_extensions = self.focalplane.numamps_image
 
@@ -164,12 +170,6 @@ class Image(object):
         self.offsets = numpy.empty(shape=[self.num_extensions], dtype="f")
         for ext in range(self.num_extensions):
             self.offsets[ext] = 0.0
-
-    def set_scaling(self, gains=None, offsets=None):
-        """
-        Set gains and offsets for image assembly.
-        Use None for no scaling.
-        """
 
         if gains is None:
             gains = len(self.data) * [1.0]
@@ -1150,8 +1150,8 @@ class Image(object):
 
         data = numpy.ndarray(
             shape=(self.asmsize[1], self.asmsize[0]),
-            dtype=self.save_data_format,
-            buffer=self.buffer.astype(self.save_data_format),
+            dtype=self.data_types[self.save_data_format],
+            buffer=self.buffer.astype(self.data_types[self.save_data_format]),
         )
         hdu = pyfits.PrimaryHDU(data=data, header=self.hdulist[0].header)
 
@@ -1223,7 +1223,6 @@ class Image(object):
     def _write_fits_header(self, hdu):
         """
         Write primary header for FITS or MEF file.
-        08Dec10 Zareba
         """
 
         numHDUs = self.focalplane.numamps_image
