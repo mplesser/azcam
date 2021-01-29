@@ -155,7 +155,7 @@ class Exposure(Objects, Filename):
         self.temp_image_file = ""
 
         #: filename of current image
-        self.current_filename = ""
+        self.last_filename = ""
 
         # write data asynchronously
         self.write_async = 0

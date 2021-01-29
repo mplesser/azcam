@@ -56,13 +56,25 @@ class API(object):
         return obj
 
 
-class HeaderMethods(object):
+class CommonMethods(object):
     """
-    Header methods used by other many client classes.
+    Common methods used by client classes.
     """
 
     def __init__(self) -> None:
         pass
+
+    def get(self, name):
+        """
+        Returns an object attribute by name.
+        Returns None if not available.
+        """
+
+        reply = self._parent.server.rcommand(f"{self.objname}.get {name}")
+
+        return reply
+
+    # *** HEADER ***
 
     def update_header(self):
         """
@@ -154,7 +166,7 @@ class HeaderMethods(object):
         return lines
 
 
-class SystemHeader(HeaderMethods):
+class SystemHeader(CommonMethods):
     """
     System header class, mainly for image header data.
     """
@@ -164,7 +176,7 @@ class SystemHeader(HeaderMethods):
         self.objname = "system"
 
 
-class Controller(HeaderMethods):
+class Controller(CommonMethods):
     """
     Controller class for client.
     """
@@ -201,7 +213,7 @@ class Controller(HeaderMethods):
         return self._parent.server.rcommand(f"{self.objname}.set_shutter {state}")
 
 
-class Instrument(HeaderMethods):
+class Instrument(CommonMethods):
     """
     Instrument class for client.
     """
@@ -344,7 +356,7 @@ class Instrument(HeaderMethods):
         return self._parent.server.rcommand(f"{self.objname}.set_shutter {state} {shutter_id}")
 
 
-class Telescope(HeaderMethods):
+class Telescope(CommonMethods):
     """
     Telescope class for client.
     """
@@ -412,7 +424,7 @@ class Telescope(HeaderMethods):
         return float(reply)
 
 
-class Tempcon(HeaderMethods):
+class Tempcon(CommonMethods):
     """
     Temperature controller (tempcon) class for client.
     """
@@ -475,7 +487,7 @@ class Tempcon(HeaderMethods):
         return float(reply)
 
 
-class Exposure(HeaderMethods):
+class Exposure(CommonMethods):
     """
     Exposure class for client.
     """
