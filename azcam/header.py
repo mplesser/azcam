@@ -76,13 +76,9 @@ class Header(object):
 
         # special case
         title = "ITL Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = "=================================================================="
         self.title[1] = "%s" % title
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = "=================================================================="
 
         return
 
@@ -294,7 +290,6 @@ class Header(object):
         May read current values using get_keyword().
         Returns:
             list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
 
         # get the header
@@ -405,9 +400,7 @@ class ObjectHeaderMethods(object):
             return
 
         for key in reply:
-            reply1 = self.get_keyword(
-                key
-            )  # this calls object's get_keyword to get updated values
+            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
             list1 = [key, reply1[0], reply1[1], reply1[2]]
             header.append(list1)
 

@@ -121,7 +121,7 @@ are listed below. Most aliases are implemeted from a command such as `from short
   * *Run* - run a command found on the python search path, usually for scripts. Note the upper case *R* to distinguish it from IPython's built-in *run* magic command.
   * *gf* - try and go to current image folder.
   * *sf* - try and set the image folder to the current directory.
-  * *bf* - browse for a file or folder usign a Tcl/Tk GUI.  
+  * *bf* - browse for a file or folder usign a Tcl/Tk GUI.
 
 ## Code Descriptions
 The links below describe some of the many classes and commands found in AzCam. Availability depends on configuration.
@@ -129,6 +129,9 @@ The links below describe some of the many classes and commands found in AzCam. A
 - [Classes](classes.md)
 - [Commands](commands.md)
 - [Console API](api_console.md)
+
+## Scripts
+Scripts are python code modules which generally contain one function and are available from  the command line or by importing the *azcam-scripts* extension module. They may interact with other *azcam* code if they are configured to be called automatically during enviroment configuration. Note that they may make extensive use of  the *azcam.db* database. By convention scripts use database items named as `db.scriptname_xxx`. As an example, `db.imsnap_resize=2.5"`will shrink a snapped image by 2.5x when the `imsnap` script is called. 
 
 ## Configuration Folders
 There are several folder names which are usually defined, although their use may be optional for some systems:

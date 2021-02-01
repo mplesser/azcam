@@ -1,13 +1,13 @@
 # Console API
 
 The *API* class contains a command set which can be called from a console application to send the equivalent command to a server process.  Commands are typically accessed in and console process 
-as ``azcam.api.objectname.commandname(parameters)``, e.g. ``azcam.api.instrument.get_wavelength()``.
+as `azcam.api.objectname.commandname(parameters)`, e.g. `azcam.api.instrument.get_wavelength()`.
 
 ::: azcam.api_console.API
     :docstring:
     :members:
 
-::: azcam.api_console.HeaderMethods
+::: azcam.api_console.CommonMethods
     :docstring:
     :members:
 

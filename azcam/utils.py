@@ -783,3 +783,39 @@ def restore_imagepars(imagepars, folder=""):
         curdir(folder)
 
     return
+
+
+def load_scripts(folder: str, package=None) -> None:
+    """
+    Load all scripts from folder into azcam.db.cli_cmds
+    """
+
+    folder = fix_path(folder)
+    if folder not in sys.path:
+        sys.path.append(folder)
+
+    if package is None:
+        package = ""
+    else:
+        package = f"{package}."
+        folder = "/azcam/azcam-scripts/azcam_scripts"
+
+    # bring all .py modules with same function name into namespace
+    _, _, filenames = next(os.walk(folder))
+    pyfiles = []
+    for files in filenames:
+        if files.endswith(".py"):
+            pyfiles.append(files[:-3])
+    if "__init__" in pyfiles:
+        pyfiles.remove("__init__")
+
+    for pfile in pyfiles:
+        try:
+            mod = importlib.import_module(f"{package}{pfile}")
+            func = getattr(mod, pfile)
+            azcam.db.cli_cmds[pfile] = func
+        except Exception as e:
+            print(e)
+            azcam.AzcamWarning(f"Could not import script {pfile}")
+
+    return

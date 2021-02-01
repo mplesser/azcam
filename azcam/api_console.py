@@ -89,7 +89,6 @@ class CommonMethods(object):
         Returns the current header.
         Returns:
             list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
-            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
 
         return self._parent.server.rcommand(f"{self.objname}.read_header")
