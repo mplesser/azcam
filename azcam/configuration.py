@@ -265,7 +265,8 @@ class Config(object):
                 try:
                     obj = getattr(obj, tokens[i])
                 except AttributeError:
-                    azcam.AzcamWarning(f"Could not get parameter: {parameter}")
+                    pass
+                    #azcam.AzcamWarning(f"Could not get parameter: {parameter}")
             value = obj  # last time is value
 
         return value
@@ -338,7 +339,8 @@ class Config(object):
             try:
                 setattr(obj, tokens[-1], value)
             except AttributeError:
-                azcam.AzcamWarning(f"Could not set parameter: {parameter}")
+                pass
+                #azcam.AzcamWarning(f"Could not set parameter: {parameter}")
 
         return None
 

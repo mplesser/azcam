@@ -50,7 +50,7 @@ class TempCon(Objects):
         self.header.set_header("tempcon", 4)
 
         # add keywords
-        self.header.keywords = {"CAMTEMP": "CAMPTEMP", "DEWTEMP": "DEWTEMP"}
+        self.header.keywords = {"CAMTEMP": "CAMTEMP", "DEWTEMP": "DEWTEMP"}
         self.header.comments = {
             "CAMTEMP": "Camera temperature in C",
             "DEWTEMP": "Dewar temperature in C",
@@ -245,12 +245,12 @@ class TempCon(Objects):
 
         # store value in Header
         if keyword == "CAMTEMP":
-            temp = float(int(temp * 1000.0) / 1000.0)
+            temp = float(f"{temp:.03f}")
             self.header.set_keyword("CAMTEMP", temp, "Camera temperature in C", float)
         elif keyword == "DEWTEMP":
-            temp = float(int(temp * 1000.0) / 1000.0)
+            temp = float(f"{temp:.03f}")
             self.header.set_keyword("DEWTEMP", temp, "Dewar temperature in C", float)
 
-        t = self.header.self.header.typestrings[keyword]
+        t = self.header.typestrings[keyword]
 
         return [temp, self.header.comments[keyword], t]

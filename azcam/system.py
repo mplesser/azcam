@@ -20,6 +20,6 @@ class System(Objects):
         self.header = Header(system_name, template_file)
         self.header.set_header("system", 0)
 
-        self.define_keywords()
+        #self.define_keywords()
 
         return

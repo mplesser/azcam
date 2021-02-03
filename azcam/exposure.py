@@ -176,14 +176,12 @@ class Exposure(Objects, Filename):
         self.objects_reset = [
             "controller",
             "instrument",
-            "telescope",
             "tempcon",
             "display",
         ]
         self.objects_init = [
             "controller",
             "instrument",
-            "telescope",
             "tempcon",
             "display",
         ]
@@ -521,8 +519,8 @@ class Exposure(Objects, Filename):
                 shutterstate = 1  # other types are comps, so open shutter
             azcam.api.controller.set_shutter_state(shutterstate)
 
-            if not self.comp_exposure:
-                self.set_keyword("IMAGETYP", imagetype, "Image type", str)
+            #if not self.comp_exposure:
+            #    self.set_keyword("IMAGETYP", imagetype, "Image type", "str")
 
         self.delete_keyword("COMPLAMP")
 
@@ -871,7 +869,7 @@ class Exposure(Objects, Filename):
 
         # all headers to be updated must be in azcam.db['headers']
         for objectname in azcam.db.headers:
-            if objectname == "controller" or objectname == "system":  # skip as already up to date
+            if objectname == "controller" or objectname == "system" or objectname == "exposure":
                 continue
             try:
                 azcam.api.get(objectname).update_header()  # dont crash so all headers get updated
