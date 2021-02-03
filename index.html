@@ -295,6 +295,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scripts" class="md-nav__link">
+    Scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-folders" class="md-nav__link">
     Configuration Folders
   </a>
@@ -468,6 +475,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scripts" class="md-nav__link">
+    Scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration-folders" class="md-nav__link">
     Configuration Folders
   </a>
@@ -589,7 +603,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <li><em>Run</em> - run a command found on the python search path, usually for scripts. Note the upper case <em>R</em> to distinguish it from IPython's built-in <em>run</em> magic command.</li>
 <li><em>gf</em> - try and go to current image folder.</li>
 <li><em>sf</em> - try and set the image folder to the current directory.</li>
-<li><em>bf</em> - browse for a file or folder usign a Tcl/Tk GUI.  </li>
+<li><em>bf</em> - browse for a file or folder usign a Tcl/Tk GUI.</li>
 </ul>
 <h2 id="code-descriptions">Code Descriptions</h2>
 <p>The links below describe some of the many classes and commands found in AzCam. Availability depends on configuration.</p>
@@ -598,6 +612,8 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <li><a href="commands/">Commands</a></li>
 <li><a href="api_console/">Console API</a></li>
 </ul>
+<h2 id="scripts">Scripts</h2>
+<p>Scripts are python code modules which generally contain one function and are available from  the command line or by importing the <em>azcam-scripts</em> extension module. They may interact with other <em>azcam</em> code if they are configured to be called automatically during enviroment configuration. Note that they may make extensive use of  the <em>azcam.db</em> database. By convention scripts use database items named as <code>db.scriptname_xxx</code>. As an example, <code>db.imsnap_resize=2.5"</code>will shrink a snapped image by 2.5x when the <code>imsnap</code> script is called. </p>
 <h2 id="configuration-folders">Configuration Folders</h2>
 <p>There are several folder names which are usually defined, although their use may be optional for some systems:</p>
 <ul>
@@ -617,7 +633,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-01-13
+      Last update: 2021-02-01
     
   </small>
 </div>
