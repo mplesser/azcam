@@ -324,8 +324,9 @@ def arith(
             for _ in range(10):  # locking issue
                 try:
                     hdulist.writeto(filename3, overwrite=1)
-                except Exception:
-                    azcam.AzcamWarning("FITS file locked")
+                except Exception as e:
+                    #print(e)
+                    #azcam.AzcamWarning("FITS file locked")
                     time.sleep(0.5)
         else:
             im1.close()
@@ -878,7 +879,10 @@ def _line_fit(xdata, ydata, order=1, fit_min=0, fit_max=-1):
     yydata = ydata[fit_min:fit_max]
 
     # generate line y values
-    polycoeffs = poly.polyfit(xxdata, yydata, order)  # [slope,intercept] using just fit_min:fit_max
+    try:
+        polycoeffs = poly.polyfit(xxdata, yydata, order)  # [slope,intercept] using just fit_min:fit_max
+    except Exception:
+        polycoeffs = poly.polyfit(xxdata, yydata, order)  # [slope,intercept] using just fit_min:fit_max
     yfit = poly.polyval(xdata, polycoeffs)  # fit for all data, not just xxdata
 
     # calculate residuals
