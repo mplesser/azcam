@@ -320,16 +320,11 @@ def display(azimage, cmap="gray"):
     return
 
 
-def plot_image(azimage, scale_type="useimage", scale_factor="useimage", cmap="gray"):
+def plot_image(azimage, scale_type="sdev", scale_factor=20.0, cmap="gray"):
     """
     Plot an Azcam image buffer nicely.
     scaletype is sdev, minmax, scaled,absolute.
     """
-
-    if scale_type == "useimage":
-        scale_type = azimage.scale_type
-    if scale_factor == "useimage":
-        scale_factor = azimage.scale_factor
 
     if not azimage.valid:
         raise azcam.AzcamError("Image object is not valid")
