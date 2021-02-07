@@ -2,18 +2,12 @@
 General support commands for throughout azcam code.
 """
 
-import fnmatch
-import hashlib
 import importlib
 import os
-import pkgutil
 import shlex
-import shutil
 import sys
-import tarfile
 import tkinter
 import tkinter.filedialog
-import typing
 
 # keyboard checking is optional
 try:
@@ -22,20 +16,6 @@ except Exception:
     pass
 
 import azcam
-
-
-def find_plugins():
-    """
-    Find all azcam plugins.
-    """
-
-    discovered_plugins = {}
-    for finder, name, ispkg in pkgutil.iter_modules():
-        if name.startswith("azcam_"):
-            mod = importlib.import_module(name)
-            discovered_plugins[name] = mod
-
-    return discovered_plugins
 
 
 def curdir(folder=""):
@@ -555,163 +535,6 @@ def find_file_in_sequence(FileRoot, FileNumber=1):
     return filename, sequencenumber
 
 
-def archive(foldername="", filetype="tar"):
-    """
-    Make a tarfile from a folder or file.
-    Type can be "tar", "tar.gz", or "zip".
-    Return tarfile filename.
-    """
-
-    if foldername == "":
-        reply = file_browser("", "folder", "Select folder to archive")
-        if reply == []:
-            raise azcam.AzcamError("no folder or file selected")
-        else:
-            foldername = reply[0]
-
-    if filetype == "tar.gz":
-
-        filename = foldername + ".tar.gz"
-        tar = tarfile.open(filename, "w:gz")
-        tar.add(foldername)
-        tar.close()
-
-    elif filetype == "tar":
-
-        filename = foldername + ".tar"
-        tar = tarfile.open(filename, "w:")
-        tar.add(foldername)
-        tar.close()
-
-    elif filetype == "zip":
-
-        filename = foldername
-        shutil.make_archive(filename, "zip", foldername)
-        filename = filename + ".zip"
-
-    else:
-        raise azcam.AzcamError("unsupported archive file type")
-
-    return filename
-
-
-def checksum(filename):
-    """
-    Make a checksum file in the working folder.
-    Return filename and checksum value.
-    """
-
-    filechecksum = os.path.basename(filename) + ".sha256"
-
-    # make checksum
-    hasher = hashlib.sha256()
-    with open(filename, "rb") as afile:
-        buf = afile.read()
-        hasher.update(buf)
-    hashstring = hasher.hexdigest()
-
-    with open(filechecksum, "w") as f:
-        f.write(hashstring + "\n")
-
-    return filechecksum, hashstring
-
-
-def run_script(script_name):
-    """
-    Runs a script, either with absolute path or assumes it is in the search path.
-    This method is exposed as the *Run* command when using IPython.
-
-    :param str script_name: filename of script to run
-    :return None:
-    """
-
-    # find arguments
-    args = ""
-    cmd = script_name.split(" ")
-    if len(cmd) != 1:
-        script_name = cmd[0]
-        args = " ".join(cmd[1:])
-
-    # find the file
-    # try script_name as-is
-    try:
-        reply = find_file(script_name, 1)
-        script_name = reply
-    except FileNotFoundError:
-        # try ScriptName.py
-        try:
-            reply = find_file(script_name + ".py", 1)
-            script_name = reply
-        except azcam.AzcamError:
-            try:
-                # try ScriptName.pyw
-                reply = find_file(script_name + ".pyw", 1)
-                script_name = reply
-            except azcam.AzcamError as e:
-                raise azcam.AzcamError(f"could not run script {script_name}: {e}")
-
-    # fix the slashes
-    sname = os.path.abspath(script_name)
-
-    # run it with no verbosity
-    s = "run %s %s" % (sname, args)
-    azcam.db.ip.magic(s)
-
-    return
-
-
-def cleanup_files(folder=None):
-    """
-    Cleanup folders after data analysis.
-    """
-
-    if folder is None:
-        folder = azcam.utils.curdir()
-
-    matches = []
-    for root, dirnames, filenames in os.walk(folder):
-        for dirname in fnmatch.filter(dirnames, "analysis*"):
-            matches.append(os.path.join(root, dirname))
-
-    for t in matches:
-        azcam.log(f"Deleting folder {t}")
-        shutil.rmtree(t)
-
-    # remove test and temp FITS files
-    matches = []
-    for root, dirnames, filenames in os.walk(folder):
-        for filename in fnmatch.filter(filenames, "test.fits"):
-            matches.append(os.path.join(root, filename))
-        for filename in fnmatch.filter(filenames, "TempDisplayFile.fits"):
-            matches.append(os.path.join(root, filename))
-
-    for t in matches:
-        azcam.log(f"Deleting file {t}")
-        os.remove(t)
-
-    return
-
-
-def count_files(path=""):
-    """
-    Return the number of files in path (default is current folder).
-    Folders are not included.
-    """
-
-    # move to path if required
-    if path != "":
-        cd = azcam.utils.curdir()
-        azcam.utils.curdir(path)
-
-    nfiles = len([name for name in os.listdir(".") if os.path.isfile(name)])
-
-    # move back
-    if path != "":
-        azcam.utils.curdir(cd)
-
-    return nfiles
-
-
 def make_file_folder(subfolder, increment=True, use_number=False):
     """
     Creates a new subfolder in the current FileFolder.
@@ -798,7 +621,7 @@ def load_scripts(folder: str, package=None) -> None:
         package = ""
     else:
         package = f"{package}."
-        folder = "/azcam/azcam-scripts/azcam_scripts"
+        folder = "/azcam/azcam-scripts/azcam_scripts"  # FIXME
 
     # bring all .py modules with same function name into namespace
     _, _, filenames = next(os.walk(folder))
