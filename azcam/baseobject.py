@@ -28,16 +28,16 @@ class Objects(ObjectHeaderMethods):
             name: descriptive name for the object
         """
 
-        #: id is the name used to reference the object (controller, display, ...)
+        # id is the name used to reference the object (controller, display, ...)
         self.id = obj_id
 
-        #: name is a descriptive name for the object
+        # name is a descriptive name for the object
         self.name = name
 
-        #: True when object is enabled
+        # True when object is enabled
         self.enabled = 1
 
-        #: True when object has been initialized
+        # True when object has been initialized
         self.initialized = 0
 
         # True when object has been reset

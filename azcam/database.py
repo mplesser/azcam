@@ -7,34 +7,34 @@ import typing
 
 class AzcamDatabase(object):
 
-    #: working directory
+    # working directory
     wd = None
 
-    #: verbosity level for messages
+    # verbosity level for messages
     verbosity = 1
 
-    #: abort flag, True if an abort has occurred
+    # abort flag, True if an abort has occurred
     abortflag = 0
 
-    #: folders
+    # folders
     datafolder = ""
 
-    #: last error status
+    # last error status
     errorstatus = ["OK", ""]
 
-    #: list of objects available to CLI namespace
+    # list of objects available to CLI namespace
     cli_cmds = {}
 
-    #: exposure flags, may be used anywhere
+    # exposure flags, may be used anywhere
     exposureflags = {}
 
-    #: header objects
+    # header objects
     headers = {}
 
-    #: header order in image header
+    # header order in image header
     headerorder = []
 
-    #: azcamparameters
+    # azcamparameters
     parameters = {
         # exposure
         "autotitle": "exposure.auto_title",
@@ -109,7 +109,7 @@ class AzcamDatabase(object):
     }
 
     # local database entries
-    #: image parameters
+    # image parameters
     imageparnames = [
         "imageroot",
         "imageincludesequencenumber",
@@ -122,7 +122,7 @@ class AzcamDatabase(object):
         "imagefolder",
     ]
 
-    #: exposure flags
+    # exposure flags
     exposureflags = {
         "NONE": 0,
         "EXPOSING": 1,

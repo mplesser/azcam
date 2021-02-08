@@ -23,7 +23,7 @@ class Controller(Objects):
 
         super().__init__(obj_id, name)
 
-        #: interface type (0 = demo, 4 = PCIe)
+        # interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0
 
         # create the controller Header object

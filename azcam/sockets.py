@@ -33,7 +33,7 @@ class SocketInterface(object):
         self.last_response = ""
         self.last_command = ""
 
-        #: default is no timeout
+        # default is no timeout
         self.timeout = 0
 
         self.busy = False

@@ -24,68 +24,68 @@ class Image(object):
 
         super().__init__()
 
-        #: True when image is valid
+        # True when image is valid
         self.valid = 0
-        #: True when image has been written to disk
+        # True when image has been written to disk
         self.written = 0
-        #: True when image is first ready
+        # True when image is first ready
         self.toggle = 0
-        #: image filename
+        # image filename
         self.filename = ""
-        #: True to allow overwritting image file
+        # True to allow overwritting image file
         self.overwrite = 0
-        #: True when image is a test image (overwrite is automatic)
+        # True when image is a test image (overwrite is automatic)
         self.test_image = 0
         self.make_lockfile = 0
-        #: image file type
+        # image file type
         self.filetype = 0
-        #: title string
+        # title string
         self.title = ""
-        #: image size - columns
+        # image size - columns
         self.size_x = 0
-        #: image szie - rows
+        # image szie - rows
         self.size_y = 0
-        #: numpy image buffer for assembled image [y,x]
+        # numpy image buffer for assembled image [y,x]
         self.buffer = []
         self.in_buffer = []
         self.out_buffer = []
-        #: True if image was read from a file
+        # True if image was read from a file
         self.from_file = 0
-        #: True if image was read from a file and has ITL header
+        # True if image was read from a file and has ITL header
         self.itl_header = 0
-        #: WCS
+        # WCS
         self.write_wcs = 1
-        #: set default values for the scale and offset
+        # set default values for the scale and offset
         self.scales = []
         self.offsets = []
-        #: numpy image data buffer
+        # numpy image data buffer
         self.data = []
-        #: display image
+        # display image
         self.display_image = 0
 
-        #: assembly
+        # assembly
         self.assemble_image = 0
-        #: flag to trim overscan, True means trim
+        # flag to trim overscan, True means trim
         self.trim = 1
-        #: True when image Data has been assembled into Buffer
+        # True when image Data has been assembled into Buffer
         self.assembled = 0
-        #: True if image is trimmed
+        # True if image is trimmed
         self.trimmed = 0
-        #: assembled image size (may be different due to trimming the prescan and overscan)
+        # assembled image size (may be different due to trimming the prescan and overscan)
         self.asmsize = (0, 0)
 
-        #: Data type (numpy array data type after reading) - default 16-bit integer
+        # Data type (numpy array data type after reading) - default 16-bit integer
         self.data_type = 16
-        #: BITPIX value - before accessing data buffer
+        # BITPIX value - before accessing data buffer
         self.bitpix = 16
-        #: BITPIX value - after accessing data buffer
+        # BITPIX value - after accessing data buffer
         self.bitpix2 = 0
-        #: BZERO value
+        # BZERO value
         self.bzero = 0
-        #: BSCALE value
+        # BSCALE value
         self.bscale = 0
 
-        #: data types for fits images
+        # data types for fits images
         self.data_types = {
             8: "uint8",
             16: "uint16",
@@ -95,55 +95,23 @@ class Image(object):
             -64: "float64",
         }
         self.filetypes = {"FITS": 0, "MEF": 1, "BIN": 2, "ASM": 6}
-        #: final data array type
+        # final data array type
         self.array_type = 0
-        #: Allows saving data using other data format than BITPIX2
+        # Allows saving data using other data format than BITPIX2
         self.save_data_format = 16
 
-        #: sub-objects
-        #: Header object for assembled image
-        self.asm_header = Header()
-        #: Header object
+        # sub-objects
         self.header = Header()
         self.focalplane = FocalPlane()
+        self.asm_header = Header()  # Header for assembled image
 
-        #: read a file if specified when instance created
+        # read a file if specified when instance created
         if filename != "":
             self.read_file(filename)
 
-    def set_scaling(self, gains=None, offsets=None):
-        """
-        Set gains and offsets for image assembly.
-        Use None for no scaling.
-        """
-
-        self.num_extensions = self.focalplane.numamps_image
-
-        #: set default values for the scale and offset
-        self.scales = numpy.empty(shape=[self.num_extensions], dtype="f")
-        for ext in range(self.num_extensions):
-            self.scales[ext] = 1.0
-        self.offsets = numpy.empty(shape=[self.num_extensions], dtype="f")
-        for ext in range(self.num_extensions):
-            self.offsets[ext] = 0.0
-
-        if gains is None:
-            gains = len(self.data) * [1.0]
-
-        if offsets is None:
-            offsets = len(self.data) * [0.0]
-
-        # Scales is gain (inverse electrical gain)
-        for chan in range(len(self.data)):
-            self.scales[chan] = gains[chan]
-            self.offsets[chan] = offsets[chan]
-
-        return
-
     def read_file(self, filename):
         """
-        Read image from file.
-        This version only supports FITS/MEF.
+        Read FITS image file (standard or MEF).
         """
 
         filename = azcam.utils.make_image_filename(filename)
@@ -154,8 +122,7 @@ class Image(object):
         self.valid = 0
         self.toggle = 0
 
-        if self.header == 0:
-            self.header = Header(self)
+        self.header = Header(self)  # new header
 
         # read file
         self._read_fits_file(self.filename)
@@ -360,6 +327,39 @@ class Image(object):
 
         return
 
+    def set_scaling(self, gains=None, offsets=None):
+        """
+        Set gains and offsets for image assembly.
+        Use None for no scaling.
+        """
+
+        self.num_extensions = self.focalplane.numamps_image
+
+        # set default values for the scale and offset
+        self.scales = numpy.empty(shape=[self.num_extensions], dtype="f")
+        for ext in range(self.num_extensions):
+            self.scales[ext] = 1.0
+        self.offsets = numpy.empty(shape=[self.num_extensions], dtype="f")
+        for ext in range(self.num_extensions):
+            self.offsets[ext] = 0.0
+
+        if gains is None:
+            gains = len(self.data) * [1.0]
+
+        if offsets is None:
+            offsets = len(self.data) * [0.0]
+
+        # Scales is gain (inverse electrical gain)
+        for chan in range(len(self.data)):
+            self.scales[chan] = gains[chan]
+            self.offsets[chan] = offsets[chan]
+
+        return
+
+    # ******************************************************************************
+    # internals
+    # ******************************************************************************
+
     def _read_fits_file(self, filename):
         """
         Reads an image from a FITS or MEF disk file into the image structure.
@@ -369,23 +369,14 @@ class Image(object):
         self.valid = 0
         self.toggle = 0
 
-        CurrentFile = filename
-
-        # clear all ITL header
-
         # clear focal plane header
         self.focalplane.header.delete_all_items()
 
-        self.hdulist = pyfits.open(CurrentFile)
+        self.hdulist = pyfits.open(filename)
         if len(self.hdulist) == 2:
             NumExt = 0
             first_ext = 0
             last_ext = 1
-            """
-            NumExt = 1
-            first_ext = 1
-            last_ext = 2
-            """
         else:
             n = 0
             for i in range(len(self.hdulist)):
@@ -412,12 +403,6 @@ class Image(object):
         # get main header
         hdr = self.hdulist[0].header
 
-        # Here the BITPIX, BZERO, and BSCALE are still OK
-        # If the BZERO and BSCALE keywords are present the BITPIX value will be
-        # changed to -32 and the BZERO and BSCALE kewwords will be removed
-
-        # get BITPIX, BZERO, and BSCALE values + get the data type after loading the data
-
         if self.num_extensions > 0:
             self.bitpix = self.hdulist[1].header["BITPIX"]
             try:
@@ -427,10 +412,9 @@ class Image(object):
                 self.bzero = 0
                 self.bscale = 0
 
-            # get the data type
             self.data_type = self.hdulist[1].data.dtype
             self.bitpix2 = self.hdulist[1].header["BITPIX"]
-            self.save_data_format = self.data_types[self.bitpix]
+            self.save_data_format = self.bitpix
         else:
             self.bitpix = self.hdulist[0].header["BITPIX"]
 
@@ -443,7 +427,7 @@ class Image(object):
 
             self.data_type = self.hdulist[0].data.dtype
             self.bitpix2 = self.hdulist[0].header["BITPIX"]
-            self.save_data_format = self.data_types[self.bitpix]
+            self.save_data_format = self.bitpix
 
         # get object name
         try:
@@ -455,7 +439,7 @@ class Image(object):
         try:
             ITLHead = hdr["ITL-HEAD"]
             if ITLHead == "OK":
-                self.itl_header = 1  # not actually reading ITLHeader
+                self.itl_header = 1
             else:
                 self.itl_header = 0
         except KeyError:
@@ -472,11 +456,6 @@ class Image(object):
             self.focalplane.col_bin = 1
             self.focalplane.row_bin = 1
 
-        # self.focalplane.num_ser_amps_det = 1   # removed 21may15
-        # self.focalplane.num_par_amps_det = 1
-
-        # only if ITL-HEAD is 1
-
         if self.itl_header == 1:
 
             # create empty arrays for focal plane values
@@ -490,13 +469,10 @@ class Image(object):
             self.focalplane.AmpPosY = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.amppix1 = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.amppix2 = numpy.ndarray(shape=(cntExt), dtype="<u2")
-
-            # new GSZ - for WCS
             self.focalplane.refpix1 = numpy.ndarray(shape=(cntExt), dtype="float32")
             self.focalplane.refpix2 = numpy.ndarray(shape=(cntExt), dtype="float32")
             self.focalplane.gapx = numpy.ndarray(shape=(cntExt), dtype="float32")
             self.focalplane.gapy = numpy.ndarray(shape=(cntExt), dtype="float32")
-
             self.focalplane.extpos_x = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.extpos_y = numpy.ndarray(shape=(cntExt), dtype="<u2")
 
@@ -583,7 +559,7 @@ class Image(object):
         else:
             # multiple extension file
             try:
-                hdr = pyfits.getheader(CurrentFile, 1)
+                hdr = pyfits.getheader(filename, 1)
                 section = hdr["DATASEC"]  # includes overscan, total binned pixels per amp
                 section = section.lstrip("[")
                 section = section.split(":")
@@ -601,12 +577,12 @@ class Image(object):
                 numcols = int(hdr["NAXIS1"])
                 numrows = int(hdr["NAXIS2"])
 
-                hdr = pyfits.getheader(CurrentFile, 0)
+                hdr = pyfits.getheader(filename, 0)
                 self.focalplane.numamps_image = int(hdr["NAMPS"])
             except KeyError:
                 pass
 
-            # overscan and underscan (04Apr2011) taken from the first extension
+            # overscan and underscan taken from the first extension
             try:
                 self.focalplane.numcols_overscan = self.hdulist[1].header["OVRSCAN1"]
                 self.focalplane.numcols_underscan = self.hdulist[1].header["PRESCAN1"]
@@ -640,7 +616,6 @@ class Image(object):
 
             if self.itl_header == 1:
                 for indx in range(1, NumExt + 1):
-                    # read the focal plane keywords
                     try:
                         self.focalplane.amp_cfg[indx - 1] = self.hdulist[indx].header["AMP-CFG"]
                         self.focalplane.det_number[indx - 1] = self.hdulist[indx].header["DET-NUM"]
@@ -699,7 +674,6 @@ class Image(object):
                     except KeyError:
                         pass
 
-            # set amp_config - new 26oct11
             self.focalplane.amp_config = ""
             for x in self.focalplane.amp_cfg:
                 self.focalplane.amp_config += chr(x + 48)
@@ -736,9 +710,6 @@ class Image(object):
 
         self.valid = 1
 
-        # create a single numpy image buffer for a fully assembled image [row,cols] or [y,x])
-        # image buffer can be float32 or float64
-
         if self.array_type == "float64":
             self.buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float64")
 
@@ -752,7 +723,7 @@ class Image(object):
             self.out_buffer = numpy.empty(shape=[self.size_y, self.size_x], dtype="float32")
             self.in_buffer = self.data.astype("float32")
 
-        # set parameters
+        # set flags
         self.from_file = 1
         self.written = 1
 
@@ -764,23 +735,21 @@ class Image(object):
         filetype is 0, 1, or 6 for FITS, MEF, or assembled.
         """
 
-        CurrentFile = filename
         Overwrite = self.overwrite or self.test_image
 
-        # ERROR if folder does not exist
-        fldr = os.path.dirname(CurrentFile)
+        fldr = os.path.dirname(filename)
         fldr = os.path.normpath(fldr)
         if fldr != "" and not os.path.exists(fldr):
-            s = "folder %s does not exist" % fldr
-            return ["ERROR", s]
+            s = f"folder {fldr} does not exist"
+            raise FileNotFoundError(s)
 
         # ERROR if file exists and overwrite flag not set
-        if os.path.exists(CurrentFile):
+        if os.path.exists(filename):
             if Overwrite:
                 loop = 0
                 while loop < 10:
                     try:
-                        os.remove(CurrentFile)
+                        os.remove(filename)
                         break
                     except Exception as details:
                         s = "ERROR deleting previous image file: %s" % repr(details)
@@ -789,22 +758,19 @@ class Image(object):
                 if loop > 10:
                     return ["ERROR", s]
             else:
-                s = "ERROR " + CurrentFile + " exists but Overwrite flag is not set"
+                s = "ERROR " + filename + " exists but Overwrite flag is not set"
                 return ["ERROR", s]
 
         # assemble image as needed
         if self.assemble_image:
             self.assemble()
 
-        # if self.from_file == 0:
         if filetype == self.filetypes["FITS"]:
-            self._write_standardfits_file(CurrentFile)
+            self._write_standardfits_file(filename)
         elif filetype == self.filetypes["MEF"]:
-            self._write_mef_file(CurrentFile)
+            self._write_mef_file(filename)
         elif filetype == self.filetypes["ASM"]:
-            self._write_asm_fits_file(CurrentFile)
-        # else:
-        #    self._save_mef_file(CurrentFile)
+            self._write_asm_fits_file(filename)
 
         return
 
@@ -814,7 +780,6 @@ class Image(object):
         """
 
         # allow case sensitive ext_name
-        # pyfits.setExtensionNameCaseSensitive()
         pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
 
         # make PHU with data
@@ -832,7 +797,7 @@ class Image(object):
 
         # add header cards to PHU
         hdu.header.set("NAXIS", 2, "number of data axes")
-        self._write_fits_header(hdu)
+        self._write_PHU(hdu)
 
         # update focal plane keywords
         self.focalplane.update_header_keywords()
@@ -872,7 +837,7 @@ class Image(object):
         numHDUs = self.focalplane.numamps_image
 
         # add header cards to PHU
-        self._write_fits_header(phdu)
+        self._write_PHU(phdu)
 
         # create a list of hdu's for MEF file
         self.hdulist = pyfits.HDUList([phdu])
@@ -898,7 +863,6 @@ class Image(object):
             hdu.header.set("BUNIT", "ADU", "Physical unit of array values")
 
             # add coord header cards to this extension
-
             self._write_extension_header(ext_number, hdu)
 
             # add WCS header cards to this extension
@@ -933,7 +897,6 @@ class Image(object):
     def _write_asm_fits_file(self, filename):
         """
         Write an assembled single extension FITS image file.
-        04Feb2015 Zareba
         """
 
         # allow case sensitive ext_name
@@ -979,8 +942,7 @@ class Image(object):
 
     def _write_bin_file(self, filename):
         """
-        Write the binary image disk.
-        Datatype is unsigned short: little-endian.
+        Write buffer as binary image to disk.
         """
 
         self.size_x = self.focalplane.numcols_image
@@ -994,26 +956,7 @@ class Image(object):
 
         return
 
-    def _save_mef_file(self, filename):
-        """
-        Save an MEF image file.
-        All keywords are taken from the previously read image file.
-        """
-
-        # allow case sensitive ext_name
-        pyfits.EXTENSION_NAME_CASE_SENSITIVE = True
-
-        # squeeze the data into 16 bit numbers
-        for i in range(self.num_extensions):
-            self.hdulist[i + 1].data = self.hdulist[i + 1].data.astype("uint16").squeeze()
-
-        # write it all to a disk file and close
-        self.hdulist.writeto(filename)
-        self.hdulist.close()
-
-        return
-
-    def _write_fits_header(self, hdu):
+    def _write_PHU(self, hdu):
         """
         Write primary header for FITS or MEF file.
         """
@@ -1023,8 +966,6 @@ class Image(object):
             numHDUs = 0
         hdu.header.set("NEXTEND", numHDUs, "Number of extensions")  # near top of FITS header
         hdu.header.set("BITPIX", 16, "array data type")  # so 8 bits never shows up in PHU
-        # hdu.header.set('BZERO',32768.0)   # these 2 new for ushort in IRAF header 07sep10
-        # hdu.header.set('BSCALE',1.0)
 
         # DETSIZE is whole mosaic size or CCD if single device (unbinned)
         x = (
@@ -1054,10 +995,8 @@ class Image(object):
         hdu.header.set("NCCDS", self.focalplane.num_detectors, "Number of CCDs")
         hdu.header.set("NAMPS", self.focalplane.numamps_image, "Number of amplifiers")
 
-        # all these keywords are written after exposure is done (controller, instrument, telscope, temperature)
+        # keywords are written after exposure is completed
         curpos = len(hdu.header)
-
-        # for item in database 'headers'.keys():
         for item in azcam.db.headerorder:
             item = azcam.db.headers[item]
             cheader = item.read_header()
@@ -1065,7 +1004,6 @@ class Image(object):
                 continue
             # first add the comment lines
             for comm in item.title:
-                # add the comment line
                 hdu.header.add_comment(item.title[comm], after=curpos)
                 curpos = curpos + 1
 
@@ -1091,10 +1029,8 @@ class Image(object):
         numHDUs = 2
 
         hdu.header.set("EXTEND", True, "")
-        hdu.header.set("NEXTEND", numHDUs, "Number of extensions")  # near top of FITS header
-        hdu.header.set("BITPIX", 16, "array data type")  # so 8 bits never shows up in PHU
-        # hdu.header.set('BZERO',32768.0)   # these 2 new for ushort in IRAF header 07sep10
-        # hdu.header.set('BSCALE',1.0)
+        hdu.header.set("NEXTEND", numHDUs, "Number of extensions")
+        hdu.header.set("BITPIX", 16, "array data type")
 
         # DETSIZE is whole mosaic size or CCD if single device (unbinned)
         x = self.asmsize[0]
@@ -1144,7 +1080,6 @@ class Image(object):
         """
         Write the extension header for a FITS/MEF file.
         ext_number starts at 1 (for MEF and FITS).
-        Last change: 02Nov2012 Zareba
         """
 
         # make nice header text
@@ -1194,8 +1129,6 @@ class Image(object):
         self.trimsecy2 = self.datasecy2
 
         # CCDSEC is unbinned
-        # modified: 30Mar2012 GSZ
-
         # new code - unbinned
         self.ccdsecX1 = self.datasecx1
         self.ccdsecX2 = self.focalplane.ampvispix_x
@@ -1207,13 +1140,6 @@ class Image(object):
         self.ccdsecx2 = self.datasecx2
         self.ccdsecy1 = self.datasecy1
         self.ccdsecy2 = self.datasecy2
-
-        # 30Mar2012 GSZ
-        # not used
-        # tx1 = (self.focalplane.first_col-1)/self.focalplane.col_bin + 1
-        # tx2 = self.ccdsecx1-1 + self.focalplane.numviscols_amp
-        # ty1 = (self.focalplane.first_row-1)/self.focalplane.row_bin + 1
-        # ty2 = self.ccdsecy1-1 + self.focalplane.numvisrows_amp
 
         # ORIGSEC is entire device in binned coordinates
         self.origsecx1 = 1
@@ -1247,16 +1173,11 @@ class Image(object):
         hdu.header.set("CCDNAME", s, "CCD name", after=curpos)  # string
         curpos += 1
 
-        # old - All coords below are binned (image not physical pixels) and refer to the
-        #  regions from which the data comes from
-
-        # new - only specified coordinates are binned
-        #  DETECTOR refers to the mosaic
-        #  CCD refers to the individual detector
-        #  AMP refers to data from one amplifier
-
+        # all unbinned
+        # DETECTOR refers to the mosaic
+        # CCD refers to the individual detector
+        # AMP refers to data from one amplifier
         # DETSIZE is entire image size
-        # modified: 24Aug12 GSZ: unbinned, does not depend on binning
 
         xVal = (
             self.focalplane.ampvispix_x
@@ -1272,8 +1193,7 @@ class Image(object):
         hdu.header.set("DETSIZE", s, "Detector size", after=curpos)  # string
         curpos += 1
 
-        # CCDSIZE is the image size on each CCD
-        # modified: 24Aug12 GSZ: unbinned, does not depend on binning
+        # CCDSIZE is the image size on each CCD, unbinned
         xVal = self.focalplane.ampvispix_x * self.focalplane.num_ser_amps_det
         yVal = self.focalplane.ampvispix_y * self.focalplane.num_par_amps_det
         s = "[1:%d,1:%d]" % (xVal, yVal)
@@ -1281,8 +1201,6 @@ class Image(object):
         curpos += 1
 
         # write the extension coordinate keywords
-
-        # BIASSEC is the bias region in this extension
         if self.focalplane.numcols_overscan > 0:
             s = "[%d:%d,%d:%d]" % (
                 self.focalplane.numviscols_amp + 1,
@@ -1318,10 +1236,7 @@ class Image(object):
         hdu.header.set("TRIMSEC", s, "Trim section", after=curpos)  # string
         curpos += 1
 
-        # AMPSEC is the data from one amp (DATASEC for one amp)
-        # AMPSEC does not depend on binning
-        # modified: 30Mar2012 GSZ
-
+        # AMPSEC is the data from one amp (DATASEC for one amp), unbinned
         if ampflip == 0:
             # no flip
             s = "[%d:%d,%d:%d]" % (
@@ -1359,7 +1274,6 @@ class Image(object):
         curpos += 1
 
         # CCDSEC is not the same as DETSEC for a mosaic
-        # modified: 05Sep2012 GSZ
 
         # amplifier's positions for CCDSEC
         if self.focalplane.detpos_x[ext_number - 1] > 1:
@@ -1372,9 +1286,8 @@ class Image(object):
         else:
             Ny = ny
 
-        # DETSEC is the region from the mosaic where this data is from -
-        # this defines how image is displayed and includes flips
-        # modified GSZ: unbinned
+        # DETSEC is the region from the mosaic where this data is from
+        # defines how image is displayed and includes flips
 
         if self.focalplane.numamps_x == 1:
             lastCol = self.focalplane.last_col
@@ -1511,7 +1424,7 @@ class Image(object):
             Y_Val1 = Ny * lastRow
             Y_Val2 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
 
-            # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
+            # CCDSEC1 binned version of CCDSEC
             xCCD1 = ((Nx - 1) * self.focalplane.ampvispix_x - skipX1) / self.focalplane.col_bin + 1
             if xCCD1 == 0:
                 xCCD1 = 1
@@ -1562,14 +1475,7 @@ class Image(object):
         hdu.header.set("CCDSUM", s, "CCD pixel summing", after=curpos)
         curpos += 1
 
-        # Image, Amplifier and Detector coordinates
-        # Last change Zareba: 09Sep2012
-
         if self.focalplane.numamps_image > 1:
-            # detectors with multiple amplifiers and CCDs
-
-            # calculate CCD to image transformation matrix and vectors
-
             self.focalplane.wcs.ltm_1_1[ext_number - 1] = flip_x / float(self.focalplane.col_bin)
             self.focalplane.wcs.ltm_2_2[ext_number - 1] = flip_y / float(self.focalplane.row_bin)
 
@@ -1619,9 +1525,6 @@ class Image(object):
                 after=curpos,
             )
             curpos += 1
-
-            # calculate CCD to amplifier transformation matrix and vectors
-            # depends on physical coordinates
 
             self.focalplane.wcs.atm_1_1[ext_number - 1] = flip_x
             self.focalplane.wcs.atm_2_2[ext_number - 1] = flip_y
@@ -1705,7 +1608,6 @@ class Image(object):
 
             # calculate CCD to detector transformation matrix and vectors
 
-            # 09.07.12 GSZ
             # DTV1 and DTV2 set to 0 combines physical coordinates for all CCDs
             self.focalplane.wcs.dtm_1_1[ext_number - 1] = 1
             self.focalplane.wcs.dtm_2_2[ext_number - 1] = 1
@@ -1804,9 +1706,6 @@ class Image(object):
             )
             curpos += 1
 
-            # calculate CCD to amplifier transformation matrix and vectors
-            # depends on physical coordinates
-
             self.focalplane.wcs.atm_1_1[ext_number - 1] = flip_x
             self.focalplane.wcs.atm_2_2[ext_number - 1] = flip_y
 
@@ -1841,7 +1740,6 @@ class Image(object):
                     Np * self.focalplane.extpos_y[ext_number - 1] + ext
                 )
 
-            # include ATM1_1, ATM2_2, ATV1, and ATV2
             hdu.header.set(
                 "ATM1_1",
                 self.focalplane.wcs.atm_1_1[ext_number - 1],
@@ -1871,16 +1769,13 @@ class Image(object):
             )
             curpos += 1
 
-            # calculate CCD to detector transformation matrix and vectors
-
-            # 09.07.12 GSZ DTV1 and DTV2 are set to 0 since there is only one CCD
+            # DTV1 and DTV2 are set to 0 since there is only one CCD
             self.focalplane.wcs.dtm_1_1[ext_number - 1] = 1
             self.focalplane.wcs.dtm_2_2[ext_number - 1] = 1
 
             self.focalplane.wcs.dtv_1[ext_number - 1] = 0
             self.focalplane.wcs.dtv_2[ext_number - 1] = 0
 
-            # include DTM1_1, DTM2_2, DTV1, and DTV2
             hdu.header.set(
                 "DTM1_1",
                 self.focalplane.wcs.dtm_1_1[ext_number - 1],
@@ -1918,7 +1813,6 @@ class Image(object):
         ext_number starts at 1 (for MEF and FITS).
         """
 
-        # check if WCS is active
         if not self.write_wcs:
             return
 
@@ -1975,8 +1869,6 @@ class Image(object):
 
         curpos += 1
 
-        # ampflip = ord(self.focalplane.amp_config[ext_number-1:ext_number])-48   # from ascii to 0 through 3
-
         ampflip = self.focalplane.amp_cfg[ext_number - 1]  # from to 0 through 3
         if ampflip == 0:  # no flip
             flip_x = 1
@@ -1991,7 +1883,6 @@ class Image(object):
             flip_x = -1
             flip_y = -1
 
-        # calculate reference pixel position - depends on binning
         ref1 = (
             self.focalplane.refpix1 - self.focalplane.amppix1[ext_number - 1]
         ) * self.focalplane.wcs.atm_1_1[ext_number - 1]

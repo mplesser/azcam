@@ -36,7 +36,7 @@ class Exposure(Objects, Filename):
         self.image = Image()
         self.sendimage = SendImage()
 
-        #: exposure flags, may be used anywhere
+        # exposure flags, may be used anywhere
         self.exposureflags = {
             "NONE": 0,
             "EXPOSING": 1,
@@ -56,14 +56,14 @@ class Exposure(Objects, Filename):
 
         self.exposureflags_rev = {v: k for k, v in self.exposureflags.items()}
 
-        #: exposure flag defining state of current exposure
+        # exposure flag defining state of current exposure
         self.exposure_flag = self.exposureflags["NONE"]
 
-        #: current image type, 'zero', 'object', 'dark', 'flat', 'ramp', etc
+        # current image type, 'zero', 'object', 'dark', 'flat', 'ramp', etc
         self.image_type = "zero"
-        #: default imagetypes
+        # default imagetypes
         self.image_types = ["zero", "object", "flat", "dark"]
-        #: dictionary of shutter states for imagetypes {imagetype:ShutterState}
+        # dictionary of shutter states for imagetypes {imagetype:ShutterState}
         self.shutter_dict = {
             "zero": 0,
             "object": 1,
@@ -71,65 +71,65 @@ class Exposure(Objects, Filename):
             "dark": 0,
             "ramp": 1,
         }
-        #: True to flush detector before exposures
+        # True to flush detector before exposures
         self.flush_array = 1
-        #: True to display an image after readout
+        # True to display an image after readout
         self.display_image = 0
 
         self.message = ""  # exposure status message
         self.guide_status = 0
         self.guide_image_copy = 0
 
-        #: TdiMode flag, 0=not in TDI mode, 1=TDI mode
+        # TdiMode flag, 0=not in TDI mode, 1=TDI mode
         self.tdi_mode = 0
-        #: TdiDelay mode
+        # TdiDelay mode
         self.tdi_delay = 5
-        #: ParDelay mode
+        # ParDelay mode
         self.par_delay = 5
 
         # guide mode
         self.guide_mode = 0
 
-        #: True when exposure type is a comparision, to turn on comp lamps
+        # True when exposure type is a comparision, to turn on comp lamps
         self.comp_exposure = 0
-        #: True when in a comparision exposure sequence so lamps stay on
+        # True when in a comparision exposure sequence so lamps stay on
         self.comp_sequence = 0
 
-        #: True when exposure has been aborted
+        # True when exposure has been aborted
         self.aborted = 0
 
-        #: True when exposure is completed, then toggled off
+        # True when exposure is completed, then toggled off
         self.completed = 0
 
-        #: requested exposure time in seconds
+        # requested exposure time in seconds
         self.exposure_time = 1.0
-        #: remaining exposure time in seconds for an exposure in progress
+        # remaining exposure time in seconds for an exposure in progress
         self.exposure_time_remaining = 0.0
-        #: actual elapsed exposure time in seconds of last/current exposure
+        # actual elapsed exposure time in seconds of last/current exposure
         self.exposure_time_actual = 0.0
-        #: exposure time saved for each exposure, used for zeros
+        # exposure time saved for each exposure, used for zeros
         self.exposure_time_saved = 0.0
-        #: total time in seconds an exposure was paused
+        # total time in seconds an exposure was paused
         self.paused_time = 0.0
-        #: starting clock paused time of exposure
+        # starting clock paused time of exposure
         self.paused_time_start = 0.0
-        #: actual elapsed dark time of last/current exposure
+        # actual elapsed dark time of last/current exposure
         self.dark_time = 0.0
-        #: starting clock dark time of exposure
+        # starting clock dark time of exposure
         self.dark_time_start = 0.0
 
-        #: True when in an exposure sequence
+        # True when in an exposure sequence
         self.is_exposure_sequence = 0
-        #: current exposure sequence number
+        # current exposure sequence number
         self.exposure_sequence_number = 1
-        #: total number of exposures in sequence
+        # total number of exposures in sequence
         self.exposure_sequence_total = 1
-        #: delay between sequence exposures in seconds
+        # delay between sequence exposures in seconds
         self.exposure_sequence_delay = 0.0
-        #: sequence flush flag: -1=> use FlushArray, 0==> flush all, 1=> flush only first exposure, 2=> no flush
+        # sequence flush flag: -1=> use FlushArray, 0==> flush all, 1=> flush only first exposure, 2=> no flush
         self.exposure_sequence_flush = 0
 
-        #: remaining number of pixels to read for an exposure in progress
+        # remaining number of pixels to read for an exposure in progress
         self.pixels_remaining = 0
 
         # True to update headers in a thread to save time
@@ -139,23 +139,23 @@ class Exposure(Objects, Filename):
         # True to save image file after exposure
         self.save_file = 1
 
-        #: file types
+        # file types
         self.filetypes = {"FITS": 0, "MEF": 1, "BIN": 2, "ASM": 6}
         self.filetype = self.filetypes["MEF"]
 
-        #: Exposure title
+        # Exposure title
         self.title = ""
 
-        #: True to make image title the same as image type
+        # True to make image title the same as image type
         self.auto_title = 0
 
-        #: deinterlace mode; 1 = generic mode; x = ODI mode
+        # deinterlace mode; 1 = generic mode; x = ODI mode
         self.deinterlace_mode = 1
 
-        #: temporary image files
+        # temporary image files
         self.temp_image_file = ""
 
-        #: filename of current image
+        # filename of current image
         self.last_filename = ""
 
         # write data asynchronously

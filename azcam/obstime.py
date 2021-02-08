@@ -8,17 +8,17 @@ class ObsTime(object):
 
     def __init__(self):
 
-        #: UT
+        # UT
         self.utc = []
-        #: UT date only
+        # UT date only
         self.date = []
-        #: UT time only
+        # UT time only
         self.ut = []
-        #: local time
+        # local time
         self.local_time = []
-        #: local time zone
+        # local time zone
         self.time_zone = []
-        #: time system
+        # time system
         self.time_system = []
 
         return

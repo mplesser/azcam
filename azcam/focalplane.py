@@ -4,20 +4,22 @@ Contains the FocalPlane and WCS classes.
 
 import numpy
 
-import azcam
 from azcam.header import Header, ObjectHeaderMethods
 
 
 class FocalPlane(ObjectHeaderMethods):
     """
-    Defines the FocalPlane class which describes a cameras focalplane and detectors.
-    It is used by the Image() object.
+    The FocalPlane class describes a focalplane layout.
+    It is used only by the Image() object.
     """
 
     def __init__(self):
 
-        # create the focal plane header
+        # header
         self.header = Header("Focalplane")
+
+        # World Coordinate System
+        self.wcs = WCS(self)
 
         # only needed for server side
         self.header.set_header("focalplane")
@@ -26,133 +28,133 @@ class FocalPlane(ObjectHeaderMethods):
         self.coord_object = "telescope"
 
         # fixed values
-        #: for multiple CCD detectors:
-        #: 0 - each CCD has its own physical coordinates
-        #: 1 - combine physical coordinates (physical coordinates
+        # for multiple CCD detectors:
+        # 0 - each CCD has its own physical coordinates
+        # 1 - combine physical coordinates (physical coordinates
         #    are the same as detector coordinates)
         self.split_physical_coords = 0
-        #: number of detectors along X axis
+        # number of detectors along X axis
         self.numdet_x = 1
-        #: number of detectors along Y axis
+        # number of detectors along Y axis
         self.numdet_y = 1
-        #: amplifier readout orientation
+        # amplifier readout orientation
         self.amp_config = "0"
-        #: ampliefier readout orientation - new as an array
+        # ampliefier readout orientation - new as an array
         self.amp_cfg = [0]
-        #: detector number for each detector
+        # detector number for each detector
         self.det_number = [1]
-        #: extension number for each amplifier
+        # extension number for each amplifier
         self.ext_number = [1]
-        #: extension name for each amplifier
+        # extension name for each amplifier
         self.ext_name = ["1"]
-        #: extension number order for each amplifier when creating binary image
+        # extension number order for each amplifier when creating binary image
         self.jpg_ext = [1]
-        #: detector position in x direction in pixels
+        # detector position in x direction in pixels
         self.detpos_x = [1]
-        #: detector position in y direction in pixels
+        # detector position in y direction in pixels
         self.detpos_y = [1]
-        #: amplifier's positions along X axis
+        # amplifier's positions along X axis
         self.extpos_x = [1]
-        #: amplifier's positions along Y axis
+        # amplifier's positions along Y axis
         self.extpos_y = [1]
-        #: amplifier's positions in pixels along X axis
+        # amplifier's positions in pixels along X axis
         self.amppix1 = [1]
-        #: amplifier's positions in pixels along Y axis
+        # amplifier's positions in pixels along Y axis
         self.amppix2 = [1]
-        #: gap between amplifiers in X. value different than 0
+        # gap between amplifiers in X. value different than 0
         #    means that there is a gap on the left side of the amplifier.
-        #: gapx is the sum of all gaps on the left side of the amplifier.
+        # gapx is the sum of all gaps on the left side of the amplifier.
         self.gapx = [0]
-        #: gap between amplifiers in Y. value different than 0 means
+        # gap between amplifiers in Y. value different than 0 means
         #    that there is a gap below of the amplifier.
-        #: gapy is the sum of all gaps below the amplifier.
+        # gapy is the sum of all gaps below the amplifier.
         self.gapy = [0]
 
-        #: number of amplifiers along X axis
+        # number of amplifiers along X axis
         self.numamps_x = 1
-        #: number of amplifiers along Y axis
+        # number of amplifiers along Y axis
         self.numamps_y = 1
-        #: reference (zeropoint) position X (in pixels)
+        # reference (zeropoint) position X (in pixels)
         self.refpix1 = 1
-        #: reference (zeropoint) position Y (in pixels)
+        # reference (zeropoint) position Y (in pixels)
         self.refpix2 = 1
-        #: unbinned number of visible pixels per amplifier along X axis
+        # unbinned number of visible pixels per amplifier along X axis
         self.ampvispix_x = 1
-        #: unbinned number of visible pixels per amplifier along Y axis
+        # unbinned number of visible pixels per amplifier along Y axis
         self.ampvispix_y = 1
 
         # calculated values
-        #: number of pixels in image
+        # number of pixels in image
         self.numpix_image = 0
-        #: number of bytes per image
+        # number of bytes per image
         self.numbytes_image = 0
-        #: number of columns per image
+        # number of columns per image
         self.numcols_image = 0
-        #: number of rows per image
+        # number of rows per image
         self.numrows_image = 0
-        #: number of total amps per image
+        # number of total amps per image
         self.numamps_image = 1
-        #: number of detectors
+        # number of detectors
         self.num_detectors = 1
 
-        #: number of columns per amplifier
+        # number of columns per amplifier
         self.numcols_amp = 1
-        #: number of row per amplifier
+        # number of row per amplifier
         self.numrows_amp = 1
-        #: number of serial amps per detector
+        # number of serial amps per detector
         self.num_ser_amps_det = 1
-        #: number of parallel amps per detector
+        # number of parallel amps per detector
         self.num_par_amps_det = 1
-        #: number of total amps per detector
+        # number of total amps per detector
         self.num_amps_det = 1
 
-        #: first column
+        # first column
         self.first_col = 1
-        #: first row
+        # first row
         self.first_row = 1
-        #: last column
+        # last column
         self.last_col = 1
-        #: last row
+        # last row
         self.last_row = 1
-        #: column binning
+        # column binning
         self.col_bin = 1
-        #: row binning
+        # row binning
         self.row_bin = 1
 
-        #: number of visible columns per amplifier
+        # number of visible columns per amplifier
         self.numviscols_amp = 1
-        #: number of visible rows per amplifier
+        # number of visible rows per amplifier
         self.numvisrows_amp = 1
-        #: number of visible columns per amplifier
+        # number of visible columns per amplifier
         self.numviscols_image = 1
-        #: number of visible rows per amplifier
+        # number of visible rows per amplifier
         self.numvisrows_image = 1
 
-        #: number of colums in overscan
+        # number of colums in overscan
         self.numcols_overscan = 0
-        #: number of rows in overscan
+        # number of rows in overscan
         self.numrows_overscan = 0
-        #: number of colums in underscan
+        # number of colums in underscan
         self.numcols_underscan = 0
-        #: number of rows in underscan
+        # number of rows in underscan
         self.numrows_underscan = 0
-        #: underscan skips
+        # underscan skips
         self.xunderscan = 0
         self.yunderscan = 0
-        #: overscan skips
+        # overscan skips
         self.xoverscan = 0
         self.yoverscan = 0
 
-        #: bias location constants
+        # bias location constants
         self.BL_COLUNDER = 1
         self.BL_COLOVER = 2
         self.BL_ROWUNDER = 3
         self.BL_ROWOVER = 4
         self.bias_location = self.BL_COLOVER
 
-        #: number of pixels per amplifier
+        # number of pixels per amplifier
         self.numpix_amp = 1
-        #: number of pixels per detector
+        # number of pixels per detector
         self.numpix_det = 1
 
         # shifting
@@ -181,11 +183,6 @@ class FocalPlane(ObjectHeaderMethods):
         self.rowoscm = 0
         self.framet = 0
 
-        # self.new_roi = 0
-
-        # World Coordinate System
-        self.wcs = WCS(self)
-
         self.define_keywords()
 
     def update_header_keywords(self):
@@ -194,18 +191,10 @@ class FocalPlane(ObjectHeaderMethods):
         """
 
         self.header.set_keyword("ITL-HEAD", "OK", "ITL Header flag", str)
-        self.header.set_keyword(
-            "NUM-DETX", self.numdet_x, "Number of detectors in X", int
-        )
-        self.header.set_keyword(
-            "NUM-DETY", self.numdet_y, "Number of detectors in Y", int
-        )
-        self.header.set_keyword(
-            "NUM-AMPX", self.numamps_x, "Number of amplifiers in X", int
-        )
-        self.header.set_keyword(
-            "NUM-AMPY", self.numamps_y, "Number of amplifiers in Y", int
-        )
+        self.header.set_keyword("NUM-DETX", self.numdet_x, "Number of detectors in X", int)
+        self.header.set_keyword("NUM-DETY", self.numdet_y, "Number of detectors in Y", int)
+        self.header.set_keyword("NUM-AMPX", self.numamps_x, "Number of amplifiers in X", int)
+        self.header.set_keyword("NUM-AMPY", self.numamps_y, "Number of amplifiers in Y", int)
         self.header.set_keyword("REF-PIX1", self.refpix1, "Reference pixel 1", int)
         self.header.set_keyword("REF-PIX2", self.refpix2, "Reference pixel 2", int)
 
@@ -223,12 +212,8 @@ class FocalPlane(ObjectHeaderMethods):
         self.header.set_keyword("DET-POSY", self.detpos_y[0], "Detector position in Y")
         self.header.set_keyword("Ext-PosX", self.extpos_x[0], "Amplifier position in X")
         self.header.set_keyword("Ext-PosY", self.extpos_y[0], "Amplifier position in Y")
-        self.header.set_keyword(
-            "AMP-PIX1", self.amppix1[0], "Amplifier pixel position in X"
-        )
-        self.header.set_keyword(
-            "AMP-PIX2", self.amppix2[0], "Amplifier pixel position in Y"
-        )
+        self.header.set_keyword("AMP-PIX1", self.amppix1[0], "Amplifier pixel position in X")
+        self.header.set_keyword("AMP-PIX2", self.amppix2[0], "Amplifier pixel position in Y")
 
         return
 
@@ -343,9 +328,7 @@ class FocalPlane(ObjectHeaderMethods):
             self.np_frametransfer,
         ]
 
-    def set_focalplane(
-        self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""
-    ):
+    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""):
         """
         Sets focal plane configuration. Use after set_format() and before set_roi().
         This command replaces SetConfiguration.
@@ -395,18 +378,10 @@ class FocalPlane(ObjectHeaderMethods):
                 self.amp_config += chr(x + 48)
 
         # set the keywords in the main header
-        self.header.set_keyword(
-            "N-DET-X", self.numdet_x, "Number of detectors in X", int
-        )
-        self.header.set_keyword(
-            "N-DET-Y", self.numdet_y, "Number of detectors in Y", int
-        )
-        self.header.set_keyword(
-            "N-AMPS-X", self.numamps_x, "Number of amplifiers in X", int
-        )
-        self.header.set_keyword(
-            "N-AMPS-Y", self.numamps_y, "Number of amplifiers in Y", int
-        )
+        self.header.set_keyword("N-DET-X", self.numdet_x, "Number of detectors in X", int)
+        self.header.set_keyword("N-DET-Y", self.numdet_y, "Number of detectors in Y", int)
+        self.header.set_keyword("N-AMPS-X", self.numamps_x, "Number of amplifiers in X", int)
+        self.header.set_keyword("N-AMPS-Y", self.numamps_y, "Number of amplifiers in Y", int)
 
         # set number of detectors
         self.num_detectors = self.numdet_x * self.numdet_y
@@ -502,17 +477,13 @@ class FocalPlane(ObjectHeaderMethods):
         fr = first_row
         # calculate variables for shifting a single AMPLIFIER
         self.xunderscan = int(min(self.colusct / self.col_bin, self.coluscw))
-        self.xskip = int(
-            min(self.colusct - self.xunderscan * self.col_bin, self.coluscm)
-        )
+        self.xskip = int(min(self.colusct - self.xunderscan * self.col_bin, self.coluscm))
         self.xpreskip = self.colusct - self.xskip - self.xunderscan * self.col_bin
         self.xskip += fc - 1
         self.xdata = (lc - (fc - 1)) / self.col_bin
         self.xdata = max(0, self.xdata)
         self.xdata = int(self.xdata / self.num_ser_amps_det)
-        self.xpostskip = self.coltotal / self.numamps_x - (
-            (fc - 1) + self.xdata * self.col_bin
-        )
+        self.xpostskip = self.coltotal / self.numamps_x - ((fc - 1) + self.xdata * self.col_bin)
         self.xpostskip = int(max(0, self.xpostskip))
         self.xpostskip += self.coloscm
         self.xoverscan = self.coloscw
@@ -521,22 +492,16 @@ class FocalPlane(ObjectHeaderMethods):
         self.numcols_overscan = self.xoverscan
         self.numviscols_amp = self.xdata
         # self.numviscols_image=self.numviscols_amp*self.num_ser_amps_det*self.numamps_x  # bug? 21may15
-        self.numviscols_image = (
-            self.numviscols_amp * self.num_ser_amps_det * self.numdet_x
-        )
+        self.numviscols_image = self.numviscols_amp * self.num_ser_amps_det * self.numdet_x
 
         self.yunderscan = int(min(self.rowusct / self.row_bin, self.rowuscw))
-        self.yskip = int(
-            min(self.rowusct - self.yunderscan * self.row_bin, self.rowuscm)
-        )
+        self.yskip = int(min(self.rowusct - self.yunderscan * self.row_bin, self.rowuscm))
         self.ypreskip = self.rowusct - self.yskip - self.yunderscan * self.row_bin
         self.yskip += self.first_row - 1
         self.ydata = (lr - (fr - 1)) / self.row_bin
         self.ydata = max(0, self.ydata)
         self.ydata = int(self.ydata / self.num_par_amps_det)
-        self.ypostskip = self.rowtotal / self.numamps_y - (
-            (fr - 1) + self.ydata * self.row_bin
-        )
+        self.ypostskip = self.rowtotal / self.numamps_y - ((fr - 1) + self.ydata * self.row_bin)
         self.ypostskip = int(max(0, self.ypostskip))
         self.ypostskip += self.rowoscm
         self.yoverscan = self.rowoscw
@@ -545,9 +510,7 @@ class FocalPlane(ObjectHeaderMethods):
         self.numrows_overscan = self.yoverscan
         self.numvisrows_amp = self.ydata
         # self.numvisrows_image=self.numvisrows_amp*self.num_par_amps_det*self.numamps_y
-        self.numvisrows_image = (
-            self.numvisrows_amp * self.num_par_amps_det * self.numdet_y
-        )
+        self.numvisrows_image = self.numvisrows_amp * self.num_par_amps_det * self.numdet_y
 
         self.numpix_amp = self.numcols_amp * self.numrows_amp
 
@@ -636,18 +599,10 @@ class FocalPlane(ObjectHeaderMethods):
             size_y = self.numvisrows_amp * self.row_bin
 
             self.amppix1[indx] = (
-                (self.extpos_x[indx] - 1) * size_x
-                + flip_x * size_x
-                + self.gapx[indx]
-                + 1
-                - flip_x
+                (self.extpos_x[indx] - 1) * size_x + flip_x * size_x + self.gapx[indx] + 1 - flip_x
             )
             self.amppix2[indx] = (
-                (self.extpos_y[indx] - 1) * size_y
-                + flip_y * size_y
-                + self.gapy[indx]
-                + 1
-                - flip_y
+                (self.extpos_y[indx] - 1) * size_y + flip_y * size_y + self.gapy[indx] + 1 - flip_y
             )
 
             indx += 1
@@ -755,70 +710,70 @@ class WCS(object):
         # ref to parent focalplane object
         self.fpobj = FPobject
 
-        #: Equinox of WCS - default value 2000
+        # Equinox of WCS - default value 2000
         self.equinox = 2000
-        #: WCS dimensionality - default value 2
+        # WCS dimensionality - default value 2
         self.wcs_dim = 2
-        #: True if CD matrix is used, False if rot_deg and scale1,2 are used
+        # True if CD matrix is used, False if rot_deg and scale1,2 are used
         self.cd_matrix = 0
-        #: coordinate type - x axis
+        # coordinate type - x axis
         self.ctype1 = "RA---TAN"
-        #: coordinate type - y axis
+        # coordinate type - y axis
         self.ctype2 = "DEC--TAN"
 
-        #: RA position of image
+        # RA position of image
         self.ra_deg = ""
-        #: DEC position of image
+        # DEC position of image
         self.dec_deg = ""
-        #: default RA position
+        # default RA position
         self.def_ra = "00:00:00.00"
-        #: default DEC position
+        # default DEC position
         self.def_dec = "00:00:00.00"
 
-        #: True if CD matrix is used, False if rot_deg and scale1, 2 are used
+        # True if CD matrix is used, False if rot_deg and scale1, 2 are used
         self.cd_matrix = 0
-        #: translation matrix: CD1_1 - number of pixel per detector pixel
+        # translation matrix: CD1_1 - number of pixel per detector pixel
         self.cd_1_1 = 1
-        #: translation matrix: CD1_2 - rotation
+        # translation matrix: CD1_2 - rotation
         self.cd_1_2 = 1
-        #: translation matrix: CD2_1 - rotation
+        # translation matrix: CD2_1 - rotation
         self.cd_2_1 = 1
-        #: translation matrix: CD2_2 - number of pixel per detector pixel
+        # translation matrix: CD2_2 - number of pixel per detector pixel
         self.cd_2_2 = 1
 
-        #: rotation in deg
+        # rotation in deg
         self.rot_deg = [0]
 
-        #: scale - x axis - deg/pixel
+        # scale - x axis - deg/pixel
         self.scale1 = [1.0 / 3600.0]
-        #: scale - y axis - deg/pixel
+        # scale - y axis - deg/pixel
         self.scale2 = [1.0 / 3600.0]
 
-        #: CCD to amplifier transformation matrix x
+        # CCD to amplifier transformation matrix x
         self.atm_1_1 = [1]
-        #: CCD to amplifier transformation matrix y
+        # CCD to amplifier transformation matrix y
         self.atm_2_2 = [1]
-        #: CCD to amplifier transformation vector x
+        # CCD to amplifier transformation vector x
         self.atv1 = [1]
-        #: CCD to amplifier transformation vector y
+        # CCD to amplifier transformation vector y
         self.atv2 = [1]
 
-        #: CCD to image transformation matrix x
+        # CCD to image transformation matrix x
         self.ltm_1_1 = [1]
-        #: CCD to image transformation matrix y
+        # CCD to image transformation matrix y
         self.ltm_2_2 = [1]
-        #: CCD to image transformation vector x
+        # CCD to image transformation vector x
         self.ltv_1 = [1]
-        #: CCD to image transformation vector y
+        # CCD to image transformation vector y
         self.ltv_2 = [1]
 
-        #: CCD to detector transformation matrix x
+        # CCD to detector transformation matrix x
         self.dtm_1_1 = [1]
-        #: CCD to detector transformation matrix y
+        # CCD to detector transformation matrix y
         self.dtm_2_2 = [1]
-        #: CCD to detector transformation vector x
+        # CCD to detector transformation vector x
         self.dtv_1 = [1]
-        #: CCD to detector transformation vector x
+        # CCD to detector transformation vector x
         self.dtv_2 = [1]
 
     def initialize(self):

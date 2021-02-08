@@ -20,29 +20,29 @@ class TempCon(Objects):
 
         self.id
 
-        #: control or set temperature at which to regulate
+        # control or set temperature at which to regulate
         self.control_temperature = 0.0
 
-        #: control temperature number (which temp is regulated)
+        # control temperature number (which temp is regulated)
         self.control_temperature_number = 0
 
-        #: True to correct temperature offset and scale for each temperature
-        #: Scaling is **new = old * scale + offset**
+        # True to correct temperature offset and scale for each temperature
+        # Scaling is **new = old * scale + offset**
         self.temperature_correction = 0
-        #: temperature offset corrections for each temperature
+        # temperature offset corrections for each temperature
         self.temperature_offsets = [0.0]
-        #: temperature scale corrections
+        # temperature scale corrections
         self.temperature_scales = [1.0]
-        #: calibration flags for each temperature
+        # calibration flags for each temperature
         self.temperature_cals = [3]
 
-        #: number of temperature sensors
+        # number of temperature sensors
         self.number_sensors = 4
 
-        #: log temperatures
+        # log temperatures
         self.log_temps = False
 
-        #: value returned when temperature read is bad
+        # value returned when temperature read is bad
         self.bad_temp_value = -999.9
 
         # create the temp control Header object
@@ -107,9 +107,7 @@ class TempCon(Objects):
 
         return
 
-    def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
-    ) -> None:
+    def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
         Args:
@@ -145,9 +143,7 @@ class TempCon(Objects):
         temps = [self.get_temperature(i) for i in range(self.number_sensors)]
 
         if self.log_temps:
-            azcam.log(
-                f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0
-            )
+            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
 
         return temps
 
