@@ -15,7 +15,6 @@ class SendImage(object):
         self.timeout = 10.0
         self.overwrite = 0
         self.test_image = 0
-
         self.remote_imageserver_host = ""
         self.remote_imageserver_port = 0
         self.remote_imageserver_filename = ""
@@ -23,10 +22,58 @@ class SendImage(object):
         self.filetype = 0
         self.size_x = 0
         self.size_y = 0
+        self.remote_imageserver_type = "dataserver"  # default for remote image server
 
-    def azcam_imageserver(
-        self, filename, remote_imageserver_host, remote_imageserver_port
+    def set_remote_imageserver(
+        self,
+        remote_imageserver_host="",
+        remote_imageserver_port=0,
+        remote_imageserver_type="dataserver",
+        remote_imageserver_filename="image",
     ):
+        """
+        Set parameters so image files are sent to a remote image server.
+        """
+
+        self.remote_imageserver_host = remote_imageserver_host
+        self.remote_imageserver_port = int(remote_imageserver_port)
+        self.remote_imageserver_type = remote_imageserver_type
+        self.remote_imageserver_filename = remote_imageserver_filename
+
+        return
+
+    def get_remote_imageserver(self):
+        """
+        Get remote image server parameters.
+        Returns:
+            remote_imageserver_host:
+            remote_imageserver_port:
+            remote_imageserver_type:
+            remote_imageserver_filename:
+        """
+
+        return [
+            self.remote_imageserver_host,
+            self.remote_imageserver_port,
+            self.remote_imageserver_type,
+            self.remote_imageserver_filename,
+        ]
+
+    def send_image(self, filename):
+        """
+        Send image to remote image server.
+        """
+
+        if self.remote_imageserver_type == "azcam":
+            self.azcam_imageserver(filename)
+        elif self.remote_imageserver_type == "lbtguider":
+            self.lbtguider_imageserver(filename)
+        elif self.remote_imageserver_type == "dataserver":
+            self.dataserver(filename)
+        else:
+            raise azcam.AzcamError("Unknown remote image server type")
+
+    def azcam_imageserver(self, filename):
         """
         Send image to azcam image server.
         """
@@ -40,14 +87,10 @@ class SendImage(object):
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
         dataserver_socket.settimeout(self.timeout)
-        dataserver_socket.connect(
-            (remote_imageserver_host, int(remote_imageserver_port))
-        )
+        dataserver_socket.connect((self.remote_imageserver_host, int(self.remote_imageserver_port)))
 
-        if self.remote_imageserver_filename != "":
-            remotefile = self.remote_imageserver_filename
-        else:
-            remotefile = filename
+        remotefile = self.remote_imageserver_filename
+
         if self.overwrite or self.test_image:
             remotefile = "!" + remotefile
 
@@ -89,9 +132,7 @@ class SendImage(object):
         reply = dataserver_socket.send(buff)
 
         if reply != len(buff):
-            raise azcam.AzcamError(
-                "Did not send entire image file data to remote image server"
-            )
+            raise azcam.AzcamError("Did not send entire image file data to remote image server")
 
         # get 16 char ASCII final return status from image server
         reply = dataserver_socket.recv(16).decode()
@@ -111,7 +152,7 @@ class SendImage(object):
 
         return
 
-    def dataserver(self, filename, remote_imageserver_host, remote_imageserver_port):
+    def dataserver(self, filename):
         """
         Send image to dataserver.
         """
@@ -127,22 +168,13 @@ class SendImage(object):
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
         dataserver_socket.settimeout(self.timeout)
-        dataserver_socket.connect(
-            (remote_imageserver_host, int(remote_imageserver_port))
-        )
+        dataserver_socket.connect((self.remote_imageserver_host, int(self.remote_imageserver_port)))
 
-        if self.remote_imageserver_filename != "":
-            remotefile = self.remote_imageserver_filename
-            if self.overwrite or self.test_image:
-                remotefile = "!" + remotefile
-        else:
-            remotefile = filename
-            if self.overwrite or self.test_image:
-                remotefile = "!" + remotefile
+        remotefile = self.remote_imageserver_filename
+        if self.overwrite or self.test_image:
+            remotefile = "!" + remotefile
 
-        azcam.log(
-            "Sending image to %s as %s" % (self.remote_imageserver_host, remotefile)
-        )
+        azcam.log("Sending image to %s as %s" % (self.remote_imageserver_host, remotefile))
 
         # send header
         # file types: 0 FITS, 1 MEF, 2 binary
@@ -170,17 +202,11 @@ class SendImage(object):
         # check header return status codes (updated 14jul11)
         if retstat != 0:
             if retstat == 1:  # overwrite existing name wihtout flag
-                raise azcam.AzcamError(
-                    "Remote image server could not create image filename"
-                )
+                raise azcam.AzcamError("Remote image server could not create image filename")
             elif retstat == 2:  # not enough space
-                raise azcam.AzcamError(
-                    "Remote image server does not have enough disk space"
-                )
+                raise azcam.AzcamError("Remote image server does not have enough disk space")
             elif retstat == 3:  #
-                raise azcam.AzcamError(
-                    "Remote image server reports folder does not exist"
-                )
+                raise azcam.AzcamError("Remote image server reports folder does not exist")
             else:
                 raise azcam.AzcamError("Unknown error from remote image server")
 
@@ -244,7 +270,7 @@ class SendImage(object):
 
         return
 
-    def lbtguider(self, filename, GuideHost, GuidePort):
+    def lbtguider_imageserver(self, filename):
         """
         Send image to an LBT guider image server.
         """
@@ -257,25 +283,25 @@ class SendImage(object):
             buff = gfile.read()
 
         # open socket to LBT image server
-        GuideSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        GuideSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
+        guidesocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        guidesocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
 
         try:
-            GuideSocket.connect((GuideHost, GuidePort))
+            guidesocket.connect((self.remote_imageserver_host, self.remote_imageserver_port))
         except Exception as message:
-            GuideSocket.close()
+            guidesocket.close()
             return ["ERROR", "LBT guider ImageServer not opened: %s" % message]
 
         # send filesize in bytes, \r\n terminated
         sockBuf = "%d\r\n" % lSize
-        if GuideSocket.send(str.encode(sockBuf)) != len(sockBuf):
+        if guidesocket.send(str.encode(sockBuf)) != len(sockBuf):
             return ["ERROR", "GuideSocket send error"]
 
         # send file data
-        if GuideSocket.send(str.encode(buff)) != len(buff):
+        if guidesocket.send(str.encode(buff)) != len(buff):
             return ["ERROR", "Could not send all image file data to LBT ImageServer"]
 
         # close socket
-        GuideSocket.close()
+        guidesocket.close()
 
         return

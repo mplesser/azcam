@@ -191,10 +191,7 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        if (
-            self.default_pardict_name == "azcamconsole"
-            and not azcam.api.server.connected
-        ):
+        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
             azcam.AzcamWarning("cannot get_par, not connected to server")
             return
 
@@ -237,7 +234,7 @@ class Config(object):
             value = azcam.utils.curdir()
             return value
         elif parameter == "remoteimageserverflag":
-            value = azcam.api.exposure.image.remote_imageserver_flag
+            value = azcam.api.exposure.remote_imageserver_flag
             return value
 
         # parameter must be in parameters
@@ -266,7 +263,7 @@ class Config(object):
                     obj = getattr(obj, tokens[i])
                 except AttributeError:
                     pass
-                    #azcam.AzcamWarning(f"Could not get parameter: {parameter}")
+                    # azcam.AzcamWarning(f"Could not get parameter: {parameter}")
             value = obj  # last time is value
 
         return value
@@ -277,10 +274,7 @@ class Config(object):
         Returns None on error.
         """
 
-        if (
-            self.default_pardict_name == "azcamconsole"
-            and not azcam.api.server.connected
-        ):
+        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
             azcam.AzcamWarning("cannot set_par, not connected to server")
             return
 
@@ -340,7 +334,7 @@ class Config(object):
                 setattr(obj, tokens[-1], value)
             except AttributeError:
                 pass
-                #azcam.AzcamWarning(f"Could not set parameter: {parameter}")
+                # azcam.AzcamWarning(f"Could not set parameter: {parameter}")
 
         return None
 

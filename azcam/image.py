@@ -13,7 +13,6 @@ import azcam
 from azcam.focalplane import FocalPlane
 from azcam.fits import pyfits
 from azcam.header import Header
-from azcam.image_send import SendImage
 
 
 class Image(object):
@@ -61,31 +60,20 @@ class Image(object):
         self.offsets = []
         #: numpy image data buffer
         self.data = []
-        #: flag to trim overscan, True means trim
-        self.trim = 1
+        #: display image
+        self.display_image = 0
+
         #: assembly
         self.assemble_image = 0
+        #: flag to trim overscan, True means trim
+        self.trim = 1
         #: True when image Data has been assembled into Buffer
         self.assembled = 0
         #: True if image is trimmed
         self.trimmed = 0
         #: assembled image size (may be different due to trimming the prescan and overscan)
         self.asmsize = (0, 0)
-        #: Assemble mode: 0 - copy data; 1 - normal multi-amp, 2
-        self.asmmode = 1
-        #: True when Histogram contains valid data
-        self.hist_valid = 0
-        self.hist_y = []
-        self.hist_x = []
-        #: send image
-        self.sendimage = SendImage()
-        self.remote_imageserver_host = ""
-        self.remote_imageserver_port = 0
-        self.remote_imageserver_flag = 0
-        self.remote_imageserver_filename = ""
-        self.display_image = 0
-        #: lbtguider, dataserver, azcam
-        self.server_type = "dataserver"
+
         #: Data type (numpy array data type after reading) - default 16-bit integer
         self.data_type = 16
         #: BITPIX value - before accessing data buffer
@@ -96,6 +84,7 @@ class Image(object):
         self.bzero = 0
         #: BSCALE value
         self.bscale = 0
+
         #: data types for fits images
         self.data_types = {
             8: "uint8",
@@ -111,6 +100,7 @@ class Image(object):
         #: Allows saving data using other data format than BITPIX2
         self.save_data_format = 16
 
+        #: sub-objects
         #: Header object for assembled image
         self.asm_header = Header()
         #: Header object
@@ -209,41 +199,6 @@ class Image(object):
                 pass
 
         return
-
-    def set_remote_imageserver(
-        self,
-        remote_imageserver_host="",
-        remote_imageserver_port=0,
-        remote_imageserver_filename="image",
-    ):
-        """
-        Set parameters so image files are sent to a remote image server.
-        If no host is provided then reset flag to local image file.
-        """
-
-        self.remote_imageserver_flag = 0 if remote_imageserver_port == 0 else 1
-        self.remote_imageserver_host = remote_imageserver_host
-        self.remote_imageserver_port = int(remote_imageserver_port)
-        self.remote_imageserver_filename = remote_imageserver_filename
-
-        return
-
-    def get_remote_imageserver(self):
-        """
-        Get remote image server parameters.
-        Returns:
-            remote_imageserver_flag:
-            remote_imageserver_host:
-            remote_imageserver_port:
-            remote_imageserver_filename:
-        """
-
-        return [
-            self.remote_imageserver_flag,
-            self.remote_imageserver_host,
-            self.remote_imageserver_port,
-            self.remote_imageserver_filename,
-        ]
 
     # ******************************************************************************
     # assemble
@@ -402,46 +357,6 @@ class Image(object):
         # set isTrimmed
         if Trim == 1:
             self.trimmed = 1
-
-        return
-
-    def send_image(self, local_filename):
-        """
-        Send local_filename image to a remote image server.
-        This method may run in an async thread.
-        Server types (self.server_type) are: azcam, lbtguider, and dataserver.
-        """
-
-        self.sendimage.remote_imageserver_filename = self.remote_imageserver_filename
-        self.sendimage.overwrite = self.overwrite
-        self.sendimage.test_image = self.test_image
-        self.sendimage.remote_imageserver_host = self.remote_imageserver_host
-        self.sendimage.remote_imageserver_port = self.remote_imageserver_port
-        self.sendimage.display_image = self.display_image
-        self.sendimage.filetype = self.filetype
-        self.sendimage.size_x = self.size_x
-        self.sendimage.size_y = self.size_y
-
-        if self.server_type == "azcam":
-            self.sendimage.azcam_imageserver(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
-            )
-        elif self.server_type == "lbtguider":
-            self.sendimage.lbtguider(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
-            )
-        elif self.server_type == "dataserver":
-            self.sendimage.dataserver(
-                local_filename,
-                self.remote_imageserver_host,
-                self.remote_imageserver_port,
-            )
-        else:
-            raise azcam.AzcamError("Unknown remote image server type")
 
         return
 
