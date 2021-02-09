@@ -233,9 +233,6 @@ class Config(object):
         elif parameter == "wd":
             value = azcam.utils.curdir()
             return value
-        elif parameter == "remoteimageserverflag":
-            value = azcam.api.exposure.remote_imageserver_flag
-            return value
 
         # parameter must be in parameters
         try:

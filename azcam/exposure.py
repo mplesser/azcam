@@ -13,7 +13,6 @@ import azcam
 from azcam.baseobject import Objects
 from azcam.header import Header
 from azcam.image import Image
-from azcam.image_send import SendImage
 from azcam.filename import Filename
 from azcam.obstime import ObsTime
 
@@ -34,7 +33,6 @@ class Exposure(Objects, Filename):
 
         self.obstime = ObsTime()
         self.image = Image()
-        self.sendimage = SendImage()
 
         # exposure flags, may be used anywhere
         self.exposureflags = {
@@ -74,7 +72,9 @@ class Exposure(Objects, Filename):
         # True to flush detector before exposures
         self.flush_array = 1
         # True to display an image after readout
-        self.display_image = 0
+        self.display_image = 1
+        # True to send image to remote image server after readout
+        self.send_image = 0
 
         self.message = ""  # exposure status message
         self.guide_status = 0
@@ -1586,63 +1586,3 @@ class Exposure(Objects, Filename):
         """
 
         return azcam.db.headers["system"].read_file(filename)
-
-    # sendimage
-    def set_remote_imageserver(
-        self,
-        remote_imageserver_host="",
-        remote_imageserver_port=0,
-        remote_imageserver_type="dataserver",
-        remote_imageserver_filename="image",
-    ):
-        """
-        Set parameters so image files are sent to a remote image server.
-        If no port is provided then disbale remote send.
-        """
-
-        self.sendimage.set_remote_imageserver(
-            remote_imageserver_host,
-            remote_imageserver_port,
-            remote_imageserver_type,
-            remote_imageserver_filename,
-        )
-
-        self.remote_imageserver_flag = 0 if remote_imageserver_port == 0 else 1
-
-        return
-
-    def get_remote_imageserver(self):
-        """
-        Get remote image server parameters.
-        Returns:
-            remote_imageserver_flag:
-            remote_imageserver_host:
-            remote_imageserver_port:
-            remote_imageserver_type:
-            remote_imageserver_filename:
-        """
-
-        return [
-            self.remote_imageserver_flag,
-            self.sendimage.remote_imageserver_host,
-            self.sendimage.remote_imageserver_port,
-            self.sendimage.remote_imageserver_type,
-            self.sendimage.remote_imageserver_filename,
-        ]
-
-    def send_image(self, local_filename):
-        """
-        Send local_filename image to a remote image server.
-        This method may run in an async thread.
-        """
-
-        self.sendimage.overwrite = self.overwrite
-        self.sendimage.test_image = self.test_image
-        self.sendimage.display_image = self.display_image
-        self.sendimage.filetype = self.filetype
-        self.sendimage.size_x = self.size_x
-        self.sendimage.size_y = self.size_y
-
-        self.sendimage.send_image(local_filename)
-
-        return

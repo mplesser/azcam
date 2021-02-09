@@ -47,6 +47,7 @@ class AzcamDatabase(object):
         "exposureupdatingheader": "exposure.updating_header",
         "isexposuresequence": "exposure.is_exposure_sequence",
         "displayimage": "exposure.display_image",
+        "sendimage": "exposure.send_image",
         "savefile": "exposure.save_file",
         "flusharray": "exposure.flush_array",
         "tdidelay": "exposure.tdi_delay",
