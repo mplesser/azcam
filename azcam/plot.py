@@ -1,14 +1,16 @@
+"""
+Plotting support. Use pylab.ion() for interactions after this import.
+"""
+
 import time
 import warnings
 
-import matplotlib
 import numpy
+import matplotlib
 from matplotlib import pylab
 from matplotlib import pyplot as plt
 
 import azcam
-
-# global data
 
 plotdata = {
     "KeyPressed": "",
@@ -20,9 +22,6 @@ plotdata = {
     "EnteredFigure": 0,
     "EnteredAxes": 0,
 }
-
-# allow for interactive plots after this import
-# pylab.ion()
 
 style_x = [
     "bx",
@@ -354,9 +353,6 @@ def plot_image(azimage, scale_type="sdev", scale_factor=20.0, cmap="gray"):
     plt.imshow(azimage.buffer, cmap=cmap, vmin=z1, vmax=z2, origin="lower")
 
     return
-
-
-# plot windows
 
 
 def move_window(figure_number=1, x=None, y=None):
