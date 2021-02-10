@@ -171,7 +171,7 @@ class Image(object):
     # assemble
     # ******************************************************************************
 
-    def assemble(self, Trim=-1):
+    def assemble(self, trim=-1):
         """
         Assemble .data into .buffer.
         """
@@ -196,7 +196,7 @@ class Image(object):
         Offsets = self.offsets
         Scales = self.scales
 
-        if Trim == 1:
+        if trim == 1:
             prescan1 = self.focalplane.numcols_underscan
             overscan1 = self.focalplane.numcols_overscan
             prescan2 = self.focalplane.numrows_underscan
@@ -322,7 +322,7 @@ class Image(object):
         self.assembled = 1
 
         # set isTrimmed
-        if Trim == 1:
+        if trim == 1:
             self.trimmed = 1
 
         return

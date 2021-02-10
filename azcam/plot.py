@@ -325,9 +325,6 @@ def plot_image(azimage, scale_type="sdev", scale_factor=20.0, cmap="gray"):
     scaletype is sdev, minmax, scaled,absolute.
     """
 
-    if not azimage.valid:
-        raise azcam.AzcamError("Image object is not valid")
-
     if not azimage.assembled:
         azimage.assemble(1)
 
