@@ -3,6 +3,7 @@ General support commands for throughout azcam code.
 """
 
 import importlib
+import imp
 import os
 import shlex
 import sys
@@ -608,20 +609,19 @@ def restore_imagepars(imagepars, folder=""):
     return
 
 
-def load_scripts(folder: str, package=None) -> None:
+def load_scripts(folder: str, package: bool = False) -> None:
     """
     Load all scripts from folder into azcam.db.cli_cmds
+    If package is True then folder is an installed package name.
     """
 
-    folder = fix_path(folder)
+    if package:
+        rootpackage = folder
+        _, folder, _ = imp.find_module(folder)
+    else:
+        folder = fix_path(folder)
     if folder not in sys.path:
         sys.path.append(folder)
-
-    if package is None:
-        package = ""
-    else:
-        package = f"{package}."
-        folder = "/azcam/azcam-scripts/azcam_scripts"  # FIXME
 
     # bring all .py modules with same function name into namespace
     _, _, filenames = next(os.walk(folder))
@@ -634,7 +634,10 @@ def load_scripts(folder: str, package=None) -> None:
 
     for pfile in pyfiles:
         try:
-            mod = importlib.import_module(f"{package}{pfile}")
+            if package:
+                mod = importlib.import_module(f"{rootpackage}.{pfile}")
+            else:
+                mod = importlib.import_module(f"{pfile}")
             func = getattr(mod, pfile)
             azcam.db.cli_cmds[pfile] = func
         except Exception as e:
