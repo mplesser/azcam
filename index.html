@@ -517,6 +517,7 @@
 <li><a href="https://github.com/mplesser/azcam-archon">azcam-archon</a> to add support for STA Archon camera controllers</li>
 <li><a href="https://github.com/mplesser/azcam-ds9">azcam-ds9</a> to add support for the SAO ds9 image display</li>
 <li><a href="https://github.com/mplesser/azcam-mag">azcam-mag</a> to add support for Magellan/ITL camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-imageserver">azcam-imageserver</a> to add support for remote image servers</li>
 <li><a href="https://github.com/mplesser/azcam-cryocon">azcam-cryocon</a> to add support for CryoCon temperature controllers</li>
 <li><a href="https://github.com/mplesser/azcam-qhy174">azcam-qhy174</a> to add support for QHY174 CMOS cameras</li>
 <li><a href="https://github.com/mplesser/azcam-testers">azcam-testers</a> to add support for image sensor testing such as QE, CTE, PRNU, etc.</li>
@@ -531,7 +532,7 @@
 <li><a href="https://github.com/mplesser/azcam-vatt">azcam-vatt</a> for the VATT vattspec and vatt4k cameras</li>
 </ul>
 <h2 id="applications">Applications</h2>
-<p>AzCam <em>applications</em> or <em>apps</em> are stand-alone programs which utilize AzCam functionality.  Ofthen they are clients which connect to AzCam server applications. There are multiple clients written in a variety of languages. Examples include:</p>
+<p>AzCam <em>applications</em> are stand-alone programs which utilize AzCam functionality.  Ofthen they are clients which connect to AzCam server applications. There are multiple clients written in a variety of languages. Examples include:</p>
 <ul>
 <li><a href="https://github.com/mplesser/azcam-tool">azcam-tool</a>, a GUI using National Instruments LabVIEW</li>
 <li><a href="https://github.com/mplesser/azcam-status">azcam-status</a>, a web-based status page</li>
@@ -546,32 +547,31 @@
   2. Console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.
   3. Applications, as descrived above. Client apps communicate with <em>azcamserver</em> over sockets or the web API.</p>
 <h2 id="operation">Operation</h2>
-<p>While there are multiple pythonic ways to access the object instances in code, it is common to use the <code>api</code> instance to access most objects, available as <code>azcam.api</code>. On there server side the <code>controller</code> object, for example, can be accessed as <code>api.controller</code>.  On the client side, the <code>api</code> object maps to the standard objects but with only a reduced set of exposed methods.  So while <code>api.exposure.reset</code> may available to server and client code, <code>api.exposure.set_video_gain</code> may only be available on the sever. There is also a local database for temporary storage maintained in the <em>azcam.db</em> object.</p>
+<p>While there are multiple pythonic ways to access the object instances in code, they are always accessible from the <em>database</em> object <code>db</code>. For example, when defined, the <code>controller</code> object can be accessed as <code>db.controller</code> and the <code>qe</code> object can be accessed as <code>db.qe</code>.  In most environments these objects are mapped directly into the command line namespace, so in practice commands are executed directly as <code>object.method</code>, e.g. <code>exposure.expose(2.5, "dark", "dark image")</code>. </p>
+<p>On the python console client side, the <code>api</code> object allows communication from the client to an <em>azcamserver</em> application over the socket-based command server interface.  The API class typically exposed allows only a limited set of methods to the standard server-side objects. So while <code>api.exposure.reset</code> may be available the command <code>api.exposure.set_video_gain</code> may not be.  These less commonly used commands are still accessible, but only with lower level code such as <code>api.server.rcommand("controller.set_video_gain 2")</code>.</p>
 <p>As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the <em>azcam_itl</em> environment has been added to the python search path.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">server_itl</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
+<span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 
 <span class="n">OR</span>
 
 <span class="c1"># client-side (azcamconsole)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">console_itl</span>
-
-<span class="n">And</span> <span class="n">then</span><span class="p">:</span>
-
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
 <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Example configuration code can be found in <code>azcam.example_server_config</code> and <code>azcam.example_console_config</code>.</p>
-<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:</p>
+<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
 <p>And then the code above could be executed as:
 <div class="highlight"><pre><span></span><code><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
 <span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 </code></pre></div></p>
-<p>This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. </p>
 <h2 id="help">Help</h2>
 <p>AzCam is often used with IPython.  Help is then avaialble by typing <code>?xxx</code>, <code>xxx?</code>, <code>xxx??</code> or <code>help(xxx)</code> where <code>xxx</code> is an AzCam class, command, or object instance.</p>
 <p>Useful links include:

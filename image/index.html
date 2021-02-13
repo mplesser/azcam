@@ -319,29 +319,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.image.Image.get_remote_imageserver" class="md-nav__link">
-    get_remote_imageserver()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#azcam.image.Image.read_file" class="md-nav__link">
     read_file()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image.Image.send_image" class="md-nav__link">
-    send_image()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image.Image.set_remote_imageserver" class="md-nav__link">
-    set_remote_imageserver()
   </a>
   
 </li>
@@ -356,54 +335,6 @@
           <li class="md-nav__item">
   <a href="#azcam.image.Image.write_file" class="md-nav__link">
     write_file()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sendimage-class" class="md-nav__link">
-    SendImage Class
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#azcam.image_send.SendImage" class="md-nav__link">
-    SendImage
-  </a>
-  
-    <nav class="md-nav" aria-label="SendImage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image_send.SendImage.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image_send.SendImage.azcam_imageserver" class="md-nav__link">
-    azcam_imageserver()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image_send.SendImage.dataserver" class="md-nav__link">
-    dataserver()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.image_send.SendImage.lbtguider" class="md-nav__link">
-    lbtguider()
   </a>
   
 </li>
@@ -464,42 +395,12 @@ the <em>exposure.image</em> object which receives image data from a camera contr
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.image.Image.assemble">
 
-<code class="highlight language-python"><span class="n">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
 <p>Assemble .data into .buffer.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image.Image.get_remote_imageserver">
-
-<code class="highlight language-python"><span class="n">get_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Get remote image server parameters.</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>remote_imageserver_flag</code></td>
-<td>
-<p>remote_imageserver_host:
-remote_imageserver_port:
-remote_imageserver_filename:</p>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="doc doc-object doc-method">
@@ -510,33 +411,7 @@ remote_imageserver_filename:</p>
 
       </h3>
 <div class="doc doc-contents ">
-<p>Read image from file.
-This version only supports FITS/MEF.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image.Image.send_image">
-
-<code class="highlight language-python"><span class="n">send_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Send local_filename image to a remote image server.
-This method may run in an async thread.
-Server types (self.server_type) are: azcam, lbtguider, and dataserver.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image.Image.set_remote_imageserver">
-
-<code class="highlight language-python"><span class="n">set_remote_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">remote_imageserver_filename</span><span class="o">=</span><span class="s1">'image'</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Set parameters so image files are sent to a remote image server.
-If no host is provided then reset flag to local image file.</p>
+<p>Read FITS image file (standard or MEF).</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
@@ -561,70 +436,6 @@ Use None for no scaling.</p>
 <div class="doc doc-contents ">
 <p>Write image to disk file.
 filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<h2 id="sendimage-class">SendImage Class</h2>
-<p>This subclass defines AzCam's code to send image data to a remote image server.</p>
-<div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="azcam.image_send.SendImage">
-
-        <code>azcam.image_send.SendImage</code>
-
-
-
-      </h2>
-<div class="doc doc-contents first">
-<p>Class to send image to a remote image server.</p>
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image_send.SendImage.__init__">
-
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-      </h3>
-<div class="doc doc-contents ">
-
-
-    </div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image_send.SendImage.azcam_imageserver">
-
-<code class="highlight language-python"><span class="n">azcam_imageserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Send image to azcam image server.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image_send.SendImage.dataserver">
-
-<code class="highlight language-python"><span class="n">dataserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">remote_imageserver_host</span><span class="p">,</span> <span class="n">remote_imageserver_port</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Send image to dataserver.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.image_send.SendImage.lbtguider">
-
-<code class="highlight language-python"><span class="n">lbtguider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">GuideHost</span><span class="p">,</span> <span class="n">GuidePort</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Send image to an LBT guider image server.</p>
 </div>
 </div>
 </div>

@@ -312,36 +312,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.utils.archive" class="md-nav__link">
-    archive()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#azcam.utils.check_keyboard" class="md-nav__link">
     check_keyboard()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.utils.checksum" class="md-nav__link">
-    checksum()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.utils.cleanup_files" class="md-nav__link">
-    cleanup_files()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.utils.count_files" class="md-nav__link">
-    count_files()
   </a>
   
 </li>
@@ -370,13 +342,6 @@
           <li class="md-nav__item">
   <a href="#azcam.utils.find_file_in_sequence" class="md-nav__link">
     find_file_in_sequence()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.utils.find_plugins" class="md-nav__link">
-    find_plugins()
   </a>
   
 </li>
@@ -447,13 +412,6 @@
           <li class="md-nav__item">
   <a href="#azcam.utils.restore_imagepars" class="md-nav__link">
     restore_imagepars()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.utils.run_script" class="md-nav__link">
-    run_script()
   </a>
   
 </li>
@@ -535,19 +493,6 @@ Subfolders beginning with "_" are not included.</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.archive">
-
-<code class="highlight language-python"><span class="n">archive</span><span class="p">(</span><span class="n">foldername</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">filetype</span><span class="o">=</span><span class="s1">'tar'</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Make a tarfile from a folder or file.
-Type can be "tar", "tar.gz", or "zip".
-Return tarfile filename.</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.check_keyboard">
 
 <code class="highlight language-python"><span class="n">check_keyboard</span><span class="p">(</span><span class="n">Wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
@@ -558,41 +503,6 @@ Return tarfile filename.</p>
 <p>Checks user's keyboard for a key press.</p>
 <p>:param bool Wait: True to wait until a key is pressed
 :return str: Key which was pressed or empty string none.</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.checksum">
-
-<code class="highlight language-python"><span class="n">checksum</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Make a checksum file in the working folder.
-Return filename and checksum value.</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.cleanup_files">
-
-<code class="highlight language-python"><span class="n">cleanup_files</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Cleanup folders after data analysis.</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.count_files">
-
-<code class="highlight language-python"><span class="n">count_files</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Return the number of files in path (default is current folder).
-Folders are not included.</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
@@ -654,17 +564,6 @@ Returns (filename,sequencenumber).</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.find_plugins">
-
-<code class="highlight language-python"><span class="n">find_plugins</span><span class="p">()</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Find all azcam plugins.</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.fix_path">
 
 <code class="highlight language-python"><span class="n">fix_path</span><span class="p">(</span><span class="n">Path</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">no_drive_letter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
@@ -723,12 +622,13 @@ Check for ROI's in the following order:</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.load_scripts">
 
-<code class="highlight language-python"><span class="n">load_scripts</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">load_scripts</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Load all scripts from folder into azcam.db.cli_cmds</p>
+<p>Load all scripts from folder into azcam.db.cli_objects
+If package is True then folder is an installed package name.</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
@@ -799,20 +699,6 @@ If setType is true, try and set data data type for each token.</p>
 <div class="doc doc-contents ">
 <p>Restore image parameters from dictionary.
 imagepars is a dictionary set with save_imagepars().</p>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.run_script">
-
-<code class="highlight language-python"><span class="n">run_script</span><span class="p">(</span><span class="n">script_name</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Runs a script, either with absolute path or assumes it is in the search path.
-This method is exposed as the <em>Run</em> command when using IPython.</p>
-<p>:param str script_name: filename of script to run
-:return None:</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
