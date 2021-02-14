@@ -9,6 +9,7 @@ AzCam *extension packages* define additional resources which extend AzCam's func
   * [azcam-archon](https://github.com/mplesser/azcam-archon) to add support for STA Archon camera controllers
   * [azcam-ds9](https://github.com/mplesser/azcam-ds9) to add support for the SAO ds9 image display
   * [azcam-mag](https://github.com/mplesser/azcam-mag) to add support for Magellan/ITL camera controllers
+  * [azcam-imageserver](https://github.com/mplesser/azcam-imageserver) to add support for remote image servers
   * [azcam-cryocon](https://github.com/mplesser/azcam-cryocon) to add support for CryoCon temperature controllers
   * [azcam-qhy174](https://github.com/mplesser/azcam-qhy174) to add support for QHY174 CMOS cameras
   * [azcam-testers](https://github.com/mplesser/azcam-testers) to add support for image sensor testing such as QE, CTE, PRNU, etc.
@@ -23,13 +24,14 @@ AzCam *extension packages* define additional resources which extend AzCam's func
   * [azcam-vatt](https://github.com/mplesser/azcam-vatt) for the VATT vattspec and vatt4k cameras
 
 ## Applications
-AzCam *applications* or *apps* are stand-alone programs which utilize AzCam functionality.  Ofthen they are clients which connect to AzCam server applications. There are multiple clients written in a variety of languages. Examples include:
+AzCam *applications* are stand-alone programs which utilize AzCam functionality.  Ofthen they are clients which connect to AzCam server applications. There are multiple clients written in a variety of languages. Examples include:
 
   * [azcam-tool](https://github.com/mplesser/azcam-tool), a GUI using National Instruments LabVIEW
   * [azcam-status](https://github.com/mplesser/azcam-status), a web-based status page
   * [azcam-exptool](https://github.com/mplesser/azcam-exptool), a web-based exposure control app
   * [azcam-focus](https://github.com/mplesser/azcam-focus), an app for acquiring focus images
   * [azcam-observe](https://github.com/mplesser/azcam-observe) to add support for observing scripts (GUI, web, and command line support is included)
+
 ## Configuration
 Once configured, the system is controlled by class instances (*objects*) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation. 
 
@@ -39,7 +41,9 @@ There are three main operational modes of AzCam:
   3. Applications, as descrived above. Client apps communicate with *azcamserver* over sockets or the web API.
 
 ## Operation
-While there are multiple pythonic ways to access the object instances in code, it is common to use the `api` instance to access most objects, available as `azcam.api`. On there server side the `controller` object, for example, can be accessed as `api.controller`.  On the client side, the `api` object maps to the standard objects but with only a reduced set of exposed methods.  So while `api.exposure.reset` may available to server and client code, `api.exposure.set_video_gain` may only be available on the sever. There is also a local database for temporary storage maintained in the *azcam.db* object.
+While there are multiple pythonic ways to access the object instances in code, they are always accessible from the *database* object `db`. For example, when defined, the `controller` object can be accessed as `db.controller` and the `qe` object can be accessed as `db.qe`.  In most environments these objects are mapped directly into the command line namespace, so in practice commands are executed directly as `object.method`, e.g. `exposure.expose(2.5, "dark", "dark image")`. 
+
+On the python console client side, the `api` object allows communication from the client to an *azcamserver* application over the socket-based command server interface.  The API class typically exposed allows only a limited set of methods to the standard server-side objects. So while `api.exposure.reset` may be available the command `api.exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `api.server.rcommand("controller.set_video_gain 2")`.
 
 As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the *azcam_itl* environment has been added to the python search path.
 
@@ -47,22 +51,21 @@ As an example, the code below can be used to set the current system wavelength a
 # server-side (azcamserver)
 import azcam
 import server_itl
+wavelength = azcam.db.instrument.set_wavelength(450)
+azcam.db.exposure.expose(2., 'flat', "a 450 nm flat field image")
 
 OR
 
 # client-side (azcamconsole)
 import azcam
 import console_itl
-
-And then:
-
 wavelength = azcam.api.instrument.set_wavelength(450)
 azcam.api.exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
 Example configuration code can be found in `azcam.example_server_config` and `azcam.example_console_config`.
 
-When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. To do this, after configuring the environment, execute the command:
+When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:
 
 ```python
 from azcam.cli import *
@@ -73,8 +76,6 @@ And then the code above could be executed as:
 instrument.set_wavelength(450)
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
-
-This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. 
 
 ## Help
 AzCam is often used with IPython.  Help is then avaialble by typing `?xxx`, `xxx?`, `xxx??` or `help(xxx)` where `xxx` is an AzCam class, command, or object instance.

@@ -1,15 +1,14 @@
 """
-Base main object class.
+Main base object class.
 Only used by other base object classes.
 """
 
 import typing
 
 import azcam
-from azcam.header import ObjectHeaderMethods
 
 
-class Objects(ObjectHeaderMethods):
+class Objects(object):
     """
     Base class used by main objects (controller, instrument, telescope, etc.).
 
@@ -43,9 +42,17 @@ class Objects(ObjectHeaderMethods):
         # True when object has been reset
         self.is_reset = 0
 
-        # add object to api and cli_cmds
-        setattr(azcam.api, self.id, self)
-        azcam.db.cli_cmds[self.id] = self
+        # save instance to db
+        setattr(azcam.db, self.id, self)
+
+        # save for command line
+        azcam.db.cli_objects[self.id] = self
+
+        # allow remote access if server
+        try:
+            azcam.db.remote_objects.append(self.id)
+        except AttributeError:
+            pass
 
     def initialize(self):
         """

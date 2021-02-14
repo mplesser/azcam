@@ -13,11 +13,3 @@ Usage Example:
 ::: azcam.image.Image
     :docstring:
     :members:
-
-## SendImage Class
-
-This subclass defines AzCam's code to send image data to a remote image server.
-
-::: azcam.image_send.SendImage
-    :docstring:
-    :members:

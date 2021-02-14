@@ -367,11 +367,11 @@ def get_image_roi():
     roi = []
 
     try:
-        reply = azcam.api.display.get_rois(0, "image")
+        reply = azcam.db.display.get_rois(0, "image")
     except AttributeError:
         raise azcam.AzcamError("cannot get ROI - display not found")
     roi.append(reply)
-    reply = azcam.api.display.get_rois(1, "image")
+    reply = azcam.db.display.get_rois(1, "image")
     if reply:
         roi.append(reply)
     else:
@@ -397,7 +397,7 @@ def set_image_roi(roi=[]):
     # use display ROIs
     roi = []
     try:
-        reply = azcam.api.display.get_rois(-1, "image")
+        reply = azcam.db.display.get_rois(-1, "image")
     except AttributeError:
         raise azcam.AzcamError("cannot set ROI - no display found")
 
@@ -582,7 +582,7 @@ def save_imagepars(imagepars={}):
     """
 
     for par in azcam.db.imageparnames:
-        imagepars[par] = azcam.api.config.get_par(par)
+        imagepars[par] = azcam.db.config.get_par(par)
 
     return
 
@@ -600,7 +600,7 @@ def restore_imagepars(imagepars, folder=""):
         imagepars[par] = impar
         if par == "imagetitle":
             impar = f'"{impar}"'
-        azcam.api.config.set_par(par, impar)
+        azcam.db.config.set_par(par, impar)
 
     # return to folder
     if folder != "":
@@ -611,7 +611,7 @@ def restore_imagepars(imagepars, folder=""):
 
 def load_scripts(folder: str, package: bool = False) -> None:
     """
-    Load all scripts from folder into azcam.db.cli_cmds
+    Load all scripts from folder into azcam.db.cli_objects
     If package is True then folder is an installed package name.
     """
 
@@ -639,7 +639,7 @@ def load_scripts(folder: str, package: bool = False) -> None:
             else:
                 mod = importlib.import_module(f"{pfile}")
             func = getattr(mod, pfile)
-            azcam.db.cli_cmds[pfile] = func
+            azcam.db.cli_objects[pfile] = func
         except Exception as e:
             print(e)
             azcam.AzcamWarning(f"Could not import script {pfile}")

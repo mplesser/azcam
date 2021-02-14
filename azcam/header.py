@@ -44,7 +44,7 @@ class Header(object):
             self.set_title(title)
 
         if template is not None:
-            azcam.api.exposure.imageheaderfile = template
+            azcam.db.exposure.imageheaderfile = template
             self.read_file(template)
 
     def set_header(self, object_name: str, order: int = -1):

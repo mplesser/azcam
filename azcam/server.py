@@ -1,15 +1,17 @@
 import socket
 
 import azcam
-from azcam.api_server import API
+
+# obj_id's which can be accessed remotely
+azcam.db.remote_objects = []
+
+# local configuration parameters
 from azcam.configuration import Config
 
-azcam.api = API()
-azcam.db.cli_cmds.update({"db": azcam.db})
-
-azcam.api.config = Config()
-
-azcam.api.config.default_pardict_name = "azcamserver"
+config = Config("azcamserver")
+setattr(azcam.db, "config", config)
+azcam.db.cli_objects["config"] = config
+azcam.db.remote_objects.append("config")
 
 # logging
 from azcam.logging import Logger
@@ -21,8 +23,11 @@ azcam.log = azcam.db.logger.log  # to allow azcam.log()
 azcam.db.hostname = socket.gethostname()
 azcam.db.hostip = socket.gethostbyname(azcam.db.hostname)
 
+# obj_id's which are reset or initialized with exposure
+azcam.db.objects_reset = {}
+azcam.db.objects_init = {}
+
 # clean namespace (never used directly again)
-del azcam.api_server
 del azcam.database
 del azcam.exceptions
 del azcam.logging

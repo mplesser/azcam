@@ -22,8 +22,8 @@ class AzcamDatabase(object):
     # last error status
     errorstatus = ["OK", ""]
 
-    # list of objects available to CLI namespace
-    cli_cmds = {}
+    # objects available to CLI namespace
+    cli_objects = {}
 
     # exposure flags, may be used anywhere
     exposureflags = {}

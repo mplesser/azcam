@@ -1,13 +1,13 @@
 """
-API commands for console application.
+API command interface for a console application.
+This is the interface to azcamserver using the
+socket-based command server.
 """
 
 from typing import List, Optional, Union
 
 import azcam
 import azcam.sockets
-
-from azcam.configuration import Config
 
 
 class API(object):
@@ -18,19 +18,17 @@ class API(object):
     def __init__(self):
         """Create instance."""
 
-        super().__init__()
-
+        self.server = ServerConnection()
+        self.config = Config()  # remote server params
         self.controller = Controller(self)
         self.exposure = Exposure(self)
         self.instrument = Instrument(self)
         self.telescope = Telescope(self)
         self.tempcon = Tempcon(self)
         self.system = SystemHeader(self)
-        self.config = Config(self)
-        self.server = ServerConnection()
 
-        setattr(azcam, "api", self)
-        azcam.db.cli_cmds["api"] = self
+        setattr(azcam.db, "api", self)
+        azcam.db.cli_objects["api"] = self
 
     def get(self, name):
         """
@@ -1010,3 +1008,73 @@ class ServerConnection(azcam.sockets.SocketInterface):
             raise azcam.AzcamError(f"invalid server response: {reply}")
 
         return  # can't get here
+
+
+class Config(object):
+    """
+    Configuration class for remote parameters.
+    """
+
+    def __init__(self):
+        pass
+
+    def get_par(self, parameter):
+        """
+        Return the value of a parameter in the parameters dictionary.
+        Returns None on error.
+        """
+
+        parameter = parameter.lower()
+        value = None
+
+        if not azcam.db.api.server.connected:
+            azcam.AzcamWarning("cannot get_par, not connected to server")
+            return
+
+        return self.get_remote_par(parameter)
+
+    def set_par(self, parameter, value=None):
+        """
+        Set the value of a parameter in the parameters dictionary.
+        Returns None on error.
+        """
+
+        if not azcam.db.api.server.connected:
+            azcam.AzcamWarning("cannot set_par, not connected to server")
+            return
+
+        if parameter == "":
+            return None
+
+        parameter = parameter.lower()
+
+        return self.set_remote_par(parameter, value)
+
+    def get_remote_par(self, parameter):
+        """
+        Return the value of a parameter from remote server.
+        Returns None on error.
+        """
+
+        parameter = parameter.lower()
+        value = None
+
+        reply = azcam.db.api.server.rcommand(f"config.get_par {parameter}")
+        _, value = azcam.utils.get_datatype(reply)
+
+        return value
+
+    def set_remote_par(self, parameter, value):
+        """
+        Set the value of a parameter in the remote server.
+        Returns None on error.
+        """
+
+        if parameter == "":
+            return None
+
+        parameter = parameter.lower()
+
+        azcam.db.api.server.rcommand(f"config.set_par {parameter} {value}")
+
+        return

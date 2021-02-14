@@ -24,7 +24,7 @@ def sf():
 
     try:
         folder = azcam.utils.curdir()
-        azcam.api.config.set_par("imagefolder", folder)
+        azcam.db.config.set_par("imagefolder", folder)
     except Exception:
         pass
 
@@ -37,7 +37,7 @@ def gf():
     Also issues sav() command to save folder location.
     """
 
-    folder = azcam.api.config.get_par("imagefolder")
+    folder = azcam.db.config.get_par("imagefolder")
     azcam.utils.curdir(folder)
     azcam.db.wd = folder
     sav()
@@ -48,9 +48,9 @@ def gf():
 def sav():
     """Shortcut for parfile_write() saving current folder in database."""
 
-    azcam.api.config.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
-    azcam.api.config.update_pars(1, "azcamconsole")
-    azcam.api.config.write_parfile()
+    azcam.db.config.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
+    azcam.db.config.update_pars(1, "azcamconsole")
+    azcam.db.config.write_parfile()
 
     return
 
@@ -63,4 +63,4 @@ def sroi():
 
 
 # add to CLI dictionary
-azcam.db.cli_cmds.update({"sav": sav, "sroi": sroi, "sf": sf, "gf": gf, "bf": bf})
+azcam.db.cli_objects.update({"sav": sav, "sroi": sroi, "sf": sf, "gf": gf, "bf": bf})

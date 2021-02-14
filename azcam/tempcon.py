@@ -6,10 +6,10 @@ from typing import List
 
 import azcam
 from azcam.baseobject import Objects
-from azcam.header import Header
+from azcam.header import Header, ObjectHeaderMethods
 
 
-class TempCon(Objects):
+class TempCon(Objects, ObjectHeaderMethods):
     """
     Temperature control class.
     """
@@ -57,6 +57,9 @@ class TempCon(Objects):
         }
         self.header.typestrings = {"CAMTEMP": "float", "DEWTEMP": "float"}
         self.define_keywords()
+
+        azcam.db.objects_init["tempcon"] = self
+        azcam.db.objects_reset["tempcon"] = self
 
         return
 

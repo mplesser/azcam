@@ -4,10 +4,10 @@ Contains the base Telescope class.
 
 import azcam
 from azcam.baseobject import Objects
-from azcam.header import Header
+from azcam.header import Header, ObjectHeaderMethods
 
 
-class Telescope(Objects):
+class Telescope(Objects, ObjectHeaderMethods):
     """
     Base telescope class.
     """
@@ -22,6 +22,9 @@ class Telescope(Objects):
         # create the temp control Header object
         self.header = Header("Telescope")
         self.header.set_header("telescope", 5)
+
+        azcam.db.objects_init["telescope"] = self
+        azcam.db.objects_reset["telescope"] = self
 
     def initialize(self):
         """

@@ -14,12 +14,12 @@ class Config(object):
     Main class for azcam configuration and parameter handling.
     """
 
-    def __init__(self, parfile: str = None):
+    def __init__(self, default_dictname: str = None):
 
-        self.par_file: str = parfile
-        self.par_dict: dict = {}
+        self.par_file = None
+        self.par_dict = {}
 
-        self.default_pardict_name = None
+        self.default_pardict_name = default_dictname
 
     def read_parfile(self, parfilename: str = None) -> None:
         """
@@ -191,41 +191,34 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
-            azcam.AzcamWarning("cannot get_par, not connected to server")
-            return
-
-        if self.default_pardict_name == "azcamconsole":
-            return self.get_remote_par(parameter)
-
         # special cases
         if parameter == "imagefilename":
-            value = azcam.api.exposure.get_filename()
+            value = azcam.db.exposure.get_filename()
             return value
         elif parameter == "imagetitle":
-            value = azcam.api.exposure.get_image_title()
+            value = azcam.db.exposure.get_image_title()
             return value
         elif parameter == "exposuretime":
-            value = azcam.api.exposure.get_exposuretime()
+            value = azcam.db.exposure.get_exposuretime()
             return value
         elif parameter == "exposurecompleted":
-            value = azcam.api.exposure.finished()
+            value = azcam.db.exposure.finished()
             return value
         elif parameter == "exposuretimeremaining":
-            value = azcam.api.exposure.get_exposuretime_remaining()
+            value = azcam.db.exposure.get_exposuretime_remaining()
             return value
         elif parameter == "pixelsremaining":
-            value = azcam.api.exposure.get_pixels_remaining()
+            value = azcam.db.exposure.get_pixels_remaining()
             return value
         elif parameter == "camtemp":
-            value = azcam.api.tempcon.get_temperatures()[0]
+            value = azcam.db.tempcon.get_temperatures()[0]
             return value
         elif parameter == "dewtemp":
-            value = azcam.api.tempcon.get_temperatures()[1]
+            value = azcam.db.tempcon.get_temperatures()[1]
             return value
         elif parameter == "temperatures":
-            camtemp = azcam.api.tempcon.get_temperatures()[0]
-            dewtemp = azcam.api.tempcon.get_temperatures()[1]
+            camtemp = azcam.db.tempcon.get_temperatures()[0]
+            dewtemp = azcam.db.tempcon.get_temperatures()[1]
             return [camtemp, dewtemp]
         elif parameter == "logcommands":
             value = azcam.db.cmdserver.logcommands
@@ -252,9 +245,9 @@ class Config(object):
             value = getattr(azcam.db, tokens[1], None)
             return value
 
-        # object must be in api
+        # object must be in objects
         else:
-            obj = azcam.api.get(object1)
+            obj = azcam.db.get(object1)
             for i in range(1, numtokens):
                 try:
                     obj = getattr(obj, tokens[i])
@@ -271,30 +264,20 @@ class Config(object):
         Returns None on error.
         """
 
-        if self.default_pardict_name == "azcamconsole" and not azcam.api.server.connected:
-            azcam.AzcamWarning("cannot set_par, not connected to server")
-            return
-
-        if parameter == "":
-            return None
-
         parameter = parameter.lower()
-
-        if self.default_pardict_name == "azcamconsole":
-            return self.set_remote_par(parameter, value)
 
         # special cases
         if parameter == "imagefilename":
-            azcam.api.exposure.image.filename = value
+            azcam.db.exposure.image.filename = value
             return None
         elif parameter == "imagetitle":
             if value is None or value == "":
-                azcam.api.exposure.set_image_title("")
+                azcam.db.exposure.set_image_title("")
             else:
-                azcam.api.exposure.set_image_title(f"{value}")
+                azcam.db.exposure.set_image_title(f"{value}")
             return None
         elif parameter == "exposuretime":
-            azcam.api.exposure.set_exposuretime(value)
+            azcam.db.exposure.set_exposuretime(value)
             return None
         elif parameter == "logcommands":
             azcam.db.cmdserver.logcommands = int(value)
@@ -307,7 +290,7 @@ class Config(object):
             azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
             return None
 
-        # object must be on API
+        # object must be on db
         tokens = attribute.split(".")
         numtokens = len(tokens)
         if numtokens < 2:
@@ -319,11 +302,11 @@ class Config(object):
         object1 = tokens[0]
 
         if object1 == "db":
-            setattr(azcam.api, tokens[1], value)
+            setattr(azcam.db, tokens[1], value)
 
         # run through sub-objects
         else:
-            obj = azcam.api.get(object1)
+            obj = azcam.db.get(object1)
             for i in range(1, numtokens - 1):
                 obj = getattr(obj, tokens[i])
             # last time is actual object
@@ -345,7 +328,7 @@ class Config(object):
         if par_dictname is None:
             par_dictname = self.default_pardict_name
 
-        par_dict = azcam.api.config.par_dict.get(par_dictname)
+        par_dict = azcam.db.config.par_dict.get(par_dictname)
         if par_dict is None:
             return
         keys = par_dict.keys()
@@ -376,34 +359,5 @@ class Config(object):
                 else:
                     value = par_dict[parname]
                     self.set_par(parname, value)
-
-        return
-
-    def get_remote_par(self, parameter):
-        """
-        Return the value of a parameter from remote server.
-        Returns None on error.
-        """
-
-        parameter = parameter.lower()
-        value = None
-
-        reply = azcam.api.server.rcommand(f"config.get_par {parameter}")
-        _, value = azcam.utils.get_datatype(reply)
-
-        return value
-
-    def set_remote_par(self, parameter, value):
-        """
-        Set the value of a parameter in the remote server.
-        Returns None on error.
-        """
-
-        if parameter == "":
-            return None
-
-        parameter = parameter.lower()
-
-        azcam.api.server.rcommand(f"config.set_par {parameter} {value}")
 
         return

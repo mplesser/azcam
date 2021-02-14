@@ -4,11 +4,12 @@ Contains the base Controller class.
 
 import typing
 
+import azcam
 from azcam.baseobject import Objects
-from azcam.header import Header
+from azcam.header import Header, ObjectHeaderMethods
 
 
-class Controller(Objects):
+class Controller(Objects, ObjectHeaderMethods):
     """
     The base controller class for azcam-supported controllers.
     Attributes:
@@ -35,6 +36,9 @@ class Controller(Objects):
         self.detpars = DetPars()
 
         self.reset_flag = 0
+
+        azcam.db.objects_init["controller"] = self
+        azcam.db.objects_reset["controller"] = self
 
     def set_roi(self):
         """

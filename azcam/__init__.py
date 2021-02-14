@@ -3,8 +3,8 @@
 from azcam import fits
 from azcam import utils
 from azcam import plot
-
-from .database import AzcamDatabase
+from azcam import image
+from azcam.database import AzcamDatabase
 
 db = AzcamDatabase()
 

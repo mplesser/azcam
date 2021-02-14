@@ -60,7 +60,7 @@ dthread.start()  # thread just for speed
 # ****************************************************************
 # try to connect to azcam
 # ****************************************************************
-connected = azcam.api.server.connect()  # default host and port
+connected = azcam.db.api.server.connect()  # default host and port
 if connected:
     azcam.log("Connected to azcamserver")
 else:
@@ -83,8 +83,8 @@ if azcam.db.wd is None:
 # ****************************************************************
 parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
 try:
-    pardict = azcam.api.config.read_parfile(parfile)
-    azcam.api.config.update_pars(0, "azcamconsole")
+    pardict = azcam.db.config.read_parfile(parfile)
+    azcam.db.config.update_pars(0, "azcamconsole")
 except FileNotFoundError:
     azcam.AzcamWarning("Parameter file not found")
 

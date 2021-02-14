@@ -4,10 +4,10 @@ Contains the Ds9Display class.
 
 import azcam
 from azcam.baseobject import Objects
-from azcam.header import Header
+from azcam.header import Header, ObjectHeaderMethods
 
 
-class Display(Objects):
+class Display(Objects, ObjectHeaderMethods):
     """
     azcam's interface to SAO's ds9 image display tool.
     """
@@ -22,6 +22,12 @@ class Display(Objects):
 
         # set default display server
         self.default_display = 0
+
+        # allow initialization of display on server in exposure
+        try:
+            azcam.db.objects_init["display"] = self
+        except AttributeError:
+            pass
 
     def initialize(self):
         """
