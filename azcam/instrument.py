@@ -4,6 +4,7 @@ Contains the base Instrument class.
 
 import time
 
+import azcam
 from azcam.baseobject import Objects
 from azcam.header import Header, ObjectHeaderMethods
 
@@ -25,6 +26,9 @@ class Instrument(Objects, ObjectHeaderMethods):
 
         # focus position
         self.focus_position = 0
+
+        azcam.db.objects_init["instrument"] = self
+        azcam.db.objects_reset["instrument"] = self
 
         # instrument header object
         self.header = Header("Instrument")
