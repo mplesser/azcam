@@ -856,14 +856,14 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
 
         # all headers to be updated must be in azcam.db['headers']
         for objectname in azcam.db.headers:
-            if objectname == "controller" or objectname == "system" or objectname == "exposure":
+            if objectname == "controller" or objectname == "system" or objectname == "exposure" or objectname == "focalplane":
                 continue
             try:
-                azcam.db.api.get(
+                azcam.db.get(
                     objectname
                 ).update_header()  # dont crash so all headers get updated
-            except Exception:
-                pass
+            except Exception as e:
+                azcam.log(f"could not get {objectname} header: {e}")
 
         # update focalplane header which is not in api
         self.image.focalplane.update_header()

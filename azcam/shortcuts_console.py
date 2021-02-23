@@ -24,7 +24,7 @@ def sf():
 
     try:
         folder = azcam.utils.curdir()
-        azcam.db.config.set_par("imagefolder", folder)
+        azcam.db.api.config.set_par("imagefolder", folder)
     except Exception:
         pass
 
@@ -37,7 +37,7 @@ def gf():
     Also issues sav() command to save folder location.
     """
 
-    folder = azcam.db.config.get_par("imagefolder")
+    folder = azcam.db.api.config.get_par("imagefolder")
     azcam.utils.curdir(folder)
     azcam.db.wd = folder
     sav()

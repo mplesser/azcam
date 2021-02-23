@@ -191,24 +191,29 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
+        try:
+            exposure = azcam.db.exposure
+        except AttributeError:
+            exposure = azcam.db.api.exposure
+
         # special cases
         if parameter == "imagefilename":
-            value = azcam.db.exposure.get_filename()
+            value = exposure.get_filename()
             return value
         elif parameter == "imagetitle":
-            value = azcam.db.exposure.get_image_title()
+            value = exposure.get_image_title()
             return value
         elif parameter == "exposuretime":
-            value = azcam.db.exposure.get_exposuretime()
+            value = exposure.get_exposuretime()
             return value
         elif parameter == "exposurecompleted":
-            value = azcam.db.exposure.finished()
+            value = exposure.finished()
             return value
         elif parameter == "exposuretimeremaining":
-            value = azcam.db.exposure.get_exposuretime_remaining()
+            value = exposure.get_exposuretime_remaining()
             return value
         elif parameter == "pixelsremaining":
-            value = azcam.db.exposure.get_pixels_remaining()
+            value = exposure.get_pixels_remaining()
             return value
         elif parameter == "camtemp":
             value = azcam.db.tempcon.get_temperatures()[0]
@@ -266,18 +271,23 @@ class Config(object):
 
         parameter = parameter.lower()
 
+        try:
+            exposure = azcam.db.exposure
+        except AttributeError:
+            exposure = azcam.db.api.exposure
+
         # special cases
         if parameter == "imagefilename":
-            azcam.db.exposure.image.filename = value
+            exposure.image.filename = value
             return None
         elif parameter == "imagetitle":
             if value is None or value == "":
-                azcam.db.exposure.set_image_title("")
+                exposure.set_image_title("")
             else:
-                azcam.db.exposure.set_image_title(f"{value}")
+                exposure.set_image_title(f"{value}")
             return None
         elif parameter == "exposuretime":
-            azcam.db.exposure.set_exposuretime(value)
+            exposure.set_exposuretime(value)
             return None
         elif parameter == "logcommands":
             azcam.db.cmdserver.logcommands = int(value)

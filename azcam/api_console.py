@@ -801,6 +801,20 @@ class Exposure(CommonMethods):
 
         return self._parent.server.rcommand(f"{self.objname}.set_filename {filename}")
 
+    def get_image_title(self) -> str:
+        """
+        Get the current image title.
+        """
+
+        return self._parent.server.rcommand(f"{self.objname}.get_image_title")
+
+    def set_image_title(self, title: str) -> Optional[str]:
+        """
+        Set the image title.
+        """
+
+        return self._parent.server.rcommand(f"{self.objname}.set_image_title {title}")
+
     def get_roi(self) -> List:
         """
         Return detector ROI.
