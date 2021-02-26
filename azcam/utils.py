@@ -645,3 +645,46 @@ def load_scripts(folder: str, package: bool = False) -> None:
             azcam.AzcamWarning(f"Could not import script {pfile}")
 
     return
+
+
+def get_objects(object_names):
+    """
+    Return an object or list of objects.
+    For server or console.
+    TEST ONLY
+
+    Args:
+        object_names ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+    try:
+        _ = azcam.db.exposure
+        server = 1
+        root = azcam.db
+    except AttributeError:
+        _ = azcam.db.api.exposure
+        server = 0
+        root = azcam.db.api
+
+    objects = []
+    if type(object_names) == str:
+        object_names = [object_names]
+    elif type(object_names) == list:
+        pass
+    else:
+        raise azcam.AzcamError("invalid type of objects")
+
+    for obs in object_names:
+        obs1 = root.get(obs)
+        if obs1 is not None:
+            objects.append(obs1)
+        else:
+            objects.append(azcam.db.get(obs))
+
+    if len(objects) == 1:
+        return objects[0]
+    else:
+        return objects

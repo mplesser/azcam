@@ -272,7 +272,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     else:
                         reply = "OK %s" % " ".join(s[1:])
                     self.request.send(str.encode(reply + "\r\n"))
-                    if self.logcommands:
+                    if azcam.db.cmdserver.logcommands:
                         azcam.log("%s" % reply, prefix=prefix_out)
                     command_string = ""
 

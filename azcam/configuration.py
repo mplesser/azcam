@@ -191,10 +191,7 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        try:
-            exposure = azcam.db.exposure
-        except AttributeError:
-            exposure = azcam.db.api.exposure
+        exposure = azcam.get_objects("exposure")
 
         # special cases
         if parameter == "imagefilename":
@@ -271,10 +268,7 @@ class Config(object):
 
         parameter = parameter.lower()
 
-        try:
-            exposure = azcam.db.exposure
-        except AttributeError:
-            exposure = azcam.db.api.exposure
+        exposure = azcam.get_objects("exposure")
 
         # special cases
         if parameter == "imagefilename":

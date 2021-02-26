@@ -5,6 +5,7 @@ from azcam import utils
 from azcam import plot
 from azcam import image
 from azcam.database import AzcamDatabase
+from azcam.utils import get_objects
 
 db = AzcamDatabase()
 
