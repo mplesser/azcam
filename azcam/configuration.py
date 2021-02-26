@@ -191,7 +191,7 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        exposure = azcam.get_objects("exposure")
+        exposure = azcam.get_tools("exposure")
 
         # special cases
         if parameter == "imagefilename":
@@ -268,7 +268,7 @@ class Config(object):
 
         parameter = parameter.lower()
 
-        exposure = azcam.get_objects("exposure")
+        exposure = azcam.get_tools("exposure")
 
         # special cases
         if parameter == "imagefilename":

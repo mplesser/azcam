@@ -1,14 +1,18 @@
 # Home
 
-AzCam is a software framework for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
+AzCam is a software framework for the acquisition and analysis of image data from scientific imaging systems. It is intended to be customized for specific hardware, observational, and data reduction needs.
+
+AzCam is based on the concept of *tools* which are the interfaces to hardware and software code.  Examples of tools are *instrument* which controls instrument hardware, *telescope* which interfaces to a telescope, and *linearity* which acquires and analyzes a sensor for linearity. The *exposure* tool is somewhat special in that it controls a scientific observation or exposure and often interfaces to many different tools. As an example, the exposure tool might need to move a telescope and multiple filter wheels, control a shutter, operate a camera, display the resultant image, and begin data reduction of that image.  
+
+AzCam is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.
 
 ## Extension Packages
-AzCam *extension packages* define additional resources which extend AzCam's functionality. In general some of these packages must be installed to create a useful configuration. Examples include:
+AzCam *extension packages* define resources which extend AzCam's functionality. Examples include:
 
-  * [azcam-arc](https://github.com/mplesser/azcam-arc) to add support for ARC camera controllers
-  * [azcam-archon](https://github.com/mplesser/azcam-archon) to add support for STA Archon camera controllers
+  * [azcam-arc](https://github.com/mplesser/azcam-arc) to add support for ARC cameras
+  * [azcam-archon](https://github.com/mplesser/azcam-archon) to add support for STA Archon cameras
   * [azcam-ds9](https://github.com/mplesser/azcam-ds9) to add support for the SAO ds9 image display
-  * [azcam-mag](https://github.com/mplesser/azcam-mag) to add support for Magellan/ITL camera controllers
+  * [azcam-mag](https://github.com/mplesser/azcam-mag) to add support for Magellan/ITL cameras
   * [azcam-imageserver](https://github.com/mplesser/azcam-imageserver) to add support for remote image servers
   * [azcam-cryocon](https://github.com/mplesser/azcam-cryocon) to add support for CryoCon temperature controllers
   * [azcam-qhy174](https://github.com/mplesser/azcam-qhy174) to add support for QHY174 CMOS cameras
@@ -33,11 +37,11 @@ AzCam *applications* are stand-alone programs which utilize AzCam functionality.
   * [azcam-observe](https://github.com/mplesser/azcam-observe) to add support for observing scripts (GUI, web, and command line support is included)
 
 ## Configuration
-Once configured, the system is controlled by class instances (*objects*) of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others.  Perhaps the most important object is *exposure*, which controls an actual observation. 
+Once configured, the system is controlled by class instances of the hardware modules, such as *controller*, *instrument*, *telescope*, *tempcon*, *system*, and others. These are the *tools* described above. 
 
 There are three main operational modes of AzCam:
   1. Server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
-  2. Console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* and is used to acquire and analyze image data through the command line and python code.
+  2. Console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* over a socket interface and is used to acquire and analyze image data through the command line and python code.
   3. Applications, as descrived above. Client apps communicate with *azcamserver* over sockets or the web API.
 
 ## Operation

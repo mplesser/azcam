@@ -647,14 +647,13 @@ def load_scripts(folder: str, package: bool = False) -> None:
     return
 
 
-def get_objects(object_names):
+def get_tools(tool_names):
     """
-    Return an object or list of objects.
+    Return a tool or list of tools.
     For server or console.
-    TEST ONLY
 
     Args:
-        object_names ([type]): [description]
+        tool_names ([type]): [description]
 
     Returns:
         [type]: [description]
@@ -669,22 +668,22 @@ def get_objects(object_names):
         server = 0
         root = azcam.db.api
 
-    objects = []
-    if type(object_names) == str:
-        object_names = [object_names]
-    elif type(object_names) == list:
+    tools = []
+    if type(tool_names) == str:
+        tool_names = [tool_names]
+    elif type(tool_names) == list:
         pass
     else:
-        raise azcam.AzcamError("invalid type of objects")
+        raise azcam.AzcamError("invalid type for tool_names")
 
-    for obs in object_names:
-        obs1 = root.get(obs)
-        if obs1 is not None:
-            objects.append(obs1)
+    for tool in tool_names:
+        tool1 = root.get(tool)
+        if tool1 is not None:
+            tools.append(tool1)
         else:
-            objects.append(azcam.db.get(obs))
+            tools.append(azcam.db.get(tool))
 
-    if len(objects) == 1:
-        return objects[0]
+    if len(tools) == 1:
+        return tools[0]
     else:
-        return objects
+        return tools
