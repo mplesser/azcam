@@ -1,14 +1,14 @@
 import azcam
-from azcam.configuration import Config
+from azcam.parameters import Parameters
 from azcam.api_console import API
 from azcam.database import AzcamDatabase
 
 db = AzcamDatabase()
 
 # local configuration parameters
-config = Config("azcamconsole")
-setattr(azcam.db, "config", config)
-azcam.db.cli_objects["config"] = config
+params = Parameters("azcamconsole")
+setattr(azcam.db, "params", params)
+azcam.db.cli_objects["params"] = params
 
 API()
 

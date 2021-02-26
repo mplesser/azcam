@@ -6,12 +6,12 @@ import azcam
 azcam.db.remote_objects = []
 
 # local configuration parameters
-from azcam.configuration import Config
+from azcam.parameters import Parameters
 
-config = Config("azcamserver")
-setattr(azcam.db, "config", config)
-azcam.db.cli_objects["config"] = config
-azcam.db.remote_objects.append("config")
+params = Parameters("azcamserver")
+setattr(azcam.db, "params", params)
+azcam.db.cli_objects["params"] = params
+azcam.db.remote_objects.append("params")
 
 # logging
 from azcam.logging import Logger

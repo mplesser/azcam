@@ -19,7 +19,7 @@ class API(object):
         """Create instance."""
 
         self.server = ServerConnection()
-        self.config = Config()  # remote server params
+        self.params = Parameters(self)
         self.controller = Controller(self)
         self.exposure = Exposure(self)
         self.instrument = Instrument(self)
@@ -29,6 +29,10 @@ class API(object):
 
         setattr(azcam.db, "api", self)
         azcam.db.cli_objects["api"] = self
+
+        # add server tool directly to CLI and db
+        setattr(azcam.db, "server", self.server)
+        azcam.db.cli_objects["server"] = self.server
 
     def get(self, name):
         """
@@ -507,12 +511,20 @@ class Exposure(CommonMethods):
 
         return self._parent.server.rcommand(f"{self.objname}.set_shutter {state} {shutter_id}")
 
-    def abort(self) -> Optional[str]:
+    def abort(self) -> None:
         """
-        Abort an exposure in progress.
+        Sets the global exposure abort flag and tries to abort a remote server exposure.
         """
 
-        return self._parent.server.rcommand(f"{self.objname}.abort")
+        azcam.db.abortflag = 1
+
+        # send abort to server, error OK
+        try:
+            self._parent.server.rcommand(f"{self.objname}.abort")
+        except Exception as e:
+            azcam.log(f"abort error: {e}")
+
+        return
 
     def initialize(self) -> None:
         """
@@ -917,21 +929,6 @@ class Exposure(CommonMethods):
             )
         )
 
-    def abort(self):
-        """
-        Sets the global exposure abort flag and tries to abort a remote server exposure.
-        """
-
-        azcam.db.abortflag = 1
-
-        # send abort to server, error OK
-        try:
-            self._parent.server.rcommand(f"{self.objname}.abort")
-        except Exception as e:
-            azcam.log(f"abort error: {e}")
-
-        return
-
     def get_par(self, parameter):
         """
         Return the value of a parameter from remote server.
@@ -1024,13 +1021,13 @@ class ServerConnection(azcam.sockets.SocketInterface):
         return  # can't get here
 
 
-class Config(object):
+class Parameters(object):
     """
     Configuration class for remote parameters.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, parent):
+        self._parent = parent
 
     def get_par(self, parameter):
         """
@@ -1039,9 +1036,8 @@ class Config(object):
         """
 
         parameter = parameter.lower()
-        value = None
 
-        if not azcam.db.api.server.connected:
+        if not self._parent.server.connected:
             azcam.AzcamWarning("cannot get_par, not connected to server")
             return
 
@@ -1053,7 +1049,7 @@ class Config(object):
         Returns None on error.
         """
 
-        if not azcam.db.api.server.connected:
+        if not self._parent.server.connected:
             azcam.AzcamWarning("cannot set_par, not connected to server")
             return
 
@@ -1073,7 +1069,7 @@ class Config(object):
         parameter = parameter.lower()
         value = None
 
-        reply = azcam.db.api.server.rcommand(f"config.get_par {parameter}")
+        reply = self._parent.server.rcommand(f"params.get_par {parameter}")
         _, value = azcam.utils.get_datatype(reply)
 
         return value
@@ -1089,6 +1085,6 @@ class Config(object):
 
         parameter = parameter.lower()
 
-        azcam.db.api.server.rcommand(f"config.set_par {parameter} {value}")
+        self._parent.server.rcommand(f"params.set_par {parameter} {value}")
 
         return

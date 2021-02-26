@@ -1,5 +1,5 @@
 """
-Configuration and parameter handling for azcam.
+Parameter handling for azcam.
 """
 
 import configparser
@@ -9,9 +9,9 @@ import typing
 import azcam
 
 
-class Config(object):
+class Parameters(object):
     """
-    Main class for azcam configuration and parameter handling.
+    Main class for azcam parameter handling.
     """
 
     def __init__(self, default_dictname: str = None):
@@ -332,7 +332,7 @@ class Config(object):
         if par_dictname is None:
             par_dictname = self.default_pardict_name
 
-        par_dict = azcam.db.config.par_dict.get(par_dictname)
+        par_dict = azcam.db.params.par_dict.get(par_dictname)
         if par_dict is None:
             return
         keys = par_dict.keys()

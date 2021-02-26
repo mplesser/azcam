@@ -856,12 +856,15 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
 
         # all headers to be updated must be in azcam.db['headers']
         for objectname in azcam.db.headers:
-            if objectname == "controller" or objectname == "system" or objectname == "exposure" or objectname == "focalplane":
+            if (
+                objectname == "controller"
+                or objectname == "system"
+                or objectname == "exposure"
+                or objectname == "focalplane"
+            ):
                 continue
             try:
-                azcam.db.get(
-                    objectname
-                ).update_header()  # dont crash so all headers get updated
+                azcam.db.get(objectname).update_header()  # dont crash so all headers get updated
             except Exception as e:
                 azcam.log(f"could not get {objectname} header: {e}")
 
@@ -1405,7 +1408,7 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
             seqtotal = 0
 
         expstate = None
-        ef = azcam.db.config.get_par("exposureflag")
+        ef = azcam.db.params.get_par("exposureflag")
         for expstate in self.exposureflags:
             if ef == self.exposureflags[expstate]:
                 break
@@ -1440,7 +1443,7 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
         elif ef == 7:
             expcolor = "red"
             progress = int(
-                100.0 * (self.get_pixels_remaining() / azcam.db.config.get_par("numpiximage"))
+                100.0 * (self.get_pixels_remaining() / azcam.db.params.get_par("numpiximage"))
             )
             explabel = f"{progress}%"
         elif ef == 8:
@@ -1479,12 +1482,12 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
             "seqcount": seqcount,
             "seqtotal": seqtotal,
             "timestamp": self._timestamp(0),
-            "imagetitle": azcam.db.config.get_par("imagetitle"),
-            "imagetype": azcam.db.config.get_par("imagetype"),
-            "imagetest": azcam.db.config.get_par("imagetest"),
-            "exposuretime": azcam.db.config.get_par("exposuretime"),
-            "colbin": azcam.db.config.get_par("colbin"),
-            "rowbin": azcam.db.config.get_par("rowbin"),
+            "imagetitle": azcam.db.params.get_par("imagetitle"),
+            "imagetype": azcam.db.params.get_par("imagetype"),
+            "imagetest": azcam.db.params.get_par("imagetest"),
+            "exposuretime": azcam.db.params.get_par("exposuretime"),
+            "colbin": azcam.db.params.get_par("colbin"),
+            "rowbin": azcam.db.params.get_par("rowbin"),
             "systemname": azcam.db.systemname,
             "mode": azcam.db.servermode,
         }
@@ -1558,7 +1561,7 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
         Returns None on error.
         """
 
-        return azcam.db.config.get_par(parameter)
+        return azcam.db.params.get_par(parameter)
 
     def set_par(self, parameter, value=None):
         """
@@ -1566,7 +1569,7 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
         Returns None on error.
         """
 
-        return azcam.db.config.set_par(parameter, value)
+        return azcam.db.params.set_par(parameter, value)
 
     def read_header_file(self, filename):
         """
