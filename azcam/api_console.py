@@ -1085,6 +1085,7 @@ class Parameters(object):
 
         parameter = parameter.lower()
 
-        self._parent.server.rcommand(f"params.set_par {parameter} {value}")
+        self._parent.server.rcommand(f"params
+        .set_par {parameter} {value}")
 
         return
