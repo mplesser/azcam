@@ -609,17 +609,12 @@ def restore_imagepars(imagepars, folder=""):
     return
 
 
-def load_scripts(folder: str, package: bool = False) -> None:
+def load_scripts(folder: str) -> None:
     """
     Load all scripts from folder into azcam.db.cli_objects
-    If package is True then folder is an installed package name.
     """
 
-    if package:
-        rootpackage = folder
-        _, folder, _ = imp.find_module(folder)
-    else:
-        folder = fix_path(folder)
+    folder = fix_path(folder)
     if folder not in sys.path:
         sys.path.append(folder)
 
@@ -634,10 +629,7 @@ def load_scripts(folder: str, package: bool = False) -> None:
 
     for pfile in pyfiles:
         try:
-            if package:
-                mod = importlib.import_module(f"{rootpackage}.{pfile}")
-            else:
-                mod = importlib.import_module(f"{pfile}")
+            mod = importlib.import_module(f"{pfile}")
             func = getattr(mod, pfile)
             azcam.db.cli_objects[pfile] = func
         except Exception as e:
@@ -659,14 +651,7 @@ def get_tools(tool_names):
         [type]: [description]
     """
 
-    try:
-        _ = azcam.db.exposure
-        server = 1
-        root = azcam.db
-    except AttributeError:
-        _ = azcam.db.api.exposure
-        server = 0
-        root = azcam.db.api
+    root = azcam.db
 
     tools = []
     if type(tool_names) == str:

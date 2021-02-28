@@ -118,7 +118,7 @@ class Parameters(object):
         if value == "prompt":
             if prompt_string == "":
                 prompt_string = f"Enter value for {attribute}"
-            value = self.prompt(prompt_string, default)
+            value = azcam.utils.prompt(prompt_string, default)
             _, value = azcam.utils.get_datatype(value)
         elif value == "default":
             value = default
@@ -185,11 +185,21 @@ class Parameters(object):
     def get_par(self, parameter):
         """
         Return the value of a parameter in the parameters dictionary.
+        Parameters valid only on server.
         Returns None on error.
         """
 
         parameter = parameter.lower()
         value = None
+
+        if azcam.db.mode == "console":
+            server = azcam.get_tools("server")
+            try:
+                reply = server.rcommand(f"params.get_par {parameter}")
+            except azcam.AzcamError:
+                return
+            _, value = azcam.utils.get_datatype(reply)
+            return value
 
         exposure = azcam.get_tools("exposure")
 
@@ -255,7 +265,6 @@ class Parameters(object):
                     obj = getattr(obj, tokens[i])
                 except AttributeError:
                     pass
-                    # azcam.AzcamWarning(f"Could not get parameter: {parameter}")
             value = obj  # last time is value
 
         return value
@@ -263,10 +272,19 @@ class Parameters(object):
     def set_par(self, parameter, value=None):
         """
         Set the value of a parameter in the parameters dictionary.
+        Parameters valid only on server.
         Returns None on error.
         """
 
         parameter = parameter.lower()
+
+        if azcam.db.mode == "console":
+            server = azcam.get_tools("server")
+            try:
+                server.rcommand(f"params.set_par {parameter} {value}")
+            except azcam.AzcamError:
+                return
+            return value
 
         exposure = azcam.get_tools("exposure")
 

@@ -2,6 +2,9 @@ import socket
 
 import azcam
 
+# server mode
+azcam.db.mode = "server"
+
 # obj_id's which can be accessed remotely
 azcam.db.remote_objects = []
 

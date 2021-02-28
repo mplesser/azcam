@@ -102,12 +102,12 @@ class SocketInterface(object):
             i += 1
             if i > 1000:
                 self.busy = False
-                raise azcam.AzcamError("Timeout error in socket BUSY loop")
+                raise azcam.AzcamError("timeout error in socket BUSY loop")
         self.busy = True
 
         if not self.open():
             self.busy = False
-            raise azcam.AzcamError("Could not open connection to server", error_code=2)
+            raise azcam.AzcamError("could not open connection to server", error_code=2)
 
         try:
             self.send(Command, terminator)

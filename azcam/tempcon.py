@@ -3,10 +3,12 @@ Contains the base TempCon class.
 """
 
 from typing import List
+from typing import List, Optional, Union
 
 import azcam
 from azcam.baseobject import Objects
 from azcam.header import Header, ObjectHeaderMethods
+from azcam.console_tools import ConsoleTools
 
 
 class TempCon(Objects, ObjectHeaderMethods):
@@ -253,3 +255,48 @@ class TempCon(Objects, ObjectHeaderMethods):
         t = self.header.typestrings[keyword]
 
         return [temp, self.header.comments[keyword], t]
+
+
+class TempconConsole(ConsoleTools):
+    """
+    Temperature controller (tempcon) class for client.
+    """
+
+    def __init__(self) -> None:
+        super().__init__("tempcon")
+
+    def get_temperatures(self) -> Union[str, List[float]]:
+        """
+        Return a list of all system temperatures as defined in configuration setup.
+        Values are in degrees Celsius and may be formatted for display.
+        If temperatures cannot be read, then a list of -999.99 is returned.
+        """
+
+        reply = azcam.db.server.rcommand(f"{self.objname}.get_temperatures")
+
+        return [float(x) for x in reply]
+
+    def set_control_temperature(
+        self, control_temperature: float, temperature_id: int = 0
+    ) -> Optional[str]:
+        """
+        Set control temperature.
+
+        :param control_temperature: control (set) temperature in Celsius
+        :param temperature_id: temperature sensor ID flag
+        """
+
+        return azcam.db.server.rcommand(
+            f"{self.objname}.set_control_temperature {control_temperature} {temperature_id}"
+        )
+
+    def get_control_temperature(self, temperature_id: int = 0) -> Union[str, float]:
+        """
+        Get control temperature in degress Celsius.
+
+        :param temperature_id: temperature ID flag
+        """
+
+        reply = azcam.db.server.rcommand(f"{self.objname}.get_control_temperature {temperature_id}")
+
+        return float(reply)

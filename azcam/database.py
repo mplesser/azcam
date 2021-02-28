@@ -13,6 +13,9 @@ class AzcamDatabase(object):
     # verbosity level for messages
     verbosity = 1
 
+    # operating mode (server or console)
+    mode = None
+
     # abort flag, True if an abort has occurred
     abortflag = 0
 

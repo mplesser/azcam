@@ -2,11 +2,10 @@
 Contains the base Controller class.
 """
 
-import typing
-
 import azcam
 from azcam.baseobject import Objects
 from azcam.header import Header, ObjectHeaderMethods
+from azcam.console_tools import ConsoleTools
 
 
 class Controller(Objects, ObjectHeaderMethods):
@@ -190,3 +189,22 @@ class DetPars(object):
         self.rowoscm = 0
 
         return
+
+
+class ControllerConsole(ConsoleTools):
+    """
+    Controller tool interface for console.
+    """
+
+    def __init__(self) -> None:
+        super().__init__("controller")
+
+    def set_shutter(self, state: int = 0):
+        """
+        Open or close a shutter.
+
+        :param state:
+
+        """
+
+        return azcam.db.server.rcommand(f"{self.objname}.set_shutter {state}")

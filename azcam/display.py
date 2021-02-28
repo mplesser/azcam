@@ -1,5 +1,6 @@
 """
-Contains the Ds9Display class.
+Contains the Ds9Display display tool.
+This tool is often implemented both by server and console.
 """
 
 import azcam
