@@ -6,9 +6,9 @@ def test_connect(host="localhost", port=2402):
     assert server.connect() == True
 
 
-def test_rcommand(command="get_par version"):
+def test_command(command="get_par version"):
     server = azcam.get_tools("server")
-    v = float(server.rcommand(command))
+    v = float(server.command(command))
     assert v >= 20
 
 

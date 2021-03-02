@@ -93,7 +93,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
         self.is_running = 0
         return
 
-    def rcommand(self, command: str, **kwargs):
+    def command(self, command: str, **kwargs):
         """
         Parse and execute a command string with optional arguments.
         Returns the reply string, always starting with OK or ERROR.
@@ -302,7 +302,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 if command_string != "":
 
                     # execute command
-                    reply = azcam.db.cmdserver.rcommand(command_string)
+                    reply = azcam.db.cmdserver.command(command_string)
 
                     # log reply
                     if azcam.db.cmdserver.logcommands:

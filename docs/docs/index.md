@@ -42,12 +42,12 @@ Once configured, the system is controlled by class instances of the hardware mod
 There are three main operational modes of AzCam:
   1. Server-side, usually implemented as the *azcamserver* application, which communicates directly or indirectly to all system hardware.
   2. Console, usually called *azcamconsole*, which is typically implemented as an IPython command window that communicates with *azcamserver* over a socket interface and is used to acquire and analyze image data through the command line and python code.
-  3. Applications, as descrived above. Client apps communicate with *azcamserver* over sockets or the web API.
+  3. Applications, as described above. Client apps communicate with *azcamserver* over sockets or the web API.
 
 ## Operation
 While there are multiple pythonic ways to access the object instances in code, they are always accessible from the *database* object `db`. For example, when defined, the `controller` object can be accessed as `db.controller` and the `qe` object can be accessed as `db.qe`.  In most environments these objects are mapped directly into the command line namespace, so in practice commands are executed directly as `object.method`, e.g. `exposure.expose(2.5, "dark", "dark image")`. 
 
-On the python console client side, the `api` object allows communication from the client to an *azcamserver* application over the socket-based command server interface.  The API class typically exposed allows only a limited set of methods to the standard server-side objects. So while `api.exposure.reset` may be available the command `api.exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `api.server.rcommand("controller.set_video_gain 2")`.
+On the python console client side, there are *console tools* which allows communication from the client to an *azcamserver* application over the socket-based command server interface.  These tools typically expose only a limited set of methods to the standard server-side objects. So while `exposure.reset` may be available the command `exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `server.command("controller.set_video_gain 2")`.
 
 As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the *azcam_itl* environment has been added to the python search path.
 
@@ -55,21 +55,23 @@ As an example, the code below can be used to set the current system wavelength a
 # server-side (azcamserver)
 import azcam
 import server_itl
-wavelength = azcam.db.instrument.set_wavelength(450)
-azcam.db.exposure.expose(2., 'flat', "a 450 nm flat field image")
+instrument, exposure = azcam.get_tools(["instrument", "exposure"])
+wavelength = instrument.set_wavelength(450)
+exposure.expose(2., 'flat', "a 450 nm flat field image")
 
 OR
 
 # client-side (azcamconsole)
 import azcam
 import console_itl
-wavelength = azcam.api.instrument.set_wavelength(450)
-azcam.api.exposure.expose(2., 'flat', "a 450 nm flat field image")
+instrument, exposure = azcam.get_tools(["instrument", "exposure"])
+wavelength = instrument.set_wavelength(450)
+exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
 Example configuration code can be found in `azcam.example_server_config` and `azcam.example_console_config`.
 
-When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as *api*, *db*, *exposure*, *controller*, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:
+When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as *db*, *exposure*, *controller*, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:
 
 ```python
 from azcam.cli import *
@@ -133,7 +135,7 @@ The links below describe some of the many classes and commands found in AzCam. A
 
 - [Classes](classes.md)
 - [Commands](commands.md)
-- [Console API](api_console.md)
+- [Console Tools](console_tools.md)
 
 ## Scripts
 Scripts are python code modules which generally contain one function and are available from  the command line or by importing the *azcam-scripts* extension module. They may interact with other *azcam* code if they are configured to be called automatically during enviroment configuration. Note that they may make extensive use of  the *azcam.db* database. By convention scripts use database items named as `db.scriptname_xxx`. As an example, `db.imsnap_resize=2.5"`will shrink a snapped image by 2.5x when the `imsnap` script is called. 

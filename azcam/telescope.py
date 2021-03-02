@@ -10,7 +10,8 @@ from azcam.console_tools import ConsoleTools
 
 class Telescope(Objects, ObjectHeaderMethods):
     """
-    Base telescope class.
+    The base telescope tool.
+    Usually implemented as the "telescope" tool.
     """
 
     def __init__(self, obj_id="telescope", name="Telescope"):
@@ -69,7 +70,8 @@ class Telescope(Objects, ObjectHeaderMethods):
 
 class TelescopeConsole(ConsoleTools):
     """
-    Telescope class for client.
+    Telescope tool for consoles.
+    Usually implemented as the "telescope" tool.
     """
 
     def __init__(self) -> None:
@@ -80,14 +82,14 @@ class TelescopeConsole(ConsoleTools):
         Initialize telescope.
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.initialize")
+        return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self) -> None:
         """
         Reset exposure.
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.reset")
+        return azcam.db.server.command(f"{self.objname}.reset")
 
     def get_focus(self, focus_id: int = 0) -> float:
         """
@@ -96,7 +98,7 @@ class TelescopeConsole(ConsoleTools):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_focus {focus_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
 
         return float(reply)
 
@@ -115,7 +117,7 @@ class TelescopeConsole(ConsoleTools):
         :param focus_type: focus type (absolute or step)
         """
 
-        azcam.db.server.rcommand(f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}")
+        azcam.db.server.command(f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}")
 
         return
 
@@ -126,6 +128,6 @@ class TelescopeConsole(ConsoleTools):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_focus {focus_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
 
         return float(reply)

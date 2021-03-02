@@ -13,7 +13,8 @@ from azcam.console_tools import ConsoleTools
 
 class TempCon(Objects, ObjectHeaderMethods):
     """
-    Temperature control class.
+    The base temperature control tool.
+    Usually implemented as the "tempcon" tool.
     """
 
     def __init__(self, obj_id="tempcon", name="tempcon"):
@@ -259,7 +260,8 @@ class TempCon(Objects, ObjectHeaderMethods):
 
 class TempconConsole(ConsoleTools):
     """
-    Temperature controller (tempcon) class for client.
+    Temperature controller tool for consoles.
+    Usually implemented as the "tempcon" tool.
     """
 
     def __init__(self) -> None:
@@ -272,7 +274,7 @@ class TempconConsole(ConsoleTools):
         If temperatures cannot be read, then a list of -999.99 is returned.
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_temperatures")
+        reply = azcam.db.server.command(f"{self.objname}.get_temperatures")
 
         return [float(x) for x in reply]
 
@@ -286,7 +288,7 @@ class TempconConsole(ConsoleTools):
         :param temperature_id: temperature sensor ID flag
         """
 
-        return azcam.db.server.rcommand(
+        return azcam.db.server.command(
             f"{self.objname}.set_control_temperature {control_temperature} {temperature_id}"
         )
 
@@ -297,6 +299,6 @@ class TempconConsole(ConsoleTools):
         :param temperature_id: temperature ID flag
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_control_temperature {temperature_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_control_temperature {temperature_id}")
 
         return float(reply)

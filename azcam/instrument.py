@@ -13,7 +13,8 @@ from azcam.console_tools import ConsoleTools
 
 class Instrument(Objects, ObjectHeaderMethods):
     """
-    The base Instrument class.
+    The base instrument tool.
+    Usually implemented as the "instrument" tool.
     """
 
     def __init__(self, obj_id="instrument", name="Instrument"):
@@ -206,16 +207,9 @@ class Instrument(Objects, ObjectHeaderMethods):
     # ***************************************************************************
     # pressure
     # ***************************************************************************
-    def get_all_pressures(self):
+    def get_pressure(self):
         """
         Return a list of all instrument pressures.
-        """
-
-        raise NotImplementedError
-
-    def get_pressure(self, pressure_id=0):
-        """
-        Read an instrument pressure.
         """
 
         raise NotImplementedError
@@ -255,7 +249,8 @@ class Instrument(Objects, ObjectHeaderMethods):
 
 class InstrumentConsole(ConsoleTools):
     """
-    Instrument class for client.
+    Instrument tool for consoles.
+    Usually implemented as the "instrument" tool.
     """
 
     def __init__(self) -> None:
@@ -269,7 +264,7 @@ class InstrumentConsole(ConsoleTools):
         :param filter_id: filter ID flag
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.set_filter {filter_name} {filter_id}")
+        return azcam.db.server.command(f"{self.objname}.set_filter {filter_name} {filter_id}")
 
     def get_filter(self, filter_id: int = 0) -> str:
         """
@@ -278,7 +273,7 @@ class InstrumentConsole(ConsoleTools):
         :param filter_id: filter ID flag (use negative value for a list of all filters)
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.get_filter {filter_id}")
+        return azcam.db.server.command(f"{self.objname}.get_filter {filter_id}")
 
     def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
         """
@@ -288,7 +283,7 @@ class InstrumentConsole(ConsoleTools):
         :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_current {diode_id} {shutter_state}")
+        reply = azcam.db.server.command(f"{self.objname}.get_current {diode_id} {shutter_state}")
 
         return float(reply)
 
@@ -303,7 +298,7 @@ class InstrumentConsole(ConsoleTools):
         :param nd: neutral density value to set
         """
 
-        return azcam.db.server.rcommand(
+        return azcam.db.server.command(
             f"{self.objname}.set_wavelength {wavelength} {wavelength_id}"
         )
 
@@ -314,7 +309,7 @@ class InstrumentConsole(ConsoleTools):
         :param wavelength_id: wavelength ID flag  (use negative value for a list of all wavelengths)
         """
 
-        reply = float(azcam.db.server.rcommand(f"{self.objname}.get_wavelength {wavelength_id}"))
+        reply = float(azcam.db.server.command(f"{self.objname}.get_wavelength {wavelength_id}"))
 
         return reply
 
@@ -333,7 +328,7 @@ class InstrumentConsole(ConsoleTools):
         :param focus_type: focus type (absolute or step)
         """
 
-        azcam.db.server.rcommand(f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}")
+        azcam.db.server.command(f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}")
 
         return
 
@@ -347,18 +342,16 @@ class InstrumentConsole(ConsoleTools):
         :param focus_id: focus sensor ID flag
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_focus {focus_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
 
         return float(reply)
 
-    def get_pressures(self, pressure_id: int = 0) -> List[float]:
+    def get_pressure(self) -> List[float]:
         """
         Return a list of all system pressures.
-
-        :param pressure_id: pressure sensor ID flag
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_pressure {pressure_id}")
+        reply = azcam.db.server.command(f"{self.objname}.get_pressure")
 
         return [float(x) for x in reply]
 
@@ -371,4 +364,4 @@ class InstrumentConsole(ConsoleTools):
 
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.set_shutter {state} {shutter_id}")
+        return azcam.db.server.command(f"{self.objname}.set_shutter {state} {shutter_id}")

@@ -1,5 +1,5 @@
 """
-Contains the Ds9Display display tool.
+Contains the display tool.
 This tool is often implemented both by server and console.
 """
 
@@ -10,7 +10,8 @@ from azcam.header import Header, ObjectHeaderMethods
 
 class Display(Objects, ObjectHeaderMethods):
     """
-    azcam's interface to SAO's ds9 image display tool.
+    The base display tool for server and consoles.
+    Usually implemented as the "display" tool.
     """
 
     def __init__(self, obj_id="display", name="Display"):

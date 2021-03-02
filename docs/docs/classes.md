@@ -26,6 +26,6 @@ These classes and commands are useful both in server and console applications.
 ### Console API
 This class is used within console applications which may be connected to an *azcamserver* process via a socket.
 
-- [Console API](api_console.md)
+- [Console Tools](console_tools.md)
 
 

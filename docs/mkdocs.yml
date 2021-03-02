@@ -58,6 +58,6 @@ nav:
   - Home: index.md
   - Classes: classes.md
   - Commands: commands.md
-  - Console API: api_console.md
+  - Console Tools: console_tools.md
   - Advanced: programming.md
   - Database: database.md

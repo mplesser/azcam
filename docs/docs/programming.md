@@ -28,16 +28,14 @@ There are many other dependencies depending on configuration. Examples are:
 
 ## Versioning
 Because Azcam consists of many different modules and plugins, there is no single version 
-number or date which uniquely identifies all the code. One indicator of the current version is to 
-issue the command `azcam.api.exposure.get_par("version")`.
+number or date which uniquely identifies all the code.
 
 ## Conventions
 Modules (files), objects (such as *controller*), command names (methods) and attributes (parameters) are all lowercase.
 Filenames should be given with forward slash ('/') separators, even on Windows 
 machines. If back slashes are needed, they must be doubled as in `c:\\data`. Strings must 
-be enclosed in quotation marks, as in `get_par('version')`. Quotation marks must match ('version" is 
-not acceptable). A quotation mark may be included in a string by preceding it with a backslash 
-("I am Mike\'s dog.")
+be enclosed in quotation marks, as in `params.get_par('imageroot')`. Quotation marks must match 
+('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash ("I am Mike\'s dog.")
 
 ## Objects
 Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
@@ -51,8 +49,8 @@ such as `object.command('ITL', 1.234,45)`. For example, the command to initializ
 instrument is `instrument.initialize()` and the command to get instrument focus is `telescope.get_focus()`.
 
 ## Attributes
-Parameters may be read with the `azcam.api.exposure.get_par()` command and written with the `azcam.api.exposure.set_par()` 
-command. For example, `azcam.api.exposure.get_par('imagetype')` returns the current image type.
+Parameters may be read with the `params.get_par()` command and written with the `params.set_par()` 
+command. For example, `params.get_par('imagetype')` returns the current image type.
 
 ## Logging
 The `azcam.log()` function should be used for output instead of python's `print()` function. 

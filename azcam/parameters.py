@@ -195,7 +195,7 @@ class Parameters(object):
         if azcam.db.mode == "console":
             server = azcam.get_tools("server")
             try:
-                reply = server.rcommand(f"params.get_par {parameter}")
+                reply = server.command(f"params.get_par {parameter}")
             except azcam.AzcamError:
                 return
             _, value = azcam.utils.get_datatype(reply)
@@ -281,7 +281,7 @@ class Parameters(object):
         if azcam.db.mode == "console":
             server = azcam.get_tools("server")
             try:
-                server.rcommand(f"params.set_par {parameter} {value}")
+                server.command(f"params.set_par {parameter} {value}")
             except azcam.AzcamError:
                 return
             return value

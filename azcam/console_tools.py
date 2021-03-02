@@ -4,7 +4,7 @@ This is the interface to azcamserver using the
 socket-based command server.
 """
 
-from typing import Optional
+from typing import Optional, Any
 
 import azcam
 import azcam.sockets
@@ -12,35 +12,42 @@ import azcam.sockets
 
 class ConsoleTools(object):
     """
-    Common methods used by all console tools.
+    Common methods included in most console tools.
     """
 
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
+        """
+        Args:
+            name (str): name of this tool.
+        """
+
         self.objname = name
         azcam.db.cli_objects[self.objname] = self
         setattr(azcam.db, self.objname, self)
 
     def initialize(self) -> None:
         """
-        Initialize tool.
+        Initialize this tool.
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.initialize")
+        return azcam.db.server.command(f"{self.objname}.initialize")
 
     def reset(self) -> None:
         """
-        Reset tool.
+        Reset this tool.
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.reset")
+        return azcam.db.server.command(f"{self.objname}.reset")
 
-    def get(self, name):
+    def get(self, name: str) -> Any:
         """
-        Returns an object attribute by name.
-        Returns None if not available.
+        Returns an attribute of this tool by name.
+
+        Returns:
+            attribute or None if not available
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get {name}")
+        reply = azcam.db.server.command(f"{self.objname}.get {name}")
 
         return reply
 
@@ -50,16 +57,17 @@ class ConsoleTools(object):
         This command usually reads hardware to get the lastest keyword values.
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.update_header")
+        return azcam.db.server.command(f"{self.objname}.update_header")
 
     def read_header(self):
         """
         Returns the current header.
+
         Returns:
             list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.read_header")
+        return azcam.db.server.command(f"{self.objname}.read_header")
 
     def set_keyword(
         self,
@@ -83,44 +91,49 @@ class ConsoleTools(object):
 
         s = f"{self.objname}.set_keyword {keyword} {value} {comment} {typestring}"
 
-        return azcam.db.server.rcommand(s)
+        return azcam.db.server.command(s)
 
     def get_keyword(self, keyword: str) -> str:
         """
         Return a keyword value, its comment string, and type.
         Comment always returned in double quotes, even if empty.
+
         Args:
             keyword: name of keyword
         Returns:
             list of [keyword, comment, type]
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.get_keyword {keyword}")
+        return azcam.db.server.command(f"{self.objname}.get_keyword {keyword}")
 
     def delete_keyword(self, keyword: str) -> Optional[str]:
         """
         Delete a keyword from a header.
-        The keyword is set in the controller header by default.
 
-        :param keyword: keyword name
+        Args:
+            keyword: name of keyword
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.delete_keyword {keyword}")
+        return azcam.db.server.command(f"{self.objname}.delete_keyword {keyword}")
 
-    def get_all_keywords(self):
+    def get_all_keywords(self) -> list:
         """
         Return a list of all keyword names.
+
         Returns:
-            keywords: list of all keywords
+            list of all keywords
         """
 
-        reply = azcam.db.server.rcommand(f"{self.objname}.get_all_keywords")
+        reply = azcam.db.server.command(f"{self.objname}.get_all_keywords")
 
         return reply
 
-    def get_string(self):
+    def get_string(self) -> str:
         """
-        Returns the entire header as a single formatted string.
+        Returns the entire header as a formatted string.
+
+        Returns:
+            single formatted string of keywords, values, and comments.
         """
 
         lines = ""
@@ -135,7 +148,8 @@ class ConsoleTools(object):
 
 class ServerConnection(azcam.sockets.SocketInterface):
     """
-    Server connection class for console tools to azcamserver.
+    Server connection tool for consoles.
+    Usually implemented as the "server" tool.
     """
 
     def __init__(self) -> None:
@@ -155,7 +169,7 @@ class ServerConnection(azcam.sockets.SocketInterface):
 
         if self.open():
             connected = True
-            self.rcommand("register console")
+            self.command("register console")
         else:
             connected = False
 
@@ -163,7 +177,7 @@ class ServerConnection(azcam.sockets.SocketInterface):
 
         return connected
 
-    def rcommand(self, command):
+    def command(self, command):
         """
         Send a command to a server process using the 'server' object in the database.
         This command traps all errors and returns exceptions and as error string.
@@ -184,7 +198,7 @@ class ServerConnection(azcam.sockets.SocketInterface):
         # status for socket communications is OK or ERROR
         if reply[0] == "ERROR":
             azcam.log(reply[1])
-            raise azcam.AzcamError(f"rcommand error: {reply[1]}")
+            raise azcam.AzcamError(f"command error: {reply[1]}")
         elif reply[0] == "OK":
             if len(reply) == 1:
                 return None

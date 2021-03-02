@@ -10,7 +10,9 @@ from azcam.console_tools import ConsoleTools
 
 class Controller(Objects, ObjectHeaderMethods):
     """
-    The base controller class for azcam-supported controllers.
+    The base controller tool.
+    Usually implemented as the "controller" tool.
+
     Attributes:
         self.interface_type (int): 0 = demo, 4 = PCIe
         self.header (Header object): controller header
@@ -193,7 +195,8 @@ class DetPars(object):
 
 class ControllerConsole(ConsoleTools):
     """
-    Controller tool interface for console.
+    Controller tool for consoles.
+    Usually implemented as the "controller" tool.
     """
 
     def __init__(self) -> None:
@@ -207,4 +210,4 @@ class ControllerConsole(ConsoleTools):
 
         """
 
-        return azcam.db.server.rcommand(f"{self.objname}.set_shutter {state}")
+        return azcam.db.server.command(f"{self.objname}.set_shutter {state}")
