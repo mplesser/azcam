@@ -23,6 +23,8 @@ plotdata = {
     "EnteredAxes": 0,
 }
 
+# can combine stypes like "bo-"
+
 style_x = [
     "bx",
     "rx",
@@ -81,23 +83,23 @@ style_dot = [
     "g.",
 ]
 style_lines = [
-    "bx-",
-    "rx-",
-    "gx-",
-    "cx-",
-    "mx-",
-    "yx-",
-    "kx-",
-    "bx-",
-    "rx-",
-    "gx-",
-    "cx-",
-    "mx-",
-    "yx-",
-    "kx-",
-    "bx-",
-    "rx-",
-    "gx-",
+    "b-",
+    "r-",
+    "g-",
+    "c-",
+    "m-",
+    "y-",
+    "k-",
+    "b-",
+    "r-",
+    "g-",
+    "c-",
+    "m-",
+    "y-",
+    "k-",
+    "b-",
+    "r-",
+    "g-",
 ]
 
 

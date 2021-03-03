@@ -220,7 +220,7 @@ class Instrument(Objects, ObjectHeaderMethods):
             p = self.get_pressure(pressure_id)
             pressures.append(p)
 
-        raise pressures
+        return pressures
 
     def get_pressure(self, pressure_id=0):
         """
@@ -367,6 +367,7 @@ class InstrumentConsole(ConsoleTools):
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_pressures")
+        reply = reply.split(" ")
 
         return [float(x) for x in reply]
 
