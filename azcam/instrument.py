@@ -30,6 +30,9 @@ class Instrument(Objects, ObjectHeaderMethods):
         # focus position
         self.focus_position = 0
 
+        # system pressures
+        self.pressure_ids = [0]
+
         azcam.db.objects_init["instrument"] = self
         azcam.db.objects_reset["instrument"] = self
 
@@ -207,9 +210,21 @@ class Instrument(Objects, ObjectHeaderMethods):
     # ***************************************************************************
     # pressure
     # ***************************************************************************
-    def get_pressure(self):
+    def get_pressures(self):
         """
         Return a list of all instrument pressures.
+        """
+
+        pressures = []
+        for pressure_id in self.pressure_ids:
+            p = self.get_pressure(pressure_id)
+            pressures.append(p)
+
+        raise pressures
+
+    def get_pressure(self, pressure_id=0):
+        """
+        Read an instrument pressure.
         """
 
         raise NotImplementedError
@@ -346,12 +361,12 @@ class InstrumentConsole(ConsoleTools):
 
         return float(reply)
 
-    def get_pressure(self) -> List[float]:
+    def get_pressures(self) -> List[float]:
         """
         Return a list of all system pressures.
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_pressure")
+        reply = azcam.db.server.command(f"{self.objname}.get_pressures")
 
         return [float(x) for x in reply]
 

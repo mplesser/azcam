@@ -146,7 +146,7 @@ class ConsoleTools(object):
         return lines
 
 
-class ServerConnection(azcam.sockets.SocketInterface):
+class ServerConnection(object):
     """
     Server connection tool for consoles.
     Usually implemented as the "server" tool.
@@ -154,7 +154,7 @@ class ServerConnection(azcam.sockets.SocketInterface):
 
     def __init__(self) -> None:
 
-        azcam.sockets.SocketInterface.__init__(self)
+        self.remserver = azcam.sockets.SocketInterface()
         self.connected = False
         azcam.db.cli_objects["server"] = self
         setattr(azcam.db, "server", self)
@@ -167,9 +167,12 @@ class ServerConnection(azcam.sockets.SocketInterface):
         self.host = host
         self.port = port
 
-        if self.open():
+        self.remserver.host = host
+        self.remserver.port = port
+
+        if self.remserver.open():
             connected = True
-            self.command("register console")
+            self.remserver.command("register console")
         else:
             connected = False
 
@@ -187,7 +190,7 @@ class ServerConnection(azcam.sockets.SocketInterface):
 
         # get tokenized reply - check for comm error
         try:
-            reply = self.command(command)
+            reply = self.remserver.command(command)
         except azcam.AzcamError as e:
             if e.error_code == 2:
                 raise
@@ -213,10 +216,11 @@ class ServerConnection(azcam.sockets.SocketInterface):
 
 
 def load(tools="all"):
-    """Load console tools
+    """
+    Load console tools.
 
     Args:
-        tools ([type]): [description]
+        tools (str or list[str]): tool name or list of names
     """
 
     from azcam.system import SystemConsole
