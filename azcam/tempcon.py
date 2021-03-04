@@ -29,6 +29,9 @@ class TempCon(Objects, ObjectHeaderMethods):
         # control temperature number (which temp is regulated)
         self.control_temperature_number = 0
 
+        # system temperatures
+        self.temperature_ids = [0]
+
         # True to correct temperature offset and scale for each temperature
         # Scaling is **new = old * scale + offset**
         self.temperature_correction = 0
@@ -41,9 +44,6 @@ class TempCon(Objects, ObjectHeaderMethods):
 
         # number of temperature sensors
         self.number_sensors = 4
-
-        # log temperatures
-        self.log_temps = False
 
         # value returned when temperature read is bad
         self.bad_temp_value = -999.9
@@ -139,6 +139,18 @@ class TempCon(Objects, ObjectHeaderMethods):
 
         return self.control_temperature
 
+    def get_pressures(self):
+        """
+        Return a list of all instrument pressures.
+        """
+
+        pressures = []
+        for pressure_id in self.pressure_ids:
+            p = self.get_pressure(pressure_id)
+            pressures.append(p)
+
+        return pressures
+
     def get_temperatures(self) -> List[float]:
         """
         Return all system temperatures.
@@ -146,10 +158,10 @@ class TempCon(Objects, ObjectHeaderMethods):
             temperatures: list of temperatures read
         """
 
-        temps = [self.get_temperature(i) for i in range(self.number_sensors)]
-
-        if self.log_temps:
-            azcam.log(f"templog: {temps[0]} {temps[1]} {temps[2]} {temps[3]}", logconsole=0)
+        temps = []
+        for temperature_id in self.temperature_ids:
+            p = self.get_temperature(temperature_id)
+            temps.append(p)
 
         return temps
 
