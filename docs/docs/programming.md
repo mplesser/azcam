@@ -37,7 +37,7 @@ machines. If back slashes are needed, they must be doubled as in `c:\\data`. Str
 be enclosed in quotation marks, as in `params.get_par('imageroot')`. Quotation marks must match 
 ('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash ("I am Mike\'s dog.")
 
-## Objects
+## Tools
 Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
 provide control of all aspects of Azcam. These commands (methods) interact with hardware such as controllers, 
 instruments, temperature controllers, and telescopes as well as with more virtual objects such as the 

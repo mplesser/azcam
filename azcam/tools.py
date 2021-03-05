@@ -8,62 +8,69 @@ import typing
 import azcam
 
 
-class Objects(object):
+class Tools(object):
     """
-    Base class used by main objects (controller, instrument, telescope, etc.).
+    Base class used by tools (controller, instrument, telescope, etc.).
 
     Attributes:
-        self.id (str): name used to reference the object (controller, display, ...)
-        self.name (str): descriptive name for the object
-        self.enabled (bool): True (default) when object is enabled
-        self.initialized (bool): True when object has been initialized
-        self.is_reset (bool): True when object has been reset
+        self.obj_id (str): name used to reference the tool (controller, display, ...)
+        self.description (str): descriptive of the tool
+        self.enabled (bool): True (default) when tool is enabled
+        self.initialized (bool): True when tool has been initialized
+        self.is_reset (bool): True when tool has been reset
     """
 
-    def __init__(self, obj_id: str, name: str = "unknown"):
+    def __init__(self, obj_id: str, description: str = None):
         """
         Args:
-            obj_id: name used to reference the object (controller, display, ...)
-            name: descriptive name for the object
+            obj_id: name used to reference the tool (controller, display, ...)
+            description: descriptive of this tool
         """
 
-        # id is the name used to reference the object (controller, display, ...)
-        self.id = obj_id
+        # id is the name used to reference the tool (controller, display, ...)
+        self.obj_id = obj_id
 
-        # name is a descriptive name for the object
-        self.name = name
+        # descriptive name
+        if description is None:
+            self.description = self.obj_id
+        else:
+            self.description = description
 
-        # True when object is enabled
+        # True when tool is enabled
         self.enabled = 1
 
-        # True when object has been initialized
+        # True when tool has been initialized
         self.initialized = 0
 
-        # True when object has been reset
+        # True when tool has been reset
         self.is_reset = 0
 
         # save instance to db
-        setattr(azcam.db, self.id, self)
+        setattr(azcam.db, self.obj_id, self)
+
+        # save tool name
+        if self.obj_id not in azcam.db.toolnames:
+            azcam.db.toolnames.append(self.obj_id)
 
         # save for command line
-        azcam.db.cli_objects[self.id] = self
+        azcam.db.cli_objects[self.obj_id] = self
 
         # allow remote access if server
         try:
-            azcam.db.remote_objects.append(self.id)
+            azcam.db.remote_objects.append(self.obj_id)
         except AttributeError:
             pass
 
     def initialize(self):
         """
-        Initialize the object.
+        Initialize the tool.
         """
 
         if self.initialized:
             return
 
         if not self.enabled:
-            azcam.AzcamWarning(f"{self.name} is not enabled")
+            azcam.AzcamWarning(f"{self.description} is not enabled")
             return
 
         self.initialized = 1
@@ -72,7 +79,7 @@ class Objects(object):
 
     def reset(self):
         """
-        Reset the object.
+        Reset the tool.
         """
 
         self.is_reset = 1

@@ -6,20 +6,20 @@ import time
 from typing import List, Optional, Union
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.console_tools import ConsoleTools
 
 
-class Instrument(Objects, ObjectHeaderMethods):
+class Instrument(Tools, ObjectHeaderMethods):
     """
     The base instrument tool.
     Usually implemented as the "instrument" tool.
     """
 
-    def __init__(self, obj_id="instrument", name="Instrument"):
+    def __init__(self, obj_id="instrument", description=None):
 
-        super().__init__(obj_id, name)
+        super().__init__(obj_id, description)
 
         # active comparisons
         self.active_comps = []

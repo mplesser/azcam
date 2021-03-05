@@ -3,20 +3,20 @@ Contains the base Telescope class.
 """
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.console_tools import ConsoleTools
 
 
-class Telescope(Objects, ObjectHeaderMethods):
+class Telescope(Tools, ObjectHeaderMethods):
     """
     The base telescope tool.
     Usually implemented as the "telescope" tool.
     """
 
-    def __init__(self, obj_id="telescope", name="Telescope"):
+    def __init__(self, obj_id="telescope", description=None):
 
-        super().__init__(obj_id, name)
+        super().__init__(obj_id, description)
 
         # focus position
         self.focus_position = 0
@@ -37,7 +37,7 @@ class Telescope(Objects, ObjectHeaderMethods):
             return
 
         if not self.enabled:
-            azcam.AzcamWarning(f"{self.name} is not enabled")
+            azcam.AzcamWarning(f"{self.description} is not enabled")
             return
 
         return

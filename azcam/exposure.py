@@ -11,7 +11,7 @@ from typing import List, Optional, Union
 import numpy
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.image import Image
 from azcam.filename import Filename
@@ -19,7 +19,7 @@ from azcam.obstime import ObsTime
 from azcam.console_tools import ConsoleTools
 
 
-class Exposure(Objects, Filename, ObjectHeaderMethods):
+class Exposure(Tools, Filename, ObjectHeaderMethods):
     """
     The base exposure tool.
     Usually implemented as the "exposure" tool.
@@ -28,9 +28,9 @@ class Exposure(Objects, Filename, ObjectHeaderMethods):
     which should inherit this class.
     """
 
-    def __init__(self, obj_id="exposure", name="Exposure"):
+    def __init__(self, obj_id="exposure", description=None):
 
-        Objects.__init__(self, obj_id, name)
+        Tools.__init__(self, obj_id, description)
 
         Filename.__init__(self)
 

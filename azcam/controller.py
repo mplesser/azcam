@@ -3,12 +3,12 @@ Contains the base Controller class.
 """
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.console_tools import ConsoleTools
 
 
-class Controller(Objects, ObjectHeaderMethods):
+class Controller(Tools, ObjectHeaderMethods):
     """
     The base controller tool.
     Usually implemented as the "controller" tool.
@@ -21,9 +21,14 @@ class Controller(Objects, ObjectHeaderMethods):
         self.reset_flag (bool): True if the controller has been reset
     """
 
-    def __init__(self, obj_id="controller", name="Controller"):
+    def __init__(self, obj_id="controller", description=None):
+        """
+        Args:
+            obj_id: tool name
+            description:   description of this tool
+        """
 
-        super().__init__(obj_id, name)
+        super().__init__(obj_id, description)
 
         # interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0

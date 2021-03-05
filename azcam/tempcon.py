@@ -6,22 +6,20 @@ from typing import List
 from typing import List, Optional, Union
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.console_tools import ConsoleTools
 
 
-class TempCon(Objects, ObjectHeaderMethods):
+class TempCon(Tools, ObjectHeaderMethods):
     """
     The base temperature control tool.
     Usually implemented as the "tempcon" tool.
     """
 
-    def __init__(self, obj_id="tempcon", name="tempcon"):
+    def __init__(self, obj_id="tempcon", description=None):
 
-        super().__init__(obj_id, name)
-
-        self.id
+        super().__init__(obj_id, description)
 
         # control or set temperature at which to regulate
         self.control_temperature = 0.0
@@ -41,9 +39,6 @@ class TempCon(Objects, ObjectHeaderMethods):
         self.temperature_scales = [1.0]
         # calibration flags for each temperature
         self.temperature_cals = [3]
-
-        # number of temperature sensors
-        self.number_sensors = 4
 
         # value returned when temperature read is bad
         self.bad_temp_value = -999.9
@@ -75,7 +70,7 @@ class TempCon(Objects, ObjectHeaderMethods):
             return
 
         if not self.enabled:
-            azcam.AzcamWarning(f"{self.name} is not enabled")
+            azcam.AzcamWarning(f"{self.description} is not enabled")
             return
 
         self.initialized = 1

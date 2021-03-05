@@ -5,12 +5,12 @@ including "system header" commands.
 """
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.console_tools import ConsoleTools
 
 
-class System(Objects, ObjectHeaderMethods):
+class System(Tools, ObjectHeaderMethods):
     """
     System tool class.
     """
@@ -21,8 +21,6 @@ class System(Objects, ObjectHeaderMethods):
 
         self.header = Header(system_name, template_file)
         self.header.set_header("system", 0)
-
-        # self.define_keywords()
 
         return
 

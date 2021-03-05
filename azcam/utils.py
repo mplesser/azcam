@@ -1,5 +1,5 @@
 """
-General support commands for throughout azcam code.
+General purpose support commands used throughout azcam code.
 """
 
 import importlib

@@ -4,19 +4,19 @@ This tool is often implemented both by server and console.
 """
 
 import azcam
-from azcam.baseobject import Objects
+from azcam.tools import Tools
 from azcam.header import Header, ObjectHeaderMethods
 
 
-class Display(Objects, ObjectHeaderMethods):
+class Display(Tools, ObjectHeaderMethods):
     """
     The base display tool for server and consoles.
     Usually implemented as the "display" tool.
     """
 
-    def __init__(self, obj_id="display", name="Display"):
+    def __init__(self, obj_id="display", description=None):
 
-        super().__init__(obj_id, name)
+        super().__init__(obj_id, description)
 
         # create the display Header object
         self.header = Header("Display")

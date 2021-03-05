@@ -142,6 +142,9 @@ class AzcamDatabase(object):
         "ERROR": 11,
     }
 
+    # tool names
+    toolnames = []
+
     def __init__(self):
         pass
 
