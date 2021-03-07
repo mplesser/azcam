@@ -28,9 +28,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
     which should inherit this class.
     """
 
-    def __init__(self, obj_id="exposure", description=None):
+    def __init__(self, tool_id="exposure", description=None):
 
-        Tools.__init__(self, obj_id, description)
+        Tools.__init__(self, tool_id, description)
 
         Filename.__init__(self)
 
@@ -183,9 +183,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         Initialize exposure.
         """
 
-        # call initialize() method on other objects
-        for obj in azcam.db.objects_init:
-            azcam.db.get(obj).initialize()
+        # call initialize() method on other tools
+        for tool in azcam.db.tools_init:
+            azcam.db.get(tool).initialize()
 
         self.initialized = 1
 
@@ -211,9 +211,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.save_file = 1
         self.exposure_flag = self.exposureflags["NONE"]
 
-        # call reset() method on other objects
-        for obj in azcam.db.objects_reset:
-            azcam.db.get(obj).reset()
+        # call reset() method on other tools
+        for tool in azcam.db.tools_reset:
+            azcam.db.get(tool).reset()
 
         return
 

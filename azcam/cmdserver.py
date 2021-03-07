@@ -13,7 +13,7 @@ import azcam
 
 class CommandServer(socketserver.ThreadingTCPServer):
     """
-    CommandServer class to receive and execute client commands.
+    CommandServer class to receive and execute client commands over the socket interface.
 
     This is a socket server which receives command strings, executes them, and returns a reply string.
     The server normally runs in a thread so as to not block the command line. Each client which
@@ -39,7 +39,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
         self.socketnames = {}
         self.use_clientname = 1  # log client name with command
 
-        self.default_object = None
+        self.default_tool = None
 
         self.currentclient = 0
 
@@ -66,7 +66,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
         except Exception as message:
             self.is_running = 0
             azcam.log(f"ERROR in cmdserver:{repr(message)} Is it already running? Exiting...")
-            time.sleep(3)
+            time.sleep(2)
             os._exit(1)
 
         # Exits here when server is aborted
@@ -79,7 +79,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
         """
 
         cmdthread = threading.Thread(target=self.begin, name="cmdserver")
-        cmdthread.daemon = True  # terminates wehn main process exits
+        cmdthread.daemon = True  # terminates when main process exits
         cmdthread.start()
 
         return
@@ -92,80 +92,6 @@ class CommandServer(socketserver.ThreadingTCPServer):
         self.server.shutdown()
         self.is_running = 0
         return
-
-    def command(self, command: str, **kwargs):
-        """
-        Parse and execute a command string with optional arguments.
-        Returns the reply string, always starting with OK or ERROR.
-        """
-
-        # parse command string
-        tokens = azcam.utils.parse(command, 0)
-        cmd = tokens[0]
-
-        # command must be of form object.command
-        if ("." in cmd) or (self.default_object is not None):
-
-            if "." in cmd:
-                cmdobject, cmdcommand = cmd.split(".")
-            else:
-                cmdobject = self.default_object
-                cmdcommand = cmd
-
-            if cmdobject not in azcam.db.remote_objects:
-                azcam.log(f"Remote access to {cmdobject} not allowed")
-                return
-
-            cmd = getattr(azcam.db, cmdobject)
-            cmd = getattr(cmd, cmdcommand)
-            kwargs = {}
-            l1 = len(tokens)
-            if l1 > 1:
-                args = tokens[1:]
-                if "=" in args[0]:
-                    # assume all keywords for now
-                    kwargs = {}
-                    for argtoken in args:
-                        keyword, value = argtoken.split("=")
-                        kwargs[keyword] = value
-                    args = []
-            else:
-                args = []
-            reply = cmd(*args, **kwargs)  # execute
-        else:
-            s = f"ERROR {cmd} not recognized"
-            azcam.log(s)
-            return s
-
-        # process reply
-        if reply is None or reply == "":
-            s = ""
-
-        elif type(reply) == str:
-            s = reply
-
-        elif type(reply) == list:
-            s = ""
-            for x in reply:
-                if type(x) == str and " " in x:  # check if space in the string
-                    s = s + " " + "'" + str(x) + "'"
-                else:
-                    s = s + " " + str(x)
-            s = s.strip()
-
-        else:
-            s = repr(reply)
-
-            if s != '""':
-                s = s.strip()
-
-        # add OK status if needed
-        if not (s.startswith("OK") or s.startswith("ERROR") or s.startswith("WARNING")):
-            s = "OK " + s
-
-        s = s.strip()
-
-        return s
 
 
 class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
@@ -302,7 +228,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 if command_string != "":
 
                     # execute command
-                    reply = azcam.db.cmdserver.command(command_string)
+                    reply = azcam.db.api.execute_cmdstring(command_string)
 
                     # log reply
                     if azcam.db.cmdserver.logcommands:

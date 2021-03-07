@@ -5,9 +5,9 @@ Usage:  from azcam.cli import *
 """
 import azcam
 
-for name in azcam.db.cli_objects:
-    globals()[name] = azcam.db.cli_objects[name]
-__all__ = [x for x in azcam.db.cli_objects.keys()]
+for name in azcam.db.cli_tools:
+    globals()[name] = azcam.db.cli_tools[name]
+__all__ = [x for x in azcam.db.cli_tools.keys()]
 
 __all__.append("azcam")
 db = azcam.db

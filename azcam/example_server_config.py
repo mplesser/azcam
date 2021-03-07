@@ -37,7 +37,7 @@ azcam.db.logger.start_logging()
 azcam.log(f"Configuring {azcam.db.systemname}")
 
 # ****************************************************************
-# define objects
+# define tools
 # ****************************************************************
 display = Ds9Display()
 telescope = Telescope()

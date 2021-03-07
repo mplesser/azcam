@@ -22,7 +22,7 @@ class ConsoleTools(object):
         """
 
         self.objname = name
-        azcam.db.cli_objects[self.objname] = self
+        azcam.db.cli_tools[self.objname] = self
         setattr(azcam.db, self.objname, self)
 
     def initialize(self) -> None:
@@ -156,7 +156,7 @@ class ServerConnection(object):
 
         self.remserver = azcam.sockets.SocketInterface()
         self.connected = False
-        azcam.db.cli_objects["server"] = self
+        azcam.db.cli_tools["server"] = self
         setattr(azcam.db, "server", self)
 
     def connect(self, host="localhost", port=2402):
@@ -200,8 +200,7 @@ class ServerConnection(object):
 
         # status for socket communications is OK or ERROR
         if reply[0] == "ERROR":
-            azcam.log(reply[1])
-            raise azcam.AzcamError(f"command error: {reply[1]}")
+            raise azcam.AzcamError(f"command error: {' '.join(reply[1:])}")
         elif reply[0] == "OK":
             if len(reply) == 1:
                 return None
@@ -210,7 +209,7 @@ class ServerConnection(object):
             else:
                 return reply[1:]
         else:
-            raise azcam.AzcamError(f"invalid server response: {reply}")
+            raise azcam.AzcamError(f"invalid server response: { ' '.join(reply)}")
 
         return  # can't get here
 

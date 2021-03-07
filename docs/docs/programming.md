@@ -38,14 +38,15 @@ be enclosed in quotation marks, as in `params.get_par('imageroot')`. Quotation m
 ('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash ("I am Mike\'s dog.")
 
 ## Tools
-Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
+Python is an object oriented programming language and objects are used extensively in Azcam. The main objects are instances of azcam 
+Classes are are referred to as *tools* in azcam. Object-based commands 
 provide control of all aspects of Azcam. These commands (methods) interact with hardware such as controllers, 
-instruments, temperature controllers, and telescopes as well as with more virtual objects such as the 
+instruments, temperature controllers, and telescopes as well as with more virtual tools such as the 
 exposures, images, databases, time, communication interfaces, etc. 
-The required command syntax is `object.command(args)` where `object` is the object name (such as 
+The required command syntax is `tool.command(args)` where `tool` is the tool name (such as 
 *controller*, *instrument*, *telescope*, etc.) and `command()` is the command to be sent. If `command()`
 uses arguments, they are specified as comma separated values of the appropriate type, 
-such as `object.command('ITL', 1.234,45)`. For example, the command to initialize to the 
+such as `tool.command('ITL', 1.234,45)`. For example, the command to initialize to the 
 instrument is `instrument.initialize()` and the command to get instrument focus is `telescope.get_focus()`.
 
 ## Attributes

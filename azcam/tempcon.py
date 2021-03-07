@@ -17,9 +17,9 @@ class TempCon(Tools, ObjectHeaderMethods):
     Usually implemented as the "tempcon" tool.
     """
 
-    def __init__(self, obj_id="tempcon", description=None):
+    def __init__(self, tool_id="tempcon", description=None):
 
-        super().__init__(obj_id, description)
+        super().__init__(tool_id, description)
 
         # control or set temperature at which to regulate
         self.control_temperature = 0.0
@@ -56,8 +56,8 @@ class TempCon(Tools, ObjectHeaderMethods):
         self.header.typestrings = {"CAMTEMP": "float", "DEWTEMP": "float"}
         self.define_keywords()
 
-        azcam.db.objects_init["tempcon"] = self
-        azcam.db.objects_reset["tempcon"] = self
+        azcam.db.tools_init["tempcon"] = self
+        azcam.db.tools_reset["tempcon"] = self
 
         return
 

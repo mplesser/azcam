@@ -611,7 +611,7 @@ def restore_imagepars(imagepars, folder=""):
 
 def load_scripts(folder: str) -> None:
     """
-    Load all scripts from folder into azcam.db.cli_objects
+    Load all scripts from folder into azcam.db.cli_tools
     """
 
     folder = fix_path(folder)
@@ -631,7 +631,7 @@ def load_scripts(folder: str) -> None:
         try:
             mod = importlib.import_module(f"{pfile}")
             func = getattr(mod, pfile)
-            azcam.db.cli_objects[pfile] = func
+            azcam.db.cli_tools[pfile] = func
         except Exception as e:
             print(e)
             azcam.AzcamWarning(f"Could not import script {pfile}")

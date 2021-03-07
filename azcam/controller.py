@@ -21,14 +21,14 @@ class Controller(Tools, ObjectHeaderMethods):
         self.reset_flag (bool): True if the controller has been reset
     """
 
-    def __init__(self, obj_id="controller", description=None):
+    def __init__(self, tool_id="controller", description=None):
         """
         Args:
-            obj_id: tool name
+            tool_id: tool name
             description:   description of this tool
         """
 
-        super().__init__(obj_id, description)
+        super().__init__(tool_id, description)
 
         # interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0
@@ -43,8 +43,8 @@ class Controller(Tools, ObjectHeaderMethods):
 
         self.reset_flag = 0
 
-        azcam.db.objects_init["controller"] = self
-        azcam.db.objects_reset["controller"] = self
+        azcam.db.tools_init["controller"] = self
+        azcam.db.tools_reset["controller"] = self
 
     def set_roi(self):
         """

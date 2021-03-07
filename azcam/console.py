@@ -8,7 +8,7 @@ azcam.db.mode = "console"
 # local configuration parameters
 params = Parameters("azcamconsole")
 setattr(azcam.db, "params", params)
-azcam.db.cli_objects["params"] = params
+azcam.db.cli_tools["params"] = params
 
 # logging
 from azcam.logging import Logger

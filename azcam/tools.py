@@ -13,26 +13,26 @@ class Tools(object):
     Base class used by tools (controller, instrument, telescope, etc.).
 
     Attributes:
-        self.obj_id (str): name used to reference the tool (controller, display, ...)
+        self.tool_id (str): name used to reference the tool (controller, display, ...)
         self.description (str): descriptive of the tool
         self.enabled (bool): True (default) when tool is enabled
         self.initialized (bool): True when tool has been initialized
         self.is_reset (bool): True when tool has been reset
     """
 
-    def __init__(self, obj_id: str, description: str = None):
+    def __init__(self, tool_id: str, description: str = None):
         """
         Args:
-            obj_id: name used to reference the tool (controller, display, ...)
+            tool_id: name used to reference the tool (controller, display, ...)
             description: descriptive of this tool
         """
 
         # id is the name used to reference the tool (controller, display, ...)
-        self.obj_id = obj_id
+        self.tool_id = tool_id
 
         # descriptive name
         if description is None:
-            self.description = self.obj_id
+            self.description = self.tool_id
         else:
             self.description = description
 
@@ -46,18 +46,18 @@ class Tools(object):
         self.is_reset = 0
 
         # save instance to db
-        setattr(azcam.db, self.obj_id, self)
+        setattr(azcam.db, self.tool_id, self)
 
         # save tool name
-        if self.obj_id not in azcam.db.toolnames:
-            azcam.db.toolnames.append(self.obj_id)
+        if self.tool_id not in azcam.db.toolnames:
+            azcam.db.toolnames.append(self.tool_id)
 
         # save for command line
-        azcam.db.cli_objects[self.obj_id] = self
+        azcam.db.cli_tools[self.tool_id] = self
 
         # allow remote access if server
         try:
-            azcam.db.remote_objects.append(self.obj_id)
+            azcam.db.remote_tools.append(self.tool_id)
         except AttributeError:
             pass
 

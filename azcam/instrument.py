@@ -17,9 +17,9 @@ class Instrument(Tools, ObjectHeaderMethods):
     Usually implemented as the "instrument" tool.
     """
 
-    def __init__(self, obj_id="instrument", description=None):
+    def __init__(self, tool_id="instrument", description=None):
 
-        super().__init__(obj_id, description)
+        super().__init__(tool_id, description)
 
         # active comparisons
         self.active_comps = []
@@ -33,8 +33,8 @@ class Instrument(Tools, ObjectHeaderMethods):
         # system pressures
         self.pressure_ids = [0]
 
-        azcam.db.objects_init["instrument"] = self
-        azcam.db.objects_reset["instrument"] = self
+        azcam.db.tools_init["instrument"] = self
+        azcam.db.tools_reset["instrument"] = self
 
         # instrument header object
         self.header = Header("Instrument")

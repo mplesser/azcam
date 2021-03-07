@@ -100,7 +100,7 @@ class Image(object):
         # Allows saving data using other data format than BITPIX2
         self.save_data_format = 16
 
-        # sub-objects
+        # sub-tools
         self.header = Header()
         self.focalplane = FocalPlane()
         self.asm_header = Header()  # Header for assembled image

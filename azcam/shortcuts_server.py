@@ -53,4 +53,4 @@ def p():
 
 
 # add to CLI dictionary
-azcam.db.cli_objects.update({"sav": sav, "p": p, "sf": sf, "gf": gf})
+azcam.db.cli_tools.update({"sav": sav, "p": p, "sf": sf, "gf": gf})

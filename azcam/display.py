@@ -14,9 +14,9 @@ class Display(Tools, ObjectHeaderMethods):
     Usually implemented as the "display" tool.
     """
 
-    def __init__(self, obj_id="display", description=None):
+    def __init__(self, tool_id="display", description=None):
 
-        super().__init__(obj_id, description)
+        super().__init__(tool_id, description)
 
         # create the display Header object
         self.header = Header("Display")
@@ -27,7 +27,7 @@ class Display(Tools, ObjectHeaderMethods):
 
         # allow initialization of display on server in exposure
         try:
-            azcam.db.objects_init["display"] = self
+            azcam.db.tools_init["display"] = self
         except AttributeError:
             pass
 

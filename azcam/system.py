@@ -32,5 +32,5 @@ class SystemConsole(ConsoleTools):
 
     def __init__(self) -> None:
         self.objname = "system"
-        azcam.db.cli_objects[self.objname] = self
+        azcam.db.cli_tools[self.objname] = self
         setattr(azcam.db, self.objname, self)

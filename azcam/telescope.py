@@ -14,9 +14,9 @@ class Telescope(Tools, ObjectHeaderMethods):
     Usually implemented as the "telescope" tool.
     """
 
-    def __init__(self, obj_id="telescope", description=None):
+    def __init__(self, tool_id="telescope", description=None):
 
-        super().__init__(obj_id, description)
+        super().__init__(tool_id, description)
 
         # focus position
         self.focus_position = 0
@@ -25,8 +25,8 @@ class Telescope(Tools, ObjectHeaderMethods):
         self.header = Header("Telescope")
         self.header.set_header("telescope", 5)
 
-        azcam.db.objects_init["telescope"] = self
-        azcam.db.objects_reset["telescope"] = self
+        azcam.db.tools_init["telescope"] = self
+        azcam.db.tools_reset["telescope"] = self
 
     def initialize(self):
         """

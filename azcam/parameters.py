@@ -257,7 +257,7 @@ class Parameters(object):
             value = getattr(azcam.db, tokens[1], None)
             return value
 
-        # object must be in objects
+        # object must be in db
         else:
             obj = azcam.db.get(object1)
             for i in range(1, numtokens):
@@ -326,7 +326,7 @@ class Parameters(object):
         if object1 == "db":
             setattr(azcam.db, tokens[1], value)
 
-        # run through sub-objects
+        # run through sub-tools
         else:
             obj = azcam.db.get(object1)
             for i in range(1, numtokens - 1):
