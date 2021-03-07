@@ -53,7 +53,7 @@ class ConsoleTools(object):
 
     def update_header(self):
         """
-        Update the header of an object.
+        Update the header of a tool.
         This command usually reads hardware to get the lastest keyword values.
         """
 

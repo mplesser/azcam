@@ -44,7 +44,7 @@ class Telescope(Tools, ObjectHeaderMethods):
 
     def reset(self):
         """
-        Reset telescope object.
+        Reset telescope tool.
         """
 
         return

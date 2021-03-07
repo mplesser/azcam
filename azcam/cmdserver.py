@@ -228,7 +228,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 if command_string != "":
 
                     # execute command
-                    reply = azcam.db.api.execute_cmdstring(command_string)
+                    reply = azcam.db.api.string_command(command_string)
 
                     # log reply
                     if azcam.db.cmdserver.logcommands:

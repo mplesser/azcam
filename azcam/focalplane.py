@@ -24,7 +24,7 @@ class FocalPlane(ObjectHeaderMethods):
         # only needed for server side
         self.header.set_header("focalplane")
 
-        # object which proves RA and DEC info
+        # tool which provides RA and DEC info
         self.coord_object = "telescope"
 
         # fixed values

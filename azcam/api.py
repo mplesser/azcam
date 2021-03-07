@@ -18,7 +18,7 @@ class API(object):
     def __init__(self) -> None:
         self.default_tool = None
 
-    def execute_cmdstring(self, command: str, **kwargs):
+    def string_command(self, command: str, **kwargs):
         """
         Parse and execute a command string.
         Returns the reply string, always starting with OK or ERROR.
@@ -94,26 +94,9 @@ class API(object):
 
         return s
 
-    def execute_url(self, command: str, url: str):
+    def web_command(self, command, url):
         """
-        Parses a web UTL string and executes with .execute_cmdstring.
-        Returns JSON packet.
-        Traps all errors.
-
-        Example:
-           url= "http://locahost:2402/api/instrument/set_filter?filter=1&filter_id=2"
-           url is parsed to "instrument.set_filter filter=1 filter_id=2"
-        """
-
-        print(command, url)
-
-        reply = self.webcommand(command, url)
-
-        return reply
-
-    def webcommand(self, command, url):
-        """
-        Parse a web URL and make call to proper object method, returning reply.
+        Parse a web URL and make call to proper tool method, returning reply.
         """
 
         try:
@@ -121,11 +104,11 @@ class API(object):
             reply = caller() if kwargs is None else caller(**kwargs)
 
         except azcam.AzcamError as e:
-            azcam.log(f"webcommand error: {e}")
+            azcam.log(f"web_command error: {e}")
             if e.error_code == 4:
                 reply = "remote call not allowed"
             else:
-                reply = f"webcommand error: {repr(e)}"
+                reply = f"web_command error: {repr(e)}"
         except Exception as e:
             azcam.log(e)
             reply = f"invalid API command: {url}"

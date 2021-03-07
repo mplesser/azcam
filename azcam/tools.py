@@ -1,6 +1,6 @@
 """
-Main base object class.
-Only used by other base object classes.
+Main base tool class.
+Only used by other base tool classes.
 """
 
 import typing

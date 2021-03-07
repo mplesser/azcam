@@ -79,7 +79,7 @@ class TempCon(Tools, ObjectHeaderMethods):
 
     def reset(self) -> None:
         """
-        Reset tempcon object.
+        Reset tempcon tool.
         """
 
         if not self.enabled:

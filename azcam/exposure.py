@@ -193,7 +193,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
     def reset(self):
         """
-        Reset exposure object.
+        Reset exposure tool.
         """
 
         # initialize only once
