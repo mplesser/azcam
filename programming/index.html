@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -305,8 +305,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#objects" class="md-nav__link">
-    Objects
+  <a href="#tools" class="md-nav__link">
+    Tools
   </a>
   
 </li>
@@ -412,8 +412,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#objects" class="md-nav__link">
-    Objects
+  <a href="#tools" class="md-nav__link">
+    Tools
   </a>
   
 </li>
@@ -494,28 +494,27 @@ layout of AzCam.</p>
 </ul>
 <h2 id="versioning">Versioning</h2>
 <p>Because Azcam consists of many different modules and plugins, there is no single version 
-number or date which uniquely identifies all the code. One indicator of the current version is to 
-issue the command <code>azcam.api.exposure.get_par("version")</code>.</p>
+number or date which uniquely identifies all the code.</p>
 <h2 id="conventions">Conventions</h2>
 <p>Modules (files), objects (such as <em>controller</em>), command names (methods) and attributes (parameters) are all lowercase.
 Filenames should be given with forward slash ('/') separators, even on Windows 
 machines. If back slashes are needed, they must be doubled as in <code>c:\\data</code>. Strings must 
-be enclosed in quotation marks, as in <code>get_par('version')</code>. Quotation marks must match ('version" is 
-not acceptable). A quotation mark may be included in a string by preceding it with a backslash 
-("I am Mike\'s dog.")</p>
-<h2 id="objects">Objects</h2>
-<p>Python is an object oriented programming language and objects are used extensively in Azcam. Object-based commands 
+be enclosed in quotation marks, as in <code>params.get_par('imageroot')</code>. Quotation marks must match 
+('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash ("I am Mike\'s dog.")</p>
+<h2 id="tools">Tools</h2>
+<p>Python is an object oriented programming language and objects are used extensively in Azcam. The main objects are instances of azcam 
+Classes are are referred to as <em>tools</em> in azcam. Object-based commands 
 provide control of all aspects of Azcam. These commands (methods) interact with hardware such as controllers, 
-instruments, temperature controllers, and telescopes as well as with more virtual objects such as the 
+instruments, temperature controllers, and telescopes as well as with more virtual tools such as the 
 exposures, images, databases, time, communication interfaces, etc. 
-The required command syntax is <code>object.command(args)</code> where <code>object</code> is the object name (such as 
+The required command syntax is <code>tool.command(args)</code> where <code>tool</code> is the tool name (such as 
 <em>controller</em>, <em>instrument</em>, <em>telescope</em>, etc.) and <code>command()</code> is the command to be sent. If <code>command()</code>
 uses arguments, they are specified as comma separated values of the appropriate type, 
-such as <code>object.command('ITL', 1.234,45)</code>. For example, the command to initialize to the 
+such as <code>tool.command('ITL', 1.234,45)</code>. For example, the command to initialize to the 
 instrument is <code>instrument.initialize()</code> and the command to get instrument focus is <code>telescope.get_focus()</code>.</p>
 <h2 id="attributes">Attributes</h2>
-<p>Parameters may be read with the <code>azcam.api.exposure.get_par()</code> command and written with the <code>azcam.api.exposure.set_par()</code> 
-command. For example, <code>azcam.api.exposure.get_par('imagetype')</code> returns the current image type.</p>
+<p>Parameters may be read with the <code>params.get_par()</code> command and written with the <code>params.set_par()</code> 
+command. For example, <code>params.get_par('imagetype')</code> returns the current image type.</p>
 <h2 id="logging">Logging</h2>
 <p>The <code>azcam.log()</code> function should be used for output instead of python's <code>print()</code> function. 
 This is important due to the multithreading nature of Azcam.  The output of the <code>log()</code> function 
@@ -569,7 +568,7 @@ systems have one a command sever port and a controller sever port.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-02-01
+      Last update: 2021-03-06
     
   </small>
 </div>
@@ -592,7 +591,7 @@ systems have one a command sever port and a controller sever port.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../api_console/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../console_tools/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -601,7 +600,7 @@ systems have one a command sever port and a controller sever port.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Console API
+                Console Tools
               </div>
             </div>
           </a>

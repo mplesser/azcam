@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -388,7 +388,8 @@
 
       </h2>
 <div class="doc doc-contents first">
-<p>The base controller class for azcam-supported controllers.</p>
+<p>The base controller tool.
+Usually implemented as the "controller" tool.</p>
 <p><strong>Attributes:</strong></p>
 <table>
 <thead>
@@ -438,7 +439,7 @@
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.controller.Controller.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'controller'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Controller'</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="o">=</span><span class="s1">'controller'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -446,9 +447,36 @@
 
       </h3>
 <div class="doc doc-contents ">
-
-
-    </div>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tool_id</code></td>
+<td><code></code></td>
+<td>
+<p>tool name</p>
+</td>
+<td><code>'controller'</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code></code></td>
+<td>
+<p>description of this tool</p>
+</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.controller.Controller.flush">

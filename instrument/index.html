@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -375,13 +375,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.instrument.Instrument.get_all_pressures" class="md-nav__link">
-    get_all_pressures()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#azcam.instrument.Instrument.get_all_wavelengths" class="md-nav__link">
     get_all_wavelengths()
   </a>
@@ -412,6 +405,13 @@
           <li class="md-nav__item">
   <a href="#azcam.instrument.Instrument.get_pressure" class="md-nav__link">
     get_pressure()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azcam.instrument.Instrument.get_pressures" class="md-nav__link">
+    get_pressures()
   </a>
   
 </li>
@@ -507,12 +507,13 @@ which are accepted by the instrument server's <em>cmdserver</em>.</p>
 
       </h2>
 <div class="doc doc-contents first">
-<p>The base Instrument class.</p>
+<p>The base instrument tool.
+Usually implemented as the "instrument" tool.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'instrument'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Instrument'</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="o">=</span><span class="s1">'instrument'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -633,17 +634,6 @@ filter_id is the filter mechanism ID.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_pressures">
-
-<code class="highlight language-python"><span class="n">get_all_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Return a list of all instrument pressures.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_all_wavelengths">
 
 <code class="highlight language-python"><span class="n">get_all_wavelengths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
@@ -703,6 +693,17 @@ focus_id is the focus mechanism ID.</p>
       </h3>
 <div class="doc doc-contents ">
 <p>Read an instrument pressure.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.instrument.Instrument.get_pressures">
+
+<code class="highlight language-python"><span class="n">get_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return a list of all instrument pressures.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">

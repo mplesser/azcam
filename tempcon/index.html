@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -347,6 +347,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#azcam.tempcon.TempCon.get_pressures" class="md-nav__link">
+    get_pressures()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#azcam.tempcon.TempCon.get_temperature" class="md-nav__link">
     get_temperature()
   </a>
@@ -425,12 +432,13 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 
       </h2>
 <div class="doc doc-contents first">
-<p>Temperature control class.</p>
+<p>The base temperature control tool.
+Usually implemented as the "tempcon" tool.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.tempcon.TempCon.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="o">=</span><span class="s1">'tempcon'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -620,6 +628,17 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_pressures">
+
+<code class="highlight language-python"><span class="n">get_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return a list of all instrument pressures.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h3 class="doc doc-heading" id="azcam.tempcon.TempCon.get_temperature">
 
 <code class="highlight language-python"><span class="n">get_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
@@ -715,7 +734,7 @@ The class is usually instantiated as the <em>tempcon</em> object in the server.<
 
       </h3>
 <div class="doc doc-contents ">
-<p>Reset tempcon object.</p>
+<p>Reset tempcon tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">

@@ -355,8 +355,8 @@
 
 
   <li class="md-nav__item">
-    <a href="api_console/" class="md-nav__link">
-      Console API
+    <a href="console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -509,14 +509,16 @@
                 
                 
                 <h1 id="home">Home</h1>
-<p>AzCam is a software framework for the acquisition and analysis of image data from scientific imaging cameras. It is intended to be customized for specific hardware and observational needs. It is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
+<p>AzCam is a software framework for the acquisition and analysis of image data from scientific imaging systems. It is intended to be customized for specific hardware, observational, and data reduction needs.</p>
+<p>AzCam is based on the concept of <em>tools</em> which are the interfaces to hardware and software code.  Examples of tools are <em>instrument</em> which controls instrument hardware, <em>telescope</em> which interfaces to a telescope, and <em>linearity</em> which acquires and analyzes a sensor for linearity. The <em>exposure</em> tool is somewhat special in that it controls a scientific observation or exposure and often interfaces to many different tools. As an example, the exposure tool might need to move a telescope and multiple filter wheels, control a shutter, operate a camera, display the resultant image, and begin data reduction of that image.  </p>
+<p>AzCam is is not appropriate for consumer-level cameras and is not intended to have a common API across all possible acquisition and analysis environments.</p>
 <h2 id="extension-packages">Extension Packages</h2>
-<p>AzCam <em>extension packages</em> define additional resources which extend AzCam's functionality. In general some of these packages must be installed to create a useful configuration. Examples include:</p>
+<p>AzCam <em>extension packages</em> define resources which extend AzCam's functionality. Examples include:</p>
 <ul>
-<li><a href="https://github.com/mplesser/azcam-arc">azcam-arc</a> to add support for ARC camera controllers</li>
-<li><a href="https://github.com/mplesser/azcam-archon">azcam-archon</a> to add support for STA Archon camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-arc">azcam-arc</a> to add support for ARC cameras</li>
+<li><a href="https://github.com/mplesser/azcam-archon">azcam-archon</a> to add support for STA Archon cameras</li>
 <li><a href="https://github.com/mplesser/azcam-ds9">azcam-ds9</a> to add support for the SAO ds9 image display</li>
-<li><a href="https://github.com/mplesser/azcam-mag">azcam-mag</a> to add support for Magellan/ITL camera controllers</li>
+<li><a href="https://github.com/mplesser/azcam-mag">azcam-mag</a> to add support for Magellan/ITL cameras</li>
 <li><a href="https://github.com/mplesser/azcam-imageserver">azcam-imageserver</a> to add support for remote image servers</li>
 <li><a href="https://github.com/mplesser/azcam-cryocon">azcam-cryocon</a> to add support for CryoCon temperature controllers</li>
 <li><a href="https://github.com/mplesser/azcam-qhy174">azcam-qhy174</a> to add support for QHY174 CMOS cameras</li>
@@ -541,31 +543,33 @@
 <li><a href="https://github.com/mplesser/azcam-observe">azcam-observe</a> to add support for observing scripts (GUI, web, and command line support is included)</li>
 </ul>
 <h2 id="configuration">Configuration</h2>
-<p>Once configured, the system is controlled by class instances (<em>objects</em>) of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, <em>system</em>, and others.  Perhaps the most important object is <em>exposure</em>, which controls an actual observation. </p>
+<p>Once configured, the system is controlled by class instances of the hardware modules, such as <em>controller</em>, <em>instrument</em>, <em>telescope</em>, <em>tempcon</em>, <em>system</em>, and others. These are the <em>tools</em> described above. </p>
 <p>There are three main operational modes of AzCam:
   1. Server-side, usually implemented as the <em>azcamserver</em> application, which communicates directly or indirectly to all system hardware.
-  2. Console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> and is used to acquire and analyze image data through the command line and python code.
-  3. Applications, as descrived above. Client apps communicate with <em>azcamserver</em> over sockets or the web API.</p>
+  2. Console, usually called <em>azcamconsole</em>, which is typically implemented as an IPython command window that communicates with <em>azcamserver</em> over a socket interface and is used to acquire and analyze image data through the command line and python code.
+  3. Applications, as described above. Client apps communicate with <em>azcamserver</em> over sockets or the web API.</p>
 <h2 id="operation">Operation</h2>
 <p>While there are multiple pythonic ways to access the object instances in code, they are always accessible from the <em>database</em> object <code>db</code>. For example, when defined, the <code>controller</code> object can be accessed as <code>db.controller</code> and the <code>qe</code> object can be accessed as <code>db.qe</code>.  In most environments these objects are mapped directly into the command line namespace, so in practice commands are executed directly as <code>object.method</code>, e.g. <code>exposure.expose(2.5, "dark", "dark image")</code>. </p>
-<p>On the python console client side, the <code>api</code> object allows communication from the client to an <em>azcamserver</em> application over the socket-based command server interface.  The API class typically exposed allows only a limited set of methods to the standard server-side objects. So while <code>api.exposure.reset</code> may be available the command <code>api.exposure.set_video_gain</code> may not be.  These less commonly used commands are still accessible, but only with lower level code such as <code>api.server.rcommand("controller.set_video_gain 2")</code>.</p>
+<p>On the python console client side, there are <em>console tools</em> which allows communication from the client to an <em>azcamserver</em> application over the socket-based command server interface.  These tools typically expose only a limited set of methods to the standard server-side objects. So while <code>exposure.reset</code> may be available the command <code>exposure.set_video_gain</code> may not be.  These less commonly used commands are still accessible, but only with lower level code such as <code>server.command("controller.set_video_gain 2")</code>.</p>
 <p>As an example, the code below can be used to set the current system wavelength and take an exposure.  It is assumed the the <em>azcam_itl</em> environment has been added to the python search path.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># server-side (azcamserver)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">server_itl</span>
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
-<span class="n">azcam</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
+<span class="n">instrument</span><span class="p">,</span> <span class="n">exposure</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">get_tools</span><span class="p">([</span><span class="s2">&quot;instrument&quot;</span><span class="p">,</span> <span class="s2">&quot;exposure&quot;</span><span class="p">])</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
+<span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 
 <span class="n">OR</span>
 
 <span class="c1"># client-side (azcamconsole)</span>
 <span class="kn">import</span> <span class="nn">azcam</span>
 <span class="kn">import</span> <span class="nn">console_itl</span>
-<span class="n">wavelength</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
-<span class="n">azcam</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
+<span class="n">instrument</span><span class="p">,</span> <span class="n">exposure</span> <span class="o">=</span> <span class="n">azcam</span><span class="o">.</span><span class="n">get_tools</span><span class="p">([</span><span class="s2">&quot;instrument&quot;</span><span class="p">,</span> <span class="s2">&quot;exposure&quot;</span><span class="p">])</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">set_wavelength</span><span class="p">(</span><span class="mi">450</span><span class="p">)</span>
+<span class="n">exposure</span><span class="o">.</span><span class="n">expose</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s2">&quot;a 450 nm flat field image&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Example configuration code can be found in <code>azcam.example_server_config</code> and <code>azcam.example_console_config</code>.</p>
-<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as <em>api</em>, <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:</p>
+<p>When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects such as <em>db</em>, <em>exposure</em>, <em>controller</em>, and various pre-defined shortcuts. To do this, after configuring the environment, execute the command:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">azcam.cli</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
 <p>And then the code above could be executed as:
@@ -610,7 +614,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <ul>
 <li><a href="classes/">Classes</a></li>
 <li><a href="commands/">Commands</a></li>
-<li><a href="api_console/">Console API</a></li>
+<li><a href="console_tools/">Console Tools</a></li>
 </ul>
 <h2 id="scripts">Scripts</h2>
 <p>Scripts are python code modules which generally contain one function and are available from  the command line or by importing the <em>azcam-scripts</em> extension module. They may interact with other <em>azcam</em> code if they are configured to be called automatically during enviroment configuration. Note that they may make extensive use of  the <em>azcam.db</em> database. By convention scripts use database items named as <code>db.scriptname_xxx</code>. As an example, <code>db.imsnap_resize=2.5"</code>will shrink a snapped image by 2.5x when the <code>imsnap</code> script is called. </p>
@@ -633,7 +637,7 @@ are listed below. Most aliases are implemeted from a command such as <code>from 
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-02-01
+      Last update: 2021-03-02
     
   </small>
 </div>

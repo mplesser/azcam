@@ -16,7 +16,7 @@
     
     
       
-        <title>Objects Class - AzCam Documentation</title>
+        <title>Tools Class - AzCam Documentation</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#objects-class" class="md-skip">
+        <a href="#tools-class" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Objects Class
+              Tools Class
             
           </span>
         </div>
@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -297,43 +297,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects" class="md-nav__link">
-    Objects
+  <a href="#azcam.tools.Tools" class="md-nav__link">
+    Tools
   </a>
   
-    <nav class="md-nav" aria-label="Objects">
+    <nav class="md-nav" aria-label="Tools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects.__init__" class="md-nav__link">
+  <a href="#azcam.tools.Tools.__init__" class="md-nav__link">
     __init__()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects.get" class="md-nav__link">
+  <a href="#azcam.tools.Tools.get" class="md-nav__link">
     get()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects.initialize" class="md-nav__link">
+  <a href="#azcam.tools.Tools.initialize" class="md-nav__link">
     initialize()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects.reset" class="md-nav__link">
+  <a href="#azcam.tools.Tools.reset" class="md-nav__link">
     reset()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#azcam.baseobject.Objects.set" class="md-nav__link">
+  <a href="#azcam.tools.Tools.set" class="md-nav__link">
     set()
   </a>
   
@@ -357,18 +357,18 @@
               
                 
                 
-                <h1 id="objects-class">Objects Class</h1>
-<p>Below is the documentation for the base Objects class which is inherited by almost all serverside object classes. </p>
+                <h1 id="tools-class">Tools Class</h1>
+<p>Below is the documentation for the base Tools class which is inherited by almost all serverside object classes. </p>
 <div class="doc doc-object doc-class">
-<h2 class="doc doc-heading" id="azcam.baseobject.Objects">
+<h2 class="doc doc-heading" id="azcam.tools.Tools">
 
-        <code>azcam.baseobject.Objects</code>
+        <code>azcam.tools.Tools</code>
 
 
 
       </h2>
 <div class="doc doc-contents first">
-<p>Base class used by main objects (controller, instrument, telescope, etc.).</p>
+<p>Base class used by tools (controller, instrument, telescope, etc.).</p>
 <p><strong>Attributes:</strong></p>
 <table>
 <thead>
@@ -380,47 +380,47 @@
 </thead>
 <tbody>
 <tr>
-<td><code>self.id</code></td>
+<td><code>self.tool_id</code></td>
 <td><code>str</code></td>
 <td>
-<p>name used to reference the object (controller, display, ...)</p>
+<p>name used to reference the tool (controller, display, ...)</p>
 </td>
 </tr>
 <tr>
-<td><code>self.name</code></td>
+<td><code>self.description</code></td>
 <td><code>str</code></td>
 <td>
-<p>descriptive name for the object</p>
+<p>descriptive of the tool</p>
 </td>
 </tr>
 <tr>
 <td><code>self.enabled</code></td>
 <td><code>bool</code></td>
 <td>
-<p>True (default) when object is enabled</p>
+<p>True (default) when tool is enabled</p>
 </td>
 </tr>
 <tr>
 <td><code>self.initialized</code></td>
 <td><code>bool</code></td>
 <td>
-<p>True when object has been initialized</p>
+<p>True when tool has been initialized</p>
 </td>
 </tr>
 <tr>
 <td><code>self.is_reset</code></td>
 <td><code>bool</code></td>
 <td>
-<p>True when object has been reset</p>
+<p>True when tool has been reset</p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.baseobject.Objects.__init__">
+<h3 class="doc doc-heading" id="azcam.tools.Tools.__init__">
 
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'unknown'</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -440,27 +440,27 @@
 </thead>
 <tbody>
 <tr>
-<td><code>obj_id</code></td>
+<td><code>tool_id</code></td>
 <td><code>str</code></td>
 <td>
-<p>name used to reference the object (controller, display, ...)</p>
+<p>name used to reference the tool (controller, display, ...)</p>
 </td>
 <td><em>required</em></td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td><code>description</code></td>
 <td><code>str</code></td>
 <td>
-<p>descriptive name for the object</p>
+<p>descriptive of this tool</p>
 </td>
-<td><code>'unknown'</code></td>
+<td><code>None</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.baseobject.Objects.get">
+<h3 class="doc doc-heading" id="azcam.tools.Tools.get">
 
 <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></code>
 
@@ -509,29 +509,29 @@
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.baseobject.Objects.initialize">
+<h3 class="doc doc-heading" id="azcam.tools.Tools.initialize">
 
 <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Initialize the object.</p>
+<p>Initialize the tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.baseobject.Objects.reset">
+<h3 class="doc doc-heading" id="azcam.tools.Tools.reset">
 
 <code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Reset the object.</p>
+<p>Reset the tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.baseobject.Objects.set">
+<h3 class="doc doc-heading" id="azcam.tools.Tools.set">
 
 <code class="highlight language-python"><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>
 
@@ -581,7 +581,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: 2020-12-08
+      Last update: 2021-03-05
     
   </small>
 </div>

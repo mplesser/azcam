@@ -240,8 +240,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_console/" class="md-nav__link">
-      Console API
+    <a href="../console_tools/" class="md-nav__link">
+      Console Tools
     </a>
   </li>
 
@@ -375,6 +375,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#azcam.utils.get_tools" class="md-nav__link">
+    get_tools()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#azcam.utils.load_scripts" class="md-nav__link">
     load_scripts()
   </a>
@@ -474,7 +481,7 @@
 
       </h2>
 <div class="doc doc-contents first">
-<p>General support commands for throughout azcam code.</p>
+<p>General purpose support commands used throughout azcam code.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="azcam.utils.add_searchfolder">
@@ -620,15 +627,64 @@ Check for ROI's in the following order:</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="azcam.utils.load_scripts">
+<h3 class="doc doc-heading" id="azcam.utils.get_tools">
 
-<code class="highlight language-python"><span class="n">load_scripts</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">get_tools</span><span class="p">(</span><span class="n">tool_names</span><span class="p">)</span></code>
 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Load all scripts from folder into azcam.db.cli_objects
-If package is True then folder is an installed package name.</p>
+<p>Return a tool or list of tools.
+For server or console.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tool_names</code></td>
+<td><code>[type]</code></td>
+<td>
+<p>[description]</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[type]</code></td>
+<td>
+<p>[description]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="azcam.utils.load_scripts">
+
+<code class="highlight language-python"><span class="n">load_scripts</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Load all scripts from folder into azcam.db.cli_tools</p>
 </div>
 </div>
 <div class="doc doc-object doc-function">
