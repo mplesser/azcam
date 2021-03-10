@@ -49,7 +49,7 @@ exposure = Exposure()
 # ****************************************************************
 # read par file and set working directory
 # ****************************************************************
-parfile = os.path.join(azcam.db.datafolder, f"parameters_{azcam.db.systemname}.ini")
+parfile = os.path.join(azcam.db.datafolder, f"parameters_console_{azcam.db.systemname}.ini")
 try:
     pardict = azcam.db.params.read_parfile(parfile)
     azcam.db.params.update_pars(0, pardict["azcamserver"])
