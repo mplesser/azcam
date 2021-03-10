@@ -17,7 +17,7 @@ AzCam *extension packages* define resources which extend AzCam's functionality. 
   * [azcam-cryocon](https://github.com/mplesser/azcam-cryocon) to add support for CryoCon temperature controllers
   * [azcam-qhy174](https://github.com/mplesser/azcam-qhy174) to add support for QHY174 CMOS cameras
   * [azcam-testers](https://github.com/mplesser/azcam-testers) to add support for image sensor testing such as QE, CTE, PRNU, etc.
-  * [azcam-webserver](https://github.com/mplesser/azcam-webserver) to add support for client web applications
+  * [azcam-flaskserver](https://github.com/mplesser/azcam-flaskserver) to add support for a flask-based webserver for web client apps
   * [azcam-scripts](https://github.com/mplesser/azcam-scripts) to add general purpose scripts
 
 ## Environments
