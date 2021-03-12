@@ -1,8 +1,7 @@
-# Telescope Class
+# Telescope Tool
 
-This class defines Azcam's telescope interfaces. 
-One class is usually instantiated as the *telescope* object in the server.
+This tool defines azcam's telescope interface. The default tool name is *telescope*.
 
 ::: azcam.telescope.Telescope
-    :docstring:
-    :members:
+
+::: azcam.telescope.TelescopeConsole

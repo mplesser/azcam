@@ -975,7 +975,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         l1 = self.image_types
 
         try:
-            l2 = azcam.db.instrument.get_all_comps()
+            l2 = azcam.db.instrument.get_comps()
         except Exception:
             return l1
 

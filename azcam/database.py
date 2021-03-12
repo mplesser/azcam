@@ -7,8 +7,8 @@ import typing
 
 class AzcamDatabase(object):
 
-    # working directory
     wd = None
+    """working directory"""
 
     # verbosity level for messages
     verbosity = 1
@@ -146,6 +146,10 @@ class AzcamDatabase(object):
     toolnames = []
 
     def __init__(self):
+        """
+        Create db object.
+        """
+
         pass
 
     def get(self, name: str) -> typing.Any:

@@ -1,8 +1,5 @@
-# TempCon Class
+# TempCon Tool
 
-This class defines Azcam's temperature controller interface. 
-The class is usually instantiated as the *tempcon* object in the server.
+This tool defines azcam's temperature controller interface. The default tool name is *tempcon*.
 
-::: azcam.tempcon.TempCon
-    :docstring:
-    :members:
+::: azcam.tempcon

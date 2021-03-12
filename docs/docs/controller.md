@@ -1,11 +1,9 @@
-# Controller Class
+# Controller Tool
 
-This class defines Azcam's camera controller interfaces. 
+This tool defines azcam's camera controller interface. The default tool name is *controller*. 
 
 ::: azcam.controller.Controller
-    :docstring:
-    :members:
 
 ::: azcam.controller.DetPars
-    :docstring:
-    :members:
+
+::: azcam.controller.ControllerConsole

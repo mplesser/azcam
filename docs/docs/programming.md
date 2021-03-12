@@ -11,11 +11,11 @@ AzCam currently uses *Python 3.8*. Important dependancies include:
   * *astropy*
   * *matplotlib*
   * *loguru*
-  * *flask*
 
 There are many other dependencies depending on configuration. Examples are:
 
   * *ipython*
+  * *flask*
   * *scipy*
   * *pandas*
   * *PyPDF2*
@@ -27,8 +27,8 @@ There are many other dependencies depending on configuration. Examples are:
   * *keyring*
 
 ## Versioning
-Because Azcam consists of many different modules and plugins, there is no single version 
-number or date which uniquely identifies all the code.
+Because Azcam consists of many different modules and extensions, there is no single version 
+number or date which uniquely identifies all the code. Version numbers are available from the [PyPI releases](https://pypi.org/search/?q=azcam) or [github repositories](https://github.com/mplesser).
 
 ## Conventions
 Modules (files), objects (such as *controller*), command names (methods) and attributes (parameters) are all lowercase.

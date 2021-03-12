@@ -21,5 +21,3 @@ is so that rapidly changing data values do not become stale. Most dictionary inf
 Below is the documentation for the Header class.
 
 ::: azcam.header.Header
-    :docstring:
-    :members:

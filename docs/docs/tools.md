@@ -1,7 +1,18 @@
-# Tools Class
+# Tools
 
-Below is the documentation for the base Tools class which is inherited by almost all serverside object classes. 
+These tools are used to define and control a system.
 
-::: azcam.tools.Tools
-    :docstring:
-    :members:
+- [exposure](exposure.md)
+- [controller](controller.md)
+- [tempcon](tempcon.md)
+- [instrument](instrument.md)
+- [telescope](telescope.md)
+- [display](display.md)
+
+The base Tools class described below is inherited by all server tools. 
+
+- [server tools](server_tools.md)
+
+The base ConsoleTools class described below is inherited by all console tools. 
+
+- [console tools](console_tools.md)

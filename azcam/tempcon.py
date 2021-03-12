@@ -2,8 +2,7 @@
 Contains the base TempCon class.
 """
 
-from typing import List
-from typing import List, Optional, Union
+from typing import Optional, Union, List
 
 import azcam
 from azcam.tools import Tools
@@ -14,15 +13,22 @@ from azcam.console_tools import ConsoleTools
 class TempCon(Tools, ObjectHeaderMethods):
     """
     The base temperature control tool.
-    Usually implemented as the "tempcon" tool.
     """
 
-    def __init__(self, tool_id="tempcon", description=None):
+    def __init__(self, tool_id: str = "tempcon", description: str = None):
+        """
+        Creates the tool.
+
+        Args:
+            tool_id: Name of tool
+            description: Description of tool, defaults to tool_id.
+        """
 
         super().__init__(tool_id, description)
 
         # control or set temperature at which to regulate
-        self.control_temperature = 0.0
+        self.AAA = 0.0
+        """AAA docstring - control or set temperature at which to regulate"""
 
         # control temperature number (which temp is regulated)
         self.control_temperature_number = 0
@@ -58,22 +64,6 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         azcam.db.tools_init["tempcon"] = self
         azcam.db.tools_reset["tempcon"] = self
-
-        return
-
-    def initialize(self):
-        """
-        Initialize the temperature control interface.
-        """
-
-        if self.initialized:
-            return
-
-        if not self.enabled:
-            azcam.AzcamWarning(f"{self.description} is not enabled")
-            return
-
-        self.initialized = 1
 
         return
 
@@ -163,16 +153,19 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         return self.bad_temp_value
 
+    # ***************************************************************************
+    # calibrations
+    # ***************************************************************************
     def set_calibrations(self, cals: List[int]) -> None:
         """
         Set calibration curves for temperature sensors.
         The values of these flags are from the list below which define the calibration curves to use
         for each sensor's temperature conversion.
 
-           * 0 => DT670  diode
-           * 1 => AD590  sensor
-           * 2 => 1N4148 diode
-           * 3 => 1N914  diode
+          * 0 => DT670  diode
+          * 1 => AD590  sensor
+          * 2 => 1N4148 diode
+          * 3 => 1N914  diode
         Args:
             cals: list of flags defining each temperature sensor type
         """
@@ -226,6 +219,9 @@ class TempCon(Tools, ObjectHeaderMethods):
         else:
             return temperature
 
+    # ***************************************************************************
+    # keywords
+    # ***************************************************************************
     def get_keyword(self, keyword: str) -> List:
         """
         Read a temperature keyword value and returns it as [value, comment, type string]
@@ -266,25 +262,14 @@ class TempconConsole(ConsoleTools):
     def __init__(self) -> None:
         super().__init__("tempcon")
 
-    def get_temperatures(self) -> Union[str, List[float]]:
-        """
-        Return a list of all system temperatures as defined in configuration setup.
-        Values are in degrees Celsius and may be formatted for display.
-        If temperatures cannot be read, then a list of -999.99 is returned.
-        """
-
-        reply = azcam.db.server.command(f"{self.objname}.get_temperatures")
-
-        return [float(x) for x in reply]
-
     def set_control_temperature(
         self, control_temperature: float, temperature_id: int = 0
     ) -> Optional[str]:
         """
-        Set control temperature.
-
-        :param control_temperature: control (set) temperature in Celsius
-        :param temperature_id: temperature sensor ID flag
+        Set the control temperature (set point).
+        Args:
+            control_temperature: control temperature in Celsius.
+            temperature_id: temperature sensor identifier
         """
 
         return azcam.db.server.command(
@@ -293,11 +278,37 @@ class TempconConsole(ConsoleTools):
 
     def get_control_temperature(self, temperature_id: int = 0) -> Union[str, float]:
         """
-        Get control temperature in degress Celsius.
-
-        :param temperature_id: temperature ID flag
+        Get the control temperature (set point).
+        Args:
+            temperature_id: temperature sensor identifier
+        Returns:
+            control_temperature: control temperature
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_control_temperature {temperature_id}")
+
+        return float(reply)
+
+    def get_temperatures(self) -> List[float]:
+        """
+        Return all system temperatures.
+        Returns:
+            temperatures: list of temperatures read
+        """
+
+        reply = azcam.db.server.command(f"{self.objname}.get_temperatures")
+
+        return [float(x) for x in reply]
+
+    def get_temperature(self, temperature_id: int = 0) -> float:
+        """
+        Returns a system temperature.
+        Args:
+            temperature_id: temperature sensor identifier
+        Returns:
+            temperature: temperature read
+        """
+
+        reply = azcam.db.server.command(f"{self.objname}.get_temperature {temperature_id}")
 
         return float(reply)

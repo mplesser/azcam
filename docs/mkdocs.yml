@@ -28,12 +28,12 @@ markdown_extensions:
       linenums_style: pymdownx.inline
   - pymdownx.superfences
   - toc:
-      toc_depth: 3
-      title: 'Contents'
+      toc_depth: 8
 
 plugins:
   - search
   - git-revision-date
+  - autorefs
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -43,6 +43,11 @@ plugins:
             show_root_heading: true
             show_root_full_path: true
             show_if_no_docstring: true
+            show_signature_annotations: true
+            group_by_category: true
+            show_category_heading: true
+            show_members: true
+            show_inherited_members: false
       watch:
         - ../azcam
 extra_css:
@@ -56,8 +61,8 @@ edit_uri: ""
 
 nav:
   - Home: index.md
+  - Tools: tools.md
   - Classes: classes.md
   - Commands: commands.md
-  - Console Tools: console_tools.md
   - Advanced: programming.md
   - Database: database.md

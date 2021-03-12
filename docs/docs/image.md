@@ -11,5 +11,3 @@ Usage Example:
     im1 = azcam.Image('test.fits')
 
 ::: azcam.image.Image
-    :docstring:
-    :members:

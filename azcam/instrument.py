@@ -3,7 +3,7 @@ Contains the base Instrument class.
 """
 
 import time
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Any
 
 import azcam
 from azcam.tools import Tools
@@ -63,28 +63,27 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # comparisons
     # ***************************************************************************
-    def get_all_comps(self, comp_id=0):
+    def get_comps(self):
         """
         Return all valid comparison names.
         Useful for clients to determine which type of comparison exposures are supported.
-        comp_id is the comparison mechanism ID.
         """
 
         raise NotImplementedError
 
-    def get_active_comps(self, comp_id=0):
+    def get_active_comps(self):
         """
         Return a list of the active comparison lamps.
-        comp_id is the comparison mechanism ID.
         """
 
         return self.active_comps
 
-    def set_active_comps(self, comp_names=None, comp_id=0):
+    def set_active_comps(self, comp_names: List[str] = None):
         """
         Set comparisons which are to be turned on and off with comps_on() and comps_off().
         comp_names is a single string or a list of strings to be set as active.
-        comp_id is the comparison mechanism ID.
+        Args:
+            comp_names: list of string (or a single string) of comparison names
         """
 
         if type(comp_names) == str:
@@ -94,28 +93,26 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         return
 
-    def comps_on(self, comp_id=0):
+    def comps_on(self):
         """
         Turn on active comparisons.
-        comp_id is the comparison mechanism ID.
         """
 
         return
 
-    def comps_off(self, comp_id=0):
+    def comps_off(self):
         """
         Turn off active comparisons.
-        comp_id is the comparison mechanism ID.
         """
 
         return
 
-    def comps_delay(self, delay_time=0, comp_id=0):
+    def comps_delay(self, delay_time=0):
         """
         Delays for delay_time for comparison lamp warmup.
         May internally set delay based on comp selection.
-        delay_time is in seconds.
-        comp_id is the comparison mechanism ID.
+        Args:
+            delay_time: delay in seconds
         """
 
         time.sleep(delay_time)
@@ -128,7 +125,8 @@ class Instrument(Tools, ObjectHeaderMethods):
     def get_filters(self, filter_id=0):
         """
         Return a list of all available/loaded filters.
-        filter_id is the filter mechanism ID.
+        Args:
+            filter_id: filter mechanism ID
         """
 
         raise NotImplementedError
@@ -136,7 +134,8 @@ class Instrument(Tools, ObjectHeaderMethods):
     def get_filter(self, filter_id=0):
         """
         Return the current/loaded filter, typically the filter in the beam.
-        filter_id is the filter mechanism ID.
+        Args:
+            filter_id: filter mechanism ID
         """
 
         raise NotImplementedError
@@ -144,8 +143,9 @@ class Instrument(Tools, ObjectHeaderMethods):
     def set_filter(self, filter_name, filter_id=0):
         """
         Set the current/loaded filter, typically the filter in the beam.
-        filter_name is the filter name to set.
-        filter_id is the filter mechanism ID.
+        Args:
+            filter_name: filter name to set. Could be a number or filter name.
+            filter_id: filter mechanism ID
         """
 
         raise NotImplementedError
@@ -153,28 +153,31 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # wavelengths
     # ***************************************************************************
-    def get_all_wavelengths(self, wavelength_id=0):
+    def get_all_wavelengths(self, wavelength_id: int = 0):
         """
         Returns a list of valid wavelengths.
         Used for filter and LED based systems.
-        wavelength_id is the wavelength mechanism ID.
+        Args:
+            wavelength_id: wavelength mechanism ID
         """
 
         raise NotImplementedError
 
-    def get_wavelength(self, wavelength_id=0):
+    def get_wavelength(self, wavelength_id: int = 0):
         """
         Returns the current wavelength.
-        wavelength_id is the wavelength mechanism ID.
+        Args:
+            wavelength_id: wavelength mechanism ID
         """
 
         raise NotImplementedError
 
-    def set_wavelength(self, wavelength, wavelength_id=0):
+    def set_wavelength(self, wavelength: Any, wavelength_id: int = 0):
         """
         Set the current wavelength, typically for a filter or grating.
-        wavelength is the wavelength value.
-        wavelength_id is the wavelength mechanism ID.
+        Args:
+            wavelength: wavelength value to set. Could be a number or filter name.
+            wavelength_id: wavelength mechanism ID
         """
 
         raise NotImplementedError
@@ -274,47 +277,42 @@ class InstrumentConsole(ConsoleTools):
     # ***************************************************************************
     # comparisons
     # ***************************************************************************
-    def get_all_comps(self, comp_id=0):
+    def get_comps(self):
         """
         Return all valid comparison names.
         Useful for clients to determine which type of comparison exposures are supported.
-        comp_id is the comparison mechanism ID.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_all_comps {comp_id}")
+        return azcam.db.server.command(f"{self.objname}.get_comps")
 
-    def get_active_comps(self, comp_id=0):
+    def get_active_comps(self):
         """
         Return a list of the active comparison lamps.
-        comp_id is the comparison mechanism ID.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_active_comps {comp_id}")
+        return azcam.db.server.command(f"{self.objname}.get_active_comps")
 
-    def set_active_comps(self, comp_names=None, comp_id=0):
+    def set_active_comps(self, comp_names=None):
         """
         Set comparisons which are to be turned on and off with comps_on() and comps_off().
         comp_names is a single string or a list of strings to be set as active.
-        comp_id is the comparison mechanism ID.
         """
 
-        return azcam.db.server.command(f"{self.objname}.set_active_comps {comp_names} {comp_id}")
+        return azcam.db.server.command(f"{self.objname}.set_active_comps {comp_names}")
 
-    def comps_on(self, comp_id=0):
+    def comps_on(self):
         """
         Turn on active comparisons.
-        comp_id is the comparison mechanism ID.
         """
 
-        return azcam.db.server.command(f"{self.objname}.comps_on {comp_id}")
+        return azcam.db.server.command(f"{self.objname}.comps_on")
 
-    def comps_off(self, comp_id=0):
+    def comps_off(self):
         """
         Turn off active comparisons.
-        comp_id is the comparison mechanism ID.
         """
 
-        return azcam.db.server.command(f"{self.objname}.comps_off {comp_id}")
+        return azcam.db.server.command(f"{self.objname}.comps_off")
 
     # ***************************************************************************
     # filters
@@ -374,6 +372,9 @@ class InstrumentConsole(ConsoleTools):
 
         return reply
 
+    # ***************************************************************************
+    # focus
+    # ***************************************************************************
     def set_focus(
         self,
         focus_value: float,
