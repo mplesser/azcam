@@ -125,7 +125,7 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # filters
     # ***************************************************************************
-    def get_all_filters(self, filter_id=0):
+    def get_filters(self, filter_id=0):
         """
         Return a list of all available/loaded filters.
         filter_id is the filter mechanism ID.
@@ -271,6 +271,61 @@ class InstrumentConsole(ConsoleTools):
     def __init__(self) -> None:
         super().__init__("instrument")
 
+    # ***************************************************************************
+    # comparisons
+    # ***************************************************************************
+    def get_all_comps(self, comp_id=0):
+        """
+        Return all valid comparison names.
+        Useful for clients to determine which type of comparison exposures are supported.
+        comp_id is the comparison mechanism ID.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.get_all_comps {comp_id}")
+
+    def get_active_comps(self, comp_id=0):
+        """
+        Return a list of the active comparison lamps.
+        comp_id is the comparison mechanism ID.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.get_active_comps {comp_id}")
+
+    def set_active_comps(self, comp_names=None, comp_id=0):
+        """
+        Set comparisons which are to be turned on and off with comps_on() and comps_off().
+        comp_names is a single string or a list of strings to be set as active.
+        comp_id is the comparison mechanism ID.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.set_active_comps {comp_names} {comp_id}")
+
+    def comps_on(self, comp_id=0):
+        """
+        Turn on active comparisons.
+        comp_id is the comparison mechanism ID.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.comps_on {comp_id}")
+
+    def comps_off(self, comp_id=0):
+        """
+        Turn off active comparisons.
+        comp_id is the comparison mechanism ID.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.comps_off {comp_id}")
+
+    # ***************************************************************************
+    # filters
+    # ***************************************************************************
+    def get_filters(self):
+        """
+        Return a list of all available/loaded filters.
+        """
+
+        return azcam.db.server.command(f"{self.objname}.get_filters")
+
     def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
         """
         Set instrument filter position.
@@ -290,18 +345,9 @@ class InstrumentConsole(ConsoleTools):
 
         return azcam.db.server.command(f"{self.objname}.get_filter {filter_id}")
 
-    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
-        """
-        Returns a list of instrument diode currents.
-
-        :param diode_id: diode ID flag (system dependent)
-        :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
-        """
-
-        reply = azcam.db.server.command(f"{self.objname}.get_current {diode_id} {shutter_state}")
-
-        return float(reply)
-
+    # ***************************************************************************
+    # wavelengths
+    # ***************************************************************************
     def set_wavelength(
         self, wavelength: float, wavelength_id: int = 0, nd: int = -1
     ) -> Optional[str]:
@@ -381,3 +427,15 @@ class InstrumentConsole(ConsoleTools):
         """
 
         return azcam.db.server.command(f"{self.objname}.set_shutter {state} {shutter_id}")
+
+    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
+        """
+        Returns a list of instrument diode currents.
+
+        :param diode_id: diode ID flag (system dependent)
+        :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
+        """
+
+        reply = azcam.db.server.command(f"{self.objname}.get_current {diode_id} {shutter_state}")
+
+        return float(reply)

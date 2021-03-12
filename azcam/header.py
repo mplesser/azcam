@@ -100,7 +100,7 @@ class Header(object):
 
         return
 
-    def get_all_keywords(self):
+    def get_keywords(self):
         """
         Return a list of all keyword names.
         Returns:
@@ -240,7 +240,7 @@ class Header(object):
         Delete all keywords.
         """
 
-        keys = self.get_all_keywords()
+        keys = self.get_keywords()
         for key in keys:
             self.delete_keyword(key)  # delete in header
 
@@ -294,7 +294,7 @@ class Header(object):
 
         # get the header
         header = []
-        reply = self.get_all_keywords()
+        reply = self.get_keywords()
         if reply == []:
             return header
 
@@ -395,7 +395,7 @@ class ObjectHeaderMethods(object):
 
         # get the header
         header = []
-        reply = self.header.get_all_keywords()
+        reply = self.header.get_keywords()
         if reply == []:
             return
 
@@ -419,14 +419,14 @@ class ObjectHeaderMethods(object):
 
         return self.header.get_keyword(keyword)
 
-    def get_all_keywords(self) -> list:
+    def get_keywords(self) -> list:
         """
         Return a list of all keyword names.
         Returns:
             keywords: list of all keywords
         """
 
-        return self.header.get_all_keywords()
+        return self.header.get_keywords()
 
     def set_keyword(
         self,

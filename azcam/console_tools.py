@@ -116,7 +116,7 @@ class ConsoleTools(object):
 
         return azcam.db.server.command(f"{self.objname}.delete_keyword {keyword}")
 
-    def get_all_keywords(self) -> list:
+    def get_keywords(self) -> list:
         """
         Return a list of all keyword names.
 
@@ -124,7 +124,7 @@ class ConsoleTools(object):
             list of all keywords
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_all_keywords")
+        reply = azcam.db.server.command(f"{self.objname}.get_keywords")
 
         return reply
 

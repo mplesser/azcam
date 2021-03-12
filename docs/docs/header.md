@@ -7,7 +7,7 @@ dictionary. These dictionaries are manipulated by commands both from clients and
 values are written to the image file header (such as a FITS header) when an exposure begins.
 
 The header information is accessed through methods such as 
-`controller.header.get_all_keywords()` to get a list of all keywords and 
+`controller.header.get_keywords()` to get a list of all keywords and 
 `instrument.get_keyword('FILTER1')` to get the currentvalue for the keyword. 
 
 The `read_header()` method of each tools will actively read hardware to obtain 
