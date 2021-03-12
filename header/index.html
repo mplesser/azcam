@@ -301,131 +301,6 @@
     Header
   </a>
   
-    <nav class="md-nav" aria-label="Header">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.convert_type" class="md-nav__link">
-    convert_type()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.copy_all_items" class="md-nav__link">
-    copy_all_items()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.define_keywords" class="md-nav__link">
-    define_keywords()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.delete_all_items" class="md-nav__link">
-    delete_all_items()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.delete_all_keywords" class="md-nav__link">
-    delete_all_keywords()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.delete_keyword" class="md-nav__link">
-    delete_keyword()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.get_all_keywords" class="md-nav__link">
-    get_all_keywords()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.get_keyword" class="md-nav__link">
-    get_keyword()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.get_string" class="md-nav__link">
-    get_string()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.read_file" class="md-nav__link">
-    read_file()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.read_header" class="md-nav__link">
-    read_header()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.set_header" class="md-nav__link">
-    set_header()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.set_keyword" class="md-nav__link">
-    set_keyword()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.set_keyword_string" class="md-nav__link">
-    set_keyword_string()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.set_title" class="md-nav__link">
-    set_title()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.header.Header.update" class="md-nav__link">
-    update()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -448,7 +323,7 @@ and comment field are stored in each of the controller, instrument, and telescop
 dictionary. These dictionaries are manipulated by commands both from clients and internally in Azcam. Most of the 
 values are written to the image file header (such as a FITS header) when an exposure begins.</p>
 <p>The header information is accessed through methods such as 
-<code>controller.header.get_all_keywords()</code> to get a list of all keywords and 
+<code>controller.header.get_keywords()</code> to get a list of all keywords and 
 <code>instrument.get_keyword('FILTER1')</code> to get the currentvalue for the keyword. </p>
 <p>The <code>read_header()</code> method of each tools will actively read hardware to obtain 
 information (such as <code>controller.read_header()</code> or <code>instrument.read_header()</code>).</p>
@@ -523,7 +398,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.__init__">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.header.Header.__init__">
 
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -566,7 +441,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.convert_type">
+<h3 class="doc doc-heading" data-toc-label="convert_type()" id="azcam.header.Header.convert_type">
 
 <code class="highlight language-python"><span class="n">convert_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">pythontype</span><span class="p">)</span></code>
 
@@ -577,7 +452,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.copy_all_items">
+<h3 class="doc doc-heading" data-toc-label="copy_all_items()" id="azcam.header.Header.copy_all_items">
 
 <code class="highlight language-python"><span class="n">copy_all_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr_header</span><span class="p">)</span></code>
 
@@ -588,7 +463,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.define_keywords">
+<h3 class="doc doc-heading" data-toc-label="define_keywords()" id="azcam.header.Header.define_keywords">
 
 <code class="highlight language-python"><span class="n">define_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="p">[],</span> <span class="n">comments</span><span class="o">=</span><span class="p">{},</span> <span class="n">typestrings</span><span class="o">=</span><span class="p">{})</span></code>
 
@@ -599,7 +474,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.delete_all_items">
+<h3 class="doc doc-heading" data-toc-label="delete_all_items()" id="azcam.header.Header.delete_all_items">
 
 <code class="highlight language-python"><span class="n">delete_all_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -610,7 +485,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.delete_all_keywords">
+<h3 class="doc doc-heading" data-toc-label="delete_all_keywords()" id="azcam.header.Header.delete_all_keywords">
 
 <code class="highlight language-python"><span class="n">delete_all_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -621,7 +496,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.delete_keyword">
+<h3 class="doc doc-heading" data-toc-label="delete_keyword()" id="azcam.header.Header.delete_keyword">
 
 <code class="highlight language-python"><span class="n">delete_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span></code>
 
@@ -632,35 +507,7 @@ in azcam objects such as <em>controller</em> and <em>instrument</em>.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.get_all_keywords">
-
-<code class="highlight language-python"><span class="n">get_all_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Return a list of all keyword names.</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>keywords</code></td>
-<td>
-<p>list of all keywords</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.get_keyword">
+<h3 class="doc doc-heading" data-toc-label="get_keyword()" id="azcam.header.Header.get_keyword">
 
 <code class="highlight language-python"><span class="n">get_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">)</span></code>
 
@@ -710,7 +557,35 @@ Comment always returned in double quotes, even if empty.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.get_string">
+<h3 class="doc doc-heading" data-toc-label="get_keywords()" id="azcam.header.Header.get_keywords">
+
+<code class="highlight language-python"><span class="n">get_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Return a list of all keyword names.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keywords</code></td>
+<td>
+<p>list of all keywords</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="get_string()" id="azcam.header.Header.get_string">
 
 <code class="highlight language-python"><span class="n">get_string</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -721,7 +596,7 @@ Comment always returned in double quotes, even if empty.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.read_file">
+<h3 class="doc doc-heading" data-toc-label="read_file()" id="azcam.header.Header.read_file">
 
 <code class="highlight language-python"><span class="n">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
@@ -732,7 +607,7 @@ Comment always returned in double quotes, even if empty.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.read_header">
+<h3 class="doc doc-heading" data-toc-label="read_header()" id="azcam.header.Header.read_header">
 
 <code class="highlight language-python"><span class="n">read_header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -761,7 +636,7 @@ May read current values using get_keyword().</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.set_header">
+<h3 class="doc doc-heading" data-toc-label="set_header()" id="azcam.header.Header.set_header">
 
 <code class="highlight language-python"><span class="n">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">order</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
@@ -802,7 +677,7 @@ order defines how headers are written in image files.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.set_keyword">
+<h3 class="doc doc-heading" data-toc-label="set_keyword()" id="azcam.header.Header.set_keyword">
 
 <code class="highlight language-python"><span class="n">set_keyword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typestring</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -858,7 +733,7 @@ order defines how headers are written in image files.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.set_keyword_string">
+<h3 class="doc doc-heading" data-toc-label="set_keyword_string()" id="azcam.header.Header.set_keyword_string">
 
 <code class="highlight language-python"><span class="n">set_keyword_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keystring</span><span class="p">)</span></code>
 
@@ -869,7 +744,7 @@ order defines how headers are written in image files.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.set_title">
+<h3 class="doc doc-heading" data-toc-label="set_title()" id="azcam.header.Header.set_title">
 
 <code class="highlight language-python"><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span></code>
 
@@ -880,7 +755,7 @@ order defines how headers are written in image files.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.header.Header.update">
+<h3 class="doc doc-heading" data-toc-label="update()" id="azcam.header.Header.update">
 
 <code class="highlight language-python"><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -901,7 +776,7 @@ order defines how headers are written in image files.</p>
 <div class="md-source-date">
   <small>
     
-      Last update: 2021-03-06
+      Last update: 2021-03-11
     
   </small>
 </div>

@@ -301,47 +301,6 @@
     Controller
   </a>
   
-    <nav class="md-nav" aria-label="Controller">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.flush" class="md-nav__link">
-    flush()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_roi" class="md-nav__link">
-    set_roi()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_shutter" class="md-nav__link">
-    set_shutter()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.Controller.set_shutter_state" class="md-nav__link">
-    set_shutter_state()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -349,18 +308,12 @@
     DetPars
   </a>
   
-    <nav class="md-nav" aria-label="DetPars">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#azcam.controller.DetPars.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#azcam.controller.ControllerConsole" class="md-nav__link">
+    ControllerConsole
+  </a>
   
 </li>
       
@@ -437,7 +390,7 @@ Usually implemented as the "controller" tool.</p>
 </table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.Controller.__init__">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.controller.Controller.__init__">
 
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="o">=</span><span class="s1">'controller'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -479,7 +432,7 @@ Usually implemented as the "controller" tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.Controller.flush">
+<h3 class="doc doc-heading" data-toc-label="flush()" id="azcam.controller.Controller.flush">
 
 <code class="highlight language-python"><span class="n">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cycles</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
@@ -512,7 +465,7 @@ Returns after clearing is finished, which could take many seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.Controller.set_roi">
+<h3 class="doc doc-heading" data-toc-label="set_roi()" id="azcam.controller.Controller.set_roi">
 
 <code class="highlight language-python"><span class="n">set_roi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -523,7 +476,7 @@ Returns after clearing is finished, which could take many seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.Controller.set_shutter">
+<h3 class="doc doc-heading" data-toc-label="set_shutter()" id="azcam.controller.Controller.set_shutter">
 
 <code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">shutter_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
@@ -563,7 +516,7 @@ Returns after clearing is finished, which could take many seconds.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.Controller.set_shutter_state">
+<h3 class="doc doc-heading" data-toc-label="set_shutter_state()" id="azcam.controller.Controller.set_shutter_state">
 
 <code class="highlight language-python"><span class="n">set_shutter_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
 
@@ -847,7 +800,7 @@ These are updated by exposure.set_format, .set_focalplane, and .set_roi.</p>
 </table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.controller.DetPars.__init__">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.controller.DetPars.__init__">
 
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -858,6 +811,48 @@ These are updated by exposure.set_format, .set_focalplane, and .set_roi.</p>
       </h3>
 <div class="doc doc-contents ">
 <p>Create detpars database.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.controller.ControllerConsole">
+
+        <code>azcam.controller.ControllerConsole</code>
+
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Controller tool for consoles.
+Usually implemented as the "controller" tool.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.controller.ControllerConsole.__init__">
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="set_shutter()" id="azcam.controller.ControllerConsole.set_shutter">
+
+<code class="highlight language-python"><span class="n">set_shutter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Open or close a shutter.</p>
+<p>:param state:</p>
 </div>
 </div>
 </div>

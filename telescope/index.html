@@ -301,46 +301,12 @@
     Telescope
   </a>
   
-    <nav class="md-nav" aria-label="Telescope">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.exposure_finish" class="md-nav__link">
-    exposure_finish()
+      
+        <li class="md-nav__item">
+  <a href="#azcam.telescope.TelescopeConsole" class="md-nav__link">
+    TelescopeConsole
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.exposure_start" class="md-nav__link">
-    exposure_start()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.initialize" class="md-nav__link">
-    initialize()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#azcam.telescope.Telescope.reset" class="md-nav__link">
-    reset()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -373,7 +339,7 @@ One class is usually instantiated as the <em>telescope</em> object in the server
 Usually implemented as the "telescope" tool.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.__init__">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.telescope.Telescope.__init__">
 
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="o">=</span><span class="s1">'telescope'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -388,7 +354,7 @@ Usually implemented as the "telescope" tool.</p>
     </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_finish">
+<h3 class="doc doc-heading" data-toc-label="exposure_finish()" id="azcam.telescope.Telescope.exposure_finish">
 
 <code class="highlight language-python"><span class="n">exposure_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -399,7 +365,7 @@ Usually implemented as the "telescope" tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.exposure_start">
+<h3 class="doc doc-heading" data-toc-label="exposure_start()" id="azcam.telescope.Telescope.exposure_start">
 
 <code class="highlight language-python"><span class="n">exposure_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -410,7 +376,7 @@ Usually implemented as the "telescope" tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.initialize">
+<h3 class="doc doc-heading" data-toc-label="initialize()" id="azcam.telescope.Telescope.initialize">
 
 <code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -421,7 +387,7 @@ Usually implemented as the "telescope" tool.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h3 class="doc doc-heading" id="azcam.telescope.Telescope.reset">
+<h3 class="doc doc-heading" data-toc-label="reset()" id="azcam.telescope.Telescope.reset">
 
 <code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -429,6 +395,85 @@ Usually implemented as the "telescope" tool.</p>
       </h3>
 <div class="doc doc-contents ">
 <p>Reset telescope tool.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h2 class="doc doc-heading" id="azcam.telescope.TelescopeConsole">
+
+        <code>azcam.telescope.TelescopeConsole</code>
+
+
+
+      </h2>
+<div class="doc doc-contents first">
+<p>Telescope tool for consoles.
+Usually implemented as the "telescope" tool.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="__init__()" id="azcam.telescope.TelescopeConsole.__init__">
+
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h3>
+<div class="doc doc-contents ">
+
+
+    </div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="get_focus()" id="azcam.telescope.TelescopeConsole.get_focus">
+
+<code class="highlight language-python"><span class="n">get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Get the current focus position.</p>
+<p>:param focus_id: focus sensor ID flag</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="initialize()" id="azcam.telescope.TelescopeConsole.initialize">
+
+<code class="highlight language-python"><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Initialize telescope.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="reset()" id="azcam.telescope.TelescopeConsole.reset">
+
+<code class="highlight language-python"><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Reset exposure.</p>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h3 class="doc doc-heading" data-toc-label="set_focus()" id="azcam.telescope.TelescopeConsole.set_focus">
+
+<code class="highlight language-python"><span class="n">set_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus_value</span><span class="p">,</span> <span class="n">focus_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">focus_type</span><span class="o">=</span><span class="s1">'absolute'</span><span class="p">)</span></code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>Set instrument focus position. The focus value may be an absolute position
+or a relative step if supported by hardware.</p>
+<p>:param focus_value: focus position
+:param focus_id: focus sensor ID flag
+:param focus_type: focus type (absolute or step)</p>
 </div>
 </div>
 </div>
