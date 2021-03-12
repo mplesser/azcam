@@ -92,8 +92,9 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         return
 
-    # *** exposure ***
-
+    # ***************************************************************************
+    # exposure
+    # ***************************************************************************
     def exposure_start(self) -> None:
         """
         Custom commands before exposure starts.
@@ -108,6 +109,9 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         return
 
+    # ***************************************************************************
+    # temperatures
+    # ***************************************************************************
     def set_control_temperature(self, temperature: float = None, temperature_id: int = 0) -> None:
         """
         Set the control temperature (set point).
@@ -133,18 +137,6 @@ class TempCon(Tools, ObjectHeaderMethods):
         """
 
         return self.control_temperature
-
-    def get_pressures(self):
-        """
-        Return a list of all instrument pressures.
-        """
-
-        pressures = []
-        for pressure_id in self.pressure_ids:
-            p = self.get_pressure(pressure_id)
-            pressures.append(p)
-
-        return pressures
 
     def get_temperatures(self) -> List[float]:
         """
