@@ -222,8 +222,6 @@ class FocalPlane(ObjectHeaderMethods):
         Update headers, reading current data.
         """
 
-        # update header
-        # self.define_keywords()
         self.update_header_keywords()
 
         return

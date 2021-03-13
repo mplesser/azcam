@@ -153,7 +153,7 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # wavelengths
     # ***************************************************************************
-    def get_all_wavelengths(self, wavelength_id: int = 0):
+    def get_wavelengths(self, wavelength_id: int = 0):
         """
         Returns a list of valid wavelengths.
         Used for filter and LED based systems.
@@ -185,13 +185,6 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # focus
     # ***************************************************************************
-    def get_all_focus_positions(self):
-        """
-        Return a list of all focus positions.
-        """
-
-        raise NotImplementedError
-
     def get_focus(self, focus_id=0):
         """
         Return the current instrument focus position.
@@ -251,19 +244,6 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         raise NotImplementedError
 
-    # ***************************************************************************
-    # electrometer
-    # ***************************************************************************
-    def get_current(self, current_id=0, shutter_state=1):
-        """
-        Read electrometer diode current in Amps.
-        current_id = 0 is the sphere (Reference) diode.
-        current_id = 1 is the calibrated diode or DUT.
-        ShutterState is 0, 1 to close/open shutter during read or 2 unchanged.
-        """
-
-        raise NotImplementedError
-
 
 class InstrumentConsole(ConsoleTools):
     """
@@ -317,12 +297,12 @@ class InstrumentConsole(ConsoleTools):
     # ***************************************************************************
     # filters
     # ***************************************************************************
-    def get_filters(self):
+    def get_filters(self, filter_id=0):
         """
         Return a list of all available/loaded filters.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_filters")
+        return azcam.db.server.command(f"{self.objname}.get_filters {filter_id}")
 
     def set_filter(self, filter_name: str, filter_id: int = 0) -> Optional[str]:
         """
@@ -421,22 +401,22 @@ class InstrumentConsole(ConsoleTools):
     def set_shutter(self, state: int = 0, shutter_id: int = 0) -> Optional[str]:
         """
         Open or close a shutter.
-
-        :param state:
-        :param shutter_id: Shutter ID flag
+        Args:
+            state: shutter state, 0 for close and 1 for open
+            shutter_id: Shutter ID flag
 
         """
 
         return azcam.db.server.command(f"{self.objname}.set_shutter {state} {shutter_id}")
 
-    def get_current(self, diode_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
+    def get_power(self, power_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
         """
-        Returns a list of instrument diode currents.
-
-        :param diode_id: diode ID flag (system dependent)
-        :param shutter_state: open (1), close (0), unchanged (2) shutter during diode read
+        Returns power meter reading.
+        Args:
+            diode_id: diode ID flag (system dependent)
+            shutter_state: open (1), close (0), unchanged (2) shutter during diode read
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_current {diode_id} {shutter_state}")
+        reply = azcam.db.server.command(f"{self.objname}.get_power {power_id} {shutter_state}")
 
         return float(reply)

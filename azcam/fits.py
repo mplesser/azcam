@@ -659,9 +659,9 @@ def get_data(filename: str = "test", roi: str = []) -> list:
     return datalist
 
 
-def get_all_data(filename: str = "test") -> list:
+def get_data(filename: str = "test") -> list:
     """
-    Return all pixel data from image.
+    Return pixel data from image.
 
     filename: image filename
     """

@@ -115,17 +115,6 @@ class Header(object):
 
         return klist
 
-    def define_keywords(self, keywords=[], comments={}, typestrings={}):
-        """
-        Defines keywords.
-        """
-
-        if len(keywords) > 0:
-            for key in keywords:
-                self.set_keyword(key, "", comments[key], typestrings[key])
-
-        return
-
     def set_keyword(self, keyword, value, comment=None, typestring=None):
         """
         Set a keyword value, comment, and type.
