@@ -244,6 +244,21 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         raise NotImplementedError
 
+    # ***************************************************************************
+    # power meter
+    # ***************************************************************************
+    def get_power(self, wavelength: flaot, power_id: int = 0) -> float:
+        """
+        Returns power meter reading.
+        Args:
+            wavelength: wavelength for power meter
+            power_id: power ID flag
+        Returns:
+            mean_power: mean power in Watts/cm2
+        """
+
+        raise NotImplementedError
+
 
 class InstrumentConsole(ConsoleTools):
     """
@@ -409,14 +424,16 @@ class InstrumentConsole(ConsoleTools):
 
         return azcam.db.server.command(f"{self.objname}.set_shutter {state} {shutter_id}")
 
-    def get_power(self, power_id: int = 0, shutter_state: int = 1) -> Union[str, float]:
+    def get_power(self, wavelength: float, power_id: int = 0) -> float:
         """
         Returns power meter reading.
         Args:
-            diode_id: diode ID flag (system dependent)
-            shutter_state: open (1), close (0), unchanged (2) shutter during diode read
+            wavelength: wavelength for power meter
+            power_id: power ID flag
+        Returns:
+            mean_power: mean power in Watts/cm2
         """
 
-        reply = azcam.db.server.command(f"{self.objname}.get_power {power_id} {shutter_state}")
+        reply = azcam.db.server.command(f"{self.objname}.get_power {wavelength} {power_id}")
 
         return float(reply)
