@@ -259,6 +259,21 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         raise NotImplementedError
 
+    # ***************************************************************************
+    # electrometer
+    # ***************************************************************************
+    def get_current(self, shutter_state: int = 1, current_id: int = 0) -> float:
+        """
+        Read instrument current, usually from an electrometer.
+        Args:
+            current_id: current source ID
+            shutter_state: shutter state during read
+        Returns:
+            current: measured current in amps
+        """
+
+        raise NotImplementedError
+
 
 class InstrumentConsole(ConsoleTools):
     """
@@ -431,19 +446,25 @@ class InstrumentConsole(ConsoleTools):
             wavelength: wavelength for power meter
             power_id: power ID flag
         Returns:
-            mean_power: mean power in Watts/cm2
+            mean_power: measured mean power in Watts/cm2
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_power {wavelength} {power_id}")
 
         return float(reply)
 
-    def get_current(self, shutter_state: int = 1, diode_id: int = 0,) -> float:
+    def get_current(
+        self,
+        shutter_state: int = 1,
+        diode_id: int = 0,
+    ) -> float:
         """
         Returns measured instrument diode current.
         Args:
             shutter_state: open (1), close (0), unchanged (2) shutter during diode read
             diode_id: diode ID flag (system dependent)
+        Returns:
+            current: measured curent in amps
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_current  {shutter_state} {diode_id}")
