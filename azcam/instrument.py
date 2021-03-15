@@ -437,3 +437,15 @@ class InstrumentConsole(ConsoleTools):
         reply = azcam.db.server.command(f"{self.objname}.get_power {wavelength} {power_id}")
 
         return float(reply)
+
+    def get_current(self, shutter_state: int = 1, diode_id: int = 0,) -> float:
+        """
+        Returns measured instrument diode current.
+        Args:
+            shutter_state: open (1), close (0), unchanged (2) shutter during diode read
+            diode_id: diode ID flag (system dependent)
+        """
+
+        reply = azcam.db.server.command(f"{self.objname}.get_current  {shutter_state} {diode_id}")
+
+        return float(reply)
