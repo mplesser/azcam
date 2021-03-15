@@ -33,6 +33,9 @@ class Instrument(Tools, ObjectHeaderMethods):
         # system pressures
         self.pressure_ids = [0]
 
+        # system currents
+        self.current_ids = [0]
+
         azcam.db.tools_init["instrument"] = self
         azcam.db.tools_reset["instrument"] = self
 
@@ -262,6 +265,18 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # electrometer
     # ***************************************************************************
+    def get_currents(self):
+        """
+        Return a list of all instrument currents.
+        """
+
+        currents = []
+        for current_id in self.current_ids:
+            p = self.get_current(current_id)
+            currents.append(p)
+
+        return currents
+
     def get_current(self, shutter_state: int = 1, current_id: int = 0) -> float:
         """
         Read instrument current, usually from an electrometer.
@@ -386,10 +401,7 @@ class InstrumentConsole(ConsoleTools):
     # focus
     # ***************************************************************************
     def set_focus(
-        self,
-        focus_value: float,
-        focus_id: int = 0,
-        focus_type: str = "absolute",
+        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -404,10 +416,7 @@ class InstrumentConsole(ConsoleTools):
 
         return
 
-    def get_focus(
-        self,
-        focus_id: int = 0,
-    ) -> float:
+    def get_focus(self, focus_id: int = 0,) -> float:
         """
         Get the current focus position.
 
@@ -420,7 +429,7 @@ class InstrumentConsole(ConsoleTools):
 
     def get_pressures(self) -> List[float]:
         """
-        Return a list of all system pressures.
+        Return a list of all instrument pressures.
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_pressures")
@@ -453,11 +462,16 @@ class InstrumentConsole(ConsoleTools):
 
         return float(reply)
 
-    def get_current(
-        self,
-        shutter_state: int = 1,
-        diode_id: int = 0,
-    ) -> float:
+    def get_currents(self) -> List[float]:
+        """
+        Return a list of all instrument currents.
+        """
+
+        reply = azcam.db.server.command(f"{self.objname}.get_currents")
+
+        return [float(x) for x in reply]
+
+    def get_current(self, shutter_state: int = 1, diode_id: int = 0,) -> float:
         """
         Returns measured instrument diode current.
         Args:
