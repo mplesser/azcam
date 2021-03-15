@@ -247,7 +247,7 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # power meter
     # ***************************************************************************
-    def get_power(self, wavelength: flaot, power_id: int = 0) -> float:
+    def get_power(self, wavelength: float, power_id: int = 0) -> float:
         """
         Returns power meter reading.
         Args:
