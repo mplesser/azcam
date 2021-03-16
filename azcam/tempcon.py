@@ -54,12 +54,6 @@ class TempCon(Tools, ObjectHeaderMethods):
         self.header.set_header("tempcon", 4)
 
         # add keywords
-        self.header.keywords = {"CAMTEMP": "CAMTEMP", "DEWTEMP": "DEWTEMP"}
-        self.header.comments = {
-            "CAMTEMP": "Camera temperature in C",
-            "DEWTEMP": "Dewar temperature in C",
-        }
-        self.header.typestrings = {"CAMTEMP": "float", "DEWTEMP": "float"}
         self.define_keywords()
 
         azcam.db.tools_init["tempcon"] = self
@@ -222,6 +216,17 @@ class TempCon(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # keywords
     # ***************************************************************************
+    def define_keywords(self):
+        """
+        Defines and resets instrument keywords.
+        """
+
+        self.set_keyword("CAMTEMP", 0.0, "Camera temperature", float)
+        self.set_keyword("DEWTEMP", "", "Dewar temperature", float)
+        self.set_keyword("TEMPUNIT", "C", "Temperature units", str)
+
+        return
+
     def get_keyword(self, keyword: str) -> List:
         """
         Read a temperature keyword value and returns it as [value, comment, type string]

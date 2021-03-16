@@ -519,17 +519,17 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
             if self.comp_sequence:  # lamps already on
                 pass
             else:
-                azcam.db.instrument.set_active_comps(imagetype)
+                azcam.db.instrument.set_comps(imagetype)
                 if not azcam.db.instrument.shutter_strobe:
                     azcam.db.instrument.comps_on()
-            lampnames = " ".join(azcam.db.instrument.get_active_comps())
+            lampnames = " ".join(azcam.db.instrument.get_comps())
             self.set_keyword("COMPLAMP", lampnames, "Comp lamp names", str)
             self.set_keyword("IMAGETYP", "comp", "Image type", str)
             azcam.db.instrument.comps_delay()  # delay for lamp warmup
         else:
             if not self.guide_mode:
                 if (azcam.db.get("instrument") is not None) and azcam.db.get("instrument").enabled:
-                    azcam.db.instrument.set_active_comps()  # reset
+                    azcam.db.instrument.set_comps()  # reset
                 self.set_keyword("IMAGETYP", imagetype, "Image type", str)
 
         # update all headers with current data
@@ -634,7 +634,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         if self.comp_sequence:
             azcam.log("Starting comparison sequence")
-            azcam.db.instrument.set_active_comps(self.image_type)
+            azcam.db.instrument.set_comps(self.image_type)
             if azcam.db.instrument.shutter_strobe:
                 pass  # these instruments use shutter to turn on comps
             else:
@@ -969,17 +969,17 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
     def get_image_types(self):
         """
         Return a list of valid imagetypes.
-        Gets imagetypes from detector and instrument.
+        Gets imagetypes and comparisons.
         """
 
         l1 = self.image_types
 
         try:
-            l2 = azcam.db.instrument.get_comps()
+            l2 = azcam.db.instrument.get_all_comps()
         except Exception:
             return l1
 
-        return l1 + l2 if len(l2) > 1 and l2[0] != "ERROR" else l1
+        return l1 + l2 if len(l2) > 0 else l1
 
     def check_comparison_imagetype(self, imagetype=""):
         """

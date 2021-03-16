@@ -183,8 +183,6 @@ class FocalPlane(ObjectHeaderMethods):
         self.rowoscm = 0
         self.framet = 0
 
-        self.define_keywords()
-
     def update_header_keywords(self):
         """
         Update focal plane keywords in header

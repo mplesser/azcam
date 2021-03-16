@@ -343,14 +343,8 @@ class ObjectHeaderMethods(object):
 
     def define_keywords(self):
         """
-        Sets up header keywords dictionary if not already defined.
+        Defines and resets keywords.
         """
-
-        # add keywords to header
-        for key in self.header.keywords:
-            self.header.set_keyword(
-                key, "", self.header.comments[key], self.header.typestrings[key]
-            )
 
         return
 

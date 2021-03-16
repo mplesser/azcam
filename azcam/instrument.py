@@ -66,7 +66,7 @@ class Instrument(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     # comparisons
     # ***************************************************************************
-    def get_comps(self):
+    def get_all_comps(self):
         """
         Return all valid comparison names.
         Useful for clients to determine which type of comparison exposures are supported.
@@ -74,23 +74,22 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         raise NotImplementedError
 
-    def get_active_comps(self):
+    def get_comps(self):
         """
         Return a list of the active comparison lamps.
         """
 
         return self.active_comps
 
-    def set_active_comps(self, comp_names: List[str] = None):
+    def set_comps(self, comp_names: List[str] = None):
         """
-        Set comparisons which are to be turned on and off with comps_on() and comps_off().
-        comp_names is a single string or a list of strings to be set as active.
+        Set comparisons to be turned on and off with comps_on() and comps_off().
         Args:
             comp_names: list of string (or a single string) of comparison names
         """
 
         if type(comp_names) == str:
-            comp_names = list(comp_names)
+            comp_names = comp_names.split(" ")
 
         self.active_comps = comp_names
 
@@ -302,28 +301,28 @@ class InstrumentConsole(ConsoleTools):
     # ***************************************************************************
     # comparisons
     # ***************************************************************************
-    def get_comps(self):
+    def get_all_comps(self):
         """
         Return all valid comparison names.
         Useful for clients to determine which type of comparison exposures are supported.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_comps")
+        return azcam.db.server.command(f"{self.objname}.get_all_comps")
 
-    def get_active_comps(self):
+    def get_comps(self):
         """
         Return a list of the active comparison lamps.
         """
 
-        return azcam.db.server.command(f"{self.objname}.get_active_comps")
+        return azcam.db.server.command(f"{self.objname}.get_comps")
 
-    def set_active_comps(self, comp_names=None):
+    def set_comps(self, comp_names=None):
         """
         Set comparisons which are to be turned on and off with comps_on() and comps_off().
         comp_names is a single string or a list of strings to be set as active.
         """
 
-        return azcam.db.server.command(f"{self.objname}.set_active_comps {comp_names}")
+        return azcam.db.server.command(f"{self.objname}.set_comps {comp_names}")
 
     def comps_on(self):
         """
@@ -401,7 +400,10 @@ class InstrumentConsole(ConsoleTools):
     # focus
     # ***************************************************************************
     def set_focus(
-        self, focus_value: float, focus_id: int = 0, focus_type: str = "absolute",
+        self,
+        focus_value: float,
+        focus_id: int = 0,
+        focus_type: str = "absolute",
     ) -> None:
         """
         Set instrument focus position. The focus value may be an absolute position
@@ -416,7 +418,10 @@ class InstrumentConsole(ConsoleTools):
 
         return
 
-    def get_focus(self, focus_id: int = 0,) -> float:
+    def get_focus(
+        self,
+        focus_id: int = 0,
+    ) -> float:
         """
         Get the current focus position.
 
@@ -471,7 +476,11 @@ class InstrumentConsole(ConsoleTools):
 
         return [float(x) for x in reply]
 
-    def get_current(self, shutter_state: int = 1, diode_id: int = 0,) -> float:
+    def get_current(
+        self,
+        shutter_state: int = 1,
+        diode_id: int = 0,
+    ) -> float:
         """
         Returns measured instrument diode current.
         Args:
