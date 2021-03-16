@@ -47,7 +47,6 @@ plugins:
             group_by_category: true
             show_category_heading: true
             show_members: true
-            show_inherited_members: false
       watch:
         - ../azcam
 extra_css:

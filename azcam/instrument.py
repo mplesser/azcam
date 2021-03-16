@@ -19,7 +19,7 @@ class Instrument(Tools, ObjectHeaderMethods):
 
     def __init__(self, tool_id="instrument", description=None):
 
-        super().__init__(tool_id, description)
+        Tools().__init__(tool_id, description)
 
         # active comparisons
         self.active_comps = []

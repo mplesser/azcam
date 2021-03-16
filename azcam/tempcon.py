@@ -24,7 +24,7 @@ class TempCon(Tools, ObjectHeaderMethods):
             description: Description of tool, defaults to tool_id.
         """
 
-        super().__init__(tool_id, description)
+        Tools().__init__(tool_id, description)
 
         # control or set temperature at which to regulate
         self.AAA = 0.0

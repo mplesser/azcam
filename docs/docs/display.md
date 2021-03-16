@@ -8,3 +8,5 @@ Usage Example:
     display.display(test.fits')
 
 ::: azcam.display.Display
+    selection:
+      inherited_members: true

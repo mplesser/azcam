@@ -16,7 +16,7 @@ class Display(Tools, ObjectHeaderMethods):
 
     def __init__(self, tool_id="display", description=None):
 
-        super().__init__(tool_id, description)
+        Tools().__init__(tool_id, description)
 
         # create the display Header object
         self.header = Header("Display")

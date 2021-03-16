@@ -8,5 +8,9 @@ The *exposure* tool often coordinates the actions of the hardware tools such as 
 *exposure.tools_reset* list are reset.
 
 ::: azcam.exposure.Exposure
+    selection:
+      inherited_members: true
 
 ::: azcam.exposure.ExposureConsole
+    selection:
+      inherited_members: true

@@ -16,7 +16,7 @@ class Telescope(Tools, ObjectHeaderMethods):
 
     def __init__(self, tool_id="telescope", description=None):
 
-        super().__init__(tool_id, description)
+        Tools().__init__(tool_id, description)
 
         # focus position
         self.focus_position = 0
@@ -27,27 +27,6 @@ class Telescope(Tools, ObjectHeaderMethods):
 
         azcam.db.tools_init["telescope"] = self
         azcam.db.tools_reset["telescope"] = self
-
-    def initialize(self):
-        """
-        Initializes the telescope interface.
-        """
-
-        if self.initialized:
-            return
-
-        if not self.enabled:
-            azcam.AzcamWarning(f"{self.description} is not enabled")
-            return
-
-        return
-
-    def reset(self):
-        """
-        Reset telescope tool.
-        """
-
-        return
 
     # ***************************************************************************
     # exposure
@@ -77,25 +56,11 @@ class TelescopeConsole(ConsoleTools):
     def __init__(self) -> None:
         super().__init__("telescope")
 
-    def initialize(self) -> None:
-        """
-        Initialize telescope.
-        """
-
-        return azcam.db.server.command(f"{self.objname}.initialize")
-
-    def reset(self) -> None:
-        """
-        Reset exposure.
-        """
-
-        return azcam.db.server.command(f"{self.objname}.reset")
-
     def get_focus(self, focus_id: int = 0) -> float:
         """
-        Get the current focus position.
-
-        :param focus_id: focus sensor ID flag
+        Get the current telescope focus position.
+        Args:
+            focus_id: focus sensor ID flag
         """
 
         reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
@@ -109,25 +74,14 @@ class TelescopeConsole(ConsoleTools):
         focus_type: str = "absolute",
     ) -> None:
         """
-        Set instrument focus position. The focus value may be an absolute position
+        Set the telescope focus position. The focus value may be an absolute position
         or a relative step if supported by hardware.
-
-        :param focus_value: focus position
-        :param focus_id: focus sensor ID flag
-        :param focus_type: focus type (absolute or step)
+        Args:
+            focus_value: focus position
+            focus_id: focus sensor ID flag
+            focus_type: focus type (absolute or step)
         """
 
         azcam.db.server.command(f"{self.objname}.set_focus {focus_value} {focus_id} {focus_type}")
 
         return
-
-    def get_focus(self, focus_id: int = 0) -> float:
-        """
-        Get the current focus position.
-
-        :param focus_id: focus sensor ID flag
-        """
-
-        reply = azcam.db.server.command(f"{self.objname}.get_focus {focus_id}")
-
-        return float(reply)
