@@ -16,7 +16,7 @@ class Telescope(Tools, ObjectHeaderMethods):
 
     def __init__(self, tool_id="telescope", description=None):
 
-        Tools().__init__(tool_id, description)
+        Tools.__init__(self, tool_id, description)
 
         # focus position
         self.focus_position = 0

@@ -28,7 +28,7 @@ class Controller(Tools, ObjectHeaderMethods):
             description:   description of this tool
         """
 
-        Tools().__init__(tool_id, description)
+        Tools.__init__(self, tool_id, description)
 
         # interface type (0 = demo, 4 = PCIe)
         self.interface_type = 0

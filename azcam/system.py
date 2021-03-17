@@ -17,7 +17,7 @@ class System(Tools, ObjectHeaderMethods):
 
     def __init__(self, system_name, template_file=None):
 
-        Tools().__init__("system", system_name)
+        Tools.__init__(self, "system", system_name)
 
         self.header = Header(system_name, template_file)
         self.header.set_header("system", 0)
