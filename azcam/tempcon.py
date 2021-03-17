@@ -242,10 +242,13 @@ class TempCon(Tools, ObjectHeaderMethods):
             temp = reply[0]
         elif keyword == "DEWTEMP":
             temp = reply[1]
+        elif keyword in self.get_keywords():
+            value = self.header.values[keyword]
+            temp = value
         else:
-            raise azcam.AzcamError("invalid keyword")
+            raise azcam.AzcamError(f"invalid keyword: {keyword}")
 
-        # store value in Header
+        # store temperature values in header
         if keyword == "CAMTEMP":
             temp = float(f"{temp:.03f}")
             self.header.set_keyword("CAMTEMP", temp, "Camera temperature in C", float)
