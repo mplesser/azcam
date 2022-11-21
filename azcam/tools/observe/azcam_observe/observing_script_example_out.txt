@@ -1,0 +1,5 @@
+# *** a comment *** 
+-1 test 1.0 flat "400 nm flat" 1
+comment "new comment 123" 
+delay 1 
+-1 test 2.3 dark "mike test dark" 3

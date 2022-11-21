@@ -1,0 +1,7 @@
+# *** a comment ***
+
+test 1.0 flat "400 nm flat" 1
+test 0.0 zero "bias" 2
+delay 1
+test 2.3 dark "test dark" 3
+

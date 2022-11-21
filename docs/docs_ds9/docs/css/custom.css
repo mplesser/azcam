@@ -1,0 +1,22 @@
+li {
+    line-height: 1.2em;
+}
+
+.doc-heading {
+    background-color: lightgray;
+    font-style: italic;
+}
+
+.doc-method {
+    background-color: transparent;
+    border-width: 1px;
+    border-style: dashed;
+    margin-bottom: 5px;
+}
+
+.doc-function {
+    background-color: transparent;
+    border-width: 1px;
+    border-style: dashed;
+    margin-bottom: 5px;
+}

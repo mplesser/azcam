@@ -1,0 +1,55 @@
+site_name: azcam-testers Documentation
+site_author: Michael Lesser
+
+theme:
+  name: material
+  palette:
+    scheme: indigo
+    primary: indigo
+    accent: indigo
+  logo:
+    img/logo.png
+  favicon:
+    img/favicon.ico
+  icon:
+    repo: fontawesome/brands/git-alt
+  features:
+    navigation.sections
+  include_search_page: false
+  search_index_only: true
+  prev_next_buttons_location: both
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - attr_list
+  - pymdownx.highlight:
+      linenums: false
+      linenums_style: pymdownx.inline
+  - pymdownx.superfences
+  - toc:
+      toc_depth: 3
+      title: 'Contents'
+
+plugins:
+  - search
+  - git-revision-date
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: true
+            show_if_no_docstring: true
+      watch:
+        - ../azcam_testers
+extra_css:
+  - css/custom.css
+
+# Repository
+repo_name: azcam-testers on GitHub
+repo_url:
+  https://github.com/mplesser/azcam-testers.git
+edit_uri: ""
