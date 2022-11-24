@@ -12,14 +12,15 @@ import azcam
 
 def main():
     """
-    Main method to allow for installed azcam command.
-    Requried arguments is startup script
-    Local optional arguments are: -venv virtual_environment_activation_script
+    Method for the azcam command.
+    Required argument is a startup script name.
+    Local optional arguments are:
+      -venv path_to_ve_activation_script
+      -python system_python_command (default is ipython)
+         may include python options in quotes (e.g. "ipython --profile azcamserver")
 
-    Usage:
-        azcam startup_script -venv path_to_venv
-            startup_script, ex: azcam_itl.start
-            -venv path_to_venv: use virtual environment
+    Usage example:
+      azcam azcam_xxx.start -venv ve_activation_path -python python3
     """
 
     args = sys.argv[1:]
@@ -27,39 +28,48 @@ def main():
     if len(args) >= 1:
         startmod = sys.argv[1]
     else:
-        print("No startup package/script specified - stopping.")
+        print("No startup package/script specified - stopping")
         exit()
 
+    i1=i2=0
     if "-venv" in args:
-        i = sys.argv.index("-venv")
-        activator = sys.argv[i + 1]
+        i1 = sys.argv.index("-venv")
+        activator = sys.argv[i1 + 1]
         use_venv = True
     else:
         use_venv = False
         activator = None
 
+    if "-python" in args:
+        i2 = sys.argv.index("-python")
+        pythoncmd = sys.argv[i2 + 1]
+    else:
+        pythoncmd = "ipython --profile azcam"
+
+    args = args[(2+i1+i2):]
+
     if os.name == "posix":
         if use_venv:
             cmds = [
-                f". {activator} ; python3 -m {startmod}",
+                f". {activator} ; {pythoncmd} -m {startmod}",
                 f"{' '.join(args)}",
             ]
         else:
             cmds = [
-                f"python3 -m {startmod}",
+                f"{pythoncmd} -m {startmod}",
                 f"{' '.join(args)}",
             ]
     else:
         if use_venv:
             cmds = [
                 "cmd /k",
-                f'"{activator} & ipython --profile azcam -m {startmod} -i"',
+                f'"{activator} & {pythoncmd} -m {startmod} -i"',
                 f"-- {' '.join(args)}",
             ]
         else:
             cmds = [
                 "cmd /k",
-                f"ipython --profile azcam -m {startmod} -i",
+                f"{pythoncmd} -m {startmod} -i",
                 f"-- {' '.join(args)}",
             ]
 

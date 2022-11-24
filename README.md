@@ -1,3 +1,5 @@
+# UNDER CONSTRUCTION - new monorepo
+
 # AzCam
 
 *azcam* is an python package used to control an observation from a scientific imaging camera. It is intended to be used as an interface to multiple non-standard hardware interfaces such as camera controllers, telescopes, instruments, and temperature controllers.
@@ -444,17 +446,6 @@ stepfocus -50
 steptel 12.34 12.34
 movetel 112940.40 +310030.0 2000.0
 ```
-
-## Sensor Testers
-# azcam-scripts
-
-*azcam-scripts* is an *azcam* extension which adds general purpose scripting. These scripts are intended for command line use. Other azcam extensions may required to be installed for proper operation, depending on the script.
-
-## Usage
-
-Use `from azcam_scripts import xxx` to import module `xxx`. Scripts may then be executed by name as `xxx.xxx(10)`, for example, `get_temperatures.get_temperatures(10)`. A shortcut could be similar to `from azcam_scripts.get_temperatures import get_temperatures` and then execute with `get_temperatures(10)`.
-
-In some cases the environment configuration process may bring all the script functions directly to the command line namespace. This is usually accomplished using the `azcam_scripts.load()` command.  In this case, use just `get_temperaturess(10, "templog.txt", 0)`.
 
 ## AzCam Web Tools
 
