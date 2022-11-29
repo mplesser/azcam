@@ -23,16 +23,13 @@ def main():
       azcam azcam_xxx.start -venv ve_activation_path -python python3
     """
 
-    args = sys.argv[1:]
-
-    if len(args) >= 1:
+    if len(sys.argv) >= 1:
         startmod = sys.argv[1]
     else:
         print("No startup package/script specified - stopping")
         exit()
 
-    i1=i2=0
-    if "-venv" in args:
+    if "-venv" in sys.argv:
         i1 = sys.argv.index("-venv")
         activator = sys.argv[i1 + 1]
         use_venv = True
@@ -40,13 +37,11 @@ def main():
         use_venv = False
         activator = None
 
-    if "-python" in args:
+    if "-python" in sys.argv:
         i2 = sys.argv.index("-python")
         pythoncmd = sys.argv[i2 + 1]
     else:
         pythoncmd = "ipython --profile azcam"
-
-    args = args[(2+i1+i2):]
 
     if os.name == "posix":
         if use_venv:
@@ -64,13 +59,13 @@ def main():
             cmds = [
                 "cmd /k",
                 f'"{activator} & {pythoncmd} -m {startmod} -i"',
-                f"-- {' '.join(args)}",
+                f"-- {' '.join(sys.argv)}",
             ]
         else:
             cmds = [
                 "cmd /k",
                 f"{pythoncmd} -m {startmod} -i",
-                f"-- {' '.join(args)}",
+                f"-- {' '.join(sys.argv)}",
             ]
 
     command = " ".join(cmds)
@@ -89,3 +84,67 @@ def start():
 
 if __name__ == "__main__":
     main()
+
+
+"""
+
+if os.name == "posix":
+    AZCAM_DATAROOT = f'{os.path.abspath("data")}'
+    os.environ["AZCAM_DATAROOT"] = AZCAM_DATAROOT
+    print(f"AzCam data root is {AZCAM_DATAROOT}")
+
+    if SERVER:
+        command = f"ipython --profile azcamserver -i -c \"import azcam_itl.server ; from azcam.cli import *\" -- {' '.join(args)}"
+    elif CONSOLE:
+        command = f"ipython --profile azcamconsole -i -c \"import azcam_itl.console ; from azcam.cli import *\" -- {' '.join(args)}"
+    os.system(command)
+
+else:
+    if SERVER:
+        config_file = os.path.join(os.path.dirname(__file__), "ipython_config.py")
+        cmds = [
+            # f"ipython --profile azcamserver -i -c",
+            f"ipython --profile azcamserver --config={config_file} -i -c",
+            '"import azcam_itl.server ; from azcam.cli import *"',
+            f" -- {' '.join(args)}",
+        ]
+    if CONSOLE:
+        cmds = [
+            "ipython --profile azcamconsole -i -c",
+            '"import azcam_itl.start"',
+            f" -- {' '.join(args)}",
+        ]
+
+    command = " ".join(cmds)
+    print(command)
+    input()
+    os.system(command)
+
+
+    if "-console" in args:
+        tabColor = "#000099"
+        tabTitle = "azcamconsole"
+    elif "-server" in args:
+        tabColor = "#990000"
+        tabTitle = "azcamserver"
+    else:
+        # assume console mode
+        tabColor = "#000099"
+        tabTitle = "azcamconsole"
+
+        if use_venv: 
+            cmds = [
+                f"wt -w azcam --suppressApplicationTitle=True --title {tabTitle} --tabColor {tabColor}",
+                "cmd /k",
+                f'"{activator} & python -m {startmod}"',
+                f"{' '.join(args)}",
+            ]
+        else:
+            cmds = [
+                f"wt -w azcam --suppressApplicationTitle=True --title {tabTitle} --tabColor {tabColor}",
+                "cmd /k",
+                f"python -m {startmod}",
+                f"{' '.join(args)}",
+            ]
+
+"""
