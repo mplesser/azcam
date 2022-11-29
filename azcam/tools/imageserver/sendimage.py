@@ -82,7 +82,7 @@ class SendImage(Tools):
         self.size_y = azcam.db.tools["exposure"].size_y
 
         if self.remote_imageserver_type == "azcam":
-            self.azcam.tools.imageserver.(localfile, remotefile)
+            self.azcam_imageserver(localfile, remotefile)
         elif self.remote_imageserver_type == "lbtguider":
             self.lbtguider_imageserver(localfile, remotefile)
         elif self.remote_imageserver_type == "dataserver":
@@ -92,7 +92,7 @@ class SendImage(Tools):
         else:
             raise azcam.AzcamError("Unknown remote image server type")
 
-    def azcam.tools.imageserver.(self, localfile, remotefile=None):
+    def azcam_imageserver(self, localfile, remotefile=None):
         """
         Send image to azcam image server.
         """

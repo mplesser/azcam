@@ -18,7 +18,6 @@ dependencies = [
     "jinja2",
     "psutil",
     "requests",
-
 ]
 
 [project.urls]
