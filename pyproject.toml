@@ -25,14 +25,6 @@ dependencies = [
 Documentation = "https://mplesser.github.io/azcam/"
 Repository = "https://github.com/mplesser/azcam/"
 
-[project.optional-dependencies]
-docs = [
-    "mkdocs-material",
-    "mkdocs-git-revision-date-plugin",
-    "mkdocstrings",
-    "pdoc3",
-]
-
 [project.scripts]
 azcam = "azcam.start:start"
 
