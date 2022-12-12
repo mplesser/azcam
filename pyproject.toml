@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "22.4.0"
+version = "22.5"
 description = "Acquisition and analysis package for scientific imaging"
 license = {file ="LICENSE"}
 readme = "README.md"
@@ -8,9 +8,10 @@ keywords=["ccd", "imaging", "astronomy", "sensors"]
 authors = [{name="Michael Lesser"},{email = "mlesser@arizona.edu"}]
 dependencies = [
     "loguru",
-    "numpy",
+    "numpy==1.20.3",
     "matplotlib",
-    "astropy",
+    "astropy==4.3.1",
+    "scipy",
     "pywin32; sys_platform == 'win32'",
     "PySide6",
     "fastapi",

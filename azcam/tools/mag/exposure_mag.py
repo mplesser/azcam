@@ -196,7 +196,7 @@ class ExposureMag(Exposure):
         if self.display_image:
             try:
                 azcam.log("Displaying image")
-                azcam.db.display.display(self.image)
+                azcam.db.tools["display"].display(self.image)
             except Exception:
                 pass
 

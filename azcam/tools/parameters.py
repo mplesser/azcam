@@ -93,94 +93,6 @@ class Parameters(Tools):
 
         return
 
-    def get_script_par(
-        self,
-        par_dict: typing.Union[str, dict],
-        attribute: typing.Any,
-        value: typing.Any = "default",
-        prompt_string: str = "",
-        default: typing.Any = None,
-    ) -> typing.Any:
-        """
-        Return a parameter from the par_dict database, or prompt as needed.
-        The new value is saved in the database.
-
-        :param str par_dict: Parameter dictionary or name of dictionary in self.par_dict
-        :param str attribute: Name of attribute, used as dictionary key
-        :param str value: "default" or "prompt" or a value
-        :param str prompt: Prompt message
-        :param str default: Default value to be used
-        :return str:  parameter
-        """
-
-        if type(par_dict) == str:
-            if self.par_dict is not None:
-                par_dict = self.par_dict.get(par_dict)
-
-        # check if a value exists in dictionary
-        if par_dict is not None:
-            if par_dict.get(attribute):
-                default = par_dict.get(attribute)  # overides method default
-        else:
-            par_dict = {}
-
-        if value == "prompt":
-            if prompt_string == "":
-                prompt_string = f"Enter value for {attribute}"
-            value = azcam.utils.prompt(prompt_string, default)
-            _, value = azcam.utils.get_datatype(value)
-        elif value == "default":
-            value = default
-        else:
-            pass  # value passsed is used
-
-        par_dict[attribute] = value
-
-        return value
-
-    def set_script_par(self, attribute, value, par_dict) -> None:
-        """
-        Set a parameter from the par_dict database.
-
-        :param str par_dict: Parameter dictionary
-        :param str attribute: Name of attribute, used as dictionary key
-        :param str value: "default" or "prompt" or a value
-        :return:  None
-        """
-
-        if type(par_dict) == str:
-            par_dict = self.par_dict.get(par_dict)
-            if par_dict is None:
-                par_dict = {}
-
-        # get value
-        par_dict[attribute] = value
-
-        return
-
-    def prompt(self, message="Enter a string", default="") -> str:
-        """
-        Prints a message and waits for user input.
-
-        :param str message: String to be printed
-        :param str default:  String to be returned if no value is entered
-        :return str: String entered or default
-        """
-
-        default = str(default)
-        try:
-            if default != "":
-                in1 = input(message + " [" + default + "]: ")
-            else:
-                in1 = input(message + ": ")
-        except KeyboardInterrupt:
-            return ""
-
-        if in1 == "":
-            return default
-        else:
-            return in1
-
     def save_pars(self) -> None:
         """
         Save the current parameter set.
@@ -188,6 +100,50 @@ class Parameters(Tools):
 
         self.update_pars(1)
         self.write_parfile()
+
+        return
+
+    def update_pars(self, write, par_dictname: str = None) -> None:
+        """
+        Update azcam parameters to/from a config dictionary.
+        write True => write values into dictionary.
+        write False => set values from dictionary.
+        """
+
+        if par_dictname is None:
+            par_dictname = self.default_pardict_name
+
+        par_dict = azcam.db.tools["parameters"].par_dict.get(par_dictname)
+        if par_dict is None:
+            return
+        keys = par_dict.keys()
+        if keys is None:
+            return
+
+        if write:
+            # run before writing parfile
+            # read values into dict
+            for parname in par_dict:
+                if parname == "wd":
+                    value = azcam.utils.curdir()
+                else:
+                    value = self.get_par(parname)
+                if value is None:
+                    value = "None"
+                par_dict[parname] = value
+
+        else:
+            # after reading parfile
+            # set values from dict
+            for parname in par_dict:
+                value = par_dict[parname]
+                if parname == "wd":
+                    azcam.db.wd = value
+                    azcam.utils.curdir(value)
+
+                else:
+                    value = par_dict[parname]
+                    self.set_par(parname, value)
 
         return
 
@@ -354,46 +310,65 @@ class Parameters(Tools):
 
         return None
 
-    def update_pars(self, write, par_dictname: str = None) -> None:
+    def get_script_par(
+        self,
+        par_dict_id: typing.Dict,
+        attribute: typing.Any,
+        value: typing.Any = "default",
+        prompt_string: str = "",
+        default: typing.Any = None,
+    ) -> typing.Any:
         """
-        Update azcam parameters to/from a config dictionary.
-        write True => write values into dictionary.
-        write False => set values from dictionary.
+        Return a parameter from the par_dict database, or prompt as needed.
+        The new value is saved in the database.
+
+        :param str par_dict_id: Parameter dictionary name of in parameters.par_dict
+        :param str attribute: Name of attribute, used as dictionary key
+        :param str value: "default" or "prompt" or a value
+        :param str prompt: Prompt message
+        :param str default: Default value to be used
+        :return str:  parameter
         """
 
-        if par_dictname is None:
-            par_dictname = self.default_pardict_name
-
-        par_dict = azcam.db.tools["parameters"].par_dict.get(par_dictname)
+        par_dict = self.par_dict.get(par_dict_id)
         if par_dict is None:
-            return
-        keys = par_dict.keys()
-        if keys is None:
-            return
+            self.par_dict[par_dict_id]={}
+            par_dict = self.par_dict[par_dict_id]
 
-        if write:
-            # run before writing parfile
-            # read values into dict
-            for parname in par_dict:
-                if parname == "wd":
-                    value = azcam.utils.curdir()
-                else:
-                    value = self.get_par(parname)
-                if value is None:
-                    value = "None"
-                par_dict[parname] = value
+        if par_dict.get(attribute):
+            default = par_dict.get(attribute)  # overides default value
 
+        if value == "prompt":
+            if prompt_string == "":
+                prompt_string = f"Enter value for {attribute}"
+            value = azcam.utils.prompt(prompt_string, default)
+            _, value = azcam.utils.get_datatype(value)
+        elif value == "default":
+            value = default
         else:
-            # after reading parfile
-            # set values from dict
-            for parname in par_dict:
-                value = par_dict[parname]
-                if parname == "wd":
-                    azcam.db.wd = value
-                    azcam.utils.curdir(value)
+            pass  # value passsed is used
 
-                else:
-                    value = par_dict[parname]
-                    self.set_par(parname, value)
+        # save
+        self.set_script_par(par_dict_id,attribute,value)
+
+        return value
+
+    def set_script_par(self, par_dict_id, attribute, value) -> None:
+        """
+        Set a parameter from the par_dict database.
+
+        :param str par_dict_id: Parameter dictionary
+        :param str attribute: Name of attribute, used as dictionary key
+        :param str value: "default" or "prompt" or a value
+        :return:  None
+        """
+
+        par_dict = self.par_dict.get(par_dict_id)
+        if par_dict is None:
+            self.par_dict[par_dict_id]={}
+            par_dict = self.par_dict[par_dict_id]
+
+        # get value
+        par_dict[attribute] = value
 
         return

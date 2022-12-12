@@ -47,7 +47,7 @@ def gf_server():
 
 def sav_server():
     """Shortcut for parfile_write() saving current folder in database."""
-    azcam.db.tools["parameters"].set_script_par("wd", azcam.utils.curdir(), "azcamserver")
+    azcam.db.tools["parameters"].set_script_par("azcamserver", "wd", azcam.utils.curdir())
     azcam.db.tools["parameters"].update_pars(1, "azcamserver")
     azcam.db.tools["parameters"].write_parfile()
 
@@ -105,7 +105,7 @@ def gf_console():
 def sav_console():
     """Shortcut for parfile_write() saving current folder in database."""
 
-    azcam.db.tools["parameters"].set_script_par("wd", azcam.utils.curdir(), "azcamconsole")
+    azcam.db.tools["parameters"].set_script_par("azcamconsole", "wd", azcam.utils.curdir())
     azcam.db.tools["parameters"].update_pars(1, "azcamconsole")
     azcam.db.tools["parameters"].write_parfile()
 
