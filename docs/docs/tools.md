@@ -20,7 +20,7 @@ The *exposure* tool often coordinates the actions of the hardware tools such as 
 *exposure.tools_init* list are initialized.  Similarly when *exposure* is reset, the tools in the 
 *exposure.tools_reset* list are reset.
 
-[Documentation for the base Exposure class](/code/azcam/tools/exposure.html)
+[Documentation for the base Exposure class](/azcam/code/azcam/tools/exposure.html)
 
 ### Astronomical Research Cameras Controllers
 ```python
@@ -87,7 +87,7 @@ exposure.display_image = 1
 
 These tools defines the camera controller interface. The default tool name is *controller*. 
 
-[Documentation for the base Controller class](/code/azcam/tools/controller.html)
+[Documentation for the base Controller class](/azcam/code/azcam/tools/controller.html)
 
 
 ### Astronomical Research Cameras Controllers
@@ -174,7 +174,7 @@ controller = ControllerASCOM()
 
 This tool defines the temperature controller interface. The default tool name is *tempcon*.
 
-[Documentation for the TempCon class](/code/azcam/tools/tempcon.html)
+[Documentation for the TempCon class](/azcam/code/azcam/tools/tempcon.html)
 
 ### CryoCon Testerature Controller
 
@@ -205,13 +205,13 @@ tempcon.init_commands = [
 
 This tool defines the instrument interface.  The default tool name is *instrument*.
 
-[Documentation for the Instrument class](/code/azcam/tools/instrument.html)
+[Documentation for the Instrument class](/azcam/code/azcam/tools/instrument.html)
 
 ## Telescope Tool
 
 This tool defines the telescope interface. The default tool name is *telescope*.
 
-[Documentation for the Telescope class](/code/azcam/tools/telescope.html)
+[Documentation for the Telescope class](/azcam/code/azcam/tools/telescope.html)
 
 ## Display Tool
 
@@ -235,13 +235,13 @@ display.display("test.fits")
 rois = display.get_rois(0, "detector")
 print(rois)
 ```
-[Documentation for the Display class](/code/azcam/tools/display.html)
+[Documentation for the Display class](/azcam/code/azcam/tools/display.html)
 
 ## Server Tool
 
 The base Tools class described below is inherited by all server tools. 
 
-[Documentation for the base Tools class](/code/azcam/tools/tools.html)
+[Documentation for the base Tools class](/azcam/code/azcam/tools/tools.html)
 
 ## Focus Tool
 
@@ -329,4 +329,4 @@ Console tools are commands which can be called from a console application to sen
 
 A console tool may be obtained by `toolname = azcam.get_tools("toolname")` where *toolname* is like *exposure*, *instrument*, or *tempcon*.  A tool may also be accessed as *azcam.db.toolname*, like `azcam.db.controller`. 
 
-[Documentation for the ConsoleTools class](/code/azcam/tools/console_tools.html)
+[Documentation for the ConsoleTools class](/azcam/code/azcam/tools/console_tools.html)
