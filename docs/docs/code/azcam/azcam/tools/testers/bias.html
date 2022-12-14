@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>azcam.tools.testers.bias API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>azcam.tools.testers.bias</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="azcam.tools.testers.bias.Bias"><code class="flex name class">
+<span>class <span class="ident">Bias</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bias (zero) image acquisition and analysis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tool_id</code></strong></dt>
+<dd>name used to reference the tool (controller, display, &hellip;)</dd>
+<dt><strong><code>description</code></strong></dt>
+<dd>description of this tool</dd>
+</dl></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></li>
+<li><a title="azcam.tools.tools.Tools" href="../tools.html#azcam.tools.tools.Tools">Tools</a></li>
+<li><a title="azcam.tools.testers.report.Report" href="report.html#azcam.tools.testers.report.Report">Report</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam.tools.testers.bias.Bias.combination_type"><code class="name">var <span class="ident">combination_type</span></code></dt>
+<dd>
+<div class="desc"><p>combination method</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.data_file"><code class="name">var <span class="ident">data_file</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.data_file" href="basetester.html#azcam.tools.testers.basetester.Tester.data_file">data_file</a></code>
+</p>
+<div class="desc inherited"><p>output data file</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.debiased_filename"><code class="name">var <span class="ident">debiased_filename</span></code></dt>
+<dd>
+<div class="desc"><p>residual image after combined and colbiased</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.delay"><code class="name">var <span class="ident">delay</span></code></dt>
+<dd>
+<div class="desc"><p>delay between exposures [sec]</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.description"><code class="name">var <span class="ident">description</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.description" href="../tools.html#azcam.tools.testers.basetester.Tester.description">description</a></code>
+</p>
+<div class="desc inherited"><p>descriptive tool name</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.enabled"><code class="name">var <span class="ident">enabled</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.enabled" href="../tools.html#azcam.tools.testers.basetester.Tester.enabled">enabled</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool is enabled</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.fit_order"><code class="name">var <span class="ident">fit_order</span></code></dt>
+<dd>
+<div class="desc"><p>order of overscan correction fit, 0 =&gt; row by row</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.initialized"><code class="name">var <span class="ident">initialized</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.initialized" href="../tools.html#azcam.tools.testers.basetester.Tester.initialized">initialized</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool has been initialized</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.is_reset"><code class="name">var <span class="ident">is_reset</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.is_reset" href="../tools.html#azcam.tools.testers.basetester.Tester.is_reset">is_reset</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool has been reset</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.report_file"><code class="name">var <span class="ident">report_file</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.report_file" href="basetester.html#azcam.tools.testers.basetester.Tester.report_file">report_file</a></code>
+</p>
+<div class="desc inherited"><p>output report file</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.superbias_filename"><code class="name">var <span class="ident">superbias_filename</span></code></dt>
+<dd>
+<div class="desc"><p>combined image with no colbias</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.tool_id"><code class="name">var <span class="ident">tool_id</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.tool_id" href="../tools.html#azcam.tools.testers.basetester.Tester.tool_id">tool_id</a></code>
+</p>
+<div class="desc inherited"><p>name used to reference the tool ("controller", "display", &hellip;)</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.verbosity"><code class="name">var <span class="ident">verbosity</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.verbosity" href="../tools.html#azcam.tools.testers.basetester.Tester.verbosity">verbosity</a></code>
+</p>
+<div class="desc inherited"><p>verbosity for debug, &gt;0 is more verbose</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.tools.testers.bias.Bias.acquire"><code class="name flex">
+<span>def <span class="ident">acquire</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Acquire bias image sets for bias measurement.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.analyze"><code class="name flex">
+<span>def <span class="ident">analyze</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Analyze an existing bias series.</p>
+<p>Creates a superbias and a debiased image.
+The superbias image is the median combined iamge and the debiased image
+is then overscan corrected.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.initialize" href="../tools.html#azcam.tools.testers.basetester.Tester.initialize">initialize</a></code>
+</p>
+<div class="desc inherited"><p>Initialize the tool.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.make_mdfile"><code class="name flex">
+<span>def <span class="ident">make_mdfile</span></span>(<span>self, md_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.make_mdfile" href="report.html#azcam.tools.testers.basetester.Tester.make_mdfile">make_mdfile</a></code>
+</p>
+<div class="desc inherited"><p>Create a markdown file from lines.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.make_rstfile"><code class="name flex">
+<span>def <span class="ident">make_rstfile</span></span>(<span>self, rst_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.make_rstfile" href="report.html#azcam.tools.testers.basetester.Tester.make_rstfile">make_rstfile</a></code>
+</p>
+<div class="desc inherited"><p>Create an RST file from lines.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.md2pdf"><code class="name flex">
+<span>def <span class="ident">md2pdf</span></span>(<span>self, filename, options=[], create_html=False)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.md2pdf" href="report.html#azcam.tools.testers.basetester.Tester.md2pdf">md2pdf</a></code>
+</p>
+<div class="desc inherited"><p>Create a PDF from a markdown file.
+Filename extension is optional.
+Optionally also create an html file.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.merge_pdf"><code class="name flex">
+<span>def <span class="ident">merge_pdf</span></span>(<span>self, input_files=[], output_file='combined.pdf')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.merge_pdf" href="report.html#azcam.tools.testers.basetester.Tester.merge_pdf">merge_pdf</a></code>
+</p>
+<div class="desc inherited"><p>Merge multiple PDF files into one.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.parse_files"><code class="name flex">
+<span>def <span class="ident">parse_files</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.parse_files" href="basetester.html#azcam.tools.testers.basetester.Tester.parse_files">parse_files</a></code>
+</p>
+<div class="desc inherited"><p>Parse image set to create file information dict.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.read_datafile"><code class="name flex">
+<span>def <span class="ident">read_datafile</span></span>(<span>self, filename='default')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.read_datafile" href="basetester.html#azcam.tools.testers.basetester.Tester.read_datafile">read_datafile</a></code>
+</p>
+<div class="desc inherited"><p>Read data file and set tool as valid.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.report"><code class="name flex">
+<span>def <span class="ident">report</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write bias report file.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.reset" href="../tools.html#azcam.tools.testers.basetester.Tester.reset">reset</a></code>
+</p>
+<div class="desc inherited"><p>Reset the tool.</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.rst2pdf"><code class="name flex">
+<span>def <span class="ident">rst2pdf</span></span>(<span>self, filename, options=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.rst2pdf" href="report.html#azcam.tools.testers.basetester.Tester.rst2pdf">rst2pdf</a></code>
+</p>
+<div class="desc inherited"><p>Create a PDF from an RST file.
+Filename extension is optional.
+Also create an html file (currently required).</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.write_datafile"><code class="name flex">
+<span>def <span class="ident">write_datafile</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.write_datafile" href="basetester.html#azcam.tools.testers.basetester.Tester.write_datafile">write_datafile</a></code>
+</p>
+<div class="desc inherited"><p>Write data file as a json dump …</p></div>
+</dd>
+<dt id="azcam.tools.testers.bias.Bias.write_report"><code class="name flex">
+<span>def <span class="ident">write_report</span></span>(<span>self, report_file, lines=[])</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.testers.basetester.Tester" href="basetester.html#azcam.tools.testers.basetester.Tester">Tester</a></code>.<code><a title="azcam.tools.testers.basetester.Tester.write_report" href="basetester.html#azcam.tools.testers.basetester.Tester.write_report">write_report</a></code>
+</p>
+<div class="desc inherited"><p>Create report file.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="azcam.tools.testers" href="index.html">azcam.tools.testers</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="azcam.tools.testers.bias.Bias" href="#azcam.tools.testers.bias.Bias">Bias</a></code></h4>
+<ul class="two-column">
+<li><code><a title="azcam.tools.testers.bias.Bias.acquire" href="#azcam.tools.testers.bias.Bias.acquire">acquire</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.analyze" href="#azcam.tools.testers.bias.Bias.analyze">analyze</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.combination_type" href="#azcam.tools.testers.bias.Bias.combination_type">combination_type</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.data_file" href="#azcam.tools.testers.bias.Bias.data_file">data_file</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.debiased_filename" href="#azcam.tools.testers.bias.Bias.debiased_filename">debiased_filename</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.delay" href="#azcam.tools.testers.bias.Bias.delay">delay</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.description" href="../tools.html#azcam.tools.testers.bias.Bias.description">description</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.enabled" href="../tools.html#azcam.tools.testers.bias.Bias.enabled">enabled</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.fit_order" href="#azcam.tools.testers.bias.Bias.fit_order">fit_order</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.initialize" href="../tools.html#azcam.tools.testers.bias.Bias.initialize">initialize</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.initialized" href="../tools.html#azcam.tools.testers.bias.Bias.initialized">initialized</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.is_reset" href="../tools.html#azcam.tools.testers.bias.Bias.is_reset">is_reset</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.make_mdfile" href="report.html#azcam.tools.testers.bias.Bias.make_mdfile">make_mdfile</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.make_rstfile" href="report.html#azcam.tools.testers.bias.Bias.make_rstfile">make_rstfile</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.md2pdf" href="report.html#azcam.tools.testers.bias.Bias.md2pdf">md2pdf</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.merge_pdf" href="report.html#azcam.tools.testers.bias.Bias.merge_pdf">merge_pdf</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.parse_files" href="basetester.html#azcam.tools.testers.bias.Bias.parse_files">parse_files</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.read_datafile" href="basetester.html#azcam.tools.testers.bias.Bias.read_datafile">read_datafile</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.report" href="#azcam.tools.testers.bias.Bias.report">report</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.report_file" href="#azcam.tools.testers.bias.Bias.report_file">report_file</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.reset" href="../tools.html#azcam.tools.testers.bias.Bias.reset">reset</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.rst2pdf" href="report.html#azcam.tools.testers.bias.Bias.rst2pdf">rst2pdf</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.superbias_filename" href="#azcam.tools.testers.bias.Bias.superbias_filename">superbias_filename</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.tool_id" href="../tools.html#azcam.tools.testers.bias.Bias.tool_id">tool_id</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.verbosity" href="../tools.html#azcam.tools.testers.bias.Bias.verbosity">verbosity</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.write_datafile" href="basetester.html#azcam.tools.testers.bias.Bias.write_datafile">write_datafile</a></code></li>
+<li><code><a title="azcam.tools.testers.bias.Bias.write_report" href="basetester.html#azcam.tools.testers.bias.Bias.write_report">write_report</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+site_name: Michael Lesser
+site_author: Michael Lesser
+site_url: 'https://mplesser.github.io'
+docs_dir: docs
+
+# Repository
+repo_name: mplesser
+repo_url:
+#  https://mplesser.github.io
+edit_uri: ""
+
+theme:
+  name: material
+  palette:
+    scheme: indigo
+    primary: indigo
+    accent: indigo
+  logo:
+    img/logo.png
+  favicon:
+    img/favicon.ico
+  icon:
+    repo: fontawesome/brands/git-alt
+  features:
+    navigation.sections
+  include_search_page: false
+  search_index_only: true
+  prev_next_buttons_location: both
+
+markdown_extensions:
+  - codehilite
+  - attr_list
+  - pymdownx.highlight:
+      linenums: false
+      linenums_style: pymdownx.inline
+  - pymdownx.superfences
+  - toc:
+      toc_depth: 3
+
+plugins:
+  - search
+  - autorefs
+
