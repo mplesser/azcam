@@ -1,12 +1,12 @@
 site_name: Michael Lesser
 site_author: Michael Lesser
-site_url: 'https://mplesser.github.io'
+site_url: 'https://mplesser.github.io/azcam'
 docs_dir: docs
 
 # Repository
 repo_name: mplesser
 repo_url:
-#  https://mplesser.github.io
+#  https://github.com/mplesser/azcam
 edit_uri: ""
 
 theme:
