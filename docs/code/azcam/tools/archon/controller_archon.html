@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>azcam.tools.archon.controller_archon API documentation</title>
+<meta name="description" content="Contains the ControllerArchon class." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>azcam.tools.archon.controller_archon</code></h1>
+</header>
+<section id="section-intro">
+<p>Contains the ControllerArchon class.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon"><code class="flex name class">
+<span>class <span class="ident">ControllerArchon</span></span>
+<span>(</span><span>tool_id='controller', description=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The controller class for STA Archon controllers.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tool_id</code></strong></dt>
+<dd>tool name</dd>
+<dt><strong><code>description</code></strong></dt>
+<dd>description of this tool</dd>
+</dl></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></li>
+<li><a title="azcam.tools.tools.Tools" href="../tools.html#azcam.tools.tools.Tools">Tools</a></li>
+<li><a title="azcam.tools.header.ObjectHeaderMethods" href="../header.html#azcam.tools.header.ObjectHeaderMethods">ObjectHeaderMethods</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.description"><code class="name">var <span class="ident">description</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.description" href="../tools.html#azcam.tools.controller.Controller.description">description</a></code>
+</p>
+<div class="desc inherited"><p>descriptive tool name</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.enabled"><code class="name">var <span class="ident">enabled</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.enabled" href="../tools.html#azcam.tools.controller.Controller.enabled">enabled</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool is enabled</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.exposure_time"><code class="name">var <span class="ident">exposure_time</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.exposure_time" href="../controller.html#azcam.tools.controller.Controller.exposure_time">exposure_time</a></code>
+</p>
+<div class="desc inherited"><p>exposure time (secs)</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.initialized"><code class="name">var <span class="ident">initialized</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.initialized" href="../tools.html#azcam.tools.controller.Controller.initialized">initialized</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool has been initialized</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.interface_type"><code class="name">var <span class="ident">interface_type</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.interface_type" href="../controller.html#azcam.tools.controller.Controller.interface_type">interface_type</a></code>
+</p>
+<div class="desc inherited"><p>interface type (0 = demo, 4 = PCIe)</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.is_reset"><code class="name">var <span class="ident">is_reset</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.is_reset" href="../tools.html#azcam.tools.controller.Controller.is_reset">is_reset</a></code>
+</p>
+<div class="desc inherited"><p>1 when tool has been reset</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.lock"><code class="name">var <span class="ident">lock</span></code></dt>
+<dd>
+<div class="desc"><p>lock for threads</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.reset_flag"><code class="name">var <span class="ident">reset_flag</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.reset_flag" href="../controller.html#azcam.tools.controller.Controller.reset_flag">reset_flag</a></code>
+</p>
+<div class="desc inherited"><p>True if the controller has been reset</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.tool_id"><code class="name">var <span class="ident">tool_id</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.tool_id" href="../tools.html#azcam.tools.controller.Controller.tool_id">tool_id</a></code>
+</p>
+<div class="desc inherited"><p>name used to reference the tool ("controller", "display", &hellip;)</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.verbosity"><code class="name">var <span class="ident">verbosity</span></code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.verbosity" href="../tools.html#azcam.tools.controller.Controller.verbosity">verbosity</a></code>
+</p>
+<div class="desc inherited"><p>verbosity for debug, &gt;0 is more verbose</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.apply_all"><code class="name flex">
+<span>def <span class="ident">apply_all</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send APPLYALL command to the Archon controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.apply_cds"><code class="name flex">
+<span>def <span class="ident">apply_cds</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send APPLYCDS command to the controller.
+CSS/Deint values are updated.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.archon_bin_command"><code class="name flex">
+<span>def <span class="ident">archon_bin_command</span></span>(<span>self, command)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send binary command to the Archon controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.archon_command"><code class="name flex">
+<span>def <span class="ident">archon_command</span></span>(<span>self, Command)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send a command to the Archon controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.bias_poll"><code class="name flex">
+<span>def <span class="ident">bias_poll</span></span>(<span>self, mode)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send BIASPOLLON or BIASPOLLOFF command.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.connect"><code class="name flex">
+<span>def <span class="ident">connect</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Connects Azcam to the controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.define_keywords"><code class="name flex">
+<span>def <span class="ident">define_keywords</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.define_keywords" href="../header.html#azcam.tools.controller.Controller.define_keywords">define_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Defines and resets keywords.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.delete_keyword" href="../header.html#azcam.tools.controller.Controller.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.disconnect"><code class="name flex">
+<span>def <span class="ident">disconnect</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Disconnets Azcam from the controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.download_config"><code class="name flex">
+<span>def <span class="ident">download_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Downloads config data from the Archon controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.flush"><code class="name flex">
+<span>def <span class="ident">flush</span></span>(<span>self, cycles=1)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.flush" href="../controller.html#azcam.tools.controller.Controller.flush">flush</a></code>
+</p>
+<div class="desc inherited"><p>Flush or clear out the sensor.
+Returns after clearing is finished, which could take many seconds.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cycles</code></strong></dt>
+<dd>number of times to flush sensor</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_archon_status"><code class="name flex">
+<span>def <span class="ident">get_archon_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get Archon controller status: 0 = UNKNOWN, 1 = IDLE, 2 = EXPOSE, 3 = READY, 4 = FETCH, 5 = DONE.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_cds"><code class="name flex">
+<span>def <span class="ident">get_cds</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get TAPLINES values and stores them in the self.rcds array.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_continuous_exposures"><code class="name flex">
+<span>def <span class="ident">get_continuous_exposures</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get Continuous Exposure value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_exposures"><code class="name flex">
+<span>def <span class="ident">get_exposures</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get number of exposures.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_exposuretime"><code class="name flex">
+<span>def <span class="ident">get_exposuretime</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get exposure time from the controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_frame"><code class="name flex">
+<span>def <span class="ident">get_frame</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get and updates frame status value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_frame_number"><code class="name flex">
+<span>def <span class="ident">get_frame_number</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get Frame number.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_int_ms"><code class="name flex">
+<span>def <span class="ident">get_int_ms</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get IntMS value. The value should be the same as the Archons IntMS.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.get_keyword" href="../header.html#azcam.tools.controller.Controller.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>name of keyword</dd>
+</dl>
+<p>…</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.get_keywords" href="../header.html#azcam.tools.controller.Controller.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>keywords</code></dt>
+<dd>list of all keywords</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_no_int_ms"><code class="name flex">
+<span>def <span class="ident">get_no_int_ms</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get NoIntMS value. The value should be the same as the Archons NoIntMS.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_parameter"><code class="name flex">
+<span>def <span class="ident">get_parameter</span></span>(<span>self, Param)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get a parameter by name.
+Returns None if not found.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_parameters"><code class="name flex">
+<span>def <span class="ident">get_parameters</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get parameters.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_pixels_remaining"><code class="name flex">
+<span>def <span class="ident">get_pixels_remaining</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return number of remaining pixels to be read (counts down).</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_power_status"><code class="name flex">
+<span>def <span class="ident">get_power_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get power status: ON, OFF, NOT_CONFIGURED, UNKNOWN, INTERMEDIATE, STANDBY.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_raw_channel"><code class="name flex">
+<span>def <span class="ident">get_raw_channel</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get RAWSEL value (raw channel selection).</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_raw_enable"><code class="name flex">
+<span>def <span class="ident">get_raw_enable</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get RAWENABLE value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_size"><code class="name flex">
+<span>def <span class="ident">get_size</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get pixels and lines.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_status"><code class="name flex">
+<span>def <span class="ident">get_status</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get status value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.get_status_valid"><code class="name flex">
+<span>def <span class="ident">get_status_valid</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get status_valid value.
+Last change: 21Dec2016 Zareba</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initializes the Archon controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.load_params"><code class="name flex">
+<span>def <span class="ident">load_params</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send LOADPARAMS command.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.poll"><code class="name flex">
+<span>def <span class="ident">poll</span></span>(<span>self, mode)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send POLLON or POLLOFF command.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.power_off"><code class="name flex">
+<span>def <span class="ident">power_off</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Turns power off.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.power_on"><code class="name flex">
+<span>def <span class="ident">power_on</span></span>(<span>self, wait=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Turns power on</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.read_config_file"><code class="name flex">
+<span>def <span class="ident">read_config_file</span></span>(<span>self, filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read Archon configuration file and parse data into dictionaries.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.read_header" href="../header.html#azcam.tools.controller.Controller.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Reads and returns current header data.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code> of <code>header lines</code></dt>
+<dd>[Header[]]: Each element Header[i] contains the sublist (keyword, value, …</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.reboot"><code class="name flex">
+<span>def <span class="ident">reboot</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send REBOOT command.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resets controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.reset_controller"><code class="name flex">
+<span>def <span class="ident">reset_controller</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resets controller.
+Send REBOOT command + loads config file + sets Power ON.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_cds"><code class="name flex">
+<span>def <span class="ident">set_cds</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets TAPLINES values.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_continuous_exposures"><code class="name flex">
+<span>def <span class="ident">set_continuous_exposures</span></span>(<span>self, cont_exp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets Continuous Exposure value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_exposures"><code class="name flex">
+<span>def <span class="ident">set_exposures</span></span>(<span>self, Exp)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets number of exposures.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_exposuretime"><code class="name flex">
+<span>def <span class="ident">set_exposuretime</span></span>(<span>self, ExpTimeMS)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set exposure time variable (millisecs).
+This is used for exposure count down.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_int_ms"><code class="name flex">
+<span>def <span class="ident">set_int_ms</span></span>(<span>self, IntMS)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set IntMS value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: Any, comment: str = 'none', typestring: str = 'none')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.set_keyword" href="../header.html#azcam.tools.controller.Controller.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_no_int_ms"><code class="name flex">
+<span>def <span class="ident">set_no_int_ms</span></span>(<span>self, NoIntMS)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set NoIntMS value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_parameter"><code class="name flex">
+<span>def <span class="ident">set_parameter</span></span>(<span>self, Param, value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets parameter.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_pocket_pumping"><code class="name flex">
+<span>def <span class="ident">set_pocket_pumping</span></span>(<span>self, flag)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set Parallel pocket pumping flag.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_raw_channel"><code class="name flex">
+<span>def <span class="ident">set_raw_channel</span></span>(<span>self, RawChannel)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets RAWSEL value
+(raw channel selection).
+RAWSEL starts from 0.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_raw_enable"><code class="name flex">
+<span>def <span class="ident">set_raw_enable</span></span>(<span>self, RawEnable)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set RAWENABLE value.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_roi"><code class="name flex">
+<span>def <span class="ident">set_roi</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.set_roi" href="../controller.html#azcam.tools.controller.Controller.set_roi">set_roi</a></code>
+</p>
+<div class="desc inherited"><p>Sets ROI parameters values in the controller based on focalplane parameters.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_shutter"><code class="name flex">
+<span>def <span class="ident">set_shutter</span></span>(<span>self, state: bool, shutter_id: int = 0)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.set_shutter" href="../controller.html#azcam.tools.controller.Controller.set_shutter">set_shutter</a></code>
+</p>
+<div class="desc inherited"><p>Open or close controller shutter.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>state</code></strong></dt>
+<dd>True to open shutter, False to close shutter</dd>
+<dt><strong><code>shutter_id</code></strong></dt>
+<dd>shutter ID number</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_shutter_state"><code class="name flex">
+<span>def <span class="ident">set_shutter_state</span></span>(<span>self, flag: bool = 0)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.set_shutter_state" href="../controller.html#azcam.tools.controller.Controller.set_shutter_state">set_shutter_state</a></code>
+</p>
+<div class="desc inherited"><p>Sets the shutter state during an exposure.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>flag</code></strong></dt>
+<dd>True open shutter during exposure, False close shutter during exposure</dd>
+</dl></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.set_size"><code class="name flex">
+<span>def <span class="ident">set_size</span></span>(<span>self, Pixels, Lines)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets pixels and lines.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.start_exposure"><code class="name flex">
+<span>def <span class="ident">start_exposure</span></span>(<span>self, wait=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Start exposure.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.start_idle"><code class="name flex">
+<span>def <span class="ident">start_idle</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.start_idle" href="../controller.html#azcam.tools.controller.Controller.start_idle">start_idle</a></code>
+</p>
+<div class="desc inherited"><p>Start idle clocking.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.stop_idle"><code class="name flex">
+<span>def <span class="ident">stop_idle</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.stop_idle" href="../controller.html#azcam.tools.controller.Controller.stop_idle">stop_idle</a></code>
+</p>
+<div class="desc inherited"><p>Stop idle clocking.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.update_cds"><code class="name flex">
+<span>def <span class="ident">update_cds</span></span>(<span>self, ucds=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates TAPLINES values based on space-delimited string string.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.update_config_data"><code class="name flex">
+<span>def <span class="ident">update_config_data</span></span>(<span>self, mode=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets configuration data:
+if mode = 0 get config data from the Archon controller, populate dictionaries.
+if mode = 1 read configuration file and then send config data to the Archon controller, populate dictionaries.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.update_exposuretime_remaining"><code class="name flex">
+<span>def <span class="ident">update_exposuretime_remaining</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns exposure time remaining in seconds.
+Last change: 13Jan2017 Zareba</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.tools.controller.Controller" href="../controller.html#azcam.tools.controller.Controller">Controller</a></code>.<code><a title="azcam.tools.controller.Controller.update_header" href="../header.html#azcam.tools.controller.Controller.update_header">update_header</a></code>
+</p>
+<div class="desc inherited"><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.upload_config"><code class="name flex">
+<span>def <span class="ident">upload_config</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Uploads configuration data to the controller.</p></div>
+</dd>
+<dt id="azcam.tools.archon.controller_archon.ControllerArchon.warmboot"><code class="name flex">
+<span>def <span class="ident">warmboot</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Send WARMBOOT command.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="azcam.tools.archon" href="index.html">azcam.tools.archon</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="azcam.tools.archon.controller_archon.ControllerArchon" href="#azcam.tools.archon.controller_archon.ControllerArchon">ControllerArchon</a></code></h4>
+<ul class="">
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.apply_all" href="#azcam.tools.archon.controller_archon.ControllerArchon.apply_all">apply_all</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.apply_cds" href="#azcam.tools.archon.controller_archon.ControllerArchon.apply_cds">apply_cds</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.archon_bin_command" href="#azcam.tools.archon.controller_archon.ControllerArchon.archon_bin_command">archon_bin_command</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.archon_command" href="#azcam.tools.archon.controller_archon.ControllerArchon.archon_command">archon_command</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.bias_poll" href="#azcam.tools.archon.controller_archon.ControllerArchon.bias_poll">bias_poll</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.connect" href="#azcam.tools.archon.controller_archon.ControllerArchon.connect">connect</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.define_keywords" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.define_keywords">define_keywords</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.delete_keyword" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.delete_keyword">delete_keyword</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.description" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.description">description</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.disconnect" href="#azcam.tools.archon.controller_archon.ControllerArchon.disconnect">disconnect</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.download_config" href="#azcam.tools.archon.controller_archon.ControllerArchon.download_config">download_config</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.enabled" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.enabled">enabled</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.exposure_time" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.exposure_time">exposure_time</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.flush" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.flush">flush</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_archon_status" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_archon_status">get_archon_status</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_cds" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_cds">get_cds</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_continuous_exposures" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_continuous_exposures">get_continuous_exposures</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_exposures" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_exposures">get_exposures</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_exposuretime" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_exposuretime">get_exposuretime</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_frame" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_frame">get_frame</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_frame_number" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_frame_number">get_frame_number</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_int_ms" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_int_ms">get_int_ms</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_keyword" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_keywords" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.get_keywords">get_keywords</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_no_int_ms" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_no_int_ms">get_no_int_ms</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_parameter" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_parameter">get_parameter</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_parameters" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_parameters">get_parameters</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_pixels_remaining" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_pixels_remaining">get_pixels_remaining</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_power_status" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_power_status">get_power_status</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_raw_channel" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_raw_channel">get_raw_channel</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_raw_enable" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_raw_enable">get_raw_enable</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_size" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_size">get_size</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_status" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_status">get_status</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.get_status_valid" href="#azcam.tools.archon.controller_archon.ControllerArchon.get_status_valid">get_status_valid</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.initialize" href="#azcam.tools.archon.controller_archon.ControllerArchon.initialize">initialize</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.initialized" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.initialized">initialized</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.interface_type" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.interface_type">interface_type</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.is_reset" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.is_reset">is_reset</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.load_params" href="#azcam.tools.archon.controller_archon.ControllerArchon.load_params">load_params</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.lock" href="#azcam.tools.archon.controller_archon.ControllerArchon.lock">lock</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.poll" href="#azcam.tools.archon.controller_archon.ControllerArchon.poll">poll</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.power_off" href="#azcam.tools.archon.controller_archon.ControllerArchon.power_off">power_off</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.power_on" href="#azcam.tools.archon.controller_archon.ControllerArchon.power_on">power_on</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.read_config_file" href="#azcam.tools.archon.controller_archon.ControllerArchon.read_config_file">read_config_file</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.read_header" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.read_header">read_header</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.reboot" href="#azcam.tools.archon.controller_archon.ControllerArchon.reboot">reboot</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.reset" href="#azcam.tools.archon.controller_archon.ControllerArchon.reset">reset</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.reset_controller" href="#azcam.tools.archon.controller_archon.ControllerArchon.reset_controller">reset_controller</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.reset_flag" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.reset_flag">reset_flag</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_cds" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_cds">set_cds</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_continuous_exposures" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_continuous_exposures">set_continuous_exposures</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_exposures" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_exposures">set_exposures</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_exposuretime" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_exposuretime">set_exposuretime</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_int_ms" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_int_ms">set_int_ms</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_keyword" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.set_keyword">set_keyword</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_no_int_ms" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_no_int_ms">set_no_int_ms</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_parameter" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_parameter">set_parameter</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_pocket_pumping" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_pocket_pumping">set_pocket_pumping</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_raw_channel" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_raw_channel">set_raw_channel</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_raw_enable" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_raw_enable">set_raw_enable</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_roi" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.set_roi">set_roi</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_shutter" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.set_shutter">set_shutter</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_shutter_state" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.set_shutter_state">set_shutter_state</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.set_size" href="#azcam.tools.archon.controller_archon.ControllerArchon.set_size">set_size</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.start_exposure" href="#azcam.tools.archon.controller_archon.ControllerArchon.start_exposure">start_exposure</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.start_idle" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.start_idle">start_idle</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.stop_idle" href="../controller.html#azcam.tools.archon.controller_archon.ControllerArchon.stop_idle">stop_idle</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.tool_id" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.tool_id">tool_id</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.update_cds" href="#azcam.tools.archon.controller_archon.ControllerArchon.update_cds">update_cds</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.update_config_data" href="#azcam.tools.archon.controller_archon.ControllerArchon.update_config_data">update_config_data</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.update_exposuretime_remaining" href="#azcam.tools.archon.controller_archon.ControllerArchon.update_exposuretime_remaining">update_exposuretime_remaining</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.update_header" href="../header.html#azcam.tools.archon.controller_archon.ControllerArchon.update_header">update_header</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.upload_config" href="#azcam.tools.archon.controller_archon.ControllerArchon.upload_config">upload_config</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.verbosity" href="../tools.html#azcam.tools.archon.controller_archon.ControllerArchon.verbosity">verbosity</a></code></li>
+<li><code><a title="azcam.tools.archon.controller_archon.ControllerArchon.warmboot" href="#azcam.tools.archon.controller_archon.ControllerArchon.warmboot">warmboot</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
