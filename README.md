@@ -6,7 +6,7 @@ AzCam is based on the concept of *tools* which are the interfaces to both hardwa
 
 AzCam is not appropriate for consumer-level cameras and is not intended to have a common API across all systems. It's primary design principle is to allow interfacing to a wide variety of custom instrumentation which is required to acquire and analyze scientific image data.
 
-The *azcam* package currently supports Astronomical Research Cameras, Inc. Gen3, Gen2, and Gen1 CCD controllers, Magellan Guider controllers, STA Archon controllers, and CMOS cameras using ASCOM. It also supports some temperature contorllers, telecopes, and image displays.
+The *azcam* package currently supports Astronomical Research Cameras, Inc. Gen3, Gen2, and Gen1 CCD controllers, Magellan Guider controllers, STA Archon controllers, and CMOS cameras using ASCOM. It also supports some temperature contorollers, telecopes, and image displays.
 
 See *azcam-tool* for a common extension package which implements a GUI used by many observers.
 
