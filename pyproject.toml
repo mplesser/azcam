@@ -8,9 +8,9 @@ keywords=["ccd", "imaging", "astronomy", "sensors"]
 authors = [{name="Michael Lesser"},{email = "mlesser@arizona.edu"}]
 dependencies = [
     "loguru",
-    "numpy==1.20.3",
+    "numpy",
     "matplotlib",
-    "astropy==4.3.1",
+    "astropy",
     "scipy",
     "pywin32; sys_platform == 'win32'",
     "PySide6",
@@ -19,6 +19,9 @@ dependencies = [
     "jinja2",
     "psutil",
     "requests",
+    "pdfkit",
+    "markdown",
+    "pypdf2",
 ]
 
 [project.urls]
