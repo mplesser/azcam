@@ -7,7 +7,6 @@ Command line options:
   -cmdport azcamserver_port
 """
 
-import importlib
 import os
 import sys
 import ctypes
@@ -26,7 +25,7 @@ from azcam.tools.tempcon import TempCon
 from azcam.tools.display import Display
 from azcam.tools.telescope import Telescope
 from azcam.tools.exposure import Exposure
-from azcam.tools.fastapi.fastapi_server import WebServer
+from azcam.tools.webserver.fastapi_server import WebServer
 from azcam.tools.webtools.exptool.exptool import Exptool
 from azcam.tools.webtools.status.status import Status
 
@@ -90,7 +89,7 @@ cmdserver.port = cmdport
 cmdserver.logcommands = 0
 
 # ****************************************************************
-# Tools
+# tools
 # ****************************************************************
 controller = Controller()
 instrument = Instrument()
@@ -111,9 +110,9 @@ azcam.scripts.load("server")
 if 1:
     webserver = WebServer()
     webserver.port = 2403
-    webserver.logcommands = 0
+    webserver.logcommands = 1
     webserver.return_json = 0
-    webserver.index = os.path.join(azcam.db.datafolder, "index.html")
+    webserver.index = os.path.join(azcam.db.systemfolder, "index.html")
     webserver.message = f"for host {azcam.db.hostname}"
     webserver.datafolder = azcam.db.datafolder
     webserver.start()
@@ -128,15 +127,6 @@ if 1:
     azcam.log("Started webserver applications")
 
 # ****************************************************************
-# parameter file
-# ****************************************************************
-parfile = os.path.join(
-    azcam.db.datafolder, "parameters", f"parameters_server_{azcam.db.systemname}.ini"
-)
-azcam.db.tools["parameters"].read_parfile(parfile)
-azcam.db.tools["parameters"].update_pars(0, "azcamserver")
-
-# ****************************************************************
 # start command server
 # ****************************************************************
 azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
@@ -147,6 +137,6 @@ from azcam.cli import *
 
 # try to change window title
 try:
-    ctypes.windll.kernel32.SetConsoleTitleW("azcamserver")
+    ctypes.windll.kernel32.SetConsoleTitleW("azcamserver - mock")
 except Exception:
     pass

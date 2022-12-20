@@ -305,7 +305,7 @@ sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_por
 This tool implements a fastapi-based web server.  See https://fastapi.tiangolo.com.
 
 ```python
-from azcam.tools.fastapi.fastapi_server import WebServer
+from azcam.tools.webserver.fastapi_server import WebServer
 webserver = WebServer()
 webserver.index = f"index_mysystem.html"
 webserver.start()

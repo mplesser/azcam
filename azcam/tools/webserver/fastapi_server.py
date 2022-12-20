@@ -20,14 +20,13 @@ import threading
 
 import uvicorn
 from fastapi import FastAPI, Request, APIRouter, HTTPException
-from starlette.responses import FileResponse
+from fastapi.responses import FileResponse
 
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 import azcam
-
 
 class WebServer(object):
     """
@@ -39,6 +38,7 @@ class WebServer(object):
         self.templates_folder = ""
         self.index = "index.html"
         self.upload_folder = None
+        self.favicon_path = None
 
         self.logcommands = 0
         self.logstatus = 0
@@ -67,6 +67,10 @@ class WebServer(object):
 
         if self.upload_folder is None:
             self.upload_folder = os.path.join(self.datafolder, "uploads")
+
+        if self.favicon_path is None:
+            self.favicon_path = os.path.join(os.path.dirname(__file__), "favicon.ico")
+
 
         # static folder - /static
         # app.mount(
@@ -157,6 +161,10 @@ class WebServer(object):
             }
 
             return JSONResponse(response)
+
+        @app.get('/favicon.ico', include_in_schema=False)
+        async def favicon():
+            return FileResponse(self.favicon_path)
 
     def add_router(self, router):
         """

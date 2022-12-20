@@ -16,23 +16,22 @@ def main():
     Required argument is a startup script name.
     Local optional arguments are:
       -venv path_to_ve_activation_script
-      -python system_python_command (default is ipython)
-         may include python options in quotes (e.g. "ipython --profile azcamserver")
+      -python system_python_command (default is "ipython --profile azcam")
 
     Usage example:
       azcam azcam_xxx.start -venv ve_activation_path -python python3
     """
 
-    if len(sys.argv) >= 1:
+    if len(sys.argv) >= 2:
         startmod = sys.argv[1]
     else:
-        print("No startup package/script specified - stopping")
+        print("Error: No startup script specified")
         exit()
 
     if "-venv" in sys.argv:
         i1 = sys.argv.index("-venv")
-        activator = sys.argv[i1 + 1]
         use_venv = True
+        activator = sys.argv[i1 + 1]
     else:
         use_venv = False
         activator = None
@@ -42,6 +41,9 @@ def main():
         pythoncmd = sys.argv[i2 + 1]
     else:
         pythoncmd = "ipython --profile azcam"
+        # Examples:
+        # pythoncmd = "start ipython --profile azcam"
+        # pythoncmd = "wt ipython --profile azcam"
 
     if os.name == "posix":
         if use_venv:

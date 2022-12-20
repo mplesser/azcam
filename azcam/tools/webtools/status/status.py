@@ -7,9 +7,8 @@ import os
 import azcam
 
 from fastapi import Request, APIRouter
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 
 
 class Status(object):
@@ -22,15 +21,13 @@ class Status(object):
         self.message = ""
 
         self.root_folder = os.path.dirname(__file__)
+        self.static_files = {
+            "style":["/style_status.css",os.path.join(self.root_folder, "style_status.css")],
+            "javascript":["/status.js",os.path.join(self.root_folder, "status.js")],
+        }
 
         self.router = APIRouter(
             prefix="/status",
-        )
-
-        azcam.db.tools["webserver"].app.mount(
-            "/status/code",
-            StaticFiles(directory=os.path.join(self.root_folder, "code")),
-            name="code",
         )
 
     def initialize(self):
@@ -47,6 +44,14 @@ class Status(object):
                 "status.html",
                 {"request": request, "message": self.message},
             )
+
+        @self.router.get(self.static_files["style"][0], include_in_schema=False)
+        async def style():
+            return FileResponse(self.static_files["style"][1])
+
+        @self.router.get(self.static_files["javascript"][0], include_in_schema=False)
+        async def javascript():
+            return FileResponse(self.static_files["javascript"][1])
 
         azcam.db.tools["webserver"].add_router(self.router)
 
