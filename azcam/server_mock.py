@@ -93,8 +93,11 @@ cmdserver.logcommands = 0
 # ****************************************************************
 controller = Controller()
 instrument = Instrument()
+instrument.enabled=0
 telescope = Telescope()
+telescope.enabled=0
 tempcon = TempCon()
+tempcon.enabled=0
 display = Display()
 exposure = Exposure()
 
@@ -110,7 +113,8 @@ azcam.scripts.load("server")
 if 1:
     webserver = WebServer()
     webserver.port = 2403
-    webserver.logcommands = 1
+    webserver.logcommands = 0
+    webserver.logstatus = 0
     webserver.return_json = 0
     webserver.index = os.path.join(azcam.db.systemfolder, "index.html")
     webserver.message = f"for host {azcam.db.hostname}"

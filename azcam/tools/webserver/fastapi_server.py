@@ -142,8 +142,6 @@ class WebServer(object):
 
             args = await request.json()
 
-            # print("args", args)
-
             try:
                 toolid = azcam.db.tools[args["tool"]]
                 command = getattr(toolid, args["command"])
@@ -152,7 +150,7 @@ class WebServer(object):
                 kwargs = args["kwargs"]
                 reply = command(*arglist, **kwargs)
             except Exception as e:
-                print(e)
+                azcam.log(e)
 
             response = {
                 "message": "Finished",
@@ -267,7 +265,6 @@ class WebServer(object):
                 reply = f"web_command error: {repr(e)}"
         except Exception as e:
             azcam.log(e)
-            print(e)
             reply = f"invalid API command: {url}"
 
         # generic response
@@ -285,7 +282,7 @@ class WebServer(object):
         Return the caller object, method, and keyword arguments.
         Object may be compound, like "exposure.image.focalplane".
 
-        URL example: http://locahost:2402/api/instrument/set_filter?filter=1&filter_id=2
+        URL example: http://locahost:2403/api/instrument/set_filter?filter=1&filter_id=2
         """
 
         # parse URL
