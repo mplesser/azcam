@@ -1,10 +1,6 @@
-import importlib.metadata
-import importlib.util
-
-__version__ = importlib.metadata.version(__package__)
-__version_info__ = tuple(int(i) for i in __version__.split(".") if i.isdigit())
 
 import importlib
+import importlib.util
 import os
 
 import azcam

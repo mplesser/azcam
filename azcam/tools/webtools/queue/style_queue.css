@@ -1,0 +1,15 @@
+.jumbotron {
+    margin: 0px;
+    padding: 0px;
+    color: blue;
+}
+
+#progressbar {
+    height: 15px;
+    width: 100%;
+}
+
+#message {
+    display: inline-block;
+    height: 1.5em;
+}

@@ -122,7 +122,7 @@ class Logger(object):
                 # backtrace=True,
                 # diagnose=True,
             )
-            azcam.log("Logging to console")
+            # azcam.log("Logging to console")
 
         # socket handler
         if "2" in logtype:

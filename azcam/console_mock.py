@@ -35,6 +35,11 @@ try:
 except ValueError:
     datafolder = None
 try:
+    i = sys.argv.index("-observe")
+    load_observe = 1
+except ValueError:
+    load_observe = 0
+try:
     i = sys.argv.index("-cmdport")
     cmdport = int(sys.argv[i + 1])
 except ValueError:
@@ -82,6 +87,14 @@ azcam.tools.testers.load()
 # ****************************************************************
 azcam.log("Loading scripts")
 azcam.scripts.load("console")
+
+# ****************************************************************
+# observe
+# ****************************************************************
+azcam.log("Loading observe")
+from azcam_observe.observe_cli.observe_cli import ObserveCli
+
+observe = ObserveCli()
 
 # try to connect to azcamserver
 connected = azcam.db.tools["server"].connect(port=cmdport)  # default host and port
