@@ -6,6 +6,7 @@ including "system header" commands.
 
 from azcam.tools.header import Header, ObjectHeaderMethods
 from azcam.tools.tools import Tools
+from azcam.tools.console_tools import ConsoleTools
 
 
 class System(Tools, ObjectHeaderMethods):
@@ -22,3 +23,13 @@ class System(Tools, ObjectHeaderMethods):
         self.header.set_header("system", 0)
 
         return
+
+class SystemConsole(ConsoleTools):
+    """
+    System header interface for console.
+    Usually implemented as the "system" tool.
+    """
+
+    def __init__(self) -> None:
+
+        ConsoleTools.__init__(self, "system")

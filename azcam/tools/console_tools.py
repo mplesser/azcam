@@ -210,12 +210,12 @@ def create_console_tools() -> None:
     Creates the console tools.
     """
 
-    from azcam.tools.controller_console import ControllerConsole
-    from azcam.tools.exposure_console import ExposureConsole
-    from azcam.tools.instrument_console import InstrumentConsole
-    from azcam.tools.system_console import SystemConsole
-    from azcam.tools.telescope_console import TelescopeConsole
-    from azcam.tools.tempcon_console import TempconConsole
+    from azcam.tools.controller import ControllerConsole
+    from azcam.tools.exposure import ExposureConsole
+    from azcam.tools.instrument import InstrumentConsole
+    from azcam.tools.system import SystemConsole
+    from azcam.tools.telescope import TelescopeConsole
+    from azcam.tools.tempcon import TempconConsole
 
     server = ServerConnection()
     system = SystemConsole()
