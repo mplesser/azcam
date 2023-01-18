@@ -3,7 +3,7 @@ Contains the base Instrument class.
 """
 
 import time
-from typing import Any, List
+from typing import Any, List, Optional
 
 import azcam
 from azcam.tools.header import Header, ObjectHeaderMethods

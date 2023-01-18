@@ -6,6 +6,7 @@ import datetime
 import os
 import threading
 import time
+from typing import Union, List, Optional
 
 import azcam
 import numpy

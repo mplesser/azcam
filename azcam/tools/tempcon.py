@@ -8,6 +8,7 @@ import azcam
 from azcam.tools.header import Header, ObjectHeaderMethods
 from azcam.tools.tools import Tools
 from azcam.tools.console_tools import ConsoleTools
+from typing import Union, List, Optional
 
 
 class TempCon(Tools, ObjectHeaderMethods):
