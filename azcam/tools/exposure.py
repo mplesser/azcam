@@ -177,7 +177,6 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         self.pgress = 0  # debug
 
-
     def initialize(self):
         """
         Initialize exposure.
@@ -529,7 +528,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         else:
             if not self.guide_mode:
                 try:
-                    if (azcam.db.tools["instrument"] is not None) and azcam.db.tools["instrument"].enabled:
+                    if (azcam.db.tools["instrument"] is not None) and azcam.db.tools[
+                        "instrument"
+                    ].enabled:
                         azcam.db.tools["instrument"].set_comps()  # reset
                 except KeyError:
                     pass
@@ -1151,7 +1152,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         return self.image.focalplane.get_format()
 
-    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""):
+    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_cfg=[0]):
         """
         Sets focal plane configuration for subsequent exposures. Use after set_format().
         Must call set_roi() after using this command and before starting exposure.
@@ -1161,7 +1162,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         numdet_y defines number of detectors in Row direction.
         numamps_x defines number of amplifiers in Column direction.
         numamps_y defines number of amplifiers in Row direction.
-        amp_config defines each amplifier's orientation (ex: '1223').
+        amp_cfg defines each amplifier's orientation (ex: '1223').
         0 - normal
         1 - flip x
         2 - flip y
@@ -1170,7 +1171,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         # update image.focalplane
         reply = self.image.focalplane.set_focalplane(
-            numdet_x, numdet_y, numamps_x, numamps_y, amp_config
+            numdet_x, numdet_y, numamps_x, numamps_y, amp_cfg
         )
 
         # update controller parameters
@@ -1179,7 +1180,6 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         controller.detpars.numdet_y = self.image.focalplane.numdet_y
         controller.detpars.numamps_x = self.image.focalplane.numamps_x
         controller.detpars.numamps_y = self.image.focalplane.numamps_y
-        controller.detpars.amp_config = self.image.focalplane.amp_config
         controller.detpars.amp_cfg = self.image.focalplane.amp_cfg
         controller.detpars.num_detectors = self.image.focalplane.num_detectors
         controller.detpars.num_ser_amps_det = self.image.focalplane.num_ser_amps_det
@@ -1528,6 +1528,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         """
 
         return azcam.db.headers["system"].read_file(filename)
+
 
 class ExposureConsole(ConsoleTools):
     """
@@ -1916,7 +1917,7 @@ class ExposureConsole(ConsoleTools):
         numdet_y: int = -1,
         numamps_x: int = -1,
         numamps_y: int = -1,
-        amp_config: str = "",
+        amp_cfg: list = [0],
     ) -> None:
         """
         Sets focal plane configuration for subsequent exposures. Use after set_format().
@@ -1927,7 +1928,7 @@ class ExposureConsole(ConsoleTools):
         numdet_y defines number of detectors in Row direction.
         numamps_x defines number of amplifiers in Column direction.
         numamps_y defines number of amplifiers in Row direction.
-        amp_config defines each amplifier's orientation (ex: '1223').
+        amp_cfg defines each amplifier's orientation (ex: '1223').
         0 - normal
         1 - flip x
         2 - flip y
@@ -1935,7 +1936,7 @@ class ExposureConsole(ConsoleTools):
         """
 
         return azcam.db.tools["server"].command(
-            f"{self.objname}.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} {amp_config}"
+            f"{self.objname}.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} {amp_cfg}"
         )
 
     def get_format(self) -> List:

@@ -240,7 +240,7 @@ class ExposureArchon(Exposure):
 
         if shutterstate:
             azcam.db.tools["controller"].set_int_ms(int(self.exposure_time * 1000))
-            #azcam.db.tools["controller"].set_no_int_ms(0)
+            # azcam.db.tools["controller"].set_no_int_ms(0)
             azcam.db.tools["controller"].set_no_int_ms(self.shutter_delay)
         else:
             azcam.db.tools["controller"].set_no_int_ms(int(self.exposure_time * 1000))
@@ -309,7 +309,6 @@ class ArchonFileConverter(object):
         self.roi = []
         self.amppix1 = []
         self.amppix2 = []
-        self.amp_cfg = []
         self.ext_name = []
         self.ext_number = []
         self.jpg_ext = []
@@ -328,14 +327,14 @@ class ArchonFileConverter(object):
         self.np_frametransfer = 0
 
         self.valid = 1
-        self.num_extensions = 16
         self.asmsize = (0, 0)
         self.size_x = 0
         self.size_y = 0
         self.from_file = 0
 
-        self.offsets = 16 * [0.0]
-        self.scales = 16 * [1.0]
+        # self.num_extensions = 16
+        # self.offsets = 16 * [0.0]
+        # self.scales = 16 * [1.0]
 
         self.prescan1 = 0
         self.prescan2 = 0
@@ -374,56 +373,118 @@ class ArchonFileConverter(object):
         self.intms = azcam.db.tools["controller"].int_ms
         self.nointms = azcam.db.tools["controller"].noint_ms
 
-        # if self.NAMPS > 1 disassemble image
-        # if self.NAMPS == 1:
-        #    return
-
         # make a copy on the input data
         self.data = numpy.ndarray(
             shape=(self.NAXIS1 * self.NAXIS2), buffer=self.InData, dtype=self.data_type
         ).copy()
-
-        # reshape the input data array copy
-        self.NData = self.data.reshape(self.NAMPS * self.LINES, self.PIXELS).copy()
 
         # current line of self.PIXELS pixels
         cntLine = 0
 
         self.StartTime = time.time()
 
-        for posY in range(0, self.numparamps):
-            currPart = posY * self.numseramps
+        # mosaic special case - Archon buffer is Nx1 - 20jan23
+        if azcam.db.tools["exposure"].image.focalplane.num_detectors > 1:
+
+            # reshape the input data array copy
+            # self.NData = self.data.reshape(self.NAMPS * self.LINES, self.PIXELS).copy()
+            self.NData = self.data.reshape([self.NAMPS, self.PIXELS * self.LINES]).copy()
+
+            # loop through all lines in Archon buffer
             for currLine in range(0, self.LINES):
-                for posX in range(0, self.numseramps):
-                    posAmp = posX + currPart
-                    indxAmp = (
-                        (self.extpos_y[posAmp] - 1) * self.numseramps + self.extpos_x[posAmp] - 1
-                    )
-                    if self.amp_cfg[posAmp] == 0:
-                        # no flip
-                        self.o_data[indxAmp][
-                            currLine * self.PIXELS : (currLine + 1) * self.PIXELS
-                        ] = self.NData[cntLine]
-                    elif self.amp_cfg[posAmp] == 1:
-                        # flip X
-                        self.o_data[indxAmp][
-                            currLine * self.PIXELS : (currLine + 1) * self.PIXELS
-                        ] = self.NData[cntLine][::-1]
-                    elif self.amp_cfg[posAmp] == 2:
-                        # flip Y
-                        self.o_data[indxAmp][
-                            (self.LINES - currLine - 1)
-                            * self.PIXELS : (self.LINES - currLine)
-                            * self.PIXELS
-                        ] = self.NData[cntLine]
-                    else:
-                        # flip XY
-                        self.o_data[indxAmp][
-                            (self.LINES - currLine - 1)
-                            * self.PIXELS : (self.LINES - currLine)
-                            * self.PIXELS
-                        ] = self.NData[cntLine][::-1]
-                    cntLine += 1
+
+                for posY in range(0, self.numparamps):
+
+                    for posX in range(0, self.numseramps):
+                        posAmp = posX + posY * self.numseramps
+
+                        # calc amp position in actual mosaic
+                        indxAmp = (
+                            (self.extpos_y[posAmp] - 1) * self.numseramps
+                            + self.extpos_x[posAmp]
+                            - 1
+                        )
+
+                        startpos = currLine * self.NAXIS1 + posAmp * self.PIXELS
+                        endpos = startpos + self.PIXELS
+                        dataline = self.data[startpos:endpos]
+
+                        if self.amp_cfg[posAmp] == 0:
+                            # no flip
+                            self.o_data[indxAmp][
+                                currLine * self.PIXELS : currLine * self.PIXELS + self.PIXELS
+                            ] = dataline
+
+                        elif self.amp_cfg[posAmp] == 1:
+                            # flip X
+                            self.o_data[indxAmp][
+                                currLine * self.PIXELS : currLine * self.PIXELS + self.PIXELS
+                            ] = dataline[::-1]
+
+                        elif self.amp_cfg[posAmp] == 2:
+                            # flip Y
+                            self.o_data[indxAmp][
+                                # (self.LINES - currLine - 1)
+                                # * self.PIXELS : (self.LINES - currLine)
+                                # * self.PIXELS
+                                (self.LINES - currLine - 1)
+                                * self.PIXELS : (self.LINES - currLine - 1)
+                                * self.PIXELS
+                                + self.PIXELS
+                            ] = dataline
+                        else:
+                            # flip XY
+                            self.o_data[indxAmp][
+                                # (self.LINES - currLine - 1)
+                                # * self.PIXELS : (self.LINES - currLine)
+                                # * self.PIXELS
+                                (self.LINES - currLine - 1)
+                                * self.PIXELS : (self.LINES - currLine - 1)
+                                * self.PIXELS
+                                + self.PIXELS
+                            ] = dataline[::-1]
+
+        else:
+            # single CCD
+
+            # reshape the input data array copy
+            self.NData = self.data.reshape(self.NAMPS * self.LINES, self.PIXELS).copy()
+
+            for posY in range(0, self.numparamps):
+                currPart = posY * self.numseramps
+                for currLine in range(0, self.LINES):
+                    for posX in range(0, self.numseramps):
+                        posAmp = posX + currPart
+                        indxAmp = (
+                            (self.extpos_y[posAmp] - 1) * self.numseramps
+                            + self.extpos_x[posAmp]
+                            - 1
+                        )
+                        if self.amp_cfg[posAmp] == 0:
+                            # no flip
+                            self.o_data[indxAmp][
+                                currLine * self.PIXELS : (currLine + 1) * self.PIXELS
+                            ] = self.NData[cntLine]
+                        elif self.amp_cfg[posAmp] == 1:
+                            # flip X
+                            self.o_data[indxAmp][
+                                currLine * self.PIXELS : (currLine + 1) * self.PIXELS
+                            ] = self.NData[cntLine][::-1]
+                        elif self.amp_cfg[posAmp] == 2:
+                            # flip Y
+                            self.o_data[indxAmp][
+                                (self.LINES - currLine - 1)
+                                * self.PIXELS : (self.LINES - currLine)
+                                * self.PIXELS
+                            ] = self.NData[cntLine]
+                        else:
+                            # flip XY
+                            self.o_data[indxAmp][
+                                (self.LINES - currLine - 1)
+                                * self.PIXELS : (self.LINES - currLine)
+                                * self.PIXELS
+                            ] = self.NData[cntLine][::-1]
+                        cntLine += 1
 
         self.StopTime = time.time()
 
@@ -448,12 +509,13 @@ class ArchonFileConverter(object):
         self.ext_name = sensor_data["ext_name"]
         self.ext_number = sensor_data["ext_number"]
         self.jpg_ext = sensor_data["jpg_order"]
-        self.amp_cfg = sensor_data["amp_cfg"]
+        #self.amp_cfg = sensor_data["amp_cfg"]
+        self.amp_cfg = azcam.db.tools["exposure"].image.focalplane.amp_cfg
 
         self.extpos_x = [x[0] for x in sensor_data["ext_position"]]
         self.extpos_y = [x[1] for x in sensor_data["ext_position"]]
-        self.amppos1 = [x[0] for x in sensor_data["amp_position"]]
-        self.amppos2 = [x[1] for x in sensor_data["amp_position"]]
+        # self.amppos1 = [x[0] for x in sensor_data["amp_position"]]
+        # self.amppos2 = [x[1] for x in sensor_data["amp_position"]]
         self.detpos_x = [x[0] for x in sensor_data["det_position"]]
         self.detpos_y = [x[1] for x in sensor_data["det_position"]]
         self.amppix1 = [x[0] for x in sensor_data["amp_pixel_position"]]

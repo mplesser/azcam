@@ -37,8 +37,6 @@ class FocalPlane(ObjectHeaderMethods):
         self.numdet_x: int = 1
         #: number of detectors along Y axis
         self.numdet_y: int = 1
-        #: amplifier readout orientation (old)
-        self.amp_config: str = "0"
         #: amplifier readout orientation (new)
         self.amp_cfg: list = [0]
         # detector number for each detector
@@ -325,7 +323,7 @@ class FocalPlane(ObjectHeaderMethods):
             self.np_frametransfer,
         ]
 
-    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config=""):
+    def set_focalplane(self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_cfg=[0]):
         """
         Sets focal plane configuration. Use after set_format() and before set_roi().
         This command replaces SetConfiguration.
@@ -334,7 +332,7 @@ class FocalPlane(ObjectHeaderMethods):
         numdet_y defines number of detectors in Row direction.
         numamps_x defines number of amplifiers in Column direction.
         numamps_y defines number of amplifiers in Row direction.
-        amp_config defines each amplifier's orientation (ex: '1223').
+        amp_cfg defines each amplifier's orientation (ex: [0,1,2,3]).
         0 - normal
         1 - flip x
         2 - flip y
@@ -354,25 +352,12 @@ class FocalPlane(ObjectHeaderMethods):
             numamps_x = self.numamps_x
         if numamps_y == -1:
             numamps_y = self.numamps_y
-        if amp_config == "":
-            amp_config = self.amp_config
 
         self.numdet_x = numdet_x
         self.numdet_y = numdet_y
         self.numamps_x = numamps_x
         self.numamps_y = numamps_y
-
-        # special case for amp_config
-        if type(amp_config) == str:
-            self.amp_config = amp_config
-            self.amp_cfg = []
-            for x in amp_config:
-                self.amp_cfg.append(ord(x) - 48)  # convert char to integer
-        elif type(amp_config) == list:
-            self.amp_cfg = amp_config
-            self.amp_config = ""
-            for x in amp_config:
-                self.amp_config += chr(x + 48)
+        self.amp_cfg = amp_cfg
 
         # set the keywords in the main header
         self.header.set_keyword("N-DET-X", self.numdet_x, "Number of detectors in X", "int")
@@ -413,7 +398,7 @@ class FocalPlane(ObjectHeaderMethods):
             self.numdet_y,
             self.numamps_x,
             self.numamps_y,
-            self.amp_config,
+            self.amp_cfg,
         ]
 
     def set_roi(
@@ -612,11 +597,10 @@ class FocalPlane(ObjectHeaderMethods):
         """
 
         # set default values for the extension names, 'im1' -> 'imN'
-        # use _WCS.py file to set nonstandard values (focalplane.ext_name = [...])
+        # use _WCS file to set nonstandard values (focalplane.ext_name = [...])
         self.ext_name = numpy.empty(shape=[self.numamps_image], dtype="S16")
         for ext in range(self.numamps_image):
-            ext_name = "im%d" % (ext + 1)
-            self.ext_name[ext] = ext_name
+            self.ext_name[ext] = f"im{(ext + 1)}"
         self.ext_name = [y.decode() for y in self.ext_name]  # new
 
         # set default values for the etension numbers, 1 -> N

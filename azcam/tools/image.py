@@ -480,6 +480,8 @@ class Image(object):
             self.focalplane.extpos_x = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.extpos_y = numpy.ndarray(shape=(cntExt), dtype="<u2")
 
+            self.focalplane.ext_name = cntExt * [""]
+
             # prepare arrays for image transformations
             self.focalplane.wcs.atm_1_1 = numpy.ndarray(shape=(cntExt), dtype="<i2")
             self.focalplane.wcs.atm_2_2 = numpy.ndarray(shape=(cntExt), dtype="<i2")
@@ -532,6 +534,12 @@ class Image(object):
                     self.focalplane.amppix2[0] = hdr["AMP-PIX2"]
                 except KeyError:
                     pass
+        else:
+            pass
+
+            # # create the extension name - new 22jan23
+            # self.focalplane.ext_number = [(x + 1) for x in range(self.focalplane.numamps_image)]
+            # self.focalplane.ext_name = [f"IM{x}" for x in self.focalplane.ext_number]
 
         if NumExt == 0:
             # single extension file
@@ -640,6 +648,8 @@ class Image(object):
                         # self.focalplane.refpix1[indx - 1] = self.hdulist[indx].header["CRPIX1"]
                         # self.focalplane.refpix2[indx - 1] = self.hdulist[indx].header["CRPIX2"]
 
+                        self.focalplane.ext_name[indx - 1] = f"IM{indx}"  # new
+
                         DetSec = self.hdulist[indx].header["DETSEC"]
                         DetSec = (DetSec.lstrip("[").rstrip("]")).split(",")
 
@@ -683,10 +693,6 @@ class Image(object):
 
                     except KeyError:
                         pass
-
-            self.focalplane.amp_config = ""
-            for x in self.focalplane.amp_cfg:
-                self.focalplane.amp_config += chr(x + 48)
 
         # ------------------------------------------- data -------------------------------------------------------
 

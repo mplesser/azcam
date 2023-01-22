@@ -417,7 +417,7 @@ class ControllerMag(Controller):
 
         return self.camserver.command("WriteImage " + str(flag) + " " + file)
 
-    def set_configuration(self, Flag, Splits, numdet_x, numdet_y, amp_config):
+    def set_configuration(self, Flag, Splits, numdet_x, numdet_y, amp_cfg):
         """
         Set detector configuration.
         """
@@ -432,7 +432,7 @@ class ControllerMag(Controller):
             + " "
             + str(numdet_y)
             + " "
-            + str(amp_config)
+            + str(amp_cfg)
         )
 
     # *** files ***
