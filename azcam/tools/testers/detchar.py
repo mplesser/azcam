@@ -51,12 +51,12 @@ class DetChar(Tools, Report):
         azcam.utils.curdir(datestring)
 
         imagefolder = azcam.utils.curdir()
-        azcam.db.tools["parameters"].set_par("imagefolder", imagefolder)
+        azcam.db.parameters.set_par("imagefolder", imagefolder)
 
         # save folder
-        azcam.db.tools["parameters"].set_script_par("azcamconsole", "wd", azcam.utils.curdir())
-        azcam.db.tools["parameters"].update_pars(1, "azcamconsole")
-        azcam.db.tools["parameters"].write_parfile()
+        azcam.db.parameters.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
+        azcam.db.parameters.update_pars(1, "azcamconsole")
+        azcam.db.parameters.write_parfile()
 
         return
 

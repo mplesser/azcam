@@ -6,7 +6,7 @@ import time
 from typing import Any, List
 
 import azcam
-from azcam.tools.header import Header, ObjectHeaderMethods
+from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools.tools import Tools
 
 
@@ -25,7 +25,7 @@ class Queue(Tools, ObjectHeaderMethods):
     ACTIVE = "active"
     NOBS = "nobs"
     NOBS_COMPLETED = "nobs_completed"
-    WAIT = "wait"
+    WAIT_COMPLETED = "wait_completed"
     TOOL = "tools"
     COMMAND = "command"
 
@@ -69,7 +69,7 @@ class Queue(Tools, ObjectHeaderMethods):
                 self.ACTIVE: 0,
                 self.NOBS: 1,
                 self.NOBS_COMPLETED: 0,
-                self.WAIT: 0,
+                self.WAIT_COMPLETED: 0,
                 self.TOOL: None,
                 self.COMMAND: None,
             },

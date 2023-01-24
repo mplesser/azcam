@@ -56,15 +56,15 @@ class DetCal(Tester):
             if os.path.exists("detcal"):
                 shutil.rmtree("detcal")
         startingfolder, subfolder = azcam.utils.make_file_folder("detcal")
-        azcam.db.tools["parameters"].set_par("imagefolder", subfolder)
+        azcam.db.parameters.set_par("imagefolder", subfolder)
         azcam.utils.curdir(subfolder)
 
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # don't use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
-        azcam.db.tools["parameters"].set_par("imageoverwrite", 1)
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imageoverwrite", 1)
 
         # get gain and ROI
         self.system_gain = azcam.db.tools["gain"].get_system_gain()
@@ -103,7 +103,7 @@ class DetCal(Tester):
             except Exception:
                 et = 1.0
             while doloop:
-                azcam.db.tools["parameters"].set_par("imagetype", self.exposure_type)
+                azcam.db.parameters.set_par("imagetype", self.exposure_type)
                 azcam.log(f"Taking flat for {et:0.3f} seconds")
                 flatfilename = azcam.db.tools["exposure"].get_filename()
                 azcam.db.tools["exposure"].expose(et, self.exposure_type, "detcal flat")

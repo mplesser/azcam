@@ -59,7 +59,7 @@ class Focus(Tools):
         Initialize focus routine.
         """
 
-        self.parameters = azcam.db.tools["parameters"]
+        self.parameters = azcam.db.parameters
         self.exposure = azcam.db.tools["exposure"]
         try:
             self.instrument = azcam.db.tools["instrument"]

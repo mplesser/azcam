@@ -12,8 +12,8 @@ import azcam
 import numpy
 from azcam.tools.exposure_filename import Filename
 from azcam.tools.exposure_obstime import ObsTime
-from azcam.tools.header import Header, ObjectHeaderMethods
-from azcam.tools.image import Image
+from azcam.header import Header, ObjectHeaderMethods
+from azcam.image import Image
 from azcam.tools.tools import Tools
 from azcam.tools.console_tools import ConsoleTools
 
@@ -1016,7 +1016,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
             self.temp_image_file = os.path.normpath(self.temp_image_file)
             self.temp_image_file = "%s%d" % (
                 self.temp_image_file,
-                azcam.db.tools["cmdserver"].port,
+                azcam.db.cmdserver.port,
             )  # make unique for multiple processes
 
         return

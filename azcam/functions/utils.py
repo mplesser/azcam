@@ -605,7 +605,7 @@ def save_imagepars(imagepars={}) -> None:
     """
 
     for par in azcam.db.imageparnames:
-        imagepars[par] = azcam.db.tools["parameters"].get_par(par)
+        imagepars[par] = azcam.db.parameters.get_par(par)
 
     return
 
@@ -626,7 +626,7 @@ def restore_imagepars(imagepars: dict, folder: str = "") -> None:
         imagepars[par] = impar
         if par == "imagetitle":
             impar = f'"{impar}"'
-        azcam.db.tools["parameters"].set_par(par, impar)
+        azcam.db.parameters.set_par(par, impar)
 
     # return to folder
     if folder != "":

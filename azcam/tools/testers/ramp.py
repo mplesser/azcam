@@ -44,7 +44,7 @@ class Ramp(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("ramp")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # save pars to be changed
         impars = {}
@@ -53,25 +53,25 @@ class Ramp(Tester):
         # flush detector
         azcam.db.tools["exposure"].test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "ramp.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "ramp.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # get bias image
-        azcam.db.tools["parameters"].set_par("imagetype", "zero")
+        azcam.db.parameters.set_par("imagetype", "zero")
         zerofile = azcam.db.tools["exposure"].get_filename()
         azcam.log("Taking bias image %s " % os.path.basename(zerofile))
         azcam.db.tools["exposure"].expose(0, "zero", "ramp bias")
 
         # take data images
         base_et = azcam.db.tools["exposure"].get_exposuretime()
-        azcam.db.tools["parameters"].set_par("imagetype", "ramp")
+        azcam.db.parameters.set_par("imagetype", "ramp")
         file1 = azcam.db.tools["exposure"].get_filename()
         azcam.log("Taking ramp image 1 %s" % os.path.basename(file1))
         azcam.db.tools["exposure"].expose(base_et, "ramp", "ramp image 1")

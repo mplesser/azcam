@@ -18,7 +18,7 @@ import azcam.shortcuts
 from azcam.logger import check_for_remote_logger
 import azcam.scripts
 
-from azcam.tools.cmdserver import CommandServer
+from azcam.cmdserver import CommandServer
 from azcam.tools.controller import Controller
 from azcam.tools.instrument import Instrument
 from azcam.tools.tempcon import TempCon

@@ -213,12 +213,10 @@ def create_console_tools() -> None:
     from azcam.tools.controller import ControllerConsole
     from azcam.tools.exposure import ExposureConsole
     from azcam.tools.instrument import InstrumentConsole
-    from azcam.tools.system import SystemConsole
     from azcam.tools.telescope import TelescopeConsole
     from azcam.tools.tempcon import TempconConsole
 
     server = ServerConnection()
-    system = SystemConsole()
     exposure = ExposureConsole()
     controller = ControllerConsole()
     instrument = InstrumentConsole()

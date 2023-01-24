@@ -5,7 +5,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.tools.testers.basetester import Tester
 
 
@@ -90,10 +90,10 @@ class Qe(Tester):
         # create new subfolder
         currentfolder, subfolder = azcam.utils.make_file_folder("qe")
         azcam.log(f"QE folder is {subfolder}")
-        azcam.db.tools["parameters"].set_par("imagefolder", subfolder)
+        azcam.db.parameters.set_par("imagefolder", subfolder)
 
-        bin1 = azcam.db.tools["parameters"].get_par("colbin")
-        bin2 = azcam.db.tools["parameters"].get_par("rowbin")
+        bin1 = azcam.db.parameters.get_par("colbin")
+        bin2 = azcam.db.parameters.get_par("rowbin")
         if 0:
             binning = bin1 * bin2
         else:
@@ -105,23 +105,23 @@ class Qe(Tester):
         else:
             raise azcam.AzcamError("Could not determine exposure times")
 
-        azcam.db.tools["parameters"].set_par("imageroot", "qe.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "qe.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imagesequencenumber", 1)  # start at sequence number 1
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imagesequencenumber", 1)  # start at sequence number 1
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # binning
         exposure.roi_reset()  # use entire device
         # exposure.set_roi(-1, -1, -1, -1, self.binning, self.binning)
 
         # take bias image
-        azcam.db.tools["parameters"].set_par("imageroot", "qe.")
+        azcam.db.parameters.set_par("imageroot", "qe.")
         azcam.log("Taking bias image %s..." % os.path.basename(exposure.get_filename()))
 
         # clear device

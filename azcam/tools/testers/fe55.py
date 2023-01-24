@@ -114,20 +114,20 @@ class Fe55(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("fe55")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
         azcam.db.tools["exposure"].test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "fe55.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "fe55.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # loop through images
         for imgnum in range(self.number_images_acquire):
@@ -138,17 +138,17 @@ class Fe55(Tester):
             )
 
             # take bias image
-            azcam.db.tools["parameters"].set_par("imagetype", "zero")
+            azcam.db.parameters.set_par("imagetype", "zero")
             azcam.log("Taking bias image")
             azcam.db.tools["exposure"].expose(0, "zero", "bias image")
 
             # take x-ray image
-            azcam.db.tools["parameters"].set_par("imagetype", "fe55")
+            azcam.db.parameters.set_par("imagetype", "fe55")
             azcam.log("Taking Fe-55 image")
             azcam.db.tools["exposure"].expose(self.exposure_time, "fe55", "Fe55 image")
 
         if self.acquire_darks:
-            azcam.db.tools["parameters"].set_par("imagetype", "dark")
+            azcam.db.parameters.set_par("imagetype", "dark")
             azcam.log("Taking dark image")
             azcam.db.tools["exposure"].expose(self.exposure_time, "dark", "dark image")
 

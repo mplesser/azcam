@@ -7,7 +7,7 @@ import socket
 
 import azcam
 from azcam.logger import Logger
-from azcam.tools.parameters import Parameters
+from azcam.parameters import Parameters
 
 # server mode
 azcam.db.mode = "server"

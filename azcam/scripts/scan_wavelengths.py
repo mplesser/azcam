@@ -11,7 +11,7 @@ def scan_wavelengths():
 
     et = 15 * 60.0
 
-    azcam.db.tools["parameters"].set_par("imagetest", 0)
+    azcam.db.parameters.set_par("imagetest", 0)
 
     for wave in range(800, 1110, 10):
 
@@ -25,7 +25,7 @@ def scan_wavelengths():
         print("Finished")
 
     # reset
-    azcam.db.tools["parameters"].set_par("imagetest", 1)
+    azcam.db.parameters.set_par("imagetest", 1)
 
     return
 

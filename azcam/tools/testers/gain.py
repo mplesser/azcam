@@ -95,15 +95,15 @@ class Gain(Tester):
             if os.path.exists("gain"):
                 shutil.rmtree("gain")
         currentfolder, subfolder = azcam.utils.make_file_folder("gain")
-        azcam.db.tools["parameters"].set_par("imagefolder", subfolder)
+        azcam.db.parameters.set_par("imagefolder", subfolder)
 
         self.imagefolder = subfolder
 
-        azcam.db.tools["parameters"].set_par("imageincludesequencenumber", 1)
-        azcam.db.tools["parameters"].set_par("imageautoincrementsequencenumber", 1)
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
-        azcam.db.tools["parameters"].set_par("imageoverwrite", 1)
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imageoverwrite", 1)
 
         # clear device
         if self.clear_arrray:
@@ -121,14 +121,14 @@ class Gain(Tester):
                 wave1 = int(wave1)
             azcam.log(f"Current wavelength is {wave1} nm")
 
-        azcam.db.tools["parameters"].set_par("imageroot", "ptc.")
+        azcam.db.parameters.set_par("imageroot", "ptc.")
         for loop in range(self.number_pairs):
 
             if self.number_pairs > 1:
                 azcam.log(f"Starting gain sequence {loop + 1}/{self.number_pairs}")
 
             # bias image
-            azcam.db.tools["parameters"].set_par("imagetype", "zero")
+            azcam.db.parameters.set_par("imagetype", "zero")
             zerofilename = azcam.db.tools["exposure"].get_filename()
             self.image_zero = zerofilename
             azcam.log("Taking bias exposure")
@@ -140,7 +140,7 @@ class Gain(Tester):
                 azcam.db.tools["exposure"].expose(ExposureTime, "dark", "PTC dark")
 
             # take flats
-            azcam.db.tools["parameters"].set_par("imagetype", self.exposure_type)
+            azcam.db.parameters.set_par("imagetype", self.exposure_type)
             azcam.log(f"Taking two flats for {ExposureTime:0.3f} seconds")
             flat1filename = azcam.db.tools["exposure"].get_filename()
             self.image_flat1 = flat1filename

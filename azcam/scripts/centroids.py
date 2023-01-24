@@ -14,7 +14,7 @@ from scipy.stats import norm
 
 import azcam
 from astropy.io import fits as pyfits
-from azcam.tools.image import Image
+from azcam.image import Image
 
 
 def centroids(filename: str = ".", threshold: float = 500.0) -> None:
@@ -30,7 +30,7 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
     # inputs
     threshold = float(threshold)
     if filename == ".":
-        filename = azcam.db.tools["parameters"].get_script_par(
+        filename = azcam.db.parameters.get_script_par(
             "centroids",
             "filename",
             "prompt",
@@ -42,7 +42,7 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
         if reply is None:
             return
         filename = reply[0]
-        azcam.db.tools["parameters"].set_script_par("centroids", "filename", filename)
+        azcam.db.parameters.set_script_par("centroids", "filename", filename)
 
     filename = azcam.utils.make_image_filename(filename)
 

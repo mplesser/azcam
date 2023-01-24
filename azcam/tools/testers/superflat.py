@@ -5,7 +5,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.tools.testers.basetester import Tester
 
 
@@ -76,21 +76,21 @@ class Superflat(Tester):
 
         for setnum, exposuretime in enumerate(self.exposure_times):
 
-            azcam.db.tools["parameters"].set_par(
+            azcam.db.parameters.set_par(
                 "imageroot", "superflat."
             )  # for automatic data analysis
-            azcam.db.tools["parameters"].set_par(
+            azcam.db.parameters.set_par(
                 "imageincludesequencenumber", 1
             )  # use sequence numbers
-            azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-            azcam.db.tools["parameters"].set_par(
+            azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+            azcam.db.parameters.set_par(
                 "imageautoincrementsequencenumber", 1
             )  # inc sequence numbers
-            azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+            azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
             # create new subfolder
             currentfolder, newfolder = azcam.utils.make_file_folder("superflat", 1, 1)
-            azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+            azcam.db.parameters.set_par("imagefolder", newfolder)
 
             for loop in range(self.number_images_acquire[setnum]):
                 exposuretime = self.exposure_times[setnum]

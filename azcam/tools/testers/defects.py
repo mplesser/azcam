@@ -4,7 +4,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.tools.testers.basetester import Tester
 
 

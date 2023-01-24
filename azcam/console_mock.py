@@ -93,7 +93,6 @@ azcam.scripts.load("console")
 # ****************************************************************
 azcam.log("Loading observe")
 from azcam_observe.observe_cli.observe_cli import ObserveCli
-
 observe = ObserveCli()
 
 # try to connect to azcamserver
@@ -115,8 +114,8 @@ if azcam.db.wd is None:
     azcam.db.wd = azcam.db.datafolder
 
 # par file
-azcam.db.tools["parameters"].read_parfile(parfile)
-azcam.db.tools["parameters"].update_pars(0, "azcamconsole")
+azcam.db.parameters.read_parfile(parfile)
+azcam.db.parameters.update_pars(0, "azcamconsole")
 
 # cli commands
 from azcam.cli import *

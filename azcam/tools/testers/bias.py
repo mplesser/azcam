@@ -51,23 +51,23 @@ class Bias(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("bias")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
         azcam.db.tools["exposure"].test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "bias.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "bias.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # take bias images
-        azcam.db.tools["parameters"].set_par("imagetype", "zero")  # for get_image_filename()
+        azcam.db.parameters.set_par("imagetype", "zero")  # for get_image_filename()
         for i in range(self.number_images_acquire):
             filename = os.path.basename(azcam.db.tools["exposure"].get_filename())
             azcam.log(f"Taking bias image {i + 1}/{self.number_images_acquire}: {filename}")

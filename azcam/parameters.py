@@ -27,6 +27,8 @@ class Parameters(Tools):
 
         self.default_pardict_name = default_dictname
 
+        azcam.db.parameters = self
+
     def read_parfile(self, parfilename: str = None) -> None:
         """
         Read a parameter file and create sub-dictionaries for saving parameters between sessions.
@@ -113,7 +115,7 @@ class Parameters(Tools):
         if par_dictname is None:
             par_dictname = self.default_pardict_name
 
-        par_dict = azcam.db.tools["parameters"].par_dict.get(par_dictname)
+        par_dict = azcam.db.parameters.par_dict.get(par_dictname)
         if par_dict is None:
             return
         keys = par_dict.keys()
@@ -200,7 +202,7 @@ class Parameters(Tools):
             dewtemp = azcam.db.tools["tempcon"].get_temperatures()[1]
             return [camtemp, dewtemp]
         elif parameter == "logcommands":
-            value = azcam.db.tools["cmdserver"].logcommands
+            value = azcam.db.cmdserver.logcommands
             return value
         elif parameter == "wd":
             value = azcam.utils.curdir()
@@ -273,7 +275,7 @@ class Parameters(Tools):
             azcam.db.tools["exposure"].set_exposuretime(value)
             return None
         elif parameter == "logcommands":
-            azcam.db.tools["cmdserver"].logcommands = int(value)
+            azcam.db.cmdserver.logcommands = int(value)
             return None
 
         # parameter must be in parameters

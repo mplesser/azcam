@@ -5,7 +5,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.tools.testers.basetester import Tester
 
 
@@ -55,23 +55,23 @@ class Prnu(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("prnu")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
         azcam.db.tools["exposure"].test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "prnu.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "prnu.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
-        azcam.db.tools["parameters"].set_par("imagetype", "zero")
+        azcam.db.parameters.set_par("imagetype", "zero")
         filename = os.path.basename(azcam.db.tools["exposure"].get_filename())
         azcam.log("Taking PRNU bias: %s" % filename)
         azcam.db.tools["exposure"].expose(0, "zero", "PRNU bias")

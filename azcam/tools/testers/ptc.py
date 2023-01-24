@@ -91,7 +91,7 @@ class Ptc(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("ptc")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength
         if self.wavelength > 0:
@@ -108,18 +108,18 @@ class Ptc(Tester):
         # clear device
         exposure.test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "ptc.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "ptc.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
-        azcam.db.tools["parameters"].set_par("imagetype", "zero")
+        azcam.db.parameters.set_par("imagetype", "zero")
         filename = os.path.basename(exposure.get_filename())
         azcam.log("Taking PTC bias: %s" % filename)
 
@@ -155,7 +155,7 @@ class Ptc(Tester):
             raise azcam.AzcamError("could not determine exposure times")
 
         # loop through pairs
-        azcam.db.tools["parameters"].set_par("imagetype", self.exposure_type)
+        azcam.db.parameters.set_par("imagetype", self.exposure_type)
         number_pairs = len(self.exposure_times)
 
         for pair, ExposureTime in enumerate(self.exposure_times):

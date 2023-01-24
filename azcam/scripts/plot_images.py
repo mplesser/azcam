@@ -6,7 +6,7 @@ import os
 import sys
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.functions.utils import beep
 
 

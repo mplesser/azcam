@@ -10,7 +10,7 @@ import azcam
 
 def test_controller(cycles=10):
 
-    cycles = azcam.db.tools["parameters"].get_script_par(
+    cycles = azcam.db.parameters.get_script_par(
         "test_controller", "cycles", "prompt", "Enter number of test cycles", cycles
     )
     cycles = int(cycles)
@@ -31,7 +31,7 @@ def test_controller(cycles=10):
     print("--> Controller communications and reset OK")
 
     # temperature
-    if int(azcam.db.tools["parameters"].get_par("utilityboardinstalled")):
+    if int(azcam.db.parameters.get_par("utilityboardinstalled")):
         print("Testing controller temperature readback...")
         for loop in range(cycles):
             reply = azcam.db.tools["tempcon"].get_temperaturess()

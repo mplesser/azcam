@@ -10,8 +10,8 @@ import warnings
 import azcam
 import numpy
 from astropy.io import fits as pyfits
-from azcam.tools.header import Header
-from azcam.tools.image_focalplane import FocalPlane
+from azcam.header import Header
+from azcam.image_focalplane import FocalPlane
 
 
 class Image(object):

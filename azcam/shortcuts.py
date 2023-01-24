@@ -47,9 +47,9 @@ def gf_server():
 
 def sav_server():
     """Shortcut for parfile_write() saving current folder in database."""
-    azcam.db.tools["parameters"].set_script_par("azcamserver", "wd", azcam.utils.curdir())
-    azcam.db.tools["parameters"].update_pars(1, "azcamserver")
-    azcam.db.tools["parameters"].write_parfile()
+    azcam.db.parameters.set_script_par("azcamserver", "wd", azcam.utils.curdir())
+    azcam.db.parameters.update_pars(1, "azcamserver")
+    azcam.db.parameters.write_parfile()
 
     return None
 
@@ -57,9 +57,9 @@ def sav_server():
 def pp():
     """Shortcut to toggle cmdserver printing."""
 
-    old = azcam.db.tools["cmdserver"].logcommands
+    old = azcam.db.cmdserver.logcommands
     new = not old
-    azcam.db.tools["cmdserver"].logcommands = new
+    azcam.db.cmdserver.logcommands = new
     print("cmdserver logcommands is now %s" % ("ON" if new else "OFF"))
 
     return
@@ -81,7 +81,7 @@ def sf_console():
 
     try:
         folder = azcam.utils.curdir()
-        azcam.db.tools["parameters"].set_par("imagefolder", folder)
+        azcam.db.parameters.set_par("imagefolder", folder)
     except Exception:
         pass
 
@@ -94,7 +94,7 @@ def gf_console():
     Also issues sav() command to save folder location.
     """
 
-    folder = azcam.db.tools["parameters"].get_par("imagefolder")
+    folder = azcam.db.parameters.get_par("imagefolder")
     azcam.utils.curdir(folder)
     azcam.db.wd = folder
     sav_console()
@@ -105,9 +105,9 @@ def gf_console():
 def sav_console():
     """Shortcut for parfile_write() saving current folder in database."""
 
-    azcam.db.tools["parameters"].set_script_par("azcamconsole", "wd", azcam.utils.curdir())
-    azcam.db.tools["parameters"].update_pars(1, "azcamconsole")
-    azcam.db.tools["parameters"].write_parfile()
+    azcam.db.parameters.set_script_par("azcamconsole", "wd", azcam.utils.curdir())
+    azcam.db.parameters.update_pars(1, "azcamconsole")
+    azcam.db.parameters.write_parfile()
 
     return
 

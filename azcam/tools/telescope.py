@@ -3,7 +3,7 @@ Contains the base Telescope class.
 """
 
 import azcam
-from azcam.tools.header import Header, ObjectHeaderMethods
+from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools.tools import Tools
 from azcam.tools.console_tools import ConsoleTools
 

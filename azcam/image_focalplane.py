@@ -4,7 +4,7 @@ Contains the FocalPlane and WCS classes.
 
 import azcam
 import numpy
-from azcam.tools.header import Header, ObjectHeaderMethods
+from azcam.header import Header, ObjectHeaderMethods
 
 
 class FocalPlane(ObjectHeaderMethods):

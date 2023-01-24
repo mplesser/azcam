@@ -7,7 +7,7 @@ import sys
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 
 
 def show_histogram(filename: str) -> None:

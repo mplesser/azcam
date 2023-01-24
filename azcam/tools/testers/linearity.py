@@ -79,19 +79,19 @@ class Linearity(Tester):
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("linearity")
         azcam.log(f"Linearity folder is {newfolder}")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageroot", "linearity."
         )  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # bias image
         azcam.log(
@@ -100,7 +100,7 @@ class Linearity(Tester):
         )
         azcam.db.tools["exposure"].expose(0, "zero", "Linearity bias")
 
-        azcam.db.tools["parameters"].set_par("imagetype", self.exposure_type)
+        azcam.db.parameters.set_par("imagetype", self.exposure_type)
 
         # Try exposure_level to get ExposureTime
         if len(self.exposure_levels) > 0:  # exposure_levels specified

@@ -48,33 +48,33 @@ class PocketPump(Tester):
         impars = {}
         azcam.utils.save_imagepars(impars)
 
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageroot", "pocketpump."
         )  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)
+        azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
         azcam.log(f"Setting wavelength to {self.wavelength}")
         azcam.db.tools["instrument"].set_wavelength(self.wavelength)
 
         # set proper timing code, reset, and clear device
-        timingfile_org = azcam.db.tools["parameters"].get_par("TimingFile")
+        timingfile_org = azcam.db.parameters.get_par("TimingFile")
         timcode = os.path.dirname(timingfile_org)
         timcode = os.path.join(timcode, self.pocketpump_timing_file)
         timcode = timcode.replace("\\", "/")
         azcam.log("PocketPump timing code will be: %s" % timcode)
-        azcam.db.tools["parameters"].set_par("TimingFile", timcode)
+        azcam.db.parameters.set_par("TimingFile", timcode)
         azcam.db.tools["exposure"].reset()
         azcam.db.tools["exposure"].test(0)
 
@@ -83,7 +83,7 @@ class PocketPump(Tester):
         try:
             azcam.db.tools["exposure"].expose(0, "zero", "pocketpump first bias")
         except Exception as message:
-            azcam.db.tools["parameters"].set_par("TimingFile", timingfile_org)
+            azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
             azcam.utils.restore_imagepars(impars, currentfolder)
             raise message
@@ -118,7 +118,7 @@ class PocketPump(Tester):
         try:
             azcam.db.tools["exposure"].expose(0, "zero", "pocketpump second bias")
         except Exception as message:
-            azcam.db.tools["parameters"].set_par("TimingFile", timingfile_org)
+            azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
             azcam.utils.restore_imagepars(impars, currentfolder)
             return message
@@ -131,13 +131,13 @@ class PocketPump(Tester):
             )
 
         except Exception as message:
-            azcam.db.tools["parameters"].set_par("TimingFile", timingfile_org)
+            azcam.db.parameters.set_par("TimingFile", timingfile_org)
             azcam.db.tools["exposure"].reset()
             azcam.utils.restore_imagepars(impars, currentfolder)
             raise message
 
         # finish
-        azcam.db.tools["parameters"].set_par("TimingFile", timingfile_org)
+        azcam.db.parameters.set_par("TimingFile", timingfile_org)
         azcam.db.tools["exposure"].reset()
         azcam.utils.restore_imagepars(impars, currentfolder)
         azcam.log("PocketPump sequence finished")
@@ -157,21 +157,21 @@ class PocketPump(Tester):
         impars = {}
         azcam.utils.save_imagepars(impars)
 
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageroot", "pocketpump."
         )  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)
+        azcam.db.parameters.set_par("imagetest", 0)
 
         # create and move to new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("pocketpump")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # set wavelength so exposure time is correct
         azcam.log(f"Setting wavelength to {self.wavelength}")

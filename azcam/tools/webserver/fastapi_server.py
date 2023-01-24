@@ -214,7 +214,7 @@ class WebServer(object):
         self.initialize()
 
         if self.port is None:
-            self.port = azcam.db.tools["cmdserver"].port + 1
+            self.port = azcam.db.cmdserver.port + 1
 
         azcam.log(f"Starting webserver - listening on port {self.port}")
 

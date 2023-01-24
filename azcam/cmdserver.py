@@ -1,5 +1,5 @@
 """
-*azcam.tools.cmdserver* contains the CommandServer class for azcam's socket command interface.
+*azcam.cmdserver* contains the CommandServer class for azcam's socket command interface.
 """
 
 import os
@@ -44,7 +44,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
 
         self.case_insensitive = 0
 
-        azcam.db.tools["cmdserver"] = self
+        azcam.db.cmdserver = self
 
     def begin(self, port=-1):
         """
@@ -113,8 +113,8 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 class MyBaseRequestHandler(socketserver.BaseRequestHandler):
     def __init__(self, request, client_address, server):
 
-        azcam.db.tools["cmdserver"].currentclient += 1
-        self.currentclient = azcam.db.tools["cmdserver"].currentclient
+        azcam.db.cmdserver.currentclient += 1
+        self.currentclient = azcam.db.cmdserver.currentclient
 
         socketserver.BaseRequestHandler.__init__(self, request, client_address, server)
 
@@ -125,8 +125,8 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
         Commands are executed sequentially.
         """
 
-        if azcam.db.tools["cmdserver"].welcome_message is not None:
-            self.request.send(str.encode(azcam.db.tools["cmdserver"].welcome_message + "\r\n"))
+        if azcam.db.cmdserver.welcome_message is not None:
+            self.request.send(str.encode(azcam.db.cmdserver.welcome_message + "\r\n"))
 
         while True:
             try:
@@ -168,10 +168,10 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 try:
                     self.cmdserver.socketnames[self.currentclient]
                 except Exception:
-                    azcam.db.tools["cmdserver"].socketnames[
+                    azcam.db.cmdserver.socketnames[
                         self.currentclient
                     ] = f"unknown_{self.currentclient}"
-                if azcam.db.tools["cmdserver"].logcommands:
+                if azcam.db.cmdserver.logcommands:
                     azcam.log(command_string.strip(), prefix=prefix_in)
 
                 # ************************************************************************
@@ -191,7 +191,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # register - register a client name, example: register console
                 elif command_string.lower().startswith("register"):
                     x = command_string.split(" ")
-                    azcam.db.tools["cmdserver"].socketnames[
+                    azcam.db.cmdserver.socketnames[
                         self.currentclient
                     ] = f"{x[1]}_{int(self.currentclient)}"
                     self.request.send(str.encode("OK\r\n"))
@@ -208,17 +208,17 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     else:
                         reply = "OK %s" % " ".join(s[1:])
                     self.request.send(str.encode(reply + "\r\n"))
-                    if azcam.db.tools["cmdserver"].logcommands:
+                    if azcam.db.cmdserver.logcommands:
                         azcam.log("%s" % reply, prefix=prefix_out)
                     command_string = ""
 
                 # update - azcammonitor
                 elif command_string.lower().startswith("update"):
-                    if azcam.db.tools["cmdserver"].monitorinterface == 0:
+                    if azcam.db.cmdserver.monitorinterface == 0:
                         azcam.log("ERROR could not update azcammonitor", prefix=prefix_out)
                         reply = "ERROR Could not update azcammonitor"
                     else:
-                        azcam.db.tools["cmdserver"].monitorinterface.Register()
+                        azcam.db.cmdserver.monitorinterface.Register()
                         azcam.log("%s" % "OK", prefix=prefix_out)
                         reply = "OK"
 
@@ -239,12 +239,12 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
 
                     # execute command
                     try:
-                        reply = azcam.db.tools["cmdserver"].command(command_string)
+                        reply = azcam.db.cmdserver.command(command_string)
                     except Exception as e:
                         reply = f"ERROR {repr(e)}"
 
                     # log reply
-                    if azcam.db.tools["cmdserver"].logcommands:
+                    if azcam.db.cmdserver.logcommands:
                         azcam.log(reply, prefix=prefix_out)
 
                     # send reply to socket
@@ -269,7 +269,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
         Called when new connection made.
         """
 
-        if azcam.db.tools["cmdserver"].log_connections and azcam.db.tools["cmdserver"].verbose:
+        if azcam.db.cmdserver.log_connections and azcam.db.cmdserver.verbose:
             azcam.log(
                 f"Client connection made from {str(self.client_address)}",
                 prefix="cmd> ",
@@ -282,7 +282,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
         Called when existing connection is closed.
         """
 
-        if azcam.db.tools["cmdserver"].log_connections and azcam.db.tools["cmdserver"].verbose:
+        if azcam.db.cmdserver.log_connections and azcam.db.cmdserver.verbose:
             azcam.log(f"Connection closed to {str(self.client_address)}")
 
         return socketserver.BaseRequestHandler.finish(self)

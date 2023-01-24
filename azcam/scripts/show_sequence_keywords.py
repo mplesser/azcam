@@ -16,17 +16,17 @@ def show_sequence_keywords(FileRoot="itl.", StartingSequence=1, keyword="OBJECT"
     data = []
 
     # inputs
-    FileRoot = azcam.db.tools["parameters"].get_script_par(
+    FileRoot = azcam.db.parameters.get_script_par(
         "show_sequence_keywords", "FileRoot", "prompt", "Enter file root name", FileRoot
     )
-    StartingSequence = azcam.db.tools["parameters"].get_script_par(
+    StartingSequence = azcam.db.parameters.get_script_par(
         "show_sequence_keywords",
         "StartingSequence",
         "prompt",
         "Enter starting sequence number",
         StartingSequence,
     )
-    keyword = azcam.db.tools["parameters"].get_script_par(
+    keyword = azcam.db.parameters.get_script_par(
         "show_sequence_keywords", "keyword", "prompt", "Enter keyword name", keyword
     )
     StartingSequence = int(StartingSequence)

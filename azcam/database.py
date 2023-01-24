@@ -8,7 +8,9 @@ temporary data for this current process.
 from typing import Any, Union, List, Dict
 
 from azcam.logger import Logger
-
+from azcam.parameters import Parameters
+from azcam.cmdserver import CommandServer
+from azcam.system import System
 
 class AzcamDatabase(object):
     """
@@ -53,6 +55,15 @@ class AzcamDatabase(object):
     """header order in image header"""
 
     logger: Logger = Logger()
+    """logger object"""
+
+    parameters: Parameters
+    """parameters object"""
+
+    cmdserver: CommandServer
+    """system header object"""
+
+    system: System
     """logger object"""
 
     pardict: dict = {

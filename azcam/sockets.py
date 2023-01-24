@@ -72,7 +72,7 @@ class SocketInterface(object):
             self.socket.connect((self.host, self.port))
             self.connected = True
         except Exception as e:
-            azcam.log(e)
+            #azcam.log(e)
             self.close()
             self.connected = False
             return False

@@ -16,11 +16,11 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
     plot_range = [-200, 30]
 
     # inputs
-    delay = azcam.db.tools["parameters"].get_script_par(
+    delay = azcam.db.parameters.get_script_par(
         "get_temps", "delay", "prompt", "Enter delay time in seconds", delay
     )
 
-    logfile = azcam.db.tools["parameters"].get_script_par(
+    logfile = azcam.db.parameters.get_script_par(
         "get_temps",
         "logfile",
         "prompt",
@@ -31,7 +31,7 @@ def get_temperatures(delay=10.0, logfile="get_temperatures.log", plottemps=1):
         reply = azcam.utils.file_browser(logfile, [("all files", ("*.*"))])
         logfile = reply[0]
 
-    plottemps = azcam.db.tools["parameters"].get_script_par(
+    plottemps = azcam.db.parameters.get_script_par(
         "get_temps", "plottemps", "prompt", "Enter 1 to plot data", plottemps
     )
 

@@ -5,7 +5,7 @@ import shutil
 import numpy
 
 import azcam
-from azcam.tools.image import Image
+from azcam.image import Image
 from azcam.tools.testers.basetester import Tester
 
 
@@ -84,26 +84,26 @@ class Dark(Tester):
 
         # create new subfolder
         currentfolder, newfolder = azcam.utils.make_file_folder("dark")
-        azcam.db.tools["parameters"].set_par("imagefolder", newfolder)
+        azcam.db.parameters.set_par("imagefolder", newfolder)
 
         # clear device
         exposure.test(0)
 
-        azcam.db.tools["parameters"].set_par("imageroot", "dark.")  # for automatic data analysis
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageroot", "dark.")  # for automatic data analysis
+        azcam.db.parameters.set_par(
             "imageincludesequencenumber", 1
         )  # use sequence numbers
-        azcam.db.tools["parameters"].set_par("imageautoname", 0)  # manually set name
-        azcam.db.tools["parameters"].set_par(
+        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
+        azcam.db.parameters.set_par(
             "imageautoincrementsequencenumber", 1
         )  # inc sequence numbers
-        azcam.db.tools["parameters"].set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
 
         # loop through images
         for imgnum in range(self.number_images_acquire):
 
             # pre-dark bias
-            azcam.db.tools["parameters"].set_par("imagetype", "dark")  # for GetFilename
+            azcam.db.parameters.set_par("imagetype", "dark")  # for GetFilename
             filename = os.path.basename(exposure.get_filename())
             azcam.log(f"Taking pre-dark image: {filename}")
             temp = tempcon.get_temperatures()
@@ -111,7 +111,7 @@ class Dark(Tester):
             exposure.expose(0, "zero", "pre-dark bias image")
 
             # take dark image
-            azcam.db.tools["parameters"].set_par("imagetype", "dark")
+            azcam.db.parameters.set_par("imagetype", "dark")
             filename = os.path.basename(exposure.get_filename())
             azcam.log(
                 f"Taking dark image {imgnum + 1}/{self.number_images_acquire} for {self.exposure_time:0.3f} seconds: {filename}"
