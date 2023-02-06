@@ -3,7 +3,7 @@ Contains the Queue class.
 """
 
 import time
-from typing import Any, List
+from collections import OrderedDict
 
 import azcam
 from azcam.header import Header, ObjectHeaderMethods
@@ -15,19 +15,6 @@ class Queue(Tools, ObjectHeaderMethods):
     The base queue tool.
     Usually implemented as the "queue" tool.
     """
-
-    START_CONDITIONS = "start_conditions"
-    STOP_CONDITIONS = "stop_conditions"
-    NCYCLES = "ncycles"
-    STATUS = "status"
-    STATE = "state"
-    STEPS = "steps"
-    ACTIVE = "active"
-    NOBS = "nobs"
-    NOBS_COMPLETED = "nobs_completed"
-    WAIT_COMPLETED = "wait_completed"
-    TOOL = "tools"
-    COMMAND = "command"
 
     def __init__(self, tool_id="queue", description=None):
 
@@ -41,16 +28,14 @@ class Queue(Tools, ObjectHeaderMethods):
         self.header.set_header("queue", 3)
 
         # create data structure
+        self.START_CONDITIONS = {}
+        self.STOP_CONDITIONS = {}
+        self.NCYCLES = 0
+        self.NCYCLES_COMPLETED = 0
+        self.QUEUE_STATUS = ""
+        self.STEPS = []  # list of steps, each step is a dict
+
         self.setup()
-
-        return
-
-    def initialize(self):
-        """
-        Initialize queue.
-        """
-
-        self.initialized = 1
 
         return
 
@@ -63,13 +48,48 @@ class Queue(Tools, ObjectHeaderMethods):
             self.START_CONDITIONS: {},
             self.STOP_CONDITIONS: {},
             self.NCYCLES: 0,
+            self.NCYCLES_COMPLETED: 0,
+            self.QUEUE_STATUS = "",
             self.STEPS: {
                 self.STATUS: "",
-                self.STATE: 0,
                 self.ACTIVE: 0,
                 self.NOBS: 1,
                 self.NOBS_COMPLETED: 0,
-                self.WAIT_COMPLETED: 0,
+                self.WAIT_FLAG: 0,
+                self.TOOL: None,
+                self.COMMAND: None,
+            },
+        }
+
+        # debug
+        if 1:
+            self.mock_setup()
+
+    def initialize(self):
+        """
+        Initialize queue.
+        """
+
+        self.initialized = 1
+
+        return
+
+    def mock_setup(self):
+        """
+        Set up mock data for queue testing.
+        """
+
+        self.data = {
+            self.START_CONDITIONS: {},
+            self.STOP_CONDITIONS: {},
+            self.NCYCLES: 0,
+            self.NCYCLES_COMPLETED: 0,
+            self.STEPS: {
+                self.STATUS: "",
+                self.ACTIVE: 0,
+                self.NOBS: 1,
+                self.NOBS_COMPLETED: 0,
+                self.WAIT_FLAG: 0,
                 self.TOOL: None,
                 self.COMMAND: None,
             },

@@ -28,7 +28,8 @@ from azcam.tools.exposure import Exposure
 from azcam.tools.webserver.fastapi_server import WebServer
 from azcam.tools.webtools.exptool.exptool import Exptool
 from azcam.tools.webtools.status.status import Status
-from azcam.tools.webtools.queue.queue import Queue
+from azcam.tools.queue import Queue
+#from azcam.tools.webtools.queue.queue import Queue
 
 # ****************************************************************
 # parse command line arguments
@@ -101,6 +102,8 @@ tempcon = TempCon()
 tempcon.enabled = 0
 display = Display()
 exposure = Exposure()
+queue = Queue()
+queue.initialize()
 
 # ****************************************************************
 # scripts
@@ -129,8 +132,8 @@ if 1:
     exptool = Exptool()
     exptool.initialize()
 
-    queue = Queue()
-    queue.initialize()
+    #queue = Queue()
+    #queue.initialize()
 
     azcam.log("Started web apps")
 

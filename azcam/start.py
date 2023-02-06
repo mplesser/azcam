@@ -49,12 +49,12 @@ def main():
         if use_venv:
             cmds = [
                 f". {activator} ; {pythoncmd} -m {startmod}",
-                f"{' '.join(args)}",
+                f"{' '.join(sys.argv)}",
             ]
         else:
             cmds = [
                 f"{pythoncmd} -m {startmod}",
-                f"{' '.join(args)}",
+                f"{' '.join(sys.argv)}",
             ]
     else:
         if use_venv:
