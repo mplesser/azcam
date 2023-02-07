@@ -1426,7 +1426,7 @@ class ControllerArchon(Controller):
 
         pixels = int(self.dict_frame[f"BUF{self.read_buffer}PIXELS"])
         lines = int(self.dict_frame[f"BUF{self.read_buffer}LINES"])
-        pixels_read = (lines * numpixelsline + pixels) * numamps
+        pixels_read = (lines * numpixelsline + pixels) * numseramps
 
         return max(0, int(total_pixels - pixels_read))
 

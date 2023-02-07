@@ -2075,5 +2075,19 @@ class Image(object):
             after=curpos,
         )
         curpos += 1
+        hdu.header.set(
+            "GAIN",
+            self.focalplane.gains[ext_number - 1],
+            "Amplifier gain",
+            after=curpos,
+        )
+        curpos += 1
+        hdu.header.set(
+            "RDNOISE",
+            self.focalplane.rdnoises[ext_number - 1],
+            "Amplifier read noise",
+            after=curpos,
+        )
+        curpos += 1
 
         return

@@ -81,6 +81,11 @@ class FocalPlane(ObjectHeaderMethods):
         # unbinned number of visible pixels per amplifier along Y axis
         self.ampvispix_y = 1
 
+        # amplifer gain values in e/DN
+        self.gains=[]
+        # amplifer read noise in e
+        self.rdnoises=[]
+
         # calculated values
         # number of pixels in image
         self.numpix_image = 0
