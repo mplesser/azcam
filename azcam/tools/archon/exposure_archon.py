@@ -30,7 +30,7 @@ class ExposureArchon(Exposure):
         self.add_extensions = 0
 
         # shutter delay in msec
-        self.shutter_delay = 50
+        self.shutter_delay = 250
 
     def abort(self):
         """
