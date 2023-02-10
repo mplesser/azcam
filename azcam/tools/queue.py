@@ -35,6 +35,10 @@ class Queue(Tools, ObjectHeaderMethods):
         self.QUEUE_STATUS = ""
         self.STEPS = []  # list of steps, each step is a dict
 
+        self.STATUS = ""
+        self.START_CONDITIONS: {}
+        self.STOP_CONDITIONS: {}
+
         self.setup()
 
         return
@@ -45,20 +49,21 @@ class Queue(Tools, ObjectHeaderMethods):
         """
 
         self.data = {
-            self.START_CONDITIONS: {},
-            self.STOP_CONDITIONS: {},
-            self.NCYCLES: 0,
-            self.NCYCLES_COMPLETED: 0,
-            self.QUEUE_STATUS = "",
-            self.STEPS: {
-                self.STATUS: "",
-                self.ACTIVE: 0,
-                self.NOBS: 1,
-                self.NOBS_COMPLETED: 0,
-                self.WAIT_FLAG: 0,
-                self.TOOL: None,
-                self.COMMAND: None,
-            },
+            "START_CONDITIONS": {},
+            "STOP_CONDITIONS": {},
+            "NCYCLES": 0,
+            "NCYCLES_COMPLETED": 0,
+            "QUEUE_STATUS": "",
+
+            # self.STEPS: {
+            #     "STATUS": "",
+            #     "ACTIVE": 0,
+            #     "NOBS": 1,
+            #     "NOBS_COMPLETED": 0,
+            #     "WAIT_FLAG": 0,
+            #     "TOOL": None,
+            #     "COMMAND": None,
+            # },
         }
 
         # debug
@@ -79,21 +84,21 @@ class Queue(Tools, ObjectHeaderMethods):
         Set up mock data for queue testing.
         """
 
-        self.data = {
-            self.START_CONDITIONS: {},
-            self.STOP_CONDITIONS: {},
-            self.NCYCLES: 0,
-            self.NCYCLES_COMPLETED: 0,
-            self.STEPS: {
-                self.STATUS: "",
-                self.ACTIVE: 0,
-                self.NOBS: 1,
-                self.NOBS_COMPLETED: 0,
-                self.WAIT_FLAG: 0,
-                self.TOOL: None,
-                self.COMMAND: None,
-            },
-        }
+        # self.data = {
+        #     self.START_CONDITIONS: {},
+        #     self.STOP_CONDITIONS: {},
+        #     self.NCYCLES: 0,
+        #     self.NCYCLES_COMPLETED: 0,
+        #     self.STEPS: {
+        #         self.STATUS: "",
+        #         self.ACTIVE: 0,
+        #         self.NOBS: 1,
+        #         self.NOBS_COMPLETED: 0,
+        #         self.WAIT_FLAG: 0,
+        #         self.TOOL: None,
+        #         self.COMMAND: None,
+        #     },
+        # }
 
     def reset(self):
         """

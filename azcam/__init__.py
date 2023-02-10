@@ -2,7 +2,7 @@
 AzCam is a software framework for the acquisition and analysis of image data
 from scientific imaging systems as well as the control of instrumentation.
 It is intended to be customized for specific hardware, observational,
-and data reduction requirements...
+and data reduction requirements.
 """
 
 from importlib import metadata
@@ -16,12 +16,7 @@ import typing
 from azcam.functions import fits
 from azcam.functions import utils
 from azcam.functions import plot
-import azcam.database
 from azcam.exceptions import AzcamError, AzcamWarning
-
-db = azcam.database.AzcamDatabase()
-"""databse object"""
-db.tools["db"] = db
 
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
@@ -30,5 +25,3 @@ log: typing.Callable = print
 del metadata
 del typing
 del exceptions
-del database
-del azcam

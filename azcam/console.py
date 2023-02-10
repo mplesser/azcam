@@ -6,6 +6,11 @@ import azcam
 from azcam.logger import Logger
 from azcam.parameters import Parameters
 
+import azcam.database_console as database
+db = database.AzcamDatabase()
+azcam.db = db
+db.tools["db"] = db
+
 # console mode
 azcam.db.mode = "console"
 
