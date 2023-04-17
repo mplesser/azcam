@@ -118,11 +118,11 @@ def sroi():
 
 
 # add to shortcuts
-if azcam.db.mode == "server":
+if azcam.mode == "server":
     azcam.db.shortcuts.update(
         {"sav": sav_server, "pp": pp, "sf": sf_server, "gf": gf_server, "wc": wc}
     )
-elif azcam.db.mode == "console":
+elif azcam.mode == "console":
     azcam.db.shortcuts.update(
         {"sav": sav_console, "sroi": sroi, "sf": sf_console, "gf": gf_console, "bf": bf}
     )

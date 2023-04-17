@@ -2,6 +2,11 @@
 Contains the Ds9Display class.
 """
 
+"""
+Note: This is a special tool as it is used by server and clients and so does not use 
+the base Tools class.
+"""
+
 import os
 import shutil
 import subprocess
@@ -21,9 +26,26 @@ class Ds9Display(Display):
     Azcam's interface to SAO's ds9 image display tool.
     """
 
-    def __init__(self, tool_id="display", description="ds9 display"):
+    def __init__(self):
+        #: name used to reference the tool ("controller", "display", ...)
+        self.tool_id: str = "display"
 
-        super().__init__(tool_id, description)
+        #: descriptive tool name
+        self.description: str = "ds9 display"
+
+        #: 1 when tool is enabled
+        self.enabled: int = 1
+
+        #: 1 when tool has been initialized
+        self.initialized: int = 0
+
+        #: 1 when tool has been reset
+        self.is_reset: int = 0
+
+        azcam.db.tools[self.tool_id] = self
+
+        #: verbosity for debug, >0 is more verbose
+        self.verbosity = 0
 
         # display Host, as a string hex code
         self.host = "0"
@@ -34,7 +56,7 @@ class Ds9Display(Display):
         self.size_x = 0
         self.size_y = 0
 
-        # region of interests [first_col,last_col,first_row,last_row]
+        # ROI's[first_col,last_col,first_row,last_row]
         # image coords     - entire image, binned units (starts at each amps reference)
         self.image_roi = []
         self.detector_roi = []  # detector coords  - single detector, unbinned units
@@ -89,6 +111,15 @@ class Ds9Display(Display):
         self.set_display(self.default_display)
 
         self.initialized = 1
+
+        return
+
+    def reset(self) -> None:
+        """
+        Reset the tool.
+        """
+
+        self.is_reset = 1
 
         return
 

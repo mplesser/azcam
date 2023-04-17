@@ -21,20 +21,17 @@ from azcam.exceptions import AzcamError, AzcamWarning
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
 
-import azcam.database_server as database
+import azcam.database
 
-db = database.AzcamDatabase()
+db = azcam.database.AzcamDatabase()
 """database"""
 
 # azcam.db = db
 db.tools["db"] = db
 
-# test
-db1 = database.Database()
-# azcam.db1 = db1
-db.tools["db1"] = db1
+mode = "unknown"
+"""azcam mode, usually server or console"""
 
 # clean namespace
 del metadata
 del typing
-del exceptions

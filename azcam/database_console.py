@@ -12,6 +12,7 @@ from azcam.parameters import Parameters
 from azcam.cmdserver import CommandServer
 from azcam.system import System
 
+
 class AzcamDatabase(object):
     """
     The azcam database class.
@@ -48,23 +49,11 @@ class AzcamDatabase(object):
     scripts: dict = {}
     """dict of scripts"""
 
-    headers: dict = {}
-    """header objects"""
-
-    headerorder: list = []
-    """header order in image header"""
-
     logger: Logger = Logger()
     """logger object"""
 
     parameters: Parameters
     """parameters object"""
-
-    cmdserver: CommandServer
-    """system header object"""
-
-    system: System
-    """logger object"""
 
     pardict: dict = {
         # exposure
@@ -175,7 +164,6 @@ class AzcamDatabase(object):
     # *************************************************************************
 
     def __init__(self) -> None:
-
         if 0:
             if AzcamDatabase._instance is None:
                 AzcamDatabase._instance = self

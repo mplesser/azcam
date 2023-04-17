@@ -163,7 +163,7 @@ class Parameters(Tools):
         parameter = parameter.lower()
         value = None
 
-        if azcam.db.mode == "console":
+        if azcam.mode == "console":
             try:
                 reply = azcam.db.tools["server"].command(f"parameters.get_par {parameter}")
             except azcam.AzcamError:
@@ -253,7 +253,7 @@ class Parameters(Tools):
 
         parameter = parameter.lower()
 
-        if azcam.db.mode == "console":
+        if azcam.mode == "console":
             try:
                 azcam.db.tools["server"].command(f"parameters.set_par {parameter} {value}")
             except azcam.AzcamError:

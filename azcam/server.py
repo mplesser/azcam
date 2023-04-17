@@ -10,7 +10,7 @@ from azcam.logger import Logger
 from azcam.parameters import Parameters
 
 # server mode
-azcam.db.mode = "server"
+azcam.mode = "server"
 azcam.db.servermode = ""
 
 # parameters

@@ -1,5 +1,5 @@
 """
-*azcam.database* contains the main azcam database class.
+Contains the main azcam database class.
 
 There is only one instance of this class which is referenced as `azcam.db` and contains
 temporary data for this current process.
