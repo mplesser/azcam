@@ -16,7 +16,7 @@ Usage Example:
 
     azcam.fits.colbias("test.fits", 3)
 
-[Documentation for the FITS functions](/azcam/code/azcam/functions/fits.html)
+[Documentation for the FITS functions](/code/azcam/functions/fits.html)
 
 ## Plot Commands
 The *azcam.plot* commands are helpful for general plotting using matplotlib. 
@@ -25,7 +25,7 @@ Usage Example:
 
     azcam.plot.save_figure(1, "myfigure.png")
 
-[Documentation for the plot functions](/azcam/code/azcam/functions/plot.html)
+[Documentation for the plot functions](/code/azcam/functions/plot.html)
 
 
 ## Utility commands
@@ -35,4 +35,4 @@ Usage Example:
 
     azcam.utils.curdir("/data")
 
-[Documentation for the utility functions](/azcam/code/azcam/functions/utils.html)
+[Documentation for the utility functions](/code/azcam/functions/utils.html)

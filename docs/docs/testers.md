@@ -28,68 +28,68 @@ bias.analyze()
 
 ### Tester Base
 
-[Testers base class](/azcam/code/azcam/tools/testers/testers.html)
+[Testers base class](/code/azcam/tools/testers/testers.html)
 
 ### Detector Characterization Base
 
-[DetChar base class](/azcam/code/azcam/tools/testers/detchar.html)
+[DetChar base class](/code/azcam/tools/testers/detchar.html)
 
 ### Bias Images
 
-[Bias class](/azcam/code/azcam/tools/testers/bias.html)
+[Bias class](/code/azcam/tools/testers/bias.html)
 
 ### Dark Signal
 
-[Dark class](/azcam/code/azcam/tools/testers/dark.html)
+[Dark class](/code/azcam/tools/testers/dark.html)
 
 ### Defects
 
-[Defects class](/azcam/code/azcam/tools/testers/defects.html)
+[Defects class](/code/azcam/tools/testers/defects.html)
 
 ### Detector Calibration
 
-[DetCal class](/azcam/code/azcam/tools/testers/detcal.html)
+[DetCal class](/code/azcam/tools/testers/detcal.html)
 
 ### Extended Pixel Edge Response Charge Transfer Efficiency
 
-[Eper class](/azcam/code/azcam/tools/testers/eper.html)
+[Eper class](/code/azcam/tools/testers/eper.html)
 
 ### Fe55 X-Ray Gain, Noise, and Charge Transfer Efficiency
 
-[Fe55 class](/azcam/code/azcam/tools/testers/fe55.html)
+[Fe55 class](/code/azcam/tools/testers/fe55.html)
 
 ### Gain
 
-[Gain class](/azcam/code/azcam/tools/testers/gain.html)
+[Gain class](/code/azcam/tools/testers/gain.html)
 
 ### Linearity
 
-[Linearity class](/azcam/code/azcam/tools/testers/linearity.html)
+[Linearity class](/code/azcam/tools/testers/linearity.html)
 
 ### Metrology
 
-[Metrology class](/azcam/code/azcam/tools/testers/metrology.html)
+[Metrology class](/code/azcam/tools/testers/metrology.html)
 
 ### Pocket Pumping
 
-[PocketPump class](/azcam/code/azcam/tools/testers/pocketpump.html)
+[PocketPump class](/code/azcam/tools/testers/pocketpump.html)
 
 ### Photo-Response Non-Uniformity
 
-[PRNU class](/azcam/code/azcam/tools/testers/prnu.html)
+[PRNU class](/code/azcam/tools/testers/prnu.html)
 
 ### Photon Transfer Curve
 
-[PTC class](/azcam/code/azcam/tools/testers/ptc.html)
+[PTC class](/code/azcam/tools/testers/ptc.html)
 
 ### Quantum Efficiency
 
-[QE class](/azcam/code/azcam/tools/testers/qe.html)
+[QE class](/code/azcam/tools/testers/qe.html)
 
 ### Ramp Images
 
-[Ramp class](/azcam/code/azcam/tools/testers/ramp.html)
+[Ramp class](/code/azcam/tools/testers/ramp.html)
 
 ### Superflat Images
 
-[Superflat class](/azcam/code/azcam/tools/testers/superflat.html)
+[Superflat class](/code/azcam/tools/testers/superflat.html)
