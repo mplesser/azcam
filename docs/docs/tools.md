@@ -20,7 +20,7 @@ The *exposure* tool often coordinates the actions of the hardware tools such as 
 *exposure.tools_init* list are initialized.  Similarly when *exposure* is reset, the tools in the 
 *exposure.tools_reset* list are reset.
 
-[Documentation for the base Exposure class](/azcam/code/azcam/tools/exposure.html)
+[Documentation for the base Exposure class](/code/azcam/tools/exposure.html)
 
 ### Astronomical Research Cameras Controllers
 ```python

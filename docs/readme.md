@@ -1,10 +1,18 @@
 ## Documenation notes for azcam ##
 
-- /azcam/azcam/docs if doc root
+https://github.com/mplesser/index.md is main index for https://mplesser.github.io/ page
+
+
+`/azcam/azcam/docs` is azcam doc root
 - mkdocs is used for doc rendering
   - write html to **docs/site** root folder
   - mkdocs.yml defines mkdoc pars
   - mkdocs_deploy.bat builds and deploys to github (https://github.com/mplesser/azcam/ **gh-pages** branch) of azcam which appears at https://mplesser.github.io/azcam/ after online build
 
-- pdoc3 is used for python code documentation as it supports attributes
- - writes html **docs/code** folder which has to be deployed to  
+
+pdoc3 is used for python code documentation as it supports attributes
+ - writes html **docs/code/azcam** folder which should be manually copied to `\azcam\mplesser.github.io\code\azcam` for deployment
+ - do not manually create `mplesser.github.io\azcam` folder as that is used by `gh-pages` above 
+ - this is then manually deployed from **main** branch on mplesser.github.io
+
+
