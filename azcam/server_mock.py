@@ -29,7 +29,7 @@ from azcam.tools.webserver.fastapi_server import WebServer
 from azcam.tools.webtools.exptool.exptool import Exptool
 from azcam.tools.webtools.status.status import Status
 from azcam.tools.queue import Queue
-#from azcam.tools.webtools.queue.queue import Queue
+from azcam.tools.observe.observe import Observe
 
 # ****************************************************************
 # parse command line arguments
@@ -74,6 +74,13 @@ azcam.db.servermode = azcam.db.systemname
 azcam.db.verbosity = 2
 
 # ****************************************************************
+# parameter file
+# ****************************************************************
+parfile = os.path.join(azcam.db.datafolder, "parameters", "parameters_server_mock.ini")
+azcam.db.parameters.read_parfile(parfile)
+azcam.db.parameters.update_pars(0, "azcamserver")
+
+# ****************************************************************
 # logging
 # ****************************************************************
 logfile = os.path.join(azcam.db.datafolder, "logs", "server.log")
@@ -102,8 +109,10 @@ tempcon = TempCon()
 tempcon.enabled = 0
 display = Display()
 exposure = Exposure()
-queue = Queue()
-queue.initialize()
+# queue = Queue()
+# queue.initialize()
+# queue.initialize()
+observe = Observe()
 
 # ****************************************************************
 # scripts
@@ -132,8 +141,8 @@ if 1:
     exptool = Exptool()
     exptool.initialize()
 
-    #queue = Queue()
-    #queue.initialize()
+    # queue = Queue()
+    # queue.initialize()
 
     azcam.log("Started web apps")
 

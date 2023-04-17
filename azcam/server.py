@@ -9,16 +9,6 @@ import azcam
 from azcam.logger import Logger
 from azcam.parameters import Parameters
 
-import azcam.database_server as database
-db = database.AzcamDatabase()
-azcam.db = db
-db.tools["db"] = db
-
-# test
-db1 = database.Database()
-azcam.db1 = db1
-db.tools["db1"] = db1
-
 # server mode
 azcam.db.mode = "server"
 azcam.db.servermode = ""
@@ -38,5 +28,3 @@ azcam.db.set("hostip", socket.gethostbyname(hostname))
 # tool_id's which are reset or initialized with exposure
 azcam.db.set("tools_reset", {})
 azcam.db.set("tools_init", {})
-
-del database

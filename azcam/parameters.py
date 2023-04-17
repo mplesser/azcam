@@ -56,7 +56,6 @@ class Parameters(Tools):
 
         # sectionname & value case sensitive, name is not
         for sectionname in sections:
-
             self.par_dict[sectionname] = {}
 
             for name, value in cp.items(sectionname):
@@ -309,6 +308,8 @@ class Parameters(Tools):
                 # azcam.AzcamWarning(f"Could not set parameter: {parameter}")
         except KeyError:
             pass
+        except Exception:  # new
+            pass
 
         return None
 
@@ -334,7 +335,7 @@ class Parameters(Tools):
 
         par_dict = self.par_dict.get(par_dict_id)
         if par_dict is None:
-            self.par_dict[par_dict_id]={}
+            self.par_dict[par_dict_id] = {}
             par_dict = self.par_dict[par_dict_id]
 
         if par_dict.get(attribute):
@@ -351,7 +352,7 @@ class Parameters(Tools):
             pass  # value passsed is used
 
         # save
-        self.set_script_par(par_dict_id,attribute,value)
+        self.set_script_par(par_dict_id, attribute, value)
 
         return value
 
@@ -367,7 +368,7 @@ class Parameters(Tools):
 
         par_dict = self.par_dict.get(par_dict_id)
         if par_dict is None:
-            self.par_dict[par_dict_id]={}
+            self.par_dict[par_dict_id] = {}
             par_dict = self.par_dict[par_dict_id]
 
         # get value

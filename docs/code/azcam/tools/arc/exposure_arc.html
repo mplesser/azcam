@@ -51,7 +51,7 @@
 <li><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></li>
 <li><a title="azcam.tools.tools.Tools" href="../tools.html#azcam.tools.tools.Tools">Tools</a></li>
 <li><a title="azcam.tools.exposure_filename.Filename" href="../exposure_filename.html#azcam.tools.exposure_filename.Filename">Filename</a></li>
-<li><a title="azcam.tools.header.ObjectHeaderMethods" href="../header.html#azcam.tools.header.ObjectHeaderMethods">ObjectHeaderMethods</a></li>
+<li><a title="azcam.header.ObjectHeaderMethods" href="../../header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></li>
 </ul>
 <h3>Instance variables</h3>
 <dl>
@@ -154,7 +154,7 @@ Used only for clients which …</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.define_keywords" href="../header.html#azcam.tools.exposure.Exposure.define_keywords">define_keywords</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.define_keywords" href="../../header.html#azcam.tools.exposure.Exposure.define_keywords">define_keywords</a></code>
 </p>
 <div class="desc inherited"><p>Defines and resets keywords.</p></div>
 </dd>
@@ -164,7 +164,7 @@ Used only for clients which …</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.delete_keyword" href="../header.html#azcam.tools.exposure.Exposure.delete_keyword">delete_keyword</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.delete_keyword" href="../../header.html#azcam.tools.exposure.Exposure.delete_keyword">delete_keyword</a></code>
 </p>
 <div class="desc inherited"><p>Delete a keyword.</p>
 <h2 id="args">Args</h2>
@@ -328,7 +328,7 @@ Gets imagetypes and comparisons.</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.get_keyword" href="../header.html#azcam.tools.exposure.Exposure.get_keyword">get_keyword</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.get_keyword" href="../../header.html#azcam.tools.exposure.Exposure.get_keyword">get_keyword</a></code>
 </p>
 <div class="desc inherited"><p>Return a keyword value, its comment string, and type.
 Comment always returned in double quotes, even if empty.</p>
@@ -345,7 +345,7 @@ Comment always returned in double quotes, even if empty.</p>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.get_keywords" href="../header.html#azcam.tools.exposure.Exposure.get_keywords">get_keywords</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.get_keywords" href="../../header.html#azcam.tools.exposure.Exposure.get_keywords">get_keywords</a></code>
 </p>
 <div class="desc inherited"><p>Return a list of all keyword names.</p>
 <h2 id="returns">Returns</h2>
@@ -475,7 +475,7 @@ Really sets a flag which is read in expose().</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.read_header" href="../header.html#azcam.tools.exposure.Exposure.read_header">read_header</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.read_header" href="../../header.html#azcam.tools.exposure.Exposure.read_header">read_header</a></code>
 </p>
 <div class="desc inherited"><p>Reads and returns current header data.</p>
 <h2 id="returns">Returns</h2>
@@ -683,7 +683,7 @@ XY is [[X,Y]] in index numbers, starting at [1,1].</p></div>
 <div class="desc inherited"><p>Set the filename components based on a simple filename …</p></div>
 </dd>
 <dt id="azcam.tools.arc.exposure_arc.ExposureArc.set_focalplane"><code class="name flex">
-<span>def <span class="ident">set_focalplane</span></span>(<span>self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_config='')</span>
+<span>def <span class="ident">set_focalplane</span></span>(<span>self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_cfg=[0])</span>
 </code></dt>
 <dd>
 <p class="inheritance">
@@ -744,7 +744,7 @@ zero, object, dark, flat.</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.set_keyword" href="../header.html#azcam.tools.exposure.Exposure.set_keyword">set_keyword</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.set_keyword" href="../../header.html#azcam.tools.exposure.Exposure.set_keyword">set_keyword</a></code>
 </p>
 <div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
 <h2 id="args">Args</h2>
@@ -861,7 +861,7 @@ title is the image title.</p></div>
 <dd>
 <p class="inheritance">
 <em>Inherited from:</em>
-<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.update_header" href="../header.html#azcam.tools.exposure.Exposure.update_header">update_header</a></code>
+<code><a title="azcam.tools.exposure.Exposure" href="../exposure.html#azcam.tools.exposure.Exposure">Exposure</a></code>.<code><a title="azcam.tools.exposure.Exposure.update_header" href="../../header.html#azcam.tools.exposure.Exposure.update_header">update_header</a></code>
 </p>
 <div class="desc inherited"><p>Update the header, reading current data.
 Deletes all keywords if the object is not enabled.</p></div>
@@ -901,8 +901,8 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.begin" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.begin">begin</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.check_comparison_imagetype" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.check_comparison_imagetype">check_comparison_imagetype</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.check_image_ready" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.check_image_ready">check_image_ready</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.define_keywords" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.define_keywords">define_keywords</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.delete_keyword" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.delete_keyword">delete_keyword</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.define_keywords" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.define_keywords">define_keywords</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.delete_keyword" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.delete_keyword">delete_keyword</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.description" href="../tools.html#azcam.tools.arc.exposure_arc.ExposureArc.description">description</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.enabled" href="../tools.html#azcam.tools.arc.exposure_arc.ExposureArc.enabled">enabled</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.end" href="#azcam.tools.arc.exposure_arc.ExposureArc.end">end</a></code></li>
@@ -919,8 +919,8 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_image_title" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_image_title">get_image_title</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_image_type" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_image_type">get_image_type</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_image_types" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_image_types">get_image_types</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_keyword" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.get_keyword">get_keyword</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_keywords" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.get_keywords">get_keywords</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_keyword" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_keywords" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.get_keywords">get_keywords</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_pixels_remaining" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_pixels_remaining">get_pixels_remaining</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_roi" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_roi">get_roi</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.get_status" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.get_status">get_status</a></code></li>
@@ -934,7 +934,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.is_reset" href="../tools.html#azcam.tools.arc.exposure_arc.ExposureArc.is_reset">is_reset</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.parshift" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.parshift">parshift</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.pause" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.pause">pause</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.read_header" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.read_header">read_header</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.read_header" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.read_header">read_header</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.read_header_file" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.read_header_file">read_header_file</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.readout" href="#azcam.tools.arc.exposure_arc.ExposureArc.readout">readout</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.record_current_times" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.record_current_times">record_current_times</a></code></li>
@@ -959,7 +959,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_image_title" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_image_title">set_image_title</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_image_type" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_image_type">set_image_type</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_jpg_order" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_jpg_order">set_jpg_order</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_keyword" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.set_keyword">set_keyword</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_keyword" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.set_keyword">set_keyword</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_ref_pixel" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_ref_pixel">set_ref_pixel</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_roi" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_roi">set_roi</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.set_shutter" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.set_shutter">set_shutter</a></code></li>
@@ -970,7 +970,7 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.start_readout" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.start_readout">start_readout</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.test" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.test">test</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.tool_id" href="../tools.html#azcam.tools.arc.exposure_arc.ExposureArc.tool_id">tool_id</a></code></li>
-<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.update_header" href="../header.html#azcam.tools.arc.exposure_arc.ExposureArc.update_header">update_header</a></code></li>
+<li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.update_header" href="../../header.html#azcam.tools.arc.exposure_arc.ExposureArc.update_header">update_header</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.update_headers" href="../exposure.html#azcam.tools.arc.exposure_arc.ExposureArc.update_headers">update_headers</a></code></li>
 <li><code><a title="azcam.tools.arc.exposure_arc.ExposureArc.verbosity" href="../tools.html#azcam.tools.arc.exposure_arc.ExposureArc.verbosity">verbosity</a></code></li>
 </ul>

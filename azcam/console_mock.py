@@ -60,9 +60,7 @@ if datafolder is None:
 else:
     azcam.db.datafolder = os.path.realpath(datafolder)
 
-parfile = os.path.join(
-    azcam.db.datafolder, "parameters", f"parameters_console_{azcam.db.systemname}.ini"
-)
+parfile = os.path.join(azcam.db.datafolder, "parameters", f"parameters_console_mock.ini")
 
 # logging
 logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
@@ -91,9 +89,9 @@ azcam.scripts.load("console")
 # ****************************************************************
 # observe
 # ****************************************************************
-azcam.log("Loading observe")
-from azcam_observe.observe_cli.observe_cli import ObserveCli
-observe = ObserveCli()
+# azcam.log("Loading observe")
+# from azcam_observe.observe_cli.observe_cli import ObserveCli
+# observe = ObserveCli()
 
 # try to connect to azcamserver
 connected = azcam.db.tools["server"].connect(port=cmdport)  # default host and port

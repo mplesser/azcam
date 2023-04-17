@@ -1,5 +1,5 @@
 """
-*azcam.exceptions* contains custom exceptions and warnings used throughout azcam.
+Contains custom exceptions and warnings used throughout azcam.
 """
 
 from typing import Any, List, Dict, Union, Optional, Type
@@ -8,6 +8,10 @@ import azcam
 
 
 class AzcamError(Exception):
+    """
+    Base custom error class for azcam.
+    """
+
     def __init__(self, message: str, error_code: int = 0):
         """
         Custom error exception for azcam.
@@ -45,13 +49,9 @@ def azcam_formatwarning(msg: str, *args, **kwargs) -> str:
     return "AzcamWarning: " + str(msg) + "\n"
 
 
-# warnings.formatwarning = azcam_formatwarning
-del azcam_formatwarning
-
-
 def AzcamWarning(message: str) -> None:
     """
-    AzcamWarning prints a warning message.
+    Print and log a warning message.
     """
 
     # warnings.warn(message)

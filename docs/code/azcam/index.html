@@ -26,7 +26,7 @@ from scientific imaging systems as well as the control of …" />
 <p>AzCam is a software framework for the acquisition and analysis of image data
 from scientific imaging systems as well as the control of instrumentation.
 It is intended to be customized for specific hardware, observational,
-and data reduction requirements&hellip;</p>
+and data reduction requirements.</p>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
@@ -34,6 +34,10 @@ and data reduction requirements&hellip;</p>
 <dt><code class="name"><a title="azcam.cli" href="cli.html">azcam.cli</a></code></dt>
 <dd>
 <div class="desc"><p><em>azcam.cli</em> is used to bring commands into the current namespace …</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.cmdserver" href="cmdserver.html">azcam.cmdserver</a></code></dt>
+<dd>
+<div class="desc"><p><em>azcam.cmdserver</em> contains the CommandServer class for azcam's socket command interface.</p></div>
 </dd>
 <dt><code class="name"><a title="azcam.console" href="console.html">azcam.console</a></code></dt>
 <dd>
@@ -43,17 +47,33 @@ and data reduction requirements&hellip;</p>
 <dd>
 <div class="desc"><p>azcam console script for a mock system …</p></div>
 </dd>
-<dt><code class="name"><a title="azcam.database" href="database.html">azcam.database</a></code></dt>
+<dt><code class="name"><a title="azcam.database_console" href="database_console.html">azcam.database_console</a></code></dt>
+<dd>
+<div class="desc"><p><em>azcam.database</em> contains the main azcam database class …</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.database_server" href="database_server.html">azcam.database_server</a></code></dt>
 <dd>
 <div class="desc"><p><em>azcam.database</em> contains the main azcam database class …</p></div>
 </dd>
 <dt><code class="name"><a title="azcam.exceptions" href="exceptions.html">azcam.exceptions</a></code></dt>
 <dd>
-<div class="desc"><p><em>azcam.exceptions</em> contains custom exceptions and warnings used throughout azcam.</p></div>
+<div class="desc"><p>Contains custom exceptions and warnings used throughout azcam.</p></div>
 </dd>
 <dt><code class="name"><a title="azcam.functions" href="functions/index.html">azcam.functions</a></code></dt>
 <dd>
 <div class="desc"><p>General functions used throughout azcam.</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.header" href="header.html">azcam.header</a></code></dt>
+<dd>
+<div class="desc"><p>Contains the Header class.</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.image" href="image.html">azcam.image</a></code></dt>
+<dd>
+<div class="desc"><p>Contains the Image class.</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.image_focalplane" href="image_focalplane.html">azcam.image_focalplane</a></code></dt>
+<dd>
+<div class="desc"><p>Contains the FocalPlane and WCS classes.</p></div>
 </dd>
 <dt><code class="name"><a title="azcam.logger" href="logger.html">azcam.logger</a></code></dt>
 <dd>
@@ -62,6 +82,10 @@ and data reduction requirements&hellip;</p>
 <dt><code class="name"><a title="azcam.logging_server_tcp" href="logging_server_tcp.html">azcam.logging_server_tcp</a></code></dt>
 <dd>
 <div class="desc"><p>Example logging server which receives and prints azcam logrecords.</p></div>
+</dd>
+<dt><code class="name"><a title="azcam.parameters" href="parameters.html">azcam.parameters</a></code></dt>
+<dd>
+<div class="desc"><p>Parameter handling tool for azcam.</p></div>
 </dd>
 <dt><code class="name"><a title="azcam.scripts" href="scripts/index.html">azcam.scripts</a></code></dt>
 <dd>
@@ -88,6 +112,12 @@ parameters dictionary, define a logger, and get local network information.</p></
 <dd>
 <div class="desc"><p>Startup script for azcam …</p></div>
 </dd>
+<dt><code class="name"><a title="azcam.system" href="system.html">azcam.system</a></code></dt>
+<dd>
+<div class="desc"><p>Contains the base System object.
+The System class contains custom code for a specific system,
+including "system header" commands.</p></div>
+</dd>
 <dt><code class="name"><a title="azcam.tools" href="tools/index.html">azcam.tools</a></code></dt>
 <dd>
 <div class="desc"><p><em>azcam.tools</em> contains the modules which define the base azcam tools.</p></div>
@@ -99,7 +129,7 @@ parameters dictionary, define a logger, and get local network information.</p></
 <dl>
 <dt id="azcam.db"><code class="name">var <span class="ident">db</span></code></dt>
 <dd>
-<div class="desc"><p>databse object</p></div>
+<div class="desc"><p>database</p></div>
 </dd>
 </dl>
 </section>
@@ -117,19 +147,26 @@ parameters dictionary, define a logger, and get local network information.</p></
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="azcam.cli" href="cli.html">azcam.cli</a></code></li>
+<li><code><a title="azcam.cmdserver" href="cmdserver.html">azcam.cmdserver</a></code></li>
 <li><code><a title="azcam.console" href="console.html">azcam.console</a></code></li>
 <li><code><a title="azcam.console_mock" href="console_mock.html">azcam.console_mock</a></code></li>
-<li><code><a title="azcam.database" href="database.html">azcam.database</a></code></li>
+<li><code><a title="azcam.database_console" href="database_console.html">azcam.database_console</a></code></li>
+<li><code><a title="azcam.database_server" href="database_server.html">azcam.database_server</a></code></li>
 <li><code><a title="azcam.exceptions" href="exceptions.html">azcam.exceptions</a></code></li>
 <li><code><a title="azcam.functions" href="functions/index.html">azcam.functions</a></code></li>
+<li><code><a title="azcam.header" href="header.html">azcam.header</a></code></li>
+<li><code><a title="azcam.image" href="image.html">azcam.image</a></code></li>
+<li><code><a title="azcam.image_focalplane" href="image_focalplane.html">azcam.image_focalplane</a></code></li>
 <li><code><a title="azcam.logger" href="logger.html">azcam.logger</a></code></li>
 <li><code><a title="azcam.logging_server_tcp" href="logging_server_tcp.html">azcam.logging_server_tcp</a></code></li>
+<li><code><a title="azcam.parameters" href="parameters.html">azcam.parameters</a></code></li>
 <li><code><a title="azcam.scripts" href="scripts/index.html">azcam.scripts</a></code></li>
 <li><code><a title="azcam.server" href="server.html">azcam.server</a></code></li>
 <li><code><a title="azcam.server_mock" href="server_mock.html">azcam.server_mock</a></code></li>
 <li><code><a title="azcam.shortcuts" href="shortcuts.html">azcam.shortcuts</a></code></li>
 <li><code><a title="azcam.sockets" href="sockets.html">azcam.sockets</a></code></li>
 <li><code><a title="azcam.start" href="start.html">azcam.start</a></code></li>
+<li><code><a title="azcam.system" href="system.html">azcam.system</a></code></li>
 <li><code><a title="azcam.tools" href="tools/index.html">azcam.tools</a></code></li>
 </ul>
 </li>

@@ -8,7 +8,7 @@ Usage:  `from azcam.cli import *`
 import azcam
 
 # main database object
-db = azcam.db
+# db = azcam.db
 
 # directly put tools in namespace
 for name in azcam.db.tools:

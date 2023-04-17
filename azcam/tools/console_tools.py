@@ -141,7 +141,6 @@ class ServerConnection(object):
     """
 
     def __init__(self) -> None:
-
         self.remserver = azcam.sockets.SocketInterface()
         self.connected = False
         azcam.db.tools["server"] = self
@@ -215,6 +214,7 @@ def create_console_tools() -> None:
     from azcam.tools.instrument import InstrumentConsole
     from azcam.tools.telescope import TelescopeConsole
     from azcam.tools.tempcon import TempconConsole
+    from azcam.tools.observe.observe import ObserveConsole
 
     server = ServerConnection()
     exposure = ExposureConsole()
@@ -222,5 +222,6 @@ def create_console_tools() -> None:
     instrument = InstrumentConsole()
     tempcon = TempconConsole()
     telescope = TelescopeConsole()
+    observe = ObserveConsole()
 
     return
