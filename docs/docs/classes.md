@@ -17,7 +17,7 @@ Usage Example:
 
 `im1 = azcam.Image('test.fits')`
 
-[Documentation for the Image class](/code/azcam/tools/image.html)
+[Documentation for the Image class](/code/azcam/image.html)
 
 ## Database Class
 
@@ -45,13 +45,13 @@ In general there is a method of the same name in both the header class and the a
 The telescope and instrument dictionaries are considered temporary and re-read every time an exposure starts. This 
 is so that rapidly changing data values do not become stale. Most dictionary information is written to the image file header if the selected image format supports headers. When an object such as an instrument or telescope is disabled, the corresponding object database information is deleted and no longer updated.
 
-[Documentation for the Header class](/code/azcam/tools/header.html)
+[Documentation for the Header class](/code/azcam/header.html)
 
 ## Focalplane class
 
 Below is the documentation for the FocalPlane class which is  used internally to define all aspects of the focal plane and sensor configuration. 
 
-[Documentation for the FocalPlane class](/code/azcam/tools/image_focalplane.html)
+[Documentation for the FocalPlane class](/code/azcam/image_focalplane.html)
 
 ## Filename class
 
