@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>azcam.database_console API documentation</title>
-<meta name="description" content="*azcam.database* contains the main azcam database class …" />
+<title>azcam.database API documentation</title>
+<meta name="description" content="Contains the main azcam database class …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,10 +19,10 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>azcam.database_console</code></h1>
+<h1 class="title">Module <code>azcam.database</code></h1>
 </header>
 <section id="section-intro">
-<p><em>azcam.database</em> contains the main azcam database class.</p>
+<p>Contains the main azcam database class.</p>
 <p>There is only one instance of this class which is referenced as <code><a title="azcam.db" href="index.html#azcam.db">db</a></code> and contains
 temporary data for this current process.</p>
 </section>
@@ -35,73 +35,89 @@ temporary data for this current process.</p>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="azcam.database_console.AzcamDatabase"><code class="flex name class">
+<dt id="azcam.database.AzcamDatabase"><code class="flex name class">
 <span>class <span class="ident">AzcamDatabase</span></span>
 </code></dt>
 <dd>
 <div class="desc"><p>The azcam database class.</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="azcam.database_console.AzcamDatabase.abortflag"><code class="name">var <span class="ident">abortflag</span> : int</code></dt>
+<dt id="azcam.database.AzcamDatabase.abortflag"><code class="name">var <span class="ident">abortflag</span> : int</code></dt>
 <dd>
 <div class="desc"><p>abort flag, 1 (true) if an abort has occurred</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.datafolder"><code class="name">var <span class="ident">datafolder</span> : str</code></dt>
+<dt id="azcam.database.AzcamDatabase.cmdserver"><code class="name">var <span class="ident">cmdserver</span> : <a title="azcam.cmdserver.CommandServer" href="cmdserver.html#azcam.cmdserver.CommandServer">CommandServer</a></code></dt>
+<dd>
+<div class="desc"><p>system header object</p></div>
+</dd>
+<dt id="azcam.database.AzcamDatabase.datafolder"><code class="name">var <span class="ident">datafolder</span> : str</code></dt>
 <dd>
 <div class="desc"><p>system datafolder</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.default_tool"><code class="name">var <span class="ident">default_tool</span></code></dt>
+<dt id="azcam.database.AzcamDatabase.default_tool"><code class="name">var <span class="ident">default_tool</span></code></dt>
 <dd>
 <div class="desc"><p>name of default tool</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.exposureflags"><code class="name">var <span class="ident">exposureflags</span> : Dict[str, int]</code></dt>
+<dt id="azcam.database.AzcamDatabase.exposureflags"><code class="name">var <span class="ident">exposureflags</span> : Dict[str, int]</code></dt>
 <dd>
 <div class="desc"><p>exposure flags</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.imageparnames"><code class="name">var <span class="ident">imageparnames</span> : List[str]</code></dt>
+<dt id="azcam.database.AzcamDatabase.headerorder"><code class="name">var <span class="ident">headerorder</span> : list</code></dt>
+<dd>
+<div class="desc"><p>header order in image header</p></div>
+</dd>
+<dt id="azcam.database.AzcamDatabase.headers"><code class="name">var <span class="ident">headers</span> : dict</code></dt>
+<dd>
+<div class="desc"><p>header objects</p></div>
+</dd>
+<dt id="azcam.database.AzcamDatabase.imageparnames"><code class="name">var <span class="ident">imageparnames</span> : List[str]</code></dt>
 <dd>
 <div class="desc"><p>image parameters</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.logger"><code class="name">var <span class="ident">logger</span> : <a title="azcam.logger.Logger" href="logger.html#azcam.logger.Logger">Logger</a></code></dt>
+<dt id="azcam.database.AzcamDatabase.logger"><code class="name">var <span class="ident">logger</span> : <a title="azcam.logger.Logger" href="logger.html#azcam.logger.Logger">Logger</a></code></dt>
 <dd>
 <div class="desc"><p>logger object</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.mode"><code class="name">var <span class="ident">mode</span> : str</code></dt>
+<dt id="azcam.database.AzcamDatabase.mode"><code class="name">var <span class="ident">mode</span> : str</code></dt>
 <dd>
 <div class="desc"><p>operating mode (server or console)</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.parameters"><code class="name">var <span class="ident">parameters</span> : <a title="azcam.parameters.Parameters" href="parameters.html#azcam.parameters.Parameters">Parameters</a></code></dt>
+<dt id="azcam.database.AzcamDatabase.parameters"><code class="name">var <span class="ident">parameters</span> : <a title="azcam.parameters.Parameters" href="parameters.html#azcam.parameters.Parameters">Parameters</a></code></dt>
 <dd>
 <div class="desc"><p>parameters object</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.pardict"><code class="name">var <span class="ident">pardict</span> : dict</code></dt>
+<dt id="azcam.database.AzcamDatabase.pardict"><code class="name">var <span class="ident">pardict</span> : dict</code></dt>
 <dd>
 <div class="desc"><p>dict of general parameters</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.scripts"><code class="name">var <span class="ident">scripts</span> : dict</code></dt>
+<dt id="azcam.database.AzcamDatabase.scripts"><code class="name">var <span class="ident">scripts</span> : dict</code></dt>
 <dd>
 <div class="desc"><p>dict of scripts</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.shortcuts"><code class="name">var <span class="ident">shortcuts</span> : dict</code></dt>
+<dt id="azcam.database.AzcamDatabase.shortcuts"><code class="name">var <span class="ident">shortcuts</span> : dict</code></dt>
 <dd>
 <div class="desc"><p>dict of shortcuts</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.tools"><code class="name">var <span class="ident">tools</span> : dict</code></dt>
+<dt id="azcam.database.AzcamDatabase.system"><code class="name">var <span class="ident">system</span> : <a title="azcam.system.System" href="system.html#azcam.system.System">System</a></code></dt>
+<dd>
+<div class="desc"><p>logger object</p></div>
+</dd>
+<dt id="azcam.database.AzcamDatabase.tools"><code class="name">var <span class="ident">tools</span> : dict</code></dt>
 <dd>
 <div class="desc"><p>dict of tools</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.verbosity"><code class="name">var <span class="ident">verbosity</span> : int</code></dt>
+<dt id="azcam.database.AzcamDatabase.verbosity"><code class="name">var <span class="ident">verbosity</span> : int</code></dt>
 <dd>
 <div class="desc"><p>verbosity level for messages</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.wd"><code class="name">var <span class="ident">wd</span> : Optional[str]</code></dt>
+<dt id="azcam.database.AzcamDatabase.wd"><code class="name">var <span class="ident">wd</span> : Optional[str]</code></dt>
 <dd>
 <div class="desc"><p>the current working directory</p></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="azcam.database_console.AzcamDatabase.get"><code class="name flex">
+<dt id="azcam.database.AzcamDatabase.get"><code class="name flex">
 <span>def <span class="ident">get</span></span>(<span>self, name: str) ‑> Any</span>
 </code></dt>
 <dd>
@@ -114,7 +130,54 @@ temporary data for this current process.</p>
 <h2 id="returns">Returns</h2>
 <p>value or None if <em>name</em> is not defined</p></div>
 </dd>
-<dt id="azcam.database_console.AzcamDatabase.set"><code class="name flex">
+<dt id="azcam.database.AzcamDatabase.set"><code class="name flex">
+<span>def <span class="ident">set</span></span>(<span>self, name: str, value: Any) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets a database attribute value.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>name of attribute to set</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of attribute to be set</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+<dt id="azcam.database.Database"><code class="flex name class">
+<span>class <span class="ident">Database</span></span>
+<span>(</span><span>tools: dict = &lt;factory&gt;, wd: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>AzCam server database dataclass.</p></div>
+<h3>Class variables</h3>
+<dl>
+<dt id="azcam.database.Database.tools"><code class="name">var <span class="ident">tools</span> : dict</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="azcam.database.Database.wd"><code class="name">var <span class="ident">wd</span> : str</code></dt>
+<dd>
+<div class="desc"><p>working folder</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.database.Database.get"><code class="name flex">
+<span>def <span class="ident">get</span></span>(<span>self, name: str) ‑> Any</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a database attribute by name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>name of attribute to return</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>value or None if <em>name</em> is not defined</p></div>
+</dd>
+<dt id="azcam.database.Database.set"><code class="name flex">
 <span>def <span class="ident">set</span></span>(<span>self, name: str, value: Any) ‑> None</span>
 </code></dt>
 <dd>
@@ -146,24 +209,37 @@ temporary data for this current process.</p>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="azcam.database_console.AzcamDatabase" href="#azcam.database_console.AzcamDatabase">AzcamDatabase</a></code></h4>
+<h4><code><a title="azcam.database.AzcamDatabase" href="#azcam.database.AzcamDatabase">AzcamDatabase</a></code></h4>
 <ul class="two-column">
-<li><code><a title="azcam.database_console.AzcamDatabase.abortflag" href="#azcam.database_console.AzcamDatabase.abortflag">abortflag</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.datafolder" href="#azcam.database_console.AzcamDatabase.datafolder">datafolder</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.default_tool" href="#azcam.database_console.AzcamDatabase.default_tool">default_tool</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.exposureflags" href="#azcam.database_console.AzcamDatabase.exposureflags">exposureflags</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.get" href="#azcam.database_console.AzcamDatabase.get">get</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.imageparnames" href="#azcam.database_console.AzcamDatabase.imageparnames">imageparnames</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.logger" href="#azcam.database_console.AzcamDatabase.logger">logger</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.mode" href="#azcam.database_console.AzcamDatabase.mode">mode</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.parameters" href="#azcam.database_console.AzcamDatabase.parameters">parameters</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.pardict" href="#azcam.database_console.AzcamDatabase.pardict">pardict</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.scripts" href="#azcam.database_console.AzcamDatabase.scripts">scripts</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.set" href="#azcam.database_console.AzcamDatabase.set">set</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.shortcuts" href="#azcam.database_console.AzcamDatabase.shortcuts">shortcuts</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.tools" href="#azcam.database_console.AzcamDatabase.tools">tools</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.verbosity" href="#azcam.database_console.AzcamDatabase.verbosity">verbosity</a></code></li>
-<li><code><a title="azcam.database_console.AzcamDatabase.wd" href="#azcam.database_console.AzcamDatabase.wd">wd</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.abortflag" href="#azcam.database.AzcamDatabase.abortflag">abortflag</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.cmdserver" href="#azcam.database.AzcamDatabase.cmdserver">cmdserver</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.datafolder" href="#azcam.database.AzcamDatabase.datafolder">datafolder</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.default_tool" href="#azcam.database.AzcamDatabase.default_tool">default_tool</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.exposureflags" href="#azcam.database.AzcamDatabase.exposureflags">exposureflags</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.get" href="#azcam.database.AzcamDatabase.get">get</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.headerorder" href="#azcam.database.AzcamDatabase.headerorder">headerorder</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.headers" href="#azcam.database.AzcamDatabase.headers">headers</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.imageparnames" href="#azcam.database.AzcamDatabase.imageparnames">imageparnames</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.logger" href="#azcam.database.AzcamDatabase.logger">logger</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.mode" href="#azcam.database.AzcamDatabase.mode">mode</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.parameters" href="#azcam.database.AzcamDatabase.parameters">parameters</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.pardict" href="#azcam.database.AzcamDatabase.pardict">pardict</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.scripts" href="#azcam.database.AzcamDatabase.scripts">scripts</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.set" href="#azcam.database.AzcamDatabase.set">set</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.shortcuts" href="#azcam.database.AzcamDatabase.shortcuts">shortcuts</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.system" href="#azcam.database.AzcamDatabase.system">system</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.tools" href="#azcam.database.AzcamDatabase.tools">tools</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.verbosity" href="#azcam.database.AzcamDatabase.verbosity">verbosity</a></code></li>
+<li><code><a title="azcam.database.AzcamDatabase.wd" href="#azcam.database.AzcamDatabase.wd">wd</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="azcam.database.Database" href="#azcam.database.Database">Database</a></code></h4>
+<ul class="">
+<li><code><a title="azcam.database.Database.get" href="#azcam.database.Database.get">get</a></code></li>
+<li><code><a title="azcam.database.Database.set" href="#azcam.database.Database.set">set</a></code></li>
+<li><code><a title="azcam.database.Database.tools" href="#azcam.database.Database.tools">tools</a></code></li>
+<li><code><a title="azcam.database.Database.wd" href="#azcam.database.Database.wd">wd</a></code></li>
 </ul>
 </li>
 </ul>

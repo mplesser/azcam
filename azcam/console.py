@@ -8,9 +8,7 @@ from azcam.parameters import Parameters
 
 import azcam.database_console as database
 
-db = database.AzcamDatabase()
-azcam.db = db
-db.tools["db"] = db
+db = database.AzcamConsoleDatabase()
 
 # console mode
 azcam.mode = "console"

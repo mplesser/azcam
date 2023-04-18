@@ -8,7 +8,7 @@ Usage:  `from azcam.cli import *`
 import azcam
 
 # main database object
-# db = azcam.db
+db = azcam.db
 
 # directly put tools in namespace
 for name in azcam.db.tools:
@@ -22,3 +22,6 @@ __all__ = (
     [x for x in azcam.db.tools] + [x for x in azcam.db.shortcuts] + [x for x in azcam.db.scripts]
 )
 __all__.append("azcam")
+
+if azcam.mode == "server":
+    __all__.append("db")
