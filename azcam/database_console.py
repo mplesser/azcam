@@ -5,12 +5,9 @@ There is only one instance of this class which is referenced as `azcam.db` and c
 temporary data for this current process.
 """
 
-from typing import Any, Union, List, Dict
+from typing import Any, Union
 
-from azcam.logger import Logger
 from azcam.parameters import Parameters
-from azcam.cmdserver import CommandServer
-from azcam.system import System
 
 
 class AzcamConsoleDatabase(object):
@@ -41,9 +38,6 @@ class AzcamConsoleDatabase(object):
 
     scripts: dict = {}
     """dict of scripts"""
-
-    logger: Logger = Logger()
-    """logger object"""
 
     parameters: Parameters
     """parameters object"""

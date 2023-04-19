@@ -85,9 +85,9 @@ azcam.db.parameters.update_pars(0, "azcamserver")
 # ****************************************************************
 logfile = os.path.join(azcam.db.datafolder, "logs", "server.log")
 if check_for_remote_logger():
-    azcam.db.logger.start_logging(logtype="23", logfile=logfile)
+    azcam.logger.start_logging(logtype="23", logfile=logfile)
 else:
-    azcam.db.logger.start_logging(logtype="1", logfile=logfile)
+    azcam.logger.start_logging(logtype="1", logfile=logfile)
 
 # message
 azcam.log(f"Configuring {azcam.db.systemname}")

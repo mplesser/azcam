@@ -8,7 +8,7 @@ from azcam.parameters import Parameters
 
 import azcam.database_console as database
 
-db = database.AzcamConsoleDatabase()
+azcam.db = database.AzcamConsoleDatabase()  # overwrite server database
 
 # console mode
 azcam.mode = "console"
@@ -17,5 +17,5 @@ azcam.mode = "console"
 parameters = Parameters("azcamconsole")
 
 # logging
-azcam.db.logger = Logger()
-azcam.log = azcam.db.logger.log  # to allow azcam.log()
+azcam.logger = Logger()
+azcam.log = azcam.logger.log  # to allow azcam.log()

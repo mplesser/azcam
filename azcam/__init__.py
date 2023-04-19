@@ -18,6 +18,11 @@ from azcam.functions import fits
 from azcam.functions import utils
 from azcam.functions import plot
 from azcam.exceptions import AzcamError, AzcamWarning
+from azcam.logger import Logger
+
+# logger object
+logger: Logger = Logger()
+"""logger object"""
 
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print

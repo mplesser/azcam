@@ -17,8 +17,8 @@ azcam.db.servermode = ""
 parameters = Parameters("azcamserver")
 
 # logging
-azcam.db.logger = Logger()
-azcam.log = azcam.db.logger.log  # to allow azcam.log()
+azcam.logger = Logger()
+azcam.log = azcam.logger.log  # to allow azcam.log()
 
 # save this machine's hostname and ip address
 hostname = socket.gethostname()

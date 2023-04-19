@@ -84,12 +84,12 @@ class WebServer(object):
             templates = Jinja2Templates(directory=os.path.dirname(self.index))
         except Exception:
             pass
-        # log_templates = Jinja2Templates(directory=os.path.dirname(azcam.db.logger.logfile))
+        # log_templates = Jinja2Templates(directory=os.path.dirname(azcam.logger.logfile))
 
         # log folder - /log
         # app.mount(
         #     "/logs",
-        #     StaticFiles(directory=os.path.dirname(azcam.db.logger.logfile), html=False),
+        #     StaticFiles(directory=os.path.dirname(azcam.logger.logfile), html=False),
         #     name="logs",
         # )
 

@@ -64,7 +64,7 @@ parfile = os.path.join(azcam.db.datafolder, "parameters", f"parameters_console_m
 
 # logging
 logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
-azcam.db.logger.start_logging(logfile=logfile)
+azcam.logger.start_logging(logfile=logfile)
 azcam.log(f"Configuring console for {azcam.db.systemname}")
 
 # display
