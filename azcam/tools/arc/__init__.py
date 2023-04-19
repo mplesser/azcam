@@ -1,3 +1,0 @@
-"""
-ARC controller tools.
-"""

@@ -1,3 +1,0 @@
-"""
-MAG controller tools.
-"""

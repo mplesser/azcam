@@ -11,7 +11,6 @@ from typing import Any, Union
 
 from azcam.logger import Logger
 from azcam.parameters import Parameters
-from azcam.cmdserver import CommandServer
 from azcam.system import System
 
 
@@ -58,9 +57,6 @@ class AzcamDatabase(object):
 
     parameters: Parameters
     """parameters object"""
-
-    cmdserver: CommandServer
-    """system header object"""
 
     system: System
     """logger object"""

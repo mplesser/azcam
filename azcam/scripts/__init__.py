@@ -1,4 +1,3 @@
-
 import importlib
 import importlib.util
 import os
@@ -6,21 +5,12 @@ import os
 import azcam
 
 
-def load(scripts="all") -> None:
+def load() -> None:
     """
     Load scripts into azcam.db.scripts.
-    Upper level (azcam.scripts) are always installed.
     """
 
-    if scripts=="all":
-        packages = ["azcam.scripts"]
-    elif scripts=="console":
-        packages = ["azcam.scripts", "azcam.scripts.console"]
-    elif scripts=="server":
-        packages = ["azcam.scripts", "azcam.scripts.server"]
-    else:
-        azcam.AzcamWarning("Invalid scripts option")
-        return
+    packages = ["azcam.scripts"]
 
     for package in packages:
         pyfiles = []

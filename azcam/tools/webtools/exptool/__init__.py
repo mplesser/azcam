@@ -1,3 +1,0 @@
-"""
-Exposure web tool.
-"""

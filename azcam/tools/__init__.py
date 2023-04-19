@@ -1,5 +1,3 @@
 """
-*azcam.tools* contains the modules which define the base azcam tools.
+tools for azcam.
 """
-
-from azcam.tools.console_tools import create_console_tools

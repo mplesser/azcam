@@ -1,3 +1,0 @@
-"""
-Observign script tools.
-"""

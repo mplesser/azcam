@@ -25,7 +25,7 @@ def main():
     if len(sys.argv) >= 2:
         startmod = sys.argv[1]
     else:
-        print("Error: No startup script specified")
+        startmod = "start_script"
         exit()
 
     if "-venv" in sys.argv:

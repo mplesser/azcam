@@ -1,3 +1,0 @@
-"""
-ASCOM camera tools.
-"""

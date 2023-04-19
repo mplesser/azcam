@@ -1,3 +1,0 @@
-"""
-STA Archon controller tools.
-"""
