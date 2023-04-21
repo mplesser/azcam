@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "23.0"
+version = "23.1"
 description = "Acquisition and analysis package for scientific imaging"
 license = {file ="LICENSE"}
 readme = "README.md"
@@ -12,22 +12,11 @@ dependencies = [
     "matplotlib",
     "astropy",
     "scipy",
-    "pywin32; sys_platform == 'win32'",
-    "fastapi",
-    "uvicorn",
-    "jinja2",
-    "requests",
-    "pdfkit",
-    "markdown",
-    "pypdf2",
 ]
 
 [project.urls]
 Documentation = "https://mplesser.github.io/azcam/"
 Repository = "https://github.com/mplesser/azcam/"
-
-[project.scripts]
-azcam = "azcam.start:start"
 
 [build-system]
 requires = ["flit_core >=3.2,<4"]

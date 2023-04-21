@@ -10,7 +10,6 @@ from dataclasses import dataclass, field
 from typing import Any, Union
 
 from azcam.logger import Logger
-from azcam.parameters import Parameters
 from azcam.system import System
 
 
@@ -55,7 +54,7 @@ class AzcamDatabase(object):
     logger: Logger = Logger()
     """logger object"""
 
-    parameters: Parameters
+    parameters: None
     """parameters object"""
 
     system: System

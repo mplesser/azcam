@@ -18,14 +18,12 @@ from azcam.functions import fits
 from azcam.functions import utils
 from azcam.functions import plot
 from azcam.exceptions import AzcamError, AzcamWarning
+from azcam.database import AzcamDatabase
+
+db = AzcamDatabase()
 
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
-
-import azcam.database
-
-db = azcam.database.AzcamDatabase()
-"""database"""
 
 mode = "unknown"
 """azcam mode, usually server or console"""

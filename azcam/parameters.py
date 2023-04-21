@@ -163,47 +163,8 @@ class Parameters(Tools):
         parameter = parameter.lower()
         value = None
 
-        if azcam.mode == "console":
-            try:
-                reply = azcam.db.tools["server"].command(f"parameters.get_par {parameter}")
-            except azcam.AzcamError:
-                return
-            _, value = azcam.utils.get_datatype(reply)
-            return value
-
         # special cases
-        if parameter == "imagefilename":
-            value = azcam.db.tools["exposure"].get_filename()
-            return value
-        elif parameter == "imagetitle":
-            value = azcam.db.tools["exposure"].get_image_title()
-            return value
-        elif parameter == "exposuretime":
-            value = azcam.db.tools["exposure"].get_exposuretime()
-            return value
-        elif parameter == "exposurecompleted":
-            value = azcam.db.tools["exposure"].finished()
-            return value
-        elif parameter == "exposuretimeremaining":
-            value = azcam.db.tools["exposure"].get_exposuretime_remaining()
-            return value
-        elif parameter == "pixelsremaining":
-            value = azcam.db.tools["exposure"].get_pixels_remaining()
-            return value
-        elif parameter == "camtemp":
-            value = azcam.db.tools["tempcon"].get_temperatures()[0]
-            return value
-        elif parameter == "dewtemp":
-            value = azcam.db.tools["tempcon"].get_temperatures()[1]
-            return value
-        elif parameter == "temperatures":
-            camtemp = azcam.db.tools["tempcon"].get_temperatures()[0]
-            dewtemp = azcam.db.tools["tempcon"].get_temperatures()[1]
-            return [camtemp, dewtemp]
-        elif parameter == "logcommands":
-            value = azcam.db.cmdserver.logcommands
-            return value
-        elif parameter == "wd":
+        if parameter == "wd":
             value = azcam.utils.curdir()
             return value
         elif parameter == "logdata":
@@ -252,30 +213,6 @@ class Parameters(Tools):
         """
 
         parameter = parameter.lower()
-
-        if azcam.mode == "console":
-            try:
-                azcam.db.tools["server"].command(f"parameters.set_par {parameter} {value}")
-            except azcam.AzcamError:
-                return
-            return None
-
-        # special cases
-        if parameter == "imagefilename":
-            azcam.db.tools["exposure"].image.filename = value
-            return None
-        elif parameter == "imagetitle":
-            if value is None or value == "" or value == "None":
-                azcam.db.tools["exposure"].set_image_title("")
-            else:
-                azcam.db.tools["exposure"].set_image_title(f"{value}")
-            return None
-        elif parameter == "exposuretime":
-            azcam.db.tools["exposure"].set_exposuretime(value)
-            return None
-        elif parameter == "logcommands":
-            azcam.db.cmdserver.logcommands = int(value)
-            return None
 
         # parameter must be in parameters
         try:

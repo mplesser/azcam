@@ -1,5 +1,5 @@
 """
-Example logging server which receives and prints azcam logrecords.
+Example logging server which receives and prints azcam log records.
 """
 
 import socketserver
@@ -19,7 +19,6 @@ class LoggingStreamHandler(socketserver.StreamRequestHandler):
     """
 
     def handle(self):
-
         while True:
             try:
                 chunk = self.connection.recv(4)
@@ -45,9 +44,12 @@ class LoggingStreamHandler(socketserver.StreamRequestHandler):
 
 
 def start_and_serve_tcp(port: int = 2404):
-
     # set window title
     ctypes.windll.kernel32.SetConsoleTitleW("azcamlogger")
     print(f"Logging server started on port {port}")
     logging_server = socketserver.TCPServer(("localhost", port), LoggingStreamHandler)
     logging_server.serve_forever()
+
+
+if __name__ == "__main__":
+    start_and_serve_tcp()
