@@ -1,5 +1,5 @@
 """
-Contains the Header class.
+Contains the Header and System classes.
 """
 
 import os
@@ -457,5 +457,19 @@ class ObjectHeaderMethods(object):
         """
 
         self.header.delete_keyword(keyword)
+
+        return
+
+
+class System(ObjectHeaderMethods):
+    """
+    System class.
+    """
+
+    def __init__(self, system_name, template_file=None):
+        self.header = Header(system_name, template_file)
+        self.header.set_header("system", 0)
+
+        self.system = self
 
         return

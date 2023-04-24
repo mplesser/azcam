@@ -1,5 +1,5 @@
 """
-*azcam.plot* contains plotting support for azcam.
+Contains plotting support for azcam.
 
 When working in IPython, use `pylab.ion()` for interactions after this import.
 """
