@@ -16,17 +16,11 @@ import typing
 from azcam.functions import fits
 from azcam.functions import utils
 from azcam.exceptions import AzcamError, AzcamWarning
-<<<<<<< HEAD
-from azcam.database import AzcamDatabase
-
-#db = AzcamDatabase()
-=======
 from azcam.logger import Logger
 
 # logger object
 logger: Logger = Logger()
 """logger object"""
->>>>>>> 0c9e7c82d30b48a5a080d9e0cbfb7d59d0e2b810
 
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
