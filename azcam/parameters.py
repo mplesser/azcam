@@ -168,7 +168,7 @@ class Parameters(Tools):
             value = azcam.utils.curdir()
             return value
         elif parameter == "logdata":
-            value = azcam.db.logger.get_logdata()
+            value = azcam.logger.get_logdata()
             return value
 
         # parameter must be in parameters
