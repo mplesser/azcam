@@ -27,7 +27,7 @@ class Parameters(Tools):
 
         self.default_pardict_name = default_dictname
 
-        azcam.db.parameters = self
+        #azcam.db.parameters = self
 
     def read_parfile(self, parfilename: str = None) -> None:
         """
@@ -173,7 +173,7 @@ class Parameters(Tools):
 
         # parameter must be in parameters
         try:
-            attribute = azcam.pardict[parameter]
+            attribute = azcam.db.pardict[parameter]
         except KeyError:
             azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
             return None
@@ -216,7 +216,7 @@ class Parameters(Tools):
 
         # parameter must be in parameters
         try:
-            attribute = azcam.pardict[parameter]
+            attribute = azcam.db.pardict[parameter]
         except KeyError:
             azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
             return None

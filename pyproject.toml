@@ -9,9 +9,7 @@ authors = [{name="Michael Lesser"},{email = "mlesser@arizona.edu"}]
 dependencies = [
     "loguru",
     "numpy",
-    "matplotlib",
     "astropy",
-    "scipy",
 ]
 
 [project.urls]
