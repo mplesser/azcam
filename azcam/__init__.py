@@ -25,6 +25,9 @@ logger: Logger = Logger()
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print
 
+# database placeholder
+db = None
+
 # clean namespace
 del metadata
 del typing
