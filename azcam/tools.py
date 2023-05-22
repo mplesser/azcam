@@ -1,5 +1,5 @@
 """
-*azcam.tools.tools* contains the `Tools` base tool class.
+*azcam.tools* contains the `Tools` base tool class.
 """
 
 import azcam

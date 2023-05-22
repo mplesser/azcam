@@ -7,7 +7,7 @@ import os
 import typing
 
 import azcam
-from azcam.tools.tools import Tools
+from azcam.tools import Tools
 
 
 class Parameters(Tools):
@@ -27,7 +27,7 @@ class Parameters(Tools):
 
         self.default_pardict_name = default_dictname
 
-        #azcam.db.parameters = self
+        # azcam.db.parameters = self
 
     def read_parfile(self, parfilename: str = None) -> None:
         """
