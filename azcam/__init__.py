@@ -20,7 +20,6 @@ from azcam.logger import Logger
 
 # logger object
 logger: Logger = Logger()
-"""logger object"""
 
 # initially azcam.log() is print(), will usually be overwritten
 log: typing.Callable = print

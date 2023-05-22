@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>azcam.header API documentation</title>
-<meta name="description" content="Contains the Header class." />
+<meta name="description" content="Contains the Header and System classes." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,7 +22,7 @@
 <h1 class="title">Module <code>azcam.header</code></h1>
 </header>
 <section id="section-intro">
-<p>Contains the Header class.</p>
+<p>Contains the Header and System classes.</p>
 </section>
 <section>
 </section>
@@ -198,15 +198,8 @@ order defines how headers are written in image files.</p>
 These are called like "controller.get_keyword()".</p></div>
 <h3>Subclasses</h3>
 <ul class="hlist">
+<li><a title="azcam.header.System" href="#azcam.header.System">System</a></li>
 <li><a title="azcam.image_focalplane.FocalPlane" href="image_focalplane.html#azcam.image_focalplane.FocalPlane">FocalPlane</a></li>
-<li><a title="azcam.system.System" href="system.html#azcam.system.System">System</a></li>
-<li><a title="azcam.tools.controller.Controller" href="tools/controller.html#azcam.tools.controller.Controller">Controller</a></li>
-<li><a title="azcam.tools.display.Display" href="tools/display.html#azcam.tools.display.Display">Display</a></li>
-<li><a title="azcam.tools.exposure.Exposure" href="tools/exposure.html#azcam.tools.exposure.Exposure">Exposure</a></li>
-<li><a title="azcam.tools.instrument.Instrument" href="tools/instrument.html#azcam.tools.instrument.Instrument">Instrument</a></li>
-<li><a title="azcam.tools.queue.Queue" href="tools/queue.html#azcam.tools.queue.Queue">Queue</a></li>
-<li><a title="azcam.tools.telescope.Telescope" href="tools/telescope.html#azcam.tools.telescope.Telescope">Telescope</a></li>
-<li><a title="azcam.tools.tempcon.TempCon" href="tools/tempcon.html#azcam.tools.tempcon.TempCon">TempCon</a></li>
 </ul>
 <h3>Methods</h3>
 <dl>
@@ -291,6 +284,124 @@ Deletes all keywords if the object is not enabled.</p></div>
 </dd>
 </dl>
 </dd>
+<dt id="azcam.header.System"><code class="flex name class">
+<span>class <span class="ident">System</span></span>
+<span>(</span><span>system_name, template_file=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>System class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.header.System.define_keywords"><code class="name flex">
+<span>def <span class="ident">define_keywords</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.define_keywords" href="#azcam.header.ObjectHeaderMethods.define_keywords">define_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Defines and resets keywords.</p></div>
+</dd>
+<dt id="azcam.header.System.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.delete_keyword" href="#azcam.header.ObjectHeaderMethods.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+</dl></div>
+</dd>
+<dt id="azcam.header.System.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.get_keyword" href="#azcam.header.ObjectHeaderMethods.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>name of keyword</dd>
+</dl>
+<p>…</p></div>
+</dd>
+<dt id="azcam.header.System.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.get_keywords" href="#azcam.header.ObjectHeaderMethods.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>keywords</code></dt>
+<dd>list of all keywords</dd>
+</dl></div>
+</dd>
+<dt id="azcam.header.System.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.read_header" href="#azcam.header.ObjectHeaderMethods.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Reads and returns current header data.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code> of <code>header lines</code></dt>
+<dd>[Header[]]: Each element Header[i] contains the sublist (keyword, value, …</dd>
+</dl></div>
+</dd>
+<dt id="azcam.header.System.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: Any, comment: str = 'none', typestring: str = 'none')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.set_keyword" href="#azcam.header.ObjectHeaderMethods.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
+<dt id="azcam.header.System.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.update_header" href="#azcam.header.ObjectHeaderMethods.update_header">update_header</a></code>
+</p>
+<div class="desc inherited"><p>Update the header, reading current data.
+Deletes all keywords if the object is not enabled.</p></div>
+</dd>
+</dl>
+</dd>
 </dl>
 </section>
 </article>
@@ -337,6 +448,18 @@ Deletes all keywords if the object is not enabled.</p></div>
 <li><code><a title="azcam.header.ObjectHeaderMethods.read_header" href="#azcam.header.ObjectHeaderMethods.read_header">read_header</a></code></li>
 <li><code><a title="azcam.header.ObjectHeaderMethods.set_keyword" href="#azcam.header.ObjectHeaderMethods.set_keyword">set_keyword</a></code></li>
 <li><code><a title="azcam.header.ObjectHeaderMethods.update_header" href="#azcam.header.ObjectHeaderMethods.update_header">update_header</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="azcam.header.System" href="#azcam.header.System">System</a></code></h4>
+<ul class="two-column">
+<li><code><a title="azcam.header.System.define_keywords" href="#azcam.header.System.define_keywords">define_keywords</a></code></li>
+<li><code><a title="azcam.header.System.delete_keyword" href="#azcam.header.System.delete_keyword">delete_keyword</a></code></li>
+<li><code><a title="azcam.header.System.get_keyword" href="#azcam.header.System.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam.header.System.get_keywords" href="#azcam.header.System.get_keywords">get_keywords</a></code></li>
+<li><code><a title="azcam.header.System.read_header" href="#azcam.header.System.read_header">read_header</a></code></li>
+<li><code><a title="azcam.header.System.set_keyword" href="#azcam.header.System.set_keyword">set_keyword</a></code></li>
+<li><code><a title="azcam.header.System.update_header" href="#azcam.header.System.update_header">update_header</a></code></li>
 </ul>
 </li>
 </ul>

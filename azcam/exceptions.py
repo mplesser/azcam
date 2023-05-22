@@ -14,7 +14,7 @@ class AzcamError(Exception):
         """
         Custom error exception for azcam.
 
-        Usage:  `raise azcam.AzcamError(message)`
+        Usage:  raise azcam.AzcamError(message)
 
         Args:
           message: string message to display when error is raised

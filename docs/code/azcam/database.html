@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>azcam.database API documentation</title>
-<meta name="description" content="Contains the main azcam database class …" />
+<meta name="description" content="Contains the main azcam database class." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -23,8 +23,6 @@
 </header>
 <section id="section-intro">
 <p>Contains the main azcam database class.</p>
-<p>There is only one instance of this class which is referenced as <code><a title="azcam.db" href="index.html#azcam.db">db</a></code> and contains
-temporary data for this current process.</p>
 </section>
 <section>
 </section>
@@ -45,10 +43,6 @@ temporary data for this current process.</p>
 <dt id="azcam.database.AzcamDatabase.abortflag"><code class="name">var <span class="ident">abortflag</span> : int</code></dt>
 <dd>
 <div class="desc"><p>abort flag, 1 (true) if an abort has occurred</p></div>
-</dd>
-<dt id="azcam.database.AzcamDatabase.cmdserver"><code class="name">var <span class="ident">cmdserver</span> : <a title="azcam.cmdserver.CommandServer" href="cmdserver.html#azcam.cmdserver.CommandServer">CommandServer</a></code></dt>
-<dd>
-<div class="desc"><p>system header object</p></div>
 </dd>
 <dt id="azcam.database.AzcamDatabase.datafolder"><code class="name">var <span class="ident">datafolder</span> : str</code></dt>
 <dd>
@@ -82,7 +76,7 @@ temporary data for this current process.</p>
 <dd>
 <div class="desc"><p>operating mode (server or console)</p></div>
 </dd>
-<dt id="azcam.database.AzcamDatabase.parameters"><code class="name">var <span class="ident">parameters</span> : <a title="azcam.parameters.Parameters" href="parameters.html#azcam.parameters.Parameters">Parameters</a></code></dt>
+<dt id="azcam.database.AzcamDatabase.parameters"><code class="name">var <span class="ident">parameters</span> : None</code></dt>
 <dd>
 <div class="desc"><p>parameters object</p></div>
 </dd>
@@ -98,7 +92,7 @@ temporary data for this current process.</p>
 <dd>
 <div class="desc"><p>dict of shortcuts</p></div>
 </dd>
-<dt id="azcam.database.AzcamDatabase.system"><code class="name">var <span class="ident">system</span> : <a title="azcam.system.System" href="system.html#azcam.system.System">System</a></code></dt>
+<dt id="azcam.database.AzcamDatabase.system"><code class="name">var <span class="ident">system</span> : <a title="azcam.header.System" href="header.html#azcam.header.System">System</a></code></dt>
 <dd>
 <div class="desc"><p>logger object</p></div>
 </dd>
@@ -212,7 +206,6 @@ temporary data for this current process.</p>
 <h4><code><a title="azcam.database.AzcamDatabase" href="#azcam.database.AzcamDatabase">AzcamDatabase</a></code></h4>
 <ul class="two-column">
 <li><code><a title="azcam.database.AzcamDatabase.abortflag" href="#azcam.database.AzcamDatabase.abortflag">abortflag</a></code></li>
-<li><code><a title="azcam.database.AzcamDatabase.cmdserver" href="#azcam.database.AzcamDatabase.cmdserver">cmdserver</a></code></li>
 <li><code><a title="azcam.database.AzcamDatabase.datafolder" href="#azcam.database.AzcamDatabase.datafolder">datafolder</a></code></li>
 <li><code><a title="azcam.database.AzcamDatabase.default_tool" href="#azcam.database.AzcamDatabase.default_tool">default_tool</a></code></li>
 <li><code><a title="azcam.database.AzcamDatabase.exposureflags" href="#azcam.database.AzcamDatabase.exposureflags">exposureflags</a></code></li>
