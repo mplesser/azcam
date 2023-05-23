@@ -10,7 +10,6 @@ from azcam.header import Header, ObjectHeaderMethods
 class FocalPlane(ObjectHeaderMethods):
     """
     The FocalPlane class describes a focalplane layout.
-    Used by the image tool.
     """
 
     def __init__(self):
@@ -82,9 +81,9 @@ class FocalPlane(ObjectHeaderMethods):
         self.ampvispix_y = 1
 
         # amplifer gain values in e/DN
-        self.gains=[]
+        self.gains = []
         # amplifer read noise in e
-        self.rdnoises=[]
+        self.rdnoises = []
 
         # calculated values
         # number of pixels in image
@@ -692,7 +691,6 @@ class FocalPlane(ObjectHeaderMethods):
 
 class WCS(object):
     def __init__(self, FPobject):
-
         # ref to parent focalplane object
         self.fpobj = FPobject
 
@@ -767,7 +765,6 @@ class WCS(object):
         self.dtv_2 = [1]
 
     def initialize(self):
-
         numexts = self.fpobj.numamps_image
 
         self.atm_1_1 = numpy.empty(shape=[numexts], dtype="<i4")

@@ -38,7 +38,7 @@ class Tools(object):
 
         # save tool name
         if self.tool_id not in azcam.db.tools:
-            azcam.db.tools[self.tool_id] = self
+            azcam.db.tools[tool_id] = self
 
         #: verbosity for debug, >0 is more verbose
         self.verbosity = 0
