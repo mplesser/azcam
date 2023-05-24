@@ -19,7 +19,6 @@ class Logger(object):
     """
 
     def __init__(self) -> None:
-
         self.logfile = "azcam.log"
         self.logger = loguru.logger
         self.use_logprefix = 1
@@ -75,7 +74,6 @@ class Logger(object):
         return
 
     def _logfilter(self, record):
-
         # do not send messages from threads to console
         thread_name = threading.currentThread().getName()
         if thread_name == "MainThread":
@@ -98,7 +96,7 @@ class Logger(object):
         """
         Start the azcam logger.
 
-        :param logtype: code for loggers to start (1 console, 2 socket, 3 file, codes may be combined as '23')
+        :param logtype: code for loggers to start (1 console, 2 socket, 3 file - combine as '23')
         :param host: hostname for logging over socket
         :param port: socket port number
         :param logfile: base filename of log file. If not absolute path, will use db.systemfolder.
@@ -178,5 +176,5 @@ def check_for_remote_logger(host: str = "localhost", port: int = 2404):
         sock.connect((host, port))
         sock.close()
         return True
-    except:
+    except Exception:
         return False

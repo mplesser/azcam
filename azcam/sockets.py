@@ -71,8 +71,7 @@ class SocketInterface(object):
             self.socket.settimeout(0.1)
             self.socket.connect((self.host, self.port))
             self.connected = True
-        except Exception as e:
-            #azcam.log(e)
+        except Exception:
             self.close()
             self.connected = False
             return False
@@ -117,7 +116,6 @@ class SocketInterface(object):
         """
 
         with self.lock:
-
             if not self.open():
                 raise azcam.AzcamError("could not open connection to server", error_code=2)
 
@@ -157,7 +155,7 @@ class SocketInterface(object):
     def recv(self, length: int = -1, terminator: str = "\n") -> str:
         """
         Receives a reply from a server.
-        Terminates the socket read when length bytes are received or when the terminator is received.
+        Terminates socket read when length bytes are received or when the terminator is received.
         Args:
             length: number of bytes to receive. -1 means receive through terminator.
             terminator: terminator string.

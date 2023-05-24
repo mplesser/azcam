@@ -217,7 +217,7 @@ def arith(
         filename1: image filename.
         operator: '+','-','/', or '*'.
         filename2: may be an image filename or a constant.
-        filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
     """
 
@@ -325,7 +325,7 @@ def arith(
             hdulist.append(phdu)
             for i in range(numext1):
                 if MakeU16:
-                    numpy.clip(data3[i], 0, 2 ** 16, data3[i])  # clip values below zero
+                    numpy.clip(data3[i], 0, 2**16, data3[i])  # clip values below zero
                     hdu = pyfits.ImageHDU(data3[i].astype("uint16"), header[i + 1])
                 else:
                     hdu = pyfits.ImageHDU(data3[i], header[i + 1])
@@ -368,7 +368,7 @@ def add(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
     Args:
         filename1: image filename.
         filename2: may be an image filename or a constant.
-        filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
     """
 
@@ -384,7 +384,7 @@ def sub(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
         filename1: image filename.
         operator: '+','-','/',or '*'.
         filename2: may be an image filename or a constant.
-        filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
     """
 
@@ -400,7 +400,7 @@ def mult(filename1: str, filename2: str, filename3: str, datatype: str = "uint16
         filename1: image filename.
         operator: '+','-','/',or '*'.
         filename2: may be an image filename or a constant.
-        filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
     """
 
@@ -416,7 +416,7 @@ def div(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
         filename1: image filename.
         operator: '+','-','/', or '*'.
         filename2: may be an image filename or a constant.
-        filename3: optional, must be an image filename.  If not specified, result goes into filename1.
+        filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
     """
 
@@ -608,7 +608,7 @@ def stat(filename: str = "test", roi: list = []) -> list:
         filename: image filename.
         roi: Region-Of-Interest.
     Returns:
-        list of `[[means], [sdevs], ROI]` the status of each image extension or ROI in each extension.
+        list of `[[means], [sdevs], ROI]` for each image extension or ROI in each extension.
     """
 
     filename = azcam.utils.make_image_filename(filename)
@@ -780,7 +780,6 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
 
     # open image and get data
     with pyfits.open(filename, mode="update") as im:
-
         # if already COLBIAS then exit here
         try:
             history = im[0].header["History"]
@@ -816,7 +815,6 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
         row2 += overscanrows
 
         for i in range(firstext, lastext):
-
             # make data float32 for calculations
             im[i].data = im[i].data.astype("float32")
 
@@ -868,7 +866,7 @@ def _get_data_roi(azcam_roi: list = []) -> list:
         azcam_roi: an azcam ROI list, i.e. one-based, columns first:
         [first_col, last_col, first_row, last_row].
     Returns:
-        the equivalent python ROI,  zero-based, rows first: [first_row, last_row, first_col, last_col].
+        the equivalent python ROI, zero-based, rows first: [first_row,last_row,first_col,last_col].
     """
 
     if azcam_roi == []:

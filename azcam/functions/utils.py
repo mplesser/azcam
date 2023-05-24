@@ -5,6 +5,7 @@
 import os
 import shlex
 import sys
+import json
 import tkinter
 import tkinter.filedialog
 from typing import Callable, List
@@ -197,7 +198,6 @@ def get_datatype(value) -> list:
     """
 
     if type(value) is str:
-
         # string integer
         if value.isdigit():
             attributetype = "int"
@@ -422,7 +422,7 @@ def file_browser(Path: str = "", SelectString: str = "*.*", Label: str = "") -> 
 
     Args:
         Path: Starting path for selection.
-        SelectString: Selection string like [('all files',('*.*'))] for filtering file names or *folder* to select folders.
+        SelectString: Selection string like [('all files',('*.*'))] or *folder* to select folders.
         Label: Dialog box label.
     Returns:
         list of selected files/folders or None
@@ -559,7 +559,7 @@ def make_file_folder(subfolder: str, increment: bool = True, use_number: bool = 
 
     Args:
         subfolder: subfolder name to create
-        increment: - if True, subfolder name may be incremented to create a unique name (e.g. ptc1, ptc2, ptc3...)
+        increment: - if True, subfolder name may be incremented to create a unique name
         use_number: - if True, starts with '1' after Subfolder name (e.g. report1 not report)
     Returns:
         tuple (currentfolder,newfolder)
@@ -610,13 +610,12 @@ def save_imagepars(imagepars={}) -> None:
     return
 
 
-def restore_imagepars(imagepars: dict, folder: str = "") -> None:
+def restore_imagepars(imagepars: dict) -> None:
     """
     Restore image parameters from dictionary.
 
     Args:
         imagepars: dictionary set with save_imagepars().
-        folder: folder to set as current
     """
 
     for par in azcam.db.imageparnames:
@@ -627,10 +626,6 @@ def restore_imagepars(imagepars: dict, folder: str = "") -> None:
         if par == "imagetitle":
             impar = f'"{impar}"'
         azcam.db.parameters.set_par(par, impar)
-
-    # return to folder
-    if folder != "":
-        curdir(folder)
 
     return
 
@@ -691,7 +686,6 @@ def parse_command_string(command: str, case_insensitive: int = 0):
                 args.append(token)
 
     if "." not in cmd:
-
         # get method from db.default_tool
         if azcam.db.default_tool is None:
             s = f"command not recognized: {cmd} "
@@ -700,7 +694,6 @@ def parse_command_string(command: str, case_insensitive: int = 0):
             objid = getattr(azcam.db.tools[azcam.db.default_tool], cmd)
 
     else:
-
         # get method from tool in db.tools
         objects = cmd.split(".")
         if objects[0] not in azcam.db.tools:

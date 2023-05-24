@@ -477,7 +477,7 @@ class FocalPlane(ObjectHeaderMethods):
         self.numcols_amp = self.xunderscan + self.xdata + self.xoverscan
         self.numcols_overscan = self.xoverscan
         self.numviscols_amp = self.xdata
-        # self.numviscols_image=self.numviscols_amp*self.num_ser_amps_det*self.numamps_x  # bug? 21may15
+        # self.numviscols_image=self.numviscols_amp*self.num_ser_amps_det*self.numamps_x
         self.numviscols_image = self.numviscols_amp * self.num_ser_amps_det * self.numdet_x
 
         self.yunderscan = int(min(self.rowusct / self.row_bin, self.rowuscw))
@@ -810,15 +810,13 @@ class WCS(object):
         try:
             get_ra = azcam.db.tools[self.coord_object].header.get_keyword("RA")
             self.ra_deg = self._ra_to_deg(get_ra[0])
-        except Exception as e:
-            # azcam.log(e)
+        except Exception:
             self.ra_deg = self._ra_to_deg(self.def_ra)
 
         try:
             get_dec = azcam.db.tools[self.coord_object].header.get_keyword("DEC")
             self.dec_deg = self._dec_to_deg(get_dec[0])
-        except Exception as e:
-            # azcam.log(e)
+        except Exception:
             self.dec_deg = self._dec_to_deg(self.def_dec)
 
         return

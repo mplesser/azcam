@@ -58,11 +58,9 @@ class AzcamDatabase(object):
     """logger object"""
 
     # *************************************************************************
-    # parameters
+    # parameter table
     # *************************************************************************
-
-    # image pardict
-    pardict: dict = {
+    par_table: dict = {
         # exposure
         "autotitle": "exposure.auto_title",
         "imagetype": "exposure.image_type",

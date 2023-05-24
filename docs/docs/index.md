@@ -155,12 +155,12 @@ http://hostname:2403/exptool
 The value *2403* here is the web server port configured by a specific environment.
 
 ## Shortcuts
-When using IPython, the auto parenthesis mode allows typing commands without 
+When using IPython, auto parenthesis mode allows typing commands without 
 requiring the normal python syntax of ``command(par1, par2, ...)``. The equivalent 
 shortcut/alias syntax is ``command par1 par2``. With IPython in this mode all commands may 
 use this syntax.
 
-There are also some simple but useful command line commands which can be optionally installed within
+There are some simple but useful command line commands which can be optionally installed within
 console or server applications as typing shortcuts. Shortcuts are intended for command line use only
 and can be found in the `db.shortcuts` dictionary (see `azcam.shortcuts`). Examples include:
 
@@ -171,7 +171,9 @@ and can be found in the `db.shortcuts` dictionary (see `azcam.shortcuts`). Examp
   * *bf* - browse for a file or folder using a Tcl/Tk GUI.
 
 ## Scripts
-Scripts are python code modules which usually contain one function. They may be loaded automatically during enviroment configuration and can be found in the `db.scripts` dictionary. Scripts defined on the server side are not available as remote commands.
+Scripts are functions contained in python code modules of the same name. They may be loaded automatically
+during enviroment configuration and can be found in the `db.scripts` dictionary. Scripts defined on
+the server side are not available as remote commands.
 
 ```python
 import azcam_scripts

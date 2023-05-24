@@ -286,7 +286,7 @@ class Header(object):
         """
         Returns the header list.
         Returns:
-            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            list of header lines: [Header[]]: Each element contains (keyword,value,comment,type).
         """
 
         # get the header
@@ -385,7 +385,7 @@ class ObjectHeaderMethods(object):
         """
         Reads and returns current header data.
         Returns:
-            list of header lines: [Header[]]: Each element Header[i] contains the sublist (keyword, value, comment, and type).
+            list of header lines: [Header[]]: Each element contains (keyword,value,comment,type).
             Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
 

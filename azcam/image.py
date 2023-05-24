@@ -20,7 +20,6 @@ class Image(object):
     """
 
     def __init__(self, filename=""):
-
         super().__init__()
 
         # True when image is valid
@@ -262,7 +261,6 @@ class Image(object):
         pixNum = 0
 
         for parAmps in range(0, self.focalplane.num_par_amps_det):
-
             # remove the prescan and overscane lines from the image
             extBase = parAmps * self.focalplane.num_ser_amps_det
 
@@ -277,7 +275,6 @@ class Image(object):
                     flip = AmpFlip[indx]  # determine flip for the current extension
 
                     if flip == 0:  # no flip
-
                         posX = srcLine * srcAmpX + prescan1
                         self.buffer[line][lineStart : lineStart + dstAmpX] = (
                             self.data[indx][posX : posX + dstAmpX] - Offsets[indx]
@@ -287,7 +284,6 @@ class Image(object):
                         pixNum += self.lineLen
 
                     if flip == 1:  # x flip: reverse the readout sequence
-
                         posX = srcLine * srcAmpX + prescan1
                         self.buffer[line][lineStart : lineStart + dstAmpX] = (
                             self.data[indx][posX : posX + dstAmpX][::-1] - Offsets[indx]
@@ -297,7 +293,6 @@ class Image(object):
                         pixNum += self.lineLen
 
                     if flip == 2:  # y flip: get the flip line
-
                         posX = (srcAmpY - srcLine - overscan2 - 1) * srcAmpX + prescan1
                         self.buffer[line][lineStart : lineStart + dstAmpX] = (
                             self.data[indx][posX : posX + dstAmpX] - Offsets[indx]
@@ -307,7 +302,6 @@ class Image(object):
                         pixNum += self.lineLen
 
                     if flip == 3:  # xy flip; get the flip line and reverse the readout sequence
-
                         posX = (srcAmpY - srcLine - prescan2 - 1) * srcAmpX + prescan1
                         self.buffer[line][lineStart : lineStart + dstAmpX] = (
                             self.data[indx][posX : posX + dstAmpX][::-1] - Offsets[indx]
@@ -463,7 +457,6 @@ class Image(object):
         self.focalplane.refpix2 = 0.0
 
         if self.itl_header == 1:
-
             # create empty arrays for focal plane values
             self.focalplane.amp_cfg = numpy.ndarray(shape=(cntExt), dtype="<u2")
             self.focalplane.det_number = numpy.ndarray(shape=(cntExt), dtype="<u2")
@@ -694,9 +687,10 @@ class Image(object):
                     except KeyError:
                         pass
 
-        # ------------------------------------------- data -------------------------------------------------------
+        # ---------------------------- data -------------------------------------------------------
 
-        # create .data numpy array and scale data, .hdulist[0].data is [nrows][ncols] -> .data[0] is the first row
+        # create .data numpy array and scale data,
+        #    .hdulist[0].data is [nrows][ncols] -> .data[0] is the first row
         if NumExt == 0:
             self.data = numpy.ndarray(
                 shape=(1, self.focalplane.numpix_amp),
@@ -870,7 +864,6 @@ class Image(object):
 
         # loop through HDU's, creating extensions and writing data
         for ext_number in range(1, numHDUs + 1):  # first HDU is 1 not 0
-
             # create the extension name
             ext_name = self.focalplane.ext_name[ext_number - 1]
 
@@ -1078,7 +1071,7 @@ class Image(object):
         hdu.header.set("NCCDS", 1, "Number of CCDs")
         hdu.header.set("NAMPS", 1, "Number of amplifiers")
 
-        # all these keywords are written after exposure is done (controller, instrument, telscope, temperature)
+        # all these keywords are written after exposure is finished
         curpos = len(hdu.header)
         for item in self.header.items:
             cheader = item.header.get_header()
