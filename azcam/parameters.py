@@ -1,5 +1,7 @@
 """
 Parameter handling tool for azcam.
+
+There is one main paramater dictionary with multiple subdicts. A default subdict can be specified.  
 """
 
 import configparser
@@ -66,7 +68,8 @@ class Parameters(Tools):
 
     def write_parfile(self, parfilename: str = None) -> None:
         """
-        Update a parameter file with current values.
+        Writes par_dict to the par file.
+        Does nto update any values.
 
         Args:
             parfilename (str, optional): Name of parameter file. Defaults to None.
@@ -96,7 +99,7 @@ class Parameters(Tools):
 
     def save_pars(self) -> None:
         """
-        Save the current parameter set.
+        Writes the par_dict to the par_file using current values.
         """
 
         self.update_pars(1)
@@ -148,13 +151,14 @@ class Parameters(Tools):
 
         return
 
-    def get_par(self, parameter: str) -> typing.Any:
+    def get_par(self, parameter: str, subdict=None) -> typing.Any:
         """
         Return the value of a parameter in the parameters dictionary.
-
+        If subdict is not specified then the default subdict is used.
 
         Args:
             parameter (str): name of the parameter
+            subdict (str): name of the subdict containing the parameter
 
         Returns:
             value (Any): value of the parameter
@@ -162,6 +166,9 @@ class Parameters(Tools):
 
         parameter = parameter.lower()
         value = None
+
+        if subdict is None:
+            subdict = self.default_pardict_name
 
         # special cases
         if parameter == "wd":
@@ -171,61 +178,72 @@ class Parameters(Tools):
             value = azcam.logger.get_logdata()
             return value
 
-        # parameter must be in parameters
+        # check if parameter is in par_table
         try:
             attribute = azcam.db.par_table[parameter]
+            tokens = attribute.split(".")
+            numtokens = len(tokens)
+
+            # a tool and attribute is required
+            if numtokens == 1:
+                return None
+
+            object1 = tokens[0]
+
+            # object1 must be a tool
+            try:
+                obj = azcam.db.tools[object1]
+                for i in range(1, numtokens):
+                    try:
+                        obj = getattr(obj, tokens[i])
+                    except AttributeError:
+                        pass
+                value = obj  # last time is value
+            except KeyError:
+                value = None
+
         except KeyError:
-            azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
-            return None
-
-        tokens = attribute.split(".")
-        numtokens = len(tokens)
-
-        # a tool and attribute is required
-        if numtokens == 1:
-            return None
-
-        object1 = tokens[0]
-
-        # object1 must be a tool
-        try:
-            obj = azcam.db.tools[object1]
-            for i in range(1, numtokens):
-                try:
-                    obj = getattr(obj, tokens[i])
-                except AttributeError:
-                    pass
-            value = obj  # last time is value
-        except KeyError:
-            value = None
+            # check if value is know directly
+            try:
+                value = azcam.db.parameters.par_dict[subdict][parameter]
+            except KeyError:
+                azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
+                return None
 
         return value
 
-    def set_par(self, parameter: str, value: typing.Any = None) -> None:
+    def set_par(self, parameter: str, value: typing.Any = "None", subdict=None) -> None:
         """
         Set the value of a parameter in the parameters dictionary.
 
         Args:
             parameter (str): name of the parameter
             value (Any): value of the parameter. Defaults to None.
+            subdict: subdict in which to set paramater
         Returns:
             None
         """
 
         parameter = parameter.lower()
 
-        # parameter must be in parameters
+        if subdict is None:
+            subdict = self.default_pardict_name
+
+        # check if parameter is in par_table
         try:
             attribute = azcam.db.par_table[parameter]
-        except KeyError:
-            azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
-            return None
 
-        # object must be a tool
-        tokens = attribute.split(".")
-        numtokens = len(tokens)
-        if numtokens < 2:
-            azcam.log("%s not valid for parameter %s" % (attribute, parameter))
+            # object must be a tool
+            tokens = attribute.split(".")
+            numtokens = len(tokens)
+            if numtokens < 2:
+                azcam.log("%s not valid for parameter %s" % (attribute, parameter))
+                return None
+
+        except KeyError:
+            _, value = azcam.utils.get_datatype(value)
+            azcam.db.parameters.par_dict[subdict][parameter] = value
+            # azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
             return None
 
         # first try to set value type

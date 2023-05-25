@@ -13,8 +13,8 @@ __version_info__ = tuple(int(i) for i in __version__.split(".") if i.isdigit())
 import typing
 
 # import here so future importing is not required
-from azcam.functions import fits
-from azcam.functions import utils
+from azcam import fits
+from azcam import utils
 from azcam.exceptions import AzcamError, AzcamWarning
 from azcam.logger import Logger
 from azcam.database import Database
