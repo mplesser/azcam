@@ -277,3 +277,36 @@ class Parameters(Tools):
             pass
 
         return None
+
+    def save_imagepars(self, imagepars={}) -> None:
+        """
+        Save current image parameters.
+        imagepars is a dictionary.
+
+        Args:
+            imagepars: dict of azcam.db.imageparnames names to save
+        """
+
+        for par in azcam.db.imageparnames:
+            imagepars[par] = azcam.db.parameters.get_par(par)
+
+        return
+
+    def restore_imagepars(self, imagepars: dict) -> None:
+        """
+        Restore image parameters from dictionary.
+
+        Args:
+            imagepars: dictionary set with save_imagepars().
+        """
+
+        for par in azcam.db.imageparnames:
+            value = imagepars[par]
+            if value == "":
+                value = '""'
+            imagepars[par] = value
+            if par == "imagetitle":
+                value = f'"{value}"'
+            azcam.db.parameters.set_par(par, value)
+
+        return
