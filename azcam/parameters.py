@@ -170,13 +170,14 @@ class Parameters(Tools):
         if subdict is None:
             subdict = self.default_pardict_name
 
-        # special cases
-        if parameter == "wd":
-            value = azcam.utils.curdir()
+        # special cases hook
+        try:
+            value = self._get_par_hook(parameter, subdict)
             return value
-        elif parameter == "logdata":
-            value = azcam.logger.get_logdata()
-            return value
+        except NameError:  # OK if hook is not defeined
+            pass
+        except AttributeError:  # OK if parameter not in hook
+            pass
 
         # check if parameter is in par_table
         try:
@@ -228,6 +229,15 @@ class Parameters(Tools):
 
         if subdict is None:
             subdict = self.default_pardict_name
+
+        # special cases hook
+        try:
+            self._set_par_hook(parameter, value, subdict)
+            return None
+        except NameError:  # OK if hook is not defeined
+            pass
+        except AttributeError:  # OK if parameter not in hook
+            pass
 
         # check if parameter is in par_table
         try:
