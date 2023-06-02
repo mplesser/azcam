@@ -102,16 +102,14 @@ class Parameters(Tools):
         Writes the par_dict to the par_file using current values.
         """
 
-        self.update_pars(1)
+        self.update_par_dict()
         self.write_parfile()
 
         return
 
-    def update_pars(self, write, par_dictname: str = None) -> None:
+    def update_pars(self, par_dictname: str = None) -> None:
         """
-        Update azcam parameters to/from a config dictionary.
-        write True => write values into dictionary.
-        write False => set values from dictionary.
+        Set current attributes from par_dict values.
         """
 
         if par_dictname is None:
@@ -124,36 +122,47 @@ class Parameters(Tools):
         if keys is None:
             return
 
-        if write:
-            # run before writing parfile
-            # read values into dict
-            for parname in par_dict:
-                if parname == "wd":
-                    value = azcam.utils.curdir()
-                else:
-                    value = self.get_par(parname)
-                if value is None:
-                    value = "None"
-                par_dict[parname] = value
+        for parname in par_dict:
+            value = par_dict[parname]
+            if parname == "wd":
+                azcam.db.wd = value
+                azcam.utils.curdir(value)
 
-        else:
-            # after reading parfile
-            # set values from dict
-            for parname in par_dict:
+            else:
                 value = par_dict[parname]
-                if parname == "wd":
-                    azcam.db.wd = value
-                    azcam.utils.curdir(value)
+                self.set_par(parname, value)
 
-                else:
-                    value = par_dict[parname]
-                    self.set_par(parname, value)
+        return
+
+    def update_par_dict(self, par_dictname: str = None) -> None:
+        """
+        Set par_dict values from current attributes.
+        """
+
+        if par_dictname is None:
+            par_dictname = self.default_pardict_name
+
+        par_dict = azcam.db.parameters.par_dict.get(par_dictname)
+        if par_dict is None:
+            return
+        keys = par_dict.keys()
+        if keys is None:
+            return
+
+        for parname in par_dict:
+            if parname == "wd":
+                value = azcam.utils.curdir()
+            else:
+                value = self.get_par(parname)
+            if value is None:
+                value = "None"
+            par_dict[parname] = value
 
         return
 
     def get_par(self, parameter: str, subdict=None) -> typing.Any:
         """
-        Return the value of a parameter in the parameters dictionary.
+        Return the current value of a parameter in the parameters dictionary.
         If subdict is not specified then the default subdict is used.
 
         Args:
