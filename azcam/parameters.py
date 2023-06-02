@@ -122,33 +122,16 @@ class Parameters(Tools):
         if keys is None:
             return
 
-<<<<<<< HEAD
         for parname in par_dict:
             value = par_dict[parname]
             if parname == "wd":
                 azcam.db.wd = value
                 azcam.utils.curdir(value)
-=======
-        print("pars", azcam.db.parameters.par_dict[par_dictname], keys)
-
-        if write:
-            # run before writing parfile
-            # read values into dict
-            for parname in par_dict:
-                if parname == "wd":
-                    value = azcam.utils.curdir()
-                else:
-                    value = self.get_par(parname, par_dictname)
-                if value is None:
-                    value = "None"
-                par_dict[parname] = value
->>>>>>> 04420cd243e6496f4ef3d6c23af8de9c9d6c77ab
 
             else:
                 value = par_dict[parname]
                 self.set_par(parname, value)
 
-<<<<<<< HEAD
         return
 
     def update_par_dict(self, par_dictname: str = None) -> None:
@@ -174,11 +157,6 @@ class Parameters(Tools):
             if value is None:
                 value = "None"
             par_dict[parname] = value
-=======
-                else:
-                    value = par_dict[parname]
-                    self.set_par(parname, value, par_dictname)
->>>>>>> 04420cd243e6496f4ef3d6c23af8de9c9d6c77ab
 
         return
 
