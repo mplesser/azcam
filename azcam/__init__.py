@@ -17,7 +17,7 @@ from azcam import fits
 from azcam import utils
 from azcam.exceptions import AzcamError, AzcamWarning
 from azcam.logger import Logger
-from azcam.database import AzCamDatabase
+from azcam.database import AzcamDatabase
 
 # logger object
 logger: Logger = Logger()
@@ -26,7 +26,7 @@ logger: Logger = Logger()
 log: typing.Callable = print
 
 # database placeholder
-db: AzCamDatabase = AzCamDatabase()
+db: AzcamDatabase = AzcamDatabase()
 
 # clean namespace
 del metadata

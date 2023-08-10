@@ -3,8 +3,10 @@ Used to bring commands into the current namespace.
 
 Usage:  `from azcam.cli import *`
 
-`azcam`, `db.tools`, and `db.shortcuts` are loaded into CLI namespace.
+`azcam` as well as items in `db.tools`, `db.shortcuts`, and `db.scripts` are 
+added to __all__ here for import into the CLI namespace.
 """
+
 import azcam
 
 # main database object

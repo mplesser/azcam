@@ -10,7 +10,7 @@ from azcam.logger import Logger
 from azcam.header import System
 
 
-class AzCamDatabase(object):
+class AzcamDatabase(object):
     """
     The azcam database class.
     """
