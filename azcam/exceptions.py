@@ -41,12 +41,6 @@ class AzcamError(Exception):
             print(f"AzcamError: {message}")
 
 
-# WARNINGS
-def azcam_formatwarning(msg: str, *args, **kwargs) -> str:
-    # only print the message
-    return "AzcamWarning: " + str(msg) + "\n"
-
-
 def AzcamWarning(message: str) -> None:
     """
     Print and log a warning message.

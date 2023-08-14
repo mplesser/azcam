@@ -1,16 +1,12 @@
 [project]
 name = "azcam"
-version = "23.1"
+version = "23.2"
 description = "Acquisition and analysis package for scientific imaging"
-license = {file ="LICENSE"}
+license = { file = "LICENSE" }
 readme = "README.md"
-keywords=["ccd", "imaging", "astronomy", "sensors"]
-authors = [{name="Michael Lesser"},{email = "mlesser@arizona.edu"}]
-dependencies = [
-    "loguru",
-    "numpy",
-    "astropy",
-]
+keywords = ["ccd", "imaging", "astronomy", "sensors"]
+authors = [{ name = "Michael Lesser" }, { email = "mlesser@arizona.edu" }]
+dependencies = ["loguru", "numpy", "astropy"]
 
 [project.urls]
 Documentation = "https://mplesser.github.io/azcam/"
@@ -26,7 +22,52 @@ select = ["E", "F"]
 ignore = ["E902"]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
-fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+fixable = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "I",
+    "N",
+    "Q",
+    "S",
+    "T",
+    "W",
+    "ANN",
+    "ARG",
+    "BLE",
+    "COM",
+    "DJ",
+    "DTZ",
+    "EM",
+    "ERA",
+    "EXE",
+    "FBT",
+    "ICN",
+    "INP",
+    "ISC",
+    "NPY",
+    "PD",
+    "PGH",
+    "PIE",
+    "PL",
+    "PT",
+    "PTH",
+    "PYI",
+    "RET",
+    "RSE",
+    "RUF",
+    "SIM",
+    "SLF",
+    "TCH",
+    "TID",
+    "TRY",
+    "UP",
+    "YTT",
+]
 unfixable = []
 
 # Exclude a variety of commonly ignored directories.
