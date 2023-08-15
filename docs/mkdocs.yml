@@ -26,17 +26,3 @@ theme:
   include_search_page: false
   search_index_only: true
   prev_next_buttons_location: both
-
-#markdown_extensions:
-#  - codehilite
-#  - attr_list
-#  - pymdownx.highlight:
-#      linenums: false
-#      linenums_style: pymdownx.inline
-#  - pymdownx.superfences
-#  - toc:
-#      toc_depth: 3
-
-#plugins:
-#  - search
-#  - autorefs
