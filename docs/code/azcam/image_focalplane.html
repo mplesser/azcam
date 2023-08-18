@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>azcam.image_focalplane API documentation</title>
+<meta name="description" content="Contains the FocalPlane and WCS classes." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>azcam.image_focalplane</code></h1>
+</header>
+<section id="section-intro">
+<p>Contains the FocalPlane and WCS classes.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="azcam.image_focalplane.FocalPlane"><code class="flex name class">
+<span>class <span class="ident">FocalPlane</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>The FocalPlane class describes a focalplane layout.</p>
+<p>Create an instance of FocalPlane class.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="azcam.image_focalplane.FocalPlane.amp_cfg"><code class="name">var <span class="ident">amp_cfg</span></code></dt>
+<dd>
+<div class="desc"><p>amplifier readout orientation (new)</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.header"><code class="name">var <span class="ident">header</span></code></dt>
+<dd>
+<div class="desc"><p>focalplane header object</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.numdet_x"><code class="name">var <span class="ident">numdet_x</span></code></dt>
+<dd>
+<div class="desc"><p>number of detectors along X axis</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.numdet_y"><code class="name">var <span class="ident">numdet_y</span></code></dt>
+<dd>
+<div class="desc"><p>number of detectors along Y axis</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.wcs"><code class="name">var <span class="ident">wcs</span></code></dt>
+<dd>
+<div class="desc"><p>World Coordinate System object</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.image_focalplane.FocalPlane.define_keywords"><code class="name flex">
+<span>def <span class="ident">define_keywords</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.define_keywords" href="header.html#azcam.header.ObjectHeaderMethods.define_keywords">define_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Defines and resets keywords.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.delete_keyword"><code class="name flex">
+<span>def <span class="ident">delete_keyword</span></span>(<span>self, keyword: str)</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.delete_keyword" href="header.html#azcam.header.ObjectHeaderMethods.delete_keyword">delete_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Delete a keyword.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+</dl></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.get_focalplane"><code class="name flex">
+<span>def <span class="ident">get_focalplane</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the focal plane configuration.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.get_format"><code class="name flex">
+<span>def <span class="ident">get_format</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a list of current detector format parameters</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.get_keyword"><code class="name flex">
+<span>def <span class="ident">get_keyword</span></span>(<span>self, keyword: str) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.get_keyword" href="header.html#azcam.header.ObjectHeaderMethods.get_keyword">get_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Return a keyword value, its comment string, and type.
+Comment always returned in double quotes, even if empty.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>name of keyword</dd>
+</dl>
+<p>…</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.get_keywords"><code class="name flex">
+<span>def <span class="ident">get_keywords</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.get_keywords" href="header.html#azcam.header.ObjectHeaderMethods.get_keywords">get_keywords</a></code>
+</p>
+<div class="desc inherited"><p>Return a list of all keyword names.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>keywords</code></dt>
+<dd>list of all keywords</dd>
+</dl></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.get_roi"><code class="name flex">
+<span>def <span class="ident">get_roi</span></span>(<span>self, roi_num=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of the ROI parameters for the roi_num specified.
+Currently only one ROI (0) is supported.
+Returned list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.read_header"><code class="name flex">
+<span>def <span class="ident">read_header</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.read_header" href="header.html#azcam.header.ObjectHeaderMethods.read_header">read_header</a></code>
+</p>
+<div class="desc inherited"><p>Reads and returns current header data.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code> of <code>header lines</code></dt>
+<dd>[Header[]]: Each element contains (keyword,value,comment,type).</dd>
+<dt><code>Example</code></dt>
+<dd>…</dd>
+</dl></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.roi_reset"><code class="name flex">
+<span>def <span class="ident">roi_reset</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resets detector ROI values to full frame, current binning.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_amp_positions"><code class="name flex">
+<span>def <span class="ident">set_amp_positions</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates amplifiers positions including gaps between amplifiers and CCDs
+New: Zareba 23Mar2012</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_default_values"><code class="name flex">
+<span>def <span class="ident">set_default_values</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets default values for focalplane variables</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_extension_extnum"><code class="name flex">
+<span>def <span class="ident">set_extension_extnum</span></span>(<span>self, ext_number)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_extension_name"><code class="name flex">
+<span>def <span class="ident">set_extension_name</span></span>(<span>self, ext_name)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_extension_position"><code class="name flex">
+<span>def <span class="ident">set_extension_position</span></span>(<span>self, xy)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the extension position of each amplifier.
+xy is [[X,Y]] in index numbers, starting at [1,1].</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_focalplane"><code class="name flex">
+<span>def <span class="ident">set_focalplane</span></span>(<span>self, numdet_x=-1, numdet_y=-1, numamps_x=-1, numamps_y=-1, amp_cfg=[0])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets focal plane configuration. Use after set_format() and before set_roi().
+This command replaces SetConfiguration.
+Default focalplane values are set here.
+numdet_x defines number of detectors in Column direction.
+numdet_y defines number of detectors in Row direction.
+numamps_x defines number of amplifiers in Column direction.
+numamps_y defines number of amplifiers in Row direction.
+amp_cfg defines each amplifier's orientation (ex: [0,1,2,3]).
+0 - normal
+1 - flip x
+2 - flip y
+3 - flip x and y</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_format"><code class="name flex">
+<span>def <span class="ident">set_format</span></span>(<span>self, ns_total: int = -1, ns_predark: int = -1, ns_underscan: int = -1, ns_overscan: int = -1, np_total: int = -1, np_predark: int = -1, np_underscan: int = -1, np_overscan: int = -1, np_frametransfer: int = -1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the detector format.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ns_total</code></strong></dt>
+<dd>number of visible columns</dd>
+<dt><strong><code>ns_predark</code></strong></dt>
+<dd>number of physical dark underscan columns</dd>
+<dt><strong><code>ns_underscan</code></strong></dt>
+<dd>desired number of desired dark underscan columns</dd>
+<dt><strong><code>ns_overscan</code></strong></dt>
+<dd>number of dark overscan columns</dd>
+<dt><strong><code>np_total</code></strong></dt>
+<dd>number of visible rows</dd>
+<dt><strong><code>np_predark</code></strong></dt>
+<dd>number of physical dark underscan rows</dd>
+<dt><strong><code>np_underscan</code></strong></dt>
+<dd>number of desired dark underscan rows</dd>
+<dt><strong><code>np_overscan</code></strong></dt>
+<dd>number of desired dark overscan rows</dd>
+<dt><strong><code>np_frametransfer</code></strong></dt>
+<dd>rows to frame transfer shift</dd>
+</dl></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_jpg_order"><code class="name flex">
+<span>def <span class="ident">set_jpg_order</span></span>(<span>self, indices)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set JPG image positions.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_keyword"><code class="name flex">
+<span>def <span class="ident">set_keyword</span></span>(<span>self, keyword: str, value: Any, comment: str = 'none', typestring: str = 'none')</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="azcam.header.ObjectHeaderMethods" href="header.html#azcam.header.ObjectHeaderMethods">ObjectHeaderMethods</a></code>.<code><a title="azcam.header.ObjectHeaderMethods.set_keyword" href="header.html#azcam.header.ObjectHeaderMethods.set_keyword">set_keyword</a></code>
+</p>
+<div class="desc inherited"><p>Set a keyword value, comment, and type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>keyword</code></strong></dt>
+<dd>keyword</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>value of keyword</dd>
+<dt><strong><code>comment</code></strong></dt>
+<dd>comment string</dd>
+<dt><strong><code>typestring</code></strong></dt>
+<dd>one of …</dd>
+</dl></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_ref_pixel"><code class="name flex">
+<span>def <span class="ident">set_ref_pixel</span></span>(<span>self, xy)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set the reference pixel.
+xy is [X,Y] in pixels.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.set_roi"><code class="name flex">
+<span>def <span class="ident">set_roi</span></span>(<span>self, first_col=-1, last_col=-1, first_row=-1, last_row=-1, col_bin=-1, row_bin=-1, roi_num=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the ROI values for a specified ROI.
+Currently only one ROI (0) is supported.
+These values are for the entire focal plane, not just one detector.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.update_ext_keywords"><code class="name flex">
+<span>def <span class="ident">update_ext_keywords</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update focal plane keywords for single extension</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.update_header"><code class="name flex">
+<span>def <span class="ident">update_header</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update headers, reading current data.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.FocalPlane.update_header_keywords"><code class="name flex">
+<span>def <span class="ident">update_header_keywords</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update focal plane keywords in header</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="azcam.image_focalplane.WCS"><code class="flex name class">
+<span>class <span class="ident">WCS</span></span>
+<span>(</span><span>FPobject)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<h3>Methods</h3>
+<dl>
+<dt id="azcam.image_focalplane.WCS.get_ra_dec"><code class="name flex">
+<span>def <span class="ident">get_ra_dec</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get RA and DEC from telescope header.
+They should have been copied from telescope header to this image header.</p></div>
+</dd>
+<dt id="azcam.image_focalplane.WCS.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="azcam" href="index.html">azcam</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="azcam.image_focalplane.FocalPlane" href="#azcam.image_focalplane.FocalPlane">FocalPlane</a></code></h4>
+<ul class="">
+<li><code><a title="azcam.image_focalplane.FocalPlane.amp_cfg" href="#azcam.image_focalplane.FocalPlane.amp_cfg">amp_cfg</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.define_keywords" href="header.html#azcam.image_focalplane.FocalPlane.define_keywords">define_keywords</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.delete_keyword" href="header.html#azcam.image_focalplane.FocalPlane.delete_keyword">delete_keyword</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.get_focalplane" href="#azcam.image_focalplane.FocalPlane.get_focalplane">get_focalplane</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.get_format" href="#azcam.image_focalplane.FocalPlane.get_format">get_format</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.get_keyword" href="header.html#azcam.image_focalplane.FocalPlane.get_keyword">get_keyword</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.get_keywords" href="header.html#azcam.image_focalplane.FocalPlane.get_keywords">get_keywords</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.get_roi" href="#azcam.image_focalplane.FocalPlane.get_roi">get_roi</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.header" href="#azcam.image_focalplane.FocalPlane.header">header</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.numdet_x" href="#azcam.image_focalplane.FocalPlane.numdet_x">numdet_x</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.numdet_y" href="#azcam.image_focalplane.FocalPlane.numdet_y">numdet_y</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.read_header" href="header.html#azcam.image_focalplane.FocalPlane.read_header">read_header</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.roi_reset" href="#azcam.image_focalplane.FocalPlane.roi_reset">roi_reset</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_amp_positions" href="#azcam.image_focalplane.FocalPlane.set_amp_positions">set_amp_positions</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_default_values" href="#azcam.image_focalplane.FocalPlane.set_default_values">set_default_values</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_extension_extnum" href="#azcam.image_focalplane.FocalPlane.set_extension_extnum">set_extension_extnum</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_extension_name" href="#azcam.image_focalplane.FocalPlane.set_extension_name">set_extension_name</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_extension_position" href="#azcam.image_focalplane.FocalPlane.set_extension_position">set_extension_position</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_focalplane" href="#azcam.image_focalplane.FocalPlane.set_focalplane">set_focalplane</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_format" href="#azcam.image_focalplane.FocalPlane.set_format">set_format</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_jpg_order" href="#azcam.image_focalplane.FocalPlane.set_jpg_order">set_jpg_order</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_keyword" href="header.html#azcam.image_focalplane.FocalPlane.set_keyword">set_keyword</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_ref_pixel" href="#azcam.image_focalplane.FocalPlane.set_ref_pixel">set_ref_pixel</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.set_roi" href="#azcam.image_focalplane.FocalPlane.set_roi">set_roi</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.update_ext_keywords" href="#azcam.image_focalplane.FocalPlane.update_ext_keywords">update_ext_keywords</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.update_header" href="#azcam.image_focalplane.FocalPlane.update_header">update_header</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.update_header_keywords" href="#azcam.image_focalplane.FocalPlane.update_header_keywords">update_header_keywords</a></code></li>
+<li><code><a title="azcam.image_focalplane.FocalPlane.wcs" href="#azcam.image_focalplane.FocalPlane.wcs">wcs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="azcam.image_focalplane.WCS" href="#azcam.image_focalplane.WCS">WCS</a></code></h4>
+<ul class="">
+<li><code><a title="azcam.image_focalplane.WCS.get_ra_dec" href="#azcam.image_focalplane.WCS.get_ra_dec">get_ra_dec</a></code></li>
+<li><code><a title="azcam.image_focalplane.WCS.initialize" href="#azcam.image_focalplane.WCS.initialize">initialize</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

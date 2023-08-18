@@ -1,6 +1,6 @@
 site_name: AzCam
 site_author: Michael Lesser
-site_url: 'https://mplesser.github.io/azcam'
+site_url: 'https://azcam.readthedocs.io/en/latest/'
 docs_dir: docs
 
 # Repository
@@ -23,6 +23,3 @@ theme:
     repo: fontawesome/brands/git-alt
   features:
     navigation.sections
-  include_search_page: false
-  search_index_only: true
-  prev_next_buttons_location: both

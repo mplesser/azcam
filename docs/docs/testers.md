@@ -2,18 +2,6 @@
 
 The **tester** tools are for image sensor characterization.
 
-## Report Commands
-
-The report tool is helpful when generating reports. 
-
-Usage Example:
-
-```
-from azcam.tools.testers.report import Report
-report=Report()
-report.make_rstfile("rstfile.rst")
-```
-
 ## Testers
 
 These classes acquire and analyze image sensor characterization data.
@@ -93,3 +81,15 @@ bias.analyze()
 ### Superflat Images
 
 [Superflat class](/code/azcam/tools/testers/superflat.html)
+
+## Report Commands
+
+The report tool is helpful when generating reports. 
+
+Usage Example:
+
+```
+from azcam.tools.testers.report import Report
+report=Report()
+report.make_rstfile("rstfile.rst")
+```

@@ -239,13 +239,13 @@ print(rois)
 
 ## Server Tool
 
-The base Tools class described below is inherited by all server tools. 
+The server tool is used to communicate with an *azcamserver* process. The base Tools class described below is inherited by all server tools. 
 
 [Documentation for the base Tools class](/code/azcam/tools/tools.html)
 
 ## Focus Tool
 
-This tools controls focus observations used to determine optimal instrument or telescope focus position. This code is usually executed in the console window although a server-side version is available on some systems. `focus` is an instance of the *Focus* class.
+The focus tool controls focus observations used to determine optimal instrument or telescope focus position. This code is usually executed in the console window although a server-side version is available on some systems. `focus` is an instance of the *Focus* class.
 
 ```python
 focus.set_pars(1, 30, 10)  
@@ -288,7 +288,7 @@ or
   <dd>Delay in seconds between focus moves</dd>
 </dl>
 
-## Sendimage Tool - Remote Image Server
+## Sendimage Tools
 
 This tool supports sending an image to a remote host running an image server which receives the image.
 
@@ -300,9 +300,9 @@ remote_imageserver_port = 6543
 sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcam")
 ```
 
-## Webserver Tool - FastAPI
+## Webserver Tool
 
-This tool implements a fastapi-based web server.  See https://fastapi.tiangolo.com.
+This tool implements a FastAPI-based web server.  See https://fastapi.tiangolo.com.
 
 ```python
 from azcam.tools.webserver.fastapi_server import WebServer
@@ -311,13 +311,13 @@ webserver.index = f"index_mysystem.html"
 webserver.start()
 ```
 
-## Browser-based Tools`
+## Browser-based Tools
 
 These tools implements various browser-based tools which connect to an azcam web server.
 
 ### Usage
 
-Open a web browser to http://localhost:2403/XXX where XXX is a toolname, with the appropriate replacements for localhost and the web server port number.
+Open a web browser to an address such as http://localhost:2403/status, replacing `localhost`, `2403`, and `status` with the appropriate hostname, web server port number, and tool name.
 
 ### Supported Browser Tools
  - status - display current exposure status
@@ -325,8 +325,8 @@ Open a web browser to http://localhost:2403/XXX where XXX is a toolname, with th
 
 ## Console Tools
 
-Console tools are commands which can be called from a console application to send the equivalent command to a server process.  Commands are typically accessed in a console process as `toolname.commandname(parameters)`, e.g. `instrument.get_wavelength()`.
+Console tools are tools which can be used directly from a console application to send the equivalent command to a server process.  Commands are typically accessed in a console process as `toolname.commandname(parameters)`, e.g. `instrument.get_wavelength()`.
 
-A console tool may be obtained by `toolname = azcam.get_tools("toolname")` where *toolname* is like *exposure*, *instrument*, or *tempcon*.  A tool may also be accessed as *azcam.db.toolname*, like `azcam.db.controller`. 
+A console tool may be obtained by `toolname = azcam.get_tools("toolname")` where *toolname* is like *exposure*, *instrument*, or *tempcon*.  A tool may also be accessed as *azcam.db.tools[toolname]*, like `azcam.db.tools[controller]`. 
 
 [Documentation for the ConsoleTools class](/code/azcam/tools/console_tools.html)
