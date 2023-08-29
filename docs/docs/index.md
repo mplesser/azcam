@@ -160,13 +160,9 @@ and can be found in the `db.shortcuts` dictionary (see `azcam.shortcuts`). Examp
   * *bf* - browse for a file or folder using a Tcl/Tk GUI.
 
 ## Scripts
-Scripts are functions contained in python code modules of the same name. They may be loaded automatically
-during enviroment configuration and can be found in the `db.scripts` dictionary. Scripts defined on
-the server side are not available as remote commands.
+Scripts are functions contained in python code modules of the same name. They may be loaded automatically during enviroment configuration and can be found in the `db.scripts` dictionary. Scripts defined on the server side are not available as remote commands. An example script to measure system pressures might be:
 
 ```python
-import azcam_scripts
-azcam_scripts.load()
 get_pressures(2.0, "get_pressures.log", 1)
 ```
 
