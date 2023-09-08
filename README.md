@@ -12,7 +12,7 @@ See *azcam-tool* for a common extension package which implements a GUI used by m
 
 ## Documentation
 
-See https://mplesser.github.io/azcam/
+See https://azcam.readthedocs.io.
 
 See https://github.com/mplesser/azcam-tool.git for the standard GUI used by most telescope observers.
 
