@@ -69,7 +69,7 @@ class SocketInterface(object):
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
         try:
             self.socket.settimeout(0.1)
-            self.socket.connect((self.host, self.port))
+            self.socket.connect((self.host, int(self.port)))
             self.connected = True
         except Exception:
             self.close()

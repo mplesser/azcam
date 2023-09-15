@@ -24,7 +24,7 @@ There are many other dependencies depending on configuration. Examples are:
   * *fastapi*
   * *scipy*
   * *pandas*
-  * *PyPDF2*
+  * *pypdf*
   * *rst2pdf*
   * *pdfkit*
   * *markdown*
