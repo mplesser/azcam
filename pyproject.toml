@@ -9,7 +9,7 @@ authors = [{ name = "Michael Lesser" }, { email = "mlesser@arizona.edu" }]
 dependencies = ["loguru", "numpy", "astropy"]
 
 [project.urls]
-Documentation = "https://mplesser.github.io/azcam/"
+Documentation = "https://azcam.readthedocs.io/"
 Repository = "https://github.com/mplesser/azcam/"
 
 [build-system]
