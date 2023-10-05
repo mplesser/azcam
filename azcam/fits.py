@@ -250,7 +250,7 @@ def arith(
         data1 = data1.astype("float32")
 
     # check if filename2 is actually a number and not a filename
-    if isinstance(filename2, (int, float)):
+    if not isinstance(filename2, str):
         data2 = filename2
         SCALAR = 1
 
@@ -279,7 +279,7 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] * data2)
+                    data3.append(data1[i] * data2[i])
                 else:
                     data3.append(data1[i] * data2[i])
         else:
@@ -289,7 +289,7 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] + data2)
+                    data3.append(data1[i] + data2[i])
                 else:
                     data3.append(data1[i] + data2[i])
         else:
@@ -298,7 +298,7 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] - data2)
+                    data3.append(data1[i] - data2[i])
                 else:
                     data3.append(data1[i] - data2[i])
         else:
@@ -307,7 +307,7 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] / data2)
+                    data3.append(data1[i] / data2[i])
                 else:
                     data3.append(data1[i] / data2[i])
         else:
