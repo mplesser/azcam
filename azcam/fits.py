@@ -279,9 +279,9 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] * data2[i])
+                    data3.append(data1[i] * data2)
                 else:
-                    data3.append(data1[i] * data2[i])
+                    data3.append(data1[i] * data2)
         else:
             data3 = data1 * data2
 
@@ -289,27 +289,27 @@ def arith(
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] + data2[i])
+                    data3.append(data1[i] + data2)
                 else:
-                    data3.append(data1[i] + data2[i])
+                    data3.append(data1[i] + data2)
         else:
             data3 = data1 + data2
     elif operator == "-":
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] - data2[i])
+                    data3.append(data1[i] - data2)
                 else:
-                    data3.append(data1[i] - data2[i])
+                    data3.append(data1[i] - data2)
         else:
             data3 = data1 - data2
     elif operator == "/":
         if MEF:
             for i in range(len(data1)):
                 if SCALAR:
-                    data3.append(data1[i] / data2[i])
+                    data3.append(data1[i] / data2)
                 else:
-                    data3.append(data1[i] / data2[i])
+                    data3.append(data1[i] / data2)
         else:
             data3 = data1 / data2
     # write result (all data is now float32)
