@@ -273,7 +273,7 @@ class Image(object):
                     # copy one line from the current extension
 
                     indx = Ext[currExt] - 1  # current amplifier
-                    flip = AmpFlip[indx]  # determine flip for the current extension
+                    flip = int(AmpFlip[indx])  # determine flip for the current extension
 
                     if flip == 0:  # no flip
                         posX = srcLine * srcAmpX + prescan1
@@ -971,8 +971,11 @@ class Image(object):
         self.size_x = self.focalplane.numcols_image
         self.size_y = self.focalplane.numrows_image
 
+        print(self.data)
+
         if not self.assembled:
             self.assemble(1)
+        print(self.buffer)
 
         with open(filename, "wb") as fd:
             fd.write(self.buffer.astype("uint16").squeeze())
