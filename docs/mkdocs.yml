@@ -35,11 +35,11 @@ plugins:
         options:
           show_source: true
 
-watch:
-  - /azcam/azcam/azcam
-  - /azcam/azcam-server/azcam_server
-  - /azcam/azcam-console/azcam_console
-  - /azcam/azcam-testers/azcam_testers
+#watch:
+#  - /azcam/azcam/azcam
+#  - /azcam/azcam-server/azcam_server
+#  - /azcam/azcam-console/azcam_console
+#  - /azcam/azcam-testers/azcam_testers
 
 nav:
   - Home: 'index.md'
