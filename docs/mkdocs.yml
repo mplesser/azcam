@@ -9,7 +9,7 @@ repo_url: https://github.com/mplesser/azcam
 edit_uri: ""
 
 theme:
-  name: material
+  name: mkdocs
   palette:
     scheme: indigo
     primary: indigo
