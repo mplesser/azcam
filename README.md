@@ -14,7 +14,7 @@ See *azcam-tool* for a common extension package which implements a GUI used by m
 
 See https://azcam.readthedocs.io.
 
-See https://github.com/mplesser/azcam-tool.git for the standard GUI used by most telescope observers.
+See also https://github.com/mplesser/azcam-tool.git for the standard GUI used by most telescope observers.
 
 ## Installation
 
@@ -28,7 +28,7 @@ You may need to install `python3-tk` on Linux systems [`sudo apt-get install pyt
 
 An *azcamserver* process is really only useful with a customized configuration script and environment which defines the hardware to be controlled.  Configuration scripts from existing environments may be used as examples. They would be imported into a python or IPython session or uses a startup script such to create a new server or console application.
 
-An example code snippet to start an *azcamserver* process is:
+An example code snippet to start *azcamserver* when using the *azcam-itl environment* is:
 
 ```python
 # server-side (azcamserver)

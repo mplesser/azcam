@@ -13,7 +13,7 @@ class Tools(object):
     def __init__(self, tool_id: str, description: str or None = None):
         """
         Args:
-            tool_id: name used to reference the tool (controller, display, ...)
+            tool_id: name used to reference the tool (controller, display, etc.)
             description: description of this tool
         """
 

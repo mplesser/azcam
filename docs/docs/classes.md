@@ -8,6 +8,10 @@ weight: 26
 # Classes
 AzCam's classes are often combined with the classes which define *tools* to provide common functionality cross multiple tools.  For example, the *controller*, *instrument*, and *telescope* tools may all use the `header` class to define header information.
 
+Common classes used thorughout azcam is listed here.
+
+  - !Image
+
 ## Image Class
 
 The `Image Class` defines Azcam's image object. Within *azcam* it is also used to define 
@@ -17,6 +21,7 @@ Usage Example:
 
 `im1 = azcam.Image('test.fits')`
 
+[Documentation for the Image class](image.md)
 [Documentation for the Image class](/code/azcam/image.html)
 
 ## Database Class

@@ -22,12 +22,13 @@ class Image(object):
     def __init__(self, filename=""):
         super().__init__()
 
-        # True when image is valid
         self.valid = 0
-        # True when image has been written to disk
+        """True when image is valid"""
         self.written = 0
-        # True when image is first ready
+        """True when image has been written to disk"""
         self.toggle = 0
+        """True when image is first ready"""
+
         # image filename
         self.filename = ""
         # True to allow overwritting image file
@@ -111,7 +112,7 @@ class Image(object):
         if filename != "":
             self.read_file(filename)
 
-    def read_file(self, filename):
+    def read_file(self, filename: str):
         """
         Read FITS image file (standard or MEF).
         """
@@ -131,7 +132,7 @@ class Image(object):
 
         return
 
-    def write_file(self, filename, filetype=-1):
+    def write_file(self, filename: str, filetype: int = -1):
         """
         Write image to disk file.
         filetype is 0 for FITS, 1 for MEF, 2 for BIN, 6 for assembled.
@@ -173,7 +174,7 @@ class Image(object):
     # assemble
     # ******************************************************************************
 
-    def assemble(self, trim=-1):
+    def assemble(self, trim: int = -1):
         """
         Assemble .data into .buffer.
         """
@@ -324,10 +325,13 @@ class Image(object):
 
         return
 
-    def set_scaling(self, gains=None, offsets=None):
+    def set_scaling(self, gains: list[float] | None = None, offsets: list[float] | None = None):
         """
         Set gains and offsets for image assembly.
-        Use None for no scaling.
+
+        Args:
+            gains: gains values for each image section in [e/DN]
+            offsets: offsets or bias values for each image section
         """
 
         self.num_extensions = self.focalplane.numamps_image
