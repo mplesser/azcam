@@ -25,7 +25,7 @@ theme:
 
 plugins:
 - search
-- autorefs
+#- autorefs
 - mkdocstrings:
     enabled: !ENV [ENABLE_MKDOCSTRINGS, true]
     custom_templates: templates
