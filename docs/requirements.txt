@@ -19,3 +19,4 @@
 # IN THE SOFTWARE.
 
 mkdocs-material-extensions>=1.0
+mkdocs-material
