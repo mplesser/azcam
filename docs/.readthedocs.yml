@@ -4,6 +4,7 @@ python:
   version: 3.11
   install:
     - requirements: docs/requirements.txt
+    - requirements: requirements.txt
 
 mkdocs:
  configuration: mkdocs.yml
