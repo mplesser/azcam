@@ -1,7 +1,7 @@
 # *azcam*
 
 ## Functions
-  - [azcam.fits](azcam-fits.md)
+  - [azcam.fits](azcam_fits.md)
 
 ## Classes
-  - [azcam.image](azcam-image.md)
+  - [azcam.image](azcam_image.md)
