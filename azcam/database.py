@@ -36,8 +36,8 @@ class AzcamDatabase(object):
     default_tool = None
     """name of default tool"""
 
-    shortcuts: dict = {}
-    """dict of shortcuts"""
+    cli: dict = {}
+    """dict of CLI commands"""
 
     scripts: dict = {}
     """dict of scripts"""

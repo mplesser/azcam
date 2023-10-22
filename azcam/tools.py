@@ -37,8 +37,10 @@ class Tools(object):
         self.is_reset: int = 0
 
         # save tool name
-        if self.tool_id not in azcam.db.tools:
-            azcam.db.tools[tool_id] = self
+        azcam.db.tools.update({self.tool_id: self})
+
+        # add tool to CLI
+        azcam.db.cli.update({self.tool_id: self})
 
         #: verbosity for debug, >0 is more verbose
         self.verbosity = 0

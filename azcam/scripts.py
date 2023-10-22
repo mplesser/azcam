@@ -32,7 +32,8 @@ def loadscripts(packages) -> None:
             try:
                 mod = importlib.import_module(f"{package}.{pfile}")
                 func = getattr(mod, pfile)
-                azcam.db.scripts[pfile] = func
+                # azcam.db.scripts[pfile] = func
+                azcam.db.cli[pfile] = func
             except Exception as e:
                 azcam.log(e)
                 azcam.AzcamWarning(f"Could not import script {pfile}")
