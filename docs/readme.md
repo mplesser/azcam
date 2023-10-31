@@ -1,4 +1,4 @@
-## Documentation notes for azcam ##
+# Documentation notes for azcam
 
 readthedocs - New documentation is deployed to https://azcam.readthedocs.io with manual build from readthedocs home. 
 
