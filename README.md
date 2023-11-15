@@ -41,3 +41,4 @@ wavelength = instrument.get_wavelength()
 print(f"Current wavelength is {wavelength}")
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
+
