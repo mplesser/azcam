@@ -30,6 +30,12 @@ class AzcamDatabase(object):
     datafolder: str = ""
     """system datafolder"""
 
+    systemname: str = ""
+    """system name"""
+
+    systemfolder: str = ""
+    """system root folder"""
+
     tools: dict = {}
     """dict of tools"""
 
