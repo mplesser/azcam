@@ -5,12 +5,10 @@ import os
 import azcam
 
 
-def loadscripts(packages) -> None:
+def loadscripts(packages: list) -> None:
     """
     Load scripts into azcam.db.scripts.
     """
-
-    # packages = ["azcam_server.scripts"]
 
     for package in packages:
         pyfiles = []
