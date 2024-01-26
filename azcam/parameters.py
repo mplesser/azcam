@@ -9,10 +9,9 @@ import os
 import typing
 
 import azcam
-from azcam.tools import Tools
 
 
-class Parameters(Tools):
+class Parameters(object):
     """
     Main class for parameters tool.
     """
@@ -21,8 +20,6 @@ class Parameters(Tools):
         """
         Creates parameters tool, optionally setting default parameter dictionary name.
         """
-
-        Tools.__init__(self, "parameters", "parameters tool")
 
         self.par_file = None
         self.par_dict = {}
@@ -69,7 +66,7 @@ class Parameters(Tools):
     def write_parfile(self, parfilename: str = None) -> None:
         """
         Writes par_dict to the par file.
-        Does nto update any values.
+        Does not update any values.
 
         Args:
             parfilename (str, optional): Name of parameter file. Defaults to None.

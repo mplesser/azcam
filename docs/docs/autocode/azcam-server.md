@@ -2,8 +2,6 @@
 
 ## Tools - azcam-server
 
-::: azcam_server.tools.tools.Tools
-
 ::: azcam_server.tools.controller.Controller
 ::: azcam_server.tools.arc.controller_arc.ControllerArc
 
