@@ -41,8 +41,8 @@ extra_css:
   - css/mkdocstrings.css
 
 watch:
-   - ./../../azcam/azcam
-   - ./docs/css
+   - /../../azcam/azcam
+   - docs/css
 
 nav:
   - Home: 'index.md'
