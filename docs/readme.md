@@ -1,8 +1,6 @@
 # Documentation notes for azcam
 
-readthedocs - New documentation is deployed to https://azcam.readthedocs.io
-
-First push to github then use "flit publish" to create new pypi version
+readthedocs - New documentation is deployed to https://azcam.readthedocs.io when manually request at readthedocs and afterpush to github.
 
 mkdocs is used for doc rendering
  - writes html to **docs/site** root folder
