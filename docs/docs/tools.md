@@ -333,4 +333,3 @@ Console tools are tools which can be used directly from a console application to
 
 A console tool may be obtained by `toolname = azcam.get_tools("toolname")` where *toolname* is like *exposure*, *instrument*, or *tempcon*.  A tool may also be accessed as *azcam.db.tools[toolname]*, like `azcam.db.tools[controller]`. 
 
-[Documentation for the ConsoleTools class](/autocode/azcam/tools/console_tools.html)
