@@ -28,7 +28,6 @@ plugins:
 - autorefs
 - mkdocstrings:
     enabled: !ENV [ENABLE_MKDOCSTRINGS, true]
-    custom_templates: templates
     default_handler: python
     handlers:
       python:
@@ -46,7 +45,7 @@ watch:
   - ../../azcam-server/azcam_server
   - ../../azcam-console/azcam_console
   - ../../azcam-testers/azcam_testers
-  - docs/css
+  - ./docs/css
 
 nav:
   - Home: 'index.md'
