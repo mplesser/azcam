@@ -40,12 +40,12 @@ plugins:
 extra_css:
   - css/mkdocstrings.css
 
-watch:
-  - ../../azcam/azcam
-  - ../../azcam-server/azcam_server
-  - ../../azcam-console/azcam_console
-  - ../../azcam-testers/azcam_testers
-  - ./docs/css
+# watch:
+#   - ../../azcam/azcam
+#   - ../../azcam-server/azcam_server
+#   - ../../azcam-console/azcam_console
+#   - ../../azcam-testers/azcam_testers
+#   - ./docs/css
 
 nav:
   - Home: 'index.md'
