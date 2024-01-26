@@ -76,7 +76,9 @@ def get_keyword(filename: str, keyword: str, extension: int = 0) -> typing.Any:
     return hdr[keyword]
 
 
-def edit_keyword(filename: str, keyword: str, value: typing.Any, extension: int = 0) -> None:
+def edit_keyword(
+    filename: str, keyword: str, value: typing.Any, extension: int = 0
+) -> None:
     """
     Edits a header keyword value.
 
@@ -125,7 +127,9 @@ def add_history(filename: str, history_string: str, extension: int = 0) -> None:
         extension: image extension number.
     """
 
-    value = time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
+    value = (
+        time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
+    )
     if len(value) > 70:
         value = value[:70] + "\n" + value[70:]
     if len(value) > 141:
@@ -356,11 +360,14 @@ def _is_image_extension(hdulist: object, extension: int) -> bool:
     """
 
     return (
-        "XTENSION" in hdulist[extension].header and hdulist[extension].header["XTENSION"] == "IMAGE"
+        "XTENSION" in hdulist[extension].header
+        and hdulist[extension].header["XTENSION"] == "IMAGE"
     )
 
 
-def add(filename1: str, filename2: str, filename3: str, datatype: str = "uint16") -> None:
+def add(
+    filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
+) -> None:
     """
     Add two images.
     `filename3 = filename1 + filename2`.
@@ -375,14 +382,15 @@ def add(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
     return arith(filename1, "+", filename2, filename3, datatype)
 
 
-def sub(filename1: str, filename2: str, filename3: str, datatype: str = "uint16") -> None:
+def sub(
+    filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
+) -> None:
     """
     Subtract two images.
     `filename3 = filename1 - filename2`.
 
     Args:
         filename1: image filename.
-        operator: '+','-','/',or '*'.
         filename2: may be an image filename or a constant.
         filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
@@ -391,14 +399,15 @@ def sub(filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
     return arith(filename1, "-", filename2, filename3, datatype)
 
 
-def mult(filename1: str, filename2: str, filename3: str, datatype: str = "uint16") -> None:
+def mult(
+    filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
+) -> None:
     """
     Multiple two images.
     `filename3 = filename1 * filename2`.
 
     Args:
         filename1: image filename.
-        operator: '+','-','/',or '*'.
         filename2: may be an image filename or a constant.
         filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
@@ -407,14 +416,15 @@ def mult(filename1: str, filename2: str, filename3: str, datatype: str = "uint16
     return arith(filename1, "*", filename2, filename3, datatype)
 
 
-def div(filename1: str, filename2: str, filename3: str, datatype: str = "uint16") -> None:
+def div(
+    filename1: str, filename2: str, filename3: str, datatype: str = "uint16"
+) -> None:
     """
     Divide two images.
     `filename3 = filename1 / filename2`.
 
     Args:
         filename1: image filename.
-        operator: '+','-','/', or '*'.
         filename2: may be an image filename or a constant.
         filename3: optional, must be an image filename.  If not specified, result to filename1.
         datatype: valid datatype string for resultant data type.
@@ -714,13 +724,17 @@ def resample(filename: str, resample: int = 2) -> None:
     filename = azcam.utils.make_image_filename(filename)
     numext, first_ext, last_ext = get_extensions(filename)
 
-    with pyfits.open(filename, "update", memmap=False) as hdul:  # memap solves lock issue
+    with pyfits.open(
+        filename, "update", memmap=False
+    ) as hdul:  # memap solves lock issue
         for chan in range(first_ext, last_ext):
             data = hdul[chan].data
             dims = [hdul[chan].header["NAXIS1"], hdul[chan].header["NAXIS2"]]
             d2 = data.reshape(dims[1], dims[0])
 
-            d2_binned = _bin_ndarray(d2, (int(dims[1] / resample), int(dims[0] / resample)), "sum")
+            d2_binned = _bin_ndarray(
+                d2, (int(dims[1] / resample), int(dims[0] / resample)), "sum"
+            )
 
             hdul[chan].header["NAXIS1"] = int(dims[0] / resample)
             hdul[chan].header["NAXIS2"] = int(dims[1] / resample)
@@ -820,7 +834,9 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
 
             Median.append([])  # first hdu will be 1
             for row in range(row1, row2 + 1):
-                Median[i].append(numpy.median(im[i].data[row : row + 1, col1 : col2 + 1]))
+                Median[i].append(
+                    numpy.median(im[i].data[row : row + 1, col1 : col2 + 1])
+                )
 
             if fit_order > 0:
                 slope, xdata, yfit, resids, residspercent = _line_fit(
@@ -843,7 +859,10 @@ def colbias(filename: str = "test", fit_order: int = 3, margin_cols: int = 0) ->
 
         # new due to lock
         history_string = "COLBIAS data was column overscan corrected"
-        value = time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time())) + history_string
+        value = (
+            time.strftime("%Y/%m/%d %H:%M:%S ", time.gmtime(time.time()))
+            + history_string
+        )
         if len(value) > 70:
             value = value[:70] + "\n" + value[70:]
         if len(value) > 141:

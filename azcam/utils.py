@@ -53,7 +53,7 @@ def fix_path(path: str = "", no_drive_letter: bool = True) -> str:
 
     Args:
         path: name of path to cleanup.
-        bool no_drive_letter: Removes leading drive letter.
+        no_drive_letter: Removes leading drive letter.
     Returns:
         cleaned path name.
     """
@@ -123,7 +123,7 @@ def make_image_filename(imagefile: str) -> str:
     return fix_path(imagefile)
 
 
-def parse(string: str, set_type=0) -> List[str]:
+def parse(string: str, set_type: bool = False) -> List[str]:
     """
     Parse a string into tokens using the standard azcam rules.
     If setType is true, try and set data data type for each token.
@@ -167,7 +167,7 @@ def parse(string: str, set_type=0) -> List[str]:
     return tokens
 
 
-def get_datatype(value) -> list:
+def get_datatype(value: any) -> list:
     """
     Determine the data type for an object and set the type if possible. A string such as "1.23"
     will result in a type "float" and "2" will result in type "int".

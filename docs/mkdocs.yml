@@ -42,7 +42,7 @@ extra_css:
 
 nav:
   - Home: 'index.md'
-  - 'tools.md'
   - 'classes.md'
+  - 'commands.md'
   - 'advanced.md'
   - 'autocode/autocode.md'

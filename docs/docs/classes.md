@@ -1,16 +1,16 @@
----
-title: "Classes"
-date: 2022-11-27
-draft: false
-weight: 26
----
-
 # Classes
+
 AzCam's classes are often combined with the classes which define *tools* to provide common functionality cross multiple tools.  For example, the *controller*, *instrument*, and *telescope* tools may all use the `header` class to define header information.
 
 Common classes used thorughout azcam is listed here.
 
-  - !Image
+## Tool Class
+
+AzCam's *tools* are used to define and control a system.
+
+The base Tools class described below is inherited by all other tools. 
+
+[Documentation for the Tool class](autocode/azcam_tools.md)
 
 ## Image Class
 
@@ -21,13 +21,13 @@ Usage Example:
 
 `im1 = azcam.Image('test.fits')`
 
-[Documentation for the Image class](/autocode/azcam/image.html)
+[Documentation for the Image class](autocode/azcam_image.md)
 
 ## Database Class
 
 This class defines the `azcam.db` object.
 
-[Documentation for the Database](/autocode/azcam/database.html)
+[Documentation for the Database](autocode/azcam_database.md)
 
 ## Header Class
 
@@ -49,16 +49,10 @@ In general there is a method of the same name in both the header class and the a
 The telescope and instrument dictionaries are considered temporary and re-read every time an exposure starts. This 
 is so that rapidly changing data values do not become stale. Most dictionary information is written to the image file header if the selected image format supports headers. When an object such as an instrument or telescope is disabled, the corresponding object database information is deleted and no longer updated.
 
-[Documentation for the Header class](/autocode/azcam/header.html)
+[Documentation for the Header class](autocode/azcam_header.md)
 
-## Focalplane class
+## Image and Focalplane classes
 
-Below is the documentation for the FocalPlane class which is  used internally to define all aspects of the focal plane and sensor configuration. 
+Below is the documentation for the Image and FocalPlane classes which define an azcam image and all aspects of the focal plane and sensor configuration used to create an image. 
 
-[Documentation for the FocalPlane class](/autocode/azcam/image_focalplane.html)
-
-## Filename class
-
-Below is the documentation for the Filename class which is used internally to define and manipulate image filenames. 
-
-[Documentation for the Filename class](/autocode/azcam/tools/exposure_filename.html)
+[Documentation for the FocalPlane class](autocode/azcam_image.md)

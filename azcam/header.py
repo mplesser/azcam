@@ -22,7 +22,7 @@ class Header(object):
         self.items (list):  list of header objects
     """
 
-    def __init__(self, title: str = "", template=None):
+    def __init__(self, title: str = "", template: str | None = None):
         """
         Create instance.
 
@@ -76,9 +76,13 @@ class Header(object):
 
         # special case
         title = "AzCam Focal plane" if title == "Focalplane" else title
-        self.title[0] = "=================================================================="
-        self.title[1] = "%s" % title
-        self.title[2] = "=================================================================="
+        self.title[
+            0
+        ] = "=================================================================="
+        self.title[1] = f"{title}"
+        self.title[
+            2
+        ] = "=================================================================="
 
         return
 
@@ -386,8 +390,9 @@ class ObjectHeaderMethods(object):
         Reads and returns current header data.
         Returns:
             list of header lines: [Header[]]: Each element contains (keyword,value,comment,type).
-            Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
         """
+
+        # Example: Header[2][1] is the value of keyword 2 and Header[2][3] is its type.
 
         # get the header
         header = []
@@ -396,7 +401,9 @@ class ObjectHeaderMethods(object):
             return
 
         for key in reply:
-            reply1 = self.get_keyword(key)  # this calls object's get_keyword to get updated values
+            reply1 = self.get_keyword(
+                key
+            )  # this calls object's get_keyword to get updated values
             list1 = [key, reply1[0], reply1[1], reply1[2]]
             header.append(list1)
 

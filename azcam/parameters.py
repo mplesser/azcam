@@ -63,7 +63,7 @@ class Parameters(object):
 
         return
 
-    def write_parfile(self, parfilename: str = None) -> None:
+    def write_parfile(self, parfilename: str | None = None) -> None:
         """
         Writes par_dict to the par file.
         Does not update any values.

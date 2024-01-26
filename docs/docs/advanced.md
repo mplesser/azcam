@@ -1,8 +1,3 @@
----
-title: "Advanced"
-date: 2022-12-08
----
-
 # Advanced
 
 This document describes AzCam installation, configuration, and programming. It is intended 

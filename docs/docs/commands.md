@@ -1,10 +1,3 @@
----
-title: "Commands"
-date: 2022-11-27
-draft: false
-weight: 24
----
-
 # Commands
 
 These commands are useful both in server and console applications. Note these are direct commands (function calls) and not class/tool methods.
@@ -16,17 +9,7 @@ Usage Example:
 
     azcam.fits.colbias("test.fits", 3)
 
-[Documentation for the FITS functions](/autocode/azcam/functions/fits.html)
-
-## Plot Commands
-The *azcam.plot* commands are helpful for general plotting using matplotlib. 
-
-Usage Example:
-
-    azcam.plot.save_figure(1, "myfigure.png")
-
-[Documentation for the plot functions](/autocode/azcam/functions/plot.html)
-
+[Documentation for the FITS functions](autocode/azcam_fits.md)
 
 ## Utility commands
 The *azcam.utils* commands are general purpose python functions used throughout azcam.
@@ -35,4 +18,4 @@ Usage Example:
 
     azcam.utils.curdir("/data")
 
-[Documentation for the utility functions](/autocode/azcam/functions/utils.html)
+[Documentation for the utility functions](autocode/azcam_utils.md)
