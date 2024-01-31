@@ -7,8 +7,10 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 # Links
 
   - Main links
-    - [AzCam documentation (this site)](https://azcam.readthedocs.io/en/latest/)
+    - [AzCam documentation (this site)](https://azcam.readthedocs.io)
+    - [AzCamServer documentation](https://azcam-server.readthedocs.io)
     - [GitHub repos](https://github.com/mplesser)
+
   - Code details and links
     - [Classes](classes.md)
     - [Commands](commands.md)
