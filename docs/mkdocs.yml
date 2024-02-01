@@ -9,13 +9,13 @@ repo_url: https://github.com/mplesser/azcam
 edit_uri: ""
 
 theme:
-  name: material
+  name: readthedocs
   palette:
     scheme: indigo
     primary: indigo
     accent: indigo
   logo:
-    img/logo.gif
+    img/logo.png
   favicon:
     img/favicon.ico
   icon:

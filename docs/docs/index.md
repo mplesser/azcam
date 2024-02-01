@@ -17,7 +17,7 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
     - [Advanced concepts](advanced.md)
 
 # Code Documentation
-Much fo the python code is autodocumented from the internal doc strings.  See [autocode](autocode/autocode.md) and the links within these documents.
+Much fo the python code is autodocumented from the internal doc strings.  See [Code Docs](autocode/autocode.md) and the links within these documents.
 
 # Tools
 
