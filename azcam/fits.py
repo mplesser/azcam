@@ -255,7 +255,7 @@ def arith(
 
     # check if filename2 is actually a number and not a filename
     if not isinstance(filename2, str):
-        data2 = filename2
+        data2 = float(filename2)
         SCALAR = 1
 
     # open Image2 and get data
@@ -285,7 +285,7 @@ def arith(
                 if SCALAR:
                     data3.append(data1[i] * data2)
                 else:
-                    data3.append(data1[i] * data2)
+                    data3.append(data1[i] * data2[i])
         else:
             data3 = data1 * data2
 
@@ -295,7 +295,7 @@ def arith(
                 if SCALAR:
                     data3.append(data1[i] + data2)
                 else:
-                    data3.append(data1[i] + data2)
+                    data3.append(data1[i] + data2[i])
         else:
             data3 = data1 + data2
     elif operator == "-":
@@ -304,7 +304,7 @@ def arith(
                 if SCALAR:
                     data3.append(data1[i] - data2)
                 else:
-                    data3.append(data1[i] - data2)
+                    data3.append(data1[i] - data2[i])
         else:
             data3 = data1 - data2
     elif operator == "/":
@@ -313,7 +313,7 @@ def arith(
                 if SCALAR:
                     data3.append(data1[i] / data2)
                 else:
-                    data3.append(data1[i] / data2)
+                    data3.append(data1[i] / data2[i])
         else:
             data3 = data1 / data2
     # write result (all data is now float32)
@@ -332,7 +332,7 @@ def arith(
                     numpy.clip(data3[i], 0, 2**16, data3[i])  # clip values below zero
                     hdu = pyfits.ImageHDU(data3[i].astype("uint16"), header[i + 1])
                 else:
-                    hdu = pyfits.ImageHDU(data3[i], header[i + 1])
+                    hdu = pyfits.ImageHDU(data3[i].astype(datatype), header[i + 1])
                 hdulist.append(hdu)
             if len(header) > len(data3):
                 for i in range(len(data3) + 1, len(im1)):
@@ -504,28 +504,28 @@ def combine(
             if combination_type == "median":
                 data_combined.append(numpy.median(data3d[chan], axis=0))
             elif combination_type == "sum":
-                data_combined.append(numpy.sum(data3d[chan], axis=0).astype(datatype))
+                data_combined.append(numpy.sum(data3d[chan], axis=0))
             elif combination_type == "mean":
-                data_combined.append(numpy.mean(data3d[chan], axis=0).astype(datatype))
+                data_combined.append(numpy.mean(data3d[chan], axis=0))
     else:
         data3d = numpy.array([x for x in dataset])
         if combination_type == "median":
-            data_combined = numpy.median(data3d, axis=0).astype(datatype)
+            data_combined = numpy.median(data3d, axis=0)
         elif combination_type == "sum":
-            data_combined = numpy.sum(data3d, axis=0).astype(datatype)
+            data_combined = numpy.sum(data3d, axis=0)
         elif combination_type == "mean":
-            data_combined = numpy.mean(data3d, axis=0).astype(datatype)
+            data_combined = numpy.mean(data3d, axis=0)
 
     if MEF:
         newdata = []
         for i in range(numexts):
-            newdata.append(data_combined[i])
+            newdata.append(data_combined[i].astype(datatype))
     else:
-        newdata = data_combined
+        newdata = data_combined.astype(datatype)
 
     # set output datatype
-    if datatype != "float64":
-        newdata = [x.astype(datatype) for x in newdata]
+    # if datatype != "float64":
+    #     newdata = [x.astype(datatype) for x in newdata]
 
     # write result
     if MEF:
@@ -533,7 +533,7 @@ def combine(
         hdulist = pyfits.HDUList()
         hdulist.append(phdu)
         for i in range(firstext, lastext):
-            hdu = pyfits.PrimaryHDU(newdata[i - 1], header[i])
+            hdu = pyfits.ImageHDU(newdata[i - 1], header[i])
             hdulist.append(hdu)
 
         with warnings.catch_warnings():  # surpress warning
