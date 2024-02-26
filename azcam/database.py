@@ -2,11 +2,10 @@
 Contains the main azcam database class.
 """
 
-from dataclasses import dataclass, field
-
 from typing import Any, Union, List, Dict
 
-from azcam.logger import Logger
+from azcam.logger import AzCamLogger
+
 from azcam.header import System
 
 
@@ -54,7 +53,7 @@ class AzcamDatabase(object):
     headerorder: list = []
     """header order in image header"""
 
-    logger: Logger = Logger()
+    logger: AzCamLogger = AzCamLogger()
     """logger object"""
 
     parameters: None

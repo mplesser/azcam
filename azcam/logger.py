@@ -7,15 +7,13 @@ import socket
 from typing import List
 
 import azcam
+from azcam import exceptions
 import loguru
 
 
-class Logger(object):
+class AzCamLogger(object):
     """
     The azcam Logger class.
-
-    Args:
-        object ([type]): [description]
     """
 
     def __init__(self) -> None:
@@ -25,7 +23,9 @@ class Logger(object):
         self.last_data = []  # data since last call to get_data
         self.last_data_max = 1024  # max entries in last_data buffer
 
-    def log(self, message: str, *args: List[str], prefix: str = "Log-> ", level: int = 1):
+    def log(
+        self, message: str, *args: List[str], prefix: str = "Log-> ", level: int = 1
+    ):
         """
         Send a message to the logging system.
 
@@ -113,9 +113,10 @@ class Logger(object):
         if "1" in logtype:
             self.logger.add(
                 sys.stdout,
-                colorize=True,
-                filter=self._logfilter,
+                level="INFO",
                 format="{message}",
+                filter=self._logfilter,
+                colorize=True,
                 enqueue=True,
                 # backtrace=True,
                 # diagnose=True,
@@ -135,11 +136,13 @@ class Logger(object):
         if "3" in logtype:
             if logfile is None:
                 if self.logfile is None:
-                    raise azcam.AzcamError("no logfile specified")
+                    raise exceptions.AzcamError("no logfile specified")
             else:
                 self.logfile = logfile
             if use_timestamp:
-                tt = datetime.datetime.strftime(datetime.datetime.now(), "%d%b%y_%H%M%S")
+                tt = datetime.datetime.strftime(
+                    datetime.datetime.now(), "%d%b%y_%H%M%S"
+                )
                 s1, s2 = os.path.splitext(self.logfile)
                 self.logfile = f"{s1}_{tt}{s2}"
 

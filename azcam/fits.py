@@ -8,6 +8,7 @@ import typing
 import warnings
 
 import azcam
+from azcam import exceptions
 import numpy
 import numpy.polynomial.polynomial as poly
 from astropy.io import fits as pyfits
@@ -266,7 +267,7 @@ def arith(
         with pyfits.open(filename2, lazy_load_hdus=False) as im2:
             if numext1 != numext2:
                 im2.close()
-                raise azcam.AzcamError("unequal FITS image extensions")
+                raise exceptions.AzcamError("unequal FITS image extensions")
             if MEF:
                 data2 = []
                 for i in range(1, lext):
@@ -453,7 +454,7 @@ def combine(
 
     numfiles = len(file_list)
     if numfiles < 2:
-        raise azcam.AzcamError("two or more images are required")
+        raise exceptions.AzcamError("two or more images are required")
 
     header = []  # header for output file
     dataset = []  # combined data

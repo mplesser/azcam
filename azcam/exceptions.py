@@ -5,6 +5,22 @@ Contains custom exceptions and warnings used throughout azcam.
 import azcam
 
 
+def warning(message: str) -> None:
+    """
+    Print and log a warning message.
+    """
+
+    # warnings.warn(message)
+    # print(f"Warning: {message}")
+
+    try:
+        azcam.logger.warning(message)
+    except Exception:
+        print(f"Warning: {message}")
+
+    return
+
+
 class AzcamError(Exception):
     """
     Base custom error class for azcam.
@@ -14,7 +30,7 @@ class AzcamError(Exception):
         """
         Custom error exception for azcam.
 
-        Usage:  raise azcam.AzcamError(message)
+        Usage:  raise exceptions.AzcamError(message)
 
         Args:
           message: string message to display when error is raised
@@ -39,19 +55,3 @@ class AzcamError(Exception):
             azcam.logger.error(message)
         else:
             print(f"AzcamError: {message}")
-
-
-def AzcamWarning(message: str) -> None:
-    """
-    Print and log a warning message.
-    """
-
-    # warnings.warn(message)
-    # print(f"AzcamWarning: {message}")
-
-    try:
-        azcam.logger.warning(message)
-    except Exception:
-        print(f"AzcamWarning: {message}")
-
-    return

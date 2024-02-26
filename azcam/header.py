@@ -6,6 +6,7 @@ import os
 import typing
 
 import azcam
+from azcam import exceptions
 
 
 class Header(object):
@@ -76,13 +77,13 @@ class Header(object):
 
         # special case
         title = "AzCam Focal plane" if title == "Focalplane" else title
-        self.title[
-            0
-        ] = "=================================================================="
+        self.title[0] = (
+            "=================================================================="
+        )
         self.title[1] = f"{title}"
-        self.title[
-            2
-        ] = "=================================================================="
+        self.title[2] = (
+            "=================================================================="
+        )
 
         return
 
@@ -119,7 +120,13 @@ class Header(object):
 
         return klist
 
-    def set_keyword(self, keyword, value, comment=None, typestring=None):
+    def set_keyword(
+        self,
+        keyword: str,
+        value: typing.Any,
+        comment: str | None = None,
+        typestring: str | None = None,
+    ):
         """
         Set a keyword value, comment, and type.
         Args:
@@ -133,7 +140,7 @@ class Header(object):
             self.keywords[keyword] = keyword
             self.values[keyword] = None
 
-        if type(value) == str:
+        if isinstance(value, str):
             value = value.strip()
 
         if typestring is None:
@@ -188,10 +195,10 @@ class Header(object):
 
         # try to get type of value
         t = "str"
-        if type(value) == int:
+        if isinstance(value, int):
             value = int(value)
             t = "int"
-        elif type(value) == float:
+        elif isinstance(value, float):
             value = float(value)
             t = "float"
 
@@ -316,7 +323,7 @@ class Header(object):
             return
 
         if not os.path.exists(filename):
-            azcam.AzcamWarning("Header file not found:%s" % filename)
+            exceptions.warning("Header file not found:%s" % filename)
             return
 
         with open(filename, "r") as f1:

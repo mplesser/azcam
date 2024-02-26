@@ -15,6 +15,7 @@ except Exception:
     pass
 
 import azcam
+from azcam import exceptions
 
 
 def curdir(folder: str = "") -> str:
@@ -178,7 +179,7 @@ def get_datatype(value: any) -> list:
         list [type, value] of data type as a code and object with that type
     """
 
-    if type(value) is str:
+    if isinstance(value, str):
         # string integer
         if value.isdigit():
             attributetype = "int"
@@ -194,11 +195,11 @@ def get_datatype(value: any) -> list:
 
         attributetype = "str"
 
-    elif type(value) is int:
+    elif isinstance(value, int):
         attributetype = "int"
         value = int(value)
 
-    elif type(value) is float:
+    elif isinstance(value, float):
         attributetype = "float"
         value = float(value)
 
@@ -249,7 +250,7 @@ def check_keyboard(wait: bool = False) -> str:
     # TODO: map sequences like 'F1'
 
     if os.name != "nt":
-        raise azcam.AzcamError("check_keyboard not supported on this OS")
+        raise exceptions.AzcamError("check_keyboard not supported on this OS")
 
     loop = 1
     key = ""
@@ -304,7 +305,7 @@ def show_menu(configs: dict) -> str:
         print("Enter configuration number: ", end="")
         choiceindex = input()
         if choiceindex == "q":
-            azcam.AzcamWarning("Quit detected")
+            exceptions.warning("Quit detected")
             return
         try:
             choiceindex = int(choiceindex)

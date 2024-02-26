@@ -3,6 +3,7 @@
 """
 
 import azcam
+from azcam import exceptions
 
 
 class Tools(object):
@@ -10,7 +11,7 @@ class Tools(object):
     Base class used by tools (controller, instrument, telescope, etc.).
     """
 
-    def __init__(self, tool_id: str, description: str or None = None):
+    def __init__(self, tool_id: str, description: str | None = None):
         """
         Args:
             tool_id: name used to reference the tool (controller, display, etc.)
@@ -54,7 +55,7 @@ class Tools(object):
             return
 
         if not self.enabled:
-            azcam.AzcamWarning(f"{self.description} is not enabled")
+            exceptions.warning(f"{self.description} is not enabled")
             return
 
         self.initialized = 1

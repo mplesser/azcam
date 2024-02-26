@@ -9,6 +9,7 @@ import os
 import typing
 
 import azcam
+from azcam import exceptions
 
 
 class Parameters(object):
@@ -39,13 +40,13 @@ class Parameters(object):
         if parfilename is None:
             parfilename = self.par_file
             if parfilename is None:
-                azcam.AzcamWarning("Parameter file is not defined")
+                exceptions.warning("Parameter file is not defined")
                 return
 
         self.par_file = parfilename
 
         if not os.path.exists(parfilename):
-            azcam.AzcamWarning(f"Parameter file not found: {parfilename}")
+            exceptions.warning(f"Parameter file not found: {parfilename}")
             return
 
         cp = configparser.ConfigParser()
@@ -214,7 +215,7 @@ class Parameters(object):
             try:
                 value = azcam.db.parameters.par_dict[subdict][parameter]
             except KeyError:
-                azcam.AzcamWarning(f"Parameter {parameter} not available for get_par")
+                exceptions.warning(f"Parameter {parameter} not available for get_par")
                 return None
 
         return value
@@ -259,7 +260,7 @@ class Parameters(object):
         except KeyError:
             _, value = azcam.utils.get_datatype(value)
             azcam.db.parameters.par_dict[subdict][parameter] = value
-            # azcam.AzcamWarning(f"Parameter {parameter} not available for set_par")
+            # exceptions.warning(f"Parameter {parameter} not available for set_par")
             return None
 
         # first try to set value type
@@ -276,7 +277,7 @@ class Parameters(object):
                 setattr(obj, tokens[-1], value)
             except AttributeError:
                 pass
-                # azcam.AzcamWarning(f"Could not set parameter: {parameter}")
+                # exceptions.warning(f"Could not set parameter: {parameter}")
         except KeyError:
             pass
         except Exception:  # new
