@@ -6,7 +6,7 @@ for advanced users.
 See [this image](azcamarchitecture.jpg) for a graphical layout of AzCam.
 
 ## Dependencies
-AzCam currently uses *Python 3.9*. Important dependancies include:
+AzCam currently uses *Python 3.11*. Important dependancies include:
 
   * *numpy*
   * *astropy*
@@ -16,14 +16,13 @@ AzCam currently uses *Python 3.9*. Important dependancies include:
 There are many other dependencies depending on configuration. Examples are:
 
   * *ipython*
+  * *rich*
   * *fastapi*
   * *scipy*
   * *pandas*
   * *pypdf*
-  * *rst2pdf*
   * *pdfkit*
   * *markdown*
-  * *mysql-connector*
   * *pyserial*
   * *keyring*
 

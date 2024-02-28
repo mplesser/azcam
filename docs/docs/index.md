@@ -69,13 +69,15 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 Both *azcamserver* and *azcamconsole* may also be called in a manner similar to:
 
 ```python
+python -m azcam_itl.server -i -- -system LVM
+python -m azcam_itl.console - -- -system LVM
+or
 ipython -m azcam_itl.server -i -- -system LVM
-ipython -m azcam_itl.console - -- -system LVM
 ```
 
 Other examples:
 ```python
-ipython --profile azcamserver  # to start IPython
+python --profile azcamserver
 from azcam_itl import server
 from azcam.cli import *
 instrument.set_wavelength(450)
