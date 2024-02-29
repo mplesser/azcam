@@ -334,3 +334,29 @@ def show_menu(configs: dict) -> str:
     print("")
 
     return choice
+
+
+def get_datafolder(datafolder: str | None = None):
+    """
+    Return the datafolder for this system.
+    If not specified, root is /data on Windows or ~/data on Linux.
+    """
+
+    if datafolder is None:
+        droot = os.environ.get("AZCAM_DATAROOT")
+        if droot is None:
+            if os.name == "posix":
+                droot = os.environ.get("HOME")
+            else:
+                droot = "/"
+            datafolder = os.path.join(
+                os.path.realpath(droot), "data", azcam.db.systemname
+            )
+        else:
+            datafolder = os.path.join(os.path.realpath(droot), azcam.db.systemname)
+    else:
+        datafolder = os.path.realpath(datafolder)
+
+    datafolder = os.path.normpath(datafolder)
+
+    return datafolder
