@@ -1,5 +1,5 @@
 """
-*azcam_console.utils* contains general purpose support commands used throughout azcam_console.
+*azcam.console.utils* contains general purpose support commands used throughout azcam.console.
 """
 
 import os
@@ -83,7 +83,7 @@ def add_searchfolder(search_folder: str = "", include_subfolders: bool = True) -
     if search_folder == "":
         search_folder = curdir()
 
-    search_folder = azcam.utils.fix_path(search_folder)
+    search_folder = fix_path(search_folder)
 
     # append all subfolders of search_folder to current search path
     if search_folder not in sys.path:
@@ -96,7 +96,7 @@ def add_searchfolder(search_folder: str = "", include_subfolders: bool = True) -
                     if s.startswith("_"):
                         continue
                     sub = os.path.join(root, s)
-                    sub = azcam.utils.fix_path(sub)
+                    sub = fix_path(sub)
                     if sub not in sys.path:
                         sys.path.append(sub)
 

@@ -8,6 +8,7 @@ import typing
 import warnings
 
 import azcam
+import azcam.utils
 from azcam import exceptions
 import numpy
 import numpy.polynomial.polynomial as poly

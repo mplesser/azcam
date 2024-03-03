@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style_exptool.css">
+
+    <title>Exptool Home</title>
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#exposure-tab" type="button">Exposure</button>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#filename-tab" type="button">Filename</button>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#detector-tab" type="button">Detector</button>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#options-tab" type="button">Options</button>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="tab-content">
+
+            <div id="exposure-tab" class="tab-pane fade show active">
+
+                <div class="card border-primary mybox">
+                    <h5 class="card-title" id="statustitle">Exposure Control</h5>
+                    <div class="card-body">
+
+                        <div class="row ml-2">
+
+                            <div class="col-2">
+                                <div class="btn-group-vertical btn-group-sm">
+                                    <button type="button" class="btn btn-outline-primary mt-0" id="expose">Expose</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="sequence">Sequence</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="reset">Reset</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="pause">Pause</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="resume">Resume</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="readout">Readout</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="abort">Abort</button>
+                                    <button type="button" class="btn btn-outline-primary mt-1" id="save_pars">Save Pars</button>
+                                </div>
+                            </div>
+
+                            <div class="col-10">
+                                <div class="row ml-2 mb-2">
+                                    <div class="col-5">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Image Type</span>
+                                            <select id="imagetype" class="form-inline-sm drop_box" title="Image exposure type">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-5">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Exp. time</span>
+                                            <input type="number" id="exposuretime" class="number_box" style="width: 30%;" value=1.0 title="exposure time in seconds" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ml-2 mb-2">
+                                    <div class="col-10">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Image Title</span>
+                                            <input type="text" id="imagetitle" class="border border-primary" title="image title" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ml-2 mb-2">
+                                    <div class="col-10">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Test Image</span>
+                                            <input type="checkbox" class="form-check-input" id="imagetest" title="check to create a test image">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ml-2 mb-2">
+                                    <div class="col-6">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Num. Seq. Images</span>
+                                            <input type="number" id="seq_total" class="number_box" style="width: 30%;" value=1 title="number of exposures in sequence" min="1">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Seq. Delay</span>
+                                            <input type="number" id="seq_delay" class="number_box" style="width: 40%;" value=1 title="sequence delay (sec)" min="0">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row ml-2 mt-1">
+                                    <div class="col-10">
+                                        <form class="form">
+                                            <div class="form-group">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-text">Sequence Flushing</span>
+                                                    <select id="seq_flush" class="form-inline-sm drop_box" style="width: 20%;" title="sequence flushing">
+                                                        <option>All</option>
+                                                        <option>Once</option>
+                                                        <option>None</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-primary mybox">
+                    <h5 class="card-title" id="statustitle">Exposure Status</h5>
+                    <div class="card-body">
+
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">Image filename</span>
+                                    <span id="imagefilename_status" title="image filename"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">Image title</span>
+                                    <span id="imagetitle_status" title="image title"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-3">
+                                <label for="camtemp">CamTemp:</label>
+                                <div class="border border-primary" style="width:50%;" id="camtemp" class="number_box">
+                                    -999.99
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="dewtemp">DewTemp:</label>
+                                <div class="border border-primary" style="width:50%;" id="dewtemp" class="number_box">
+                                    -999.99
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="colbin_status">ColBin:</label>
+                                <div class="border border-primary" style="width:40%;" id="colbin_status" class="number_box">1
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="rowbin_status">RowBin:</label>
+                                <div class="border border-primary" style="width:40%;" id="rowbin_status" class="number_box">1
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-text text" id="timestamp">timestamp...</div>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-text text" id="message" title="messages">messages...</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-text text" id="command" title="last command executed">last command...</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="progress" id="progress">
+                                    <div class="progress-bar" id="progressbar" title="integration or readout progress"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="filename-tab" class="tab-pane fade">
+
+                <div class="card border-primary mybox">
+                    <h5 class="card-title">Image Filename Parameters</h5>
+                    <div class="card-body">
+
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Image Directory</span>
+                            <input type="text" class="form-control" id="imagefolder" placeholder="image folder name">
+                        </div>
+
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Image Root</span>
+                                <input type="text" class="form-control" id="imageroot" placeholder="image root string">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Image Sequence Number</span>
+                                <input type="number" class="form-control" id="imagesequencenumber" min="0" style="width: 5em;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="imageautoincrementsequencenumber" title="">
+                                        <label class="form-check-label" for="imageautoincrementsequencenumber" title="increment sequence number after next exposure">Auto increment
+                                        sequence
+                                        number</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="imageoverwrite" title="">
+                                        <label class="form-check-label" for="imageoverwrite" title="allow new image to overwrite existing image">Overwrite existing
+                                        image</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="imageincludesequencenumber" title="">
+                                        <label class="form-check-label" for="imageincludesequencenumber" title="include a sequence number">Include sequence
+                                        number</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="imageautoname" title="use ImageType in filename">
+                                        <label class="form-check-label" for="imageautoname">Auto Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="detector-tab" class="tab-pane fade">
+                <div class="card border-primary mybox">
+                    <h5 class="card-title">Detector Parameters</h5>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-2">
+                                <label for=firstcol>FirstCol:</label>
+                                <input type="number" id="firstcol" value=1 title="first unbinned column number" min="1">
+                            </div>
+                            <div class="col-2">
+                                <label for=lastcol>LastCol:</label>
+                                <input type="number" id="lastcol" value=9999 title="last unbinned column number" min="1">
+                            </div>
+                            <div class="col-2">
+                                <label for=colbin>ColBin:</label>
+                                <input type="number" id="colbin" value=1 title="column binning" min="1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <label for=firstcol>FirstRow:</label>
+                                <input type="number" id="firstrow" value=1 title="first unbinned row number" min="1">
+                            </div>
+                            <div class="col-2">
+                                <label for=lastrow>LastRow:</label>
+                                <input type="number" id="lastrow" value=9999 title="last unbinned row number" min="1">
+                            </div>
+                            <div class="col-2">
+                                <label for=rowbin>RowBin:</label>
+                                <input type="number" id="rowbin" value=1 title="row binning" min="1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="btn-group-sm">
+                                    <button type="button" id="fullframe" class="btn btn-primary mr-2 mt-2" title="set ROI to full frame">Full Frame</button>
+                                    <button type="button" id="applyroi" class="btn btn-primary mt-2" title="apply detector parameters">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="options-tab" class="tab-pane fade">
+                <div class="card border-primary mybox">
+                    <h5 class="card-title">Options</h5>
+                    <div class="card-body">
+
+                        <input type="checkbox" id="flusharray" value="flusharray" title="flush sensor before each exposure">
+                        <label for="flusharray">Clear sensor before each exposure</label><br>
+
+                        <input type="checkbox" id="displayimage" value="displayimage" title="display image from server after each exposure">
+                        <label for="displayimage">Display image from server</label><br>
+
+                        <input type="checkbox" id="instrumentenabled" value="instrumentenabled" title="enable instrument">
+                        <label for="instrumentenabled">Enable Instrument</label><br>
+
+                        <input type="checkbox" id="telescopeenabled" value="telescopeenabled" title="enable telescope">
+                        <label for="telescopeenabled">Enable Telescope</label><br>
+
+                        <input type="checkbox" id="autotitle" value="autotitle" title="automatically title images by Image Type">
+                        <label for="autotitle">Auto title images</label><br>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="exptool.js"></script>
+
+</body>
+
+</html>

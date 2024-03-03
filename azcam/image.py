@@ -8,6 +8,7 @@ import time
 import warnings
 
 import azcam
+import azcam.utils
 from azcam import exceptions
 import numpy
 from astropy.io import fits as pyfits

@@ -9,10 +9,6 @@ from importlib import metadata
 __version__ = metadata.version(__package__)
 __version_info__ = tuple(int(i) for i in __version__.split(".") if i.isdigit())
 
-# import here so future importing is not required
-from azcam import fits
-from azcam import utils
-
 from azcam.logger import AzCamLogger
 
 from azcam.database import AzcamDatabase
