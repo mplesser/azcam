@@ -73,7 +73,7 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 
 Import observe for observing command use:
 ```
-from azcam_server.tools.observe.observe import Observe
+from azcam.server.tools.observe.observe import Observe
 ```
 
 ```

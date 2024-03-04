@@ -1,12 +1,25 @@
 [project]
 name = "azcam"
-version = "24.1"
+version = "24.2"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"
 keywords = ["ccd", "imaging", "astronomy", "sensors"]
 authors = [{ name = "Michael Lesser" }, { email = "mlesser@arizona.edu" }]
-dependencies = ["loguru", "numpy", "astropy"]
+dependencies = [
+    "loguru",
+    "numpy",
+    "astropy",
+    "matplotlib",
+    "numpy",
+    "astropy",
+    "pywin32; sys_platform == 'win32'",
+    "psutil",
+    "fastapi",
+    "uvicorn",
+    "jinja2",
+    "requests",
+]
 requires-python = ">= 3.10"
 
 [project.urls]

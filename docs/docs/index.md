@@ -8,13 +8,13 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
   - Main links
     - [AzCam documentation (this site)](https://azcam.readthedocs.io)
-    - [AzCamServer documentation](https://azcam-server.readthedocs.io)
     - [GitHub repos](https://github.com/mplesser)
 
   - Code details and links
     - [Classes](classes.md)
     - [Commands](commands.md)
     - [Advanced concepts](advanced.md)
+    - [Server docs](server.md)
 
 # Code Documentation
 Much fo the python code is autodocumented from the internal doc strings.  See [Code Docs](autocode/autocode.md) and the links within these documents.

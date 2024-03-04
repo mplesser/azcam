@@ -59,7 +59,7 @@ class WebServer(object):
         self.hostname = socket.gethostname()
 
         # templates folder
-        dd = "/azcam/azcam/server/azcam_server/monitor/webserver"  # flit exe changes folder!
+        dd = "/azcam/azcam/azcam/server/monitor/webserver"  # flit exe changes folder!
 
         static_path = os.path.join(dd, "static")
 
