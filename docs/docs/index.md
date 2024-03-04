@@ -4,6 +4,14 @@ AzCam is a software framework for the acquisition and analysis of image data fro
 
 AzCam is not appropriate for consumer-level cameras and is not intended to have a common API across all systems. It's primary design principle is to allow interfacing to a wide variety of custom instrumentation which is required to acquire and analyze scientific image data.
 
+## Installation
+
+`pip install azcam`
+
+Or download the latest version from from github: https://github.com/mplesser/azcam.git.
+
+You may need to install `python3-tk` on Linux systems [`sudo apt-get install python3-tk`].
+
 # Links
 
   - Main links
@@ -15,9 +23,6 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
     - [Commands](commands.md)
     - [Advanced concepts](advanced.md)
     - [Server docs](server.md)
-
-# Code Documentation
-Much fo the python code is autodocumented from the internal doc strings.  See [Code Docs](autocode/autocode.md) and the links within these documents.
 
 # Tools
 
@@ -98,6 +103,8 @@ from azcam.cli import *
 instrument.set_wavelength(450)
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
+# Code Documentation
+Much fo the python code is autodocumented from the internal doc strings.  See [Code Docs](autocode/autocode.md) and the links within these documents.
 
 # AzCam Environments
 
@@ -110,11 +117,9 @@ Some packages act as *environments* to define code and data files used for speci
 # AzCam Applications
 AzCam *applications* are stand-alone programs which utilize AzCam functionality. The most important application is *azcamserver* which defines the tools for a hardware system. Most but not all applications are clients which connect to an *azcamserver* application. These clients cab be written in any languages.  Some are experimental or still in development. Examples include:
 
-  * [azcam-expstatus](https://github.com/mplesser/azcam-expstatus): a small GUI which displays exposure progress 
-  * [azcam-monitor](https://github.com/mplesser/azcam-monitr): an app to monitor and control AzCam processes on the local network
   * [azcam-tool](https://github.com/mplesser/azcam-tool): an exposure control GUI written in National Instruments LabVIEW
+  * [azcam-expstatus](https://github.com/mplesser/azcam-expstatus): a small GUI which displays exposure progress 
   * [azcam-imageserver](https://github.com/mplesser/azcam-imageserver) an app to receive and write image data from a remote *azcamserver*
-  * [azcam-observe](https://github.com/mplesser/azcam-observe) supports observing scripts which utilizes a Qt-based GUI and command line interface
 
 # Command Structure
 The AzCam command structure provides a fairly uniform interface which can be used from the local command line (CLI), a remote socket connection, or the web interface.  An example for taking a 2.5 second *flat field* exposure is:
@@ -185,3 +190,179 @@ Useful external links include:
   
  * IPython <https://ipython.org>
  * Python programming language <https://www.python.org>
+
+# Configuration and startup
+
+An *azcamserver* process is really only useful with a customized configuration script and environment which defines the hardware to be controlled.  Configuration scripts from existing environments may be used as examples. They would be imported into a python or IPython session or uses a startup script such to create a new server or console application.
+
+An example code snippet to start *azcamserver* when using the *azcam-itl environment* is:
+
+```python
+# server-side (azcamserver)
+import azcam
+import azcam_itl.server
+instrument = azcam.db.tools["instrument"]
+exposure = azcam.db.tools["exposure"]
+instrument.set_wavelength(450)
+wavelength = instrument.get_wavelength()
+print(f"Current wavelength is {wavelength}")
+exposure.expose(2., 'flat', "a 450 nm flat field image")
+```
+
+# AzCam Server
+
+*azcamserver* is the main server application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is mainly used to control data acquistion. 
+
+## Documentation
+
+See https://azcam.readthedocs.io/.
+
+## Configuration and startup 
+
+An example code snippet to start an *azcamserver* process is:
+
+```
+python -i -m azcam.server.server_mock
+or
+ipython -m azcam.server.server_mock --profile azcamserver -i
+```
+
+and then in the IPython window:
+
+```python
+instrument.set_wavelength(450)
+wavelength = instrument.get_wavelength()
+print(f"Current wavelength is {wavelength}")
+exposure.expose(2., 'flat', "a 450 nm flat field image")
+```
+
+# AzCam Console
+
+*azcamconsole* is a console application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
+
+## Configuration and startup 
+
+An example code snippet to start an *azcamconsole* process is:
+
+```
+ipython -m azcam_itl.console --profile azcamconsole -i -- -system DESI
+```
+
+and then in the IPython window:
+
+```python
+instrument.set_wavelength(450)
+wavelength = instrument.get_wavelength()
+print(f"Current wavelength is {wavelength}")
+exposure.expose(2., 'flat', "a 450 nm flat field image")
+```
+
+# Observe
+
+The *observe* tool supports running observing scripts. It can be used
+with a Qt-based GUI or with a command line interface.
+
+The `observe.observe()` command executed from a console window uses the CLI interface. The `observe` command executed from a terminal or icon starts the Qt GUI.
+
+The Qt GUI uses the *PySide6* package.
+
+## Usage
+
+`observe` to start the GUI from a terminal.  A new window will open.
+
+Use `observe.observe()` from an azcam console window to run the CLI version.
+
+![GUI example after loading script file.](observe_gui.jpg)
+*GUI example after loading script file.*
+
+After starting the GUI, Press "Select Script" to find a script to load on disk. 
+Then press "Load Script" to populate the table.  The excute, press Run.
+You may Pause a script after the current command by pressing the Pause/Resume button. 
+Then press the same button to resume the script.  The "Abort Script" button will 
+abort the script as soon as possible.
+
+If you have troubles, close the console window and start again.
+
+## GUI Real-time Updates
+
+   You may change a cell in the table to update values while a script is running.  Click in the cell, make the change and press "Enter" (or click elsewhere).
+   
+## Non-GUI Use
+
+It is still possible to run *observe* without the GUI, although this mode is depricated.
+
+# Misc
+
+Import observe for observing command use:
+```
+from azcam.server.tools.observe.observe import Observe
+```
+
+```
+# this is a single line comment python style
+```
+
+This block shows some direct commands
+```
+observe = Observe()
+observe.test(et=1.0,object="flat", filter="400")
+observe.comment("a different new comment 123")
+observe.delay(1)
+observe.obs(et=2.0,object="zero", filter="400", dec="12:00:00.23", ra="-23:34:2.1")
+```
+
+This block shows an example of commands using python flow control
+```
+alt_start = 0.0
+step_size = 0.01
+num_steps = 100
+for count in range(num_steps):
+    altitude = alt_start + count*step_size
+    observe.steptel(altitude=altitude)
+    print(f"On loop {count} altitude is {altitude}")
+```
+
+## Examples
+
+```python
+observe.observe('/azcam/systems/90prime/ObservingScripts/bass.txt',1)
+observe.move_telescope_during_readout=1
+```
+
+## Parameters
+
+   Parameters may be changed from the command line as:
+   
+```python
+observe.move_telescope_during_readout=1
+observe.verbose=1
+```
+
+## Observe Script Commands
+
+Always use double quotes (") when needed
+Comment lines start with # or !
+Status integers are start of a script line are ignored or incremented
+
+```
+Observe scripts commands:
+obs        ExposureTime ImageType Title NumberExposures Filter RA DEC Epoch
+stepfocus  RelativeNumberSteps
+steptel    RA_ArcSecs Dec_ArcSecs
+movetel    RA Dec Epoch
+movefilter FilterName
+delay      NumberSecs
+test       ExposureTime imagetype Title NumberExposures Filter RA DEC Epoch
+print      "hi there"
+prompt     "press any key to continue..."
+quit       quit script
+
+Example of a script:
+obs 10.5 object "M31 field F" 1 u 00:36:00 40:30:00 2000.0 
+obs 2.3 dark "a test dark" 2 u
+stepfocus 50
+delay 3.5
+stepfocus -50
+steptel 12.34 12.34
+movetel 112940.40 +310030.0 2000.0
+```

@@ -1,4 +1,3 @@
 mkdocs-autorefs
 mkdocstrings
 mkdocstrings-python
-mkdocs-material

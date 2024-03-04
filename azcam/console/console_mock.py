@@ -94,7 +94,7 @@ def setup():
     # observe
     # ****************************************************************
     # azcam.log("Loading observe")
-    # from azcam_observe.observe_cli.observe_cli import ObserveCli
+    # from azcam.observe.observe_cli.observe_cli import ObserveCli
     # observe = ObserveCli()
 
     # try to connect to azcamserver
