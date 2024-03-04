@@ -18,7 +18,10 @@ from azcam.observe.observe_qt.observe_qt import ObserveQt
 
 def start():
     """
-    Start observe for installed command "observe".
+    Start observe GUI as a command.
+    Usage examples:
+      python -m azcam.observe
+      ipython -m azcam.observe --
     """
 
     # app setup
@@ -35,7 +38,7 @@ def start():
         i = sys.argv.index("-port")
         port = int(sys.argv[i + 1])
     except ValueError:
-        port = 2442
+        port = 2402
 
     azcam.db.datafolder = azcam.utils.get_datafolder(datafolder)
 
