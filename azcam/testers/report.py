@@ -3,7 +3,6 @@ Report generation class.
 """
 
 import os
-import subprocess
 
 import pdfkit
 from markdown import markdown
@@ -16,7 +15,9 @@ class Report(object):
     """
 
     def __init__(self):
-        self.report_css = os.path.join(os.path.dirname(os.path.abspath(__file__)), "report.css")
+        self.report_css = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "report.css"
+        )
 
     def make_rstfile(self, rst_file, lines=[]):
         """

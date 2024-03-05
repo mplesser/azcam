@@ -13,13 +13,16 @@ dependencies = [
     "matplotlib",
     "numpy",
     "astropy",
-    "pywin32; sys_platform == 'win32'",
     "psutil",
     "fastapi",
     "uvicorn",
     "jinja2",
     "requests",
     "pyside6",
+    "pdfkit",
+    "markdown",
+    "pypdf",
+    "pywin32; sys_platform == 'win32'",
 ]
 requires-python = ">= 3.10"
 

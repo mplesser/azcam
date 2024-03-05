@@ -6,9 +6,9 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.image import Image
-from azcam.testers.basetester import Tester
+import azcam.image
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 
 class Defects(Tester):
@@ -137,7 +137,7 @@ class Defects(Tester):
         self.template = superflatimagename
         NumExt, _, _ = azcam.fits.get_extensions(superflatimagename)
 
-        superflatimage = Image(superflatimagename)
+        superflatimage = azcam.image.Image(superflatimagename)
 
         bin1 = azcam.fits.get_keyword(superflatimagename, "CCDBIN1")
         bin2 = azcam.fits.get_keyword(superflatimagename, "CCDBIN2")
@@ -217,7 +217,7 @@ class Defects(Tester):
         azcam.console.plot.save_figure(fignum, "DarkPixelRejectionMask")
 
         # write mask as FITS
-        maskfile = Image(superflatimagename)
+        maskfile = azcam.image.Image(superflatimagename)
         maskfile.hdulist[0].header["OBJECT"] = "dark pixel mask"
         maskfile.assemble(1)  # for parameters
         maskfile.buffer = self.dark_mask
@@ -257,7 +257,7 @@ class Defects(Tester):
         self.template = darkfilename
         NumExt, _, _ = azcam.fits.get_extensions(darkfilename)
 
-        darkimage = Image(darkfilename)
+        darkimage = azcam.image.Image(darkfilename)
 
         # Assemble and scale by gain
         darkimage.set_scaling(azcam.db.tools["gain"].get_system_gain(), None)
@@ -311,7 +311,7 @@ class Defects(Tester):
         azcam.console.plot.save_figure(fignum, "BrightPixelRejectionMask")
 
         # write mask as FITS
-        maskfile = Image(darkfilename)
+        maskfile = azcam.image.Image(darkfilename)
         maskfile.hdulist[0].header["OBJECT"] = "bright pixel mask"
         maskfile.assemble(1)  # for parameters
         maskfile.buffer = self.bright_mask
@@ -419,7 +419,7 @@ class Defects(Tester):
         azcam.console.plot.save_figure(fignum, "PixelRejectionMask")
 
         # write mask as FITS
-        defectsmask = Image(self.template)  # just a template
+        defectsmask = azcam.image.Image(self.template)  # just a template
         defectsmask.assemble(1)
         # defectsmask.buffer=numpy.ma.getmask(self.DefectsMask).astype('uint8')
         defectsmask.buffer = self.defects_mask.astype("uint8")
@@ -475,7 +475,7 @@ class Defects(Tester):
         if filename == "":
             filename = self.defects_mask_filename
 
-        defectsimage = Image(filename)
+        defectsimage = azcam.image.Image(filename)
         defectsimage.assemble(1)
         self.DefectsImage = defectsimage
 

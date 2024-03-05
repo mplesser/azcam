@@ -7,10 +7,10 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.image import Image
-from azcam.testers.basetester import Tester
+import azcam.image
 import azcam.console.plot
 from azcam.console.plot import plt
+from azcam.testers.basetester import Tester
 
 
 class Dark(Tester):
@@ -234,7 +234,7 @@ class Dark(Tester):
             os.rename(biassub, masterdark)
 
         # create dark azcam image
-        self.dark_image = Image(masterdark)
+        self.dark_image = azcam.image.Image(masterdark)
 
         # get header info
         exptime = float(azcam.fits.get_keyword(masterdark, "EXPTIME"))

@@ -1,10 +1,10 @@
 import numpy
+from astropy.io import fits as pyfits
 
 import azcam
 import azcam.utils
 import azcam.fits
 from azcam.testers.basetester import Tester
-from astropy.io import fits as pyfits
 
 
 class Eper(Tester):

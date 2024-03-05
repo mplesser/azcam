@@ -3,8 +3,7 @@ import json
 import azcam
 import azcam.console
 from azcam.tools import Tools
-
-from .report import Report
+from azcam.testers.report import Report
 
 
 class Tester(Tools, Report):

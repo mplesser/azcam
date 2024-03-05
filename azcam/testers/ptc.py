@@ -10,8 +10,8 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.testers.basetester import Tester
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 
 class Ptc(Tester):

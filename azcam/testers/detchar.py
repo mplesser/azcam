@@ -3,9 +3,8 @@ import os
 
 import azcam
 import azcam.utils
+from azcam.testers.report import Report
 from azcam.tools import Tools
-
-from .report import Report
 
 
 class DetChar(Tools, Report):

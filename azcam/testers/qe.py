@@ -12,9 +12,9 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.image import Image
-from azcam.testers.basetester import Tester
+import azcam.image
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 
 class QE(Tester):
@@ -318,7 +318,7 @@ class QE(Tester):
                 azcam.fits.colbias(qefilename, fit_order=self.fit_order)
 
             # scale to electrons by system gain
-            qeimage = Image(qefilename)
+            qeimage = azcam.image.Image(qefilename)
 
             if self.overscan_correct or self.include_dark_images:
                 qeimage.set_scaling(self.system_gain, None)

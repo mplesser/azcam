@@ -3,13 +3,13 @@ import os
 import shutil
 
 import numpy
+from astropy.io import fits as pyfits
 
 import azcam
 import azcam.utils
 import azcam.fits
 import azcam.console.utils
 from azcam.testers.basetester import Tester
-from astropy.io import fits as pyfits
 
 
 class Gain(Tester):

@@ -9,12 +9,13 @@ When working in IPython, use `pylab.ion()` for interactions after this import.
 import time
 import warnings
 
-import azcam
-import azcam.utils
-import azcam.exceptions
 import matplotlib
 import numpy
 from matplotlib import pyplot as plt
+
+import azcam
+import azcam.utils
+import azcam.exceptions
 
 #: plot data - *azcam.console.plot.plotdata*
 plotdata = {

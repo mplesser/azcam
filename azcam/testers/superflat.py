@@ -7,9 +7,9 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.image import Image
-from azcam.testers.basetester import Tester
+import azcam.image
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 
 class Superflat(Tester):
@@ -203,7 +203,7 @@ class Superflat(Tester):
         else:
             azcam.log("WARNING: no gain values found for scaling")
 
-        superflat_image = Image(self.superflat_filename)
+        superflat_image = azcam.image.Image(self.superflat_filename)
         if self.overscan_correct:
             superflat_image.set_scaling(self.system_gain, None)
         else:

@@ -9,7 +9,7 @@ import azcam
 import azcam.utils
 import azcam.fits
 import azcam.console.utils
-from azcam.image import Image
+import azcam.image
 from azcam.testers.basetester import Tester
 
 
@@ -209,7 +209,7 @@ class Prnu(Tester):
                 azcam.fits.colbias(nextfile, fit_order=self.fit_order)
 
             # scale to electrons by system gain
-            prnuimage = Image(nextfile)
+            prnuimage = azcam.image.Image(nextfile)
 
             if self.overscan_correct:
                 prnuimage.set_scaling(self.system_gain, None)

@@ -8,13 +8,13 @@ import numpy
 import scipy.ndimage
 import scipy.ndimage.filters
 import scipy.optimize
+from astropy.io import fits as pyfits
 
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.testers.basetester import Tester
-from astropy.io import fits as pyfits
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 # constants
 CON1 = 2.0 * numpy.sqrt(2.0 * numpy.log(2.0))  # 2.355 for sigma <=> FWHM

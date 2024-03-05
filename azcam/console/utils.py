@@ -1,7 +1,5 @@
 """
-# utils.py
-
-*azcam.utils* contains general purpose support commands used throughout azcam.
+# azcam.console.utils.py
 """
 
 import os
@@ -13,6 +11,7 @@ if os.name == "nt":
     import winsound
 
 import azcam
+import azcam.utils
 import azcam.exceptions
 
 
@@ -248,7 +247,9 @@ def find_file(filename, include_curdir=False) -> str:
     return
 
 
-def file_browser(Path: str = "", SelectString: str = "*.*", Label: str = "") -> list:
+def file_browser(
+    Path: str = "", SelectString: str = "*.*", Label: str = ""
+) -> list | None:
     """
     Filebrowser GUI to select files.  This is the tcl/tk version.
 
@@ -277,7 +278,7 @@ def file_browser(Path: str = "", SelectString: str = "*.*", Label: str = "") -> 
             return
         if folder == "":
             folder = None
-        return folder
+        return [folder]
 
     else:
         options["title"] = "Select file(s)" if Label == "" else Label
@@ -293,4 +294,4 @@ def file_browser(Path: str = "", SelectString: str = "*.*", Label: str = "") -> 
         if filename == "":
             filename = None
 
-        return filename
+        return [filename]

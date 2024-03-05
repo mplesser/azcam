@@ -11,14 +11,14 @@ import scipy.ndimage
 import scipy.optimize
 from astropy.modeling import fitting, models
 from scipy.stats import norm
+from astropy.io import fits as pyfits
 
 import azcam
 import azcam.utils
 import azcam.fits
-from astropy.io import fits as pyfits
-from azcam.image import Image
+import azcam.image
 import azcam.console
-import azcam.console.plot
+from azcam.console.plot import plt, update
 
 
 def centroids(filename: str = ".", threshold: float = 500.0) -> None:
@@ -57,7 +57,7 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
     fe55im = pyfits.open(filename)
 
     # make data buffer from FITS file
-    im1 = Image(filename)
+    im1 = azcam.image.Image(filename)
     im1.assemble(1)
     data = im1.buffer
     maxrows = len(data)
@@ -123,24 +123,22 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
 
     # plot the events
     if 0:
-        azcam.console.plot.plt.figure()
-        azcam.console.plot.plt.plot(xint, yint, "r.")
-        azcam.console.plot.update()
+        plt.figure()
+        plt.plot(xint, yint, "r.")
+        update()
 
     # plot a histogram of values
     if 0:
-        azcam.console.plot.plt.figure()
+        plt.figure()
         rng = int((max(values) + 1) / 100.0)
-        azcam.console.plot.plt.hist(values, bins=rng)
-        azcam.console.plot.plt.ylim(0)
-        azcam.console.plot.plt.xlim(0)
+        plt.hist(values, bins=rng)
+        plt.ylim(0)
+        plt.xlim(0)
 
     # plot image
     if 0:
-        azcam.console.plot.plt.figure()
-        azcam.console.plot.plt.imshow(
-            data, cmap="gray", origin="lower", vmin=0, vmax=threshold
-        )
+        plt.figure()
+        plt.imshow(data, cmap="gray", origin="lower", vmin=0, vmax=threshold)
 
     FWHM_array = []
     print("Finding FWHM...")
@@ -160,10 +158,10 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
 
         if 0:
             databox = data[row - boxsize : row + boxsize, col - boxsize : col + boxsize]
-            azcam.console.plot.plt.figure(4)
+            plt.figure(4)
             z1 = databox.min()
             z2 = databox.max()
-            imgplot = azcam.console.plot.plt.imshow(databox, vmin=z1, vmax=z2)
+            imgplot = plt.imshow(databox, vmin=z1, vmax=z2)
             imgplot.set_cmap("Blues")  # Blues gray hot
             imgplot.set_interpolation("nearest")  # bicubic
 
@@ -176,9 +174,9 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
                 range(0, boxsize * 2)
             )  # make an array of y values, same length as x
             if 0:
-                azcam.console.plot.plt.plot(indices, dataslice)
-                azcam.console.plot.plt.show()
-                azcam.console.plot.update()
+                plt.plot(indices, dataslice)
+                plt.show()
+                update()
 
             # mean1,sigma1 = norm.fit(dataslice)
             # yfit = mlab.normpdf(dataslice,mean1,sigma1)*dataslice.max()   # normalized probability
@@ -199,34 +197,32 @@ def centroids(filename: str = ".", threshold: float = 500.0) -> None:
             # print("%d of %d: FWHM = %.3f, Max = %.1f" % (i, len(yint), fitfwhm, fitmean))
 
             if 0:
-                azcam.console.plot.plt.plot(indices, gaussian(coeffs, indices), "ro")
-                azcam.console.plot.update()
+                plt.plot(indices, gaussian(coeffs, indices), "ro")
+                update()
 
             if 0:
                 coeffs = numpy.polyfit(indices, dataslice, 3)
                 yfit = numpy.polyval(coeffs, indices)
-                azcam.console.plot.plt.plot(indices, yfit, "r--", linewidth=2)
-                azcam.console.plot.plt.errorbar(
-                    indices, slice, yerr=numpy.sqrt(slice), fmt="ro"
-                )
-                azcam.console.plot.update()
+                plt.plot(indices, yfit, "r--", linewidth=2)
+                plt.errorbar(indices, slice, yerr=numpy.sqrt(slice), fmt="ro")
+                update()
 
     FWHM_mean = sum(FWHM_array) / len(FWHM_array)
     print("Mean FWHM = %.2f, Mean Sigma = %.1f" % (FWHM_mean, FWHM_mean / 2.355))
 
     if 0:
-        azcam.console.plot.plt.figure(6)
+        plt.figure(6)
         rng = len(FWHM_array) + 1
-        azcam.console.plot.plt.hist(values, bins=rng)
-        azcam.console.plot.plt.ylim(
+        plt.hist(values, bins=rng)
+        plt.ylim(
             0,
         )
-        azcam.console.plot.plt.xlim(
+        plt.xlim(
             0,
         )
 
     # show plots
-    azcam.console.plot.plt.show()
+    plt.show()
 
     # finish
     fe55im.close()

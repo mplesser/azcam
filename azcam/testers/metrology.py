@@ -10,8 +10,8 @@ from scipy.interpolate import griddata
 
 import azcam
 import azcam.utils
-from azcam.testers.basetester import Tester
 import azcam.console.plot
+from azcam.testers.basetester import Tester
 
 
 class Metrology(Tester):

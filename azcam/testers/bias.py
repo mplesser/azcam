@@ -2,14 +2,13 @@ import os
 import shutil
 import time
 
-from astropy.io import fits as pyfits
 import numpy
 import matplotlib.patches as mpatches
 
 import azcam
 import azcam.utils
 import azcam.fits
-from azcam.image import Image
+import azcam.image
 import azcam.console.utils
 from azcam.console.plot import plt, save_figure
 from azcam.testers.basetester import Tester
@@ -177,7 +176,7 @@ class Bias(Tester):
         # make assembled images
         self.bias_images = []
         for frame in self.imagelist:
-            im = Image(frame)
+            im = azcam.image.Image(frame)
             im.assemble(1)  # assembled an trim overscan
             self.bias_images.append(im)
 
