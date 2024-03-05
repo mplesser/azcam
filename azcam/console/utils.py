@@ -13,7 +13,7 @@ if os.name == "nt":
     import winsound
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 def beep(frequency=2000, duration=500) -> None:
@@ -53,9 +53,9 @@ def find_file_in_sequence(file_root: str, file_number: int = 1) -> tuple:
 
     try:
         if not f.startswith(file_root):
-            raise exceptions.AzcamError("image sequence not found")
+            raise azcam.exceptions.AzCamError("image sequence not found")
     except Exception:
-        raise exceptions.AzcamError("image sequence not found")
+        raise azcam.exceptions.AzCamError("image sequence not found")
 
     firstfile = azcam.utils.fix_path(os.path.join(currentfolder, f))
     firstsequencenumber = firstfile[-9:-5]
@@ -92,7 +92,7 @@ def make_file_folder(
         newfolder = azcam.utils.fix_path(newfolder)
     except Exception:
         if not increment:
-            raise exceptions.AzcamError("could not make new subfolder")
+            raise azcam.exceptions.AzCamError("could not make new subfolder")
         else:
             for i in range(1, 1000):
                 newfolder = os.path.join(
@@ -105,7 +105,7 @@ def make_file_folder(
                 except Exception:  # error OK
                     continue
             if i == 999:
-                raise exceptions.AzcamError("could not make subfolder")
+                raise azcam.exceptions.AzCamError("could not make subfolder")
 
     newfolder = azcam.utils.fix_path(newfolder)
 
@@ -134,7 +134,7 @@ def get_image_roi() -> list:
     try:
         reply = azcam.db.tools["display"].get_rois(0, "image")
     except AttributeError:
-        raise exceptions.AzcamError("cannot get ROI - display not found")
+        raise azcam.exceptions.AzCamError("cannot get ROI - display not found")
     roi.append(reply)
     reply = azcam.db.tools["display"].get_rois(1, "image")
     if reply:
@@ -164,10 +164,10 @@ def set_image_roi(roi: list = []) -> None:
     try:
         reply = azcam.db.tools["display"].get_rois(-1, "image")
     except AttributeError:
-        raise exceptions.AzcamError("cannot set ROI - no display found")
+        raise azcam.exceptions.AzCamError("cannot set ROI - no display found")
 
     if not reply:
-        raise exceptions.AzcamError("could not get display ROI")
+        raise azcam.exceptions.AzCamError("could not get display ROI")
 
     azcam.db.imageroi = reply
 

@@ -19,7 +19,7 @@ from astropy.io import fits as pyfits
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 from azcam.console.tools.display import Display
 
 
@@ -109,7 +109,7 @@ class Ds9Display(Display):
             self.xpans = os.path.abspath(self.xpans)
 
         if not self.enabled:
-            exceptions.warning("Display is not enabled")
+            azcam.exceptions.warning("Display is not enabled")
             return
 
         self.set_display(self.default_display)
@@ -266,7 +266,7 @@ class Ds9Display(Display):
                 f"[xdim={NumCols},ydim={NumRows},bitpix=-16] < {filename}",
             ]
         else:
-            exceptions.warning("invalid image extension")
+            azcam.exceptions.warning("invalid image extension")
             return
 
         # execute XPA command to display file
@@ -571,7 +571,7 @@ class Ds9Display(Display):
         elif mode == "crosshair":
             self._set_crosshair(clear_rois)
         else:
-            raise exceptions.AzcamError("Invalid cursor mode")
+            raise azcam.exceptions.AzCamError("Invalid cursor mode")
 
         return
 
@@ -727,9 +727,9 @@ class Ds9Display(Display):
         self.read_rois()
         numrois = len(self.detector_roi)
         if numrois == 0:
-            raise exceptions.AzcamError("No ROI defined")
+            raise azcam.exceptions.AzCamError("No ROI defined")
         elif roi_number > numrois:
-            raise exceptions.AzcamError("Invalid ROI number")
+            raise azcam.exceptions.AzCamError("Invalid ROI number")
 
         roi = self.detector_roi[roi_number]
 

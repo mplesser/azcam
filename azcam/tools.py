@@ -3,7 +3,7 @@
 """
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 class Tools(object):
@@ -55,7 +55,7 @@ class Tools(object):
             return
 
         if not self.enabled:
-            exceptions.warning(f"{self.description} is not enabled")
+            azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
         self.initialized = 1

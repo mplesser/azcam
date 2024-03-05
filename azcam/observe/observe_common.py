@@ -7,7 +7,7 @@ import time
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 
 
 class ObserveCommon(object):
@@ -419,7 +419,7 @@ class ObserveCommon(object):
                 if not ofile:
                     azcam.utils.restore_imagepars(impars)
                     self.log("could not open script output file %s" % self.out_file)
-                    exceptions.warning("could not open script output file")
+                    azcam.exceptions.warning("could not open script output file")
                     return
 
                 for linenumber, command in enumerate(self.commands):

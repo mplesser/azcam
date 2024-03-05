@@ -5,7 +5,7 @@ Contains the ControllerArc class.
 import os
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.controller import Controller
 
 from .camera_server import CameraServerInterface
@@ -129,7 +129,7 @@ class ControllerArc(Controller):
         elif self.timing_board == "arc22":
             self.controller_type = "gen3"
         else:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 f"Unrecognized timing board {self.timing_board}"
             )
 
@@ -139,7 +139,7 @@ class ControllerArc(Controller):
         elif self.utility_board in ["gen1", "gen2", "gen3"]:
             self.utility_board_installed = 1
         else:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 f"Unrecognized utility board name: {self.utility_board}"
             )
 
@@ -154,7 +154,7 @@ class ControllerArc(Controller):
             return
 
         if not self.enabled:
-            exceptions.warning(f"{self.description} is not enabled")
+            azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
         self.set_boards()
@@ -164,15 +164,17 @@ class ControllerArc(Controller):
             self.initialized = True
             if reply[1] == "0" or reply[1] == 0 or reply[1].lower() == "demo":
                 self.interface_type = 0
-                exceptions.warning("ControllerServer running in DEMO mode")
+                azcam.exceptions.warning("ControllerServer running in DEMO mode")
                 return
             else:
                 self.interface_type = int(reply[1])
         elif reply[0] == "DEMO":
-            exceptions.warning("ControllerServer running in DEMO mode")
+            azcam.exceptions.warning("ControllerServer running in DEMO mode")
             self.interface_type = 0
         else:
-            raise exceptions.AzcamError("Could not initialize controller interface")
+            raise azcam.exceptions.AzCamError(
+                "Could not initialize controller interface"
+            )
 
         # do this only once
         if self.interface_type != 4:  # don't load PCIe DSP code
@@ -194,14 +196,14 @@ class ControllerArc(Controller):
         try:
             reply = self.camserver.command("resetcontroller")
             if reply[0] == "ERROR":
-                raise exceptions.AzcamError(f"SYR reset error: {reply[1:]}")
+                raise azcam.exceptions.AzCamError(f"SYR reset error: {reply[1:]}")
         except azcam.AzcamError as e:
             if e.error_code == 1:
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Controller reset error, check power and fibers", error_code=1
                 )
             if e.error_code == 2:
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Could not connect to controller server", error_code=2
                 )
             else:
@@ -409,9 +411,9 @@ class ControllerArc(Controller):
                 if speed in [0, 1]:
                     self.board_command("SGN", self.TIMINGBOARD, Gain, speed)
                 else:
-                    raise exceptions.AzcamError("Speed must be 1 or 2")
+                    raise azcam.exceptions.AzCamError("Speed must be 1 or 2")
             else:
-                raise exceptions.AzcamError("Gain must be 1, 2, 5, or 10")
+                raise azcam.exceptions.AzCamError("Gain must be 1, 2, 5, or 10")
 
             self.video_gain = Gain
             self.set_keyword("DETGAIN", self.video_gain, "Video gain setting", "int")
@@ -429,7 +431,7 @@ class ControllerArc(Controller):
         """
 
         if Speed not in [0, 1, 2]:
-            raise exceptions.AzcamError("Speed must be 0-2")
+            raise azcam.exceptions.AzCamError("Speed must be 0-2")
 
         # only used for gen2 and arc45 video boards
         if self.video_boards[0] in ["gen2", "arc45", "sdsu2"]:
@@ -451,7 +453,7 @@ class ControllerArc(Controller):
         if self.video_boards[0] == "arc48":  # assume all board types are the same
             self.board_command("SVO", self.TIMINGBOARD, BoardNumber, DAC, DacValue)
         else:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Command set_video_offset not supported for this video board"
             )
 
@@ -544,7 +546,7 @@ class ControllerArc(Controller):
 
         # check for ERROR
         if reply[0] == "ERROR":
-            raise exceptions.AzcamError(reply[1:][0])
+            raise azcam.exceptions.AzCamError(reply[1:][0])
 
         # check for demo mode: ["DEMO", 0]
         if reply[0] == "DEMO":
@@ -665,7 +667,7 @@ class ControllerArc(Controller):
         """
 
         if self.video_boards[0] == "gen1":
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Command set_bias_number not supported for this controller"
             )
         elif self.video_boards[0] in [
@@ -759,7 +761,7 @@ class ControllerArc(Controller):
         elif Type == "R":
             arg = 0x800000
         else:
-            raise exceptions.AzcamError("Invalue write_memory type")
+            raise azcam.exceptions.AzCamError("Invalue write_memory type")
 
         self.board_command("WRM", BoardNumber, arg | Address, value)
 
@@ -782,7 +784,7 @@ class ControllerArc(Controller):
         elif Type == "R":
             arg = 0x800000
         else:
-            raise exceptions.AzcamError("Invalue Type")
+            raise azcam.exceptions.AzCamError("Invalue Type")
 
         BoardNumber = int(BoardNumber)
         Address = int(Address)
@@ -848,7 +850,7 @@ class ControllerArc(Controller):
             filename = os.path.normpath(filename)
             self.camserver.load_file(3, filename)
         else:
-            raise exceptions.AzcamError("Invalid board number")
+            raise azcam.exceptions.AzCamError("Invalid board number")
 
         return
 
@@ -1013,7 +1015,7 @@ class ControllerArc(Controller):
                 if int(reply) == value:
                     continue
                 else:
-                    raise exceptions.AzcamError(
+                    raise azcam.exceptions.AzCamError(
                         f"Communication to board {board} failed on loop {loop}"
                     )
 

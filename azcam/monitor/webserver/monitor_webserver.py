@@ -16,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 """
 Home page:
@@ -59,7 +59,7 @@ class WebServer(object):
         self.hostname = socket.gethostname()
 
         # templates folder
-        dd = "/azcam/azcam/azcam/server/monitor/webserver"  # flit exe changes folder!
+        dd = "/azcam/azcam/azcam/monitor/webserver"  # flit exe changes folder!
 
         static_path = os.path.join(dd, "static")
 
@@ -169,7 +169,7 @@ class WebServer(object):
 
         # get oject and method
         if len(tokens) != 2:
-            raise exceptions.AzcamError("Invalid API command - parse length")
+            raise azcam.exceptions.AzCamError("Invalid API command - parse length")
         obj, method = tokens
 
         # get arguments
@@ -223,7 +223,7 @@ class WebServer(object):
 
         # # security check
         # if obj != "monitor":
-        #     raise exceptions.AzcamError(f"remote call not allowed: {obj}", 4)
+        #     raise azcam.exceptions.AzCamError(f"remote call not allowed: {obj}", 4)
 
         caller = getattr(azcam.db.monitor, command)
 

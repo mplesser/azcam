@@ -9,7 +9,7 @@ import time
 import typing
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 from azcam.tools import Tools
 
 
@@ -65,7 +65,7 @@ class Queue(Tools):
                 mode = 2  # azalt mode
         else:
             if az is not None or alt is not None:
-                raise exceptions.AzcamError("conflicting radec/azalt parameters")
+                raise azcam.exceptions.AzCamError("conflicting radec/azalt parameters")
             else:
                 mode = 1  # radec mode
 
@@ -257,7 +257,7 @@ class Queue(Tools):
             "move_telescope_during_readout",
             "number_cycles",
         ]:
-            exceptions.AzcamError(f"parameter {parameter} for set not recognized")
+            azcam.exceptions.AzCamError(f"parameter {parameter} for set not recognized")
 
         if parameter == "mock":
             self.mock = int(value)

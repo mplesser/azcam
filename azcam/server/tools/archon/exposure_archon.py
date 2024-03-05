@@ -8,7 +8,7 @@ import time
 import numpy
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.exposure import Exposure
 from astropy.io import fits as pyfits
 
@@ -776,12 +776,12 @@ class ReceiveDataArchon(object):
                 else:
                     if self.exposure_flag != self.EF_ABORT:
                         s = "ERROR did not receive entire image buffer"
-                        raise exceptions.AzcamError(s)
+                        raise azcam.exceptions.AzCamError(s)
                     else:
-                        raise exceptions.AzcamError("Exposure ABORTED")
+                        raise azcam.exceptions.AzCamError("Exposure ABORTED")
 
             else:
-                raise exceptions.AzcamError("No frame available for fetching")
+                raise azcam.exceptions.AzCamError("No frame available for fetching")
 
         else:
-            raise exceptions.AzcamError("Wrong frame number")
+            raise azcam.exceptions.AzCamError("Wrong frame number")

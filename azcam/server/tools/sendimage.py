@@ -3,7 +3,7 @@ import socket
 import time
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.tools import Tools
 
 
@@ -90,7 +90,7 @@ class SendImage(Tools):
         elif self.remote_imageserver_type == "ccdacq":
             self.ccdacq_imageserver(localfile, remotefile)
         else:
-            raise exceptions.AzcamError("Unknown remote image server type")
+            raise azcam.exceptions.AzCamError("Unknown remote image server type")
 
     def azcam_imageserver(self, localfile, remotefile=None):
         """
@@ -131,14 +131,14 @@ class SendImage(Tools):
         s1 = "%-256s" % s1
         status = dataserver_socket.send(str.encode(s1))
         if status != 256:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Could not send image header to remote image server"
             )
 
         # get 16 char ASCII header return status from image server
         # reply = dataserver_socket.recv(16)
         # if len(reply) != 16:
-        #    raise exceptions.AzcamError("Did not receive header return status from remote image server")
+        #    raise azcam.exceptions.AzCamError("Did not receive header return status from remote image server")
         # retstat=int(reply[:1])
         # retstat=int(reply)
         retstat = 0
@@ -146,21 +146,25 @@ class SendImage(Tools):
         # check header return status codes
         if retstat != 0:
             if retstat == -1:
-                raise exceptions.AzcamError("Bad reply from remote image server")
+                raise azcam.exceptions.AzCamError("Bad reply from remote image server")
             elif retstat == -2:
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Remote ImageServer not create image filename"
                 )
             elif retstat == -3:  #
-                raise exceptions.AzcamError("Folder does not exist on remote machine")
+                raise azcam.exceptions.AzCamError(
+                    "Folder does not exist on remote machine"
+                )
             else:
-                raise exceptions.AzcamError("Unknown error from remote image server")
+                raise azcam.exceptions.AzCamError(
+                    "Unknown error from remote image server"
+                )
 
         # send file data
         reply = dataserver_socket.send(buff)
 
         if reply != len(buff):
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Did not send entire image file data to remote image server"
             )
 
@@ -174,7 +178,7 @@ class SendImage(Tools):
 
         # check final return status error codes
         if retstat != 0:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Bad final return status from remote image server"
             )
 
@@ -224,14 +228,14 @@ class SendImage(Tools):
         s1 = "%-256s" % s1
         status = dataserver_socket.send(str.encode(s1))
         if status != 256:
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 "Could not send image header to remote DataServer"
             )
 
         # get 16 char ASCII header return status from image server
         # reply = dataserver_socket.recv(16)
         # if len(reply) != 16:
-        #    raise exceptions.AzcamError("Did not receive header return status from remote image server")
+        #    raise azcam.exceptions.AzCamError("Did not receive header return status from remote image server")
         # retstat=int(reply[:1])
         # retstat=int(reply)
         retstat = 0
@@ -239,19 +243,21 @@ class SendImage(Tools):
         # check header return status codes (updated 14jul11)
         if retstat != 0:
             if retstat == 1:  # overwrite existing name wihtout flag
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Remote image server could not create image filename"
                 )
             elif retstat == 2:  # not enough space
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Remote image server does not have enough disk space"
                 )
             elif retstat == 3:  #
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Remote image server reports folder does not exist"
                 )
             else:
-                raise exceptions.AzcamError("Unknown error from remote image server")
+                raise azcam.exceptions.AzCamError(
+                    "Unknown error from remote image server"
+                )
 
         # send file data, new 10Sep13
         numchunks = int(lSize / ImageSendBufferSize)
@@ -273,7 +279,7 @@ class SendImage(Tools):
                 # dataserver_socket.send(str.encode(buff[start:end]))
                 dataserver_socket.send(buff[start:end])
             except Exception as message:
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     f"Did not send image file data to remote image server: {message}"
                 )
         if remainder > 0:
@@ -285,10 +291,10 @@ class SendImage(Tools):
         try:
             reply=dataserver_socket.send(str.encode(buff))
         except Exception as message:
-            raise exceptions.AzcamError("Did not send image file data to remote image server: %s" % message)
+            raise azcam.exceptions.AzCamError("Did not send image file data to remote image server: %s" % message)
 
         if reply!=len(buff):
-            raise exceptions.AzcamError("Did not send entire image file data to remote image server")
+            raise azcam.exceptions.AzCamError("Did not send entire image file data to remote image server")
         """
 
         # get 16 char ASCII final return status from image server
@@ -296,15 +302,15 @@ class SendImage(Tools):
         try:
             reply = dataserver_socket.recv(16)
         except:
-            raise exceptions.AzcamError("Did not receive return status from remote image server")
+            raise azcam.exceptions.AzCamError("Did not receive return status from remote image server")
 
         if len(reply) != 2:
-            raise exceptions.AzcamError("Did not receive entire return status from remote image server")
+            raise azcam.exceptions.AzCamError("Did not receive entire return status from remote image server")
         retstat=int(reply[:1])
 
         # check final return status error codes
         if retstat != 0:
-            raise exceptions.AzcamError("Bad final return status from remote image server")
+            raise azcam.exceptions.AzCamError("Bad final return status from remote image server")
         """
 
         # close socket
@@ -321,7 +327,7 @@ class SendImage(Tools):
         # open image file on disk
         with open(localfile, "rb") as gfile:
             if not gfile:
-                raise exceptions.AzcamError(f"Could not open local image file")
+                raise azcam.exceptions.AzCamError(f"Could not open local image file")
             lSize = os.path.getsize(localfile)
             buff = gfile.read()
 
@@ -335,16 +341,18 @@ class SendImage(Tools):
             )
         except Exception as message:
             guidesocket.close()
-            raise exceptions.AzcamError(f"LBT guider ImageServer not opened: {message}")
+            raise azcam.exceptions.AzCamError(
+                f"LBT guider ImageServer not opened: {message}"
+            )
 
         # send filesize in bytes, \r\n terminated
         sockBuf = "%d\r\n" % lSize
         if guidesocket.send(str.encode(sockBuf)) != len(sockBuf):
-            raise exceptions.AzcamError(f"GuideSocket send error")
+            raise azcam.exceptions.AzCamError(f"GuideSocket send error")
 
         # send file data
         if guidesocket.send(buff) != len(buff):
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 f"Could not send all image file data to LBT ImageServer"
             )
 
@@ -368,22 +376,24 @@ class SendImage(Tools):
             )
         except Exception as message:
             ccdacqsocket.close()
-            raise exceptions.AzcamError(f"ccdacq image server not opened: {message}")
+            raise azcam.exceptions.AzCamError(
+                f"ccdacq image server not opened: {message}"
+            )
 
         # send header
         s1 = "%d %d\r\n" % (self.size_x, self.size_y)
         if ccdacqsocket.send(str.encode(s1)) != len(s1):
-            raise exceptions.AzcamError(f"socket send error header1")
+            raise azcam.exceptions.AzCamError(f"socket send error header1")
 
         s1 = "NoFilename NoImageType\r\n"
         if ccdacqsocket.send(str.encode(s1)) != len(s1):
-            raise exceptions.AzcamError(f"socket send error header2")
+            raise azcam.exceptions.AzCamError(f"socket send error header2")
 
         # send file data
         buff = azcam.db.tools["exposure"].image.data[0]
         numsent = ccdacqsocket.send(buff)
         if numsent != 2 * len(buff):
-            raise exceptions.AzcamError(
+            raise azcam.exceptions.AzCamError(
                 f"Could not send all image data to ccdacq server"
             )
 

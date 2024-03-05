@@ -3,7 +3,7 @@ import importlib.util
 import os
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 def loadscripts(packages: list) -> None:
@@ -35,6 +35,6 @@ def loadscripts(packages: list) -> None:
                 azcam.db.cli[pfile] = func
             except Exception as e:
                 azcam.log(e)
-                exceptions.warning(f"Could not import script {pfile}")
+                azcam.exceptions.warning(f"Could not import script {pfile}")
 
     return

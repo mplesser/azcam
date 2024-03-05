@@ -6,7 +6,7 @@ import os
 import time
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.controller import Controller
 
 from .camera_server import CameraServerInterface
@@ -80,7 +80,7 @@ class ControllerMag(Controller):
         except azcam.AzcamError as e:
             # warn about reset
             if e.error_code == 1:
-                exceptions.warning("Controller not reset: check power")
+                azcam.exceptions.warning("Controller not reset: check power")
                 return
 
         self.remove_read_lock()
@@ -115,7 +115,7 @@ class ControllerMag(Controller):
             self.initialized = True
             return
         else:
-            raise exceptions.AzcamError("Could not initialize controller")
+            raise azcam.exceptions.AzCamError("Could not initialize controller")
 
         return
 
@@ -258,7 +258,9 @@ class ControllerMag(Controller):
         for _ in range(Loops):
             status = self.magio("dsp_echo", value)
             if status[0] != "OK":
-                raise exceptions.AzcamError("Comminication with controller failed")
+                raise azcam.exceptions.AzCamError(
+                    "Comminication with controller failed"
+                )
 
         return
 

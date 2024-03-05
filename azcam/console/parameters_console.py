@@ -8,6 +8,7 @@ import typing
 
 import azcam
 import azcam.utils
+import azcam.exceptions
 from azcam.parameters import Parameters
 
 

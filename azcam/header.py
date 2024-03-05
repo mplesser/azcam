@@ -7,7 +7,7 @@ import typing
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 
 
 class Header(object):
@@ -324,7 +324,7 @@ class Header(object):
             return
 
         if not os.path.exists(filename):
-            exceptions.warning("Header file not found:%s" % filename)
+            azcam.exceptions.warning("Header file not found:%s" % filename)
             return
 
         with open(filename, "r") as f1:

@@ -1,5 +1,5 @@
 """
-azcammonitor class
+AzCamMonitor class
 """
 
 import configparser
@@ -12,10 +12,10 @@ import threading
 import time
 
 import azcam
-from azcam.server.monitor.webserver.monitor_webserver import WebServer
-from azcam.server.monitor.monitor_udp import UDP_aux
-from azcam.server.monitor.monitor_watchdog import MonitorWatchdog
-from azcam.server.monitor.monitor_processes import MonitorProcesses
+from azcam.monitor.webserver.monitor_webserver import WebServer
+from azcam.monitor.monitor_udp import UDP_aux
+from azcam.monitor.monitor_watchdog import MonitorWatchdog
+from azcam.monitor.monitor_processes import MonitorProcesses
 
 
 class DataItem(object):

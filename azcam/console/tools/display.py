@@ -4,8 +4,8 @@ This tool is often implemented both by server and console.
 """
 
 import azcam
-from azcam import exceptions
-from azcam import exceptions
+import azcam.exceptions
+import azcam.exceptions
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools import Tools
 
@@ -41,7 +41,7 @@ class Display(Tools, ObjectHeaderMethods):
             return
 
         if not self.enabled:
-            exceptions.warning("Display is not enabled")
+            azcam.exceptions.warning("Display is not enabled")
             return
 
         self.set_display(self.default_display)

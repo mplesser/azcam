@@ -4,7 +4,7 @@ import time
 import numpy
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 class ReceiveData(object):
@@ -145,10 +145,10 @@ class ReceiveData(object):
                     data_size,
                 )
                 self.socket.close()
-                raise exceptions.AzcamError(s)
+                raise azcam.exceptions.AzCamError(s)
             else:
                 self.socket.close()
-                raise exceptions.AzcamError(
+                raise azcam.exceptions.AzCamError(
                     "Aborted in receive_image_data", error_code=3
                 )
         self.socket.close()

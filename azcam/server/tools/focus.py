@@ -6,7 +6,7 @@ import time
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 from azcam.tools import Tools
 
 
@@ -206,7 +206,7 @@ class Focus(Tools):
         self.exposure.set_exposuretime(self.exposure_time)
         ExpTime = self.exposure.get_exposuretime()
         if ExpTime < 0.001:
-            exceptions.warning("do not focus with zero exposure time")
+            azcam.exceptions.warning("do not focus with zero exposure time")
             return
         self.exposure.set_exposuretime(self.exposure_time)
 

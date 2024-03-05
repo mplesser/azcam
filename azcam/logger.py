@@ -7,7 +7,7 @@ import socket
 from typing import List
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 import loguru
 
 
@@ -136,7 +136,7 @@ class AzCamLogger(object):
         if "3" in logtype:
             if logfile is None:
                 if self.logfile is None:
-                    raise exceptions.AzcamError("no logfile specified")
+                    raise azcam.exceptions.AzCamError("no logfile specified")
             else:
                 self.logfile = logfile
             if use_timestamp:

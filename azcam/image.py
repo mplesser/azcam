@@ -9,7 +9,7 @@ import warnings
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 import numpy
 from astropy.io import fits as pyfits
 from azcam.header import Header
@@ -162,7 +162,7 @@ class Image(object):
         elif filetype == 6:
             self._write_asm_fits_file(filename)
         else:
-            raise exceptions.AzcamError("Invalid filetype for Image")
+            raise azcam.exceptions.AzCamError("Invalid filetype for Image")
 
         # optionally make a lock file indicating the image file has been written
         if self.make_lockfile:
@@ -182,7 +182,7 @@ class Image(object):
         """
 
         if not self.valid:
-            raise exceptions.AzcamError("image is not valid")
+            raise azcam.exceptions.AzCamError("image is not valid")
 
         if self.assembled:
             return

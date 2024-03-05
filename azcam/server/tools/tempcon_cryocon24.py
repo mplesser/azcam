@@ -6,7 +6,7 @@ import socket
 import threading
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.tempcon import TempCon
 
 """
@@ -57,7 +57,7 @@ class TempConCryoCon24(TempCon):
         if self.initialized:
             return
         if not self.enabled:
-            exceptions.warning(f"{self.description} is not enabled")
+            azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
         # recreate in case host/port changed
@@ -67,7 +67,7 @@ class TempConCryoCon24(TempCon):
         try:
             self.server.command("*IDN?;")
         except socket.timeout as e:
-            exceptions.warning("Could not query temperature controller: {e}")
+            azcam.exceptions.warning("Could not query temperature controller: {e}")
             return
 
         # set PID mode
@@ -128,11 +128,11 @@ class TempConCryoCon24(TempCon):
         """
 
         if not self.enabled:
-            # exceptions.warning("Tempcon not enabled")
+            # azcam.exceptions.warning("Tempcon not enabled")
             return -999.9
 
         if not self.initialized:
-            # exceptions.warning("Tempcon not initialized")
+            # azcam.exceptions.warning("Tempcon not initialized")
             return -999.9
 
         temperature_id = int(temperature_id)
@@ -145,7 +145,7 @@ class TempConCryoCon24(TempCon):
         elif temperature_id == 3:
             tempstr = "INPUT? D;"
         else:
-            raise exceptions.AzcamError("bad temperature_id in get_temperature")
+            raise azcam.exceptions.AzCamError("bad temperature_id in get_temperature")
 
         reply = self.server.command(tempstr)
         try:

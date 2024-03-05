@@ -3,7 +3,7 @@ Contains the CameraServerInterface class for Magelllan controllers.
 """
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 import azcam.sockets
 
 
@@ -47,7 +47,7 @@ class CameraServerInterface(object):
                 return reply
             except Exception as e:
                 if e.error_code == 2:
-                    raise exceptions.AzcamError("Could not connect to camserver")
+                    raise azcam.exceptions.AzCamError("Could not connect to camserver")
 
     def test(self):
         """

@@ -3,7 +3,7 @@ Contains the base TempConMag class.
 """
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.tempcon import TempCon
 
 
@@ -26,11 +26,11 @@ class TempConMag(TempCon):
         """
 
         if not self.enabled:
-            # exceptions.warning("Tempcon not enabled")
+            # azcam.exceptions.warning("Tempcon not enabled")
             return -999.9
 
         if not self.initialized:
-            # exceptions.warning("Tempcon not initialized")
+            # azcam.exceptions.warning("Tempcon not initialized")
             return -999.9
 
         itemp1 = itemp = 0.0

@@ -11,7 +11,7 @@ except Exception as e:
     print(e)
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.server.tools.controller import Controller
 
 
@@ -149,7 +149,7 @@ class ControllerASCOM(Controller):
         if wait:
             while not flag:
                 if count > 100:
-                    raise exceptions.AzcamError("Camera timeout reading image")
+                    raise azcam.exceptions.AzCamError("Camera timeout reading image")
                 time.sleep(0.05)
                 count += 1
                 # print("waiting...")

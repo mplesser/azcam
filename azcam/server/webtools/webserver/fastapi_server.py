@@ -37,7 +37,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 class WebServer(object):
@@ -259,7 +259,9 @@ class WebServer(object):
                     objid = None  # too complicated for now
 
             else:
-                raise exceptions.AzcamError(f"remote call not allowed in API: {obj}", 4)
+                raise azcam.exceptions.AzCamError(
+                    f"remote call not allowed in API: {obj}", 4
+                )
 
             caller = getattr(objid, method)
             reply = caller() if kwargs is None else caller(**kwargs)
@@ -302,7 +304,7 @@ class WebServer(object):
 
         # get oject and method
         if len(tokens) != 2:
-            raise exceptions.AzcamError("Invalid API command - parse length")
+            raise azcam.exceptions.AzCamError("Invalid API command - parse length")
         obj, method = tokens
 
         # get arguments

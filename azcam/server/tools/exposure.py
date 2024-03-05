@@ -8,9 +8,10 @@ import threading
 import time
 from typing import Union, List, Optional
 
-import azcam
-from azcam import exceptions
 import numpy
+
+import azcam
+import azcam.exceptions
 from azcam.server.tools.exposure_filename import Filename
 from azcam.server.tools.exposure_obstime import ObsTime
 from azcam.header import Header, ObjectHeaderMethods
@@ -300,7 +301,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         # if last exposure was aborted, warn before clearing flag
         if self.exposure_flag == self.exposureflags["ABORT"]:
-            exceptions.warning("Previous exposure was aborted")
+            azcam.exceptions.warning("Previous exposure was aborted")
 
         # begin
         if self.exposure_flag != self.exposureflags["ABORT"]:
@@ -411,7 +412,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.flush_array = flusharray
 
         if AbortFlag:
-            exceptions.warning("Guide aborted")
+            azcam.exceptions.warning("Guide aborted")
         else:
             azcam.log("Guide finished")
 

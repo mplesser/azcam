@@ -15,7 +15,7 @@ except Exception:
     pass
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 
 
 def curdir(folder: str = "") -> str:
@@ -250,7 +250,7 @@ def check_keyboard(wait: bool = False) -> str:
     # TODO: map sequences like 'F1'
 
     if os.name != "nt":
-        raise exceptions.AzcamError("check_keyboard not supported on this OS")
+        raise azcam.exceptions.AzCamError("check_keyboard not supported on this OS")
 
     loop = 1
     key = ""
@@ -305,7 +305,7 @@ def show_menu(configs: dict) -> str:
         print("Enter configuration number: ", end="")
         choiceindex = input()
         if choiceindex == "q":
-            exceptions.warning("Quit detected")
+            azcam.exceptions.warning("Quit detected")
             return
         try:
             choiceindex = int(choiceindex)

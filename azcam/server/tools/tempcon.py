@@ -5,7 +5,7 @@ Contains the base TempCon class.
 from typing import List
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools import Tools
 from typing import Union, List, Optional
@@ -243,7 +243,7 @@ class TempCon(Tools, ObjectHeaderMethods):
             value = self.header.values[keyword]
             temp = value
         else:
-            raise exceptions.AzcamError(f"invalid keyword: {keyword}")
+            raise azcam.exceptions.AzCamError(f"invalid keyword: {keyword}")
 
         # store temperature values in header
         if keyword == "CAMTEMP":

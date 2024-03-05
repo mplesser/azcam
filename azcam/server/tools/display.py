@@ -6,7 +6,7 @@ This tool is often implemented both by server and console.
 import azcam
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.tools import Tools
-from azcam import exceptions
+import azcam.exceptions
 
 
 class Display(Tools, ObjectHeaderMethods):
@@ -40,7 +40,7 @@ class Display(Tools, ObjectHeaderMethods):
             return
 
         if not self.enabled:
-            exceptions.warning("Display is not enabled")
+            azcam.exceptions.warning("Display is not enabled")
             return
 
         self.set_display(self.default_display)

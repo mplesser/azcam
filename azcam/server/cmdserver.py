@@ -11,7 +11,7 @@ from typing import Callable
 
 import azcam
 import azcam.utils
-from azcam import exceptions
+import azcam.exceptions
 
 
 class CommandServer(socketserver.ThreadingTCPServer):
@@ -217,7 +217,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
             # get method from db.default_tool
             if azcam.db.default_tool is None:
                 s = f"command not recognized: {cmd} "
-                raise exceptions.AzcamError(s)
+                raise azcam.exceptions.AzCamError(s)
             else:
                 objid = getattr(azcam.db.tools[azcam.db.default_tool], cmd)
 
@@ -245,7 +245,9 @@ class CommandServer(socketserver.ThreadingTCPServer):
                 return objid, args, kwargs
 
             elif objects[0] not in azcam.db.tools:
-                raise exceptions.AzcamError(f"remote call not allowed: {objects[0]}", 4)
+                raise azcam.exceptions.AzCamError(
+                    f"remote call not allowed: {objects[0]}", 4
+                )
 
             if len(objects) == 1:
                 objid = azcam.db.tools[objects[0]]

@@ -3,7 +3,7 @@ Contains the CameraServerInterface class for ARC controllers.
 """
 
 import azcam
-from azcam import exceptions
+import azcam.exceptions
 import azcam.sockets
 
 
@@ -47,9 +47,9 @@ class CameraServerInterface(object):
                 return reply
             except azcam.AzcamError as e:
                 if e.error_code == 2:
-                    raise exceptions.AzcamError("Could not connect to camserver")
+                    raise azcam.exceptions.AzCamError("Could not connect to camserver")
                 else:
-                    raise exceptions.AzcamError("Could not connect to camserver")
+                    raise azcam.exceptions.AzCamError("Could not connect to camserver")
 
     def test(self):
         """
