@@ -1,0 +1,3 @@
+"""
+azcamconsole scripts
+"""

@@ -214,16 +214,3 @@ class AzCamMonitor(
         self.webserver = WebServer()
         self.webserver.azcammonitor = self
         self.webserver.start()
-
-
-# start process
-azcammonitor = AzCamMonitor()
-azcammonitor.load_configfile()
-azcammonitor.start_udp_server()
-azcammonitor.start_watchdog()
-
-thread = threading.Thread(target=azcammonitor.start_webserver, name="webserver")
-thread.start()
-
-
-# azcammonitor.start_webserver()

@@ -16,7 +16,7 @@ from azcam.console.tools import create_console_tools
 from azcam.observe.observe_qt.observe_qt import ObserveQt
 
 
-def start():
+def main():
     """
     Start observe GUI as a command.
     Usage examples:
@@ -25,7 +25,7 @@ def start():
     """
 
     # app setup
-    azcam.db.systemname = "observe"
+    azcam.db.systemname = "azcamobserve"
     azcam.db.systemfolder = f"{os.path.dirname(__file__)}"
 
     try:
@@ -67,4 +67,4 @@ def start():
 
 
 if __name__ == "__main__":
-    start()
+    main()
