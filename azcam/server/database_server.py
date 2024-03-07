@@ -9,7 +9,7 @@ from azcam.database import AzcamDatabase
 from azcam.server.parameters_server import ParametersServer
 from azcam.server.cmdserver import CommandServer
 from azcam.server.webtools.webserver.fastapi_server import WebServer
-from azcam.server.monitor.monitorinterface import AzCamMonitorInterface
+from azcam.monitor.monitorinterface import AzCamMonitorInterface
 
 
 class AzcamDatabaseServer(AzcamDatabase):

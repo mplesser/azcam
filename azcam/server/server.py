@@ -11,7 +11,7 @@ from azcam.server.parameters_server import ParametersServer
 from azcam.server.database_server import AzcamDatabaseServer
 from azcam.server.cmdserver import CommandServer
 
-from azcam.server.monitor.monitorinterface import AzCamMonitorInterface
+from azcam.monitor.monitorinterface import AzCamMonitorInterface
 
 
 def setup_server():
