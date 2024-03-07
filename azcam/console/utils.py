@@ -1,11 +1,12 @@
 """
-# azcam.console.utils.py
+azcam.console.utils.py
 """
 
 import os
 import sys
-import tkinter
-import tkinter.filedialog
+
+from PySide6.QtWidgets import QFileDialog
+
 
 if os.name == "nt":
     import winsound
@@ -248,50 +249,34 @@ def find_file(filename, include_curdir=False) -> str:
 
 
 def file_browser(
-    Path: str = "", SelectString: str = "*.*", Label: str = ""
+    path: str = "", select_string: str = "*.*", label: str = ""
 ) -> list | None:
     """
-    Filebrowser GUI to select files.  This is the tcl/tk version.
+    Filebrowser GUI to select files.  This is the Qt version.
 
     Args:
-        Path: Starting path for selection.
-        SelectString: Selection string like [('all files',('*.*'))] or *folder* to select folders.
-        Label: Dialog box label.
+        path: Starting path for selection.
+        select_string: Selection string like [('all files',('*.*'))] or *folder* to select folders.
+        label: Dialog window label.
     Returns:
         list of selected files/folders or None
     """
 
-    tkinter.Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
-
-    options = {}
-
-    if Path != "":
-        options["initialdir"] = Path if os.path.isdir(Path) else os.path.dirname(Path)
-    else:
-        options["initialdir"] = ""
-
-    if SelectString == "folder":
-        options["mustexist"] = True
-        options["title"] = "Select folder" if Label == "" else Label
-        folder = tkinter.filedialog.askdirectory(**options)
-        if folder is None:
-            return
-        if folder == "":
-            folder = None
-        return [folder]
-
-    else:
-        options["title"] = "Select file(s)" if Label == "" else Label
-        options["multiple"] = True
-
-        # get filetypes string
-        if SelectString == "*.*":
-            options["filetypes"] = [("all files", "*.*")]
+    if select_string == "folder":
+        data = QFileDialog.getExistingDirectory(caption=label, dir=path)
+        if data == "":
+            data = None
         else:
-            options["filetypes"] = SelectString
+            data = [data]
+    else:
+        data = QFileDialog.getOpenFileNames(
+            caption=label,
+            dir=path,
+            filter=select_string,
+        )
+        if data[0] == []:
+            data = None
+        else:
+            data = data[0]
 
-        filename = tkinter.filedialog.askopenfilename(**options)
-        if filename == "":
-            filename = None
-
-        return [filename]
+    return data

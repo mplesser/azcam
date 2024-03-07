@@ -19,5 +19,3 @@ See also https://github.com/mplesser/azcam-tool.git for the standard GUI used by
 `pip install azcam`
 
 Or download the latest version from from github: https://github.com/mplesser/azcam.git.
-
-You may need to install `python3-tk` on Linux systems [`sudo apt-get install python3-tk`].
