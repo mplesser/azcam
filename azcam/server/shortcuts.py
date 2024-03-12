@@ -54,9 +54,9 @@ def pp():
 def wc():
     """Shortcut to toggle webserver command logging to console."""
 
-    old = azcam.db.tools["webserver"].logcommands
+    old = azcam.db.webserver.logcommands
     new = not old
-    azcam.db.tools["webserver"].logcommands = new
+    azcam.db.webserver.logcommands = new
     print("webserver logcommands is now %s" % ("ON" if new else "OFF"))
 
     return

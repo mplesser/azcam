@@ -61,6 +61,8 @@ class WebServer(object):
 
         self.is_running = 0
 
+        azcam.db.webserver = self
+
     def initialize(self):
         """
         Initialize application.
@@ -148,10 +150,10 @@ class WebServer(object):
 
             if self.logcommands:
                 if self.logstatus:
-                    azcam.log(url, prefix="Web-> ")
+                    azcam.log(url, qpars, prefix="Web-> ")
                 else:
                     if not ("/get_status" in url or "/watchdog" in url):
-                        azcam.log(url, prefix="Web-> ")
+                        azcam.log(url, qpars, prefix="Web-> ")
 
             reply = self.web_command(url, qpars)
 

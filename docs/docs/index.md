@@ -289,13 +289,13 @@ If you have troubles, close the console window and start again.
    
 ## Non-GUI Use
 
-It is still possible to run *observe* without the GUI, although this mode is depricated.
+It is still possible to run *observe* without the GUI, although this mode is deprecated.
 
 ## Misc
 
 Import observe for observing command use:
 ```
-from azcam.server.tools.observe.observe import Observe
+from azcam.observe.observe_cli.observe_cli import ObserveCli
 ```
 
 ```
@@ -304,7 +304,7 @@ from azcam.server.tools.observe.observe import Observe
 
 This block shows some direct commands
 ```
-observe = Observe()
+observe = ObserveCli()
 observe.test(et=1.0,object="flat", filter="400")
 observe.comment("a different new comment 123")
 observe.delay(1)
