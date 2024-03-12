@@ -291,7 +291,7 @@ If you have troubles, close the console window and start again.
 
 It is still possible to run *observe* without the GUI, although this mode is depricated.
 
-# Misc
+## Misc
 
 Import observe for observing command use:
 ```
