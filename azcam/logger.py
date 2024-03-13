@@ -23,9 +23,7 @@ class AzCamLogger(object):
         self.last_data = []  # data since last call to get_data
         self.last_data_max = 1024  # max entries in last_data buffer
 
-    def log(
-        self, message: str, *args: List[str], prefix: str = "Log-> ", level: int = 1
-    ):
+    def log(self, message: str, *args: List[str], prefix: str = "", level: int = 1):
         """
         Send a message to the logging system.
 
@@ -39,7 +37,7 @@ class AzCamLogger(object):
         Args:
             message: String message to be logged
             args: Additional string message to be logged
-            prefix: Prefix to be prepended to logged message, ex: 'log> '
+            prefix: Prefix to be prepended to logged message, ex: 'Log-> '
             level: verbosity level for output
 
         """
@@ -121,7 +119,6 @@ class AzCamLogger(object):
                 # backtrace=True,
                 # diagnose=True,
             )
-            # azcam.log("Logging to console")
 
         # socket handler
         if "2" in logtype:
