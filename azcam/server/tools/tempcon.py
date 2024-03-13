@@ -243,7 +243,7 @@ class TempCon(Tools, ObjectHeaderMethods):
             value = self.header.values[keyword]
             temp = value
         else:
-            raise azcam.exceptions.AzCamError(f"invalid keyword: {keyword}")
+            raise azcam.exceptions.AzcamError(f"invalid keyword: {keyword}")
 
         # store temperature values in header
         if keyword == "CAMTEMP":

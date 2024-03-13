@@ -403,7 +403,7 @@ def plot_image(
         z1 = m - scale_factor
         z2 = m + scale_factor
     else:
-        raise azcam.exceptions.AzCamError("unrecognized scale_type")
+        raise azcam.exceptions.AzcamError("unrecognized scale_type")
 
     plt.imshow(azimage.buffer, cmap=cmap, vmin=z1, vmax=z2, origin="lower")
 

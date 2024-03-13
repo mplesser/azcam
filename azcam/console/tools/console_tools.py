@@ -185,7 +185,7 @@ class ServerConnection(object):
         except azcam.AzcamError as e:
             if e.error_code == 2:
                 raise
-                # raise azcam.exceptions.AzCamError("could not connect to server")
+                # raise azcam.exceptions.AzcamError("could not connect to server")
             else:
                 raise
 
@@ -194,8 +194,8 @@ class ServerConnection(object):
 
         # status for socket communications is OK or ERROR
         if reply[0] == "ERROR":
-            # raise azcam.exceptions.AzCamError(f"command error: {' '.join(reply[1:])}")
-            raise azcam.exceptions.AzCamError(f"command error: {reply}")
+            # raise azcam.exceptions.AzcamError(f"command error: {' '.join(reply[1:])}")
+            raise azcam.exceptions.AzcamError(f"command error: {reply}")
         elif reply[0] == "OK":
             if len(reply) == 1:
                 return None
@@ -204,7 +204,7 @@ class ServerConnection(object):
             else:
                 return reply[1:]
         else:
-            raise azcam.exceptions.AzCamError(
+            raise azcam.exceptions.AzcamError(
                 f"invalid server response: { ' '.join(reply)}"
             )
 

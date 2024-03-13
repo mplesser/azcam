@@ -149,7 +149,7 @@ class ControllerASCOM(Controller):
         if wait:
             while not flag:
                 if count > 100:
-                    raise azcam.exceptions.AzCamError("Camera timeout reading image")
+                    raise azcam.exceptions.AzcamError("Camera timeout reading image")
                 time.sleep(0.05)
                 count += 1
                 # print("waiting...")

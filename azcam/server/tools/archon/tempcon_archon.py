@@ -65,7 +65,7 @@ class TempConArchon(TempCon):
         elif temperature_id == 2:
             Address = f"{self.heaterx_board}/TEMPC"
         else:
-            raise azcam.exceptions.AzCamError("bad temperature_id in get_temperature")
+            raise azcam.exceptions.AzcamError("bad temperature_id in get_temperature")
 
         # Don't read hardware while exposure is in progess
         flag = azcam.db.tools["exposure"].exposure_flag

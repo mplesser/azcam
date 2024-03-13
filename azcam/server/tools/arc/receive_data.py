@@ -145,10 +145,10 @@ class ReceiveData(object):
                     data_size,
                 )
                 self.socket.close()
-                raise azcam.exceptions.AzCamError(s)
+                raise azcam.exceptions.AzcamError(s)
             else:
                 self.socket.close()
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     "Aborted in receive_image_data", error_code=3
                 )
         self.socket.close()

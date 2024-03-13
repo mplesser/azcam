@@ -217,7 +217,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
             # get method from db.default_tool
             if azcam.db.default_tool is None:
                 s = f"command not recognized: {cmd} "
-                raise azcam.exceptions.AzCamError(s)
+                raise azcam.exceptions.AzcamError(s)
             else:
                 objid = getattr(azcam.db.tools[azcam.db.default_tool], cmd)
 
@@ -245,7 +245,7 @@ class CommandServer(socketserver.ThreadingTCPServer):
                 return objid, args, kwargs
 
             elif objects[0] not in azcam.db.tools:
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     f"remote call not allowed: {objects[0]}", 4
                 )
 

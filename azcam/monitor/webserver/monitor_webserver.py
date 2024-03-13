@@ -169,7 +169,7 @@ class WebServer(object):
 
         # get oject and method
         if len(tokens) != 2:
-            raise azcam.exceptions.AzCamError("Invalid API command - parse length")
+            raise azcam.exceptions.AzcamError("Invalid API command - parse length")
         obj, method = tokens
 
         # get arguments
@@ -223,7 +223,7 @@ class WebServer(object):
 
         # # security check
         # if obj != "monitor":
-        #     raise azcam.exceptions.AzCamError(f"remote call not allowed: {obj}", 4)
+        #     raise azcam.exceptions.AzcamError(f"remote call not allowed: {obj}", 4)
 
         caller = getattr(azcam.db.monitor, command)
 

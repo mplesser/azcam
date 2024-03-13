@@ -519,8 +519,9 @@ class ArchonFileConverter(object):
         self.ext_name = sensor_data["ext_name"]
         self.ext_number = sensor_data["ext_number"]
         self.jpg_ext = sensor_data["jpg_order"]
-        self.amp_cfg = sensor_data["amp_cfg"]
-        # self.amp_cfg = azcam.db.tools["exposure"].image.focalplane.amp_cfg
+
+        # maybe fix this
+        self.amp_cfg = self.focalplane[4]
 
         self.extpos_x = [x[0] for x in sensor_data["ext_position"]]
         self.extpos_y = [x[1] for x in sensor_data["ext_position"]]
@@ -776,12 +777,12 @@ class ReceiveDataArchon(object):
                 else:
                     if self.exposure_flag != self.EF_ABORT:
                         s = "ERROR did not receive entire image buffer"
-                        raise azcam.exceptions.AzCamError(s)
+                        raise azcam.exceptions.AzcamError(s)
                     else:
-                        raise azcam.exceptions.AzCamError("Exposure ABORTED")
+                        raise azcam.exceptions.AzcamError("Exposure ABORTED")
 
             else:
-                raise azcam.exceptions.AzCamError("No frame available for fetching")
+                raise azcam.exceptions.AzcamError("No frame available for fetching")
 
         else:
-            raise azcam.exceptions.AzCamError("Wrong frame number")
+            raise azcam.exceptions.AzcamError("Wrong frame number")

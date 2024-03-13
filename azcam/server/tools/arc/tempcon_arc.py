@@ -104,7 +104,7 @@ class TempConArc(TempCon):
         elif temperature_id == 2:
             Address = 12
         else:
-            raise azcam.exceptions.AzCamError("bad temperature_id in get_temperature")
+            raise azcam.exceptions.AzcamError("bad temperature_id in get_temperature")
 
         temperature_id = int(temperature_id)
 
@@ -124,7 +124,7 @@ class TempConArc(TempCon):
                 counts = int(reply)
                 avecount += counts
         except ValueError:
-            raise azcam.exceptions.AzCamError("could not read temperature")
+            raise azcam.exceptions.AzcamError("could not read temperature")
         counts = avecount / self.num_temp_reads
 
         # convert from counts to Celsius
@@ -315,7 +315,7 @@ class TempConArc(TempCon):
             return temp
 
         else:
-            raise azcam.exceptions.AzCamError("ConvertCountsToTemp", "invalid calflag")
+            raise azcam.exceptions.AzcamError("ConvertCountsToTemp", "invalid calflag")
 
     def convert_temp_to_counts(self, calflag: int, temperature: float) -> float:
         """
@@ -346,6 +346,6 @@ class TempConArc(TempCon):
             ) + 2048
 
         else:
-            raise azcam.exceptions.AzCamError("convert_temp_to_counts invalid calflag")
+            raise azcam.exceptions.AzcamError("convert_temp_to_counts invalid calflag")
 
         return counts

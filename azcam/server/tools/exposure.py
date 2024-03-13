@@ -6,6 +6,7 @@ import datetime
 import os
 import threading
 import time
+import ast
 from typing import Union, List, Optional
 
 import numpy
@@ -1183,12 +1184,20 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         numdet_y defines number of detectors in Row direction.
         numamps_x defines number of amplifiers in Column direction.
         numamps_y defines number of amplifiers in Row direction.
-        amp_cfg defines each amplifier's orientation (ex: '1223').
+        amp_cfg defines each amplifier's orientation (ex: [1,2,2,3]).
         0 - normal
         1 - flip x
         2 - flip y
         3 - flip x and y
         """
+
+        # set type as could have some from socket string
+        numdet_x = int(numdet_x)
+        numdet_y = int(numdet_y)
+        numamps_x = int(numamps_x)
+        numamps_y = int(numamps_y)
+        if type(amp_cfg) == str:
+            amp_cfg = ast.literal_eval(amp_cfg)
 
         # update image.focalplane
         reply = self.image.focalplane.set_focalplane(

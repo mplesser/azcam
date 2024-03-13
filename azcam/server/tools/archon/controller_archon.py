@@ -235,7 +235,7 @@ class ControllerArchon(Controller):
 
         with self.lock:
             if not self.camserver.open():
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     "Could not open connection to controller"
                 )
 
@@ -260,9 +260,9 @@ class ControllerArchon(Controller):
                     return reply[3:]
                 else:
                     if reply[0] == "?":
-                        raise azcam.exceptions.AzCamError("Archon response not valid")
+                        raise azcam.exceptions.AzcamError("Archon response not valid")
                     else:
-                        raise azcam.exceptions.AzCamError("Archon response out of sync")
+                        raise azcam.exceptions.AzcamError("Archon response out of sync")
 
         return None  # no Archon reponse is OK
 
@@ -313,7 +313,7 @@ class ControllerArchon(Controller):
             azcam.log("Power status: ", self.power_status, level=2)
             self.power_on(1)
         elif self.power_status != "ON":
-            raise azcam.exceptions.AzCamError(f"Bad power status: {self.power_status}")
+            raise azcam.exceptions.AzcamError(f"Bad power status: {self.power_status}")
 
         self.initialized = 1
 
@@ -342,7 +342,7 @@ class ControllerArchon(Controller):
         # Connect to controller
         self.connect()
         if not self.connected_controller:
-            raise azcam.exceptions.AzCamError("coud not connect to controller")
+            raise azcam.exceptions.AzcamError("coud not connect to controller")
 
         self.warmboot()
         self.disconnect()
@@ -369,7 +369,7 @@ class ControllerArchon(Controller):
                 cnt += 1
 
         if self.status_valid != 1:
-            raise azcam.exceptions.AzCamError("Controller reboot error")
+            raise azcam.exceptions.AzcamError("Controller reboot error")
 
         # reconnect to controller
         self.connect()
@@ -390,7 +390,7 @@ class ControllerArchon(Controller):
         if reply in ["OFF", "NOT_CONFIGURED"]:
             self.power_on(1)
         else:
-            raise azcam.exceptions.AzCamError("Bad controller power status")
+            raise azcam.exceptions.AzcamError("Bad controller power status")
 
         return
 
@@ -502,7 +502,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Config data not loaded")
+            raise azcam.exceptions.AzcamError("Config data not loaded")
         valPixels = 0
         valLines = 0
 
@@ -515,9 +515,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 valPixels = int(paramStr[2])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
         indxParam = self.dict_wconfig[self.dict_params["Lines"]]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -528,9 +528,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 valLines = int(paramStr[2])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
         return [valPixels, valLines]
 
@@ -540,7 +540,7 @@ class ControllerArchon(Controller):
         """
 
         if len(self.dict_config) <= 0:
-            raise azcam.exceptions.AzCamError("Config data not loaded")
+            raise azcam.exceptions.AzcamError("Config data not loaded")
         if self.lines != Lines:
             self.lines = Lines
 
@@ -621,7 +621,7 @@ class ControllerArchon(Controller):
         self.dict_wconfig = {}
 
         if len(self.config_data) == 0:
-            raise azcam.exceptions.AzCamError("No configuration data")
+            raise azcam.exceptions.AzcamError("No configuration data")
 
         self.poll(0)
 
@@ -804,7 +804,7 @@ class ControllerArchon(Controller):
             if reply == "OFF" or reply == "NOT_CONFIGURED":
                 self.power_on(1)
             else:
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     "Power status not OFF or NOT_CONFIGURED"
                 )
 
@@ -937,7 +937,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig[self.dict_params["ContinuousExposures"]]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -948,9 +948,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 return int(paramStr[2])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
         return
 
@@ -960,7 +960,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.cont_exp = int(cont_exp)
 
@@ -1014,7 +1014,7 @@ class ControllerArchon(Controller):
 
             return self.parameters
         else:
-            raise azcam.exceptions.AzCamError("Configuration data error")
+            raise azcam.exceptions.AzcamError("Configuration data error")
 
     def get_parameter(self, Param):
         """
@@ -1046,9 +1046,9 @@ class ControllerArchon(Controller):
             if found == 1:
                 return
             else:
-                raise azcam.exceptions.AzCamError("Parameter not found")
+                raise azcam.exceptions.AzcamError("Parameter not found")
         else:
-            raise azcam.exceptions.AzCamError("Configuration error")
+            raise azcam.exceptions.AzcamError("Configuration error")
 
     def get_exposures(self):
         """
@@ -1065,11 +1065,11 @@ class ControllerArchon(Controller):
                 if len(paramStr) == 3:
                     return int(paramStr[2])
                 else:
-                    raise azcam.exceptions.AzCamError("Parameter error")
+                    raise azcam.exceptions.AzcamError("Parameter error")
             else:
-                raise azcam.exceptions.AzCamError("Parameter not found")
+                raise azcam.exceptions.AzcamError("Parameter not found")
         else:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         return self.exp
 
@@ -1080,7 +1080,7 @@ class ControllerArchon(Controller):
 
         if self.exp != Exp:
             if not self.config_ok:
-                raise azcam.exceptions.AzCamError("Configuration data not loaded")
+                raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
             self.exp = Exp
 
@@ -1131,7 +1131,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig[self.dict_params["IntMS"]]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -1142,9 +1142,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 return int(paramStr[2]) / 1000.0
             else:
-                raise azcam.exceptions.AzCamError("IntMS parameter error")
+                raise azcam.exceptions.AzcamError("IntMS parameter error")
         else:
-            raise azcam.exceptions.AzCamError("IntMS parameter not found")
+            raise azcam.exceptions.AzcamError("IntMS parameter not found")
 
         return
 
@@ -1155,7 +1155,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.exp_time_ms = int(ExpTimeMS)
         self.int_ms = int(ExpTimeMS)
@@ -1180,7 +1180,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig[self.dict_params["IntMS"]]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -1191,9 +1191,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 return int(paramStr[2])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
         return
 
@@ -1203,7 +1203,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.exp_time_ms = int(IntMS)
         self.int_ms = int(IntMS)
@@ -1249,7 +1249,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         # update config dictionary
         self.dict_config[self.dict_params["ParallelPumping"]] = "ParallelPumping=%s" % (
@@ -1273,7 +1273,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig[self.dict_params["NoIntMS"]]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -1284,9 +1284,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 3:
                 return int(paramStr[2])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Paramter not found")
+            raise azcam.exceptions.AzcamError("Paramter not found")
 
         return
 
@@ -1296,7 +1296,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.noint_ms = int(NoIntMS)
 
@@ -1349,7 +1349,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig["RAWENABLE"]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -1361,9 +1361,9 @@ class ControllerArchon(Controller):
                 self.rawdata_enable = int(paramStr[1])
                 return int(paramStr[1])
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
     def set_raw_enable(self, RawEnable):
         """
@@ -1371,7 +1371,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.rawdata_enable = RawEnable
 
@@ -1396,7 +1396,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         indxParam = self.dict_wconfig["RAWSEL"]
         cmd = "RCONFIG%04X" % (indxParam & 0xFFFF)
@@ -1407,9 +1407,9 @@ class ControllerArchon(Controller):
             if len(paramStr) == 2:
                 return int(paramStr[1]) + 1
             else:
-                raise azcam.exceptions.AzCamError("Parameter error")
+                raise azcam.exceptions.AzcamError("Parameter error")
         else:
-            raise azcam.exceptions.AzCamError("Parameter not found")
+            raise azcam.exceptions.AzcamError("Parameter not found")
 
         return
 
@@ -1420,7 +1420,7 @@ class ControllerArchon(Controller):
         """
 
         if not self.config_ok:
-            raise azcam.exceptions.AzCamError("Configuration data not loaded")
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
         self.rawdata_channel = RawChannel
 
@@ -1587,7 +1587,7 @@ class ControllerArchon(Controller):
         azcam.log("Reading", level=1)
         if self.newframe == 0:
             self.archon_status = EXP_UNKNOWN
-            raise azcam.exceptions.AzCamError("New frame is not ready")
+            raise azcam.exceptions.AzcamError("New frame is not ready")
 
         self.read_time = time.time()
         frameStatus = "BUF%dCOMPLETE" % (self.read_buffer)
@@ -1636,7 +1636,7 @@ class ControllerArchon(Controller):
             self.archon_status = EXP_DONE
             azcam.exceptions.warning("Exposure aborted")
         else:
-            raise azcam.exceptions.AzCamError("New frame data is not ready")
+            raise azcam.exceptions.AzcamError("New frame data is not ready")
 
         return
 

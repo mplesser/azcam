@@ -96,7 +96,7 @@ class TempConASCOM(TempCon):
         elif temperature_id == 1:
             pass
         else:
-            raise azcam.exceptions.AzCamError("bad temperature_id in get_temperature")
+            raise azcam.exceptions.AzcamError("bad temperature_id in get_temperature")
 
         reply = azcam.db.tools["controller"].camera.CCDTemperature
         try:

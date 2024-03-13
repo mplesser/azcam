@@ -136,7 +136,7 @@ class AzCamLogger(object):
         if "3" in logtype:
             if logfile is None:
                 if self.logfile is None:
-                    raise azcam.exceptions.AzCamError("no logfile specified")
+                    raise azcam.exceptions.AzcamError("no logfile specified")
             else:
                 self.logfile = logfile
             if use_timestamp:

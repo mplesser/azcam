@@ -261,7 +261,7 @@ class WebServer(object):
                     objid = None  # too complicated for now
 
             else:
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     f"remote call not allowed in API: {obj}", 4
                 )
 
@@ -306,7 +306,7 @@ class WebServer(object):
 
         # get oject and method
         if len(tokens) != 2:
-            raise azcam.exceptions.AzCamError("Invalid API command - parse length")
+            raise azcam.exceptions.AzcamError("Invalid API command - parse length")
         obj, method = tokens
 
         # get arguments

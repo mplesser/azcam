@@ -423,7 +423,7 @@ class ExposureConsole(ConsoleTools):
         numdet_y defines number of detectors in Row direction.
         numamps_x defines number of amplifiers in Column direction.
         numamps_y defines number of amplifiers in Row direction.
-        amp_cfg defines each amplifier's orientation (ex: '1223').
+        amp_cfg defines each amplifier's orientation (ex: [1,2,2,3]).
         0 - normal
         1 - flip x
         2 - flip y
@@ -431,7 +431,7 @@ class ExposureConsole(ConsoleTools):
         """
 
         return azcam.db.tools["server"].command(
-            f"{self.objname}.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} {amp_cfg}"
+            f"{self.objname}.set_focalplane {numdet_x} {numdet_y} {numamps_x} {numamps_y} '{amp_cfg}'"
         )
 
     def get_format(self) -> List:

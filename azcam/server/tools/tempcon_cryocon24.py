@@ -145,7 +145,7 @@ class TempConCryoCon24(TempCon):
         elif temperature_id == 3:
             tempstr = "INPUT? D;"
         else:
-            raise azcam.exceptions.AzCamError("bad temperature_id in get_temperature")
+            raise azcam.exceptions.AzcamError("bad temperature_id in get_temperature")
 
         reply = self.server.command(tempstr)
         try:

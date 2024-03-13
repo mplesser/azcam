@@ -115,7 +115,7 @@ class ControllerMag(Controller):
             self.initialized = True
             return
         else:
-            raise azcam.exceptions.AzCamError("Could not initialize controller")
+            raise azcam.exceptions.AzcamError("Could not initialize controller")
 
         return
 
@@ -258,7 +258,7 @@ class ControllerMag(Controller):
         for _ in range(Loops):
             status = self.magio("dsp_echo", value)
             if status[0] != "OK":
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     "Comminication with controller failed"
                 )
 

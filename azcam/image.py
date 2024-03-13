@@ -162,7 +162,7 @@ class Image(object):
         elif filetype == 6:
             self._write_asm_fits_file(filename)
         else:
-            raise azcam.exceptions.AzCamError("Invalid filetype for Image")
+            raise azcam.exceptions.AzcamError("Invalid filetype for Image")
 
         # optionally make a lock file indicating the image file has been written
         if self.make_lockfile:
@@ -182,7 +182,7 @@ class Image(object):
         """
 
         if not self.valid:
-            raise azcam.exceptions.AzCamError("image is not valid")
+            raise azcam.exceptions.AzcamError("image is not valid")
 
         if self.assembled:
             return

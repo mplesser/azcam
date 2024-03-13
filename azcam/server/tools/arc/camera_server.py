@@ -47,9 +47,9 @@ class CameraServerInterface(object):
                 return reply
             except azcam.AzcamError as e:
                 if e.error_code == 2:
-                    raise azcam.exceptions.AzCamError("Could not connect to camserver")
+                    raise azcam.exceptions.AzcamError("Could not connect to camserver")
                 else:
-                    raise azcam.exceptions.AzCamError("Could not connect to camserver")
+                    raise azcam.exceptions.AzcamError("Could not connect to camserver")
 
     def test(self):
         """

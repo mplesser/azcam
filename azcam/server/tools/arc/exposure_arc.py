@@ -206,15 +206,15 @@ class ExposureArc(Exposure):
                 self.exposure_flag = self.exposureflags["READ"]
             else:
                 azcam.log("Readout aborted")
-                raise azcam.exceptions.AzCamError("Readout aborted", error_code=3)
+                raise azcam.exceptions.AzcamError("Readout aborted", error_code=3)
         elif self.exposure_flag == self.exposureflags["ERROR"]:
             if self.is_exposure_sequence:
                 self.exposure_flag = self.exposureflags["NONE"]
-                raise azcam.exceptions.AzCamError("Exposure sequence error occurred")
+                raise azcam.exceptions.AzcamError("Exposure sequence error occurred")
             else:
                 self.exposure_flag = self.exposureflags["ABORT"]
                 azcam.log("Readout aborted")
-                raise azcam.exceptions.AzCamError("Readout aborted", error_code=3)
+                raise azcam.exceptions.AzcamError("Readout aborted", error_code=3)
         else:
             azcam.log("Readout finished", level=2)
             self.exposure_flag = self.exposureflags["NONE"]
@@ -329,7 +329,7 @@ class ExposureArc(Exposure):
             azcam.db.tools["controller"].controller_type == "gen2"
             and self.exposure_flag == self.exposureflags["READ"]
         ):
-            raise azcam.exceptions.AzCamError(
+            raise azcam.exceptions.AzcamError(
                 "Abort readout not supported for this controller"
             )
 
@@ -337,7 +337,7 @@ class ExposureArc(Exposure):
             azcam.db.tools["controller"].controller_type == "gen1"
             and self.exposure_flag == self.exposureflags["READ"]
         ):
-            raise azcam.exceptions.AzCamError(
+            raise azcam.exceptions.AzcamError(
                 "Abort readout not supported for this controller"
             )
 

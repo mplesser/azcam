@@ -571,7 +571,7 @@ class Ds9Display(Display):
         elif mode == "crosshair":
             self._set_crosshair(clear_rois)
         else:
-            raise azcam.exceptions.AzCamError("Invalid cursor mode")
+            raise azcam.exceptions.AzcamError("Invalid cursor mode")
 
         return
 
@@ -727,9 +727,9 @@ class Ds9Display(Display):
         self.read_rois()
         numrois = len(self.detector_roi)
         if numrois == 0:
-            raise azcam.exceptions.AzCamError("No ROI defined")
+            raise azcam.exceptions.AzcamError("No ROI defined")
         elif roi_number > numrois:
-            raise azcam.exceptions.AzCamError("Invalid ROI number")
+            raise azcam.exceptions.AzcamError("Invalid ROI number")
 
         roi = self.detector_roi[roi_number]
 

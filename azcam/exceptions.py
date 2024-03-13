@@ -30,7 +30,7 @@ class AzcamError(Exception):
         """
         Custom error exception for azcam.
 
-        Usage:  raise azcam.exceptions.AzCamError(message)
+        Usage:  raise azcam.exceptions.AzcamError(message)
 
         Args:
           message: string message to display when error is raised

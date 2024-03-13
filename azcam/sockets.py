@@ -118,7 +118,7 @@ class SocketInterface(object):
 
         with self.lock:
             if not self.open():
-                raise azcam.exceptions.AzCamError(
+                raise azcam.exceptions.AzcamError(
                     "could not open connection to server", error_code=2
                 )
 
@@ -176,7 +176,7 @@ class SocketInterface(object):
             try:
                 msg += self.socket.recv(1024).decode()
             except ConnectionAbortedError:
-                raise azcam.exceptions.AzCamError("Connection aborted")
+                raise azcam.exceptions.AzcamError("Connection aborted")
             if len(msg) == 0:
                 pass
             elif msg[-1] == terminator:  # found terminator at end
@@ -184,11 +184,11 @@ class SocketInterface(object):
             # check for infinite loop
             loop += 1
             if loop > 1024:
-                raise azcam.exceptions.AzCamError("Socket recv loop max retry exceeded")
+                raise azcam.exceptions.AzcamError("Socket recv loop max retry exceeded")
             time.sleep(0.005)
 
         if len(msg) < 2:
-            raise azcam.exceptions.AzCamError("Invalid command response received")
+            raise azcam.exceptions.AzcamError("Invalid command response received")
         if msg[-2] == "r":
             reply = msg[:-2]  # remove CR/LF
         else:
