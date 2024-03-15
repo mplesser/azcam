@@ -108,9 +108,6 @@ def setup():
     if azcam.db.systemname == "azcam_mock":
         pass
 
-        if azcam.db.wd is None:
-            azcam.db.wd = "/data/test1"
-
     if azcam.db.wd is None:
         azcam.db.wd = azcam.db.datafolder
 

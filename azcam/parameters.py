@@ -126,7 +126,6 @@ class Parameters(object):
             if parname == "wd":
                 azcam.db.wd = value
                 azcam.utils.curdir(value)
-
             else:
                 value = par_dict[parname]
                 self.set_par(parname, value)

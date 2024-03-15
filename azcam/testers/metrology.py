@@ -23,9 +23,6 @@ class Metrology(Tester):
     def __init__(self):
         super().__init__("metrology")
 
-        self.itl_sn = -1
-        self.itl_id = ""
-
         # inputs
         self.data_file = "metrology.txt"
         self.report_file = "metrology"
@@ -265,7 +262,6 @@ class Metrology(Tester):
         self.dataset = {
             "data_file": self.data_file,
             "grade": self.grade,
-            "itl_sn": self.itl_sn,
             "itl_id": self.itl_id,
             "grade_mounting": self.grade_mounting,
             "z_nom": self.z_nom,
@@ -540,7 +536,7 @@ class Metrology(Tester):
         lines.append("# Metrology Analysis")
         lines.append("")
 
-        s = f"ITL Serial Number = sn{self.itl_sn}"
+        s = f"ITL ID = {self.itl_id}"
         lines.append(s)
         lines.append("")
 
@@ -661,7 +657,7 @@ class Metrology(Tester):
         lines.append("")
 
         # Make report files
-        report_file = f"{self.report_file}_sn{self.itl_sn}"
+        report_file = f"{self.report_file}_{self.itl_id}"
         self.write_report(report_file, lines)
 
         return
@@ -740,8 +736,8 @@ class Metrology(Tester):
                     azcam.log(f"Package ID is {self.itl_id}")
 
                 elif tokens[0] == "CCD" and tokens[1] == "NUMBER":
-                    self.itl_sn = int(tokens[3])
-                    azcam.log(f"ITL serial number is {self.itl_sn}\n")
+                    self.itl_id = int(tokens[3])
+                    azcam.log(f"ITL ID is {self.itl_id}\n")
 
                 elif tokens[0] == "Row":
                     zstandard = []  # start fresh

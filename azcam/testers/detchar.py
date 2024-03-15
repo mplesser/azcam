@@ -16,57 +16,154 @@ class DetChar(Tools, Report):
         Tools.__init__(self, "detchar")
         Report.__init__(self)
 
-        self.is_setup = 0
+        self.package_id = ""
+        self.itl_id = ""
+
+        self.summary_lines: list[str] = []
+        self.report_name: str = "sensor_characterization_report"
+        self.summary_report_name: str = "sensor_summary_report"
+        self.report_date: str = ""
+        self.report_comment: str = ""
+        self.operator: str = ""
+        self.system: str = ""
+        self.customer: str = ""
+
+        self.is_setup = False
         self.create_html = True
 
-    def initdata(self, serial_number=-1):
+    def setup(self, itl_id: str = ""):
         """
-        Initialize data taking for new sensor.
+        Setup for acquistion and analysis
         """
 
-        if serial_number != -1:
-            sn = serial_number
-        else:
-            sn = azcam.utils.prompt("Enter sensor serial number")
-            if sn.startswith("sn"):
-                sn = sn.lstrip("sn")
-            elif sn.startswith("s"):
-                sn = sn.lstrip("s")
+        raise NotImplementedError("setup() not implemented")
 
-        newfolder = f"sn{sn}"
-        newfolder = os.path.join(azcam.db.datafolder, newfolder)
-        try:
-            os.mkdir(newfolder)
-        except FileExistsError as e:
-            print(e)
-            pass
+    def make_report(self):
+        """
+        Make detector characterization report.
+        """
+
+        if not self.is_setup:
+            self.setup()
+
+        folder = azcam.utils.curdir()
+        self.report_folder = folder
+
+        print("")
+        print(f"Generating self.{report_name}")
+        print("")
+
+        # *********************************************
+        # Combine PDF report files for each tool
+        # *********************************************
+        rfiles = [self.summary_report_name + ".pdf"]
+        for r in self.report_names:  # add pdf extension
+            f1 = self.report_files[r] + ".pdf"
+            f1 = os.path.abspath(f1)
+            if os.path.exists(f1):
+                rfiles.append(f1)
+            else:
+                print("Report file not found: %s" % f1)
+        self.merge_pdf(rfiles, report_name)
+
+        # open report
+        with open(os.devnull, "w") as fnull:
+            s = "%s" % self.report_file
+            subprocess.Popen(s, shell=True, cwd=folder, stdout=fnull, stderr=fnull)
+            fnull.close()
+
+        return
+
+    def make_summary_report(self):
+        """
+        Create a ID and summary report.
+        """
+
+        if not self.is_setup:
+            self.setup()
+
+        if len(self.report_comment) == 0:
+            self.report_comment = azcam.utils.prompt("Enter report comment")
+
+        # get current date
+        self.report_date = datetime.datetime.now().strftime("%b-%d-%Y")
+
+        """
+        # example
+        
+        self.summary_lines = []
+
+        self.summary_lines.append("# 90prime Detector Characterization Report")
+
+        self.summary_lines.append("|||")
+        self.summary_lines.append("|:---|:---|")
+        self.summary_lines.append(f"|Customer       |UArizona|")
+        self.summary_lines.append(f"|ITL System     |90prime|")
+        self.summary_lines.append(f"|ITL ID         |{self.itl_id}|")
+        self.summary_lines.append(f"|Report Date    |{report_date}|")
+        self.summary_lines.append(f"|Operator       |{self.operator}|")
+        self.summary_lines.append(f"|System         |{self.system}|")
+        """
+
+        lines = []
+        lines.append(f"|Comment        |{self.report_comment}|")
+        lines.append(f"|Report date    |{self.report_date}|")
+
+        # Make report files
+        self.write_report(self.summary_report_name, self.summary_lines, lines)
+
+        return
+
+    def upload_prep(self, shipdate: str):
+        """
+        Prepare a dataset for upload by creating an archive file.
+        file.  Start in the _shipment folder.
+        """
+
+        startdir = azcam.utils.curdir()
+        shipdate = os.path.basename(startdir)
+        idstring = f"{shipdate}"
+
+        # cleanup folder
+        azcam.log("cleaning dataset folder")
+        itlutils.cleanup_files()
+
+        # move one folder above report folder
+        # azcam.utils.curdir(reportfolder)
+        # azcam.utils.curdir("..")
+
+        self.copy_files()
+
+        # copy files to new folder and archive
+        azcam.log(f"copying dataset to {idstring}")
+        currentfolder, newfolder = azcam.console.utils.make_file_folder(idstring)
+
+        copy_files = glob.glob("*.pdf")
+        for f in copy_files:
+            shutil.move(f, newfolder)
+        copy_files = glob.glob("*.fits")
+        for f in copy_files:
+            shutil.move(f, newfolder)
+        copy_files = glob.glob("*.csv")
+        for f in copy_files:
+            shutil.move(f, newfolder)
+
         azcam.utils.curdir(newfolder)
 
-        datestring = datetime.datetime.strftime(
-            datetime.datetime.now(), "%d%b%y"
-        ).lower()
-        try:
-            os.mkdir(datestring)
-        except FileExistsError:
-            pass
-        azcam.utils.curdir(datestring)
+        # make archive file
+        azcam.utils.curdir(currentfolder)
+        azcam.log("making archive file")
+        archivefile = itlutils.archive(idstring, "zip")
+        shutil.move(archivefile, newfolder)
 
-        imagefolder = azcam.utils.curdir()
-        azcam.db.parameters.set_par("imagefolder", imagefolder)
+        # delete data files from new folder
+        azcam.utils.curdir(newfolder)
+        [os.remove(x) for x in glob.glob("*.pdf")]
+        [os.remove(x) for x in glob.glob("*.fits")]
+        [os.remove(x) for x in glob.glob("*.csv")]
 
-        # save folder
-        azcam.db.parameters.set_local_par("azcamconsole", "wd", azcam.utils.curdir())
-        azcam.db.parameters.write_parfile()
+        azcam.utils.curdir(startdir)
 
-        return
+        self.remote_upload_folder = idstring
 
-    def write_report(self, report_file, lines=[]):
-        """
-        Create report file.
-        """
-
-        # Make report file
-        self.make_mdfile(report_file, lines)
-        self.md2pdf(report_file, create_html=self.create_html)
-
-        return
+        return archivefile

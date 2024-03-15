@@ -16,6 +16,8 @@ class Tester(Tools, Report):
 
         Report.__init__(self)
 
+        self.itl_id = ""
+
         # acquistion
         self.number_images_acquire = 1  # number of images to acquire
         self.rootname = "tester."  # root for data filenames
@@ -30,7 +32,7 @@ class Tester(Tools, Report):
         self.dataset = {}
 
         #: output report file
-        self.report_file = "base"  # no extension, will be pdf, md, or rst
+        self.report_file = "base"  # no extension, will be pdf or md
         self.create_reports = True  # True to generate reports during analysis
         self.create_plots = True  # True to generate plots during analysis
         self.create_html = True
@@ -46,14 +48,14 @@ class Tester(Tools, Report):
         Acquire data.
         """
 
-        return "not supported"
+        raise NotImplementedError("acquire() not defined")
 
     def analyze(self):
         """
         Analyze data.
         """
 
-        return "not supported"
+        raise NotImplementedError("analyze() not defined")
 
     def write_datafile(self):
         """
@@ -99,30 +101,4 @@ class Tester(Tools, Report):
         Generate a report.
         """
 
-        lines = []
-
-        return lines
-
-    def write_report(self, report_file, lines=[]):
-        """
-        Create report file.
-        """
-
-        # Make report file
-        self.make_mdfile(report_file, lines)
-        self.md2pdf(report_file, create_html=self.create_html)
-
-        return
-
-    def parse_files(self):
-        """
-        Parse image set to create file information dict.
-        """
-
-        self.image_info_file = "image_info.txt"
-        self.image_info = {}
-
-        with open(self.image_info_file, "w") as datafile:
-            json.dump(self.image_info, datafile)
-
-        return
+        raise NotImplementedError("report() not defined")

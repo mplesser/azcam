@@ -15,25 +15,10 @@ class Report(object):
     """
 
     def __init__(self):
+
         self.report_css = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "report.css"
         )
-
-    def make_rstfile(self, rst_file, lines=[]):
-        """
-        Create an RST file from lines.
-        """
-
-        basefile, ext = os.path.splitext(rst_file)
-        if ext == "":
-            rst_file = f"{basefile}.rst"
-
-        # Write RSTfile
-        with open(rst_file, "w") as f:
-            for line in lines:
-                f.write(line + "\n")
-
-        return
 
     def make_mdfile(self, md_file, lines=[]):
         """
@@ -109,5 +94,18 @@ class Report(object):
                 "enable-local-file-access": None,
             }
         pdfkit.from_string(html_text, pdf_file, options, css=self.report_css)
+
+        return
+
+    def write_report(self, report_file, lines=[], additional_lines=[]):
+        """
+        Create report file.
+        """
+
+        if len(additional_lines) > 0:
+            lines = lines + additional_lines
+
+        self.make_mdfile(report_file, lines)
+        self.md2pdf(report_file, create_html=self.create_html)
 
         return
