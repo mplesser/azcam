@@ -235,7 +235,7 @@ class QE(Tester):
         _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
         SequenceNumber = StartingSequence
 
-        # scale by gain
+        # get gain
         if azcam.db.tools["gain"].valid:
             self.system_gain = azcam.db.tools["gain"].system_gain
         else:
@@ -435,7 +435,7 @@ class QE(Tester):
             "mean_temp": str(self.mean_temp),
             "wavelengths": self.wavelengths,
             "qe": self.qe,
-            "means": self.means,
+            "means": numpy.array(self.means).tolist(),
             "exposures": self.exposures,
             "fluxes": self.fluxes,
             "throughputs": self.throughputs,
