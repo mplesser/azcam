@@ -4,8 +4,8 @@ Contains the main azcam database class.
 
 from typing import Any, Union, List, Dict
 
+import azcam
 from azcam.logger import AzCamLogger
-
 from azcam.header import System
 
 
@@ -13,6 +13,9 @@ class AzcamDatabase(object):
     """
     The azcam database class.
     """
+
+    version: str = azcam.__version__
+    """current azcam version"""
 
     wd: Union[str, None] = None
     """the current working directory"""
@@ -136,6 +139,7 @@ class AzcamDatabase(object):
         "abortflag": "db.abortflag",
         "verbosity": "db.verbosity",
         "hostname": "db.hostname",
+        "version": "db.version",
     }
     """dict of general parameters"""
 

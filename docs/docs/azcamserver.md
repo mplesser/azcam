@@ -1,5 +1,42 @@
 # azcamserver
 
+*azcamserver* is the main server application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is mainly used to control data acquistion. 
+
+## Configuration and startup
+
+An *azcamserver* process is really only useful with a customized configuration script and environment which defines the hardware to be controlled.  Configuration scripts from existing environments may be used as examples. They would be imported into a python or IPython session or uses a startup script such to create a new server or console application.
+
+An example code snippet to start *azcamserver* when using the *azcam-itl environment* is:
+
+```python
+# server-side (azcamserver)
+import azcam
+import azcam_itl.server
+instrument = azcam.db.tools["instrument"]
+exposure = azcam.db.tools["exposure"]
+instrument.set_wavelength(450)
+wavelength = instrument.get_wavelength()
+print(f"Current wavelength is {wavelength}")
+exposure.expose(2., 'flat', "a 450 nm flat field image")
+```
+
+Another example code snippet to start an *azcamserver* process is:
+
+```
+python -i -m azcam.server.server_mock
+or
+ipython -m azcam.server.server_mock --profile azcamserver -i
+```
+
+and then in the IPython window:
+
+```python
+instrument.set_wavelength(450)
+wavelength = instrument.get_wavelength()
+print(f"Current wavelength is {wavelength}")
+exposure.expose(2., 'flat', "a 450 nm flat field image")
+```
+
 ## Tools
 AzCam's *tools* are used to define and control a system.  The supported systems include:
 

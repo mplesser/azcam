@@ -204,7 +204,7 @@ class ExposureArchon(Exposure):
         azcam.log(f"Writing finished: {LocalFile}", level=2)
 
         # set flag that image now written to disk
-        self.image.written = 1
+        self.image.is_written = 1
 
         # image data and file are now ready
         self.image.toggle = 1

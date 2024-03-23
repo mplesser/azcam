@@ -155,7 +155,7 @@ class ExposureASCOM(Exposure):
             azcam.log("Writing finished", level=2)
 
             # set flag that image now written to disk
-            self.image.written = 1
+            self.image.is_written = 1
 
             if self.send_image:
                 azcam.log("Sending image")

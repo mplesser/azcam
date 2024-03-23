@@ -268,7 +268,7 @@ class ExposureArc(Exposure):
             azcam.log("Writing finished", level=2)
 
             # set flag that image now written to disk
-            self.image.written = 1
+            self.image.is_written = 1
 
             # send image to guider software
             if self.guide_mode:

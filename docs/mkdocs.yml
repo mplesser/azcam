@@ -22,7 +22,14 @@ theme:
     repo: fontawesome/brands/git-alt
   features:
     navigation.sections
-
+    navigation.instant
+    navigation.tabs
+    navigation.tabs.sticky
+    navigation.top
+    navigation.path
+    toc.follow
+    toc.integrate
+      
 plugins:
 - search
 - autorefs
@@ -34,15 +41,20 @@ plugins:
         options:
           show_source: false
           show_root_heading: true
-          heading_level: 2
           show_root_full_path: true
+          heading_level: 2
 
 extra_css:
   - css/mkdocstrings.css
 
+watch:
+  - docs/css
+
 nav:
   - Home: 'index.md'
-  - 'classes.md'
   - 'commands.md'
+  - 'classes.md'
+  - 'azcamserver.md'
+  - 'azcamconsole.md'
+  - 'autocode.md'
   - 'advanced.md'
-  - 'autocode/autocode.md'

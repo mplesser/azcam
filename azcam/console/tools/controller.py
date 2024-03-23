@@ -19,8 +19,8 @@ class ControllerConsole(ConsoleTools):
         """
         Open or close a shutter.
 
-        :param state:
-
+        Args:
+            state: 1 to open shutter or 0 to close
         """
 
         return azcam.db.tools["server"].command(f"{self.objname}.set_shutter {state}")

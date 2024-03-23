@@ -11,8 +11,6 @@ dependencies = [
     "numpy",
     "astropy",
     "matplotlib",
-    "numpy",
-    "astropy",
     "psutil",
     "fastapi",
     "uvicorn",
@@ -23,6 +21,7 @@ dependencies = [
     "markdown",
     "pypdf",
     "pywin32; sys_platform == 'win32'",
+    "mkdocstrings[python]>=0.18",
 ]
 requires-python = ">= 3.10"
 

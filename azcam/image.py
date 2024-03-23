@@ -26,22 +26,23 @@ class Image(object):
 
         self.valid = 0
         """True when image is valid"""
-        self.written = 0
+        self.is_written = 0
         """True when image has been written to disk"""
         self.toggle = 0
         """True when image is first ready"""
-
-        # image filename
         self.filename = ""
-        # True to allow overwritting image file
+        """image filename"""
         self.overwrite = 0
-        # True when image is a test image (overwrite is automatic)
+        """True to allow overwritting image file"""
         self.test_image = 0
+        """True when the image is a test image (overwrite is automatic)"""
         self.make_lockfile = 0
-        # image file type
+        """ True to make a lock file when image is written"""
         self.filetype = 0
-        # title string
+        """image file type"""
         self.title = ""
+        """title string"""
+
         # image size - columns
         self.size_x = 0
         # image szie - rows
@@ -827,7 +828,7 @@ class Image(object):
 
         # set flags
         self.from_file = 1
-        self.written = 1
+        self.is_written = 1
 
         return
 

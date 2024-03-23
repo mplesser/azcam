@@ -198,20 +198,20 @@ class Parameters(object):
 
             object1 = tokens[0]
 
-            # object1 must be a tool
-            try:
+            # object1 must be a tool or the database
+            if object1 == "db":
+                obj = azcam.db
+            else:
                 obj = azcam.db.tools[object1]
-                for i in range(1, numtokens):
-                    try:
-                        obj = getattr(obj, tokens[i])
-                    except AttributeError:
-                        pass
-                value = obj  # last time is value
-            except KeyError:
-                value = None
+            for i in range(1, numtokens):
+                try:
+                    obj = getattr(obj, tokens[i])
+                except AttributeError:
+                    pass
+            value = obj  # last time is value
 
         except KeyError:
-            # check if value is know directly
+            # check if value is known directly
             try:
                 value = azcam.db.parameters.par_dict[subdict][parameter]
             except KeyError:

@@ -449,7 +449,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         # reset flags as new data coming
         self.image.valid = 0
-        self.image.written = 0
+        self.image.is_written = 0
         self.image.toggle = 0
         self.image.assembled = 0
 
