@@ -56,9 +56,9 @@ def setup():
     azcam.db.systemname = systemname
     azcam.db.systemfolder = os.path.dirname(__file__)
     azcam.db.systemfolder = azcam.utils.fix_path(azcam.db.systemfolder)
-
     azcam.db.datafolder = azcam.utils.get_datafolder(datafolder)
     azcam.db.servermode = azcam.db.systemname
+
     azcam.db.verbosity = 2
 
     # ****************************************************************
@@ -110,9 +110,9 @@ def setup():
     # ****************************************************************
     # web server
     # ****************************************************************
-    if 0:
+    if 1:
         webserver = WebServer()
-        webserver.port = 2403
+        webserver.port = cmdport + 1
         webserver.logcommands = 0
         webserver.logstatus = 0
         webserver.index = os.path.join(azcam.db.systemfolder, "index.html")

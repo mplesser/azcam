@@ -8,9 +8,7 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 `pip install azcam`
 
-Or download the latest version from from github: https://github.com/mplesser/azcam.git.
-
-You may need to install `python3-tk` on Linux systems [`sudo apt-get install python3-tk`].
+Or download the latest version from from github <https://github.com/mplesser/azcam.git>
 
 # Links
 
@@ -272,7 +270,7 @@ The Qt GUI uses the *PySide6* package.
 
 Use `observe.observe()` from an azcam console window to run the CLI version.
 
-![GUI example after loading script file.](observe_gui.jpg)
+![GUI example after loading script file.](img/observe_gui.jpg)
 *GUI example after loading script file.*
 
 After starting the GUI, Press "Select Script" to find a script to load on disk. 
