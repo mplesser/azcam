@@ -105,10 +105,30 @@ from azcam.cli import *
 instrument.set_wavelength(450)
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
+
+## Azcamserver
+
+*azcamserver* is the main server application for *azcam*. It usually runs in an IPython window and is mainly used to control data acquistion. 
+
+See [azcamserver](azcamserver.md).
+
+## Azcamconsole
+
+*azcamconsole* is a console application for *azcam*. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
+
+See [azcamconsole](azcamconsole.md).
+
+## Observing Scripts
+
+The *observe* tool supports running observing scripts which can sequentially control all aspects of observations with no user interaction. It can be used
+with a GUI or with a command line interface.
+
+See [observe](observe.md).
+
 ## Code Documentation
 Much of the python code is autodocumented from the internal doc strings. See [Code Docs](autocode.md).
 
-## AzCam Environments
+## Environments
 
 Some packages act as *environments* to define code and data files used for specific systems. Examples include:
 
@@ -116,7 +136,7 @@ Some packages act as *environments* to define code and data files used for speci
   * [azcam-mont4k](https://github.com/mplesser/azcam-mont4k) for the UArizona Mont4k instrument
   * [azcam-vattspec](https://github.com/mplesser/azcam-vattspec) for the VATT VattSpec camera
 
-## AzCam Applications
+## Applications
 AzCam *applications* are stand-alone programs which utilize AzCam functionality. The most important application is *azcamserver* which defines the tools for a system. Most but not all applications are clients which connect to an *azcamserver* application. These clients may be written in any language. Examples include:
 
   * [azcam-tool](https://github.com/mplesser/azcam-tool): an exposure control GUI written in National Instruments LabVIEW
@@ -192,22 +212,3 @@ Useful external links include:
   
  * IPython <https://ipython.org>
  * Python programming language <https://www.python.org>
-
-## azcamserver
-
-*azcamserver* is the main server application for *azcam*. It usually runs in an IPython window and is mainly used to control data acquistion. 
-
-See [azcamserver](azcamserver.md).
-
-## azcamconsole
-
-*azcamconsole* is a console application for *azcam*. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
-
-See [azcamconsole](azcamconsole.md).
-
-## Observe
-
-The *observe* tool supports running observing scripts which can sequentially control all aspects of observations with no user interaction. It can be used
-with a GUI or with a command line interface.
-
-See [observe](observe.md).

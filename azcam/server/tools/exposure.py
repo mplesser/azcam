@@ -14,6 +14,7 @@ import numpy
 import azcam
 import azcam.exceptions
 from azcam.server.tools.exposure_filename import Filename
+from azcam.server.tools.exposure_sendimage import SendImage
 from azcam.server.tools.exposure_obstime import ObsTime
 from azcam.header import Header, ObjectHeaderMethods
 from azcam.image import Image
@@ -33,6 +34,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         Tools.__init__(self, tool_id, description)
         Filename.__init__(self)
 
+        self.sendimage = SendImage()
         self.obstime = ObsTime()
         self.image = Image()
 

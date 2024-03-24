@@ -216,7 +216,7 @@ class ExposureArchon(Exposure):
 
         if self.send_image:
             azcam.log("Sending image")
-            azcam.db.tools["sendimage"].send_image(LocalFile, self.get_filename())
+            self.sendimage.send_image(LocalFile, self.get_filename())
 
         # increment file sequence number if image was written
         if self.save_file:

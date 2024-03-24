@@ -272,7 +272,7 @@ class ExposureArc(Exposure):
 
             # send image to guider software
             if self.guide_mode:
-                azcam.db.tools["sendimage"].send_image(LocalFile)
+                self.sendimage.send_image(LocalFile)
 
             # send image to remote image server
             elif self.send_image:
@@ -282,7 +282,7 @@ class ExposureArc(Exposure):
                     ]  # reset flag now so next exposure can start
                     azcam.log("Sending image asynchronously")
                     sendthread = threading.Thread(
-                        target=azcam.db.tools["sendimage"].send_image,
+                        target=self.sendimage.send_image,
                         name="writeasync",
                         args=(self.get_filename()),
                     )
@@ -295,7 +295,7 @@ class ExposureArc(Exposure):
 
                 else:
                     azcam.log("Sending image")
-                    azcam.db.tools["sendimage"].send_image(
+                    self.sendimage.send_image(
                         LocalFile, self.get_filename()
                     )
 

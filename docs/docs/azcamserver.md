@@ -58,27 +58,26 @@ The *exposure* tool often coordinates the actions of the hardware tools such as 
 
 #### Astronomical Research Cameras Controllers
 ```python
-import azcam.server
-from azcam.tools.arc.exposure_arc import ExposureArc
+import azcam.server.server
+from azcam.server.tools.arc.exposure_arc import ExposureArc
 exposure = ExposureArc()
-exposure.filetype = azcam.db.filetypes["MEF"]
-exposure.image.filetype = azcam.db.filetypes["MEF"]
-exposure.set_remote_imageserver("localhost", 6543)
+exposure.filetype = exposure.filetypes["MEF"]
+exposure.image.filetype = exposure.filetypes["MEF"]
+exposure.sendimage.set_remote_imageserver("localhost", 6543)
 exposure.image.remote_imageserver_filename = "/data/image.fits"
 exposure.image.server_type = "azcam"
-exposure.set_remote_imageserver()
 ```
 
 #### STA Archon Controllers
 
 ```python
-import azcam.server
-from azcam.tools.archon.exposure_archon import ExposureArchon
+import azcam.server.server
+from azcam.server.tools.archon.exposure_archon import ExposureArchon
 exposure = ExposureArchon()
 filetype = "MEF"
 exposure.fileconverter.set_detector_config(detector_sta3800)
-exposure.filetype = azcam.db.filetypes[filetype]
-exposure.image.filetype = azcam.db.filetypes[filetype]
+exposure.filetype = exposure.filetypes[filetype]
+exposure.image.filetype = exposure.filetypes[filetype]
 exposure.display_image = 1
 exposure.image.remote_imageserver_flag = 0
 exposure.add_extensions = 1
@@ -87,8 +86,8 @@ exposure.add_extensions = 1
 #### Magellan Controllers
 
 ```python
-import azcam.server
-from azcam.tools.mag.exposure_mag import ExposureMag
+import azcam.server.server
+from azcam.server.tools.mag.exposure_mag import ExposureMag
 exposure = ExposureMag()
 filetype = "BIN"
 exposure.filetype = exposure.filetypes[filetype]
@@ -105,8 +104,8 @@ exposure.image.make_lockfile = 1
 #### ASCOM Exposure
 
 ```python
-import azcam.server
-from azcam.tools.ascom.exposure_ascom import ExposureASCOM
+import azcam.server.server
+from azcam.server.tools.ascom.exposure_ascom import ExposureASCOM
 exposure = ExposureASCOM()
 filetype = "FITS"
 exposure.filetype = exposure.filetypes[filetype]
@@ -273,10 +272,6 @@ print(rois)
 ```
 [Documentation for the Display class](autocode/display.md)
 
-### Server Tool
-
-The server tool is used by console applications to communicate with an *azcamserver* process. 
-
 ### Focus Tool
 
 The focus tool controls focus observations used to determine optimal instrument or telescope focus position. This code is usually executed in the console window although a server-side version is available on some systems. `focus` is an instance of the *Focus* class.
@@ -322,14 +317,12 @@ or
   <dd>Delay in seconds between focus moves</dd>
 </dl>
 
-### Sendimage Tools
+### Sendimage
 
-This tool supports sending an image to a remote host running an image server which receives the image.
+The exposure.sendimage class supports sending an image to a remote host running an image server which receives the image.
 
 ```python
-from azcam.tools.sendimage import SendImage
-sendimage = SendImage()
 remote_imageserver_host = "10.0.0.1"
 remote_imageserver_port = 6543
-sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcam")
+exposure.sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcam")
 ```

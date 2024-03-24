@@ -7,13 +7,12 @@ import azcam.exceptions
 from azcam.tools import Tools
 
 
-class SendImage(Tools):
+class SendImage(object):
     """
     Class to send image to a remote image server.
     """
 
-    def __init__(self, tool_id="sendimage", description=None):
-        super().__init__(tool_id, description)
+    def __init__(self):
 
         self.remote_imageserver_host = ""
         self.remote_imageserver_port = 0

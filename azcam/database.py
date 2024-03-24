@@ -99,8 +99,6 @@ class AzcamDatabase(object):
         "imageoverwrite": "exposure.overwrite",
         "imageroot": "exposure.root",
         "imagefolder": "exposure.folder",
-        "remote_imageserver_host": "sendimage.remote_imageserver_host",
-        "remote_imageserver_port": "sendimage.remote_imageserver_port",
         # image
         "imagesizex": "exposure.image.focalplane.numcols_image",
         "imagesizey": "exposure.image.focalplane.numrows_image",

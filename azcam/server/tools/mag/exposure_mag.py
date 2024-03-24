@@ -191,7 +191,7 @@ class ExposureMag(Exposure):
 
             if self.send_image:
                 azcam.log("Sending image")
-                azcam.db.tools["sendimage"].send_image(local_file, self.get_filename())
+                self.sendimage.send_image(local_file, self.get_filename())
 
         # image data and file are now ready
         self.image.toggle = 1
