@@ -118,13 +118,6 @@ See [azcamserver](azcamserver.md).
 
 See [azcamconsole](azcamconsole.md).
 
-## Observing Scripts
-
-The *observe* tool supports running observing scripts which can sequentially control all aspects of observations with no user interaction. It can be used
-with a GUI or with a command line interface.
-
-See [observe](observe.md).
-
 ## Code Documentation
 Much of the python code is autodocumented from the internal doc strings. See [Code Docs](autocode.md).
 

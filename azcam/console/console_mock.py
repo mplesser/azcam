@@ -5,7 +5,7 @@ Command line options:
   -system azcam_mock
   -datafolder path_to_datafolder
   -cmdport azcamserver_port
-  -observe flag to laod observe
+  -observe flag to load observe
 """
 
 import os

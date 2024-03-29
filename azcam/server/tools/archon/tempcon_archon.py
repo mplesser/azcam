@@ -16,18 +16,15 @@ class TempConArchon(TempCon):
         super().__init__(tool_id, description)
 
         self.num_temp_reads = 1
-        self.control_temperature = -100.0
         self.heaterx_board = "MOD2"
 
         self.temperature_ids = [0, 1]  # camtemp, dewtemp
-
-        self.last_temps = 3 * [self.bad_temp_value]  # last readings for during exposure
 
         return
 
     def define_keywords(self):
         """
-        Defines and resets instrument keywords.
+        Defines and resets tempcon keywords.
         """
 
         self.set_keyword("CAMTEMP", 0.0, "Camera temperature", "float")

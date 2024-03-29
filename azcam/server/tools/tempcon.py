@@ -28,9 +28,10 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         Tools.__init__(self, tool_id, description)
 
-        # control temperature number (which temp is regulated)
         self.control_temperature = -999.0
+        """control temperature in Celsius"""
         self.control_temperature_number = 0
+        """control temperature number for regulattion)"""
 
         # system temperatures
         self.temperature_ids = [0]
@@ -47,6 +48,8 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         # value returned when temperature read is bad
         self.bad_temp_value = -999.9
+
+        self.last_temps = 3 * [self.bad_temp_value]  # last readings for during exposure
 
         # create the temp control Header object
         self.header = Header("Temperature")
@@ -196,7 +199,7 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         return
 
-    def apply_corrections(self, temperature: float, temperature_id: int = 0) -> None:
+    def apply_corrections(self, temperature: float, temperature_id: int = 0) -> float:
         """
         Correct the temperatures for offset and scale is temperature correction is enabled.
         Args:
@@ -219,7 +222,7 @@ class TempCon(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     def define_keywords(self):
         """
-        Defines and resets instrument keywords.
+        Defines and resets tempcon keywords.
         """
 
         return

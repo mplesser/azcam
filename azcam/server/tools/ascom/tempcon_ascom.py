@@ -21,7 +21,7 @@ class TempConASCOM(TempCon):
 
     def define_keywords(self):
         """
-        Defines and resets instrument keywords.
+        Defines and resets tempcon keywords.
         """
 
         self.set_keyword("CAMTEMP", 0.0, "Camera temperature", "float")

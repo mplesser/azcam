@@ -1,5 +1,6 @@
 """
 Contains the ControllerArchon class.
+Originally written by Grzegorz Zareba.
 """
 
 import socket
@@ -12,19 +13,28 @@ import azcam.exceptions
 import azcam.sockets
 from azcam.server.tools.controller import Controller
 
-# Exposure states
-EXP_UNKNOWN = 0
-EXP_IDLE = 1
-EXP_EXPOSE = 2
-EXP_READY = 3
-EXP_FETCH = 4
-EXP_DONE = 5
-
 
 class ControllerArchon(Controller):
     """
     The controller class for STA Archon controllers.
     """
+
+    # Exposure states
+    EXP_UNKNOWN = 0
+    EXP_IDLE = 1
+    EXP_EXPOSE = 2
+    EXP_READY = 3
+    EXP_FETCH = 4
+    EXP_DONE = 5
+
+    power_values = [
+        "UNKNOWN",
+        "NOT_CONFIGURED",
+        "OFF",
+        "INTERMEDIATE",
+        "ON",
+        "STADBY",
+    ]
 
     def __init__(self, tool_id="controller", description=None):
         super().__init__(tool_id, description)
@@ -55,8 +65,8 @@ class ControllerArchon(Controller):
         self.status_power = 0
         self.status_backplane_temp = 0.0
 
-        self.cont_exp = 0
-        self.exp = 1
+        self.cont_exposures = 0
+        self.exposures = 1
         self.sweep_cnt = 1
         self.exp_time_ms = 0
         self.int_ms = 0
@@ -108,14 +118,6 @@ class ControllerArchon(Controller):
         self.config_data = ""
         # Config data dictionary
 
-        self.power_values = [
-            "UNKNOWN",
-            "NOT_CONFIGURED",
-            "OFF",
-            "INTERMEDIATE",
-            "ON",
-            "STADBY",
-        ]
         self.power_status = "UNKNOWN"
         self.archon_status = 0
 
@@ -125,13 +127,6 @@ class ControllerArchon(Controller):
 
         # image type
         self.img_type = 0
-
-        self.EXP_UNKNOWN = 0
-        self.EXP_IDLE = 1
-        self.EXP_EXPOSE = 2
-        self.EXP_READY = 3
-        self.EXP_FETCH = 4
-        self.EXP_DONE = 5
 
         # Image data received from the Archom controller in Direct Mode
         self.imagedata = 0
@@ -159,25 +154,8 @@ class ControllerArchon(Controller):
         # True to lower voltages when integrating
         self.lower_voltages = 0
 
-        # CDS parameters (taplines) - default values used just for test
-        self.cds = [
-            "AD12L, -3.0, 3000",
-            "AD11L, 3.0, 3000",
-            "AD8L, -3.0, 3000",
-            "AD7L, 3.0, 3000",
-            "AD6L, 3.0, 4000",
-            "AD5L, -3.0, 3000",
-            "AD10L, 3.0, 3000",
-            "AD9L, -3.0, 3000",
-            "AD4L, -3.0, 3000",
-            "AD3L, 3.0, 3000",
-            "AD2L, -3.0, 3000",
-            "AD1L, 3.0, 3000",
-            "AD16L, 3.0, 3000",
-            "AD15L, -3.0, 3000",
-            "AD14L, 3.0, 3000",
-            "AD13L, -3.0, 3000",
-        ]
+        # CDS parameters (taplines) - ex: ["AD1L, -3.0, 3000", "AD2R, 3.0, 3000"]
+        self.cds = []
 
         # CDS parameters read from the Archon controller
         self.rcds = []
@@ -188,7 +166,7 @@ class ControllerArchon(Controller):
         # Total number of taplines
         self.tap_lines = 0
 
-        # GSZ 05Feb2018: receiving raw data
+        # receiving raw data
         self.rawdata_enable = 1
         # Raw channel - in the config dictionary raw channel numbers start from 0
         self.rawdata_channel = 1
@@ -761,22 +739,22 @@ class ControllerArchon(Controller):
         self.tap_lines = cnt
 
         # extract exposure settings
-        cont_exp = (
+        cont_exposures = (
             self.dict_config[self.dict_params["ContinuousExposures"]]
             .replace('"', "")
             .split("=")
         )
-        self.cont_exp = cont_exp[1]
+        self.cont_exposures = int(cont_exposures[1])
 
-        Exp = (
+        exposures = (
             self.dict_config[self.dict_params["Exposures"]].replace('"', "").split("=")
         )
-        self.exp = Exp[1]
+        self.exposures = int(exposures[1])
 
         sweep_cnt = (
             self.dict_config[self.dict_params["SweepCount"]].replace('"', "").split("=")
         )
-        self.sweep_cnt = sweep_cnt[1]
+        self.sweep_cnt = int(sweep_cnt[1])
 
         IntMS = self.dict_config[self.dict_params["IntMS"]].replace('"', "").split("=")
         self.int_ms = int(IntMS[1])
@@ -797,7 +775,7 @@ class ControllerArchon(Controller):
             time.sleep(1)
 
             # set pars for exposures
-            self.set_continuous_exposures(0)
+            self.set_continuous_exposures(0)  # was 0
 
             # power on
             reply = self.get_power_status()
@@ -962,11 +940,11 @@ class ControllerArchon(Controller):
         if not self.config_ok:
             raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
-        self.cont_exp = int(cont_exp)
+        self.cont_exposures = int(cont_exp)
 
         # update config dictionary
         self.dict_config[self.dict_params["ContinuousExposures"]] = (
-            "ContinuousExposures=%s" % (self.cont_exp)
+            "ContinuousExposures=%s" % (self.cont_exposures)
         )
 
         # update Archons CountinuousExposures value
@@ -974,7 +952,7 @@ class ControllerArchon(Controller):
         cmd = "WCONFIG%04X%s=%s" % (
             indxParam & 0xFFFF,
             self.dict_params["ContinuousExposures"],
-            "ContinuousExposures=" + str(self.cont_exp),
+            "ContinuousExposures=" + str(self.cont_exposures),
         )
         self.archon_command(cmd)
 
@@ -1071,22 +1049,22 @@ class ControllerArchon(Controller):
         else:
             raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
-        return self.exp
+        return self.exposures
 
     def set_exposures(self, Exp):
         """
         Sets number of exposures.
         """
 
-        if self.exp != Exp:
+        if self.exposures != Exp:
             if not self.config_ok:
                 raise azcam.exceptions.AzcamError("Configuration data not loaded")
 
-            self.exp = Exp
+            self.exposures = Exp
 
             # update config dictionary
             self.dict_config[self.dict_params["Exposures"]] = "Exposures=%s" % (
-                self.exp
+                self.exposures
             )
 
             # update Archons Exposures value
@@ -1481,12 +1459,6 @@ class ControllerArchon(Controller):
         Start exposure.
         """
 
-        # direct mode
-        # 1. Get FRAME
-        # 2. LOADPARAMS -> this should start the exposure
-        # 3. Loop: FRAME
-        # 4. FETCH frame
-
         # Set exposure state to UNKNOWN
         self.archon_status = self.EXP_UNKNOWN
 
@@ -1499,9 +1471,9 @@ class ControllerArchon(Controller):
         self.currframe3 = self.dict_frame["BUF3FRAME"]
 
         # Start exposure -> send LOADPARAMS command for single exposure mode
-        self.set_exposures(1)
-        self.load_params()
-        # self.resettiming()
+        self.set_exposures(0)
+        self.load_params()  # load exposure times and other pars
+        self.fastloadparam("EXPOSURES", 1)
         self.frame_time = time.time()
 
         # Exposure start time -> used to determine time out
@@ -1528,7 +1500,8 @@ class ControllerArchon(Controller):
         ].exposureflags["EXPOSING"]
 
         # wait for frame to change in buffers
-        azcam.log("Integrating", level=1)
+        if int_time > 0:
+            azcam.log("Integrating", level=1)
         while stop == 0:
             # Get frame and update frame dictionary
             self.get_frame()

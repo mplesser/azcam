@@ -50,7 +50,7 @@ class DetChar(Tools, Report):
         self.report_folder = folder
 
         print("")
-        print(f"Generating self.{report_name}")
+        print(f"Generating {self.report_name}")
         print("")
 
         # *********************************************
@@ -64,7 +64,7 @@ class DetChar(Tools, Report):
                 rfiles.append(f1)
             else:
                 print("Report file not found: %s" % f1)
-        self.merge_pdf(rfiles, report_name)
+        self.merge_pdf(rfiles, self.report_name)
 
         # open report
         with open(os.devnull, "w") as fnull:

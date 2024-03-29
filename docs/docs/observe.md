@@ -1,17 +1,14 @@
-# Observe
+# Observing Scripts
 
-The *observe* tool supports running observing scripts. It can be used
-with a Qt-based GUI or with a command line interface.
+The *observe* tool supports running observing scripts which can sequentially control all aspects of observations with no user interaction. It can be used with a GUI or with a command line interface.
 
-The `observe.observe()` command executed from a console window uses the CLI interface. The `observe` command executed from a terminal or icon starts the Qt GUI.
-
-The Qt GUI uses the *PySide6* package.
+The GUI uses the *PySide6* Qt package.
 
 ## Usage
 
-`observe` to start the GUI from a terminal.  A new window will open.
+Type `azcamobserve` to start the GUI from any terminal.  A new window will open.
 
-Use `observe.observe()` from an azcam console window to run the CLI version.
+Use `observe.observe()` from an azcamconsole window to run the CLI version.
 
 ![GUI example after loading script file.](img/observe_gui.jpg)
 *GUI example after loading script file.*

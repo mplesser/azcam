@@ -220,7 +220,7 @@ class TempCon(Tools, ObjectHeaderMethods):
     # ***************************************************************************
     def define_keywords(self):
         """
-        Defines and resets instrument keywords.
+        Defines and resets tempcon keywords.
         """
 
         return
