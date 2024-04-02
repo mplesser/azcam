@@ -76,7 +76,7 @@ class Fe55(Tester):
         self.show_events = 0  # plot event locations
         self.plot_order = []  # order of plots in report
 
-        self.overscan_correct = 1
+        self.overscan_correct = 0
         self.zero_correct = 0
         self.combine_images = 0  # True to sum Fe55 images into one image
         self.pause_each_channel = 0  # True to pause after analysis of each channel
@@ -180,20 +180,17 @@ class Fe55(Tester):
 
         startingfolder = azcam.utils.curdir()
 
-        if self.overscan_correct or self.zero_correct:
-            # create analysis subfolder
-            startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
+        # create analysis subfolder
+        startingfolder, subfolder = azcam.console.utils.make_file_folder(subfolder)
 
-            # copy all image files to analysis folder
-            azcam.log("Making copy of image files for analysis")
-            for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
-                shutil.copy(filename, subfolder)
+        # copy all image files to analysis folder
+        azcam.log("Making copy of image files for analysis")
+        for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
+            shutil.copy(filename, subfolder)
 
-            azcam.utils.curdir(
-                subfolder
-            )  # move for analysis folder - assume it already exists
-        else:
-            pass
+        azcam.utils.curdir(
+            subfolder
+        )  # move for analysis folder - assume it already exists
 
         currentfolder = azcam.utils.curdir()
         _, StartingSequence = azcam.console.utils.find_file_in_sequence(rootname)
@@ -222,34 +219,22 @@ class Fe55(Tester):
 
         SequenceNumber += 1
 
-        # Correct fe55 image
-        if self.overscan_correct or self.zero_correct:
-            filename = (
-                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                + ".fits"
-            )
-            NumExt, first_ext, last_ext = azcam.fits.get_extensions(filename)
+        # bias correct fe55 image
+        filename = (
+            os.path.join(currentfolder, rootname + "%04d" % SequenceNumber) + ".fits"
+        )
+        NumExt, first_ext, last_ext = azcam.fits.get_extensions(filename)
 
-            # zero_correct image first
-            if self.zero_correct:
-                # debiased = azcam.db.tools["bias"].debiased_filename
-                # debiased = azcam.db.tools["bias"].superbias_filename
-                debiased=zerofilename
-                azcam.log("zero_correct image: %s" % os.path.basename(filename))
-                zerosub = "zerosub.fits"
-                azcam.fits.sub(filename, debiased, zerosub)
-                os.remove(filename)
-                os.rename(zerosub, filename)
+        azcam.log("bias correct image: %s" % os.path.basename(filename))
+        zerosub = "zerosub.fits"
+        azcam.fits.sub(filename, zerofilename, zerosub)
+        os.remove(filename)
+        os.rename(zerosub, filename)
 
-            # overscan_correct image second
-            if self.overscan_correct:
-                azcam.log("overscan_correct image: %s" % os.path.basename(filename))
-                azcam.fits.colbias(filename, fit_order=self.fit_order)
-        else:
-            filename = (
-                os.path.join(currentfolder, rootname + "%04d" % SequenceNumber)
-                + ".fits"
-            )
+        # overscan_correct image second
+        if self.overscan_correct:
+            azcam.log("overscan_correct image: %s" % os.path.basename(filename))
+            azcam.fits.colbias(filename, fit_order=self.fit_order)
 
         self.grade = "UNKNOWN"
         azcam.log("Analyzing image %s" % os.path.basename(filename))
