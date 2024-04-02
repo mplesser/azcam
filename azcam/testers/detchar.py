@@ -1,5 +1,6 @@
 import datetime
 import os
+import subprocess
 
 import azcam
 import azcam.utils
@@ -20,8 +21,7 @@ class DetChar(Tools, Report):
         self.itl_id = ""
 
         self.summary_lines: list[str] = []
-        self.report_name: str = "sensor_characterization_report"
-        self.summary_report_name: str = "sensor_summary_report"
+        self.summary_report_name: str = "SummaryReport"
         self.report_date: str = ""
         self.report_comment: str = ""
         self.operator: str = ""
@@ -49,9 +49,7 @@ class DetChar(Tools, Report):
         folder = azcam.utils.curdir()
         self.report_folder = folder
 
-        print("")
         print(f"Generating {self.report_name}")
-        print("")
 
         # *********************************************
         # Combine PDF report files for each tool
@@ -64,11 +62,11 @@ class DetChar(Tools, Report):
                 rfiles.append(f1)
             else:
                 print("Report file not found: %s" % f1)
-        self.merge_pdf(rfiles, self.report_name)
+        self.merge_pdf(rfiles, f"{self.report_name}.pdf")
 
         # open report
         with open(os.devnull, "w") as fnull:
-            s = "%s" % self.report_file
+            s = f"{self.report_name}pdf"
             subprocess.Popen(s, shell=True, cwd=folder, stdout=fnull, stderr=fnull)
             fnull.close()
 
@@ -110,6 +108,7 @@ class DetChar(Tools, Report):
         lines.append(f"|Report date    |{self.report_date}|")
 
         # Make report files
+        azcam.log(f"Generating {self.summary_report_name}.pdf")
         self.write_report(self.summary_report_name, self.summary_lines, lines)
 
         return

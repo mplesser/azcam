@@ -201,10 +201,11 @@ class Dark(Tester):
         numdarks = len(imagelist)
 
         # if no overscan correct, subtract superbias from darks
-        if not self.overscan_correct:
+        # if not self.overscan_correct:
+        if 1:
             bias = azcam.db.tools["bias"]
             for darkfile in imagelist:
-                azcam.fits.sub(darkfile, bias.superbias_filename, darkfile, "uint16")
+                azcam.fits.sub(darkfile, bias.superbias_filename, "", "uint16")
 
         # median combine all dark images
         masterdark = self.dark_filename
@@ -226,12 +227,12 @@ class Dark(Tester):
         azcam.log(s)
 
         # "debias" correct with residuals after colbias
-        if self.zero_correct:
-            debiased = azcam.db.tools["bias"].debiased_filename
-            biassub = "biassub.fits"
-            azcam.fits.sub(masterdark, debiased, biassub, "uint16")
-            os.remove(masterdark)
-            os.rename(biassub, masterdark)
+        # if self.zero_correct:
+        #     debiased = azcam.db.tools["bias"].debiased_filename
+        #     biassub = "biassub.fits"
+        #     azcam.fits.sub(masterdark, debiased, biassub, "uint16")
+        #     os.remove(masterdark)
+        #     os.rename(biassub, masterdark)
 
         # create dark azcam image
         self.dark_image = azcam.image.Image(masterdark)

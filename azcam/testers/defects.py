@@ -250,7 +250,7 @@ class Defects(Tester):
         self.bright_rejected_pixels = 0
 
         # reject bright pixels from dark median combined and colbiased image
-        s = "Rejecting bright pixels above %.3f e/pix/sec" % self.bright_pixel_reject
+        s = f"Rejecting bright pixels above {self.bright_pixel_reject:0.03f} e/pix/sec"
         azcam.log(s)
 
         darkfilename = azcam.utils.make_image_filename(self.dark_filename)
@@ -551,7 +551,7 @@ class Defects(Tester):
         lines.append("# Bright Defects Analysis")
         lines.append("")
         lines.append(
-            f"Rejecting bright pixels above {self.bright_pixel_reject:.01f} electrons/pix/sec"
+            f"Rejecting bright pixels above {self.bright_pixel_reject:0.03f} e/pix/sec"
         )
         lines.append("")
         lines.append(f"Number of bright rejected: {self.bright_rejected_pixels}")
@@ -627,7 +627,7 @@ class Defects(Tester):
         lines.append("# Bright Defects Analysis")
         lines.append("")
         lines.append(
-            f"Rejecting bright pixels above {self.bright_pixel_reject:.01f} electrons/pix/sec"
+            f"Rejecting bright pixels above {self.bright_pixel_reject:0.03f} e/pix/sec"
         )
         lines.append("")
         lines.append(f"Number of bright rejected pixels: {self.bright_rejected_pixels}")

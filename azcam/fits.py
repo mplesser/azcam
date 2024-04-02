@@ -233,27 +233,28 @@ def arith(
     # open Image1
     filename1 = azcam.utils.make_image_filename(filename1)
     numext1, fext, lext = get_extensions(filename1)
-    im1 = pyfits.open(filename1, lazy_load_hdus=False)  # this is an hdulist
-    if numext1 > 0:
-        MEF = 1
-        header.append(im1[0].header)  # save for output file
-        data1 = []  # first data index is 0
-        for i in range(1, lext):
-            header.append(im1[i].header)  # save for output
-            if _is_image_extension(im1, i):  # only use image data
-                data1.append(im1[i].data)
-    else:
-        MEF = 0
-        header = im1[0].header  # save for output file
-        data1 = im1[0].data
+    # im1 = pyfits.open(filename1, lazy_load_hdus=False)  # this is an hdulist
+    with pyfits.open(filename1, lazy_load_hdus=False) as im1:
+        if numext1 > 0:
+            MEF = 1
+            header.append(im1[0].header)  # save for output file
+            data1 = []  # first data index is 0
+            for i in range(1, lext):
+                header.append(im1[i].header)  # save for output
+                if _is_image_extension(im1, i):  # only use image data
+                    data1.append(im1[i].data)
+        else:
+            MEF = 0
+            header = im1[0].header  # save for output file
+            data1 = im1[0].data
 
-    # make float - new
-    if MEF:
-        for i in range(len(data1)):
-            if _is_image_extension(im1, i):
-                data1[i] = data1[i].astype("float32")
-    else:
-        data1 = data1.astype("float32")
+        # make float - new
+        if MEF:
+            for i in range(len(data1)):
+                if _is_image_extension(im1, i):
+                    data1[i] = data1[i].astype("float32")
+        else:
+            data1 = data1.astype("float32")
 
     # check if filename2 is actually a number and not a filename
     if not isinstance(filename2, str):
@@ -340,10 +341,7 @@ def arith(
                 for i in range(len(data3) + 1, len(im1)):
                     hdulist.append(im1[i])
             hdulist.writeto(filename3, overwrite=1)
-            im1.close()
-
         else:
-            im1.close()
             im3 = pyfits.PrimaryHDU(data3, header)
             im3.writeto(filename3, overwrite=1)
 
