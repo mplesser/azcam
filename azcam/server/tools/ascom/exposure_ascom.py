@@ -81,7 +81,7 @@ class ExposureASCOM(Exposure):
 
         try:
             azcam.db.tools["controller"].is_imageready(1)
-        except azcam.AzcamError:
+        except azcam.exceptions.AzcamError:
             self.exposure_flag = self.exposureflags["ABORT"]
             return
 

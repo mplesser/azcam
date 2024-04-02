@@ -721,7 +721,7 @@ class Queue(Tools):
             try:
                 reply = azcam.db.tools["server"].command(f"telescope.offset {ra} {dec}")
                 return "OK"
-            except azcam.AzcamError as e:
+            except azcam.exceptions.AzcamError as e:
                 return f"ERROR {e}"
 
         elif cmd == "delay":
@@ -732,7 +732,7 @@ class Queue(Tools):
             try:
                 reply = azcam.db.tools["server"].command(arg)
                 return reply
-            except azcam.AzcamError as e:
+            except azcam.exceptions.AzcamError as e:
                 return f"ERROR {e}"
 
         elif cmd == "print":
@@ -791,7 +791,7 @@ class Queue(Tools):
                         reply = azcam.db.tools["server"].command(
                             f"telescope.move {ra} {dec}"
                         )
-                except azcam.AzcamError as e:
+                except azcam.exceptions.AzcamError as e:
                     return f"ERROR {e}"
             else:
                 if self.azalt_mode:
@@ -868,7 +868,7 @@ class Queue(Tools):
                                             "telescope.move_start %s %s %s"
                                             % (raNext, decNext, epochNext)
                                         )
-                                    except azcam.AzcamError as e:
+                                    except azcam.exceptions.AzcamError as e:
                                         return f"ERROR {e}"
                                     doMove = 0
                             elif flag == azcam.db.exposureflags["WRITING"]:

@@ -321,7 +321,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         ):
             try:
                 self.readout()
-            except azcam.AzcamError:
+            except azcam.exceptions.AzcamError:
                 pass
         # end
         if self.exposure_flag != self.exposureflags["ABORT"]:

@@ -182,7 +182,7 @@ class ServerConnection(object):
         # get tokenized reply - check for comm error
         try:
             reply = self.remserver.command(command)
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             if e.error_code == 2:
                 raise
                 # raise azcam.exceptions.AzcamError("could not connect to server")

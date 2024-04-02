@@ -130,7 +130,7 @@ class WebServer(object):
             caller = getattr(azcam.db.monitor, command)
             reply = caller(**kwargs)
 
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             print(f"web_command error: {e}")
             if e.error_code == 4:
                 reply = "remote call not allowed"
@@ -185,7 +185,7 @@ class WebServer(object):
         try:
             caller = self.webparse(command)
             reply = self.webcall(caller)
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             if e.error_code == 4:
                 reply = "remote call not allowed"
         except Exception as e:

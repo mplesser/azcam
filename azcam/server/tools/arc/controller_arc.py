@@ -197,7 +197,7 @@ class ControllerArc(Controller):
             reply = self.camserver.command("resetcontroller")
             if reply[0] == "ERROR":
                 raise azcam.exceptions.AzcamError(f"SYR reset error: {reply[1:]}")
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             if e.error_code == 1:
                 raise azcam.exceptions.AzcamError(
                     "Controller reset error, check power and fibers", error_code=1

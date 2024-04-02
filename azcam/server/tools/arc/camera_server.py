@@ -45,7 +45,7 @@ class CameraServerInterface(object):
             try:
                 reply = self.socketserver.command(command, terminator)
                 return reply
-            except azcam.AzcamError as e:
+            except azcam.exceptions.AzcamError as e:
                 if e.error_code == 2:
                     raise azcam.exceptions.AzcamError("Could not connect to camserver")
                 else:

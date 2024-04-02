@@ -210,7 +210,7 @@ def get_datatype(value: any) -> list:
     return [attributetype, value]
 
 
-def prompt(prompt_message: str = "Enter a string", default: str = "") -> str:
+def prompt(prompt_message: str = "Enter a string", default: any = "") -> any:
     """
     Prints a message and waits for user input.
 

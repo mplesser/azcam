@@ -68,7 +68,7 @@ def setup():
         azcam.db.datafolder, "parameters", f"parameters_console_mock.ini"
     )
     azcam.db.parameters.read_parfile(parfile)
-    azcam.db.parameters.update_pars("azcamconsole")
+    azcam.db.parameters.update_pars()
 
     # logging
     logfile = os.path.join(azcam.db.datafolder, "logs", "console.log")
@@ -113,7 +113,7 @@ def setup():
 
     # par file
     azcam.db.parameters.read_parfile(parfile)
-    azcam.db.parameters.update_pars("azcamconsole")
+    azcam.db.parameters.update_pars()
 
 
 setup()

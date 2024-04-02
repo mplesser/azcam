@@ -268,7 +268,7 @@ class WebServer(object):
             caller = getattr(objid, method)
             reply = caller() if kwargs is None else caller(**kwargs)
 
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             azcam.log(f"web_command error: {e}")
             if e.error_code == 4:
                 reply = "remote call not allowed"

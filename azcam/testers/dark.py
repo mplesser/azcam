@@ -396,7 +396,7 @@ class Dark(Tester):
         elif self._numchans == 4:
             plotconfig = (2, 2)
         else:
-            raise azcam.AzcamError("missing subplot configuration")
+            raise azcam.exceptions.AzcamError("missing subplot configuration")
 
         # plot dark image
         fig = plt.figure()

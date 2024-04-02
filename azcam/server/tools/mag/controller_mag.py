@@ -77,7 +77,7 @@ class ControllerMag(Controller):
 
         try:
             self.upload_dsp_file(2, self.timing_file)
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             # warn about reset
             if e.error_code == 1:
                 azcam.exceptions.warning("Controller not reset: check power")

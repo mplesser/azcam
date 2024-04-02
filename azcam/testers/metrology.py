@@ -107,9 +107,9 @@ class Metrology(Tester):
 
         try:
             if not f.startswith(filename):
-                raise azcam.AzcamError("file not found")
+                raise azcam.exceptions.AzcamError("file not found")
         except Exception:
-            raise azcam.AzcamError("file not found")
+            raise azcam.exceptions.AzcamError("file not found")
 
         return f
 

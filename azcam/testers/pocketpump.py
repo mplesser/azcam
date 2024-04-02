@@ -195,7 +195,7 @@ class PocketPump(Tester):
             azcam.log("Using ExposureTime")
             et = self.exposure_time
         else:
-            raise azcam.AzcamError("could not determine exposure times")
+            raise azcam.exceptions.AzcamError("could not determine exposure times")
 
         # flush well
         azcam.log("Flushing")

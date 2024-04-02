@@ -167,7 +167,7 @@ class Ptc(Tester):
                 self.exposure_times.append(exptime)
                 exptime = exptime + ExposureInc
         else:
-            raise azcam.AzcamError("could not determine exposure times")
+            raise azcam.exceptions.AzcamError("could not determine exposure times")
 
         # loop through pairs
         azcam.db.parameters.set_par("imagetype", self.exposure_type)

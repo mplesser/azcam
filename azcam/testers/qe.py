@@ -124,7 +124,9 @@ class QE(Tester):
         # Get exposure times
         if self.use_exposure_levels:
             if not detcal.valid or len(self.exposure_levels) == 0:
-                raise azcam.AzcamError("invalid exposure level data or calibration")
+                raise azcam.exceptions.AzcamError(
+                    "invalid exposure level data or calibration"
+                )
             azcam.log("Using exposure_levels")
 
             # determine exposure_times from exposure_levels

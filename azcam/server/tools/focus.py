@@ -280,7 +280,7 @@ class Focus(Tools):
             azcam.log("Integrating")
             try:
                 self.exposure.integrate()
-            except azcam.AzcamError:
+            except azcam.exceptions.AzcamError:
                 azcam.log("Focus exposure aborted")
                 self._set_focus(starting_focus_value)
                 azcam.db.parameters.set_par("imageroot", root)

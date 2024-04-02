@@ -179,7 +179,7 @@ class ExposureArc(Exposure):
         # start data transfer, returns when all data is received
         try:
             self.receive_data.receive_image_data(self.image.focalplane.numpix_image * 2)
-        except azcam.AzcamError as e:
+        except azcam.exceptions.AzcamError as e:
             if e.error_code == 3:
                 azcam.log("Exposure aborted")
             else:
@@ -295,9 +295,7 @@ class ExposureArc(Exposure):
 
                 else:
                     azcam.log("Sending image")
-                    self.sendimage.send_image(
-                        LocalFile, self.get_filename()
-                    )
+                    self.sendimage.send_image(LocalFile, self.get_filename())
 
         # image data and file are now ready
         self.image.toggle = 1

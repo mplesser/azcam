@@ -126,7 +126,7 @@ class ExposureMag(Exposure):
             reply = self.receive_data.receive_image_data(
                 self.image.focalplane.numpix_image * 2
             )
-        except azcam.AzcamError:
+        except azcam.exceptions.AzcamError:
             self.exposure_flag = self.exposureflags["ABORT"]
 
         self.image.valid = 1  # new

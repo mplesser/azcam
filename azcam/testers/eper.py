@@ -45,7 +45,7 @@ class Eper(Tester):
         Not supported, use superflat image set
         """
 
-        raise azcam.AzcamError(
+        raise azcam.exceptions.AzcamError(
             "EPER acquire not supported - use superflat to acquire data"
         )
 

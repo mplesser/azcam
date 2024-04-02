@@ -106,13 +106,12 @@ class Parameters(object):
 
         return
 
-    def update_pars(self, par_dictname: str = None) -> None:
+    def update_pars(self) -> None:
         """
-        Set current attributes from par_dict values.
+        Set current attributes from default par_dict values.
         """
 
-        if par_dictname is None:
-            par_dictname = self.default_pardict_name
+        par_dictname = self.default_pardict_name
 
         par_dict = azcam.db.parameters.par_dict.get(par_dictname)
         if par_dict is None:
@@ -132,13 +131,12 @@ class Parameters(object):
 
         return
 
-    def update_par_dict(self, par_dictname: str = None) -> None:
+    def update_par_dict(self) -> None:
         """
-        Set par_dict values from current attributes.
+        Set par_dict values in default par_dict from current attributes.
         """
 
-        if par_dictname is None:
-            par_dictname = self.default_pardict_name
+        par_dictname = self.default_pardict_name
 
         par_dict = azcam.db.parameters.par_dict.get(par_dictname)
         if par_dict is None:
@@ -160,15 +158,15 @@ class Parameters(object):
 
     def get_par(self, parameter: str, subdict=None) -> typing.Any:
         """
-        Return the current value of a parameter in the parameters dictionary.
+        Return the current attribute value of a parameter in the parameters dictionary.
         If subdict is not specified then the default subdict is used.
 
         Args:
-            parameter (str): name of the parameter
-            subdict (str): name of the subdict containing the parameter
+            parameter: name of the parameter
+            subdict: name of the subdict containing the parameter
 
         Returns:
-            value (Any): value of the parameter
+            value: value of the parameter
         """
 
         parameter = parameter.lower()
@@ -224,14 +222,13 @@ class Parameters(object):
 
     def set_par(self, parameter: str, value: typing.Any = "None", subdict=None) -> None:
         """
-        Set the value of a parameter in the parameters dictionary.
+        Set the value of a parameter in a parameters dictionary.
+        Also attempts to set actual attribute value.
 
         Args:
-            parameter (str): name of the parameter
-            value (Any): value of the parameter. Defaults to None.
+            parameter: name of the parameter
+            value: value of the parameter. Defaults to None.
             subdict: subdict in which to set paramater
-        Returns:
-            None
         """
 
         parameter = parameter.lower()
@@ -243,7 +240,7 @@ class Parameters(object):
         try:
             self._set_par_hook(parameter, value, subdict)
             return None
-        except NameError:  # OK if hook is not defeined
+        except NameError:  # OK if hook is not defined
             pass
         except AttributeError:  # OK if parameter not in hook
             pass
@@ -261,8 +258,13 @@ class Parameters(object):
 
         except KeyError:
             _, value = azcam.utils.get_datatype(value)
-            azcam.db.parameters.par_dict[subdict][parameter] = value
-            # azcam.exceptions.warning(f"Parameter {parameter} not available for set_par")
+
+            try:
+                azcam.db.parameters.par_dict[subdict][parameter] = value
+            except KeyError:
+                if azcam.db.parameters.par_dict.get(subdict) is None:
+                    azcam.db.parameters.par_dict[subdict] = {}
+                azcam.db.parameters.par_dict[subdict][parameter] = value
             return None
 
         # first try to set value type
@@ -279,7 +281,6 @@ class Parameters(object):
                 setattr(obj, tokens[-1], value)
             except AttributeError:
                 pass
-                # azcam.exceptions.warning(f"Could not set parameter: {parameter}")
         except KeyError:
             pass
         except Exception:  # new

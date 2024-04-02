@@ -27,7 +27,7 @@ class ParametersConsole(Parameters):
 
         Parameters.__init__(self, "azcamconsole")
 
-    def get_par(self, parameter: str) -> typing.Any:
+    def get_par(self, parameter: str, subdict=None) -> typing.Any:
         """
         Return the value of a parameter in the parameters dictionary.
 
@@ -41,14 +41,19 @@ class ParametersConsole(Parameters):
         parameter = parameter.lower()
         value = None
 
+        if subdict is None:
+            subdict = self.default_pardict_name
+
         try:
-            reply = azcam.db.tools["server"].command(f"parameters.get_par {parameter}")
-        except azcam.AzcamError:
+            reply = azcam.db.tools["server"].command(
+                f"parameters.get_par {parameter} {subdict}"
+            )
+        except azcam.exceptions.AzcamError:
             return
         _, value = azcam.utils.get_datatype(reply)
         return value
 
-    def set_par(self, parameter: str, value: typing.Any = None) -> None:
+    def set_par(self, parameter: str, value: typing.Any = None, subdict=None) -> None:
         """
         Set the value of a parameter in the parameters dictionary.
 
@@ -61,9 +66,14 @@ class ParametersConsole(Parameters):
 
         parameter = parameter.lower()
 
+        if subdict is None:
+            subdict = self.default_pardict_name
+
         try:
-            azcam.db.tools["server"].command(f"parameters.set_par {parameter} {value}")
-        except azcam.AzcamError:
+            azcam.db.tools["server"].command(
+                f"parameters.set_par {parameter} {value} {subdict}"
+            )
+        except azcam.exceptions.AzcamError:
             return
         return None
 
@@ -149,5 +159,18 @@ class ParametersConsole(Parameters):
 
         # get value
         par_dict[attribute] = value
+
+        return
+
+    def save_pars(self) -> None:
+        """
+        Writes the par_dict to the par_file using current values.
+        """
+
+        self.update_par_dict()
+        self.write_parfile()
+
+        if azcam.db.tools["server"].connected:
+            azcam.db.tools["server"].command("parameters.save_pars")
 
         return

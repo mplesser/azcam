@@ -80,7 +80,7 @@ class Superflat(Tester):
         elif len(self.exposure_times) > 0:
             azcam.log("Using ExposureTimes")
         else:
-            raise azcam.AzcamError("could not determine exposure times")
+            raise azcam.exceptions.AzcamError("could not determine exposure times")
 
         for setnum, exposuretime in enumerate(self.exposure_times):
             azcam.db.parameters.set_par(
