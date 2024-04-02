@@ -70,8 +70,9 @@ class Dark(Tester):
         self.data_file = "dark.txt"
         self.report_file = "dark"
         self.dark_filename = "dark.fits"
+        self.bias_filename = "bias.fits"
+        self.darksub_filename = "dark_sub.fits"
         self.scaled_dark_filename = "darkscaled.fits"
-        self.dark_reference_filename = "darkref.fits"
         self.cumm_hist_plot = "cumm_hist.png"
         self.total_hist_plot = "total_hist.png"
         self.darkimage_plot = "darkimage.png"
@@ -148,8 +149,8 @@ class Dark(Tester):
         self.data_file = "dark.txt"
         self.report_file = "dark"
         self.dark_filename = "dark.fits"
+        self.darksub_filename = "dark_sub.fits"
         self.scaled_dark_filename = "darkscaled.fits"
-        self.dark_reference_filename = "darkref.fits"
         self.cumm_hist_plot = "cumm_hist.png"
         self.darkimage_plot = "darkimage.png"
 
@@ -188,35 +189,54 @@ class Dark(Tester):
         bin2 = azcam.fits.get_keyword(zerofilename, "CCDBIN2")
         binned = int(bin1) * int(bin2)
 
-        # get list of dark images
-        imagelist = []
-        seq = StartingSequence + 1  # pairs are bias then dark
+        # get lists of images
+        biaslist = []
+        darklist = []
+        seq = StartingSequence  # pairs are bias then dark
         while True:
             df = os.path.join(currentfolder, rootname) + f"{seq:04d}.fits"
             if os.path.exists(df):
-                imagelist.append(df)
-                seq += 2
+                biaslist.append(df)
+                seq += 1
             else:
                 break
-        numdarks = len(imagelist)
+            df = os.path.join(currentfolder, rootname) + f"{seq:04d}.fits"
+            if os.path.exists(df):
+                darklist.append(df)
+                seq += 1
+            else:
+                break
+        numdarks = len(darklist)
 
-        # if no overscan correct, subtract superbias from darks
-        # if not self.overscan_correct:
-        if 1:
-            bias = azcam.db.tools["bias"]
-            for darkfile in imagelist:
-                azcam.fits.sub(darkfile, bias.superbias_filename, "", "uint16")
+        # median combine all bias images
+        masterbias = self.bias_filename
+        if numdarks == 1:
+            s = f"One bias image found: {darklist[0]}"
+            shutil.copyfile(darklist[0], masterbias)
+            if self.overscan_correct:
+                azcam.fits.colbias(masterbias, fit_order=self.fit_order)
+        else:
+            azcam.fits.combine(
+                biaslist,
+                masterbias,
+                "median",
+                overscan_correct=self.overscan_correct,
+                fit_order=self.fit_order,
+                datatype="float32",
+            )
+            s = f"Number of bias images combined into {masterbias}: {numdarks}"
+        azcam.log(s)
 
         # median combine all dark images
         masterdark = self.dark_filename
         if numdarks == 1:
-            s = f"One dark image found: {imagelist[0]}"
-            shutil.copyfile(imagelist[0], masterdark)
+            s = f"One dark image found: {darklist[0]}"
+            shutil.copyfile(darklist[0], masterdark)
             if self.overscan_correct:
                 azcam.fits.colbias(masterdark, fit_order=self.fit_order)
         else:
             azcam.fits.combine(
-                imagelist,
+                darklist,
                 masterdark,
                 "median",
                 overscan_correct=self.overscan_correct,
@@ -226,16 +246,10 @@ class Dark(Tester):
             s = f"Number of dark images combined into {masterdark}: {numdarks}"
         azcam.log(s)
 
-        # "debias" correct with residuals after colbias
-        # if self.zero_correct:
-        #     debiased = azcam.db.tools["bias"].debiased_filename
-        #     biassub = "biassub.fits"
-        #     azcam.fits.sub(masterdark, debiased, biassub, "uint16")
-        #     os.remove(masterdark)
-        #     os.rename(biassub, masterdark)
+        azcam.fits.sub(masterdark, masterbias, self.darksub_filename, "float32")
 
         # create dark azcam image
-        self.dark_image = azcam.image.Image(masterdark)
+        self.dark_image = azcam.image.Image(self.darksub_filename)
 
         # get header info
         exptime = float(azcam.fits.get_keyword(masterdark, "EXPTIME"))
@@ -243,11 +257,6 @@ class Dark(Tester):
             self.temperature = float(azcam.fits.get_keyword(masterdark, "CAMTEMP"))
         except Exception:
             self.temperature = -999
-
-        # save dark reference image, bias corrected and scaled to DN per second
-        azcam.fits.mult(
-            masterdark, 1.0 / exptime, self.dark_reference_filename, datatype="float32"
-        )
 
         # set scale from gain
         history = azcam.fits.get_history(masterdark)
@@ -339,6 +348,10 @@ class Dark(Tester):
 
         azcam.log(f"Grade = {self.grade}")
 
+        # replace dark_filename with darksub_filename
+        os.remove(self.dark_filename)
+        os.rename(self.darksub_filename, self.dark_filename)
+
         if self.create_plots:
             self.plot()
 
@@ -346,7 +359,6 @@ class Dark(Tester):
         if startingfolder != subfolder:
             shutil.copy(os.path.abspath(self.dark_filename), startingfolder)
             shutil.copy(os.path.abspath(self.scaled_dark_filename), startingfolder)
-            shutil.copy(os.path.abspath(self.dark_reference_filename), startingfolder)
             if self.create_plots:
                 shutil.copy(os.path.abspath(self.darkimage_plot), startingfolder)
                 shutil.copy(os.path.abspath(self.cumm_hist_plot), startingfolder)
@@ -356,7 +368,6 @@ class Dark(Tester):
         azcam.utils.curdir(startingfolder)
         self.dark_filename = os.path.abspath(self.dark_filename)
         self.scaled_dark_filename = os.path.abspath(self.scaled_dark_filename)
-        self.dark_reference_filename = os.path.abspath(self.dark_reference_filename)
         self.darkimage_plot = os.path.abspath(self.darkimage_plot)
         self.cumm_hist_plot = os.path.abspath(self.cumm_hist_plot)
 
