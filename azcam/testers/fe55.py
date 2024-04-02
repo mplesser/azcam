@@ -211,15 +211,14 @@ class Fe55(Tester):
         self.num_chans = last_ext - first_ext
 
         # get overscan noise from zero
-        zeroim = pyfits.open(zerofilename)
-        for chan, ext in enumerate(range(first_ext, last_ext)):
-            hdr = zeroim[ext].header
-            ncols = hdr["NAXIS1"]
-            nrows = hdr["NAXIS2"]
-            imbuf = numpy.reshape(zeroim[ext].data, [nrows, ncols])  # [rows,cols]
-            noise = imbuf[nroi[2] : nroi[3], nroi[0] : nroi[1]].std()
-            self.noise_dn.append(noise)
-        zeroim.close()
+        with pyfits.open(zerofilename, lazy_load_hdus=False) as zeroim:
+            for chan, ext in enumerate(range(first_ext, last_ext)):
+                hdr = zeroim[ext].header
+                ncols = hdr["NAXIS1"]
+                nrows = hdr["NAXIS2"]
+                imbuf = numpy.reshape(zeroim[ext].data, [nrows, ncols])  # [rows,cols]
+                noise = imbuf[nroi[2] : nroi[3], nroi[0] : nroi[1]].std()
+                self.noise_dn.append(noise)
 
         SequenceNumber += 1
 
@@ -233,7 +232,9 @@ class Fe55(Tester):
 
             # zero_correct image first
             if self.zero_correct:
-                debiased = azcam.db.tools["bias"].debiased_filename
+                # debiased = azcam.db.tools["bias"].debiased_filename
+                # debiased = azcam.db.tools["bias"].superbias_filename
+                debiased=zerofilename
                 azcam.log("zero_correct image: %s" % os.path.basename(filename))
                 zerosub = "zerosub.fits"
                 azcam.fits.sub(filename, debiased, zerosub)

@@ -1487,7 +1487,7 @@ class ControllerArchon(Controller):
 
         # if no wait, just set status and exit
         if wait == 0:
-            self.archon_status = EXP_EXPOSE
+            self.archon_status = self.EXP_EXPOSE
             return
 
         # frame number changes when integration is over
@@ -1545,7 +1545,7 @@ class ControllerArchon(Controller):
             azcam.db.tools["exposure"].exposure_flag
             == azcam.db.tools["exposure"].exposureflags["ABORT"]
         ):
-            self.archon_status = EXP_DONE
+            self.archon_status = self.EXP_DONE
             azcam.exceptions.warning("Exposure aborted")
             return
 
@@ -1559,7 +1559,7 @@ class ControllerArchon(Controller):
         # Wait for readout to complete
         azcam.log("Reading", level=1)
         if self.newframe == 0:
-            self.archon_status = EXP_UNKNOWN
+            self.archon_status = self.EXP_UNKNOWN
             raise azcam.exceptions.AzcamError("New frame is not ready")
 
         self.read_time = time.time()
@@ -1603,10 +1603,10 @@ class ControllerArchon(Controller):
         azcam.db.tools["exposure"].exposure_time_actual = et
 
         if dataReady == 1:
-            self.archon_status = EXP_DONE
+            self.archon_status = self.EXP_DONE
             return
         elif dataReady == -1:
-            self.archon_status = EXP_DONE
+            self.archon_status = self.EXP_DONE
             azcam.exceptions.warning("Exposure aborted")
         else:
             raise azcam.exceptions.AzcamError("New frame data is not ready")
