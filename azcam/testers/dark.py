@@ -315,11 +315,11 @@ class Dark(Tester):
 
         # PASS or FAIL on mean dark signal if specified
         azcam.log(
-            f"Mean dark signal is {(self.mean_dark_signal*self.units_scale):0.2f} {self.units_text}"
+            f"Mean dark signal is {(self.mean_dark_signal*self.units_scale):0.03f} {self.units_text}"
         )
         if self.median_dark_signal != -1:
             azcam.log(
-                f"Median dark signal is {(self.median_dark_signal*self.units_scale):0.2f} {self.units_text}"
+                f"Median dark signal is {(self.median_dark_signal*self.units_scale):0.03f} {self.units_text}"
             )
         if self.mean_dark_spec != -1:
             if self.mean_dark_signal > self.mean_dark_spec:
@@ -328,7 +328,7 @@ class Dark(Tester):
                 self.grade = "PASS"
         if self.mean_dark_spec > 0:
             azcam.log(
-                f"Spec for mean dark signal is {(self.mean_dark_spec*self.units_scale):0.2f} {self.units_text}"
+                f"Spec for mean dark signal is {(self.mean_dark_spec*self.units_scale):0.03f} {self.units_text}"
             )
 
         if not self.grade_sensor:
@@ -340,7 +340,7 @@ class Dark(Tester):
             max1 = int(len(ordered) * self.dark_fraction)
             trimmed = ordered[:max1]
             self.dark_rate_measured = max(trimmed)
-            s1 = f"{self.dark_fraction * 100:0.1f}% of pixels are below {(self.dark_rate_measured*self.units_scale):0.2f} {self.units_text}"
+            s1 = f"{self.dark_fraction * 100:0.1f}% of pixels are below {(self.dark_rate_measured*self.units_scale):0.03f} {self.units_text}"
             azcam.log(s1)
             azcam.log(
                 f"Spec is {100.*self.dark_fraction:0.1f}% below {(self.dark_limit*self.units_scale)} {self.units_text}"
@@ -542,13 +542,13 @@ class Dark(Tester):
             s = f"{self.dark_fraction_measured * 100:0.1f} of pixels are below {(self.dark_rate_measured*self.units_scale):0.3f} {self.units_text}  "
             lines.append(s)
 
-        s = f"Mean dark signal is {self.units_scale*self.mean_dark_signal:0.2f} {self.units_text}  "
+        s = f"Mean dark signal is {self.units_scale*self.mean_dark_signal:0.03f} {self.units_text}  "
         lines.append(s)
         if self.mean_dark_spec > 0:
-            s = f"Dark signal spec is {self.units_scale*self.mean_dark_spec:0.2f} {self.units_text}  "
+            s = f"Dark signal spec is {self.units_scale*self.mean_dark_spec:0.03f} {self.units_text}  "
             lines.append(s)
 
-        s = f"Median dark signal is {self.units_scale*self.median_dark_signal:0.2f} {self.units_text}  "
+        s = f"Median dark signal is {self.units_scale*self.median_dark_signal:0.03f} {self.units_text}  "
         lines.append(s)
 
         # if self.dsnu > 0:

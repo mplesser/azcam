@@ -87,13 +87,16 @@ class Prnu(Tester):
         waves.sort()
         if self.mean_count_goal > 0:
             if azcam.db.tools["detcal"].valid:
+                meancounts = (
+                    azcam.db.tools["detcal"].mean_counts
+                    * azcam.db.tools["detcal"].scaling
+                )
                 for wave in waves:
                     self.exposure_levels[wave] = (
-                        self.mean_count_goal
-                        / azcam.db.tools["detcal"].mean_counts[wave]
+                        self.mean_count_goal / meancounts[wave]
                     ) / binning
             else:
-                azcam.log("invaloid detcal data, using fixed exposure times")
+                azcam.log("invalid detcal data, using fixed exposure times")
 
         for wave in waves:
             wavelength = float(wave)

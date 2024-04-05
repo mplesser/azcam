@@ -72,10 +72,12 @@ class Superflat(Tester):
         if azcam.db.tools["detcal"].valid and len(self.exposure_levels) > 0:
             azcam.log("Using exposure_levels")
 
-            meanelectrons = azcam.db.tools["detcal"].mean_electrons
+            meancounts = (
+                azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
+            )
 
             self.exposure_times = (
-                numpy.array(self.exposure_levels) / meanelectrons[wave] / binning
+                numpy.array(self.exposure_levels) / meancounts[wave] / binning
             )
         elif len(self.exposure_times) > 0:
             azcam.log("Using ExposureTimes")

@@ -190,8 +190,8 @@ class Bias(Tester):
 
         # get list of status for each ext
         self.mean = self.mean_image.mean()
-        self.median = numpy.median(self.median_image)
-        self.sdev = self.sdev_image.std()
+        self.median = self.median_image.mean()
+        self.sdev = self.sdev_image.mean()
         self.mean_noise = self.sdev_image.mean()
         self.median_noise = numpy.median(self.sdev_image)
 

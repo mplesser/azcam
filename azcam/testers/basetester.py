@@ -35,7 +35,7 @@ class Tester(Tools, Report):
         self.report_file = "base"  # no extension, will be pdf or md
         self.create_reports = True  # True to generate reports during analysis
         self.create_plots = True  # True to generate plots during analysis
-        self.create_html = True
+        self.create_html = False
 
         self.fit_order = 3  # fit order for overscan correction
 

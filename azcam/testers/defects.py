@@ -29,11 +29,12 @@ class Defects(Tester):
         self.defects_mask = 0
 
         # bright defects
+        self.grade_bright_defects = 1
+        self.bright_pixel_reject = -1  # reject dark image pixels above this e/pix/sec
         self.brightdefects_datafile = "brightdefects.txt"
         self.brightdefectsreport_rst = "brightdefects"
         self.dark_filename = "dark.fits"  # dark image for bright defects
         self.BrightPixelRejectionMask = "BrightPixelRejectionMask.png"
-        self.bright_pixel_reject = -1  # reject dark image pixels above this e/pix/sec
         self.bright_defects_grade = "FAIL"
         self.bright_rejected_pixels = -1
         self.allowable_bright_pixels = -1
@@ -41,11 +42,12 @@ class Defects(Tester):
         self.total_bright_pixels = -1  # total pixels with mask
 
         # dark defects
+        self.grade_dark_defects = 1
+        self.dark_pixel_reject = -1  # reject dark pixels below this value from mean
         self.darkdefects_datafile = "darkdefects.txt"
         self.darkdefectsreport_file = "darkdefects"
         self.DarkPixelRejectionMask = "DarkPixelRejectionMask.png"
         self.flat_filename = "superflat.fits"  # flat image for dark pixels
-        self.dark_pixel_reject = -1  # reject dark pixels below this value from mean
         self.dark_defects_grade = "FAIL"
         self.dark_rejected_pixels = -1
         self.allowable_dark_pixels = -1
@@ -70,7 +72,8 @@ class Defects(Tester):
         Find dark defects in a flat/superflat image.
         """
 
-        azcam.log("Combining data from Bright and Dark analysis")
+        if self.grade_bright_defects == 0 and self.grade_dark_defects == 0:
+            return
 
         if self.allowable_bad_fraction > 0:
             self.allowable_rejected_pixels = int(
@@ -120,6 +123,11 @@ class Defects(Tester):
         """
         Find dark defects in a flat/superflat image.
         """
+
+        if self.grade_dark_defects:
+            self.dark_defects_grade = "UNDEFINED"
+            self.dark_rejected_pixels = 0
+            return
 
         azcam.log("Analyzing illuminated image for dark defects")
 
@@ -243,8 +251,10 @@ class Defects(Tester):
         """
         Find bright defects in dark signal image.
         """
-
-        azcam.log("Analyzing dark image for bright defects")
+        if self.grade_bright_defects:
+            self.bright_defects_grade = "UNDEFINED"
+            self.bright_rejected_pixels = 0
+            return
 
         self.bright_defects_grade = "UNDEFINED"
         self.bright_rejected_pixels = 0

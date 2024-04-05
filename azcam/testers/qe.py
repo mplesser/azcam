@@ -36,7 +36,7 @@ class QE(Tester):
         self.use_exposure_levels = (
             0  # 1 to use exposure levels, else use exposure times
         )
-        self.exposure_levels = {}  # Exposure levels {wave:level} [e/pix]
+        self.exposure_levels = {}  # Exposure levels {wave:level} [DN/pix]
         self.exposure_times = (
             {}
         )  # Exposure times {wave:seconds]  (when no exposure_levels)
@@ -121,7 +121,7 @@ class QE(Tester):
 
         exposure.roi_reset()  # use entire device
 
-        # Get exposure times
+        # get exposure times
         if self.use_exposure_levels:
             if not detcal.valid or len(self.exposure_levels) == 0:
                 raise azcam.exceptions.AzcamError(
@@ -129,10 +129,12 @@ class QE(Tester):
                 )
             azcam.log("Using exposure_levels")
 
-            # determine exposure_times from exposure_levels
+            meancounts = (
+                azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
+            )
             self.exposure_times = {}  # reset
             for w in self.exposure_levels:
-                et = self.exposure_levels[w] / detcal.mean_electrons[w] / binning
+                et = self.exposure_levels[w] / meancounts[w] / binning
                 self.exposure_times[w] = et
 
         else:
@@ -149,22 +151,11 @@ class QE(Tester):
 
             etime = self.exposure_times[wave]
             title = f"{wave} nm QE flat for {etime} secs"
-            azcam.log(f"Setting wavelength to {wave}")
             instrument.set_wavelength(wave)
 
             azcam.log(
-                "Taking %d nm QE image for %.3f seconds: %s..."
-                % (
-                    wave,
-                    etime,
-                    os.path.basename(exposure.get_filename()),
-                )
+                f"Taking {wave} nm QE image for {etime:0.03f}seconds: {os.path.basename(exposure.get_filename())}"
             )
-
-            # make sure at proper wavelength
-            w = instrument.get_wavelength()
-            w = int(float(w) + 0.5)
-            azcam.log(f"Actual wavelength is {w}")
 
             # make exposure
             for _ in range(self.flush_before_exposure):
@@ -568,8 +559,8 @@ class QE(Tester):
 
         lines.append(f"![QE Plot]({os.path.abspath(QEPLOT)})  ")
         lines.append("")
-        # lines.append("*QE Plot.*")
-        # lines.append("")
+        lines.append("*Quantum Efficiency Plot.*")
+        lines.append("")
 
         if self.grade == "UNDEFINED":
             s = "|**Wavelength**|**QE**|"

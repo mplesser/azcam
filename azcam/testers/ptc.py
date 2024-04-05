@@ -147,7 +147,7 @@ class Ptc(Tester):
             else:
                 wave = self.wavelength
 
-            meancounts = azcam.db.tools["detcal"].mean_counts
+            meancounts = azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
             self.exposure_times = (
                 numpy.array(self.exposure_levels) / meancounts[wave] / binning
             )

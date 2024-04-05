@@ -188,7 +188,10 @@ class PocketPump(Tester):
         if azcam.db.tools["detcal"].valid and self.exposure_level != -1:
             azcam.log("Using exposure_level")
 
-            meanelectrons = azcam.db.tools["detcal"].mean_electrons
+            meanelectrons = (
+                azcam.db.tools["detcal"].mean_electrons
+                * azcam.db.tools["detcal"].scaling
+            )
 
             et = self.exposure_level / meanelectrons[self.wavelength] / binning
         elif self.exposure_time != -1:

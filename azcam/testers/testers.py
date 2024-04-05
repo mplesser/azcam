@@ -5,6 +5,7 @@ from .detcal import DetCal
 from .eper import Eper
 from .fe55 import Fe55
 from .gain import Gain
+from .gainmap import GainMap
 from .linearity import Linearity
 from .metrology import Metrology
 from .pocketpump import PocketPump
@@ -28,6 +29,7 @@ def load_testers(testers="all"):
         eper = Eper()
         fe55 = Fe55()
         gain = Gain()
+        gainmap = GainMap()
         linearity = Linearity()
         metrology = Metrology()
         pocketpump = PocketPump()

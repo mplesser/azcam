@@ -19,7 +19,7 @@ class DetCal(Tester):
      - find system gains
      - read diode flux calibration data
 
-    Fluxes are reported as per binned pixel even if taken binned.
+    Fluxes are reported as per unbinned pixel even if taken binned.
     """
 
     def __init__(self):
@@ -34,6 +34,7 @@ class DetCal(Tester):
         self.wavelength_delay = 2  # seconds to delay after changing wavelengths
         self.zero_mean = []
         self.system_gain = []
+        self.scaling = 1.0  # scaling for gain changes from detcal data
 
         self.range_factor = 2.0  # allowed range factor for meeting mean goal
 
@@ -87,6 +88,10 @@ class DetCal(Tester):
         self.mean_electrons = {}
 
         wavelengths = self.wavelengths
+
+        # not used, for reference
+        # detcal.mean_electrons = {int(k): v for k, v in detcal.mean_electrons.items()}
+        # detcal.mean_counts = {int(k): v for k, v in detcal.mean_counts.items()}
 
         # get flat at each wavelength
         for wave in wavelengths:

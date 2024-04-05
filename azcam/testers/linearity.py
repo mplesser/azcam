@@ -120,31 +120,27 @@ class Linearity(Tester):
         azcam.db.parameters.set_par("imagetype", self.exposure_type)
 
         # Try exposure_level to get ExposureTime
-        if len(self.exposure_levels) > 0:  # exposure_levels specified
+        if len(self.exposure_levels) > 0:
             detcal = azcam.db.tools["detcal"]
-            if detcal == 0:
+            if not azcam.db.tools["detcal"].valid:
                 azcam.log("Detector not calibrated, cannot use exposure_level")
             else:
-                if not azcam.db.tools["detcal"].valid:
-                    azcam.log("Detector not calibrated, cannot use exposure_level")
-                else:
-                    meanelectrons = azcam.db.tools["detcal"].mean_electrons
+                meancounts = (
+                    azcam.db.tools["detcal"].mean_counts
+                    * azcam.db.tools["detcal"].scaling
+                )
 
-                    if self.wavelength == -1:
-                        wave = azcam.db.tools["instrument"].get_wavelength()
-                        wave = int(wave)
-                        self.exposure_times = (
-                            numpy.array(self.exposure_levels)
-                            / meanelectrons[wave]
-                            / binning
-                        )
-                    else:
-                        wave = self.wavelength
-                        self.exposure_times = (
-                            numpy.array(self.exposure_levels)
-                            / meanelectrons[wave]
-                            / binning
-                        )
+                if self.wavelength == -1:
+                    wave = azcam.db.tools["instrument"].get_wavelength()
+                    wave = int(wave)
+                    self.exposure_times = (
+                        numpy.array(self.exposure_levels) / meancounts[wave] / binning
+                    )
+                else:
+                    wave = self.wavelength
+                    self.exposure_times = (
+                        numpy.array(self.exposure_levels) / meancounts[wave] / binning
+                    )
 
         elif self.number_images_acquire != -1:  # max exposure time specified
             self.exposure_times = []  # reset
@@ -368,8 +364,8 @@ class Linearity(Tester):
         azcam.log(f"Largest non-linearity residual is {100. * self.max_residual:0.1f}%")
 
         # calculate mean linearity
-        # for ext in range(self.first_ext, self.last_ext):
-        for ext in range(0, self.last_ext - 1):
+        for ext in range(self.first_ext, self.last_ext):
+            # for ext in range(0, self.last_ext - 1):
             self.mean_residuals = numpy.array(
                 [abs(x) for x in self.residuals[ext][minfit:maxfit]]
             ).mean()
@@ -388,34 +384,21 @@ class Linearity(Tester):
         self.plot(minfit, maxfit, minfit, maxfit)
 
         # define dataset
-        if self.max_allowed_linearity == -1:
-            self.dataset = {
-                "data_file": self.data_file,
-                "NumExt": self.NumExt,
-                "max_residual": self.max_residual,
-                "fit_min": self.fitmin_dn,
-                "fit_max": self.fitmax_dn,
-                "poly_coeffs": self.poly_coeffs,
-                "exptimes": self.exptimes,
-                "means": numpy.array(self.means).tolist(),
-                "residuals": self.residuals,
-                "mean_residuals": self.mean_residuals,
-            }
-        else:
-            self.dataset = {
-                "data_file": self.data_file,
-                "grade": self.grade,
-                "NumExt": self.NumExt,
-                "max_residual": self.max_residual,
-                "max_allowed_linearity": self.max_allowed_linearity,
-                "fit_min": self.fitmin_dn,
-                "fit_max": self.fitmax_dn,
-                "poly_coeffs": self.poly_coeffs,
-                "exptimes": self.exptimes,
-                "means": numpy.array(self.means).tolist(),
-                "residuals": self.residuals,
-                "mean_residuals": self.mean_residuals,
-            }
+        self.dataset = {
+            "data_file": self.data_file,
+            "NumExt": self.NumExt,
+            "max_residual": self.max_residual,
+            "fit_min": self.fitmin_dn,
+            "fit_max": self.fitmax_dn,
+            "poly_coeffs": numpy.array(self.poly_coeffs).tolist(),
+            "exptimes": self.exptimes,
+            "means": numpy.array(self.means).tolist(),
+            "residuals": numpy.array(self.residuals).tolist(),
+            "mean_residuals": self.mean_residuals.tolist(),
+        }
+        if self.max_allowed_linearity != -1:
+            self.dataset["grade"] = (self.grade,)
+            self.dataset["max_allowed_linearity"] = self.max_allowed_linearity
 
         # set absolute filenames
         self.linearity_plot = os.path.abspath(self.linearity_plot)
