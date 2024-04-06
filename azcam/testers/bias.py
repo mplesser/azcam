@@ -428,7 +428,7 @@ class Bias(Tester):
         lines.append(
             f"![Bias Cummulative Noise Histogram]({os.path.abspath(self.cumm_hist_plot)})  "
         )
-        lines.append("*Bias mummulative noise histogram.*")
+        lines.append("*Bias cummulative noise histogram.*")
         lines.append("")
 
         lines.append("")
