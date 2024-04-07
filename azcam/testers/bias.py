@@ -49,14 +49,14 @@ class Bias(Tester):
 
         self.imageplot_scale = 3.0
 
-        #: list of data from all frames [N][y][x]
+        #: list of image data from all frames [N][y][x]
         self.datacube = numpy.array
 
         #: list of azcam images
         self.bias_images = []
 
         #: list of all bias filenames
-        self.imagelist = []
+        self.bias_filenames = []
 
         #: mean image
         self.mean_image = []
@@ -91,25 +91,20 @@ class Bias(Tester):
         impars = {}
         azcam.db.parameters.save_imagepars(impars)
 
-        # create new subfolder
-        currentfolder, newfolder = azcam.console.utils.make_file_folder("bias")
-        azcam.db.parameters.set_par("imagefolder", newfolder)
+        # create subfolder
+        currentfolder, subfolder = azcam.console.utils.make_file_folder("bias")
+        azcam.db.parameters.set_par("imagefolder", subfolder)
+        azcam.db.parameters.set_par("imageroot", "bias.")
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)
+        azcam.db.parameters.set_par("imageautoname", 0)
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)
+        azcam.db.parameters.set_par("imagetest", 0)
 
-        azcam.db.parameters.set_par("imageroot", "bias.")  # for automatic data analysis
-        azcam.db.parameters.set_par(
-            "imageincludesequencenumber", 1
-        )  # use sequence numbers
-        azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-        azcam.db.parameters.set_par(
-            "imageautoincrementsequencenumber", 1
-        )  # inc sequence numbers
-        azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
-
-        # clear device
+        # clear sensor
         azcam.db.tools["exposure"].test(0)
 
         # take bias images
-        azcam.db.parameters.set_par("imagetype", "zero")  # for get_image_filename()
+        azcam.db.parameters.set_par("imagetype", "zero")
         for i in range(self.number_images_acquire):
             filename = os.path.basename(azcam.db.tools["exposure"].get_filename())
             azcam.log(
@@ -145,27 +140,22 @@ class Bias(Tester):
         self.debiased_filename = "debiased.fits"
 
         startingfolder = azcam.utils.curdir()
-        _, starting_sequence = azcam.console.utils.find_file_in_sequence(rootname)
+        nextfile, starting_sequence = azcam.console.utils.find_file_in_sequence(
+            rootname
+        )
         sequence_number = starting_sequence
 
         # ROI for stats
         self.roi = azcam.console.utils.get_image_roi()
-
-        # get filename
-        nextfile = (
-            os.path.join(startingfolder, rootname + f"{starting_sequence:04d}")
-            + ".fits"
-        )
-        nextfile = azcam.utils.fix_path(nextfile)
 
         # all images must have same image sections
         numext, first_ext, last_ext = azcam.fits.get_extensions(nextfile)
         self._numchans = max(1, numext)
 
         # create list of all images
-        self.imagelist = []
+        self.bias_filenames = []
         while os.path.exists(nextfile):
-            self.imagelist.append(nextfile)
+            self.bias_filenames.append(nextfile)
             sequence_number = sequence_number + 1
             nextfile = (
                 os.path.join(startingfolder, rootname + f"{sequence_number:04d}")
@@ -175,7 +165,7 @@ class Bias(Tester):
 
         # make assembled images
         self.bias_images = []
-        for frame in self.imagelist:
+        for frame in self.bias_filenames:
             im = azcam.image.Image(frame)
             im.assemble(1)  # assembled an trim overscan
             self.bias_images.append(im)
@@ -198,7 +188,7 @@ class Bias(Tester):
         # make superbias
         azcam.log(f"Creating superbias image: {self.superbias_filename}")
         azcam.fits.combine(
-            self.imagelist,
+            self.bias_filenames,
             self.superbias_filename,
             "median",
             overscan_correct=0,

@@ -106,17 +106,24 @@ instrument.set_wavelength(450)
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
 
-## Azcamserver
+## AzcamServer
 
 *azcamserver* is the main server application for *azcam*. It usually runs in an IPython window and is mainly used to control data acquistion. 
 
 See [azcamserver](azcamserver.md).
 
-## Azcamconsole
+## AzcamConsole
 
 *azcamconsole* is a console application for *azcam*. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
 
 See [azcamconsole](azcamconsole.md).
+
+## Testers
+
+The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose
+of characterizing sensor performance.
+
+See [testers](testers.md).
 
 ## Code Documentation
 Much of the python code is autodocumented from the internal doc strings. See [Code Docs](autocode.md).

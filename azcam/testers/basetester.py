@@ -18,26 +18,43 @@ class Tester(Tools, Report):
 
         self.itl_id = ""
 
-        # acquistion
-        self.number_images_acquire = 1  # number of images to acquire
-        self.rootname = "tester."  # root for data filenames
+        self.number_images_acquire = 1
+        """number of images to acquire"""
+
+        self.rootname = "tester."
+        """root for data filenames"""
 
         # analysis
-        self.grade = "UNDEFINED"  # final grade
-        self.grade_sensor = True  # True to produce a grade
-        self.valid = False  # flag True if analysis results are valid
+        self.grade = "UNDEFINED"
+        """final grade"""
 
-        #: output data file
+        self.grade_sensor = True
+        """True to produce a grade"""
+
+        self.valid = False
+        """True if analysis results are valid"""
+
         self.data_file = "base.txt"
+        """output data file"""
+
         self.dataset = {}
+        """output 3D cube of image data"""
 
         #: output report file
-        self.report_file = "base"  # no extension, will be pdf or md
-        self.create_reports = True  # True to generate reports during analysis
-        self.create_plots = True  # True to generate plots during analysis
-        self.create_html = False
+        self.report_file = "base"
+        """no extension, will be pdf or md"""
 
-        self.fit_order = 3  # fit order for overscan correction
+        self.create_reports = True
+        """True to generate reports during analysis"""
+
+        self.create_plots = True
+        """True to generate plots during analysis"""
+
+        self.create_html = False
+        """True to create HTML analysis reports"""
+
+        self.fit_order = 3
+        """fit order for overscan correction"""
 
         # all testers are initialized and reset at creation
         self.initialize()
