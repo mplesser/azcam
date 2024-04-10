@@ -31,8 +31,9 @@ class Bias(Tester):
 
         #: flag to subtract overscan fit from each image
         self.overscan_correct = 0
-        #: order of overscan correction fit, 0 => row by row
+
         self.fit_order = 3
+        """fit order for overscan correction"""
 
         #: bias noise histogram plot
         self.noise_hist_plot = "bias_noise.png"

@@ -53,9 +53,6 @@ class Tester(Tools, Report):
         self.create_html = False
         """True to create HTML analysis reports"""
 
-        self.fit_order = 3
-        """fit order for overscan correction"""
-
         # all testers are initialized and reset at creation
         self.initialize()
         self.reset()
@@ -88,7 +85,7 @@ class Tester(Tools, Report):
 
     def read_datafile(self, filename="default"):
         """
-        Read data file and set tool as valid.
+        Read an existing data file and set tool as valid.
         """
 
         if filename == "prompt":

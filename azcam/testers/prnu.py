@@ -29,7 +29,8 @@ class Prnu(Tester):
         self.use_edge_mask = False  # flag to use defects exclusion mask
         self.grades = {}  # Pass/Fail grades at each wavelength {wave:grade}
 
-        self.fit_order = 3  # order of overscan correction fit
+        self.fit_order = 3
+        """fit order for overscan correction"""
 
         self.bias_image_in_sequence = 1  # flag true if first image is a bias image
 

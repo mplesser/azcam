@@ -28,8 +28,8 @@ class Dark(Tester):
         self.overscan_correct = 1  # flag to overscan correct images
         self.zero_correct = 1  # flag to correct with bias residuals
 
-        # analysis
-        self.fit_order = 3  # order of overscan correction fit
+        self.fit_order = 3
+        """fit order for overscan correction"""
 
         self.use_edge_mask = False  # flag True to use defects mask
 
