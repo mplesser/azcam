@@ -123,18 +123,15 @@ class QE(Tester):
 
         # get exposure times
         if self.use_exposure_levels:
-            if not detcal.valid or len(self.exposure_levels) == 0:
-                raise azcam.exceptions.AzcamError(
-                    "invalid exposure level data or calibration"
-                )
             azcam.log("Using exposure_levels")
 
-            meancounts = (
-                azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
-            )
             self.exposure_times = {}  # reset
             for w in self.exposure_levels:
-                et = self.exposure_levels[w] / meancounts[w] / binning
+                meancounts = (
+                    azcam.db.tools["detcal"].mean_counts[w]
+                    * azcam.db.tools["detcal"].scaling
+                )
+                et = self.exposure_levels[w] / meancounts / binning
                 self.exposure_times[w] = et
 
         else:

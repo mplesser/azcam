@@ -38,8 +38,7 @@ class DetCal(Tester):
 
         self.range_factor = 2.0  # allowed range factor for meeting mean goal
 
-        self.wavelengths = []  # list of list of wavelengths to calibrate
-        self.exposure_times = {}  # dictionaries of {wavelength:initial guess et}
+        self.exposures = {}  # dictionaries of {wavelength:initial guess et}
         self.mean_counts = {}  # dictionaries of {wavelength:Counts/Sec}
         self.mean_electrons = {}  # dictionaries of {wavelength:Electrons/Sec}
 
@@ -87,7 +86,7 @@ class DetCal(Tester):
         self.mean_counts = {}
         self.mean_electrons = {}
 
-        wavelengths = self.wavelengths
+        wavelengths = sorted(self.exposures.keys())
 
         # not used, for reference
         # detcal.mean_electrons = {int(k): v for k, v in detcal.mean_electrons.items()}
@@ -97,19 +96,15 @@ class DetCal(Tester):
         for wave in wavelengths:
             # set wavelength
             wave = int(wave)
-            wave1 = azcam.db.tools["instrument"].get_wavelength()
-            wave1 = int(wave1)
+            wave1 = int(azcam.db.tools["instrument"].get_wavelength())
             if wave1 != wave:
                 azcam.log(f"Setting wavelength to {wave} nm")
                 azcam.db.tools["instrument"].set_wavelength(wave)
-                time.sleep(self.wavelength_delay)
-                wave1 = azcam.db.tools["instrument"].get_wavelength()
-                wave1 = int(wave1)
 
             # take flat
             doloop = 1
             try:
-                et = self.exposure_times[wave] / binning
+                et = self.exposures[wave] / binning
             except Exception:
                 et = 1.0
             while doloop:
@@ -146,7 +141,7 @@ class DetCal(Tester):
         # define dataset
         self.dataset = {
             "data_file": self.data_file,
-            "wavelengths": self.wavelengths,
+            "wavelengths": wavelengths,
             "mean_electrons": self.mean_electrons,
             "mean_counts": self.mean_counts,
         }

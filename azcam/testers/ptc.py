@@ -1,7 +1,6 @@
 import glob
 import os
 import shutil
-import time
 
 # import concurrent.futures
 
@@ -10,6 +9,7 @@ import numpy
 import azcam
 import azcam.utils
 import azcam.fits
+import azcam.exceptions
 import azcam.console.plot
 from azcam.testers.basetester import Tester
 
@@ -26,6 +26,7 @@ class Ptc(Tester):
         self.ext_analyze = -1  # extension to analyze if not entire image
 
         self.exposure_levels = []  # exposure levels in DN
+        self.use_exposure_levels = 1
 
         self.marker1 = "b."
         self.marker2 = "r."
@@ -138,34 +139,31 @@ class Ptc(Tester):
 
         exposure.expose(0, "zero", "PTC bias")
 
-        # determine ExposureTimes
-        if azcam.db.tools["detcal"].valid and len(self.exposure_levels) > 0:
+        # determine exposure times
+        if self.use_exposure_levels:
             azcam.log("Using exposure_levels")
-            if self.wavelength == -1:
-                wave = instrument.get_wavelength()
-                wave = int(wave)
-            else:
-                wave = self.wavelength
-
-            meancounts = azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
+            meancounts = (
+                azcam.db.tools["detcal"].mean_counts[self.wavelength]
+                * azcam.db.tools["detcal"].scaling
+            )
             self.exposure_times = (
-                numpy.array(self.exposure_levels) / meancounts[wave] / binning
+                numpy.array(self.exposure_levels) / meancounts / binning
             )
 
         elif len(self.exposure_times) > 0:
-            azcam.log("Using ExposureTimes")
+            azcam.log("Using exposure_times")
 
         elif self.number_images_acquire > 0:
             azcam.log("Using number_images_acquire")
             self.exposure_times = []
-            MinExposure = float(self.max_exposure) / self.number_images_acquire
-            ExposureInc = (self.max_exposure - MinExposure) / max(
+            min_exposure = float(self.max_exposure) / self.number_images_acquire
+            exposure_inc = (self.max_exposure - min_exposure) / max(
                 (self.number_images_acquire - 1), 1
             )
-            exptime = MinExposure
+            exptime = min_exposure
             for _ in range(self.number_images_acquire):
                 self.exposure_times.append(exptime)
-                exptime = exptime + ExposureInc
+                exptime = exptime + exposure_inc
         else:
             raise azcam.exceptions.AzcamError("could not determine exposure times")
 
@@ -173,20 +171,19 @@ class Ptc(Tester):
         azcam.db.parameters.set_par("imagetype", self.exposure_type)
         number_pairs = len(self.exposure_times)
 
-        for pair, ExposureTime in enumerate(self.exposure_times):
+        for pair, et in enumerate(self.exposure_times):
             filename = os.path.basename(exposure.get_filename())
             azcam.log(
-                "Taking PTC pair %d of %d for %.3f secs"
-                % (pair + 1, number_pairs, ExposureTime)
+                f"Taking PTC pair {(pair + 1)} of {number_pairs} for {et:0.03f} secs"
             )
 
             # make exposure
             for _ in range(self.flush_before_exposure):
                 exposure.test(0)
-            exposure.expose(ExposureTime, self.exposure_type, "PTC frame 1")
+            exposure.expose(et, self.exposure_type, "Frame 1")
             filename = os.path.basename(exposure.get_filename())
 
-            exposure.expose(ExposureTime, self.exposure_type, "PTC frame 2")
+            exposure.expose(et, self.exposure_type, "Frame 2")
 
         # close
         azcam.db.parameters.restore_imagepars(impars)

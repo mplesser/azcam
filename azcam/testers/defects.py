@@ -124,7 +124,7 @@ class Defects(Tester):
         Find dark defects in a flat/superflat image.
         """
 
-        if self.grade_dark_defects:
+        if not self.grade_dark_defects:
             self.dark_defects_grade = "UNDEFINED"
             self.dark_rejected_pixels = 0
             return
@@ -251,7 +251,7 @@ class Defects(Tester):
         """
         Find bright defects in dark signal image.
         """
-        if self.grade_bright_defects:
+        if not self.grade_bright_defects:
             self.bright_defects_grade = "UNDEFINED"
             self.bright_rejected_pixels = 0
             return

@@ -126,7 +126,7 @@ class Linearity(Tester):
                 azcam.log("Detector not calibrated, cannot use exposure_level")
             else:
                 meancounts = (
-                    azcam.db.tools["detcal"].mean_counts
+                    azcam.db.tools["detcal"].mean_counts[self.wavelength]
                     * azcam.db.tools["detcal"].scaling
                 )
 
@@ -134,12 +134,12 @@ class Linearity(Tester):
                     wave = azcam.db.tools["instrument"].get_wavelength()
                     wave = int(wave)
                     self.exposure_times = (
-                        numpy.array(self.exposure_levels) / meancounts[wave] / binning
+                        numpy.array(self.exposure_levels) / meancounts / binning
                     )
                 else:
                     wave = self.wavelength
                     self.exposure_times = (
-                        numpy.array(self.exposure_levels) / meancounts[wave] / binning
+                        numpy.array(self.exposure_levels) / meancounts / binning
                     )
 
         elif self.number_images_acquire != -1:  # max exposure time specified
@@ -366,6 +366,7 @@ class Linearity(Tester):
         # calculate mean linearity
         for ext in range(self.first_ext, self.last_ext):
             # for ext in range(0, self.last_ext - 1):
+            ext = ext - 1
             self.mean_residuals = numpy.array(
                 [abs(x) for x in self.residuals[ext][minfit:maxfit]]
             ).mean()

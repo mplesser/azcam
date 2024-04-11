@@ -9,6 +9,7 @@ import azcam.utils
 import azcam.fits
 import azcam.image
 import azcam.console.plot
+import azcam.exceptions
 from azcam.testers.basetester import Tester
 
 
@@ -22,10 +23,11 @@ class Superflat(Tester):
 
         # acquire
         self.exposure_type = "flat"
-        self.exposure_levels = []  # exposure levels in e/pix
-        self.exposure_times = [1.0]  # exposure times if no exposure_levels
+        self.use_exposure_level = 1
+        self.exposure_level = 30000  # exposure level in DN
+        self.exposure_time = 1.0  # exposure time if no exposure_level
         self.wavelength = 500.0  # wavelength for images
-        self.number_images_acquire = [2]  # number of images
+        self.number_images_acquire = 3  # number of images
 
         # analyze
         self.combination_type = "median"
@@ -52,14 +54,10 @@ class Superflat(Tester):
         # set wavelength
         if self.wavelength > 0:
             wave = int(self.wavelength)
-            wave1 = azcam.db.tools["instrument"].get_wavelength()
-            wave1 = int(wave1)
+            wave1 = int(azcam.db.tools["instrument"].get_wavelength())
             if wave1 != wave:
                 azcam.log(f"Setting wavelength to {wave} nm")
                 azcam.db.tools["instrument"].set_wavelength(wave)
-                wave1 = azcam.db.tools["instrument"].get_wavelength()
-                wave1 = int(wave1)
-            azcam.log(f"Current wavelength is {wave1} nm")
 
         # clear device
         imname = azcam.db.tools["exposure"].get_filename()
@@ -69,54 +67,41 @@ class Superflat(Tester):
         binning = bin1 * bin2
 
         # Try exposure_level to get ExposureTime
-        if azcam.db.tools["detcal"].valid and len(self.exposure_levels) > 0:
-            azcam.log("Using exposure_levels")
+        if self.use_exposure_level:
+            azcam.log("Using exposure_level")
 
             meancounts = (
-                azcam.db.tools["detcal"].mean_counts * azcam.db.tools["detcal"].scaling
+                azcam.db.tools["detcal"].mean_counts[wave]
+                * azcam.db.tools["detcal"].scaling
             )
-
-            self.exposure_times = (
-                numpy.array(self.exposure_levels) / meancounts[wave] / binning
-            )
-        elif len(self.exposure_times) > 0:
-            azcam.log("Using ExposureTimes")
+            self.exposure_time = self.exposure_level / meancounts / binning
+        elif self.exposure_time > 0:
+            azcam.log("Using exposure_time")
         else:
             raise azcam.exceptions.AzcamError("could not determine exposure times")
 
-        for setnum, exposuretime in enumerate(self.exposure_times):
-            azcam.db.parameters.set_par(
-                "imageroot", "superflat."
-            )  # for automatic data analysis
-            azcam.db.parameters.set_par(
-                "imageincludesequencenumber", 1
-            )  # use sequence numbers
-            azcam.db.parameters.set_par("imageautoname", 0)  # manually set name
-            azcam.db.parameters.set_par(
-                "imageautoincrementsequencenumber", 1
-            )  # inc sequence numbers
-            azcam.db.parameters.set_par("imagetest", 0)  # turn off TestImage
+        azcam.db.parameters.set_par("imageroot", "superflat.")
+        azcam.db.parameters.set_par("imageincludesequencenumber", 1)
+        azcam.db.parameters.set_par("imageautoname", 0)
+        azcam.db.parameters.set_par("imageautoincrementsequencenumber", 1)
+        azcam.db.parameters.set_par("imagetest", 0)
 
-            # create new subfolder
-            currentfolder, subfolder = azcam.console.utils.make_file_folder(
-                "superflat", 1, 0
+        # create new subfolder
+        currentfolder, subfolder = azcam.console.utils.make_file_folder(
+            "superflat", 1, 0
+        )
+        azcam.db.parameters.set_par("imagefolder", subfolder)
+
+        for loop in range(self.number_images_acquire):
+            azcam.log(
+                f"Taking SuperFlat image {(loop + 1)} of {self.number_images_acquire} for {self.exposure_time:0.03f} seconds"
             )
-            azcam.db.parameters.set_par("imagefolder", subfolder)
+            azcam.db.tools["exposure"].expose(
+                self.exposure_time, self.exposure_type, "superflat flat"
+            )
 
-            for loop in range(self.number_images_acquire[setnum]):
-                exposuretime = self.exposure_times[setnum]
-
-                azcam.log(
-                    "Taking SuperFlat image %d of %d for %.3f seconds"
-                    % (loop + 1, self.number_images_acquire[setnum], exposuretime)
-                )
-                azcam.db.tools["exposure"].expose(
-                    exposuretime, self.exposure_type, "superflat flat"
-                )
-
-            # finish this set
-            azcam.db.parameters.restore_imagepars(impars)
-            azcam.utils.curdir(currentfolder)
+        azcam.db.parameters.restore_imagepars(impars)
+        azcam.utils.curdir(currentfolder)
 
         # finish
         azcam.log("Superflat sequence finished")
@@ -139,19 +124,6 @@ class Superflat(Tester):
 
         startingfolder = azcam.utils.curdir()
         subfolder = startingfolder
-
-        # if self.overscan_correct or self.zero_correct:
-        #     # create analysis subfolder
-        #     startingfolder, subfolder = azcam.console.utils.make_file_folder("analysis")
-
-        #     # copy all image files to analysis folder
-        #     azcam.log("Making copy of image files for analysis")
-        #     for filename in glob.glob(os.path.join(startingfolder, "*.fits")):
-        #         shutil.copy(filename, subfolder)
-
-        #     azcam.utils.curdir(subfolder)  # move to analysis folder
-        # else:
-        #     azcam.utils.curdir(subfolder)  # move to analysis folder - assume it exists
 
         # create analysis subfolder
         startingfolder, subfolder = azcam.console.utils.make_file_folder("analysis")

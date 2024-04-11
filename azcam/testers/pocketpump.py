@@ -2,6 +2,7 @@ import os
 
 import azcam
 import azcam.utils
+import azcam.exceptions
 from azcam.testers.basetester import Tester
 
 
@@ -189,11 +190,11 @@ class PocketPump(Tester):
             azcam.log("Using exposure_level")
 
             meanelectrons = (
-                azcam.db.tools["detcal"].mean_electrons
+                azcam.db.tools["detcal"].mean_electrons[self.wavelength]
                 * azcam.db.tools["detcal"].scaling
             )
 
-            et = self.exposure_level / meanelectrons[self.wavelength] / binning
+            et = self.exposure_level / meanelectrons / binning
         elif self.exposure_time != -1:
             azcam.log("Using ExposureTime")
             et = self.exposure_time
