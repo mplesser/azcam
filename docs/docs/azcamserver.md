@@ -1,4 +1,4 @@
-# azcamserver
+# AzcamServer
 
 *azcamserver* is the main server application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is mainly used to control data acquistion. 
 

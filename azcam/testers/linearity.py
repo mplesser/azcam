@@ -50,6 +50,9 @@ class Linearity(Tester):
         self.fitmax_dn = -1
         self.fit_all_data = 1
 
+        self.fit_order = 3
+        """fit order for overscan correction"""
+
         self.max_allowed_linearity = -1  # max residual for linearity
         self.plot_specifications = 1  # True to plot max_allowed_linearity
         self.use_weights = 1

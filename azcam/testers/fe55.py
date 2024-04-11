@@ -40,6 +40,9 @@ class Fe55(Tester):
         self.max_images = -1  # limit numbe of image files analyzed
         self.max_events = -1  # limit number events analyzed per channel
 
+        self.fit_order = 3
+        """fit order for overscan correction"""
+
         self.acquire_darks = 0  # flag to acquire darks of the same exposur time
 
         self.number_events = []

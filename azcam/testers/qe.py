@@ -56,7 +56,8 @@ class QE(Tester):
 
         self.system_gain = []
 
-        self.fit_order = 3  # order of overscan correction fit
+        self.fit_order = 3
+        """fit order for overscan correction"""
 
         self.diode_area = 613.0  # diode area in mm^2
         self.diode_wavelength = []

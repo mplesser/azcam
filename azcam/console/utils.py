@@ -32,7 +32,7 @@ def beep(frequency=2000, duration=500) -> None:
 
 def find_file_in_sequence(file_root: str, file_number: int = 1) -> tuple:
     """
-    Returns the Nth file in an image sequence where N is file_number (-1 for first file).
+    Returns the Nth file in an image sequence where N is file_number (1 for first file).
 
     Args:
         file_root: image file root name.

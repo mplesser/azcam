@@ -51,6 +51,8 @@ class Ptc(Tester):
         self.fit_max = 50000
         self.fullwell_spec = -1  # FW spec in electrons
         self.min_fullwell = -1
+        self.fit_order = 3
+        """fit order for overscan correction"""
 
         self.minfits = []
         self.maxfits = []

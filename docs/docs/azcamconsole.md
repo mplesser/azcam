@@ -1,4 +1,4 @@
-# azcamconsole
+# AzcamConsole
 
 ## Configuration and startup 
 

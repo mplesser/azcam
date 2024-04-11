@@ -39,6 +39,9 @@ class Superflat(Tester):
         )
         self.system_gain = []
 
+        self.fit_order = 3
+        """fit order for overscan correction"""
+
     def acquire(self):
         """
         Acquire a set of flat field images.
