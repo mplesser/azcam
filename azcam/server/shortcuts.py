@@ -46,7 +46,12 @@ def pp():
     old = azcam.db.cmdserver.logcommands
     new = not old
     azcam.db.cmdserver.logcommands = new
-    print("cmdserver logcommands is now %s" % ("ON" if new else "OFF"))
+
+    old = azcam.db.webserver.logcommands
+    new = not old
+    azcam.db.webserver.logcommands = new
+
+    print("logcommands is now %s" % ("ON" if new else "OFF"))
 
     return
 

@@ -99,9 +99,6 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         # True when in a comparision exposure sequence so lamps stay on
         self.comp_sequence = 0
 
-        # True when exposure has been aborted
-        self.aborted = 0
-
         # True when exposure is completed, then toggled off
         self.completed = 0
 
@@ -296,6 +293,8 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         imagetype is the type of exposure ('zero', 'object', 'flat', ...)
         title is the image title.
         """
+
+        azcam.db.abortflag = 0
 
         # allow custom operations
         self.start()
@@ -661,9 +660,8 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
             self.expose(self.exposure_time, self.image_type, self.title)
 
-            # check and clear user abort
-            AbortFlag = azcam.db.abortflag
-            if AbortFlag:
+            # check
+            if azcam.db.abortflag:
                 break
 
             # sequence may have been stopped
@@ -681,8 +679,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.is_exposure_sequence = 0
         self.exposure_sequence_number = 1
 
-        if AbortFlag:
-            self.aborted = 1
+        azcam.db.abortflag = 0
 
         return
 

@@ -72,6 +72,11 @@ class ParametersServer(Parameters):
                 azcam.db.tools["exposure"].set_image_title("")
             else:
                 azcam.db.tools["exposure"].set_image_title(f"{value}")
+        elif parameter == "autotitle":
+            azcam.db.tools["exposure"].set_auto_title(int(value))
+        elif parameter == "imagetype":
+            azcam.db.tools["exposure"].image_type = value
+            azcam.db.tools["exposure"].set_image_title()
         elif parameter == "exposuretime":
             azcam.db.tools["exposure"].set_exposuretime(value)
         elif parameter == "logcommands":

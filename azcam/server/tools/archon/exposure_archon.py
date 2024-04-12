@@ -41,6 +41,8 @@ class ExposureArchon(Exposure):
 
         azcam.db.tools["controller"].resettiming()
 
+        azcam.db.abortflag = 1
+
         if self.exposure_flag != self.exposureflags["NONE"]:
             self.exposure_flag = self.exposureflags["ABORT"]
 
@@ -226,12 +228,12 @@ class ExposureArchon(Exposure):
 
         return
 
-    def set_exposuretime(self, ExposureTime):
+    def set_exposuretime(self, exposure_time):
         """
         Set current exposure time in seconds.
         """
 
-        self.exposure_time = float(ExposureTime)
+        self.exposure_time = float(exposure_time)
         self.exposure_time_actual = self.exposure_time  # may be changed later
 
         if self.image_type == "zero":

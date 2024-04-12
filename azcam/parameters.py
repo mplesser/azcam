@@ -28,6 +28,8 @@ class Parameters(object):
 
         self.default_pardict_name = default_dictname
 
+        azcam.db.cli["parameters"] = self
+
         # azcam.db.parameters = self
 
     def read_parfile(self, parfilename: str = None) -> None:

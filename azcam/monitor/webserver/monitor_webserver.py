@@ -138,7 +138,7 @@ class WebServer(object):
                 reply = f"web_command error: {repr(e)}"
         except Exception as e:
             print(e)
-            reply = f"invalid API command: {command}"
+            reply = f"API command error: {command}"
 
         # generic response
         response = {
@@ -165,11 +165,11 @@ class WebServer(object):
         try:
             tokens = p.split("/")
         except Exception as e:
-            raise e("Invalid API command - parse split")
+            raise e("API command error - parse split")
 
         # get oject and method
         if len(tokens) != 2:
-            raise azcam.exceptions.AzcamError("Invalid API command - parse length")
+            raise azcam.exceptions.AzcamError("API command error - parse length")
         obj, method = tokens
 
         # get arguments
@@ -207,7 +207,7 @@ class WebServer(object):
         # try:
         #     obj, method = p.split("/")
         # except Exception as e:
-        #     raise e("Invalid API command")
+        #     raise e("API error command")
 
         # print(obj)
 

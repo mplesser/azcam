@@ -55,15 +55,6 @@ $("#sequence").click(function() {
 $("#reset").click(function() {
     Reset();
 });
-$("#pause").click(function() {
-    Pause();
-});
-$("#resume").click(function() {
-    Resume();
-});
-$("#readout").click(function() {
-    Readout();
-});
 $("#abort").click(function() {
     Abort();
 });
@@ -93,7 +84,7 @@ function Expose(et, it, title) {
     var et = $("#exposuretime").val();
     var it = $("#imagetype").val();
     var title = $("#imagetitle").val();
-    var cmd = "/api/exposure/expose?exposure_time=" + et + "&imagetype=" + it + "&title=" + title;
+    var cmd = "/api/exposure/expose1?exposure_time=" + et + "&image_type=" + it + "&image_title=" + title;
     $("#command").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
@@ -144,7 +135,7 @@ function Sequence() {
             $("#command").text(data.command);
         });
 
-    var cmd = "/api/exposure/sequence?number_exposures=" + seq_total +
+    var cmd = "/api/exposure/sequence1?number_exposures=" + seq_total +
         "&flush_array_flag=" + sf + "&delay=" + seq_delay
     $.getJSON(cmd, {},
         function(data) {
@@ -157,36 +148,6 @@ function Sequence() {
 function Reset() {
     $("#message").text("resetting camera...");
     $.getJSON('/api/exposure/reset', {},
-        function(data) {
-            $("#message").text(data.message);
-            $("#command").text(data.command);
-        });
-    return false;
-}
-
-function Pause() {
-    $("#message").text("pausing exposure...");
-    $.getJSON("/api/exposure/pause", {},
-        function(data) {
-            $("#message").text(data.message);
-            $("#command").text(data.command);
-        });
-    return false;
-}
-
-function Resume() {
-    $("#message").text("resuming exposure...");
-    $.getJSON('/api/exposure/resume', {},
-        function(data) {
-            $("#message").text(data.message);
-            $("#command").text(data.command);
-        });
-    return false;
-}
-
-function Readout() {
-    $("#message").text("reading out camera...");
-    $.getJSON('/api/exposure/readout', {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
