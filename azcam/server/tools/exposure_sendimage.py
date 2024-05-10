@@ -27,6 +27,9 @@ class SendImage(object):
         self.size_x = 0
         self.size_y = 0
 
+        # new - imageserver call method, may be overridden
+        self.imageserver_send = self.dataserver
+
     def set_remote_imageserver(
         self,
         remote_imageserver_host="",
@@ -80,16 +83,18 @@ class SendImage(object):
         self.size_x = azcam.db.tools["exposure"].size_x
         self.size_y = azcam.db.tools["exposure"].size_y
 
-        if self.remote_imageserver_type == "azcam":
-            self.azcam_imageserver(localfile, remotefile)
-        elif self.remote_imageserver_type == "lbtguider":
-            self.lbtguider_imageserver(localfile, remotefile)
-        elif self.remote_imageserver_type == "dataserver":
-            self.dataserver(localfile, remotefile)
-        elif self.remote_imageserver_type == "ccdacq":
-            self.ccdacq_imageserver(localfile, remotefile)
-        else:
-            raise azcam.exceptions.AzcamError("Unknown remote image server type")
+        self.imageserver_send(localfile, remotefile)
+
+        # if self.remote_imageserver_type == "azcam":
+        #     self.azcam_imageserver(localfile, remotefile)
+        # elif self.remote_imageserver_type == "lbtguider":
+        #     self.lbtguider_imageserver(localfile, remotefile)
+        # elif self.remote_imageserver_type == "dataserver":
+        #     self.dataserver(localfile, remotefile)
+        # elif self.remote_imageserver_type == "ccdacq":
+        #     self.ccdacq_imageserver(localfile, remotefile)
+        # else:
+        #     raise azcam.exceptions.AzcamError("Unknown remote image server type")
 
     def azcam_imageserver(self, localfile, remotefile=None):
         """
@@ -315,94 +320,5 @@ class SendImage(object):
         # close socket
         time.sleep(1)  # 3
         dataserver_socket.close()
-
-        return
-
-    def lbtguider_imageserver(self, localfile, remotefile=None):
-        """
-        Send image to an LBT guider image server.
-        """
-
-        # open image file on disk
-        with open(localfile, "rb") as gfile:
-            if not gfile:
-                raise azcam.exceptions.AzcamError(f"Could not open local image file")
-            lSize = os.path.getsize(localfile)
-            buff = gfile.read()
-
-        # open socket to LBT image server
-        guidesocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        guidesocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
-
-        try:
-            guidesocket.connect(
-                (self.remote_imageserver_host, self.remote_imageserver_port)
-            )
-        except Exception as message:
-            guidesocket.close()
-            raise azcam.exceptions.AzcamError(
-                f"LBT guider ImageServer not opened: {message}"
-            )
-
-        # send filesize in bytes, \r\n terminated
-        sockBuf = "%d\r\n" % lSize
-        if guidesocket.send(str.encode(sockBuf)) != len(sockBuf):
-            raise azcam.exceptions.AzcamError(f"GuideSocket send error")
-
-        # send file data
-        if guidesocket.send(buff) != len(buff):
-            raise azcam.exceptions.AzcamError(
-                f"Could not send all image file data to LBT ImageServer"
-            )
-
-        # close socket
-        guidesocket.close()
-
-        return
-
-    def ccdacq_imageserver(self, localfile, remotefile=None):
-        """
-        Send raw image data to cccdacq (ICE) application.
-        """
-
-        # open socket to remote image server
-        ccdacqsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ccdacqsocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
-
-        try:
-            ccdacqsocket.connect(
-                (self.remote_imageserver_host, self.remote_imageserver_port)
-            )
-        except Exception as message:
-            ccdacqsocket.close()
-            raise azcam.exceptions.AzcamError(
-                f"ccdacq image server not opened: {message}"
-            )
-
-        # send header
-        s1 = "%d %d\r\n" % (self.size_x, self.size_y)
-        if ccdacqsocket.send(str.encode(s1)) != len(s1):
-            raise azcam.exceptions.AzcamError(f"socket send error header1")
-
-        s1 = "NoFilename NoImageType\r\n"
-        if ccdacqsocket.send(str.encode(s1)) != len(s1):
-            raise azcam.exceptions.AzcamError(f"socket send error header2")
-
-        # send file data
-        buff = azcam.db.tools["exposure"].image.data[0]
-        numsent = ccdacqsocket.send(buff)
-        if numsent != 2 * len(buff):
-            raise azcam.exceptions.AzcamError(
-                f"Could not send all image data to ccdacq server"
-            )
-
-        # wait before closing
-        try:
-            reply = ccdacqsocket.recv(1)
-        except Exception as e:
-            pass
-
-        # close socket
-        ccdacqsocket.close()
 
         return

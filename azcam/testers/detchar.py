@@ -27,9 +27,8 @@ class DetChar(Tools, Report):
         self.operator: str = ""
         self.system: str = ""
         self.customer: str = ""
-
         self.is_setup = False
-        self.create_html = True
+        self.create_html = False
 
     def setup(self, itl_id: str = ""):
         """

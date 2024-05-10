@@ -73,11 +73,17 @@ class Superflat(Tester):
         if self.use_exposure_level:
             azcam.log("Using exposure_level")
 
-            meancounts = (
-                azcam.db.tools["detcal"].mean_counts[wave]
-                * azcam.db.tools["detcal"].scaling
+            meancounts = azcam.db.tools["detcal"].mean_counts[wave]
+            self.exposure_time = (
+                self.exposure_level
+                / meancounts
+                / binning
+                * (
+                    azcam.db.tools["gain"].system_gain[0]
+                    / azcam.db.tools["detcal"].system_gain[0]
+                )
             )
-            self.exposure_time = self.exposure_level / meancounts / binning
+
         elif self.exposure_time > 0:
             azcam.log("Using exposure_time")
         else:

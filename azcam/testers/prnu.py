@@ -61,6 +61,7 @@ class Prnu(Tester):
         azcam.db.parameters.set_par("imagefolder", subfolder)
 
         # clear device
+        azcam.db.parameters.set_par("imagetest", 1)
         imname = azcam.db.tools["exposure"].get_filename()
         azcam.db.tools["exposure"].test(0)
         bin1 = int(azcam.fits.get_keyword(imname, "CCDBIN1"))
@@ -89,13 +90,16 @@ class Prnu(Tester):
         if self.mean_count_goal > 0:
             if azcam.db.tools["detcal"].valid:
                 for wave in waves:
-                    meancounts = (
-                        azcam.db.tools["detcal"].mean_counts[wave]
-                        * azcam.db.tools["detcal"].scaling
-                    )
+                    meancounts = azcam.db.tools["detcal"].mean_counts[wave]
                     self.exposure_levels[wave] = (
-                        self.mean_count_goal / meancounts
-                    ) / binning
+                        (self.mean_count_goal / meancounts)
+                        / binning
+                        * (
+                            azcam.db.tools["gain"].system_gain[0]
+                            / azcam.db.tools["detcal"].system_gain[0]
+                        )
+                    )
+
             else:
                 azcam.log("invalid detcal data, using fixed exposure times")
 
@@ -240,7 +244,7 @@ class Prnu(Tester):
             mean = numpy.ma.mean(self.masked_image)
 
             # changed 20sep23 to account for signal shot noise
-            prnu = math.sqrt(stdev * 82 - mean) / mean
+            prnu = math.sqrt(stdev**2 - mean) / mean
 
             self.Prnus[wavelength] = float(prnu)
             if self.allowable_deviation_from_mean != -1:

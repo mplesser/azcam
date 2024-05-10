@@ -34,7 +34,6 @@ class DetCal(Tester):
         self.wavelength_delay = 2  # seconds to delay after changing wavelengths
         self.zero_mean = []
         self.system_gain = []
-        self.scaling = 1.0  # scaling for gain changes from detcal data
 
         self.range_factor = 2.0  # allowed range factor for meeting mean goal
 
@@ -104,7 +103,8 @@ class DetCal(Tester):
             # take flat
             doloop = 1
             try:
-                et = self.exposures[wave] / binning
+                # et = self.exposures[wave] / binning
+                et = self.exposures[wave]
             except Exception:
                 et = 1.0
             while doloop:
@@ -144,6 +144,7 @@ class DetCal(Tester):
             "wavelengths": wavelengths,
             "mean_electrons": self.mean_electrons,
             "mean_counts": self.mean_counts,
+            "system_gain": self.system_gain,
         }
 
         # write data file

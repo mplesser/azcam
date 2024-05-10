@@ -74,6 +74,7 @@ class QE(Tester):
 
         self.plot_limits = []  # min and max of plot
         self.plot_title = ""  # title for QE plot
+        self.use_errorbars = 1
 
         self.data_file = "qe.txt"
         self.report_file = "qe"
@@ -128,11 +129,13 @@ class QE(Tester):
 
             self.exposure_times = {}  # reset
             for w in self.exposure_levels:
-                meancounts = (
-                    azcam.db.tools["detcal"].mean_counts[w]
-                    * azcam.db.tools["detcal"].scaling
-                )
+                meancounts = azcam.db.tools["detcal"].mean_counts[w]
                 et = self.exposure_levels[w] / meancounts / binning
+                et = et * (
+                    azcam.db.tools["gain"].system_gain[0]
+                    / azcam.db.tools["detcal"].system_gain[0]
+                )
+
                 self.exposure_times[w] = et
 
         else:
@@ -510,9 +513,12 @@ class QE(Tester):
         qevals = []
         for w in waves:
             qevals.append(self.qe[w])
-        azcam.console.plot.plt.errorbar(
-            waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls=""
-        )
+        if self.use_errorbars:
+            azcam.console.plot.plt.errorbar(
+                waves, [x * 100.0 for x in qevals], yerr=3.0, marker="o", ls=""
+            )
+        else:
+            azcam.console.plot.plt.plot(waves, [x * 100.0 for x in qevals], "bo-")
 
         if len(self.plot_limits) == 2:
             azcam.console.plot.plt.xlim(self.plot_limits[0][0], self.plot_limits[0][1])

@@ -61,6 +61,7 @@ class Dark(Tester):
         self.total_pixels = 0  # total non-masked pixels
         self.hist_values = []
         self.hist_fractions = []
+        self.histscale_factor = 3.0
 
         self.report_dark_per_hour = 1
         self.units_scale = 3600  # 3600 for /hr, 1 for /sec
@@ -334,7 +335,7 @@ class Dark(Tester):
         if not self.grade_sensor:
             self.grade = "UNDEFINED"
 
-        # report on dark signal historgram if dark_fraction specified
+        # report on dark signal histogram if dark_fraction specified
         if self.dark_fraction != -1:
             ordered = sorted(self.validdata)
             max1 = int(len(ordered) * self.dark_fraction)
@@ -514,11 +515,11 @@ class Dark(Tester):
         )
         ax = plt.gca()
         ax.set_xlabel(f"Dark Signal [{self.units_text}]")
-        ax.set_ylabel("Pixel Fraction")
+        ax.set_ylabel("Pixels")
         plt.xlim(
             [
                 0,
-                self.mean_dark_signal * 3 * self.units_scale,
+                self.mean_dark_signal * self.histscale_factor * self.units_scale,
             ]
         )
         plt.title("Dark Signal Histogram")

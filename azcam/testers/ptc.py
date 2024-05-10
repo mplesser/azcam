@@ -141,15 +141,15 @@ class Ptc(Tester):
 
         exposure.expose(0, "zero", "PTC bias")
 
-        # determine exposure times
+        # determine exposure times, scaling by gain difference if necessary
         if self.use_exposure_levels:
             azcam.log("Using exposure_levels")
-            meancounts = (
-                azcam.db.tools["detcal"].mean_counts[self.wavelength]
-                * azcam.db.tools["detcal"].scaling
-            )
+            meancounts = azcam.db.tools["detcal"].mean_counts[self.wavelength]
             self.exposure_times = (
                 numpy.array(self.exposure_levels) / meancounts / binning
+            ) * (
+                azcam.db.tools["gain"].system_gain[0]
+                / azcam.db.tools["detcal"].system_gain[0]
             )
 
         elif len(self.exposure_times) > 0:
