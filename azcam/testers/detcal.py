@@ -111,7 +111,9 @@ class DetCal(Tester):
                 azcam.db.parameters.set_par("imagetype", self.exposure_type)
                 azcam.log(f"Taking flat for {et:0.3f} seconds")
                 flatfilename = azcam.db.tools["exposure"].get_filename()
-                azcam.db.tools["exposure"].expose(et, self.exposure_type, "detcal flat")
+                azcam.db.tools["exposure"].expose(
+                    et, self.exposure_type, f"detcal flat {wave} nm"
+                )
 
                 # get counts
                 flatmean = numpy.array(azcam.fits.mean(flatfilename)) - numpy.array(
