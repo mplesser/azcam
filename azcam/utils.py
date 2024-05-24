@@ -1,5 +1,5 @@
 """
-*azcam.console.utils* contains general purpose support commands used throughout azcam.console.
+*azcam_console.utils* contains general purpose support commands used throughout azcam_console.
 """
 
 import os
