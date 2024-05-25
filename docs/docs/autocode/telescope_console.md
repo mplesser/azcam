@@ -1,3 +1,3 @@
 # Telescope Class
 
-::: azcam.console.tools.telescope.TelescopeConsole
+::: azcam_console.tools.telescope.TelescopeConsole

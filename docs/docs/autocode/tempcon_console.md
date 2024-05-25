@@ -1,3 +1,3 @@
 # Temcon Class
 
-::: azcam.console.tools.tempcon.TempconConsole
+::: azcam_console.tools.tempcon.TempconConsole

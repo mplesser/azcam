@@ -1,3 +1,3 @@
 # Telescope Class
 
-::: azcam.server.tools.telescope.Telescope
+::: azcam.tools.telescope.Telescope

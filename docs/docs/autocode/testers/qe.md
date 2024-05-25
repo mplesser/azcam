@@ -1,3 +1,3 @@
 # **Quantum Efficiency**
 
-::: azcam.testers.qe
+::: azcam_console.testers.qe

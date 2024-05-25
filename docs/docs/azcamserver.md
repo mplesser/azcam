@@ -23,9 +23,9 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 Another example code snippet to start an *azcamserver* process is:
 
 ```
-python -i -m azcam.server.server_mock
+python -i -m azcam.server_mock
 or
-ipython -m azcam.server.server_mock --profile azcamserver -i
+ipython -m azcam.server_mock --profile azcamserver -i
 ```
 
 and then in the IPython window:
@@ -58,8 +58,8 @@ The *exposure* tool often coordinates the actions of the hardware tools such as 
 
 #### Astronomical Research Cameras Controllers
 ```python
-import azcam.server.server
-from azcam.server.tools.arc.exposure_arc import ExposureArc
+import azcam.server
+from azcam.tools.arc.exposure_arc import ExposureArc
 exposure = ExposureArc()
 exposure.filetype = exposure.filetypes["MEF"]
 exposure.image.filetype = exposure.filetypes["MEF"]
@@ -71,8 +71,8 @@ exposure.image.server_type = "azcam"
 #### STA Archon Controllers
 
 ```python
-import azcam.server.server
-from azcam.server.tools.archon.exposure_archon import ExposureArchon
+import azcam.server
+from azcam.tools.archon.exposure_archon import ExposureArchon
 exposure = ExposureArchon()
 filetype = "MEF"
 exposure.fileconverter.set_detector_config(detector_sta3800)
@@ -86,8 +86,8 @@ exposure.add_extensions = 1
 #### Magellan Controllers
 
 ```python
-import azcam.server.server
-from azcam.server.tools.mag.exposure_mag import ExposureMag
+import azcam.server
+from azcam.tools.mag.exposure_mag import ExposureMag
 exposure = ExposureMag()
 filetype = "BIN"
 exposure.filetype = exposure.filetypes[filetype]
@@ -104,8 +104,8 @@ exposure.image.make_lockfile = 1
 #### ASCOM Exposure
 
 ```python
-import azcam.server.server
-from azcam.server.tools.ascom.exposure_ascom import ExposureASCOM
+import azcam.server
+from azcam.tools.ascom.exposure_ascom import ExposureASCOM
 exposure = ExposureASCOM()
 filetype = "FITS"
 exposure.filetype = exposure.filetypes[filetype]

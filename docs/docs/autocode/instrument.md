@@ -1,3 +1,3 @@
 # Instrument Class
 
-::: azcam.server.tools.instrument.Instrument
+::: azcam.tools.instrument.Instrument

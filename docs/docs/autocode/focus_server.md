@@ -1,3 +1,3 @@
 # Focus Class
 
-::: azcam.server.tools.focus.Focus
+::: azcam.tools.focus.Focus

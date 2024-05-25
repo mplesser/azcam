@@ -1,3 +1,3 @@
 # **Metrology**
 
-::: azcam.testers.metrology
+::: azcam_console.testers.metrology

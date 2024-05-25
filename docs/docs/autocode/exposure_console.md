@@ -1,3 +1,3 @@
 # Exposure Class
 
-::: azcam.console.tools.exposure.ExposureConsole
+::: azcam_console.tools.exposure.ExposureConsole

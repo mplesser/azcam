@@ -1,3 +1,3 @@
 # **Defects**
 
-::: azcam.testers.defects
+::: azcam_console.testers.defects

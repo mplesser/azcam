@@ -1,3 +1,3 @@
 # TempCon Class
 
-::: azcam.server.tools.tempcon.TempCon
+::: azcam.tools.tempcon.TempCon
