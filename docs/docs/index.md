@@ -7,9 +7,10 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 ## Installation
 
 `pip install azcam` 
+
 `pip install azcam-console`  # optional component
 
-Or download the latest version from from github <https://github.com/mplesser/azcam.git>
+Or download the latest version from from github <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git>
 
 ## Links
 
@@ -37,7 +38,7 @@ There are three main operational modes of AzCam:
 
   1. A server, usually called [azcamserver](azcamserver.md), which communicates directly or indirectly with system hardware.
 
-  2. A console, usually called [azcamconsole](azcamconsole.md), which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. The `azcam-console` package is optional and must be intstalled seperately from *azcam* itself.
+  2. A console, usually called [azcamconsole](azcamconsole.md), which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. The `azcam-console` package is optional and must be installed seperately from *azcam* itself.
 
   3. Applications, which are usually client programs that communicate with *azcamserver* over sockets or the web API.
 
