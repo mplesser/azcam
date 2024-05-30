@@ -1,3 +1,3 @@
 # **BaseTester**
 
-::: azcam.testers.basetester
+::: azcam_console.testers.basetester

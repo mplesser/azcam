@@ -11,8 +11,9 @@ import azcam
 
 # main database object
 db = azcam.db
+api = azcam.db.api
 
-# directly put tools in namespace sowil be imported with *
+# directly put tools in namespace to be imported with *
 try:
     for name in azcam.db.cli:
         globals()[name] = azcam.db.cli[name]
@@ -23,3 +24,4 @@ except Exception:
 
 # __all__.append("azcam")
 __all__.append("db")
+__all__.append("api")

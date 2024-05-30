@@ -1,3 +1,3 @@
 # **Gain**
 
-::: azcam.testers.gain
+::: azcam_console.testers.gain

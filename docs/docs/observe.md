@@ -33,7 +33,7 @@ It is still possible to run *observe* without the GUI, although this mode is dep
 
 Import observe for observing command use:
 ```
-from azcam.observe.observe_cli.observe_cli import ObserveCli
+from azcam_console.observe.observe_cli.observe_cli import ObserveCli
 ```
 
 ```

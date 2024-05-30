@@ -4,6 +4,7 @@ from scientific imaging systems as well as the control of instrumentation.
 """
 
 import typing
+from typing import List, Dict
 from importlib import metadata
 
 __version__ = metadata.version(__package__)
@@ -21,6 +22,9 @@ log: typing.Callable = print
 
 # initial database but will ususally be overwritten by server or console
 db: AzcamDatabase = AzcamDatabase()
+
+mode = "server"
+"""azcam mode, usually server or console"""
 
 # cleanup namespace
 del metadata

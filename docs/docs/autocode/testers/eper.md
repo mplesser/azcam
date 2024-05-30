@@ -1,3 +1,3 @@
 # **Extended Pixel Edge Response**
 
-::: azcam.testers.eper
+::: azcam_console.testers.eper

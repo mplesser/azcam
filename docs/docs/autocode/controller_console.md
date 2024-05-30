@@ -1,3 +1,3 @@
 # Controller Class
 
-::: azcam.console.tools.controller.ControllerConsole
+::: azcam_console.tools.controller.ControllerConsole

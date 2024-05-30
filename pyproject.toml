@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "24.2.4"
+version = "24.3.1"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -10,17 +10,11 @@ dependencies = [
     "loguru",
     "numpy",
     "astropy",
-    "matplotlib",
     "psutil",
     "fastapi",
     "uvicorn",
     "jinja2",
     "requests",
-    "pyside6",
-    "pdfkit",
-    "markdown",
-    "pypdf",
-    "pywin32; sys_platform == 'win32'",
     "mkdocstrings[python]>=0.18",
 ]
 requires-python = ">= 3.10"
@@ -34,5 +28,4 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project.scripts]
-azcamobserve = "azcam.observe.__main__:main"
 azcammonitor = "azcam.monitor.__main__:main"

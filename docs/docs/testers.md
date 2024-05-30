@@ -1,7 +1,7 @@
 # Testers
 
 The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose
-of characterizing sensor performance.
+of characterizing sensor performance. The *testers* subpackage is installed with the *azcam-console* package.
 
 Usage Example:
 
@@ -10,7 +10,7 @@ bias.acquire()
 bias.analyze()
 ```
 
-The *azcam.console.testers* subpackage contains the classes listed below.
+The *azcam_console.testers* subpackage contains the classes listed below.
 
 ## Base Tester Class
 - [Base Tester Class](autocode/testers/basetester.md)

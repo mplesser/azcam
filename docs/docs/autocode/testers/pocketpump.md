@@ -1,3 +1,3 @@
 # **Pocket Pumping**
 
-::: azcam.testers.pocketpump
+::: azcam_console.testers.pocketpump

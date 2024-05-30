@@ -1,3 +1,3 @@
 # Instrument Class
 
-::: azcam.console.tools.instrument.InstrumentConsole
+::: azcam_console.tools.instrument.InstrumentConsole

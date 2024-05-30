@@ -1,3 +1,3 @@
 # **Ramp Image**
 
-::: azcam.testers.ramp
+::: azcam_console.testers.ramp

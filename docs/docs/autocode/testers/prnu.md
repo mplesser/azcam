@@ -1,3 +1,3 @@
 # **Photo Response Non-Uniformity**
 
-::: azcam.testers.prnu
+::: azcam_console.testers.prnu

@@ -1,3 +1,3 @@
 # Focus Class
 
-::: azcam.console.tools.focus.FocusConsole
+::: azcam_console.tools.focus.FocusConsole
