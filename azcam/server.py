@@ -10,7 +10,7 @@ from azcam.logger import AzCamLogger
 from azcam.parameters_server import ParametersServer
 from azcam.database_server import AzcamDatabaseServer
 from azcam.cmdserver import CommandServer
-from azcam.azcam_api import API
+from azcam.api import API
 
 from azcam.monitor.monitorinterface import AzCamMonitorInterface
 
