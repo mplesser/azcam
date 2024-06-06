@@ -122,15 +122,21 @@ class WebServer(object):
             Remote web api commands.
             """
 
-            # JSON
+            print("command:", command)
+            print("qpars:", request.query_params)
+
+            # JSON request
             if command is None:
                 args = await request.json()
+
                 try:
                     toolid = azcam.db.tools[args["tool"]]
                     command = getattr(toolid, args["command"])
-
                     arglist = args["args"]
                     kwargs = args["kwargs"]
+
+                    response = api.command(toolid, command, arglist, kwars)
+
                     reply = command(*arglist, **kwargs)
                 except Exception as e:
                     reply = repr(e)
@@ -144,7 +150,7 @@ class WebServer(object):
 
                 return JSONResponse(response)
 
-            # query string
+            # query string request
             url = command
             qpars = request.query_params
 

@@ -19,6 +19,15 @@ class API(object):
 
         pass
 
+    def set_version(version: str):
+        """
+        Set teh API version for subsequent calls.
+        """
+
+        self.version = version
+
+        return
+
 
 class ParametersAPI(object):
     """
