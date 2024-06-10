@@ -125,7 +125,7 @@ See [azcamconsole](azcamconsole.md).
 
 The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose of characterizing sensor performance. The *testers* subpackage is part of the optional *azcam-console* package.
 
-See [testers](testers.md).
+See azcam-console.
 
 ## Code Documentation
 Much of the python code is autodocumented from the internal doc strings. See [Code Docs](autocode.md).
