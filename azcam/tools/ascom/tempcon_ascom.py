@@ -35,16 +35,16 @@ class TempConASCOM(TempCon):
         Initialize CryoConM24TemperatureControl temperature controller.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
         # set control temp
         self.set_control_temperature(self.control_temperature)
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 
@@ -82,11 +82,11 @@ class TempConASCOM(TempCon):
             temperature: temperature read
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             # azcam.exceptions.warning("Tempcon not enabled")
             return -999.9
 
-        if not self.initialized:
+        if not self.is_initialized:
             # azcam.exceptions.warning("Tempcon not initialized")
             return -999.9
 

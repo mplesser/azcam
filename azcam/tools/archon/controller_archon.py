@@ -265,7 +265,7 @@ class ControllerArchon(Controller):
         Initializes the Archon controller.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
         # connect to controller
@@ -293,7 +293,7 @@ class ControllerArchon(Controller):
         elif self.power_status != "ON":
             raise azcam.exceptions.AzcamError(f"Bad power status: {self.power_status}")
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 

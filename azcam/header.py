@@ -380,11 +380,11 @@ class ObjectHeaderMethods(object):
         Deletes all keywords if the object is not enabled.
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             self.header.delete_all_keywords()
             return
 
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         self.define_keywords()

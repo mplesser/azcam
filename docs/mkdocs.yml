@@ -49,9 +49,11 @@ extra_css:
 
 watch:
   - docs/css
+  - docs/autocode
 
 nav:
   - Home: 'index.md'
+  - 'api.md'
   - 'commands.md'
   - 'classes.md'
   - 'azcamserver.md'

@@ -51,6 +51,24 @@ class Queue(Tools):
         #: focus tool for motion - usually "instrument" or "telescope"
         self.focus_component = "instrument"
 
+    def initialize(self):
+        """
+        Initialize tool.
+        """
+
+        self.is_initialized = 1
+
+        return
+
+    def reset(self):
+        """
+        Reset tool.
+        """
+
+        self.is_reset = 1
+
+        return
+
     def _get_coord_mode(self, ra, dec, az, alt):
         """
         Return coordinate mode.

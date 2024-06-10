@@ -11,7 +11,6 @@ import azcam
 
 # main database object
 db = azcam.db
-api = azcam.db.api
 
 # directly put tools in namespace to be imported with *
 try:
@@ -24,4 +23,3 @@ except Exception:
 
 # __all__.append("azcam")
 __all__.append("db")
-__all__.append("api")

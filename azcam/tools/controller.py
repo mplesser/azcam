@@ -40,6 +40,24 @@ class Controller(Tools, ObjectHeaderMethods):
         azcam.db.tools_init["controller"] = self
         azcam.db.tools_reset["controller"] = self
 
+    def initialize(self):
+        """
+        Initialize tool.
+        """
+
+        self.is_initialized = 1
+
+        return
+
+    def reset(self):
+        """
+        Reset tool.
+        """
+
+        self.is_reset = 1
+
+        return
+
     def set_roi(self):
         """
         XXXSets ROI parameters values in the controller based on focalplane parameters.

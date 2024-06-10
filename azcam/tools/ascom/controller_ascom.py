@@ -42,7 +42,7 @@ class ControllerASCOM(Controller):
         Initialize the controller interface.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
         azcam.log("initializing camera")
@@ -75,7 +75,7 @@ class ControllerASCOM(Controller):
         self.camera.BinY = 1
         """
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 

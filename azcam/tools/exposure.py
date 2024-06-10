@@ -185,7 +185,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         for tool in azcam.db.tools_init:
             azcam.db.tools[tool].initialize()
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 
@@ -195,7 +195,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         """
 
         # initialize only once
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         # set temporary filenames
@@ -211,7 +211,10 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         # call reset() method on other tools
         for tool in azcam.db.tools_reset:
-            azcam.db.tools[tool].reset()
+            try:
+                azcam.db.tools[tool].reset()
+            except Exception as e:
+                raise azcam.exceptions.AzcamError(f"Could not reset {tool}: {e}")
 
         return
 
@@ -686,7 +689,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
     def sequence1(self, number_exposures=1, flush_array_flag=-1, delay=-1):
         """
         Take an exposure sequence.
-        Uses pre-set image type and image title.
+        Uses pre-set exposure time, image type and image title.
         number_exposures is the number of exposures to make.
         flush_array_flag defines detector flushing:
         -1 => current value defined by exposure.exposure_sequence_flush [default]
@@ -801,7 +804,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         return self.exposure_time
 
-    def set_exposuretime(self, exposure_time):
+    def set_exposuretime(self, exposure_time: float):
         """
         Set current exposure time in seconds.
         """
@@ -964,7 +967,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
     def set_image_type(self, imagetype="zero"):
         """
         Set image type for an exposure.
-        imagetype is system defines, and typically includes:
+        imagetype is system defined, and typically includes:
         zero, object, dark, flat.
         """
 

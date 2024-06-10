@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     // get_status function which runs on a timer
     function getstatus() {
-        $.getJSON('/api/exposure/get_status', {}, function(data) {
+        $.getJSON('/api/get_status', {}, function(data) {
             $("#imagetitle_status").text(decodeURI(data.data.imagetitle));
             $("#imagefilename_status").text(data.data.filename);
             $("#exposuretime_status").text(data.data.exposuretime);
@@ -68,7 +68,7 @@ $("#imagetest").click(function() {
 function ImageTest() {
     var ti = $("#imagetest").prop("checked");
     var imagetest = (ti ? 1 : 0);
-    var cmd = "/api/parameters/set_par?parameter=imagetest&value=" + imagetest;
+    var cmd = "/api/set_par?parameter=imagetest&value=" + imagetest;
     $("#message").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
@@ -84,7 +84,7 @@ function Expose(et, it, title) {
     var et = $("#exposuretime").val();
     var it = $("#imagetype").val();
     var title = $("#imagetitle").val();
-    var cmd = "/api/exposure/expose1?exposure_time=" + et + "&image_type=" + it + "&image_title=" + title;
+    var cmd = "/api/expose1?exposure_time=" + et + "&image_type=" + it + "&image_title=" + title;
     $("#command").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
@@ -113,21 +113,21 @@ function Sequence() {
     var et = $("#exposuretime").val();
     var it = $("#imagetype").val();
     var title = $("#imagetitle").val();
-    var cmd = "/api/exposure/set_exposuretime?exposure_time=" + et;
+    var cmd = "/api/set_exposuretime?exposure_time=" + et;
     $("#message").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
         });
-    var cmd = "/api/exposure/set_image_type?imagetype=" + it;
+    var cmd = "/api/set_image_type?imagetype=" + it;
     $("#message").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
         });
-    var cmd = "/api/exposure/set_image_title?title=" + title;
+    var cmd = "/api/set_image_title?title=" + title;
     $("#message").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
@@ -135,7 +135,7 @@ function Sequence() {
             $("#command").text(data.command);
         });
 
-    var cmd = "/api/exposure/sequence1?number_exposures=" + seq_total +
+    var cmd = "/api/sequence1?number_exposures=" + seq_total +
         "&flush_array_flag=" + sf + "&delay=" + seq_delay
     $.getJSON(cmd, {},
         function(data) {
@@ -147,7 +147,7 @@ function Sequence() {
 
 function Reset() {
     $("#message").text("resetting camera...");
-    $.getJSON('/api/exposure/reset', {},
+    $.getJSON('/api/reset', {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
@@ -157,7 +157,7 @@ function Reset() {
 
 function Abort() {
     $("#message").text("aborting exposure...");
-    $.getJSON('/api/exposure/abort', {},
+    $.getJSON('/api/abort', {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
@@ -167,7 +167,7 @@ function Abort() {
 
 function save_pars() {
     $("#message").text("saving parameters...");
-    $.getJSON('/api/exposure/save_pars', {},
+    $.getJSON('/api/save_pars', {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
@@ -176,38 +176,38 @@ function save_pars() {
 }
 
 function GetExposureInfo() {
-    $.getJSON('/api/parameters/get_par?parameter=imagetitle', {},
+    $.getJSON('/api/get_par?parameter=imagetitle', {},
         function(data) {
             $("#imagetitle").val(decodeURI(data.data));
         });
-    $.getJSON('/api/exposure/get_image_types', {},
+    $.getJSON('/api/get_image_types', {},
         function(data) {
             for (var dd in data.data) {
                 var val = data.data[dd];
                 $("#imagetype").append($('<option></option>').val(val).html(val));
             }
         });
-    $.getJSON('/api/exposure/get_image_type', {},
+    $.getJSON('/api/get_image_type', {},
         function(data) {
             $("#imagetype").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imagetest', {},
+    $.getJSON('/api/get_par?parameter=imagetest', {},
         function(data) {
             $('#imagetest')[0].checked = data.data;
         });
-    $.getJSON('/api/exposure/get_exposuretime', {},
+    $.getJSON('/api/get_exposuretime', {},
         function(data) {
             $("#exposuretime").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=exposuresequencetotal', {},
+    $.getJSON('/api/get_par?parameter=exposuresequencetotal', {},
         function(data) {
             $("#seq_total").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=exposuresequencedelay', {},
+    $.getJSON('/api/get_par?parameter=exposuresequencedelay', {},
         function(data) {
             $("#seq_delay").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=exposuresequenceflush', {},
+    $.getJSON('/api/get_par?parameter=exposuresequenceflush', {},
         function(data) {
             var seq_flush = data.data;
             if (seq_flush == 0) {
@@ -249,31 +249,31 @@ $("#imageautoname").change(function() {
 });
 
 function GetFilename() {
-    $.getJSON('/api/parameters/get_par?parameter=imagefolder', {},
+    $.getJSON('/api/get_par?parameter=imagefolder', {},
         function(data) {
             $("#imagefolder").val(decodeURI(data.data));
         });
-    $.getJSON('/api/parameters/get_par?parameter=imagesequencenumber', {},
+    $.getJSON('/api/get_par?parameter=imagesequencenumber', {},
         function(data) {
             $("#imagesequencenumber").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imageroot', {},
+    $.getJSON('/api/get_par?parameter=imageroot', {},
         function(data) {
             $("#imageroot").val(data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imageautoincrementsequencenumber', {},
+    $.getJSON('/api/get_par?parameter=imageautoincrementsequencenumber', {},
         function(data) {
             $("#imageautoincrementsequencenumber").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imageincludesequencenumber', {},
+    $.getJSON('/api/get_par?parameter=imageincludesequencenumber', {},
         function(data) {
             $("#imageincludesequencenumber").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imageautoname', {},
+    $.getJSON('/api/get_par?parameter=imageautoname', {},
         function(data) {
             $("#imageautoname").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=imageoverwrite', {},
+    $.getJSON('/api/get_par?parameter=imageoverwrite', {},
         function(data) {
             $("#imageoverwrite").prop("checked", data.data);
         });
@@ -282,7 +282,7 @@ function GetFilename() {
 
 function imagefolder() {
     var imagefolder = $("#imagefolder").val();
-    $.getJSON('/api/parameters/set_par?parameter=imagefolder&value=' + imagefolder, {},
+    $.getJSON('/api/set_par?parameter=imagefolder&value=' + imagefolder, {},
         function(data) {});
 
     return false;
@@ -290,7 +290,7 @@ function imagefolder() {
 
 function imagesequencenumber() {
     var imagenumber = $("#imagesequencenumber").val();
-    $.getJSON('/api/parameters/set_par?parameter=imagesequencenumber&value=' + imagenumber, {},
+    $.getJSON('/api/set_par?parameter=imagesequencenumber&value=' + imagenumber, {},
         function(data) {});
 
     return false;
@@ -298,7 +298,7 @@ function imagesequencenumber() {
 
 function imageroot() {
     var imageroot = $("#imageroot").val();
-    $.getJSON('/api/parameters/set_par?parameter=imageroot&value=' + imageroot, {},
+    $.getJSON('/api/set_par?parameter=imageroot&value=' + imageroot, {},
         function(data) {});
 
     return false;
@@ -307,7 +307,7 @@ function imageroot() {
 function imageautoincrementsequencenumber() {
     var imageautoincrementsequencenumber = $("#imageautoincrementsequencenumber").prop("checked");
     imageautoincrementsequencenumber = (imageautoincrementsequencenumber ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=imageautoincrementsequencenumber&value=' + imageautoincrementsequencenumber, {},
+    $.getJSON('/api/set_par?parameter=imageautoincrementsequencenumber&value=' + imageautoincrementsequencenumber, {},
         function(data) {});
 
     return false;
@@ -316,7 +316,7 @@ function imageautoincrementsequencenumber() {
 function imageoverwrite() {
     var imageoverwrite = $("#imageoverwrite").prop("checked");
     imageoverwrite = (imageoverwrite ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=imageoverwrite&value=' + imageoverwrite, {},
+    $.getJSON('/api/set_par?parameter=imageoverwrite&value=' + imageoverwrite, {},
         function(data) {});
 
     return false;
@@ -325,7 +325,7 @@ function imageoverwrite() {
 function imageincludesequencenumber() {
     var imageincludesequencenumber = $("#imageincludesequencenumber").prop("checked");
     imageincludesequencenumber = (imageincludesequencenumber ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=imageincludesequencenumber&value=' + imageincludesequencenumber, {},
+    $.getJSON('/api/set_par?parameter=imageincludesequencenumber&value=' + imageincludesequencenumber, {},
         function(data) {});
 
     return false;
@@ -334,7 +334,7 @@ function imageincludesequencenumber() {
 function imageautoname() {
     var imageautoname = $("#imageautoname").prop("checked");
     imageautoname = (imageautoname ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=imageautoname&value=' + imageautoname, {},
+    $.getJSON('/api/set_par?parameter=imageautoname&value=' + imageautoname, {},
         function(data) {});
 
     return false;
@@ -377,7 +377,7 @@ function applyroi() {
     var firstrow = $("#firstrow").val();
     var lastrow = $("#lastrow").val();
     var rowbin = $("#rowbin").val();
-    cmd = "/api/exposure/set_roi?" +
+    cmd = "/api/set_roi?" +
         "first_col=" + firstcol +
         "&last_col=" + lastcol +
         "&col_bin=" + colbin +
@@ -393,7 +393,7 @@ function applyroi() {
 }
 
 function GetDetector() {
-    $.getJSON('/api/exposure/get_roi', {},
+    $.getJSON('/api/get_roi', {},
         function(data) {
             $("#firstcol").val(data.data[0]);
             $("#lastcol").val(data.data[1]);
@@ -427,7 +427,7 @@ $("#autotitle").click(function() {
 function flusharray() {
     var x = $("#flusharray").prop("checked");
     x = (x ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=flusharray&value=' + x, {},
+    $.getJSON('/api/set_par?parameter=flusharray&value=' + x, {},
         function(data) {});
 
     return false;
@@ -436,7 +436,7 @@ function flusharray() {
 function displayimage() {
     var x = $("#displayimage").prop("checked");
     x = (x ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=displayimage&value=' + x, {},
+    $.getJSON('/api/set_par?parameter=displayimage&value=' + x, {},
         function(data) {});
     return false;
 }
@@ -444,7 +444,7 @@ function displayimage() {
 function instrumentenabled() {
     var x = $("#instrumentenabled").prop("checked");
     x = (x ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=instrumentenabled&value=' + x, {},
+    $.getJSON('/api/set_par?parameter=instrumentenabled&value=' + x, {},
         function(data) {});
     return false;
 }
@@ -452,7 +452,7 @@ function instrumentenabled() {
 function telescopeenabled() {
     var x = $("#telescopeenabled").prop("checked");
     x = (x ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=telescopeenabled&value=' + x, {},
+    $.getJSON('/api/set_par?parameter=telescopeenabled&value=' + x, {},
         function(data) {});
     return false;
 }
@@ -460,29 +460,29 @@ function telescopeenabled() {
 function autotitle() {
     var x = $("#autotitle").prop("checked");
     x = (x ? 1 : 0)
-    $.getJSON('/api/parameters/set_par?parameter=autotitle&value=' + x, {},
+    $.getJSON('/api/set_par?parameter=autotitle&value=' + x, {},
         function(data) {});
     return false;
 }
 
 function GetOptions() {
-    $.getJSON('/api/parameters/get_par?parameter=flusharray', {},
+    $.getJSON('/api/get_par?parameter=flusharray', {},
         function(data) {
             $("#flusharray").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=displayimage', {},
+    $.getJSON('/api/get_par?parameter=displayimage', {},
         function(data) {
             $("#displayimage").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=instrumentenabled', {},
+    $.getJSON('/api/get_par?parameter=instrumentenabled', {},
         function(data) {
             $("#instrumentenabled").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=telescopeenabled', {},
+    $.getJSON('/api/get_par?parameter=telescopeenabled', {},
         function(data) {
             $("#telescopeenabled").prop("checked", data.data);
         });
-    $.getJSON('/api/parameters/get_par?parameter=autotitle', {},
+    $.getJSON('/api/get_par?parameter=autotitle', {},
         function(data) {
             $("#autotitle").prop("checked", data.data);
         });

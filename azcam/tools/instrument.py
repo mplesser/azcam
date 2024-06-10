@@ -43,6 +43,24 @@ class Instrument(Tools, ObjectHeaderMethods):
 
         return
 
+    def initialize(self):
+        """
+        Initialize tool.
+        """
+
+        self.is_initialized = 1
+
+        return
+
+    def reset(self):
+        """
+        Reset tool.
+        """
+
+        self.is_reset = 1
+
+        return
+
     # ***************************************************************************
     # exposure
     # ***************************************************************************

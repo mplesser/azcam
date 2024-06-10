@@ -19,6 +19,7 @@ Or download the latest version from from github <https://github.com/mplesser/azc
     - [GitHub repos](https://github.com/mplesser)
 
   - Code details and links
+    - [API](api.md)
     - [Classes](classes.md)
     - [Commands](commands.md)
     - [azcamserver](azcamserver.md)

@@ -32,4 +32,3 @@ del typing
 del AzCamLogger
 del AzcamDatabase
 del database
-del header

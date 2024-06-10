@@ -6,7 +6,6 @@ from typing import Any, Union, List, Dict
 
 import azcam
 from azcam.logger import AzCamLogger
-from azcam.header import System
 
 
 class AzcamDatabase(object):
@@ -41,9 +40,6 @@ class AzcamDatabase(object):
     tools: dict = {}
     """dict of tools"""
 
-    default_tool = None
-    """name of default tool"""
-
     cli: dict = {}
     """dict of CLI commands"""
 
@@ -61,9 +57,6 @@ class AzcamDatabase(object):
 
     parameters: None
     """parameters object"""
-
-    system: System
-    """logger object"""
 
     # *************************************************************************
     # parameter table

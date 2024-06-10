@@ -42,10 +42,10 @@ class TempConArchon(TempCon):
         2 => TEMPC
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             return -999.9
 
-        if not self.initialized:
+        if not self.is_initialized:
             return -999.9
 
         if not azcam.db.tools["controller"].heater_board_installed:

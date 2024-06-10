@@ -42,7 +42,7 @@ class TempConArc(TempCon):
         Temperature is temperature to set in Celsius.
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
@@ -79,11 +79,11 @@ class TempConArc(TempCon):
         2 => DIODETEMP
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             # azcam.exceptions.warning("Tempcon not enabled")
             return -999.9
 
-        if not self.initialized:
+        if not self.is_initialized:
             # azcam.exceptions.warning("Tempcon not initialized")
             return -999.9
 

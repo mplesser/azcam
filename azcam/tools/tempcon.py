@@ -63,15 +63,24 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         return
 
+    def initialize(self):
+        """
+        Initialize tool.
+        """
+
+        self.is_initialized = 1
+
+        return
+
     def reset(self) -> None:
         """
         Reset tempcon tool.
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             return
 
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         self.set_control_temperature()

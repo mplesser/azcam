@@ -122,8 +122,8 @@ class WebServer(object):
             Remote web api commands.
             """
 
-            print("command:", command)
-            print("qpars:", request.query_params)
+            # print("command:", command)
+            # print("qpars:", request.query_params)
 
             # JSON request
             if command is None:
@@ -158,7 +158,7 @@ class WebServer(object):
                 if self.logstatus:
                     azcam.log(url, qpars, prefix="Web-> ")
                 else:
-                    if not ("/get_status" in url or "/watchdog" in url):
+                    if not ("get_status" in url or "watchdog" in url):
                         azcam.log(url, qpars, prefix="Web-> ")
 
             reply = self.web_command(url, qpars)
@@ -167,8 +167,8 @@ class WebServer(object):
                 if self.logstatus:
                     azcam.log(reply, prefix="Web->   ")
                 else:
-                    if not ("/get_status" in url or "/watchdog" in url):
-                        azcam.log(reply, prefix="Web->   ")
+                    if not ("get_status" in url or "watchdog" in url):
+                        azcam.log(reply["data"], prefix="Web->   ")
 
             return JSONResponse(reply)
 
@@ -234,42 +234,44 @@ class WebServer(object):
         try:
             obj, method, kwargs = self.parse(url, qpars)
 
-            objects = obj.split(".")
+            # objects = obj.split(".")
 
-            # special case temporarily for parameters
-            if objects[0] == "parameters":
-                if len(objects) == 1:
-                    objid = azcam.db.parameters
-                elif len(objects) == 2:
-                    objid = getattr(azcam.db.parameters, objects[1])
-                elif len(objects) == 3:
-                    objid = getattr(
-                        getattr(azcam.db.parameters, objects[1]), objects[2]
-                    )
-                elif len(objects) == 4:
-                    objid = getattr(
-                        getattr(getattr(azcam.db.parameters, objects[1]), objects[2]),
-                        objects[3],
-                    )
-                else:
-                    objid = None  # too complicated for now
+            objid = azcam.db.api
 
-            elif objects[0] in azcam.db.tools:
-                if len(objects) == 1:
-                    objid = azcam.db.tools[obj]
-                elif len(objects) == 2:
-                    objid = getattr(azcam.db.tools.get(objects[0]), objects[1])
-                elif len(objects) == 3:
-                    objid = getattr(
-                        getattr(azcam.db.tools.get(objects[0]), objects[1]), objects[2]
-                    )
-                else:
-                    objid = None  # too complicated for now
+            # # special case temporarily for parameters
+            # if objects[0] == "parameters":
+            #     if len(objects) == 1:
+            #         objid = azcam.db.parameters
+            #     elif len(objects) == 2:
+            #         objid = getattr(azcam.db.parameters, objects[1])
+            #     elif len(objects) == 3:
+            #         objid = getattr(
+            #             getattr(azcam.db.parameters, objects[1]), objects[2]
+            #         )
+            #     elif len(objects) == 4:
+            #         objid = getattr(
+            #             getattr(getattr(azcam.db.parameters, objects[1]), objects[2]),
+            #             objects[3],
+            #         )
+            #     else:
+            #         objid = None  # too complicated for now
 
-            else:
-                raise azcam.exceptions.AzcamError(
-                    f"remote call not allowed in API: {obj}", 4
-                )
+            # elif objects[0] in azcam.db.tools:
+            #     if len(objects) == 1:
+            #         objid = azcam.db.tools[obj]
+            #     elif len(objects) == 2:
+            #         objid = getattr(azcam.db.tools.get(objects[0]), objects[1])
+            #     elif len(objects) == 3:
+            #         objid = getattr(
+            #             getattr(azcam.db.tools.get(objects[0]), objects[1]), objects[2]
+            #         )
+            #     else:
+            #         objid = None  # too complicated for now
+
+            # else:
+            #     raise azcam.exceptions.AzcamError(
+            #         f"remote call not allowed in API: {obj}", 4
+            #     )
 
             caller = getattr(objid, method)
             reply = caller() if kwargs is None else caller(**kwargs)
@@ -303,19 +305,10 @@ class WebServer(object):
         """
 
         # parse URL
-        p = url
-
-        try:
-            tokens = p.split("/")
-        except Exception as e:
-            raise e("API command error - parse split")
-
-        # get oject and method
-        if len(tokens) != 2:
-            raise azcam.exceptions.AzcamError("API command error - parse length")
-        obj, method = tokens
+        tokens = url
+        method = tokens
 
         # get arguments
         kwargs = qpars._dict
 
-        return obj, method, kwargs
+        return None, method, kwargs

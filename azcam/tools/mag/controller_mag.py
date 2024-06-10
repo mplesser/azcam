@@ -112,7 +112,7 @@ class ControllerMag(Controller):
         if reply[0] == "OK":
             if reply[1] == "0" or reply[1].lower() == "demo":
                 azcam.log("ControllerServer running in DEMO mode")
-            self.initialized = True
+            self.is_initialized = True
             return
         else:
             raise azcam.exceptions.AzcamError("Could not initialize controller")

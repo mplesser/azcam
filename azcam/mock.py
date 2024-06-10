@@ -27,7 +27,7 @@ from azcam.cmdserver import CommandServer
 from azcam.tools.focus import Focus
 import azcam.shortcuts
 
-from azcam.webtools.webserver.fastapi_server import WebServer
+from azcam.webtools.webserver import WebServer
 from azcam.webtools.status.status import Status
 from azcam.webtools.exptool.exptool import Exptool
 

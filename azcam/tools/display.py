@@ -36,14 +36,23 @@ class Display(Tools, ObjectHeaderMethods):
         Initialize display.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning("Display is not enabled")
             return
 
         self.set_display(self.default_display)
+
+        return
+
+    def reset(self):
+        """
+        Reset tool.
+        """
+
+        self.is_reset = 1
 
         return
 

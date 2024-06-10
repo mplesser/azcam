@@ -150,10 +150,10 @@ class ControllerArc(Controller):
         Initialize controller hardware, loading PCI code as needed.
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning(f"{self.description} is not enabled")
             return
 
@@ -161,7 +161,7 @@ class ControllerArc(Controller):
 
         reply = self.camserver.get("ControllerType")
         if reply[0] == "OK":
-            self.initialized = True
+            self.is_initialized = True
             if reply[1] == "0" or reply[1] == 0 or reply[1].lower() == "demo":
                 self.interface_type = 0
                 azcam.exceptions.warning("ControllerServer running in DEMO mode")
@@ -220,7 +220,7 @@ class ControllerArc(Controller):
         # reset flag even is system has previously been reset
         self.is_reset = 0
 
-        if not self.initialized:
+        if not self.is_initialized:
             self.initialize()
 
         self.reset_controller()

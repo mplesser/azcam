@@ -25,11 +25,11 @@ class TempConMag(TempCon):
         Returns the current detector temperature in Celsius.
         """
 
-        if not self.enabled:
+        if not self.is_enabled:
             # azcam.exceptions.warning("Tempcon not enabled")
             return -999.9
 
-        if not self.initialized:
+        if not self.is_initialized:
             # azcam.exceptions.warning("Tempcon not initialized")
             return -999.9
 

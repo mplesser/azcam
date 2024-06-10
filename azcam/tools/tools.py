@@ -29,44 +29,19 @@ class Tools(object):
             self.description = description
 
         #: 1 when tool is enabled
-        self.enabled: int = 1
+        self.is_enabled: int = 1
 
         #: 1 when tool has been initialized
-        self.initialized: int = 0
+        self.is_initialized: int = 0
 
         #: 1 when tool has been reset
         self.is_reset: int = 0
+
+        #: verbosity for debug, >0 is more verbose
+        self.verbosity = 0
 
         # save tool name
         azcam.db.tools.update({self.tool_id: self})
 
         # add tool to CLI
         azcam.db.cli.update({self.tool_id: self})
-
-        #: verbosity for debug, >0 is more verbose
-        self.verbosity = 0
-
-    def initialize(self) -> None:
-        """
-        Initialize the tool.
-        """
-
-        if self.initialized:
-            return
-
-        if not self.enabled:
-            azcam.exceptions.warning(f"{self.description} is not enabled")
-            return
-
-        self.initialized = 1
-
-        return
-
-    def reset(self) -> None:
-        """
-        Reset the tool.
-        """
-
-        self.is_reset = 1
-
-        return

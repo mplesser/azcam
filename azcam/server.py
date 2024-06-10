@@ -45,8 +45,8 @@ def setup_server():
     # azcam.db.monitor.proc_path = ""
     # azcam.db.monitor.register()
 
-    # API
-    azcam.db.api = API()
+    # define API tool
+    _ = API()
 
     return
 

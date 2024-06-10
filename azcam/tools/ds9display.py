@@ -38,10 +38,10 @@ class Ds9Display(Display):
         super().__init__(self.tool_id, self.description)
 
         #: 1 when tool is enabled
-        self.enabled: int = 1
+        self.is_enabled: int = 1
 
         #: 1 when tool has been initialized
-        self.initialized: int = 0
+        self.is_initialized: int = 0
 
         #: 1 when tool has been reset
         self.is_reset: int = 0
@@ -87,7 +87,7 @@ class Ds9Display(Display):
         :return None:
         """
 
-        if self.initialized:
+        if self.is_initialized:
             return
 
         if os.name == "posix":
@@ -108,13 +108,13 @@ class Ds9Display(Display):
             self.xpans = os.path.join(self.root, "xpans.exe")
             self.xpans = os.path.abspath(self.xpans)
 
-        if not self.enabled:
+        if not self.is_enabled:
             azcam.exceptions.warning("Display is not enabled")
             return
 
         self.set_display(self.default_display)
 
-        self.initialized = 1
+        self.is_initialized = 1
 
         return
 
