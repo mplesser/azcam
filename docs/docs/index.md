@@ -10,12 +10,13 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 `pip install azcam-console`  # optional component
 
-Or download the latest version from from github <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git>
+Or download the latest versions from github at <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git>
 
 ## Links
 
   - Main links
     - [AzCam documentation (this site)](https://azcam.readthedocs.io)
+    - [AzCamConsole documentation](https://azcam-console.readthedocs.io)
     - [GitHub repos](https://github.com/mplesser)
 
   - Code details and links
@@ -23,11 +24,9 @@ Or download the latest version from from github <https://github.com/mplesser/azc
     - [Classes](classes.md)
     - [Commands](commands.md)
     - [azcamserver](azcamserver.md)
-    - [azcamconsole](azcamconsole.md)
     - [Code Docs](autocode.md)
     - [Advanced concepts](advanced.md)
-    - [Observing scripts](observe.md)
-    - Focus Command -- [server](autocode/focus_server.md) -- [console](autocode/focus_console.md)
+    - [Focus Command -- server](autocode/focus_server.md)
 
 ## Tools
 
@@ -39,7 +38,7 @@ There are three main operational modes of AzCam:
 
   1. A server, usually called [azcamserver](azcamserver.md), which communicates directly or indirectly with system hardware.
 
-  2. A console, usually called [azcamconsole](azcamconsole.md), which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. The `azcam-console` package is optional and must be installed seperately from *azcam* itself.
+  2. A console, usually called *azcamconsole*, which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. This mode requires the `azcam-console` package which is optional.
 
   3. Applications, which are usually client programs that communicate with *azcamserver* over sockets or the web API.
 
@@ -62,25 +61,11 @@ wavelength = instrument.get_wavelength()
 print(f"Current wavelength is {wavelength}")
 exposure.expose(2., 'flat', "a 450 nm flat field image")
 ```
-or
 
-```python
-# client-side (azcamconsole)
-import azcam
-import azam_itl.console
-instrument = azcam.db.tools["instrument"]
-exposure = azcam.db.tools["exposure"]
-instrument.set_wavelength(450)
-wavelength = instrument.get_wavelength()
-print(f"Current wavelength is {wavelength}")
-exposure.expose(2., 'flat', "a 450 nm flat field image")
-```
-
-Both *azcamserver* and *azcamconsole* may also be called in a manner similar to:
+*azcamserver* may also be called in a manner similar to:
 
 ```python
 python -m azcam_itl.server -i -- -system LVM
-python -m azcam_itl.console - -- -system LVM
 or
 ipython -m azcam_itl.server -i -- -system LVM
 ```
@@ -94,11 +79,7 @@ instrument.set_wavelength(450)
 exposure.expose(2.5,"flat","a test image")
 ```
 
-```python
-azcam azcam_itl.console -system DESI
-```
-
-Example configuration code may be found in the various environment packages with names like `server.py` and `console.py`.
+Example configuration code may be found in the various environment packages with names like `server.py`.
 
 When working in a command line environment, it is often convenient to import commonly used commands into the CLI namespace. This provides direct access to objects and tools such as *db*, *exposure*, *controller*, and various pre-defined shortcuts. To do this, after configuring the environment, execute the commandfrom `from azcam.cli import *`.
 
@@ -114,18 +95,6 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 *azcamserver* is the main server application for *azcam*. It usually runs in an IPython window and is mainly used to control data acquistion. 
 
 See [azcamserver](azcamserver.md).
-
-## AzcamConsole
-
-*azcamconsole* is a console application for *azcam*. It usually runs in an IPython window and is used to both acquire and analyze data in a python scripting environment.
-
-See [azcamconsole](azcamconsole.md).
-
-## Testers
-
-The *testers* subpackage contains classes which are used to acquire and analyze sensor data for the purpose of characterizing sensor performance. The *testers* subpackage is part of the optional *azcam-console* package.
-
-See azcam-console.
 
 ## Code Documentation
 Much of the python code is autodocumented from the internal doc strings. See [Code Docs](autocode.md).

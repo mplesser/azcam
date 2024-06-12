@@ -18,6 +18,7 @@ $(document).ready(function() {
             $("#progressbar").css("background-color", data.data.exposurecolor);
             $("#timestamp").text(data.data.timestamp);
             $("#command").text(data.data.command);
+            $("#testimage_exposure").text(data.data.imagetest);
         });
         return false;
     }
