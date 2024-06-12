@@ -519,7 +519,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.delete_keyword("COMPLAMP")
 
         # set comp lamps, turn on, set keyword
-        if self.comp_exposure and azcam.db.tools["instrument"].enabled:
+        if self.comp_exposure and azcam.db.tools["instrument"].is_enabled:
             if self.comp_sequence:  # lamps already on
                 pass
             else:
@@ -535,7 +535,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
                 try:
                     if (azcam.db.tools["instrument"] is not None) and azcam.db.tools[
                         "instrument"
-                    ].enabled:
+                    ].is_enabled:
                         azcam.db.tools["instrument"].set_comps()  # reset
                 except KeyError:
                     pass
@@ -640,7 +640,8 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.flush_array = FlushArray
 
         self.comp_sequence = (
-            self.check_comparison_imagetype() and azcam.db.tools["instrument"].enabled
+            self.check_comparison_imagetype()
+            and azcam.db.tools["instrument"].is_enabled
         )
 
         if self.comp_sequence:
@@ -1454,7 +1455,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         ef = self.exposure_flag
         expstate = self.exposureflags_rev.get(ef, "")
 
-        if azcam.db.tools["tempcon"].enabled:
+        if azcam.db.tools["tempcon"].is_enabled:
             try:
                 camtemp, dewtemp = azcam.db.tools["tempcon"].get_temperatures()[0:2]
                 camtemp = f"{camtemp:.1f}"

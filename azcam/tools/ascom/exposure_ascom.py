@@ -35,7 +35,7 @@ class ExposureASCOM(Exposure):
             shutterstate = 1  # other types are comps, so open shutter
 
         # close instrument shutter for darks and zeros
-        if azcam.db.tools["instrument"].enabled:
+        if azcam.db.tools["instrument"].is_enabled:
             if shutterstate:
                 azcam.db.tools["instrument"].comps_on()
             else:
@@ -61,7 +61,7 @@ class ExposureASCOM(Exposure):
         else:
             self.exposure_flag = self.exposureflags["READ"]
 
-        if azcam.db.tools["instrument"].enabled:
+        if azcam.db.tools["instrument"].is_enabled:
             azcam.db.tools["instrument"].comps_off()
 
         if self.image_type.lower() != "zero":

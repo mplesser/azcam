@@ -92,11 +92,11 @@ def setup():
     # ****************************************************************
     controller = Controller()
     instrument = Instrument()
-    instrument.enabled = 0
+    instrument.is_enabled = 0
     telescope = Telescope()
-    telescope.enabled = 0
+    telescope.is_enabled = 0
     tempcon = TempCon()
-    tempcon.enabled = 0
+    tempcon.is_enabled = 0
     display = Display()
     exposure = Exposure()
     focus = Focus()

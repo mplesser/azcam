@@ -236,7 +236,7 @@ class WebServer(object):
 
             # objects = obj.split(".")
 
-            objid = azcam.db.api
+            objid = azcam.db.tools["api"]
 
             # # special case temporarily for parameters
             # if objects[0] == "parameters":

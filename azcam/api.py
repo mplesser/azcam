@@ -245,6 +245,13 @@ class API(Tools):
             first_col, last_col, first_row, last_row, col_bin, row_bin, roi_num
         )
 
+    def roi_reset(self):
+        """
+        Resets detector ROI values to full frame, current binning.
+        """
+
+        return self.exposure.roi_reset()
+
     def get_format(self) -> list:
         """
         Return the current detector format parameters.

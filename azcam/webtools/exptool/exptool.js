@@ -352,12 +352,12 @@ $("#applyroi").click(function() {
 
 function fullframe() {
     $("#message").text("setting ROI to full frame...");
-    $.getJSON('/api/exposure/roi_reset', {},
+    $.getJSON('/api/roi_reset', {},
         function(data) {
             $("#message").text(data.message);
             $("#command").text(data.command);
         });
-    $.getJSON('/api/exposure/get_roi', {},
+    $.getJSON('/api/get_roi', {},
         function(data) {
             $("#firstcol").val(data.data[0]);
             $("#lastcol").val(data.data[1]);

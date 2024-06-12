@@ -103,10 +103,10 @@ class AzcamDatabase(object):
         "lastcol": "exposure.image.focalplane.last_col",
         "lastrow": "exposure.image.focalplane.last_row",
         # instrument
-        "instrumentenabled": "instrument.enabled",
+        "instrumentenabled": "instrument.is_enabled",
         "instrumentfocus": "instrument.focus_position",
         # telescope
-        "telescopeenabled": "telescope.enabled",
+        "telescopeenabled": "telescope.is_enabled",
         "telescopefocus": "telescope.focus_position",
         # tempcon
         "controltemperature": "tempcon.control_temperature",
