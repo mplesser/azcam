@@ -143,7 +143,7 @@ http://hostname:2403/status
 http://hostname:2403/exptool
 ```
 
-The value *2403* here is the web server port configured by a specific environment. Note all services may be enabled for a particular system.
+The value *2403* here is the web server port configured by a specific environment. Not all services may be enabled for a particular system.
 
 ## Shortcuts
 When using IPython, auto parenthesis mode allows typing commands without 

@@ -16,7 +16,6 @@ from azcam.scripts.scripts import loadscripts
 
 from azcam.logger import check_for_remote_logger
 
-from azcam.tools.queue import Queue
 from azcam.tools.controller import Controller
 from azcam.tools.instrument import Instrument
 from azcam.tools.tempcon import TempCon
@@ -126,9 +125,6 @@ def setup():
 
         exptool = Exptool(webserver)
         exptool.initialize()
-
-        # queue = Queue()
-        # queue.initialize()
 
         azcam.log("Started web apps")
 

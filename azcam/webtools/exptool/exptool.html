@@ -127,54 +127,57 @@
 
                         <div class="row mb-2">
                             <div class="col-12">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text">Image filename</span>
-                                    <span id="imagefilename_status" class = "border border-primary" style="width:80%;" title="image filename"></span>
-                                </div>
+                                <label for="imagefilename_status">Image filename</label>
+                                <div class="border border-primary" style="width:85%;" id="imagefilename_status" title="image filename">
+                                none</div>
                             </div>
                         </div>
 
                         <div class="row mb-2">
                             <div class="col-12">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text ">Image title</span>
-                                    <span id="imagetitle_status" class = "border border-primary" style="width:84%;" title="image title"></span>
-                                </div>
+                                <label for="imagetitle_status">Image title</label>
+                                <div class="border border-primary" style="width:90%;" id="imagetitle_status" title="image title">
+                                none</div>
                             </div>
                         </div>
-
-                        <div class="row mb-2">
-                            <div class="col-12">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text ">Test Image</span>
-                                    <span id="testimage_exposure" class = "border border-primary" style="width:5%;" title="test image">0</span>
-                                </div>
-                            </div>
-                        </div>        
 
                         <div class="row mb-2">
                             <div class="col-3">
-                                <label for="camtemp">CamTemp:</label>
+                                <label for="testimage_exposure">Test image</label>
+                                <div class="border border-primary" style="width:50%;" id="testimage_status" class="number_box" title="exposure time in seconds">
+                                0</div>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="exposuretime_status">Exposure time</label>
+                                <div class="border border-primary" style="width:50%;" id="exposuretime_status" class="number_box" title="exposure time in seconds">
+                                0</div>
+                            </div>
+                        </div> 
+
+                        <div class="row mb-2">
+                            <div class="col-3">
+                                <label for="camtemp">CamTemp</label>
                                 <div class="border border-primary" style="width:50%;" id="camtemp" class="number_box">
                                     -999.99
                                 </div>
                             </div>
 
                             <div class="col-3">
-                                <label for="dewtemp">DewTemp:</label>
+                                <label for="dewtemp">DewTemp</label>
                                 <div class="border border-primary" style="width:50%;" id="dewtemp" class="number_box">
                                     -999.99
                                 </div>
                             </div>
 
                             <div class="col-3">
-                                <label for="colbin_status">ColBin:</label>
+                                <label for="colbin_status">ColBin</label>
                                 <div class="border border-primary" style="width:40%;" id="colbin_status" class="number_box">1
                                 </div>
                             </div>
 
                             <div class="col-3">
-                                <label for="rowbin_status">RowBin:</label>
+                                <label for="rowbin_status">RowBin</label>
                                 <div class="border border-primary" style="width:40%;" id="rowbin_status" class="number_box">1
                                 </div>
                             </div>

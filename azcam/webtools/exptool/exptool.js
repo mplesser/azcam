@@ -18,7 +18,7 @@ $(document).ready(function() {
             $("#progressbar").css("background-color", data.data.exposurecolor);
             $("#timestamp").text(data.data.timestamp);
             $("#command").text(data.data.command);
-            $("#testimage_exposure").text(data.data.imagetest);
+            $("#testimage_status").text(data.data.imagetest);
         });
         return false;
     }
@@ -60,16 +60,46 @@ $("#abort").click(function() {
     Abort();
 });
 $("#save_pars").click(function() {
-    save_pars();
+    Save_Pars();
 });
 $("#imagetest").click(function() {
     ImageTest();
+});
+$("#imagetitle").change(function() {
+    ImageTitle();
+});
+$("#exposuretime").change(function() {
+    ExposureTime();
 });
 
 function ImageTest() {
     var ti = $("#imagetest").prop("checked");
     var imagetest = (ti ? 1 : 0);
     var cmd = "/api/set_par?parameter=imagetest&value=" + imagetest;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function(data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    return false;
+}
+
+function ImageTitle() {
+    var imagetitle = $("#imagetitle").val();
+    var cmd = "/api/set_image_title?title=" + imagetitle;
+    $("#message").text(cmd);
+    $.getJSON(cmd, {},
+        function(data) {
+            $("#message").text(data.message);
+            $("#command").text(data.command);
+        });
+    return false;
+}
+
+function ExposureTime() {
+    var et = $("#exposuretime").val();
+    var cmd = "/api/set_exposuretime?exposure_time=" + et;
     $("#message").text(cmd);
     $.getJSON(cmd, {},
         function(data) {
@@ -166,7 +196,7 @@ function Abort() {
     return false;
 }
 
-function save_pars() {
+function Save_Pars() {
     $("#message").text("saving parameters...");
     $.getJSON('/api/save_pars', {},
         function(data) {
@@ -177,7 +207,7 @@ function save_pars() {
 }
 
 function GetExposureInfo() {
-    $.getJSON('/api/get_par?parameter=imagetitle', {},
+    $.getJSON('/api/get_image_title', {},
         function(data) {
             $("#imagetitle").val(decodeURI(data.data));
         });

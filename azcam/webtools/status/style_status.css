@@ -62,3 +62,13 @@
     font-style: normal;
     margin-bottom: 2px;
 }
+
+.mybox {
+    border: solid;
+    border-width: 1px;
+    border-color: blue;
+    margin-left: 4px;
+    margin-bottom: 1px;
+    width: 65%;
+    float: right;
+}

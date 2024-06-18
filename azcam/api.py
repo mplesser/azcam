@@ -400,6 +400,13 @@ class API(Tools):
 
         return self.exposure.set_image_title(title)
 
+    def get_image_title(self):
+        """
+        Return the image title.
+        """
+
+        return self.exposure.get_image_title()
+
     def set_image_type(self, imagetype: str = "zero"):
         """
         Set image type for an exposure.
