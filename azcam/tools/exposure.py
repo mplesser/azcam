@@ -1058,9 +1058,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         Returns TestImage flag.
         """
 
-        flag = self.test_image
-
-        return ["OK", flag]
+        return self.test_image
 
     # **********************************************************************************************
     # detector parameters

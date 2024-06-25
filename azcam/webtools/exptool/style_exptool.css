@@ -66,6 +66,10 @@
     display: block;
 }
 
+#exposuretime_status,
+#testimage_status,
+#imagetitle_status,
 #imagefilename_status {
-    display: block;
+    float: right;
+    background-color: lightgray;
 }
