@@ -52,9 +52,7 @@ class Focus(Tools):
         #: delay in seconds between exposures
         self.move_delay = 3
 
-        self.initalize()
-
-    def initalize(self):
+    def initialize(self):
         """
         Initialize focus routine.
         """
@@ -69,6 +67,8 @@ class Focus(Tools):
         except Exception:
             self.telescope = None
             pass
+
+        self.is_initialized = 1
 
         return
 

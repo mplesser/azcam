@@ -100,6 +100,7 @@ def setup():
     display = Display()
     exposure = Exposure()
     focus = Focus()
+    focus.initialize()
 
     # ****************************************************************
     # scripts
