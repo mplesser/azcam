@@ -1,3 +1,3 @@
 # Tools Class
 
-::: azcam.tools
+::: azcam.tools.tools

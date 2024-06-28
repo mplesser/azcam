@@ -133,6 +133,7 @@ def setup():
     # start command server
     # ****************************************************************
     azcam.log(f"Starting cmdserver - listening on port {cmdserver.port}")
+    azcam.db.tools["api"].initialize_api()
     cmdserver.start()
 
 

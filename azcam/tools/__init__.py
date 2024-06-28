@@ -1,3 +1,3 @@
 """
-azcamserver tools
+azcam tools
 """

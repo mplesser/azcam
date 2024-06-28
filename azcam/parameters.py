@@ -181,7 +181,7 @@ class Parameters(object):
         try:
             value = self._get_par_hook(parameter, subdict)
             return value
-        except NameError:  # OK if hook is not defeined
+        except NameError:  # OK if hook is not defined
             pass
         except AttributeError:  # OK if parameter not in hook
             pass
@@ -287,6 +287,22 @@ class Parameters(object):
             pass
         except Exception:  # new
             pass
+
+        return None
+
+    def _get_par_hook(self, parameter, subdict):
+        """
+        Return the value of a parameter for special cases.
+        """
+
+        value = None
+
+        return value
+
+    def _set_par_hook(self, parameter, value, subdict):
+        """
+        Sets the value of a parameter for special cases.
+        """
 
         return None
 
