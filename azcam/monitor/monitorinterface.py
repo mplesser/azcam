@@ -45,7 +45,7 @@ class AzCamMonitorInterface(object):
             "1 "
             + str(self.proc_id)
             + " "
-            + self.system_name
+            + azcam.db.servermode
             + " "
             + command_port
             + " "

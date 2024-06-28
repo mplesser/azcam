@@ -27,8 +27,8 @@ def main():
 
     # azcammonitor.start_webserver()
 
-    return
+    return azcammonitor
 
 
 if __name__ == "__main__":
-    main()
+    azcammonitor = main()

@@ -33,9 +33,6 @@ class AzcamDatabaseServer(AzcamDatabase):
     monitor = AzCamMonitorInterface
     """azcammonitor object"""
 
-    process_name = ""
-    """process name for azcammonitor"""
-
     default_tool: str = "api"
     """default tool for remote commands"""
 

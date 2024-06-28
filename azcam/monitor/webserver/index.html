@@ -21,7 +21,8 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">AzCam Processes for {{machine_id}}</h4>
-                <div class="card-subtitle text-muted">Click the buttons below to control AzCam processes configured for this computer.</div>
+                <div class="card-subtitle text-muted">Click the buttons below to control AzCam processes 
+                    which may be configured for this computer.</div>
                 {% for result in process_list %}
                 {% if result[0] == "0" %}
                 {% else %}
@@ -63,6 +64,7 @@
                 <div class="card-subtitle text-muted">The links below point to useful information relating to observing.</div>
                 <ul class="list-group">
                     <li class="list-group-item"><a href="https://azcam.readthedocs.io" target="_self" class="card-link">AzCam Software</a></li>
+                    <li class="list-group-item"><a href="https://azcam-console.readthedocs.io" target="_self" class="card-link">AzCam Console Software</a></li>
                 </ul>
             </div>
         </div>
