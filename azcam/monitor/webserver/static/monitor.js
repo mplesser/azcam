@@ -25,6 +25,11 @@ $("#ID1_start").click(function() {
 $("#ID1_stop").click(function() {
     Stop_1();
 });
+$("#ID1_home").click(function() {
+    var cmdport = $("#cmdport_1").text();
+    var webport = parseInt(cmdport)+1;
+    window.open("http://localhost:" + webport);;
+});
 $("#ID1_status").click(function() {
     var cmdport = $("#cmdport_1").text();
     var webport = parseInt(cmdport)+1;
@@ -41,6 +46,11 @@ $("#ID2_start").click(function() {
 });
 $("#ID2_stop").click(function() {
     Stop_2();
+});
+$("#ID2_home").click(function() {
+    var cmdport = $("#cmdport_2").text();
+    var webport = parseInt(cmdport)+1;
+    window.open("http://localhost:" + webport);;
 });
 $("#ID2_status").click(function() {
     var cmdport = $("#cmdport_2").text();
@@ -59,6 +69,11 @@ $("#ID3_start").click(function() {
 $("#ID3_stop").click(function() {
     Stop_3();
 });
+$("#ID3_home").click(function() {
+    var cmdport = $("#cmdport_3").text();
+    var webport = parseInt(cmdport)+1;
+    window.open("http://localhost:" + webport);;
+});
 $("#ID3_status").click(function() {
     var cmdport = $("#cmdport_3").text();
     var webport = parseInt(cmdport)+1;
@@ -70,28 +85,16 @@ $("#ID3_exposure").click(function() {
     window.open("http://localhost:" + webport + "/exptool");;
 });
 
-
-
-
 $("#ID4_start").click(function() {
     Start_4();
 });
 $("#ID4_stop").click(function() {
     Stop_4();
 });
-
-$("#ID5_start").click(function() {
-    Start_5();
-});
-$("#ID5_stop").click(function() {
-    Stop_5();
-});
-
-$("#ID6_start").click(function() {
-    Start_6();
-});
-$("#ID6_stop").click(function() {
-    Stop_6();
+$("#ID4_home").click(function() {
+    var cmdport = $("#cmdport_4").text();
+    var webport = parseInt(cmdport)+1;
+    window.open("http://localhost:" + webport);;
 });
 
 

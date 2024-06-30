@@ -27,8 +27,14 @@
                 {% if result[0] == "0" %}
                 {% else %}
                 <div class="row m-2">
-                    <div class="col-m-4">
-                        <b>Process {{result[0]}}: {{result[2]}} - Port: <span id="cmdport_{{result[0]}}">{{result[3]}}</span> PID: {{result[1]}}</b>   
+                    <div class="col-m-4 ">
+                        {% if result[1] == "0" %}
+                        <span class="text-muted">
+                        {% else %}
+                        <span class="bg-transparent">
+                        {% endif %}
+                            <b>Process {{result[0]}}: {{result[2]}} - Port: <span id="cmdport_{{result[0]}}">{{result[3]}}</span> PID: {{result[1]}}</b>   
+                        </span>
                     </div>
                     <div class="col-md-auto">
                         <button type="button" class="btn btn-success mt-0"
@@ -37,6 +43,10 @@
                     <div class="col-md-auto">
                         <button type="button" class="btn btn-danger mt-0"
                             id="ID{{result[0]}}_stop">Stop</button>
+                    </div>
+                    <div class="col-md-auto">
+                        <button type="button" class="btn btn-secondary mt-0"
+                            id="ID{{result[0]}}_home">Home Page</button>
                     </div>
                     <div class="col-md-auto">
                         <button type="button" class="btn btn-info mt-0"

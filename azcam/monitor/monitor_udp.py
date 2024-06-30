@@ -35,7 +35,6 @@ class UDP_aux:
     def init_udp_server(self, port=-1):
         """
         Start UDP (ID and Register) process server.
-        Last change: 06Mar2019 Zareba
         """
         if port == -1:
             port = self.port_udp

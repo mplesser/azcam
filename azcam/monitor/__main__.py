@@ -22,10 +22,14 @@ def main():
     azcammonitor.start_udp_server()
     azcammonitor.start_watchdog()
 
-    thread = threading.Thread(target=azcammonitor.start_webserver, name="webserver")
-    thread.start()
-
-    # azcammonitor.start_webserver()
+    # run in a thread to allow inspection
+    if 0:
+        thread = threading.Thread(
+            target=azcammonitor.start_webserver, name="monitorserver"
+        )
+        thread.start()
+    else:
+        azcammonitor.start_webserver()
 
     return azcammonitor
 

@@ -118,6 +118,8 @@ class AzCamMonitor(
         if self.config_file is None:
             return
 
+        config_file = os.path.abspath(self.config_file)
+
         update = "updatemonitor\r\n"
 
         print(f"Loading monitor config file: {config_file}")

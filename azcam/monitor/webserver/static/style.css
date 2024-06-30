@@ -10,15 +10,10 @@
     background-color: none;
 }
 
-#progressbar {
-    height: 15px;
-    width: 100%;
-}
-
 .msgbox {
     width: 500px;
     height: 30px;
-    border: 1px solid black;
+    border: 1px dotted gray;
     padding: 0px;
     margin: 2px;
 }

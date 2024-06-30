@@ -24,6 +24,7 @@ class MonitorProcesses(object):
     # *************************************************************************
 
     def __init__(self):
+        self.debug = 1
         pass
 
     def register_process(self):
@@ -260,12 +261,14 @@ class MonitorProcesses(object):
             ):
                 found = 1
                 if self.MonitorData[indx].pid == 0:
+
+                    cmd = f"python {self.MonitorData[indx].path}"
                     p = subprocess.Popen(
-                        self.MonitorData[indx].path,
+                        cmd,
                         creationflags=subprocess.CREATE_NEW_CONSOLE,
                     )
-                    # p.wait()
-                    self.MonitorData[indx].pid = int(p.pid)
+                    p.wait()
+                    # self.MonitorData[indx].pid = int(p.pid)
                     if self.debug:
                         print(
                             f"Process: {self.MonitorData[indx].name} has been started"
@@ -283,14 +286,15 @@ class MonitorProcesses(object):
                             print(
                                 f"Process: {self.MonitorData[indx].name} is already running"
                             )
-                    except Exception:
+                    except Exception as e:
                         # Process is not running
+                        cmd = f"python {self.MonitorData[indx].path}"
                         p = subprocess.Popen(
-                            self.MonitorData[indx].path,
+                            cmd,
                             creationflags=subprocess.CREATE_NEW_CONSOLE,
                         )
-                        # p.wait()
-                        self.MonitorData[indx].pid = int(p.pid)
+                        p.wait()
+                        # self.MonitorData[indx].pid = int(p.pid)
                         if self.debug:
                             print(
                                 f"Process: {self.MonitorData[indx].name} has been started"
@@ -373,8 +377,6 @@ class MonitorProcesses(object):
                 stopCnt += 1
 
         retVal = "Stopped: " + str(stopCnt) + " processes"
-        if self.debug:
-            print(retVal)
 
         self.MonitorDataSemafor.release()
 
