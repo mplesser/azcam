@@ -1,0 +1,3 @@
+# FITS Images
+
+::: azcam.fits

@@ -1,0 +1,10 @@
+pip install -e ./azcam-90prime --user
+pip install -e ./azcam-bcspec --user
+pip install -e ./azcam-bluechan --user
+pip install -e ./azcam-mont4k --user
+pip install -e ./azcam-vatt4k --user
+pip install -e ./azcam-vattspec --user
+pip install -e ./azcam-lbtguiders --user
+pip install -e ./azcam-soguiders --user
+pip install -e ./azcam-osu4k --user
+pip install -e ./azcam-pepsi --user

@@ -1,0 +1,31 @@
+[project]
+name = "azcam"
+version = "24.5.0"
+description = "Acquisition and analysis package for scientific imaging"
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["ccd", "imaging", "astronomy", "sensors"]
+authors = [{ name = "Michael Lesser" }, { email = "mlesser@arizona.edu" }]
+dependencies = [
+    "loguru",
+    "numpy",
+    "astropy",
+    "psutil",
+    "fastapi",
+    "uvicorn",
+    "jinja2",
+    "requests",
+    "mkdocstrings[python]>=0.18",
+]
+requires-python = ">= 3.10"
+
+[project.urls]
+Documentation = "https://azcam.readthedocs.io/"
+Repository = "https://github.com/mplesser/azcam/"
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project.scripts]
+azcammonitor = "azcam.monitor.__main__:main"

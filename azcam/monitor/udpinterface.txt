@@ -1,0 +1,25 @@
+udpinterface.py
+
+There are two methods in the UDPinterface class:
+
+GetIP(name) - sends UDP broadcast request (port 2400) and returns IP address of specified by name device.
+GetIDs() = sends UDP broadcast request (port 2400) and returns list of all ID strings received.
+The list of IDs is also available through local variable 'Resp'.
+
+
+Example
+
+from udpinterface import *
+
+UDPObj = UDPinterface()
+
+UDPObj.GetIP('guider_z1')
+=> '10.0.1.100'
+
+
+UDPObj.GetIDs()
+=>[(b'0 4501 guider_z1 2425 10.0.100 0\r\n', ('10.0.1.100', 2400))]
+
+
+UDPObj.Resp
+=>[(b'0 4501 guider_z1 2425 10.0.100 0\r\n', ('10.0.1.100', 2400))]

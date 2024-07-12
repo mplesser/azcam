@@ -1,0 +1,8 @@
+    AZCAM_ROOT='/azcam'
+    os.environ['AZCAM_ROOT']=AZCAM_ROOT
+
+    AZCAM_DATAROOT='/data'
+    os.environ['AZCAM_DATAROOT']=AZCAM_DATAROOT
+
+    AZCAM_AZCAMTOOL='C:\\azcam\\azcam-tool\\azcam_tool\\builds\\azcamtool.exe'
+    os.environ['AZCAM_AZCAMTOOL']=AZCAM_AZCAMTOOL
