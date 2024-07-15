@@ -1,10 +1,10 @@
 # AzcamServer
 
-*azcamserver* is the main server application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is mainly used to control data acquistion. 
+*azcamserver* is the main server application for the *azcam* acquisition and analysis package. It usually runs in an IPython window and is used to control data acquistion. 
 
 ## Configuration and startup
 
-An *azcamserver* process is really only useful with a customized configuration script and environment which defines the hardware to be controlled.  Configuration scripts from existing environments may be used as examples. They would be imported into a python or IPython session or uses a startup script such to create a new server or console application.
+An *azcamserver* process is really only useful with a customized configuration script and environment which defines the hardware to be controlled.  Configuration scripts from existing environments may be used as examples. They are imported into a python or IPython session or use a startup script to create a new application.
 
 An example code snippet to start *azcamserver* when using the *azcam-itl environment* is:
 
@@ -43,7 +43,7 @@ AzCam's *tools* are used to define and control a system.  The supported systems 
 - Astronomical Research Cameras, Inc. gen1, gen2, and gen3 controllers. See [this link](https://www.astro-cam.com).
 - STA Archon controllers. See [this link](http://www.sta-inc.net/archon).
 -  OCIW Magellan CCD controllers (ITL version). See [this link](http://instrumentation.obs.carnegiescience.edu/ccd/gcam.html).
-- ASCOM cameras. See [this link](https://ascom-standards.org). This code has been used for QHY and ZWO cameras.
+- ASCOM cameras. See [this link](https://ascom-standards.org). This code has been used for QHY, ZWO, and Moravian cameras.
 
 ### Exposure Tools
 
@@ -115,6 +115,17 @@ exposure.image.remote_imageserver_flag = 0
 exposure.set_filename("/data/zwo/asi1294/image.fits")
 exposure.display_image = 1
 ```
+
+#### Sendimage
+
+The **exposure.sendimage** class supports sending an image to a remote host running an image server which receives the image.
+
+```python
+remote_imageserver_host = "10.0.0.1"
+remote_imageserver_port = 6543
+exposure.sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcam")
+```
+
 
 ### Controller Tools
 
@@ -289,40 +300,30 @@ or
 `focus.set_pars(1.0, 5, 25, 15)`.
 
 <dl>
-  <dt><strong>focus.number_exposures = 7</strong></dt>
+  <dt><em>focus.number_exposures = 7</em></dt>
   <dd>Number of exposures in focus sequence</dd>
 
-  <dt><strong>focus.focus_step = 30</strong></dt>
+  <dt><em>focus.focus_step = 30</em></dt>
   <dd>Number of focus steps between each exposure in a frame</dd>
 
-  <dt><strong>focus.detector_shift = 10</strong></dt>
+  <dt><em>focus.detector_shift = 10</em></dt>
   <dd>Number of rows to shift detector for each focus step</dd>
 
-  <dt><strong>focus.focus_position</strong></dt>
+  <dt><em>focus.focus_position</em></dt>
   <dd>Current focus position</dd>
 
-  <dt><strong>focus.exposure_time = 1.0</strong></dt>
+  <dt><em>focus.exposure_time = 1.0</em></dt>
   <dd>Exposure time (seconds)</dd>
 
-  <dt><strong>focus.focus_component = "instrument"</strong></dt>
+  <dt><em>focus.focus_component = "instrument"</em></dt>
   <dd>Focus component for motion - "instrument" or "telescope"</dd>
 
-  <dt><strong>focus.focus_type = "absolute"</strong></dt>
+  <dt><em>focus.focus_type = "absolute"</em></dt>
   <dd>Focus type, "absolute" or "step"</dd>
 
-  <dt><strong>focus.set_pars_called = 1</strong></dt>
+  <dt><em>focus.set_pars_called = 1</em></dt>
   <dd>Flag to not prompt for focus position</dd>
 
-  <dt><strong>focus.move_delay = 3</strong></dt>
+  <dt><em>focus.move_delay = 3</em></dt>
   <dd>Delay in seconds between focus moves</dd>
 </dl>
-
-### Sendimage
-
-The exposure.sendimage class supports sending an image to a remote host running an image server which receives the image.
-
-```python
-remote_imageserver_host = "10.0.0.1"
-remote_imageserver_port = 6543
-exposure.sendimage.set_remote_imageserver(remote_imageserver_host, remote_imageserver_port, "azcam")
-```

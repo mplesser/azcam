@@ -8,7 +8,7 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 `pip install azcam` 
 
-`pip install azcam-console`  # optional component
+`pip install azcam-console`  # optional component for CLI and sensor characterization
 
 Or download the latest versions from github at <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git>
 
