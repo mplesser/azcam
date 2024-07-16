@@ -7,10 +7,6 @@ import typing
 import azcam
 from azcam.tools.tools import Tools
 
-# from azcam.tools.exposure import Exposure  # for typing
-# from azcam.tools.tempcon import TempCon
-# from azcam.parameters import Parameters
-
 
 class API(Tools):
     """
@@ -22,10 +18,6 @@ class API(Tools):
 
         self.mock = 0
         """True for mock mode which uses no hardware"""
-
-        # self.exposure = Exposure
-        # self.tempcon = TempCon
-        # self.parameters = Parameters
 
     def initialize_api(self, mock: int = 0):
         """
