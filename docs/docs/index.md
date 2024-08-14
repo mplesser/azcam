@@ -40,7 +40,7 @@ There are three main operational modes of AzCam:
 
   2. A console, usually called *azcamconsole*, which is typically implemented as an IPython command line interface that communicates with *azcamserver* over a socket connection.  It is used to acquire and analyze image data through the command line and python code. This mode requires the `azcam-console` package which is optional.
 
-  3. Applications, which are usually client programs that communicate with *azcamserver* over sockets or the web API.
+  3. Applications, which are usually client programs that communicate with *azcamserver* over a network socket.
 
 While there are multiple pythonic ways to access the various tools in code, they are always accessible from the *database* object `db`, which can always be accessed as `azcam.db`. For example, when defined, the `controller` tool can be accessed as `db.tools["controller"]` and the `qe` tool can be accessed as `db.tools["qe"]`.  In most environments these tool are mapped directly into the command namespace, so in practice commands are executed directly as `object.method`, e.g. `exposure.expose(2.5, "dark", "dark image")`.
 
@@ -128,22 +128,6 @@ A remote socket connection example:
 ```python
 exposure.expose 2.5 flat "an image title"
 ```
-
-Web (http) connection example:
-
-```html
-http://hostname:2403/api/exposure/expose?exposure_time=2.5&image_type=flat&image_title=an+image+title
-```
-Example URL's which provide exposure status and control are are:
-
-```html
-http://hostname:2403/status
-```
-```html
-http://hostname:2403/exptool
-```
-
-The value *2403* here is the web server port configured by a specific environment. Not all services may be enabled for a particular system.
 
 ## Shortcuts
 When using IPython, auto parenthesis mode allows typing commands without 

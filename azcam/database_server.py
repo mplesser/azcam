@@ -8,7 +8,6 @@ temporary data for this current process.
 from azcam.database import AzcamDatabase
 from azcam.parameters_server import ParametersServer
 from azcam.cmdserver import CommandServer
-from azcam.webtools.webserver import WebServer
 from azcam.monitor.monitorinterface import AzCamMonitorInterface
 from azcam.header import System
 
@@ -24,7 +23,7 @@ class AzcamDatabaseServer(AzcamDatabase):
     cmdserver: CommandServer
     """command server object"""
 
-    webserver: WebServer
+    webserver: object
     """webserver object"""
 
     servermode: str

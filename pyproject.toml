@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "24.5.0"
+version = "24.6.0"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -11,6 +11,7 @@ dependencies = [
     "numpy",
     "astropy",
     "psutil",
+    "dash",
     "fastapi",
     "uvicorn",
     "jinja2",
