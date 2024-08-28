@@ -30,11 +30,6 @@ $("#ID1_home").click(function() {
     var webport = parseInt(cmdport)+1;
     window.open("http://localhost:" + webport);;
 });
-$("#ID1_exposure").click(function() {
-    var cmdport = $("#cmdport_1").text();
-    var webport = parseInt(cmdport)+1;
-    window.open("http://localhost:" + webport);;
-});
 
 $("#ID2_start").click(function() {
     Start_2();
@@ -47,11 +42,6 @@ $("#ID2_home").click(function() {
     var webport = parseInt(cmdport)+1;
     window.open("http://localhost:" + webport);;
 });
-$("#ID2_exposure").click(function() {
-    var cmdport = $("#cmdport_2").text();
-    var webport = parseInt(cmdport)+1;
-    window.open("http://localhost:" + webport);;
-});
 
 $("#ID3_start").click(function() {
     Start_3();
@@ -60,11 +50,6 @@ $("#ID3_stop").click(function() {
     Stop_3();
 });
 $("#ID3_home").click(function() {
-    var cmdport = $("#cmdport_3").text();
-    var webport = parseInt(cmdport)+1;
-    window.open("http://localhost:" + webport);;
-});
-$("#ID3_exposure").click(function() {
     var cmdport = $("#cmdport_3").text();
     var webport = parseInt(cmdport)+1;
     window.open("http://localhost:" + webport);;
