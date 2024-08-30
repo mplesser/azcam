@@ -26,9 +26,7 @@ from azcam.cmdserver import CommandServer
 from azcam.tools.focus import Focus
 import azcam.shortcuts
 
-from azcam.webtools.webserver import WebServer
-from azcam.webtools.status.status import Status
-from azcam.webtools.exptool.exptool import Exptool
+from azcam.web.webserver_dash import WebServer
 
 
 def setup():
@@ -103,13 +101,7 @@ def setup():
         webserver.port = cmdport + 1
         webserver.logcommands = 0
         webserver.logstatus = 0
-        webserver.index = os.path.join(azcam.db.systemfolder, "index.html")
-        webserver.message = f"for host {azcam.db.hostname}"
         webserver.start()
-        webstatus = Status(webserver)
-        webstatus.initialize()
-        exptool = Exptool(webserver)
-        exptool.initialize()
 
         azcam.log("Started web apps")
 
