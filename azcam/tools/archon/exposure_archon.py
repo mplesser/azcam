@@ -120,7 +120,7 @@ class ExposureArchon(Exposure):
 
         self.last_filename = LocalFile
 
-        # get the image data and put into buffer controller.imagedata
+        # get the image data and put into controller.imagedata
         self.receive_data.receive_archon_image_data()
 
         self.pixels_remaining = 0
@@ -136,12 +136,6 @@ class ExposureArchon(Exposure):
 
         self.fileconverter.copy_to_buffer(
             azcam.db.tools["controller"].imagedata, self.image.data
-        )
-
-        # why is this necessary?
-        self.image.data.reshape(
-            self.image.focalplane.numamps_image,
-            self.image.focalplane.numcols_amp * self.image.focalplane.numrows_amp,
         )
 
         # write MEF file
@@ -323,8 +317,6 @@ class ArchonFileConverter(object):
         self.ext_name = []
         self.ext_number = []
         self.jpg_ext = []
-        self.amppos1 = []
-        self.amppos2 = []
         self.amp_cfg = []
 
         self.ns_total = 0
@@ -394,7 +386,6 @@ class ArchonFileConverter(object):
 
         self.StartTime = time.time()
 
-        # mosaic special case - Archon buffer is Nx1 - 20jan23
         if azcam.db.tools["exposure"].image.focalplane.num_detectors > 1:
             # reshape the input data array copy
             # self.NData = self.data.reshape(self.NAMPS * self.LINES, self.PIXELS).copy()
@@ -513,22 +504,29 @@ class ArchonFileConverter(object):
             # ExtNum for IMAGEID
         """
 
-        self.detname = sensor_data["name"]
-        self.det_number = sensor_data["det_number"]
-        self.detformat = sensor_data["format"]
-        self.focalplane = sensor_data["focalplane"]
-        self.roi = sensor_data["roi"]
-        self.ext_name = sensor_data["ext_name"]
-        self.ext_number = sensor_data["ext_number"]
-        self.jpg_ext = sensor_data["jpg_order"]
+        # defaults may have been set already
+        if sensor_data.get("name"):
+            self.detname = sensor_data["name"]
+        if sensor_data.get("det_number"):
+            self.det_number = sensor_data["det_number"]
+        if sensor_data.get("format"):
+            self.detformat = sensor_data["format"]
+        if sensor_data.get("focalplane"):
+            self.focalplane = sensor_data["focalplane"]
+        if sensor_data.get("roi"):
+            self.roi = sensor_data["roi"]
+        if sensor_data.get("ext_name"):
+            self.ext_name = sensor_data["ext_name"]
+        if sensor_data.get("ext_number"):
+            self.ext_number = sensor_data["ext_number"]
+        if sensor_data.get("jpg_order"):
+            self.jpg_ext = sensor_data["jpg_order"]
 
         # maybe fix this
         self.amp_cfg = self.focalplane[4]
 
         self.extpos_x = [x[0] for x in sensor_data["ext_position"]]
         self.extpos_y = [x[1] for x in sensor_data["ext_position"]]
-        # self.amppos1 = [x[0] for x in sensor_data["amp_position"]]
-        # self.amppos2 = [x[1] for x in sensor_data["amp_position"]]
         self.detpos_x = [x[0] for x in sensor_data["det_position"]]
         self.detpos_y = [x[1] for x in sensor_data["det_position"]]
         self.amppix1 = [x[0] for x in sensor_data["amp_pixel_position"]]
@@ -577,8 +575,8 @@ class ReceiveDataArchon(object):
 
     def receive_archon_image_data(self):
         """
-        Receives image data and raw data (if rawdata_enable=1) from the Archon controller in the Direct Mode.
-        Last change: 06Feb2018 Zareba
+        Receives image data (and raw data if rawdata_enable=1) from the Archon controller.
+        Data goes to controller.imagedata as one buffer.
         """
 
         # initial values
@@ -693,7 +691,6 @@ class ReceiveDataArchon(object):
                     self.exposure.image.valid = 1
                     self.pixels_remaining = 0
                     azcam.db.tools["controller"].imagedata = self.TData
-                    self.exposure.image.data = self.TData
 
                     if azcam.db.tools["controller"].rawdata_enable == 1:
                         # receive rad data

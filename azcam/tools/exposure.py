@@ -1440,7 +1440,6 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         progress = 0
 
         filename = self.get_filename()
-        # filename = os.path.basename(filename)
         et = self.get_exposuretime()
         if self.is_exposure_sequence:
             self.exposure_sequence_number

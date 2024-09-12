@@ -385,14 +385,22 @@ def restore_imagepars(imagepars: dict) -> None:
         imagepars: dictionary set with save_imagepars().
     """
 
+    # for par in azcam.db.imageparnames:
+    #     value = imagepars[par]
+    #     if value == "":
+    #         value = '""'
+    #     imagepars[par] = value
+    #     if par == "imagetitle":
+    #         if len(value) == 0:
+    #             value = ""
+    #         else:
+    #             value = f'"{value}"'
+    #     print(par, value)
+    #     azcam.db.parameters.set_par(par, value)
+
     for par in azcam.db.imageparnames:
         value = imagepars[par]
-        if value == "":
-            value = '""'
         imagepars[par] = value
-        if par == "imagetitle":
-            value = f'"{value}"'
-        print(par, value)
         azcam.db.parameters.set_par(par, value)
 
     return

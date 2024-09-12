@@ -167,7 +167,7 @@ class ControllerArchon(Controller):
         self.tap_lines = 0
 
         # receiving raw data
-        self.rawdata_enable = 1
+        self.rawdata_enable = 0
         # Raw channel - in the config dictionary raw channel numbers start from 0
         self.rawdata_channel = 1
         # Raw data received from the Archon controller
@@ -593,7 +593,7 @@ class ControllerArchon(Controller):
         # start the counter
         cnt = 0x0000
 
-        azcam.log("Uploading configuration data to controller", level=2)
+        azcam.log("Uploading configuration data to controller", level=1)
 
         # clean the Write Config dictionary
         self.dict_wconfig = {}
@@ -649,7 +649,6 @@ class ControllerArchon(Controller):
 
                 indx += 1
                 if copy == 1 and indx < fLen and len(sBuff[indx]) > 0:
-                    # azcam.log(sBuff[indx], level=3)
                     self.config_data.append(sBuff[indx].replace("\\", "/"))
                     self.dict_wconfig[self.config_data[pos].split("=")[0]] = pos
                     pos += 1
@@ -847,15 +846,16 @@ class ControllerArchon(Controller):
 
     def update_cds(self, ucds=None):
         """
-        Updates TAPLINES values based on space-delimited string string.
+        Updates TAPLINES values based on space-delimited string.
         """
 
         if ucds is not None:
             self.ucds = ucds
 
-        temp = self.ucds[1 : len(self.ucds) - 1]
+        # temp = self.ucds[1 : len(self.ucds) - 1]
 
-        nCDS = azcam.utils.parse(temp)
+        nCDS = azcam.utils.parse(self.ucds)
+        print("nCDS", nCDS)
 
         self.cds = []
         for item in nCDS:
@@ -863,6 +863,7 @@ class ControllerArchon(Controller):
                 self.cds.append(item)
 
         self.set_cds()
+
         return
 
     def set_cds(self):
@@ -1426,16 +1427,21 @@ class ControllerArchon(Controller):
             return 0
 
         fp = azcam.db.tools["exposure"].get_focalplane()
-        numseramps = fp[0] * fp[2]
-        numparamps = fp[1] * fp[3]
+        # numseramps = fp[0] * fp[2]
+        # numparamps = fp[1] * fp[3]
+        numseramps = fp[2]
+        numparamps = fp[3]
         naxis1 = int(self.dict_frame[f"BUF{self.read_buffer}WIDTH"])
         naxis2 = int(self.dict_frame[f"BUF{self.read_buffer}HEIGHT"])
-        numpixelsline = naxis1 / numseramps
         total_pixels = naxis1 * naxis2
 
         pixels = int(self.dict_frame[f"BUF{self.read_buffer}PIXELS"])
         lines = int(self.dict_frame[f"BUF{self.read_buffer}LINES"])
-        pixels_read = numparamps * ((lines * numpixelsline + pixels) * numseramps)
+
+        # this is for slpit mode
+        if int(self.dict_config["FRAMEMODE"]) == 2:
+            lines = lines * 2
+        pixels_read = lines * naxis1 + numparamps * pixels
         pixels_remaining = max(0, int(total_pixels - pixels_read))
 
         return pixels_remaining

@@ -641,7 +641,7 @@ class FocalPlane(ObjectHeaderMethods):
         # use _WCS file to set nonstandard values (focalplane.ext_name = [...])
         self.ext_name = numpy.empty(shape=[self.numamps_image], dtype="S16")
         for ext in range(self.numamps_image):
-            self.ext_name[ext] = f"im{(ext + 1)}"
+            self.ext_name[ext] = f"IM{(ext + 1)}"
         self.ext_name = [y.decode() for y in self.ext_name]  # new
 
         # set default values for the etension numbers, 1 -> N

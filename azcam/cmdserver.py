@@ -315,7 +315,8 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # receive command from the network socket
                 # ************************************************************************
                 try:
-                    command_string = self.receive_command(self.currentclient).strip()
+                    # command_string = self.receive_command().strip()
+                    command_string = self.receive_command()
                 except ConnectionResetError:
                     azcam.log(
                         f"Client {azcam.db.tools['cmdserver'].socketnames[self.currentclient]} disconnected",
@@ -351,7 +352,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                         f"unknown_{self.currentclient}"
                     )
                 if azcam.db.cmdserver.logcommands:
-                    azcam.log(command_string.strip(), prefix=prefix_in)
+                    azcam.log(command_string, prefix=prefix_in)
 
                 # ************************************************************************
                 # check special cases which do not leave cmdserver
@@ -463,12 +464,11 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
 
         return socketserver.BaseRequestHandler.finish(self)
 
-    def receive_command(self, currentclient):
+    def receive_command(self):
         """
         Receive a string from socket until terminator is found.
         Returns a string.
         Returns empty string on error.
-        :param currentclient: client ID for socket ID
         """
 
         terminator = "\n"  # likely ends with \r\n
@@ -482,7 +482,7 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 if msg1 == "":
                     return ""
                 if msg1[-1] == terminator:  # found terminator
-                    msg += msg1
+                    msg += msg1[:-1]
                     break
                 msg += msg1
             except socket.error as e:
@@ -492,14 +492,10 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                     azcam.log(f"receive_command: {e}", prefix="Err-> ")
                 break
 
-        reply = msg[:-1]  # \n
-        if len(reply) == 0:
-            return ""
+        if len(msg) == 0:
+            msg = ""
 
-        if reply[-1] == "\r":
-            reply = msg[:-1]  # \r
+        if msg is None:
+            msg = ""
 
-        if reply is None:
-            reply = ""
-
-        return reply
+        return msg

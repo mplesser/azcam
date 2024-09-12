@@ -173,10 +173,6 @@ class Image(object):
 
         return
 
-    # ******************************************************************************
-    # assemble
-    # ******************************************************************************
-
     def assemble(self, trim: int = -1):
         """
         Assemble .data into .buffer.
@@ -372,10 +368,6 @@ class Image(object):
 
         return
 
-    # ******************************************************************************
-    # internals
-    # ******************************************************************************
-
     def _read_fits_file(self, filename):
         """
         Reads an image from a FITS or MEF disk file into the image structure.
@@ -548,10 +540,6 @@ class Image(object):
                     pass
         else:
             pass
-
-            # # create the extension name - new 22jan23
-            # self.focalplane.ext_number = [(x + 1) for x in range(self.focalplane.numamps_image)]
-            # self.focalplane.ext_name = [f"IM{x}" for x in self.focalplane.ext_number]
 
         if NumExt == 0:
             # single extension file
@@ -1060,11 +1048,8 @@ class Image(object):
         self.size_x = self.focalplane.numcols_image
         self.size_y = self.focalplane.numrows_image
 
-        print(self.data)
-
         if not self.assembled:
             self.assemble(1)
-        print(self.buffer)
 
         with open(filename, "wb") as fd:
             fd.write(self.buffer.astype("uint16").squeeze())
@@ -1597,6 +1582,7 @@ class Image(object):
         x_Val1 = xVal1
         y_Val1 = yVal1
         y_Val2 = yVal2
+        x_Val2 = xVal2  # ? added 07sep24
 
         # do not overwrite x_Val1 and y_Val2; these are needed to calculate LTV1 and LTV2
         hdu.header.set("DETSEC", s, "Detector section", after=curpos)
