@@ -182,7 +182,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def seq_total_callback(value):
-        azcam.db.tools["exposure"].sequence_number = int(value)
+        azcam.db.tools["exposure"].exposure_sequence_total = int(value)
         return value
 
     sequence_delay_input = html.Div(
