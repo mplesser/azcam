@@ -623,9 +623,12 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         self.exposure_sequence_number = 1
 
         # number exposures in sequence
+        print("seq", number_exposures)
         number_exposures = int(number_exposures)
+        print("seq", number_exposures)
         if number_exposures == -1:
             number_exposures = self.exposure_sequence_total
+        print("seq", number_exposures)
 
         # delay between exposures
         if int(delay) == -1:
