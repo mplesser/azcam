@@ -19,7 +19,6 @@ dependencies = [
     "dash",
     "dash-bootstrap-components",
     "dash_daq",
-    "mkdocstrings[python]>=0.18",
 ]
 requires-python = ">= 3.10"
 

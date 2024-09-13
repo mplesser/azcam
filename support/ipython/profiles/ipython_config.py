@@ -37,6 +37,7 @@
 
 ## A list of dotted module names of IPython extensions to load.
 # c.InteractiveShellApp.extensions = ["rich"]
+c.InteractiveShellApp.extensions = ["rich"]
 
 ## dotted module name of an IPython extension to load.
 # c.InteractiveShellApp.extra_extension = ''
@@ -164,7 +165,6 @@ c.TerminalIPythonApp.display_banner = False
 #  'full' autocall, where all callable objects are automatically called (even if
 #  no arguments are present).
 # c.InteractiveShell.autocall = 0
-c.InteractiveShell.autocall = 2
 
 ## Autoindent IPython code entered interactively.
 # c.InteractiveShell.autoindent = True
