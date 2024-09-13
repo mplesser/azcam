@@ -604,7 +604,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         return azcam.db.tools["controller"].flush(int(Cycles))
 
-    def sequence(self, number_exposures=1, flush_array_flag=-1, delay=-1):
+    def sequence(self, number_exposures=-1, flush_array_flag=-1, delay=-1):
         """
         Take an exposure sequence.
         Uses pre-set exposure time, image type and image title.
@@ -621,14 +621,19 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         AbortFlag = 0
         self.is_exposure_sequence = 1
         self.exposure_sequence_number = 1
-        self.exposure_sequence_total = number_exposures
 
+        # number exposures in sequence
         number_exposures = int(number_exposures)
-        flush_array_flag = int(flush_array_flag)
-        if delay != -1 and delay != "-1":
-            self.exposure_sequence_delay = float(delay)
+        if number_exposures == -1:
+            number_exposures = self.exposure_sequence_total
 
-        # set flushing
+        # delay between exposures
+        if int(delay) == -1:
+            delay = self.exposure_sequence_delay
+        delay = float(delay)
+
+        # flushing
+        flush_array_flag = int(flush_array_flag)
         currentflush = self.flush_array
         if flush_array_flag == -1:
             flush_array_flag = self.exposure_sequence_flush
