@@ -65,7 +65,8 @@ def fix_path(path: str = "", no_drive_letter: bool = True) -> str:
         if no_drive_letter and len(pth) > 2 and pth[1] == ":":
             pth = pth[2:]
     else:
-        pth = os.path.normpath(path)
+        pth = os.path.expanduser(path)
+        pth = os.path.normpath(pth)
 
     return pth
 
