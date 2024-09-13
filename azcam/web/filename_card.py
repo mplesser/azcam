@@ -114,10 +114,10 @@ def filename_card():
         prevent_initial_call=True,
     )
     def on_button_click_apply_filename(n, seqnum, root, folder):
-        print(seqnum, root, folder)
         try:
-            pass
-            # azcam.db.tools["exposure"].expose()
+            azcam.db.parameters.set_par("imagesequencenumber", seqnum)
+            azcam.db.parameters.set_par("imageroot", root)
+            azcam.db.parameters.set_par("imagefolder", folder)
         except Exception as e:
             print(e)
         return
