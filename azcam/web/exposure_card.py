@@ -110,8 +110,8 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def image_type_callback(value):
-        azcam.db._command["image_type"] = value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].set_image_type(value)
+        # azcam.db.tools["exposure"].message = repr(azcam.db._command)
         return ""
 
     exposure_time_input = html.Div(
@@ -127,8 +127,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def exposure_time_callback(value):
-        azcam.db._command["exposure_time"] = value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].set_exposuretime(value)
         return ""
 
     image_title_input = html.Div(
@@ -149,8 +148,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def image_title_callback(value):
-        azcam.db._command["image_title"] = "" if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].set_image_title(value)
         return value
 
     test_image_input = html.Div(
@@ -166,8 +164,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def image_test_callback(value):
-        azcam.db._command["test_image"] = value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].set_test_image(value)
         return value
 
     ###########################################################################
@@ -185,8 +182,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def seq_total_callback(value):
-        azcam.db._command["seq_total"] = 0 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].sequence_number = int(value)
         return value
 
     sequence_delay_input = html.Div(
@@ -206,8 +202,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def seq_delay_callback(value):
-        azcam.db._command["seq_del"] = 0.0 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.tools["exposure"].sequence_delay = float(value)
         return value
 
     button_group = create_button_group()
