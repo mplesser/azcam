@@ -202,7 +202,7 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def seq_delay_callback(value):
-        azcam.db.tools["exposure"].sequence_delay = float(value)
+        azcam.db.tools["exposure"].exposure_sequence_delay = float(value)
         return value
 
     button_group = create_button_group()
