@@ -59,12 +59,13 @@ def fix_path(path: str = "", no_drive_letter: bool = True) -> str:
         cleaned path name.
     """
 
-    norm = os.path.abspath(os.path.normpath(path))
-
-    pth = norm.replace("\\", "/")  # go to forward slashes only
-
-    if no_drive_letter and len(pth) > 2 and pth[1] == ":":
-        pth = pth[2:]
+    if os.name != "posix":
+        norm = os.path.abspath(os.path.normpath(path))
+        pth = norm.replace("\\", "/")  # go to forward slashes only
+        if no_drive_letter and len(pth) > 2 and pth[1] == ":":
+            pth = pth[2:]
+    else:
+        pth = os.path.normpath(path)
 
     return pth
 
