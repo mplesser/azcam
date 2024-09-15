@@ -19,11 +19,32 @@ def tabs_buttons():
 
     @callback(
         Output("tabs", "active_tab", allow_duplicate=True),
+        Output("image_type_dropdown", "value"),
+        Output("title_input", "value"),
+        Output("test_image", "value"),
+        Output("et", "value"),
+        Output("seq_num", "value"),
+        Output("seq_delay", "value"),
         Input("exposure_tab_btn", "n_clicks"),
         prevent_initial_call=True,
     )
     def on_button_click_exposure_tab_btn(n):
-        return "exposure_tab"
+        exposure = azcam.db.tools["exposure"]
+        image_type_dropdown = exposure.get_image_type()
+        title_input = exposure.get_image_title()
+        test_image = exposure.test_image
+        et = exposure.exposure_time
+        seq_num = exposure.exposure_sequence_total
+        seq_delay = exposure.exposure_sequence_delay
+        return [
+            "exposure_tab",
+            image_type_dropdown,
+            title_input,
+            test_image,
+            et,
+            seq_num,
+            seq_delay,
+        ]
 
     @callback(
         Output("tabs", "active_tab", allow_duplicate=True),
@@ -78,11 +99,11 @@ def tabs_buttons():
         prevent_initial_call=True,
     )
     def on_button_click_options_tab_btn(n):
-        flush_sensor = azcam.db.parameters.get_par("flusharray")
-        display_image = azcam.db.parameters.get_par("displayimage")
-        enable_instrument = azcam.db.parameters.get_par("instrumentenabled")
-        enable_telescope = azcam.db.parameters.get_par("telescopeenabled")
-        auto_title = azcam.db.parameters.get_par("autotitle")
+        flush_sensor = azcam.db.tools["exposure"].flush_array
+        display_image = azcam.db.tools["exposure"].display_image
+        enable_instrument = azcam.db.tools["instrument"].is_enabled
+        enable_telescope = azcam.db.tools["telescope"].is_enabled
+        auto_title = azcam.db.tools["exposure"].auto_title
 
         return [
             "options_tab",

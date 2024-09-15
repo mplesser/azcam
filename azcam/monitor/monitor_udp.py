@@ -163,6 +163,7 @@ class GetUDPRequestHandler(socketserver.BaseRequestHandler):
         # Get remote IP address
         remote_ip = self.client_address[0]
         self.server.remote_ip = remote_ip
+        print("Message from", remote_ip)
 
         try:
             # The UDP packet is already received -> get the first token (message-command)

@@ -127,7 +127,10 @@ def exposure_card():
         prevent_initial_call=True,
     )
     def exposure_time_callback(value):
-        azcam.db.tools["exposure"].set_exposuretime(value)
+        try:
+            azcam.db.tools["exposure"].set_exposuretime(value)
+        except Exception:
+            pass  # controller may not be reset
         return ""
 
     image_title_input = html.Div(
