@@ -1,6 +1,5 @@
 from dash import Dash, html, dcc, callback, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
-import dash_daq as daq
 
 import azcam
 
@@ -56,8 +55,8 @@ def tabs_buttons():
     )
     def on_button_click_filename_tab_btn(n):
         exposure = azcam.db.tools["exposure"]
-        seq = exposure.sequence_number
         folder = exposure.folder
+        seq = exposure.sequence_number
         root = exposure.root
 
         return ["filename_tab", folder, root, seq]
@@ -151,28 +150,5 @@ def tabs(parent):
         id="tabs",
         active_tab="exposure_tab",
     )
-
-    # @callback(
-    #     Output("folderselect", "value"),
-    #     Output("rootselect", "value"),
-    #     Output("seqnumselect", "value"),
-    #     Input("tabs", "active_tab"),
-    # )
-    # def switch_tab(at):
-
-    #     exposure = azcam.db.tools["exposure"]
-    #     if at == "exposure_tab":
-    #         return ["", "", 99]
-    #     elif at == "filename_tab":
-    #         seq = exposure.sequence_number
-    #         folder = exposure.folder
-    #         root = exposure.root
-    #         return [folder, root, seq]
-    #     elif at == "detector_tab":
-    #         return ["", "", 99]
-    #     elif at == "options_tab":
-    #         return ["", "", 99]
-    #     else:
-    #         return ["", "", 99]
 
     return tabs
