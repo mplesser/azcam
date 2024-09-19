@@ -46,7 +46,7 @@ ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
 - `python -m pip install --user -e ./azcam-console`
 - `python -m pip install --user -e ./azcam-90prime`
 - `sudo apt install saods9`
-- `sudo apt install ds9-tools`
+- `sudo apt install xpa-tools`
 
 ## Windows GUI
 - install Labview 2014 runtime for azcam-tool
@@ -56,3 +56,26 @@ ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
 ## Camera Server Windows 10 machines
 - install ARC Win10 PCI card driver
 - install and configure controller server for proper port
+
+# Example script for fresh Linux installation (WSL under Windows 11)
+
+```shell
+wsl --install -d Ubuntu-24.04
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3.11
+echo "alias python=/usr/bin/python3.11" >> ~/.bashrc
+python -m pip install --upgrade pip.
+
+sudo apt install saods9
+sudo apt install xpa-tools
+
+mkdir ~/azcam
+mkdir ~/data
+cd ~/azcam
+git clone https://github.com/mplesser/azcam
+git clone https://github.com/mplesser/azcam-console
+git clone https://github.com/mplesser/azcam-90prime
+
+ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
