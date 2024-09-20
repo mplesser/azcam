@@ -67,7 +67,10 @@ def options_card():
         prevent_initial_call=True,
     )
     def enable_instrument_callback(value):
-        azcam.db.tools["instrument"].is_enabled = int(value)
+        try:
+            azcam.db.tools["instrument"].is_enabled = int(value)
+        except Exception:
+            pass
         return
 
     # enable telescope
@@ -87,8 +90,11 @@ def options_card():
         prevent_initial_call=True,
     )
     def enable_telescope_callback(value):
-        azcam.db.tools["telescope"].is_enabled = int(value)
-        return value
+        try:
+            azcam.db.tools["telescope"].is_enabled = int(value)
+        except Exception:
+            pass
+        return
 
     # auto title images
     auto_title_input = html.Div(
@@ -108,7 +114,6 @@ def options_card():
     )
     def auto_title_callback(value):
         azcam.db.tools["exposure"].auto_title = int(value)
-        print(value)
         return
 
     options_card = dbc.Card(
