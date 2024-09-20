@@ -104,7 +104,7 @@ def detector_card():
     )
     def row_bin_callback(value):
         azcam.db.tools["exposure"].set_roi(row_bin=int(value))
-        return value
+        return
 
     detector_button_group = dbc.ButtonGroup(
         [
