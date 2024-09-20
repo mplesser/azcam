@@ -23,7 +23,7 @@ def detector_card():
         prevent_initial_call=True,
     )
     def first_col_callback(value):
-        azcam.db.webserver.set_message(value)
+        azcam.db.tools["exposure"].set_roi(first_col=int(value))
         return
 
     # Last Column
@@ -39,7 +39,7 @@ def detector_card():
         prevent_initial_call=True,
     )
     def last_col_callback(value):
-        azcam.db.webserver.set_message(value)
+        azcam.db.tools["exposure"].set_roi(last_col=int(value))
         return
 
     # Column binning
@@ -55,9 +55,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def col_bin_callback(value):
-        azcam.db._command["col_bin"] = 1 if value is None else value
-        azcam.db.webserver.set_message(value)
-        return value
+        azcam.db.tools["exposure"].set_roi(col_bin=int(value))
+        return
 
     # First Row
     first_row_input = html.Div(
@@ -72,9 +71,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def first_row_callback(value):
-        azcam.db._command["first_row"] = 1 if value is None else value
-        azcam.db.webserver.set_message(value)
-        return value
+        azcam.db.tools["exposure"].set_roi(first_row=int(value))
+        return
 
     # Last Row
     last_row_input = html.Div(
@@ -89,9 +87,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def last_row_callback(value):
-        azcam.db._command["last_row"] = 1 if value is None else value
-        azcam.db.webserver.set_message(value)
-        return value
+        azcam.db.tools["exposure"].set_roi(last_row=int(value))
+        return
 
     # Row binning
     row_bin_input = html.Div(
@@ -106,8 +103,7 @@ def detector_card():
         prevent_initial_call=True,
     )
     def row_bin_callback(value):
-        azcam.db._command["row_bin"] = 1 if value is None else value
-        azcam.db.webserver.set_message(value)
+        azcam.db.tools["exposure"].set_roi(row_bin=int(value))
         return value
 
     detector_button_group = dbc.ButtonGroup(
@@ -126,11 +122,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def on_button_click_fullframe(n):
-        try:
-            pass
-            # azcam.db.tools["exposure"].expose()
-        except Exception as e:
-            print(e)
+        azcam.db.tools["exposure"].roi_reset()
+
         return
 
     @callback(
@@ -139,11 +132,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def on_button_click_detpars(n):
-        try:
-            pass
-            # azcam.db.tools["exposure"].sequence()
-        except Exception as e:
-            print(e)
+        azcam.db.tools["exposure"].set_roi()
+
         return
 
     detector_card = dbc.Card(
