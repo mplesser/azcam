@@ -100,10 +100,14 @@ def tabs_buttons():
     def on_button_click_options_tab_btn(n):
         flush_sensor = azcam.db.tools["exposure"].flush_array
         display_image = azcam.db.tools["exposure"].display_image
-        enable_instrument = azcam.db.tools["instrument"].get(
-            "is_enabled",
-        )
-        enable_telescope = azcam.db.tools["telescope"].get("is_enabled", 0)
+        if azcam.db.tools.get("instrument"):
+            enable_instrument = azcam.db.tools.get("instrument").is_enabled
+        else:
+            enable_instrument = 0
+        if azcam.db.tools.get("telescope"):
+            enable_telescope = azcam.db.tools["telescope"].is_enabled
+        else:
+            enable_telescope = 0
         auto_title = azcam.db.tools["exposure"].auto_title
 
         return [
