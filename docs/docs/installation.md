@@ -57,7 +57,7 @@ ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
 - install ARC Win10 PCI card driver
 - install and configure controller server for proper port
 
-# Example script for fresh Linux installation (WSL under Windows 11)
+# Example installation sequence for fresh Linux installation (WSL under Windows 11)
 
 ```shell
 wsl --install -d Ubuntu-24.04
@@ -66,7 +66,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3.11
 echo "alias python=/usr/bin/python3.11" >> ~/.bashrc
-python -m pip install --upgrade pip.
+python -m pip install --upgrade pip
 
 sudo apt install saods9
 sudo apt install xpa-tools

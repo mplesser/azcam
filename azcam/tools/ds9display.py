@@ -127,20 +127,6 @@ class Ds9Display(Display):
 
         return
 
-    def start(self, flag=0):
-        """
-        Starts a display process.
-        """
-
-        self.initialize()
-
-        cmd = [self.ds9_app]
-        p = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False
-        )
-
-        return
-
     # *************************************************************************************************
     #   display server info
     # *************************************************************************************************

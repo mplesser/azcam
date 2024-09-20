@@ -27,7 +27,8 @@ def options_card():
         prevent_initial_call=True,
     )
     def flush_sensor_callback(value):
-        return value
+        azcam.db.tools["exposure"].flush_array = int(value)
+        return
 
     # display image
     display_image_input = html.Div(
@@ -46,7 +47,8 @@ def options_card():
         prevent_initial_call=True,
     )
     def display_image_callback(value):
-        return value
+        azcam.db.tools["exposure"].display_image = int(value)
+        return
 
     # enable instrument
     enable_instrument_input = html.Div(
@@ -65,7 +67,8 @@ def options_card():
         prevent_initial_call=True,
     )
     def enable_instrument_callback(value):
-        return value
+        azcam.db.tools["instrument"].is_enabled = int(value)
+        return
 
     # enable telescope
     enable_telescope_input = html.Div(
@@ -84,6 +87,7 @@ def options_card():
         prevent_initial_call=True,
     )
     def enable_telescope_callback(value):
+        azcam.db.tools["telescope"].is_enabled = int(value)
         return value
 
     # auto title images
@@ -103,7 +107,9 @@ def options_card():
         prevent_initial_call=True,
     )
     def auto_title_callback(value):
-        return value
+        azcam.db.tools["exposure"].auto_title = int(value)
+        print(value)
+        return
 
     options_card = dbc.Card(
         [
