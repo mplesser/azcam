@@ -59,6 +59,14 @@ class WebServer(object):
 
         return
 
+    def set_message(self, message: str = "") -> None:
+        """
+        Set the browser message.
+        """
+
+        azcam.db.tools["exposure"].message = repr(message)
+        return
+
     def start(self):
         kwargs = {
             "debug": False,

@@ -23,9 +23,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def first_col_callback(value):
-        azcam.db._command["first_col"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
-        return value
+        azcam.db.webserver.set_message(value)
+        return
 
     # Last Column
     last_col_input = html.Div(
@@ -40,9 +39,8 @@ def detector_card():
         prevent_initial_call=True,
     )
     def last_col_callback(value):
-        azcam.db._command["last_col"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
-        return value
+        azcam.db.webserver.set_message(value)
+        return
 
     # Column binning
     col_bin_input = html.Div(
@@ -58,7 +56,7 @@ def detector_card():
     )
     def col_bin_callback(value):
         azcam.db._command["col_bin"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.webserver.set_message(value)
         return value
 
     # First Row
@@ -75,7 +73,7 @@ def detector_card():
     )
     def first_row_callback(value):
         azcam.db._command["first_row"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.webserver.set_message(value)
         return value
 
     # Last Row
@@ -92,7 +90,7 @@ def detector_card():
     )
     def last_row_callback(value):
         azcam.db._command["last_row"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.webserver.set_message(value)
         return value
 
     # Row binning
@@ -109,7 +107,7 @@ def detector_card():
     )
     def row_bin_callback(value):
         azcam.db._command["row_bin"] = 1 if value is None else value
-        azcam.db.tools["exposure"].message = repr(azcam.db._command)
+        azcam.db.webserver.set_message(value)
         return value
 
     detector_button_group = dbc.ButtonGroup(
