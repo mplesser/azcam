@@ -27,6 +27,8 @@ pip install -e azcam-console
 pip install -e azcam-90prime
 ```
 
+Optionally install and start xpans from `../azcam/support/ds9`
+
 ## Execute examples
 ```shell
 python -i -m azcam_90prime.server
