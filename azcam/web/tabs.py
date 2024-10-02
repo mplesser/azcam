@@ -17,7 +17,7 @@ def tabs_buttons():
     )
 
     @callback(
-        Output("tabs", "active_tab", allow_duplicate=True),
+        Output("tabs", "active_tab", allow_duplicate=False),
         Output("image_type_dropdown", "value"),
         Output("title_input", "value"),
         Output("test_image", "value"),
@@ -25,7 +25,7 @@ def tabs_buttons():
         Output("seq_num", "value"),
         Output("seq_delay", "value"),
         Input("exposure_tab_btn", "n_clicks"),
-        prevent_initial_call=True,
+        prevent_initial_call=False,
     )
     def on_button_click_exposure_tab_btn(n):
         exposure = azcam.db.tools["exposure"]

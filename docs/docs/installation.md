@@ -1,5 +1,10 @@
 # Installation Notes
 
+## Environment (optional)
+ - Update python to 3.11
+ - Update Windows Terminal and PowerShell
+ - "pip install pickleshare" may be needed for Ipython
+
 ## create azcam root folder
 ```shell
 mkdir /azcam
@@ -10,17 +15,15 @@ cd /azcam
 ```shell
 git clone https://github.com/mplesser/azcam
 git clone https://github.com/mplesser/azcam-console
-
 git clone https://github.com/mplesser/azcam-90prime
-
-(windows only) git clone https://github.com/mplesser/azcam-tool
+# windows only: 
+git clone https://github.com/mplesser/azcam-tool
 ```
 
 ## Install repositories
 ```shell
 pip install -e azcam
 pip install -e azcam-console
-
 pip install -e azcam-90prime
 ```
 
