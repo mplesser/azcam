@@ -46,7 +46,8 @@ ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
 
 ## Linux Notes
 - upgrade python3 to python 3.11 and add pip
-- alias to `python` to python3
+- alias `python` to python3
+- create and goto ~/azcam
 - `python -m pip install --user -e ./azcam`
 - `python -m pip install --user -e ./azcam-console`
 - `python -m pip install --user -e ./azcam-90prime`
@@ -71,6 +72,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3.11
 echo "alias python=/usr/bin/python3.11" >> ~/.bashrc
+source ~/.bashrc
 python -m pip install --upgrade pip
 
 sudo apt install saods9
