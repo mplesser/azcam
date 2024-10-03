@@ -1122,7 +1122,10 @@ class Image(object):
                 elif head[0].lower() == "history":
                     hdu.header.add_history(head[1], after=curpos)
                 else:
-                    hdu.header.set(head[0], head[1], head[2], after=curpos)
+                    try:
+                        hdu.header.set(head[0], head[1], head[2], after=curpos)
+                    except Exception:
+                        curpos -= 1
                 curpos += 1
 
         return
