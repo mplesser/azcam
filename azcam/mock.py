@@ -26,7 +26,7 @@ from azcam.cmdserver import CommandServer
 from azcam.tools.focus import Focus
 import azcam.shortcuts
 
-from azcam.web.webserver_dash import WebServer
+from azcam.web.webserver_main import WebServer
 
 
 def setup():
