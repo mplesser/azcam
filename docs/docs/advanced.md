@@ -5,26 +5,6 @@ for advanced users.
 
 See [this image](azcamarchitecture.jpg) for a graphical layout of AzCam.
 
-## Dependencies
-AzCam currently uses *Python 3.11*. Important dependancies include:
-
-  * *numpy*
-  * *astropy*
-  * *matplotlib*
-  * *loguru*
-
-There are many other dependencies depending on configuration. Examples are:
-
-  * *psutil*
-  * *fastapi*
-  * *uvicorn*
-  * *jinja2*
-  * *requests*
-  * *pyside6*
-  * *pdfkit*
-  * *markdown*
-  * *pypdf*
-
 ## Versioning
 The AzCam can be found from `azcam.db.version` after importing azcam. It can also be obtained remotely `azcam.db.parameters.get_par("version")`.
 
@@ -57,7 +37,7 @@ server functions and may not all be needed in a specific environment. The comman
   * web server port - 2403
   * logging server port - 2404
   * camera server port - 2405
-  * Reserved - 2406
+  * queue web server - 2406
   * Reserved - 2407
   * Reserved - 2408
   * Reserved - 2409
