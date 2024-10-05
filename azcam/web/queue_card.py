@@ -188,6 +188,11 @@ def queue_card():
                             html.Div(id="hidden_div1"),
                         ],
                     ),
+                    dbc.Row(
+                        [
+                            html.Div(id="message_queue"),
+                        ],
+                    ),
                 ]
             ),
             dbc.CardFooter(

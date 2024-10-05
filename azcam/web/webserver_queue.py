@@ -40,9 +40,26 @@ class QueueServer(object):
             [
                 self.queue_card,
                 html.Div(id="hidden_div", hidden=True),
-                dcc.Interval("status_interval", interval=1_000, n_intervals=0),
+                dcc.Interval("queue_interval", interval=500, n_intervals=0),
             ]
         )
+
+    # interval update
+    @callback(
+        Output("message_queue", "children"),
+        Input("queue_interval", "n_intervals"),
+    )
+    def update_queue(n):
+        """
+        Update queue status.
+        """
+
+        # the return order must match Output order
+        data = "mike"
+
+        return [
+            str(n),
+        ]
 
         return
 
