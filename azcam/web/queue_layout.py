@@ -18,16 +18,20 @@ def create_button_group():
 
     button_group = dbc.ButtonGroup(
         [
-            dbc.Button("Run script", id="run_btn", className="m-1", n_clicks=0),
-            dbc.Button("Pause/Resume", id="pause_btn", className="m-1", n_clicks=0),
-            dbc.Button("Abort script", id="abort_btn", className="m-1", n_clicks=0),
+            dbc.Button("Run script", id="runscript_btn", className="m-1", n_clicks=0),
+            dbc.Button(
+                "Pause/Resume script", id="pausescript_btn", className="m-1", n_clicks=0
+            ),
+            dbc.Button(
+                "Abort script", id="abortscript_btn", className="m-1", n_clicks=0
+            ),
         ],
         vertical=False,
     )
 
     @callback(
         Output("hidden_div1", "children", allow_duplicate=True),
-        Input("run_btn", "n_clicks"),
+        Input("runscript_btn", "n_clicks"),
         prevent_initial_call=True,
     )
     def on_button_click_run(n):
@@ -66,14 +70,21 @@ def create_button_group():
     return button_group
 
 
-def queue_card():
+def queue_layout():
     """
-    Create card for queue control.
+    Create layout for queue control.
     """
+
+    # cycles_input = html.Div(
+    #     [
+    #         dbc.Label("Cycles", width=2),
+    #         daq.NumericInput(id="cycles", value=1, size=100),
+    #     ]
+    # )
 
     cycles_input = html.Div(
         [
-            dbc.Label("Cycles"),
+            dbc.Label("Cycles", width=2),
             daq.NumericInput(id="cycles", value=1, size=100),
         ]
     )
@@ -84,21 +95,7 @@ def queue_card():
         prevent_initial_call=True,
     )
     def cycles_callback(value):
-        return
-
-    altaz_input = html.Div(
-        [
-            dbc.Label("Use Alt/Az"),
-            dbc.Checkbox(id="altaz", value=True),
-        ]
-    )
-
-    @callback(
-        Output("hidden_div1", "children", allow_duplicate=True),
-        Input("altaz", "value"),
-        prevent_initial_call=True,
-    )
-    def altaz_callback(value):
+        print(f"Cycle is {int(value)}")
         return
 
     script_input = html.Div(
@@ -162,7 +159,7 @@ def queue_card():
 
     button_group = create_button_group()
 
-    queue_card = dbc.Card(
+    queue_layout = dbc.Card(
         [
             dbc.CardHeader("Observing Queue Control", style={"font-weight": "bold"}),
             dbc.CardBody(
@@ -178,21 +175,14 @@ def queue_card():
                         ]
                     ),
                     dbc.Row(
-                        [
-                            dbc.Col(cycles_input),
-                            dbc.Col(altaz_input),
-                        ],
-                    ),
-                    dbc.Row(
-                        [
-                            html.Div(id="hidden_div1"),
-                        ],
+                        [dbc.Col(cycles_input)],
                     ),
                     dbc.Row(
                         [
                             html.Div(id="message_queue"),
-                        ],
+                        ]
                     ),
+                    html.Div(id="hidden_div1"),
                 ]
             ),
             dbc.CardFooter(
@@ -203,4 +193,4 @@ def queue_card():
         ]
     )
 
-    return queue_card
+    return queue_layout

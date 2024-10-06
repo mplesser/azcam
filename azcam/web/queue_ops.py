@@ -11,29 +11,33 @@ def execute():
     df = azcam.db.queue_df
 
     for irow in df.index:
-        print(f"Row {irow}")
+        azcam.db.queueserver.set_message(f"Executing script row {irow}")
         cmd = df.iloc[irow]["Command"]
 
         if cmd.startswith("print"):
             text = cmd.lstrip("print ")
-            print(f" {text}")
+            azcam.db.queueserver.set_message(f"{text}")
 
         elif cmd.startswith("delay"):
             delay = float(cmd.lstrip("delay "))
-            print(f" Delay {delay} secs")
+            azcam.db.queueserver.set_message(f"Delaying {delay} secs")
             time.sleep(delay)
 
         elif cmd.startswith("movefilter"):
             filt = cmd.lstrip("movefilter ")
-            print(f" Moving filter to {filt}")
+            azcam.db.queueserver.set_message(f"Moving filte to {filt}")
 
         elif cmd.startswith("steptel"):
             ra_dec = cmd.lstrip("steptel ")
-            print(f" Stepping telescope to {ra_dec}")
+            azcam.db.queueserver.set_message(f"Stepping telescope by {ra_dec}")
 
         elif cmd.startswith("movetel"):
             ra_dec = cmd.lstrip("movetel ")
-            print(f" Moving telescope to {ra_dec}")
+            azcam.db.queueserver.set_message(f"Moving telescope {ra_dec}")
+
+        elif cmd.startswith("epoch"):
+            epoch = float(cmd.lstrip("epoch "))
+            azcam.db.queueserver.set_message(f"Epoch is {epoch}")
 
         time.sleep(0.5)
 

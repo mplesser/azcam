@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 import dash_daq as daq
 
 import azcam
-from azcam.web.queue_card import queue_card
+from azcam.web.queue_layout import queue_layout
 
 
 class QueueServer(object):
@@ -23,24 +23,25 @@ class QueueServer(object):
         self.port = 2406
         self.logcommands = 0
         self.logstatus = 0
+        self._queue_message = ""
+
         azcam.db.queueserver = self
-        azcam.db._command = {}  # command dict
 
         self.app = Dash(
             __name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
             suppress_callback_exceptions=False,
+            title="AzCam Queue",
+            update_title="",
         )
         logging.getLogger("werkzeug").setLevel(logging.CRITICAL)  # stop messages
-
-        self.queue_card = queue_card()
 
         # app layout
         self.app.layout = html.Div(
             [
-                self.queue_card,
+                queue_layout(),
                 html.Div(id="hidden_div", hidden=True),
-                dcc.Interval("queue_interval", interval=500, n_intervals=0),
+                dcc.Interval("queue_interval", interval=1000, n_intervals=0),
             ]
         )
 
@@ -49,24 +50,21 @@ class QueueServer(object):
         Output("message_queue", "children"),
         Input("queue_interval", "n_intervals"),
     )
-    def update_queue(n):
+    def update_queue(n=0):
         """
         Update queue status.
         """
 
         # the return order must match Output order
-        data = "mike"
 
-        return [
-            str(n),
-        ]
-
-        return
+        return azcam.db.queueserver._queue_message
 
     def set_message(self, message: str = "") -> None:
         """
         Set the browser message.
         """
+
+        azcam.db.queueserver._queue_message = message
 
         return
 
