@@ -34,6 +34,8 @@ class WebServer(object):
         self.app = Dash(
             __name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
+            title="AzCam Exposure",
+            update_title="",
             suppress_callback_exceptions=False,
         )
         logging.getLogger("werkzeug").setLevel(logging.CRITICAL)  # stop messages

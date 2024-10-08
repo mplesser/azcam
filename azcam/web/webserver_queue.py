@@ -40,24 +40,10 @@ class QueueServer(object):
         self.app.layout = html.Div(
             [
                 queue_layout(),
-                html.Div(id="hidden_div", hidden=True),
+                html.Div(id="hidden_divq"),
                 dcc.Interval("queue_interval", interval=1000, n_intervals=0),
             ]
         )
-
-    # interval update
-    @callback(
-        Output("message_queue", "children"),
-        Input("queue_interval", "n_intervals"),
-    )
-    def update_queue(n=0):
-        """
-        Update queue status.
-        """
-
-        # the return order must match Output order
-
-        return azcam.db.queueserver._queue_message
 
     def set_message(self, message: str = "") -> None:
         """

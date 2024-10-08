@@ -1,4 +1,10 @@
 import time
+import base64
+import datetime
+import io
+
+from dash import html, dcc, callback, Input, Output, State, dash_table
+import pandas as pd
 
 import azcam
 
@@ -42,3 +48,31 @@ def execute():
         time.sleep(0.5)
 
     return
+
+
+def parse_script(contents, filename):
+    content_type, content_string = contents.split(",")
+
+    decoded = base64.b64decode(content_string)
+    try:
+        if "csv" in filename:
+            # Assume that the user uploaded a CSV file
+            df = pd.read_csv(
+                io.StringIO(decoded.decode("utf-8")),
+                dtype=str,
+                keep_default_na=False,
+                skipinitialspace=True,
+            )
+            azcam.db.queue_df = df
+    except Exception as e:
+        print(e)
+        return html.Div(["There was an error processing this file."])
+
+    return html.Div(
+        [
+            html.H5(filename),
+            dash_table.DataTable(
+                df.to_dict("records"), [{"name": i, "id": i} for i in df.columns]
+            ),
+        ]
+    )
