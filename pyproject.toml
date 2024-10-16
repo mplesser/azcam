@@ -11,14 +11,13 @@ dependencies = [
     "numpy",
     "astropy",
     "psutil",
-    "dash",
     "fastapi",
     "uvicorn",
     "jinja2",
-    "requests",
     "dash",
     "dash-bootstrap-components",
     "dash_daq",
+    "pandas",
 ]
 requires-python = ">= 3.10"
 
