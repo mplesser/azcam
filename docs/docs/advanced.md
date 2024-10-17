@@ -11,7 +11,7 @@ The AzCam can be found from `azcam.db.version` after importing azcam. It can als
 ## Conventions
  * Modules (files), objects (such as *controller*), command names (methods) and attributes (parameters) are all lowercase.
  * Filenames should be specified with forward slash ('/') separators, even under MS Windows. If back slashes are needed, they must be doubled as in `c:\\data`.
- * Strings must be enclosed in quotation marks, as in `parameters.get_par('imageroot')`. Quotation marks must match ('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash, as `"I am Mike\'s dog"` to generate `"I am Mike's dog"`.
+ * Strings must be enclosed in quotation marks, as in `parameters.get_par("imageroot")`. Quotation marks must match ('imageroot" is not acceptable). A quotation mark may be included in a string by preceding it with a backslash, as `"I am Mike\'s dog"` to generate `"I am Mike's dog"`.
 
 ## Tools
 Python is an object oriented programming language and objects are used extensively in AzCam. The main objects are instances of classes are are referred to as *tools*. Object-based commands provide control of all aspects of AzCam. These commands (class methods) interact with hardware such as controllers, instruments, temperature controllers, and telescopes as well as with more virtual tools such as the exposures, images, databases, time, communication interfaces, etc. The command syntax is `tool.command(args)` where `tool` is the tool name (such as *controller*, *instrument*, *telescope*, etc.) and `command()` is the command. If `command()` uses arguments, they are specified as comma separated values of the appropriate type, such as `tool.command('ITL', 1.234, 45)`. For example, the command to initialize to the instrument is `instrument.initialize()` and the command to set the telescope focus may be  `telescope.set_focus(12.4)`.
@@ -44,4 +44,4 @@ server functions and may not all be needed in a specific environment. The comman
   * Reserved - 2410
   * Reserved - 2411
 
-Ports 2400 and 2401 are typically reserved for the *azcammonitor* process which can monitor and control all *azcam* proceses on a single host.
+Ports 2400 and 2401 are reserved for the *azcammonitor* process which can monitor and control all *azcam* proceses on a single host.

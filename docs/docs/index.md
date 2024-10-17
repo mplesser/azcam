@@ -126,20 +126,15 @@ exposure.expose 2.5 flat "an image title"
 ```
 
 ## Shortcuts
-When using IPython, auto parenthesis mode allows typing commands without 
-requiring the normal python syntax of ``command(par1, par2, ...)``. The equivalent 
-shortcut/alias syntax is ``command par1 par2``. With IPython in this mode all commands may 
-use this syntax.
-
 There are some simple but useful command line commands which can be optionally installed within
 console or server applications as typing shortcuts. Shortcuts are intended for command line use only
 and can be found in the `db.shortcuts` dictionary (see `azcam.shortcuts`). Examples include:
 
-  * *sav* - save the current parameters to the parameter file
-  * *pp* - toggle the command line printout of client commands and responses command.
-  * *gf* - try and go to current image folder.
-  * *sf* - try and set the image folder to the current directory.
-  * *bf* - browse for a file or folder using a GUI.
+  * *sav()* - save the current parameters to the parameter file
+  * *pp()* - toggle the command line printout of client commands and responses command.
+  * *gf()* - try and go to current image folder.
+  * *sf()* - try and set the image folder to the current directory.
+  * *bf()* - browse for a file or folder using a GUI.
 
 ## Scripts
 Scripts are functions contained in python code modules of the same name. They may be loaded automatically during enviroment configuration and can be found in the `db.scripts` dictionary. Scripts defined on the server side are not available as remote commands. An example script to measure system pressures might be:
