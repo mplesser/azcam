@@ -37,7 +37,6 @@
 
 ## A list of dotted module names of IPython extensions to load.
 # c.InteractiveShellApp.extensions = ["rich"]
-c.InteractiveShellApp.extensions = ["rich"]
 
 ## dotted module name of an IPython extension to load.
 # c.InteractiveShellApp.extra_extension = ''
@@ -48,7 +47,7 @@ c.InteractiveShellApp.extensions = ["rich"]
 ## Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk2', 'gtk3',
 #  'osx', 'pyglet', 'qt', 'qt4', 'qt5', 'tk', 'wx', 'gtk2', 'qt4').
 # c.InteractiveShellApp.gui = None
-c.InteractiveShellApp.gui = "qt"
+# c.InteractiveShellApp.gui = "qt"
 
 ## Should variables loaded at startup (by startup files, exec_lines, etc.) be
 #  hidden from tools like %who?
@@ -62,7 +61,7 @@ c.InteractiveShellApp.gui = "qt"
 
 ## Pre-load matplotlib and numpy for interactive use, selecting a particular
 #  matplotlib backend and loop integration.
-c.InteractiveShellApp.pylab = "qt"
+# c.InteractiveShellApp.pylab = "qt"
 
 ## If true, IPython will populate the user namespace with numpy, pylab, etc. and
 #  an ``import *`` is done from numpy and pylab, when using pylab mode.
@@ -165,6 +164,7 @@ c.TerminalIPythonApp.display_banner = False
 #  'full' autocall, where all callable objects are automatically called (even if
 #  no arguments are present).
 # c.InteractiveShell.autocall = 0
+c.InteractiveShell.autocall = 2
 
 ## Autoindent IPython code entered interactively.
 # c.InteractiveShell.autoindent = True
@@ -190,7 +190,6 @@ c.TerminalIPythonApp.display_banner = False
 #  is passed through a pager (like 'less'), and some pagers get confused with
 #  color codes, this capability can be turned off.
 # c.InteractiveShell.color_info = True
-c.InteractiveShell.color_info = False
 
 ## Set the color scheme (NoColor, Neutral, Linux, or LightBG).
 # c.InteractiveShell.colors = 'Neutral'
@@ -612,3 +611,4 @@ c.TerminalInteractiveShell.term_title = False
 ## If True, any %store-d variables will be automatically restored when IPython
 #  starts.
 # c.StoreMagics.autorestore = False
+c.StoreMagics.autorestore = True
