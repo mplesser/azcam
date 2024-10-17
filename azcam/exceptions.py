@@ -4,6 +4,8 @@ Contains custom exceptions and warnings used throughout azcam.
 
 import azcam
 
+import warnings
+warnings.filterwarnings("ignore")
 
 def warning(message: str) -> None:
     """

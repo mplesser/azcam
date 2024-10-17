@@ -1582,10 +1582,10 @@ class Image(object):
 
             s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
 
-        x_Val1 = xVal1
-        y_Val1 = yVal1
-        y_Val2 = yVal2
-        x_Val2 = xVal2  # ? added 07sep24
+        x_Val1 = float(xVal1)
+        y_Val1 = float(yVal1)
+        y_Val2 = float(yVal2)
+        x_Val2 = float(xVal2)  # ? added 07sep24
 
         # do not overwrite x_Val1 and y_Val2; these are needed to calculate LTV1 and LTV2
         hdu.header.set("DETSEC", s, "Detector section", after=curpos)
