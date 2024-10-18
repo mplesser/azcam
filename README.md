@@ -16,9 +16,11 @@ See https://github.com/mplesser/azcam-tool.git for the standard GUI used by most
 
 See https://github.com/mplesser/azcam-console.git for a python package which supports a local or remote command line interface and sensor characterization tools.
 
-## Installation
+## Installation Example
 
-`pip install azcam`
-`pip install azcam-console`
-
-Or download the latest version from from the github links above.
+```shell
+git clone https://github.com/mplesser/azcam
+git clone https://github.com/mplesser/azcam-console
+pip install -e azcam
+pip install -e azcam-console
+```
