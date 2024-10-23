@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 import dash_daq as daq
 
 import azcam
-from azcam.web.queue_card import queue_card
+from azcam.web.queue.queue_card import queue_card
 
 
 class QueueServer(object):
@@ -73,7 +73,7 @@ class QueueServer(object):
     def start(self):
         kwargs = {
             "debug": False,
-            "port": azcam.db.cmdserver.port + 4,
+            "port": azcam.db.cmdserver.port + 5,
             "host": "localhost",
             "use_reloader": False,
         }

@@ -10,22 +10,22 @@ import dash_bootstrap_components as dbc
 import dash_daq as daq
 
 import azcam
-from azcam.web.exposure_card import exposure_card
-from azcam.web.status_card import status_card
-from azcam.web.filename_card import filename_card
-from azcam.web.detector_card import detector_card
-from azcam.web.options_card import options_card
-from azcam.web.tabs import tabs_buttons, tabs
+from azcam.web.exposure.exposure_card import exposure_card
+from azcam.web.exposure.status_card import status_card
+from azcam.web.exposure.filename_card import filename_card
+from azcam.web.exposure.detector_card import detector_card
+from azcam.web.exposure.options_card import options_card
+from azcam.web.exposure.tabs import tabs_buttons, tabs
 
 
-class WebServer(object):
+class WebServerDash(object):
     """
     Web server using Dash (plotly).
     """
 
     def __init__(self) -> None:
 
-        self.port = 2403
+        self.port = 2406
         self.logcommands = 0
         self.logstatus = 0
         azcam.db.webserver = self
@@ -70,7 +70,7 @@ class WebServer(object):
     def start(self):
         kwargs = {
             "debug": False,
-            "port": azcam.db.cmdserver.port + 1,
+            "port": azcam.db.cmdserver.port + 4,
             "host": "localhost",
             "use_reloader": False,
         }

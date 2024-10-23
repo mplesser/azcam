@@ -1,0 +1,64 @@
+.page {
+    width: 500px;
+}
+
+.tab-content {
+    margin-top: 5px;
+}
+
+.card {
+    padding-left: 15px;
+    margin-left: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.card-header {
+    padding: 0px;
+    margin: 0px;
+    margin-left: -10px;
+}
+
+.card-body {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+.number_box {
+    border-width: 1px;
+    border-color: blue;
+}
+
+.drop_box {
+    border-width: 1px;
+    border-color: blue;
+}
+
+.row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+[class*="col-"] {
+    padding-left: 2px !important;
+    padding-right: 0 !important;
+}
+
+#progress {
+    height: 15px;
+    margin-left: 2px;
+    margin-top: 4px;
+}
+
+#progressbar {
+    height: 15px;
+    background-color: blue;
+    width: "100%"
+}
+
+.heading {
+    font-style: normal;
+    margin-bottom: 2px;
+}
