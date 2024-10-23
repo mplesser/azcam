@@ -455,10 +455,10 @@ class ObjectHeaderMethods(object):
             typestring: one of 'str', 'int', or 'float'
         """
 
-        if typestring == "none":
-            typestring = None
-        if comment == "none":
-            comment = None
+        # if typestring == "none":
+        #     typestring = None
+        # if comment == "none":
+        #     comment = None
 
         self.header.set_keyword(keyword, value, comment, typestring)
 

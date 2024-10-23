@@ -150,15 +150,15 @@ def parse(string: str, set_type: bool = False) -> List[str]:
     for tok in toks:
         if tok.startswith('"') and tok.endswith('"'):
             tok1 = tok[1:-1]
-            t, value = get_datatype(tok1)
-            if t not in ["int", "float"]:
-                tok = tok1
+            # t, value = get_datatype(tok1)
+            # if t not in ["int", "float"]:
+            #     tok = tok1
 
         elif tok.startswith("'") and tok.endswith("'"):
             tok1 = tok[1:-1]
-            t, value = get_datatype(tok1)
-            if t not in ["int", "float"]:
-                tok = tok1
+            # t, value = get_datatype(tok1)
+            # if t not in ["int", "float"]:
+            #     tok = tok1
 
         tokens.append(tok)
 
@@ -386,19 +386,6 @@ def restore_imagepars(imagepars: dict) -> None:
     Args:
         imagepars: dictionary set with save_imagepars().
     """
-
-    # for par in azcam.db.imageparnames:
-    #     value = imagepars[par]
-    #     if value == "":
-    #         value = '""'
-    #     imagepars[par] = value
-    #     if par == "imagetitle":
-    #         if len(value) == 0:
-    #             value = ""
-    #         else:
-    #             value = f'"{value}"'
-    #     print(par, value)
-    #     azcam.db.parameters.set_par(par, value)
 
     for par in azcam.db.imageparnames:
         value = imagepars[par]

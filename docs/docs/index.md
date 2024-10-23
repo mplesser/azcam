@@ -6,7 +6,7 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 ## Installation
 
-The latest version of the azcam packages are located on GitHub at <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git> as well as other repos for applications and environments.  See [installation](installation.md) for detailed instructions.
+The latest version of the azcam packages are located on GitHub at <https://github.com/mplesser/azcam.git> and <https://github.com/mplesser/azcam-console.git> as well as other repos for applications and environments.  See [installation](installation.md) for installtion notes.
 
 ## Links
 

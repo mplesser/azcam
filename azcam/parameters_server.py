@@ -36,7 +36,6 @@ class ParametersServer(Parameters):
             value = azcam.db.tools["exposure"].get_filename()
         elif parameter == "imagetitle":
             value = azcam.db.tools["exposure"].get_image_title()
-            value = f'"{value}"'
         elif parameter == "exposuretime":
             value = azcam.db.tools["exposure"].get_exposuretime()
         elif parameter == "exposurecompleted":
@@ -72,7 +71,8 @@ class ParametersServer(Parameters):
             if value is None or value == "" or value == "None":
                 azcam.db.tools["exposure"].set_image_title("")
             else:
-                azcam.db.tools["exposure"].set_image_title(f"{value}")
+                # azcam.db.tools["exposure"].set_image_title(f"{value}")
+                azcam.db.tools["exposure"].set_image_title(value)
         elif parameter == "autotitle":
             azcam.db.tools["exposure"].set_auto_title(int(value))
         elif parameter == "imagetype":
