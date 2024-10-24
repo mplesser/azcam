@@ -52,17 +52,4 @@ def pp():
     return
 
 
-def wc():
-    """Shortcut to toggle webserver command logging to console."""
-
-    old = azcam.db.webserver.logcommands
-    new = not old
-    azcam.db.webserver.logcommands = new
-    print("webserver logcommands is now %s" % ("ON" if new else "OFF"))
-
-    return
-
-
-azcam.db.cli.update(
-    {"sav": sav_server, "pp": pp, "sf": sf_server, "gf": gf_server, "wc": wc}
-)
+azcam.db.cli.update({"sav": sav_server, "pp": pp, "sf": sf_server, "gf": gf_server})

@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "24.7"
+version = "24.8"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"

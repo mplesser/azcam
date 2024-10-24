@@ -18,23 +18,21 @@ from azcam.web.exposure.options_card import options_card
 from azcam.web.exposure.tabs import tabs_buttons, tabs
 
 
-class WebServerDash(object):
+class ExposureWeb(object):
     """
     Web server using Dash (plotly).
     """
 
     def __init__(self) -> None:
 
-        self.port = 2406
-        self.logcommands = 0
-        self.logstatus = 0
-        azcam.db.webserver = self
+        azcam.db.expserver = self
         azcam.db._command = {}  # command dict
 
         self.app = Dash(
             __name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
             suppress_callback_exceptions=False,
+            requests_pathname_prefix="/exposure/",
         )
         logging.getLogger("werkzeug").setLevel(logging.CRITICAL)  # stop messages
 
@@ -66,23 +64,3 @@ class WebServerDash(object):
 
         azcam.db.tools["exposure"].message = repr(message)
         return
-
-    def start(self):
-        kwargs = {
-            "debug": False,
-            "port": azcam.db.cmdserver.port + 4,
-            "host": "localhost",
-            "use_reloader": False,
-        }
-
-        azcam.log(f"Starting web server on port {kwargs['port']}")
-        if 1:
-            thread = threading.Thread(
-                target=self.app.run,
-                name="azcam_webserver",
-                kwargs=kwargs,
-            )
-            thread.daemon = True  # terminates when main process exits
-            thread.start()
-        else:
-            self.app.run(**kwargs)

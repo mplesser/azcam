@@ -70,7 +70,7 @@ def options_card():
         try:
             azcam.db.tools["instrument"].is_enabled = int(value)
         except Exception:
-            azcam.db.webserver.set_message("instrument not defined")
+            azcam.db.expserver.set_message("instrument not defined")
         return
 
     # enable telescope
@@ -93,7 +93,7 @@ def options_card():
         try:
             azcam.db.tools["telescope"].is_enabled = int(value)
         except Exception:
-            azcam.db.webserver.set_message("telescope is not defined")
+            azcam.db.expserver.set_message("telescope is not defined")
         return
 
     # auto title images

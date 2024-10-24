@@ -1,7 +1,3 @@
-"""
-Browser-based azcam tools.
-"""
-
 import os
 
 import azcam
@@ -11,9 +7,9 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 
 
-class Status(object):
+class StatusWeb(object):
     """
-    Implement a fastapi based web status page.
+    System status web page.
     """
 
     def __init__(self):

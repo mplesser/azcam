@@ -32,8 +32,13 @@ import uvicorn
 from fastapi import FastAPI, Request, APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.wsgi import WSGIMiddleware
+
+from azcam.web.exposure.exposure_web import ExposureWeb
+from azcam.web.queue.queue_web import QueueWeb
+from azcam.web.status.status_web import StatusWeb
+
 
 import azcam
 from azcam import exceptions
@@ -78,26 +83,23 @@ class WebServer(object):
 
         self.index = os.path.join(os.path.dirname(__file__), self.index)
 
-        # static folder - /static
-        # app.mount(
-        #     "/static",
-        #     StaticFiles(directory=os.path.join(self.datafolder, "static")),
-        #     name="static",
-        # )
+        expweb = ExposureWeb()
+        expweb.logcommands = 1
+        expweb.logstatus = 0
+        queueweb = QueueWeb()
+        queueweb.logcommands = 1
+        queueweb.logstatus = 0
+        statusweb = StatusWeb()
+        statusweb.initialize()
+
+        app.mount("/exposure", WSGIMiddleware(expweb.app.server))
+        app.mount("/queue", WSGIMiddleware(queueweb.app.server))
 
         # templates folder
         try:
             templates = Jinja2Templates(directory=os.path.dirname(self.index))
         except Exception:
             pass
-        # log_templates = Jinja2Templates(directory=os.path.dirname(azcam.logger.logfile))
-
-        # log folder - /log
-        # app.mount(
-        #     "/logs",
-        #     StaticFiles(directory=os.path.dirname(azcam.logger.logfile), html=False),
-        #     name="logs",
-        # )
 
         # ******************************************************************************
         # Home - /

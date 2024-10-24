@@ -94,7 +94,7 @@ def filename_card():
         prevent_initial_call=True,
     )
     def image_test_callback(value):
-        azcam.db.webserver.set_message(value)
+        azcam.db.expserver.set_message(value)
         return value
 
     # apply button - all options on this page

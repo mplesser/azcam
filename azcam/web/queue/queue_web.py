@@ -13,16 +13,13 @@ import azcam
 from azcam.web.queue.queue_card import queue_card
 
 
-class QueueServer(object):
+class QueueWeb(object):
     """
-    Web server for queue operations using Dash (plotly).
+    Web code for queue operations using Dash (plotly).
     """
 
     def __init__(self) -> None:
 
-        self.port = 2406
-        self.logcommands = 0
-        self.logstatus = 0
         azcam.db.queueserver = self
         azcam.db._command = {}  # command dict
 
@@ -30,6 +27,7 @@ class QueueServer(object):
             __name__,
             external_stylesheets=[dbc.themes.BOOTSTRAP],
             suppress_callback_exceptions=False,
+            requests_pathname_prefix="/queue/",
         )
         logging.getLogger("werkzeug").setLevel(logging.CRITICAL)  # stop messages
 
@@ -69,23 +67,3 @@ class QueueServer(object):
         """
 
         return
-
-    def start(self):
-        kwargs = {
-            "debug": False,
-            "port": azcam.db.cmdserver.port + 5,
-            "host": "localhost",
-            "use_reloader": False,
-        }
-
-        azcam.log(f"Starting queue server on port {kwargs['port']}")
-        if 1:
-            thread = threading.Thread(
-                target=self.app.run,
-                name="azcam_queueserver",
-                kwargs=kwargs,
-            )
-            thread.daemon = True  # terminates when main process exits
-            thread.start()
-        else:
-            self.app.run(**kwargs)

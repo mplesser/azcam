@@ -37,7 +37,7 @@ server functions and may not all be needed in a specific environment. The comman
   * web server port - 2403
   * logging server port - 2404
   * camera server port - 2405
-  * queue web server - 2406
+  * Reserved - 2406
   * Reserved - 2407
   * Reserved - 2408
   * Reserved - 2409

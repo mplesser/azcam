@@ -26,7 +26,7 @@ from azcam.cmdserver import CommandServer
 from azcam.tools.focus import Focus
 import azcam.shortcuts
 
-from azcam.web.webserver_main import WebServer
+from azcam.web.fastapi_server import WebServer
 
 
 def setup():
