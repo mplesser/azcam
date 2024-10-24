@@ -22,7 +22,7 @@ The latest version of the azcam packages are located on GitHub at <https://githu
     - [azcamserver](azcamserver.md)
     - [Code Docs](autocode.md)
     - [Advanced concepts](advanced.md)
-    - [Focus Command -- server](autocode/focus_server.md)
+    - [Focus Command](autocode/focus.md)
 
 ## Tools
 
