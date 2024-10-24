@@ -4,11 +4,10 @@ Import this after all configuration has been completed.
 All API commands suported here must start with ""http://locahost:xxxx/api/" where xxxx is the
 port number like 2402.
 
-Query string example: "http://localhost:2402/api/instrument/set_filter?filter=1&filter_id=2"
+Query string example: "http://localhost:2402/api/set_filter?filter=1&filter_id=2"
 
 JSON example:
     data = {
-        "tool": "parameters",
         "command": "set_par",
         "args": [],
         "kwargs": {"parameter": "imagetest", "value": 3333},
@@ -107,13 +106,17 @@ class WebServer(object):
         @app.get("/", response_class=HTMLResponse)
         def home(request: Request):
             index = os.path.basename(self.index)
-            # return "hi"
             return templates.TemplateResponse(
-                index, {"request": request, "message": self.message}
+                index,
+                {
+                    "request": request,
+                    "message": self.message,
+                    "webport": azcam.db.cmdserver.port + 1,
+                },
             )
 
         # ******************************************************************************
-        # API interface - ../api/tool/command or ../api JSON
+        # API interface - ../api/command or ../api JSON
         # ******************************************************************************
         @app.post("/api", response_class=JSONResponse)
         @app.get("/api/{command:path}", response_class=JSONResponse)
@@ -126,7 +129,7 @@ class WebServer(object):
             if command is None:
                 args = await request.json()
                 try:
-                    toolid = azcam.db.tools[args["tool"]]
+                    toolid = azcam.db.tools["api"]
                     command = getattr(toolid, args["command"])
 
                     arglist = args["args"]
@@ -138,7 +141,7 @@ class WebServer(object):
 
                 response = {
                     "message": "Finished",
-                    "command": f"{args['tool']}.{args['command']}",
+                    "command": f"api.{args['command']}",
                     "data": reply,
                 }
 
@@ -149,20 +152,12 @@ class WebServer(object):
             qpars = request.query_params
 
             if self.logcommands:
-                if self.logstatus:
-                    azcam.log(url, prefix="Web-> ")
-                else:
-                    if not ("/get_status" in url or "/watchdog" in url):
-                        azcam.log(url, prefix="Web-> ")
+                azcam.log(url, prefix="Web-> ")
 
             reply = self.web_command(url, qpars)
 
             if self.logcommands:
-                if self.logstatus:
-                    azcam.log(reply, prefix="Web->   ")
-                else:
-                    if not ("/get_status" in url or "/watchdog" in url):
-                        azcam.log(reply, prefix="Web->   ")
+                azcam.log(reply, prefix="Web->   ")
 
             return JSONResponse(reply)
 
@@ -225,53 +220,15 @@ class WebServer(object):
         Returns the reply as a JSON packet.
         """
 
+        api = azcam.db.tools["api"]
+
         try:
-            obj, method, kwargs = self.parse(url, qpars)
+            method = url
+            kwargs = qpars._dict
 
-            objects = obj.split(".")
-
-            # special case temporarily for parameters
-            if objects[0] == "parameters":
-                if len(objects) == 1:
-                    objid = azcam.db.parameters
-                elif len(objects) == 2:
-                    objid = getattr(azcam.db.parameters, objects[1])
-                elif len(objects) == 3:
-                    objid = getattr(
-                        getattr(azcam.db.parameters, objects[1]), objects[2]
-                    )
-                elif len(objects) == 4:
-                    objid = getattr(
-                        getattr(getattr(azcam.db.parameters, objects[1]), objects[2]),
-                        objects[3],
-                    )
-                else:
-                    objid = None  # too complicated for now
-
-            elif objects[0] in azcam.db.tools:
-                if len(objects) == 1:
-                    objid = azcam.db.tools[obj]
-                elif len(objects) == 2:
-                    objid = getattr(azcam.db.tools.get(objects[0]), objects[1])
-                elif len(objects) == 3:
-                    objid = getattr(
-                        getattr(azcam.db.tools.get(objects[0]), objects[1]), objects[2]
-                    )
-                else:
-                    objid = None  # too complicated for now
-
-            else:
-                raise exceptions.AzcamError(f"remote call not allowed in API: {obj}", 4)
-
-            caller = getattr(objid, method)
+            caller = getattr(api, method)
             reply = caller() if kwargs is None else caller(**kwargs)
 
-        except azcam.AzcamError as e:
-            azcam.log(f"web_command error: {e}")
-            if e.error_code == 4:
-                reply = "remote call not allowed"
-            else:
-                reply = f"web_command error: {repr(e)}"
         except Exception as e:
             azcam.log(e)
             reply = f"invalid API command: {url}"
@@ -284,30 +241,3 @@ class WebServer(object):
         }
 
         return response
-
-    def parse(self, url, qpars=None):
-        """
-        Parse URL.
-        Return the caller object, method, and keyword arguments.
-        Object may be compound, like "exposure.image.focalplane".
-
-        URL example: http://locahost:2403/api/instrument/set_filter?filter=1&filter_id=2
-        """
-
-        # parse URL
-        p = url
-
-        try:
-            tokens = p.split("/")
-        except Exception as e:
-            raise e("Invalid API command - parse split")
-
-        # get oject and method
-        if len(tokens) != 2:
-            raise exceptions.AzcamError("Invalid API command - parse length")
-        obj, method = tokens
-
-        # get arguments
-        kwargs = qpars._dict
-
-        return obj, method, kwargs
