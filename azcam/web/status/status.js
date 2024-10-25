@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // getstatus function
     function getstatus() {
-        $.getJSON('/api/exposure/get_status', {}, function(data) {
+        $.getJSON('/api/get_status', {}, function(data) {
             $("#imagetitle").text(data.data.imagetitle);
             $("#imagefilename").text(data.data.filename);
             $("#imagetype").text(data.data.imagetype);
