@@ -116,6 +116,22 @@ class WebServer(object):
             )
 
         # ******************************************************************************
+        # Example of a special case: /api/exposure/get_status
+        # ******************************************************************************
+        @app.get("/api/exposure/get_status", response_class=JSONResponse)
+        async def expstatus(request: Request, command: str = None):
+
+            expstatus = azcam.db.tools["api"].get_status()
+
+            response = {
+                "message": "Finished",
+                "command": f"exposure.get_status",
+                "data": expstatus,
+            }
+
+            return JSONResponse(response)
+
+        # ******************************************************************************
         # API interface - ../api/command or ../api JSON
         # ******************************************************************************
         @app.post("/api", response_class=JSONResponse)
