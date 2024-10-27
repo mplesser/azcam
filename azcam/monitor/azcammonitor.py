@@ -127,33 +127,6 @@ class AzCamMonitor(
         for process_section in self.MonitorConfig.sections():
             cmd_port = int(self.MonitorConfig.get(process_section, "cmd_port"))
 
-            try:
-                testSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                testSocket.settimeout(0.1)
-                testSocket.connect((self.cmd_host, cmd_port))
-                testSocket.send(str.encode(update))
-                reply = testSocket.recv(1024)
-                testSocket.close()
-                if self.debug:
-                    print(
-                        f"Process {self.MonitorConfig.get(process_section, 'name')} is running"
-                    )
-            except Exception as e:
-                start = int(self.MonitorConfig.get(process_section, "start"))
-                if start == 1:
-                    # Start the process -> the process will register itself
-                    if self.debug:
-                        print(
-                            f"Process {self.MonitorConfig.get(process_section, 'name')} is not running"
-                        )
-                    path = self.MonitorConfig.get(process_section, "path")
-                    if self.debug:
-                        print(
-                            f"Starting {self.MonitorConfig.get(process_section, 'name')} on port {str(cmd_port)}"
-                        )
-                    subprocess.Popen(path, creationflags=subprocess.CREATE_NEW_CONSOLE)
-                    time.sleep(0.2)
-
             # Create new Data Item
             self.NewDataItem = DataItem()
 
@@ -172,6 +145,36 @@ class AzCamMonitor(
 
             # Append new DataItem
             self.MonitorData.append(self.NewDataItem)
+
+        for process_section in self.MonitorConfig.sections():
+            cmd_port = int(self.MonitorConfig.get(process_section, "cmd_port"))
+            try:
+                testSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                testSocket.settimeout(0.1)
+                testSocket.connect((self.cmd_host, cmd_port))
+                testSocket.send(str.encode(update))
+                reply = testSocket.recv(1024)
+                testSocket.close()
+
+                # print(
+                #     f"Found process running on port {cmd_port}: {self.MonitorConfig.get(process_section, 'name')}"
+                # )
+
+            except Exception as e:
+                start = int(self.MonitorConfig.get(process_section, "start"))
+                if start == 1:
+                    # Start the process -> the process will register itself
+                    if self.debug:
+                        print(
+                            f"Process {self.MonitorConfig.get(process_section, 'name')} is not running"
+                        )
+                    path = self.MonitorConfig.get(process_section, "path")
+                    if self.debug:
+                        print(
+                            f"Starting {self.MonitorConfig.get(process_section, 'name')} on port {str(cmd_port)}"
+                        )
+                    subprocess.Popen(path, creationflags=subprocess.CREATE_NEW_CONSOLE)
+                    time.sleep(0.2)
 
         return
 

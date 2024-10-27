@@ -18,12 +18,12 @@ def main():
 
     # start process
     azcammonitor = AzCamMonitor()
-    azcammonitor.load_configfile()
     azcammonitor.start_udp_server()
+    azcammonitor.load_configfile()
     azcammonitor.start_watchdog()
 
     # run in a thread to allow inspection
-    if 0:
+    if 1:
         thread = threading.Thread(
             target=azcammonitor.start_webserver, name="monitorserver"
         )
@@ -32,7 +32,7 @@ def main():
         azcammonitor.start_webserver()
 
     # return azcammonitor
-    return
+    return azcammonitor
 
 
 if __name__ == "__main__":
