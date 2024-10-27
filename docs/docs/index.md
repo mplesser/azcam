@@ -44,7 +44,7 @@ Tools defined on the server side may or may not be available as remote commands 
 
 In *azcamconsole*, the available tools usually communication from the console to an *azcamserver* application over a socket interface.  These client-side tools may only expose a limited set of methods as compared to the server-side tools. So while the command `exposure.reset` may be available from a client the command `exposure.set_video_gain` may not be.  These less commonly used commands are still accessible, but only with lower level code such as `server.command("controller.set_video_gain 2")` where `server` is a client's server communication tool.
 
-As an specific example, the code below can be used to set the current system wavelength and take an exposure.  For this example, it is assumed here that the *azcam-itl* environment package has been installed (see [Environments](#azcam-environments) below.).
+As an specific example, the code below can be used to set the current system wavelength and take an exposure.  For this example, it is assumed here that the *azcam-itl* environment package has been installed (see [Environments](#environments) below.).
 
 ```python
 # server-side (azcamserver)
