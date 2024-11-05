@@ -21,16 +21,15 @@ cd /azcam
 ```shell
 git clone https://github.com/mplesser/azcam
 git clone https://github.com/mplesser/azcam-console
-git clone https://github.com/mplesser/azcam-90prime
-# windows only: 
-git clone https://github.com/mplesser/azcam-tool
+git clone https://github.com/mplesser/azcam-90prime  # example
+git clone https://github.com/mplesser/azcam-tool  # windows only
 ```
 
 ## Install repositories
 ```shell
 pip install -e azcam
 pip install -e azcam-console
-pip install -e azcam-90prime
+pip install -e azcam-90prime  # example
 ```
 
 Optionally install and start xpans from `../azcam/support/ds9`
