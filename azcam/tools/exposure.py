@@ -948,6 +948,10 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         Allows for AutoTitle.
         """
 
+        if title == "":
+            if self.title != "":
+                title = self.title
+
         if self.auto_title:
             if (
                 self.image_type.lower() == "object"
