@@ -125,8 +125,6 @@ class SendImage(object):
         if self.overwrite or self.test_image:
             remotefile = "!" + remotefile
 
-        print(remotefile)
-
         # send header
         # file types: 0 FITS, 1 MEF, 2 binary
         s1 = "%16d %s %d %d %d %d" % (
@@ -213,24 +211,13 @@ class SendImage(object):
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
 
-        print("timeout", self.timeout)
-
-        connected = 0
-        for i in range(10):
-            print("attempting to connect...")
-            try:
-                dataserver_socket.settimeout(self.timeout)
-                dataserver_socket.connect(
-                    (self.remote_imageserver_host, int(self.remote_imageserver_port))
-                )
-                connected = 1
-            except Exception as e:
-                azcam.log(e)
-                # raise azcam.exceptions.AzcamError(
-                #     f"Could not connect to imageserver {self.remote_imageserver_host}:{int(self.remote_imageserver_port)}"
-                # )
-                time.sleep(1.0)
-        if not connected:
+        try:
+            dataserver_socket.settimeout(self.timeout)
+            dataserver_socket.connect(
+                (self.remote_imageserver_host, int(self.remote_imageserver_port))
+            )
+        except Exception as e:
+            azcam.log(e)
             raise azcam.exceptions.AzcamError(
                 f"Could not connect to imageserver {self.remote_imageserver_host}:{int(self.remote_imageserver_port)}"
             )
