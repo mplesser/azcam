@@ -38,7 +38,8 @@ Optionally install and start xpans from `../azcam/support/ds9`
 ```shell
 python -i -m azcam_90prime.server
 ipython -i -m azcam_90prime.server
-ipython --profile azcamserver -i -m azcam_90prime.server -- -archon -nogui
+ipython -i --profile azcamserver -m azcam_90prime.server -- -archon -nogui
+ipython --ipython-dir=/data/ipython -i --profile azcamserver -m azcam_90prime.server
 ```
 
 ## Linux Notes

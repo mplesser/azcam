@@ -218,7 +218,7 @@ class WebServer(object):
         # uvicorn.run(self.app)
 
         arglist = [self.app]
-        kwargs = {"port": self.port, "host": "localhost", "log_level": "critical"}
+        kwargs = {"port": self.port, "host": "0.0.0.0", "log_level": "critical"}
 
         thread = threading.Thread(
             target=uvicorn.run, name="uvicorn", args=arglist, kwargs=kwargs
