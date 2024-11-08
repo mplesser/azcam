@@ -125,6 +125,8 @@ class WebServer(object):
 
         kwargs = qpars._dict
 
+        command = command.strip("/monitor")  # added 06nov24
+
         try:
             caller = getattr(azcam.db.monitor, command)
             reply = caller(**kwargs)

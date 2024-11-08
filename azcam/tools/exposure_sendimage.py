@@ -46,6 +46,11 @@ class SendImage(object):
         self.remote_imageserver_type = remote_imageserver_type
         self.remote_imageserver_filename = remote_imageserver_filename
 
+        if self.remote_imageserver_type == "dataserver":
+            self.imageserver_send = self.dataserver
+        elif self.remote_imageserver_type == "azcam":
+            self.imageserver_send = self.azcam_imageserver
+
         return
 
     def get_remote_imageserver(self):
@@ -207,17 +212,33 @@ class SendImage(object):
         # open socket to DataServer
         dataserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         dataserver_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
-        dataserver_socket.settimeout(self.timeout)
-        dataserver_socket.connect(
-            (self.remote_imageserver_host, int(self.remote_imageserver_port))
-        )
+
+        print("timeout", self.timeout)
+
+        connected = 0
+        for i in range(10):
+            print("attempting to connect...")
+            try:
+                dataserver_socket.settimeout(self.timeout)
+                dataserver_socket.connect(
+                    (self.remote_imageserver_host, int(self.remote_imageserver_port))
+                )
+                connected = 1
+            except Exception as e:
+                azcam.log(e)
+                # raise azcam.exceptions.AzcamError(
+                #     f"Could not connect to imageserver {self.remote_imageserver_host}:{int(self.remote_imageserver_port)}"
+                # )
+                time.sleep(1.0)
+        if not connected:
+            raise azcam.exceptions.AzcamError(
+                f"Could not connect to imageserver {self.remote_imageserver_host}:{int(self.remote_imageserver_port)}"
+            )
 
         if self.overwrite or self.test_image:
             remotefile = "!" + remotefile
 
-        azcam.log(
-            "Sending image to %s as %s" % (self.remote_imageserver_host, remotefile)
-        )
+        azcam.log(f"Sending image to {self.remote_imageserver_host} as {remotefile}")
 
         # send header
         # file types: 0 FITS, 1 MEF, 2 binary
