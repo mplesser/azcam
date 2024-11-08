@@ -101,7 +101,7 @@ class WebServer(object):
             reply = self.web_command(command, qpars)
 
             if self.logcommands:
-                print("Web->   ", reply)
+                print("Web->   ", reply["data"])
 
             return JSONResponse(reply)
 
