@@ -315,7 +315,6 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                 # receive command from the network socket
                 # ************************************************************************
                 try:
-                    # command_string = self.receive_command().strip()
                     command_string = self.receive_command()
                 except ConnectionResetError:
                     azcam.log(
@@ -339,7 +338,6 @@ class MyBaseRequestHandler(socketserver.BaseRequestHandler):
                         azcam.log(
                             f"Null command send error for client {self.currentclient}: {e}"
                         )
-                    # azcam.log(f"closing connection to client {self.currentclient}")
                     break
 
                 # ************************************************************************

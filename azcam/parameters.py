@@ -233,6 +233,7 @@ class Parameters(object):
             subdict: subdict in which to set paramater
         """
 
+        parameter = azcam.utils.dequote(parameter)
         parameter = parameter.lower()
 
         if subdict is None:

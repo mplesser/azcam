@@ -393,3 +393,24 @@ def restore_imagepars(imagepars: dict) -> None:
         azcam.db.parameters.set_par(par, value)
 
     return
+
+
+def dequote(input: str) -> str:
+    """
+    Remove matching single or double quote at ends of input.
+
+    Args:
+        input: string to be dequoted.
+    """
+
+    if type(input) != str:
+        return input
+
+    if input.startswith("'") and input.endswith("'"):
+        dequote = input[1:-1]
+    elif input.startswith('"') and input.endswith('"'):
+        dequote = input[1:-1]
+    else:
+        dequote = input
+
+    return dequote

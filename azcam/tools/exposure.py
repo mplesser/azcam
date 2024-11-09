@@ -13,6 +13,7 @@ import numpy
 
 import azcam
 import azcam.exceptions
+import azcam.utils
 from azcam.tools.exposure_filename import Filename
 from azcam.tools.exposure_sendimage import SendImage
 from azcam.tools.exposure_obstime import ObsTime
@@ -298,6 +299,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         """
 
         azcam.db.abortflag = 0
+
+        imagetype = azcam.utils.dequote(imagetype)
+        title = azcam.utils.dequote(title)
 
         # allow custom operations
         self.start()

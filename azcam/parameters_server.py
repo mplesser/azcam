@@ -6,6 +6,7 @@ import typing
 
 import azcam
 from azcam.parameters import Parameters
+import azcam.utils
 
 
 class ParametersServer(Parameters):
@@ -66,16 +67,18 @@ class ParametersServer(Parameters):
 
         # special cases
         if parameter == "imagefilename":
+            value = azcam.utils.dequote(value)
             azcam.db.tools["exposure"].image.filename = value
         elif parameter == "imagetitle":
             if value is None or value == "" or value == "None":
                 azcam.db.tools["exposure"].set_image_title("")
             else:
-                # azcam.db.tools["exposure"].set_image_title(f"{value}")
+                value = azcam.utils.dequote(value)
                 azcam.db.tools["exposure"].set_image_title(value)
         elif parameter == "autotitle":
             azcam.db.tools["exposure"].set_auto_title(int(value))
         elif parameter == "imagetype":
+            value = azcam.utils.dequote(value)
             azcam.db.tools["exposure"].image_type = value
             azcam.db.tools["exposure"].set_image_title()
         elif parameter == "exposuretime":

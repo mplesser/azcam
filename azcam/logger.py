@@ -10,6 +10,8 @@ import azcam
 import azcam.exceptions
 import loguru
 
+import azcam.utils
+
 
 class AzCamLogger(object):
     """
@@ -47,18 +49,13 @@ class AzCamLogger(object):
             return
 
         message = str(message)  # better for exceptions
+        message = azcam.utils.dequote(message)
 
         # format message
         if len(args) == 1:
             message = message + " " + str(args[0])
         elif len(args) > 1:
             message = message + " " + " ".join(str(x) for x in args)
-
-        if message.startswith("'") or message.startswith('"'):
-            message = message[1:]
-
-        if message.endswith("'") or message.endswith('"'):
-            message = message[:-1]
 
         if prefix != "" and self.use_logprefix:
             message = prefix + message
