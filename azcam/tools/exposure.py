@@ -962,8 +962,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
             ):  # don't change object title in AutoTitle mode
                 pass
             else:
-                if title == "":
-                    title = self.image_type.lower()
+                # if title == "":
+                #     title = self.image_type.lower()
+                title = self.image_type.lower()
 
         # set OBJECT keyword to title or autotitle value
         self.set_keyword("OBJECT", title, "", "str")
