@@ -96,8 +96,8 @@ class Ds9Display(Display):
             self.xpaaccess_app = "xpaaccess"
             self.xpans = "xpans"
         else:
-            # self.root = "c:\\ds9\\"
-            self.root = "c:\\SAOImageDS9\\"
+            self.root = "c:\\ds9\\"
+            # self.root = "c:\\SAOImageDS9\\"
             self.ds9_app = os.path.join(self.root, "ds9.exe")
             self.ds9_app = os.path.abspath(self.ds9_app)
             self.xpaset_app = os.path.join(self.root, "xpaset.exe")
