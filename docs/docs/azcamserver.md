@@ -23,9 +23,7 @@ exposure.expose(2., 'flat', "a 450 nm flat field image")
 Another example code snippet to start an *azcamserver* process is:
 
 ```
-python -i -m azcam.server_mock
-or
-ipython -m azcam.server_mock --profile azcamserver -i
+ipython -i -m azcam.server_itl --profile azcamserver
 ```
 
 and then in the IPython window:
