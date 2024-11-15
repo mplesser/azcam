@@ -134,9 +134,6 @@ class ControllerArchon(Controller):
         # video gain flag
         self.video_gain = 1
 
-        # True to lower voltages when integrating
-        self.lower_voltages = 0
-
         # For timing
         self.frame_time = 0
 
@@ -150,9 +147,6 @@ class ControllerArchon(Controller):
 
         # video gain flag
         self.video_gain = 1
-
-        # True to lower voltages when integrating
-        self.lower_voltages = 0
 
         # CDS parameters (taplines) - ex: ["AD1L, -3.0, 3000", "AD2R, 3.0, 3000"]
         self.cds = []
