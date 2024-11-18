@@ -32,31 +32,11 @@ class ExposureArc(Exposure):
         self.exposure_flag = self.exposureflags["EXPOSING"]
         imagetype = self.image_type.lower()
 
-        # flag to change OD voltages during integration > 1 second
-        CHANGEVOLTAGES = (
-            self.image_type.lower() != "zero"
-            and azcam.db.tools["controller"].lower_voltages
-            and self.exposure_time > 1.0
-        )
-
-        if CHANGEVOLTAGES:
-            # lower OD's
-            azcam.db.tools["controller"].board_command(
-                "RMP", azcam.db.tools["controller"].TIMINGBOARD, 0
-            )
-
         # start exposure
         if imagetype != "zero":
             azcam.log("Integration started")
         azcam.db.tools["controller"].start_exposure()
-
-        """
-        # do this for any return below
-        if CHANGEVOLTAGES:  # return OD volatges
-            azcam.db.tools["controller"].board_command("RMP", azcam.db.tools["controller"].TIMINGBOARD, 1)
-        """
         self.dark_time_start = time.time()
-
         reply = self.get_exposuretime_remaining()
         remtime = reply
         lasttime = remtime
@@ -126,13 +106,6 @@ class ExposureArc(Exposure):
             self.exposure_flag = self.exposureflags["READ"]  # set to readout
 
         self.dark_time = time.time() - self.dark_time_start
-
-        # return OD voltages
-        if CHANGEVOLTAGES:
-            azcam.db.tools["controller"].board_command(
-                "RMP", azcam.db.tools["controller"].TIMINGBOARD, 1
-            )
-            time.sleep(0.5)  # delay for voltages to come up
 
         # turn off comp lamps
         if not self.comp_sequence:

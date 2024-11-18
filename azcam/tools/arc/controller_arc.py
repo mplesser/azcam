@@ -28,9 +28,6 @@ class ControllerArc(Controller):
         # True to generate fake data instead of real data
         self.synthetic_data = 0
 
-        # True to lower voltages when integrating
-        self.lower_voltages = 0
-
         # True if image data from ControllserServer is binary (not a file)
         self.binary_image_data = 1
 
