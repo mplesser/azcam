@@ -98,3 +98,10 @@ AzCam sets the time written into FITS image headers as close as possible to when
   - "LOCTIME", "Local time at start of exposure"
 
 (Windows OS) For the local machine time to be as accurate as possible, some machines sync time on a fairly short interval (every few minutes). A time sync setup app may be used to set the sync interval and remote time server addresses for the w32tm system time process. This file is typically a shell file named *setup_time_sync* and is found in the azcam environment support folders. It is usually executed automatically when the machine boots (see the shell:startup fodler).
+
+## ARC controller Camera Server
+installation of camera servers is generally a two part process. First install drivers and then install the azcam camera server application. We use the Windows 10 OS for our camera servers. The drivers were devleoped by ARC and provided in 32- and 64-bit versions for both PCI (ARC-64) and PCIe (ARC-66) fiber optic boards. Administrative privileges are required for these installations.
+
+For the CAstroArcCameraServer64.exe program, vcredist_x64.exe may be required to be installed.
+
+The azcam InstallService.bat script erquires the XYNTService.exe utility.
