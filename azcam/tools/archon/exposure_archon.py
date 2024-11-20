@@ -376,7 +376,7 @@ class ArchonFileConverter(object):
         self.intms = azcam.db.tools["controller"].int_ms
         self.nointms = azcam.db.tools["controller"].noint_ms
 
-        # make a copy on the input data
+        # make a 1D copy on the input data
         self.data = numpy.ndarray(
             shape=(self.NAXIS1 * self.NAXIS2), buffer=self.InData, dtype=self.data_type
         ).copy()
@@ -410,42 +410,73 @@ class ArchonFileConverter(object):
                         endpos = startpos + self.PIXELS
                         dataline = self.data[startpos:endpos]
 
-                        if self.amp_cfg[posAmp] == 0:
-                            # no flip
-                            self.o_data[indxAmp][
-                                currLine * self.PIXELS : currLine * self.PIXELS
-                                + self.PIXELS
-                            ] = dataline
+                        # break data into amp sections, no flipping
+                        self.o_data[indxAmp][
+                            currLine * self.PIXELS : currLine * self.PIXELS
+                            + self.PIXELS
+                        ] = dataline
 
-                        elif self.amp_cfg[posAmp] == 1:
-                            # flip X
-                            self.o_data[indxAmp][
-                                currLine * self.PIXELS : currLine * self.PIXELS
-                                + self.PIXELS
-                            ] = dataline[::-1]
+                        # if self.amp_cfg[posAmp] == 0:
+                        #     # no flip
+                        #     self.o_data[indxAmp][
+                        #         currLine * self.PIXELS : currLine * self.PIXELS
+                        #         + self.PIXELS
+                        #     ] = dataline
 
-                        elif self.amp_cfg[posAmp] == 2:
-                            # flip Y
-                            self.o_data[indxAmp][
-                                # (self.LINES - currLine - 1)
-                                # * self.PIXELS : (self.LINES - currLine)
-                                # * self.PIXELS
-                                (self.LINES - currLine - 1)
-                                * self.PIXELS : (self.LINES - currLine - 1)
-                                * self.PIXELS
-                                + self.PIXELS
-                            ] = dataline
-                        else:
-                            # flip XY
-                            self.o_data[indxAmp][
-                                # (self.LINES - currLine - 1)
-                                # * self.PIXELS : (self.LINES - currLine)
-                                # * self.PIXELS
-                                (self.LINES - currLine - 1)
-                                * self.PIXELS : (self.LINES - currLine - 1)
-                                * self.PIXELS
-                                + self.PIXELS
-                            ] = dataline[::-1]
+                        # elif self.amp_cfg[posAmp] == 1:
+                        #     # flip X
+                        #     self.o_data[indxAmp][
+                        #         currLine * self.PIXELS : currLine * self.PIXELS
+                        #         + self.PIXELS
+                        #     ] = dataline[::-1]
+
+                        # elif self.amp_cfg[posAmp] == 2:
+                        #     # flip Y
+                        #     self.o_data[indxAmp][
+                        #         # (self.LINES - currLine - 1)
+                        #         # * self.PIXELS : (self.LINES - currLine)
+                        #         # * self.PIXELS
+                        #         (self.LINES - currLine - 1)
+                        #         * self.PIXELS : (self.LINES - currLine - 1)
+                        #         * self.PIXELS
+                        #         + self.PIXELS
+                        #     ] = dataline
+                        # else:
+                        #     # flip XY
+                        #     self.o_data[indxAmp][
+                        #         # (self.LINES - currLine - 1)
+                        #         # * self.PIXELS : (self.LINES - currLine)
+                        #         # * self.PIXELS
+                        #         (self.LINES - currLine - 1)
+                        #         * self.PIXELS : (self.LINES - currLine - 1)
+                        #         * self.PIXELS
+                        #         + self.PIXELS
+                        #     ] = dataline[::-1]
+
+            # only for new 90prime  19nov24
+            # nx = int(self.NAXIS1 / self.numseramps)
+            # ny = int(self.NAXIS2 / self.numparamps)
+            # for ampnum in range(4):
+            # if self.amp_cfg[ampnum] == 0:
+            #     pass
+            # elif self.amp_cfg[ampnum] == 1:
+            #     buff2d = self.o_data[ampnum].reshape(ny, nx)
+            #     buff2d_flipped = numpy.flip(buff2d, 1)
+            #     self.o_data[ampnum] = buff2d_flipped.reshape(nx * ny)
+            # elif self.amp_cfg[ampnum] == 2:
+            #     buff2d = self.o_data[ampnum].reshape(ny, nx)
+            #     buff2d_flipped = numpy.flip(buff2d, 0)
+            #     self.o_data[ampnum] = buff2d_flipped.reshape(nx * ny)
+            # elif self.amp_cfg[ampnum] == 3:
+            #     buff2d = self.o_data[ampnum].reshape(ny, nx)
+            #     buff2d_flipped = numpy.flip(buff2d, 1)
+            #     buff2d_flipped = numpy.flip(buff2d_flipped, 0)
+            #     self.o_data[ampnum] = buff2d_flipped.reshape(nx * ny)
+
+            # buff2d = self.o_data[ampnum].reshape(ny, nx)
+            # buff2d_flipped = numpy.flip(buff2d, 0)
+            # self.o_data[ampnum] = buff2d_flipped.reshape(nx * ny)
+            # pass
 
         else:
             # single CCD
@@ -529,8 +560,8 @@ class ArchonFileConverter(object):
         self.extpos_y = [x[1] for x in sensor_data["ext_position"]]
         self.detpos_x = [x[0] for x in sensor_data["det_position"]]
         self.detpos_y = [x[1] for x in sensor_data["det_position"]]
-        self.amppix1 = [x[0] for x in sensor_data["amp_pixel_position"]]
-        self.amppix2 = [x[1] for x in sensor_data["amp_pixel_position"]]
+        # self.amppix1 = [x[0] for x in sensor_data["amp_pixel_position"]]
+        # self.amppix2 = [x[1] for x in sensor_data["amp_pixel_position"]]
 
         self.ns_total = self.detformat[0]
         self.ns_predark = self.detformat[1]
