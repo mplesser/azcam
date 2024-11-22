@@ -1227,7 +1227,7 @@ class ControllerArchon(Controller):
             str(flag)
         )
 
-        # update Archons IntMS value
+        # update Archons value
         indxParam = self.dict_wconfig[self.dict_params["ParallelPumping"]]
         cmd = "WCONFIG%04X%s=%s" % (
             indxParam & 0xFFFF,
@@ -1653,7 +1653,41 @@ class ControllerArchon(Controller):
         """
 
         print("Archon ROI in development...")
+        self.write_controller_roi()
 
-        # send parameters to controller in order to do all hardware communication here
+        return
+
+    def write_controller_roi(self):
+        """
+        Set controller ROI values.
+        """
+
+        roi_pars = {
+            "PreSkipPixels":0
+            "Pixels":4096
+            "PostSkipPixels":0
+            "OverScanPixels":0
+            "PreSkipLines":0
+            "Lines":1536
+            "PostSkipLines":0
+            "OverScanLines":0
+        }
+
+        if not self.config_ok:
+            raise azcam.exceptions.AzcamError("Configuration data not loaded")
+
+        # update config dictionary
+        for par in roi_pars:
+            self.dict_config[self.dict_params[par]] = f"{par}={roi_pars[par]}"
+
+            # update Archon value
+            indxParam = self.dict_wconfig[self.dict_params[par]]
+            cmd = "WCONFIG%04X%s=%s" % (
+                indxParam & 0xFFFF,
+                self.dict_params[par],
+                f"{par}={roi_pars[par]}",
+            )
+            print(cmd)
+            self.archon_command(cmd)
 
         return
