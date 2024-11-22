@@ -1663,14 +1663,14 @@ class ControllerArchon(Controller):
         """
 
         roi_pars = {
-            "PreSkipPixels":0
-            "Pixels":4096
-            "PostSkipPixels":0
-            "OverScanPixels":0
-            "PreSkipLines":0
-            "Lines":1536
-            "PostSkipLines":0
-            "OverScanLines":0
+            "PreSkipPixels": 0,
+            "Pixels": 4096,
+            "PostSkipPixels": 0,
+            "OverScanPixels": 0,
+            "PreSkipLines": 0,
+            "Lines": 1536,
+            "PostSkipLines": 0,
+            "OverScanLines": 0,
         }
 
         if not self.config_ok:
