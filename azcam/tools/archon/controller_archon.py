@@ -277,8 +277,6 @@ class ControllerArchon(Controller):
         self.resettiming()
 
         # check power status
-        if self.verbosity > 1:
-            azcam.log("Setting controller power status")
         self.get_power_status()
 
         if self.power_status in ["OFF", "NOT_CONFIGURED"]:
@@ -1643,5 +1641,19 @@ class ControllerArchon(Controller):
         """
 
         self.archon_command("RESETTIMING")
+
+        return
+
+    # ROI
+
+    def set_roi(self):
+        """
+        Sets the ROI parameters values in the controller based on focalplane parameters.
+        Sends parameters to the controller.
+        """
+
+        print("Archon ROI in development...")
+
+        # send parameters to controller in order to do all hardware communication here
 
         return

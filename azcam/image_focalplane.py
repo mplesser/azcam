@@ -190,7 +190,7 @@ class FocalPlane(ObjectHeaderMethods):
         Update focal plane keywords in header
         """
 
-        self.header.set_keyword("ITL-HEAD", "OK", "ITL Header flag", "str")
+        self.header.set_keyword("AZCAM-HEAD", "OK", "AzCam Header flag", "str")
         self.header.set_keyword(
             "NUM-DETX", self.numdet_x, "Number of detectors in X", "int"
         )
