@@ -1665,9 +1665,9 @@ class ControllerArchon(Controller):
         roi_pars = {
             "PreSkipPixels": 0,
             "Pixels": 4096,
-            "PostSkipPixels": 0,
+            "PostSkipPixels": 500,
             "OverScanPixels": 0,
-            "PreSkipLines": 0,
+            "PreSkipLines": 200,
             "Lines": 1536,
             "PostSkipLines": 0,
             "OverScanLines": 0,
