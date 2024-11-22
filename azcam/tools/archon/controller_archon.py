@@ -1653,7 +1653,7 @@ class ControllerArchon(Controller):
         """
 
         print("Archon ROI in development...")
-        self.write_controller_roi()
+        # self.write_controller_roi()
 
         return
 
