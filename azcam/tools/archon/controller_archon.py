@@ -1662,15 +1662,57 @@ class ControllerArchon(Controller):
         Set controller ROI values.
         """
 
+        # self.detpars.first_col = self.image.focalplane.first_col
+        # self.detpars.last_col = self.image.focalplane.last_col
+        # self.detpars.first_row = self.image.focalplane.first_row
+        # self.detpars.last_row = self.image.focalplane.last_row
+        # self.detpars.col_bin = self.image.focalplane.col_bin
+        # self.detpars.row_bin = self.image.focalplane.row_bin
+
+        # self.detpars.xunderscan = self.image.focalplane.xunderscan
+        # self.detpars.xskip = self.image.focalplane.xskip
+        # self.detpars.xpreskip = self.image.focalplane.xpreskip
+        # self.detpars.xdata = self.image.focalplane.xdata
+        # self.detpars.xpostskip = self.image.focalplane.xpostskip
+        # self.detpars.xoverscan = self.image.focalplane.xoverscan
+        # self.detpars.yunderscan = self.image.focalplane.yunderscan
+        # self.detpars.yskip = self.image.focalplane.yskip
+        # self.detpars.ypreskip = self.image.focalplane.ypreskip
+        # self.detpars.ydata = self.image.focalplane.ydata
+        # self.detpars.ypostskip = self.image.focalplane.ypostskip
+        # self.detpars.yoverscan = self.image.focalplane.yoverscan
+
+        # self.detpars.numcols_amp = self.image.focalplane.numcols_amp
+        # self.detpars.numcols_overscan = self.image.focalplane.numcols_overscan
+        # self.detpars.numviscols_amp = self.image.focalplane.numviscols_amp
+        # self.detpars.numviscols_image = self.image.focalplane.numviscols_image
+        # self.detpars.numrows_amp = self.image.focalplane.numrows_amp
+        # self.detpars.numrows_overscan = self.image.focalplane.numrows_overscan
+        # self.detpars.numvisrows_amp = self.image.focalplane.numvisrows_amp
+        # self.detpars.numvisrows_image = self.image.focalplane.numvisrows_image
+        # self.detpars.numpix_amp = self.image.focalplane.numpix_amp
+        # self.detpars.numcols_det = self.image.focalplane.numcols_det
+        # self.detpars.numrows_det = self.image.focalplane.numrows_det
+        # self.detpars.numpix_det = self.image.focalplane.numpix_det
+        # self.detpars.numpix_image = self.image.focalplane.numpix_image
+        # self.detpars.numcols_image = self.image.focalplane.numcols_image
+        # self.detpars.numrows_image = self.image.focalplane.numrows_image
+        # self.detpars.numbytes_image = self.image.focalplane.numbytes_image
+        # self.detpars.xflush = self.image.focalplane.xflush
+        # self.detpars.yflush = self.image.focalplane.yflush
+
+        xpreskip = self.detpars.xpreskip + self.detpars.xskip
+        ypreskip = self.detpars.ypreskip + self.detpars.yskip
+
         roi_pars = {
-            "PreSkipPixels": 500,
-            "Pixels": 4096,
-            "PostSkipPixels": 0,
-            "OverScanPixels": 0,
-            "PreSkipLines": 200,
-            "Lines": 1536,
-            "PostSkipLines": 0,
-            "OverScanLines": 0,
+            "PreSkipPixels": xpreskip,
+            "Pixels": self.detpars.xdata,
+            "PostSkipPixels": self.detpars.xpostskip,
+            "OverScanPixels": self.detpars.xoverscan,
+            "PreSkipLines": ypreskip,
+            "Lines": self.detpars.ydata,
+            "PostSkipLines": self.detpars.ypostskip,
+            "OverScanLines": self.detpars.yoverscan,
         }
 
         if not self.config_ok:
@@ -1687,7 +1729,6 @@ class ControllerArchon(Controller):
                 self.dict_params[par],
                 f"{par}={roi_pars[par]}",
             )
-            print(cmd)
             self.archon_command(cmd)
 
         return
