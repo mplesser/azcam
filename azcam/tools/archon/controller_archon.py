@@ -1652,7 +1652,10 @@ class ControllerArchon(Controller):
         Sends parameters to the controller.
         """
 
-        self.write_controller_roi()
+        try:
+            self.write_controller_roi()
+        except azcam.exceptions.AzcamError:
+            pass  # cant update until controller is reset
 
         return
 
