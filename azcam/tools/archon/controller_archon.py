@@ -979,6 +979,7 @@ class ControllerArchon(Controller):
 
             for indx in range(cnt):
                 param = "PARAMETER" + str(indx)
+                print(param)
                 parname = self.dict_config[param].split("=")[0]
                 parvalue = self.dict_config[param].split("=")[1]
                 self.parameters[parname] = parvalue
