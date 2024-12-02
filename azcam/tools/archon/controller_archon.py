@@ -1652,8 +1652,7 @@ class ControllerArchon(Controller):
         Sends parameters to the controller.
         """
 
-        print("Archon ROI in development...")
-        # self.write_controller_roi()
+        self.write_controller_roi()
 
         return
 
