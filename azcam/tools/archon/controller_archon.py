@@ -423,7 +423,7 @@ class ControllerArchon(Controller):
                 line = item.split("=")
                 self.dict_status[line[0]] = line[1]
 
-        # Update staus keywords
+        # Update status keywords
         StatusDict = {}
         for line in self.status:
             if len(line) > 0:
@@ -979,7 +979,6 @@ class ControllerArchon(Controller):
 
             for indx in range(cnt):
                 param = "PARAMETER" + str(indx)
-                print(param, self.dict_config[param])
                 parname = self.dict_config[param].split("=")[0]
                 parvalue = self.dict_config[param].split("=")[1]
                 self.parameters[parname] = parvalue
@@ -1733,5 +1732,8 @@ class ControllerArchon(Controller):
                 f"{par}={roi_pars[par]}",
             )
             self.archon_command(cmd)
+
+        print("updating...???")
+        self.update_config_data(0)
 
         return
