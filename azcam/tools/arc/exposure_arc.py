@@ -273,9 +273,8 @@ class ExposureArc(Exposure):
         # image data and file are now ready
         self.image.toggle = 1
 
-        print("saved time", self.exposure_time_saved, self.exposure_time)
+        # added for sequence pause and readout issue
         self.exposure_time = self.exposure_time_saved
-        print("saved time", self.exposure_time_saved, self.exposure_time)
         self.set_exposuretime(self.exposure_time)
 
         # reset idle if no flush
