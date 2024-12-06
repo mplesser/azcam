@@ -489,9 +489,9 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
 
         # exposure times
         exposure_time = float(exposure_time)
-        self.exposure_time_saved = self.exposure_time
         if exposure_time >= 0:
-            self.exposure_time = float(exposure_time)
+            self.exposure_time = exposure_time
+        self.exposure_time_saved = self.exposure_time
         if imagetype == "zero":
             self.exposure_time = 0.0
         self.paused_time = 0.0  # reset paused time

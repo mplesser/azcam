@@ -93,6 +93,7 @@ class ExposureArc(Exposure):
                 self.exposure_time_actual = (
                     self.exposure_time - self.exposure_time_remaining
                 )
+                self.set_exposuretime(self.exposure_time_saved)  # reset for sequence
                 break
             elif (
                 self.exposure_flag == self.exposureflags["PAUSE"]
