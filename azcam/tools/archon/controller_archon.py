@@ -1430,10 +1430,11 @@ class ControllerArchon(Controller):
         pixels = int(self.dict_frame[f"BUF{self.read_buffer}PIXELS"])
         lines = int(self.dict_frame[f"BUF{self.read_buffer}LINES"])
 
-        # this is for slpit mode
+        # this is for split pit mode
         if int(self.dict_config["FRAMEMODE"]) == 2:
             lines = lines * 2
-        pixels_read = lines * naxis1 + numparamps * pixels
+        # pixels_read = lines * naxis1 + numparamps * pixels
+        pixels_read = lines * naxis1 + (numparamps + numseramps) * pixels
         pixels_remaining = max(0, int(total_pixels - pixels_read))
 
         return pixels_remaining
@@ -1654,8 +1655,8 @@ class ControllerArchon(Controller):
 
         try:
             self.write_controller_roi()
-        except azcam.exceptions.AzcamError:
-            pass  # cant update until controller is reset
+        except azcam.exceptions.AzcamError as e:
+            pass  # can't update until controller is reset
 
         return
 
@@ -1708,17 +1709,18 @@ class ControllerArchon(Controller):
 
         roi_pars = {
             "PreSkipPixels": xpreskip,
-            "Pixels": self.detpars.xdata,
+            # "Pixels": self.detpars.xdata,
             "PostSkipPixels": self.detpars.xpostskip,
             "OverScanPixels": self.detpars.xoverscan,
             "PreSkipLines": ypreskip,
-            "Lines": self.detpars.ydata,
+            # "Lines": self.detpars.ydata,
             "PostSkipLines": self.detpars.ypostskip,
             "OverScanLines": self.detpars.yoverscan,
         }
 
         if not self.config_ok:
-            raise azcam.exceptions.AzcamError("Configuration data not loaded")
+            # raise azcam.exceptions.AzcamError("Configuration data not loaded")
+            return
 
         # update config dictionary
         for par in roi_pars:
@@ -1733,7 +1735,27 @@ class ControllerArchon(Controller):
             )
             self.archon_command(cmd)
 
-        print("updating...???")
-        self.update_config_data(0)
+        # also update pixelcount and linecount (per tap)
+        pixelcount = (
+            self.detpars.xunderscan + self.detpars.xdata + self.detpars.xoverscan
+        )
+        linecount = (
+            self.detpars.yunderscan + self.detpars.ydata + self.detpars.yoverscan
+        )
+        # indxParam = self.dict_wconfig["LINECOUNT"]
+        # cmd = "WCONFIG%04X%s=%s" % (indxParam & 0xFFFF, "LINECOUNT", str(linecount))
+        # self.archon_command(cmd)
+
+        # indxParam = self.dict_wconfig["PIXELCOUNT"]
+        # cmd = "WCONFIG%04X%s=%s" % (
+        #     indxParam & 0xFFFF,
+        #     "PIXELCOUNT",
+        #     str(pixelcount),
+        # )
+        # self.archon_command(cmd)
+
+        self.set_size(pixelcount, linecount)
+        self.apply_cds()
+        self.load_params()
 
         return
