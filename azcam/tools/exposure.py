@@ -488,6 +488,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
         imagetype = self.image_type.lower()
 
         # exposure times
+        print("begin", exposure_time, self.exposure_time, self.exposure_time_saved)
         exposure_time = float(exposure_time)
         if exposure_time >= 0:
             self.exposure_time = exposure_time
