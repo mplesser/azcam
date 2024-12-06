@@ -276,6 +276,7 @@ class ExposureArc(Exposure):
         print("saved time", self.exposure_time_saved, self.exposure_time)
         self.exposure_time = self.exposure_time_saved
         print("saved time", self.exposure_time_saved, self.exposure_time)
+        self.set_exposuretime(self.exposure_time)
 
         # reset idle if no flush
         if not self.flush_array:
