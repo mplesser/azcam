@@ -119,9 +119,8 @@ class ExposureArc(Exposure):
 
         # set times
         self.exposure_time_remaining = 0
-        # if imagetype == "zero":
-        #     self.exposure_time = self.exposure_time_saved
-        self.exposure_time = self.exposure_time_saved
+        if imagetype == "zero":
+            self.exposure_time = self.exposure_time_saved
 
         if self.exposure_flag == self.exposureflags["ABORT"]:
             azcam.exceptions.warning("Integration aborted")
@@ -273,6 +272,10 @@ class ExposureArc(Exposure):
 
         # image data and file are now ready
         self.image.toggle = 1
+
+        print("saved time", self.exposure_time_saved, self.exposure_time)
+        self.exposure_time = self.exposure_time_saved
+        print("saved time", self.exposure_time_saved, self.exposure_time)
 
         # reset idle if no flush
         if not self.flush_array:
