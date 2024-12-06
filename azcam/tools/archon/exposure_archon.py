@@ -137,6 +137,7 @@ class ExposureArchon(Exposure):
         self.fileconverter.copy_to_buffer(
             azcam.db.tools["controller"].imagedata, self.image.data
         )
+        self.image.is_valid = 1
 
         # write MEF file
         self.image.overwrite = self.overwrite

@@ -386,12 +386,10 @@ class ImageHeaders(object):
 
         skipX1 = self.focalplane.first_col - 1
         skipX2 = self.focalplane.ampvispix_x - self.focalplane.last_col
-        if skipX2 < 0:
-            skipX2 = 0
+        skipX2 = max(0, skipX2)
         skipY1 = self.focalplane.first_row - 1
         skipY2 = self.focalplane.ampvispix_y - self.focalplane.last_row
-        if skipY2 < 0:
-            skipY2 = 0
+        skipY2 = max(0, skipY2)
 
         skipX1bin = skipX1 / self.focalplane.col_bin
         skipY1bin = skipY1 / self.focalplane.row_bin
@@ -412,22 +410,12 @@ class ImageHeaders(object):
             Y_Val1 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
             Y_Val2 = Ny * lastRow
 
-            # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
+            # CCDSEC1 binned version of CCDSEC
             xCCD1 = skipX1bin + 1
-            if xCCD1 == 0:
-                xCCD1 = 1
             xCCD2 = (self.focalplane.ampvispix_x - skipX1) / self.focalplane.col_bin
-            if xCCD2 == 0:
-                xCCD2 = 1
-
             yCCD1 = skipY1bin + 1
-            if yCCD1 == 0:
-                yCCD1 = 1
             yCCD2 = (self.focalplane.ampvispix_y - skipY2) / self.focalplane.row_bin
-            if yCCD2 == 0:
-                yCCD2 = 1
 
-            s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
         elif ampflip == 1:  # flip in x
             flip_x = -1
             flip_y = 1
@@ -444,26 +432,19 @@ class ImageHeaders(object):
             Y_Val1 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
             Y_Val2 = Ny * lastRow
 
-            # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
+            # CCDSEC1 binned version of CCDSEC
             xCCD1 = (
                 (Nx * self.focalplane.ampvispix_x) - skipX1
             ) / self.focalplane.col_bin
-            if xCCD1 == 0:
-                xCCD1 = 1
+            # xCCD2 = (
+            #     (Nx - 1) * self.focalplane.ampvispix_x - skipX1
+            # ) / self.focalplane.col_bin + 1
             xCCD2 = (
                 (Nx - 1) * self.focalplane.ampvispix_x - skipX1
-            ) / self.focalplane.col_bin + 1
-            if xCCD2 == 0:
-                xCCD2 = 1
-
+            ) / self.focalplane.col_bin
             yCCD1 = skipY1bin + 1
-            if yCCD1 == 0:
-                yCCD1 = 1
             yCCD2 = (self.focalplane.ampvispix_y - skipY2) / self.focalplane.row_bin
-            if yCCD2 == 0:
-                yCCD2 = 1
 
-            s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
         elif ampflip == 2:  # flip in y
             flip_x = 1
             flip_y = -1
@@ -480,27 +461,19 @@ class ImageHeaders(object):
             Y_Val1 = Ny * lastRow
             Y_Val2 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
 
-            # CCDSEC1 binned version of CCDSEC - 15Aug12 Zareba
-
+            # CCDSEC1 binned version of CCDSEC
             xCCD1 = skipX1bin + 1
-            if xCCD1 == 0:
-                xCCD1 = 1
             xCCD2 = (self.focalplane.ampvispix_x - skipX1) / self.focalplane.col_bin
-            if xCCD2 == 0:
-                xCCD2 = 1
-
             yCCD1 = (
                 (Ny * self.focalplane.ampvispix_y) - skipY1
             ) / self.focalplane.row_bin
-            if yCCD1 == 0:
-                yCCD1 = 1
+            # yCCD2 = (
+            #     (Ny - 1) * self.focalplane.ampvispix_y - skipY1
+            # ) / self.focalplane.row_bin + 1
             yCCD2 = (
                 (Ny - 1) * self.focalplane.ampvispix_y - skipY1
-            ) / self.focalplane.row_bin + 1
-            if yCCD2 == 0:
-                yCCD2 = 1
+            ) / self.focalplane.row_bin
 
-            s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
         elif ampflip == 3:  # flip both
             flip_x = -1
             flip_y = -1
@@ -518,36 +491,27 @@ class ImageHeaders(object):
             Y_Val2 = (Ny - 1) * self.focalplane.ampvispix_y + self.focalplane.first_row
 
             # CCDSEC1 binned version of CCDSEC
+            # xCCD1 = (
+            #     (Nx - 1) * self.focalplane.ampvispix_x - skipX1
+            # ) / self.focalplane.col_bin + 1
             xCCD1 = (
                 (Nx - 1) * self.focalplane.ampvispix_x - skipX1
-            ) / self.focalplane.col_bin + 1
-            if xCCD1 == 0:
-                xCCD1 = 1
+            ) / self.focalplane.col_bin
             xCCD2 = (
                 (Nx * self.focalplane.ampvispix_x) - skipX1
             ) / self.focalplane.col_bin
-            if xCCD2 == 0:
-                xCCD2 = 1
-
             yCCD1 = (
                 (Ny * self.focalplane.ampvispix_y) - skipY1
             ) / self.focalplane.row_bin
-            if yCCD1 == 0:
-                yCCD1 = 1
+            # yCCD2 = (
+            #     (Ny - 1) * self.focalplane.ampvispix_y - skipY1
+            # ) / self.focalplane.row_bin + 1
             yCCD2 = (
                 (Ny - 1) * self.focalplane.ampvispix_y - skipY1
-            ) / self.focalplane.row_bin + 1
-            if yCCD2 == 0:
-                yCCD2 = 1
-
-            s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
-
-        x_Val1 = float(xVal1)
-        y_Val1 = float(yVal1)
-        y_Val2 = float(yVal2)
-        x_Val2 = float(xVal2)  # ? added 07sep24
+            ) / self.focalplane.row_bin
 
         # do not overwrite x_Val1 and y_Val2; these are needed to calculate LTV1 and LTV2
+        s = "[%d:%d,%d:%d]" % (xVal1, xVal2, yVal1, yVal2)
         hdu.header.set("DETSEC", s, "Detector section", after=curpos)
         curpos += 1
 
@@ -555,10 +519,12 @@ class ImageHeaders(object):
         hdu.header.set("CCDSEC", s, "CCD section", after=curpos)
         curpos += 1
 
+        xCCD1 = max(1, xCCD1)
+        xCCD2 = max(1, xCCD2)
+        yCCD1 = max(1, yCCD1)
+        yCCD2 = max(1, yCCD2)
         s = "[%d:%d,%d:%d]" % (xCCD1, xCCD2, yCCD1, yCCD2)
-        hdu.header.set(
-            "CCDSEC1", s, "CCD section with binning", after=curpos
-        )  # extra keyword 14Sep10
+        hdu.header.set("CCDSEC1", s, "CCD section with binning", after=curpos)
 
         curpos += 1
 
@@ -584,6 +550,11 @@ class ImageHeaders(object):
         s = "%s %s" % (self.focalplane.col_bin, self.focalplane.row_bin)
         hdu.header.set("CCDSUM", s, "CCD pixel summing", after=curpos)
         curpos += 1
+
+        x_Val1 = float(xVal1)
+        y_Val1 = float(yVal1)
+        y_Val2 = float(yVal2)
+        x_Val2 = float(xVal2)  # ? added 07sep24
 
         if self.focalplane.numamps_image > 1:
             self.focalplane.wcs.ltm_1_1[ext_number - 1] = flip_x / float(
