@@ -93,7 +93,6 @@ class ExposureArc(Exposure):
                 self.exposure_time_actual = (
                     self.exposure_time - self.exposure_time_remaining
                 )
-                self.set_exposuretime(self.exposure_time_saved)  # reset for sequence
                 break
             elif (
                 self.exposure_flag == self.exposureflags["PAUSE"]
@@ -120,8 +119,9 @@ class ExposureArc(Exposure):
 
         # set times
         self.exposure_time_remaining = 0
-        if imagetype == "zero":
-            self.exposure_time = self.exposure_time_saved
+        # if imagetype == "zero":
+        #     self.exposure_time = self.exposure_time_saved
+        self.exposure_time = self.exposure_time_saved
 
         if self.exposure_flag == self.exposureflags["ABORT"]:
             azcam.exceptions.warning("Integration aborted")
