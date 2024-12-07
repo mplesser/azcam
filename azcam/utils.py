@@ -388,7 +388,7 @@ def restore_imagepars(imagepars: dict) -> None:
     """
 
     for par in azcam.db.imageparnames:
-        value = imagepars[par]
+        value = quoter(imagepars[par])
         imagepars[par] = value
         azcam.db.parameters.set_par(par, value)
 
@@ -414,3 +414,28 @@ def dequote(input: str) -> str:
         dequote = input
 
     return dequote
+
+
+def quoter(input: str) -> str:
+    """
+    Put quotes around a string if it contains special characters.
+    Currently just spaces.
+
+    Args:
+        input: string to be optionally quoted.
+    """
+
+    if type(input) != str:
+        return input
+
+    if " " not in input:
+        return input
+
+    if input.startswith("'") and input.endswith("'"):
+        output = input
+    elif input.startswith('"') and input.endswith('"'):
+        output = input
+    else:
+        output = f'"{input}"'
+
+    return output
