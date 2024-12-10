@@ -20,6 +20,7 @@ Example commands:
     tempcon.server.command("loop 1:type pid")  # PID control
     tempcon.server.command("loop 1:range mid")  # range (0.5W,5W,50W)
     tempcon.server.command("loop 1:maxpwr 100")  # max power on this range
+    tempcon.server.command("loop 1:source B")  # controlling input channel
 """
 
 
@@ -35,6 +36,8 @@ class TempConCryoCon24(TempCon):
         self.port = 5000
 
         self.temperature_ids = [0, 1]  # camtemp, dewtemp
+
+        self.temp_names = {0: "A", 1: "B", 2: "C", 3: "D"}
 
         self.init_commands = []
 
@@ -88,15 +91,17 @@ class TempConCryoCon24(TempCon):
         return
 
     def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
+        self, temperature: float = None, temperature_id: int = -1
     ):
         """
-        Set control temperature in Celsius.
+        Set Loop 1 control temperature in Celsius.
         Args:
             temperature: temperature to set
             temperature_id: temperature ID number
                 * 0 is TempA
                 * 1 is TempB
+                * 2 is TempC
+                * 3 is TempD
         """
 
         if temperature is None:
@@ -104,14 +109,15 @@ class TempConCryoCon24(TempCon):
         else:
             self.control_temperature = float(temperature)
 
-        if temperature_id == 0:
-            # set loop 1
-            self.server.command(f"Loop 1:SETPT {temperature};")
-            self.server.command(f"LOOP 1:TYPE PID")
-        elif temperature_id == 1:
-            # set loop 2
-            self.server.command(f"Loop 2:SETPT {temperature};")
-            self.server.command(f"LOOP 2:TYPE PID")
+        if temperature_id != -1:
+            self.control_temperature_id = temperature_id
+
+        # set loop 1
+        self.server.command(f"Loop 1:SETPT {temperature};")
+        self.server.command(f"LOOP 1:TYPE PID")
+        self.server.command(
+            f"LOOP 1:SOURCE {self.temp_names[self.control_temperature_id]}"
+        )
 
         # turn on control loop
         self.server.command("CONTrol;")

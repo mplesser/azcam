@@ -453,7 +453,7 @@ class API(Tools):
 
         Args:
             temperature: control temperature in Celsius. If not specified, use saved value
-            temperature_id: temperature sensor identifier
+            temperature_id: control temperature sensor number
         """
 
         return self.tempcon.set_control_temperature(temperature, temperature_id)

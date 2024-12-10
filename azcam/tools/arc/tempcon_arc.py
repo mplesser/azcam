@@ -62,7 +62,6 @@ class TempConArc(TempCon):
             self.control_temperature = float(temperature)
 
         temperature_id = int(temperature_id)
-        self.control_temperature_number = temperature_id
         counts = self.convert_temp_to_counts(2, self.control_temperature)
         azcam.db.tools["controller"].write_memory(
             "Y", azcam.db.tools["controller"].UTILITYBOARD, TEMPSET, int(counts)

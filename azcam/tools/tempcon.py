@@ -30,8 +30,8 @@ class TempCon(Tools, ObjectHeaderMethods):
 
         self.control_temperature = -999.0
         """control temperature in Celsius"""
-        self.control_temperature_number = 0
-        """control temperature number for regulattion)"""
+        self.control_temperature_id = 0
+        """sensor used for temperature control"""
 
         # system temperatures
         self.temperature_ids = [0]
@@ -108,7 +108,7 @@ class TempCon(Tools, ObjectHeaderMethods):
     # temperatures
     # ***************************************************************************
     def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
+        self, temperature: float = None, temperature_id: int = -1
     ) -> None:
         """
         Set the control temperature (set point).
