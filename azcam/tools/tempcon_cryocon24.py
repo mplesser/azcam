@@ -109,6 +109,8 @@ class TempConCryoCon24(TempCon):
         else:
             self.control_temperature = float(temperature)
 
+        temperature_id = int(temperature_id)
+
         if temperature_id != -1:
             self.control_temperature_id = temperature_id
 
