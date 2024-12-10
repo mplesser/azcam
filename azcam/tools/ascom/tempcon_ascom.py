@@ -49,7 +49,7 @@ class TempConASCOM(TempCon):
         return
 
     def set_control_temperature(
-        self, temperature: float = None, temperature_id: int = 0
+        self, temperature: float = None, temperature_id: int = -1
     ):
         """
         Set control temperature in Celsius.
@@ -68,8 +68,7 @@ class TempConASCOM(TempCon):
         # turn cooler ON
         azcam.db.tools["tempcon"].set_cooler(1)
 
-        if temperature_id == 0:
-            azcam.db.tools["controller"].camera.SetCCDTemperature = temperature
+        azcam.db.tools["controller"].camera.SetCCDTemperature = temperature
 
         return
 

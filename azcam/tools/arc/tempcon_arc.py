@@ -35,7 +35,7 @@ class TempConArc(TempCon):
 
         return
 
-    def set_control_temperature(self, temperature=None, temperature_id=0):
+    def set_control_temperature(self, temperature=None, temperature_id=-1):
         """
         Set controller/detector control temperature.
         Ignored if no utlity board is installed.
@@ -61,7 +61,6 @@ class TempConArc(TempCon):
         else:
             self.control_temperature = float(temperature)
 
-        temperature_id = int(temperature_id)
         counts = self.convert_temp_to_counts(2, self.control_temperature)
         azcam.db.tools["controller"].write_memory(
             "Y", azcam.db.tools["controller"].UTILITYBOARD, TEMPSET, int(counts)

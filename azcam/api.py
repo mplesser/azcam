@@ -446,7 +446,7 @@ class API(Tools):
         return self.tempcon.get_temperatures()
 
     def set_control_temperature(
-        self, temperature: float | None = None, temperature_id: int = 0
+        self, temperature: float | None = None, temperature_id: int = -1
     ) -> None:
         """
         Set the control temperature (set point).
@@ -458,7 +458,7 @@ class API(Tools):
 
         return self.tempcon.set_control_temperature(temperature, temperature_id)
 
-    def get_control_temperature(self, temperature_id: int = 0) -> float:
+    def get_control_temperature(self, temperature_id: int = -1) -> float:
         """
         Get the control temperature (set point).
 
