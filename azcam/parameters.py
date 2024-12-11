@@ -30,8 +30,6 @@ class Parameters(object):
 
         azcam.db.cli["parameters"] = self
 
-        # azcam.db.parameters = self
-
     def read_parfile(self, parfilename: str = None) -> None:
         """
         Read a parameter file and create sub-dictionaries for saving parameters between sessions.
