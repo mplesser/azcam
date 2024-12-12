@@ -309,7 +309,7 @@ class API(object):
 
     def abort(self):
         """
-        Abort an exposure in progress.
+        Abort an operation in progress.
         """
 
         return self.exposure.abort()
@@ -338,6 +338,9 @@ class API(object):
           * 0 => controller default shutter.
           * 1 => instrument default shutter.
         """
+
+        state = int(state)
+        shutter_id = int(shutter_id)
 
         return self.exposure.set_shutter(state, shutter_id)
 

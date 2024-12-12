@@ -121,7 +121,7 @@ class WebServer(object):
         @app.get("/api/exposure/get_status", response_class=JSONResponse)
         async def expstatus(request: Request, command: str = None):
 
-            expstatus = azcam.db.tools["api"].get_status()
+            expstatus = azcam.db.api.get_status()
 
             response = {
                 "message": "Finished",
@@ -145,7 +145,7 @@ class WebServer(object):
             if command is None:
                 args = await request.json()
                 try:
-                    toolid = azcam.db.tools["api"]
+                    toolid = azcam.db.api
                     command = getattr(toolid, args["command"])
 
                     arglist = args["args"]
@@ -236,7 +236,7 @@ class WebServer(object):
         Returns the reply as a JSON packet.
         """
 
-        api = azcam.db.tools["api"]
+        api = azcam.db.api
 
         try:
             method = url

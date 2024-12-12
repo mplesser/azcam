@@ -47,6 +47,7 @@ def setup_server():
 
     # define API tool
     azcam.db.api = API()
+    azcam.db.cli["api"] = azcam.db.api
 
     return
 
