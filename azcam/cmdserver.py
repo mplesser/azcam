@@ -215,7 +215,9 @@ class CommandServer(socketserver.ThreadingTCPServer):
 
         if "." not in cmd:
             # get method from db.default_tool
-            if azcam.db.default_tool is None:
+            if azcam.db.default_tool == "api":
+                objid = getattr(azcam.db.api, cmd)
+            elif azcam.db.default_tool is None:
                 s = f"command not recognized: {cmd} "
                 raise azcam.exceptions.AzcamError(s)
             else:
@@ -242,6 +244,10 @@ class CommandServer(socketserver.ThreadingTCPServer):
                     )
                 else:
                     objid = None  # too complicated for now
+                return objid, args, kwargs
+
+            elif objects[0] == "api":
+                objid = getattr(azcam.db.api, objects[1])
                 return objid, args, kwargs
 
             elif objects[0] not in azcam.db.tools:

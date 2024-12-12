@@ -46,7 +46,7 @@ def setup_server():
     # azcam.db.monitor.register()
 
     # define API tool
-    _ = API()
+    azcam.db.api = API()
 
     return
 

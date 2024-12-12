@@ -5,21 +5,19 @@ API for azcam
 import typing
 
 import azcam
-from azcam.tools.tools import Tools
 
 
-class API(Tools):
+class API(object):
     """
     AzCam API class.
     """
 
-    def __init__(self, tool_id="api", description="azcam API"):
-        Tools.__init__(self, tool_id, description)
+    def __init__(self):
 
         self.mock = 0
         """True for mock mode which uses no hardware"""
 
-    def initialize_api(self, mock: int = 0):
+    def initialize(self, mock: int = 0):
         """
         Initialize the API.
 
@@ -29,10 +27,28 @@ class API(Tools):
         """
 
         self.mock = mock
-
-        self.exposure = azcam.db.tools["exposure"]
-        self.tempcon = azcam.db.tools["tempcon"]
         self.parameters = azcam.db.parameters
+
+        try:
+            self.exposure = azcam.db.tools["exposure"]
+        except Exception:
+            pass
+        try:
+            self.tempcon = azcam.db.tools["tempcon"]
+        except Exception:
+            pass
+        try:
+            self.instrument = azcam.db.tools["instrument"]
+        except Exception:
+            pass
+        try:
+            self.telescope = azcam.db.tools["telescope"]
+        except Exception:
+            pass
+        try:
+            self.controller = azcam.db.tools["controller"]
+        except Exception:
+            pass
 
         self.is_initialized = 1
 
@@ -180,14 +196,14 @@ class API(Tools):
 
         return self.exposure.set_filename(filename)
 
-    def initialize(self):
+    def initialize_exposure(self):
         """
         Initialize exposure.
         """
 
         return self.exposure.initialize()
 
-    def reset(self):
+    def reset_exposure(self):
         """
         Reset exposure.
         """
