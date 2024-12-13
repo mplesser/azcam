@@ -81,6 +81,7 @@ class WebServer(object):
             self.favicon_path = os.path.join(os.path.dirname(__file__), "favicon.ico")
 
         self.index = os.path.join(os.path.dirname(__file__), self.index)
+        self.version = 1  # API version
 
         expweb = ExposureWeb()
         expweb.logcommands = 1
@@ -116,6 +117,23 @@ class WebServer(object):
             )
 
         # ******************************************************************************
+        # Set API version: /api/set_version?version=2
+        # ******************************************************************************
+        @app.get("/api/set_version", response_class=JSONResponse)
+        async def set_version(request: Request, command: str = None):
+
+            qpars = request.query_params
+            self.version = int(qpars["version"])
+
+            response = {
+                "message": "Finished",
+                "command": f"api.set_version",
+                "data": self.version,
+            }
+
+            return JSONResponse(response)
+
+        # ******************************************************************************
         # Example of a special case: /api/exposure/get_status
         # ******************************************************************************
         @app.get("/api/exposure/get_status", response_class=JSONResponse)
@@ -131,9 +149,14 @@ class WebServer(object):
 
             return JSONResponse(response)
 
+        @app.get("/favicon.ico", include_in_schema=False)
+        async def favicon():
+            return FileResponse(self.favicon_path)
+
         # ******************************************************************************
         # API interface - ../api/command or ../api JSON
         # ******************************************************************************
+
         @app.post("/api", response_class=JSONResponse)
         @app.get("/api/{command:path}", response_class=JSONResponse)
         async def api(request: Request, command: str = None):
@@ -141,45 +164,57 @@ class WebServer(object):
             Remote web api commands.
             """
 
-            # JSON
-            if command is None:
-                args = await request.json()
-                try:
-                    toolid = azcam.db.api
-                    command = getattr(toolid, args["command"])
+            if self.version == 1 or self.version == 2:
 
-                    arglist = args["args"]
-                    kwargs = args["kwargs"]
-                    reply = command(*arglist, **kwargs)
-                except Exception as e:
-                    reply = repr(e)
-                    azcam.log(e)
+                # JSON
+                if command is None:
+                    args = await request.json()
+                    try:
+                        toolid = azcam.db.api
+                        command = getattr(toolid, args["command"])
+
+                        arglist = args["args"]
+                        kwargs = args["kwargs"]
+                        reply = command(*arglist, **kwargs)
+                    except Exception as e:
+                        reply = repr(e)
+                        azcam.log(e)
+
+                    response = {
+                        "message": "Finished",
+                        "command": f"api.{args['command']}",
+                        "data": reply,
+                    }
+
+                    return JSONResponse(response)
+
+                # query string
+                url = command
+                qpars = request.query_params
+
+                if self.logcommands:
+                    azcam.log(url, prefix="Web-> ")
+
+                reply = self.web_command(url, qpars)
+
+                if self.logcommands:
+                    azcam.log(reply, prefix="Web->   ")
+
+                return JSONResponse(reply)
+
+            else:
+
+                # query string
+                url = command
+                qpars = request.query_params
 
                 response = {
                     "message": "Finished",
-                    "command": f"api.{args['command']}",
-                    "data": reply,
+                    "command": url,
+                    "data": "Invalid API version",
                 }
 
                 return JSONResponse(response)
-
-            # query string
-            url = command
-            qpars = request.query_params
-
-            if self.logcommands:
-                azcam.log(url, prefix="Web-> ")
-
-            reply = self.web_command(url, qpars)
-
-            if self.logcommands:
-                azcam.log(reply, prefix="Web->   ")
-
-            return JSONResponse(reply)
-
-        @app.get("/favicon.ico", include_in_schema=False)
-        async def favicon():
-            return FileResponse(self.favicon_path)
 
     # ******************************************************************************
     # webserver methods
@@ -236,13 +271,11 @@ class WebServer(object):
         Returns the reply as a JSON packet.
         """
 
-        api = azcam.db.api
-
         try:
             method = url
             kwargs = qpars._dict
 
-            caller = getattr(api, method)
+            caller = getattr(azcam.db.api, method)
             reply = caller() if kwargs is None else caller(**kwargs)
 
         except Exception as e:
