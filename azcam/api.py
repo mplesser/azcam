@@ -489,3 +489,64 @@ class API(object):
         """
 
         return self.tempcon.get_control_temperature(temperature_id)
+
+    # *************************************************************************
+    #   instruments
+    # *************************************************************************
+
+    def get_filters(self, filter_id=0):
+        """
+        Return a list of all available/loaded filters.
+        Args:
+            filter_id: filter mechanism ID
+        """
+
+        return self.instrument.get_filters(filter_id)
+
+    def get_filter(self, filter_id=0):
+        """
+        Return the current/loaded filter, typically the filter in the beam.
+        Args:
+            filter_id: filter mechanism ID
+        """
+
+        return self.instrument.get_filter(filter_id)
+
+    def set_filter(self, filter_name, filter_id=0):
+        """
+        Set the current/loaded filter, typically the filter in the beam.
+        Args:
+            filter_name: filter name to set. Could be a number or filter name.
+            filter_id: filter mechanism ID
+        """
+
+        return self.instrument.set_filter(filter_name, filter_id)
+
+    def get_wavelengths(self, wavelength_id: int = 0):
+        """
+        Returns a list of valid wavelengths.
+        Used for filter and LED based systems.
+        Args:
+            wavelength_id: wavelength mechanism ID
+        """
+
+        return self.instrument.get_wavelengths(wavelength_id)
+
+    def get_wavelength(self, wavelength_id: int = 0):
+        """
+        Returns the current wavelength.
+        Args:
+            wavelength_id: wavelength mechanism ID
+        """
+
+        return self.instrument.get_wavelength(wavelength_id)
+
+    def set_wavelength(self, wavelength: typing.Any, wavelength_id: int = 0):
+        """
+        Set the current wavelength, typically for a filter or grating.
+        Args:
+            wavelength: wavelength value to set. Could be a number or filter name.
+            wavelength_id: wavelength mechanism ID
+        """
+
+        return self.instrument.set_wavelength(wavelength, wavelength_id)
