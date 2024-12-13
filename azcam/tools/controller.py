@@ -108,12 +108,28 @@ class Controller(Tools, ObjectHeaderMethods):
 
         return
 
-    def set_exposuretime(self, ExposureTime: float):
+    def set_exposuretime(self, exposure_time: float):
         """
         Write the exposure time (in seconds) to the controller.
         """
 
+        self.exposure_time = exposure_time
+
         return
+
+    def get_exposuretime(self):
+        """
+        Return the exposure time from the controller (in seconds).
+        """
+
+        return self.exposure_time
+
+    def get_pixels_remaining(self):
+        """
+        Return number of remaining pixels to be read (counts down).
+        """
+
+        return 0
 
 
 class DetPars(object):

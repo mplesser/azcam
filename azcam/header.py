@@ -324,8 +324,7 @@ class Header(object):
             return
 
         if not os.path.exists(filename):
-            azcam.exceptions.warning("Header file not found:%s" % filename)
-            return
+            azcam.exceptions.AzcamError(f"Header file not found: {filename}")
 
         with open(filename, "r") as f1:
             for line in f1.readlines():
