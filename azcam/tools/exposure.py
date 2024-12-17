@@ -1474,7 +1474,7 @@ class Exposure(Tools, Filename, ObjectHeaderMethods):
                 camtemp = f"{camtemp:.1f}"
                 dewtemp = f"{dewtemp:.1f}"
             except Exception as e:
-                azcam.log(e)
+                # azcam.log(e)
                 camtemp = -999.9  # error reading temperature
                 dewtemp = -666.6
         else:

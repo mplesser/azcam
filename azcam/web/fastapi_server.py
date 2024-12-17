@@ -198,7 +198,7 @@ class WebServer(object):
                 reply = self.web_command(url, qpars)
 
                 if self.logcommands:
-                    azcam.log(reply, prefix="Web->   ")
+                    azcam.log(reply, prefix="---->   ")
 
                 return JSONResponse(reply)
 
