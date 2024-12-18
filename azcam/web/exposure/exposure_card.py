@@ -111,7 +111,6 @@ def exposure_card():
     )
     def image_type_callback(value):
         azcam.db.tools["exposure"].set_image_type(value)
-        # azcam.db.tools["exposure"].message = repr(azcam.db._command)
         return ""
 
     exposure_time_input = html.Div(

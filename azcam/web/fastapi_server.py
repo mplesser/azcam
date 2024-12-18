@@ -83,6 +83,7 @@ class WebServer(object):
         self.index = os.path.join(os.path.dirname(__file__), self.index)
         self.version = 1  # API version
 
+        # Plotly Dash webs
         expweb = ExposureWeb()
         expweb.logcommands = 1
         expweb.logstatus = 0
@@ -90,10 +91,11 @@ class WebServer(object):
         queueweb.logcommands = 1
         queueweb.logstatus = 0
         statusweb = StatusWeb()
-        statusweb.initialize()
-
+        statusweb.logcommands = 1
+        statusweb.logstatus = 0
         app.mount("/exposure", WSGIMiddleware(expweb.app.server))
         app.mount("/queue", WSGIMiddleware(queueweb.app.server))
+        app.mount("/status", WSGIMiddleware(statusweb.app.server))
 
         # templates folder
         try:
@@ -133,6 +135,10 @@ class WebServer(object):
 
             return JSONResponse(response)
 
+        @app.get("/favicon.ico", include_in_schema=False)
+        async def favicon():
+            return FileResponse(self.favicon_path)
+
         # ******************************************************************************
         # Example of a special case: /api/exposure/get_status
         # ******************************************************************************
@@ -148,10 +154,6 @@ class WebServer(object):
             }
 
             return JSONResponse(response)
-
-        @app.get("/favicon.ico", include_in_schema=False)
-        async def favicon():
-            return FileResponse(self.favicon_path)
 
         # ******************************************************************************
         # API interface - ../api/command or ../api JSON

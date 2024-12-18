@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import azcam
 
 
-def status_card():
+def statusweb_card():
     """
     Create status card.
     """
@@ -14,56 +14,56 @@ def status_card():
     row1 = html.Tr(
         [
             html.Td("Image Filename", style=style1),
-            html.Td("filename here", id="filename_status", colSpan=3),
+            html.Td("filename here", id="filename_statusweb", colSpan=3),
         ]
     )
     row2 = html.Tr(
         [
             html.Td("Image Title", style=style1),
-            html.Td("title here", id="imagetitle_status", colSpan=3),
+            html.Td("title here", id="imagetitle_statusweb", colSpan=3),
         ]
     )
     row3 = html.Tr(
         [
             html.Td("Image Type", style=style1),
-            html.Td("type here", id="imagetype_status"),
+            html.Td("type here", id="imagetype_statusweb"),
             html.Td("Exposure Time", style=style1),
-            html.Td("ET here", id="et_status"),
+            html.Td("ET here", id="et_statusweb"),
         ]
     )
     row4 = html.Tr(
         [
             html.Td("Test Image", style=style1),
-            html.Td("test here", id="imagetest_status"),
+            html.Td("test here", id="imagetest_statusweb"),
             html.Td("Mode", style=style1),
-            html.Td("mode here", id="mode_status"),
+            html.Td("mode here", id="mode_statusweb"),
         ]
     )
     row5 = html.Tr(
         [
             html.Td("Temperatures", style=style1),
-            html.Td("temps here", id="temps_status"),
+            html.Td("temps here", id="temps_statusweb"),
             html.Td("Binning", style=style1),
-            html.Td("binning here", id="binning_status"),
+            html.Td("binning here", id="binning_statusweb"),
         ]
     )
     row_messsage = html.Tr(
         [
             html.Td("Message", style=style1),
-            html.Td("messages here", id="message_status", colSpan=3),
+            html.Td("messages here", id="message_statusweb", colSpan=3),
         ]
     )
     row_ts = html.Tr(
         [
             html.Td("Timestamp", style=style1),
-            html.Td("timestamp here", id="timestamp_status", colSpan=3),
+            html.Td("timestamp here", id="timestamp_statusweb", colSpan=3),
         ]
     )
     row_progress = html.Tr(
         [
             html.Td("Progress", style=style1),
             html.Td(
-                dbc.Progress(id="progress_status"),
+                dbc.Progress(id="progress_statusweb"),
                 colSpan=3,
             ),
         ]
@@ -81,7 +81,7 @@ def status_card():
     )
     # table = dbc.Table(table_header + table_body, bordered=True)
 
-    status_card = dbc.Card(
+    statusweb_card = dbc.Card(
         [
             dbc.CardHeader(
                 "Status for Current Exposure", style={"font-weight": "bold"}
@@ -90,7 +90,7 @@ def status_card():
                 [
                     html.Div(
                         "",
-                        id="estate_status",
+                        id="estate_statusweb",
                         style={"font-weight": "bold"},
                     ),
                     table,
@@ -101,21 +101,21 @@ def status_card():
 
     # status table update
     @callback(
-        Output("filename_status", "children"),
-        Output("imagetitle_status", "children"),
-        Output("imagetype_status", "children"),
-        Output("et_status", "children"),
-        Output("imagetest_status", "children"),
-        Output("mode_status", "children"),
-        Output("temps_status", "children"),
-        Output("binning_status", "children"),
-        Output("timestamp_status", "children"),
-        Output("estate_status", "children"),
-        Output("progress_status", "value"),
-        Output("message_status", "children"),
-        Input("expstatus_interval", "n_intervals"),
+        Output("filename_statusweb", "children"),
+        Output("imagetitle_statusweb", "children"),
+        Output("imagetype_statusweb", "children"),
+        Output("et_statusweb", "children"),
+        Output("imagetest_statusweb", "children"),
+        Output("mode_statusweb", "children"),
+        Output("temps_statusweb", "children"),
+        Output("binning_statusweb", "children"),
+        Output("timestamp_statusweb", "children"),
+        Output("estate_statusweb", "children"),
+        Output("progress_statusweb", "value"),
+        Output("message_statusweb", "children"),
+        Input("statusweb_interval", "n_intervals"),
     )
-    def update_expstatus(n):
+    def update_statusweb(n):
         """
         Get exposure status and update fields.
         """
@@ -158,4 +158,4 @@ def status_card():
             message,
         ]
 
-    return status_card
+    return statusweb_card

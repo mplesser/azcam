@@ -26,7 +26,6 @@ class ExposureWeb(object):
     def __init__(self) -> None:
 
         azcam.db.expserver = self
-        azcam.db._command = {}  # command dict
 
         self.app = Dash(
             __name__,
@@ -51,7 +50,7 @@ class ExposureWeb(object):
                 self.tabs_buttons,
                 self.tabs,
                 html.Div(id="hidden_div", hidden=True),
-                dcc.Interval("status_interval", interval=1_000, n_intervals=0),
+                dcc.Interval("expstatus_interval", interval=1_000, n_intervals=0),
             ]
         )
 

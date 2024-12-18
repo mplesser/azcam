@@ -21,7 +21,6 @@ class QueueWeb(object):
     def __init__(self) -> None:
 
         azcam.db.queueserver = self
-        azcam.db._command = {}  # command dict
 
         self.app = Dash(
             __name__,

@@ -1,57 +1,51 @@
-import os
+"""
+DASH web server for azcam
+"""
+
+import logging
+
+from dash import Dash, html, dcc, callback, Input, Output, State, ctx
+import dash_bootstrap_components as dbc
+import dash_daq as daq
 
 import azcam
-
-from fastapi import Request, APIRouter
-from fastapi.responses import HTMLResponse, FileResponse
-from fastapi.templating import Jinja2Templates
+from azcam.web.status.status_card import statusweb_card
 
 
 class StatusWeb(object):
     """
-    System status web page.
+    Web server using Dash (plotly).
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
 
-        self.message = ""
+        azcam.db.statusweb = self
 
-        self.root_folder = os.path.dirname(__file__)
-        self.static_files = {
-            "style": [
-                "/style_status.css",
-                os.path.join(self.root_folder, "style_status.css"),
-            ],
-            "javascript": ["/status.js", os.path.join(self.root_folder, "status.js")],
-        }
+        self.app = Dash(
+            __name__,
+            external_stylesheets=[dbc.themes.BOOTSTRAP],
+            suppress_callback_exceptions=False,
+            requests_pathname_prefix="/status/",
+        )
+        logging.getLogger("werkzeug").setLevel(logging.CRITICAL)  # stop messages
 
-        self.router = APIRouter(
-            prefix="/status",
+        self.statusweb_card = statusweb_card()
+
+        # app layout
+        self.app.layout = html.Div(
+            [
+                self.statusweb_card,
+                html.Div(id="hidden_div", hidden=True),
+                dcc.Interval("statusweb_interval", interval=1_000, n_intervals=0),
+            ]
         )
 
-    def initialize(self):
+        return
+
+    def set_message(self, message: str = "") -> None:
         """
-        Initialize status.
+        Set the browser message.
         """
 
-        self.templates = Jinja2Templates(directory=self.root_folder)
-
-        @self.router.get("/", response_class=HTMLResponse)
-        def status(request: Request):
-            templates = Jinja2Templates(directory=self.root_folder)
-            return templates.TemplateResponse(
-                "status.html",
-                {"request": request, "message": self.message},
-            )
-
-        @self.router.get(self.static_files["style"][0], include_in_schema=False)
-        async def style():
-            return FileResponse(self.static_files["style"][1])
-
-        @self.router.get(self.static_files["javascript"][0], include_in_schema=False)
-        async def javascript():
-            return FileResponse(self.static_files["javascript"][1])
-
-        azcam.db.webserver.add_router(self.router)
-
+        azcam.db.tools["exposure"].message = repr(message)
         return
