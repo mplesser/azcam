@@ -17,7 +17,7 @@ import azcam.exceptions
 
 class CommandServer(socketserver.ThreadingTCPServer):
     """
-    Main class for cmdserver tool.
+    Main class for cmdserver.
 
     CommandServer class to receive and execute client commands over the socket interface.
     This is a socket server which receives command strings, executes them, and returns a reply string.

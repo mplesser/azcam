@@ -52,4 +52,7 @@ def setup_server():
     return
 
 
-setup_server()
+# initial database but will ususally be overwritten by server or console
+azcam.db: AzcamDatabaseServer = AzcamDatabaseServer()
+
+# setup_server()
