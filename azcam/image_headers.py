@@ -93,7 +93,6 @@ class ImageHeaders(object):
     def _write_asm_fits_header(self, hdu):
         """
         Write primary header for assembled FITS file.
-        11Sep13 Zareba
         """
 
         # no extensions
