@@ -6,6 +6,7 @@ from typing import Any, Union, List, Dict
 
 import azcam
 from azcam.logger import AzCamLogger
+from azcam.parameters import Parameters
 
 
 class AzcamDatabase(object):
@@ -55,7 +56,7 @@ class AzcamDatabase(object):
     logger: AzCamLogger = AzCamLogger()
     """logger object"""
 
-    parameters: None
+    parameters: Parameters
     """parameters object"""
 
     # *************************************************************************

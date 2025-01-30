@@ -49,6 +49,10 @@ class API(object):
             self.controller = azcam.db.tools["controller"]
         except Exception:
             pass
+        try:
+            self.focus = azcam.db.tools["focus"]
+        except Exception:
+            pass
 
         self.is_initialized = 1
 
@@ -550,3 +554,72 @@ class API(object):
         """
 
         return self.instrument.set_wavelength(wavelength, wavelength_id)
+
+    # *************************************************************************
+    #   focus
+    # *************************************************************************
+    def focus_initalize(self):
+        """
+        Initialize focus routine.
+        """
+
+        return self.focus.initialize()
+
+    def focus_reset(self):
+        """
+        Reset focus tool to default values.
+        """
+
+        return self.focus.reset()
+
+    def focus_abort(self):
+        """
+        Abort focus exposure.
+        """
+
+        return self.focus.abort()
+
+    def focus_set_pars(
+        self,
+        exposure_time: float,
+        number_exposures: int = 7,
+        focus_step: float = 30,
+        detector_shift: int = 10,
+    ):
+        """
+        Set focus related parameters.
+        Args:
+            number_exposures: Number of exposures in focus sequence.
+            focus_step: Number of focus steps between each exposure in a frame.
+            detector_shift: Number of rows to shift detector for each focus step.
+            exposuretime: Exposure time i seconds.
+
+        """
+
+        return self.focus.set_pars(
+            exposure_time,
+            number_exposures,
+            focus_step,
+            detector_shift,
+        )
+
+    def focus_run(
+        self,
+        exposure_time: float,
+        number_exposures: int,
+        focus_step: float,
+        detector_shift: int,
+    ):
+        """
+        Execute the focus sequence.
+        If focus.set_pars() was previously called then those values are used and input here is ignored.
+        Args:
+            exposure_time: Exposure time in seconds.
+            number_exposures: Number of exposures in focus sequence.
+            focus_step: Number of focus steps between each exposure in a frame.
+            detector_shift: Number of rows to shift detector for each focus step.
+        """
+
+        return self.focus.run(
+            exposure_time, number_exposures, focus_step, detector_shift
+        )
