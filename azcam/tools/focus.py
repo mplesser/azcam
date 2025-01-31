@@ -72,19 +72,6 @@ class Focus(Tools):
 
         return
 
-    def reset(self):
-        """
-        Reset focus tool to default values.
-        """
-
-        self.exposure_time = 1.0
-        self.number_exposures = 7
-        self.focus_step = 30
-        self.detector_shift = 10
-        self.set_pars_called = 0
-
-        return
-
     def abort(self):
         """
         Abort focus exposure.
