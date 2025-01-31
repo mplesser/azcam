@@ -565,13 +565,6 @@ class API(object):
 
         return self.focus.initialize()
 
-    def focus_reset(self):
-        """
-        Reset focus tool to default values.
-        """
-
-        return self.focus.reset()
-
     def focus_abort(self):
         """
         Abort focus exposure.
