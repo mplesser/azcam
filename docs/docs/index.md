@@ -128,7 +128,7 @@ exposure.expose 2.5 flat "an image title"
 ## Shortcuts
 There are some simple but useful command line commands which can be optionally installed within
 console or server applications as typing shortcuts. Shortcuts are intended for command line use only
-and can be found in the `db.shortcuts` dictionary (see `azcam.shortcuts`). Examples include:
+and can be found in the `db.cli` dictionary (see `azcam.shortcuts`). Examples include:
 
   * *sav()* - save the current parameters to the parameter file
   * *pp()* - toggle the command line printout of client commands and responses command.
