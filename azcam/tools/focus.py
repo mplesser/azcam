@@ -163,7 +163,7 @@ class Focus(Tools):
 
     def run(
         self,
-        exposure_time: float,
+        exposure_time: float = 1.0,
         number_exposures: int = 7,
         focus_step: float = 30,
         detector_shift: int = 10,
