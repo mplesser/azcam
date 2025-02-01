@@ -164,9 +164,9 @@ class Focus(Tools):
     def run(
         self,
         exposure_time: float,
-        number_exposures: int,
-        focus_step: float,
-        detector_shift: int,
+        number_exposures: int = 7,
+        focus_step: float = 30,
+        detector_shift: int = 10,
     ):
         """
         Execute the focus sequence.
