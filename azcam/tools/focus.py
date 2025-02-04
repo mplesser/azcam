@@ -288,7 +288,7 @@ class Focus(Tools):
             current_exposure += 1
 
         # set focus back to starting position
-        azcam.log("Returning focus to starting value %.3f" % starting_focus_value)
+        azcam.log(f"Returning focus to starting value {starting_focus_value:.3f}")
         if self.focus_type == "step":
             steps = -1 * nsteps
             self._set_focus(steps)
