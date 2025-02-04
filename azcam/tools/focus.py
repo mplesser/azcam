@@ -113,9 +113,11 @@ class Focus(Tools):
         """
 
         if self.focus_component == "instrument":
-            return self.instrument.get_focus()
+            reply = self.instrument.get_focus()
         elif self.focus_component == "telescope":
-            return self.telescope.get_focus()
+            reply = self.telescope.get_focus()
+
+        return float(reply)
 
     def _set_focus(self, focus_value: float):
         """
@@ -248,9 +250,7 @@ class Focus(Tools):
                         current_focus_position + self.focus_step,
                     )
                 time.sleep(self.move_delay)
-                reply = self._get_focus()
-                current_focus_position = reply
-                current_focus_position = float(current_focus_position)
+                current_focus_position = self._get_focus()
 
                 # shift detector
                 self.exposure.parshift(self.detector_shift)
@@ -259,8 +259,7 @@ class Focus(Tools):
                     self.exposure.parshift(self.detector_shift)
 
             azcam.log(
-                "Next exposure is %d of %d at focus position %.3f"
-                % (current_exposure, self.number_exposures, current_focus_position)
+                f"Next exposure is {current_exposure} of {self.number_exposures} at focus position {current_focus_position:.3f}"
             )
 
             # integrate
@@ -282,7 +281,7 @@ class Focus(Tools):
                 azcam.db.parameters.set_par("imagetitle", title)
                 azcam.db.parameters.set_par("imagetype", imagetype)
                 fp = self._get_focus()
-                azcam.log("Current focus: %.3f" % fp)
+                azcam.log(f"Current focus: {fp:.3f}")
                 return
 
             # increment focus number
@@ -297,7 +296,7 @@ class Focus(Tools):
             self._set_focus(starting_focus_value)
         time.sleep(self.move_delay)
         fp = self._get_focus()
-        azcam.log("Current focus: %.3f" % fp)
+        azcam.log(f"Current focus: {fp:.3f}")
 
         if not abort_flag:
             # readout and finish
