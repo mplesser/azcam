@@ -35,7 +35,6 @@ class StatusWeb(object):
         self.app.layout = html.Div(
             [
                 self.statusweb_card,
-                html.Div(id="hidden_div", hidden=True),
                 dcc.Interval("statusweb_interval", interval=1_000, n_intervals=0),
             ]
         )

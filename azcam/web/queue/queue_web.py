@@ -36,7 +36,6 @@ class QueueWeb(object):
         self.app.layout = html.Div(
             [
                 self.queue_card,
-                html.Div(id="hidden_div", hidden=True),
                 dcc.Interval("queue_interval", interval=500, n_intervals=0),
             ]
         )
