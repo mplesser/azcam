@@ -331,9 +331,9 @@ class Header(object):
                 line = line.rstrip()
                 line = line.lstrip()
                 if line.startswith("#"):
-                    break
+                    continue
                 if len(line) == 0:
-                    break
+                    continue
                 tokens = line.split(" ", 1)
                 keyword = tokens[0]
 
