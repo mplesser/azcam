@@ -252,7 +252,8 @@ def check_keyboard(wait: bool = False) -> str:
     # TODO: map sequences like 'F1'
 
     if os.name != "nt":
-        raise azcam.exceptions.AzcamError("check_keyboard not supported on this OS")
+        # raise azcam.exceptions.AzcamError("check_keyboard not supported on this OS")
+        return ""
 
     loop = 1
     key = ""
