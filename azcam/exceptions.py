@@ -5,7 +5,9 @@ Contains custom exceptions and warnings used throughout azcam.
 import azcam
 
 import warnings
+
 warnings.filterwarnings("ignore")
+
 
 def warning(message: str) -> None:
     """
@@ -16,7 +18,7 @@ def warning(message: str) -> None:
     # print(f"Warning: {message}")
 
     try:
-        azcam.logger.warning(message)
+        azcam.logger.warning(f"Warning: {message}")
     except Exception:
         print(f"Warning: {message}")
 
