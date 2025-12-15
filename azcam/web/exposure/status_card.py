@@ -76,7 +76,7 @@ def status_card():
         table_body,
         bordered=True,
         striped=True,
-        dark=False,
+        # dark=False,
         style={"padding": "2em"},
     )
     # table = dbc.Table(table_header + table_body, bordered=True)

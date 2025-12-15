@@ -1,5 +1,5 @@
 """
-*azcam.server* is imported to define server mode, create azcamserver 
+*azcam.server* is imported to define server mode, create azcamserver
 parameters dictionary, define a logger, and get local network information.
 """
 
@@ -11,8 +11,6 @@ from azcam.parameters_server import ParametersServer
 from azcam.database_server import AzcamDatabaseServer
 from azcam.cmdserver import CommandServer
 from azcam.api import API
-
-from azcam.monitor.monitorinterface import AzCamMonitorInterface
 
 
 def setup_server():
@@ -39,11 +37,6 @@ def setup_server():
 
     # command server
     azcam.db.cmdserver = CommandServer()
-
-    # azcammonitor
-    azcam.db.monitor = AzCamMonitorInterface()
-    # azcam.db.monitor.proc_path = ""
-    # azcam.db.monitor.register()
 
     # define API tool
     azcam.db.api = API()
