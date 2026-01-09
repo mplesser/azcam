@@ -18,6 +18,10 @@ See https://github.com/mplesser/azcam-console.git for a python package which sup
 
 ## Installation Example
 
+`pip install azcam`
+
+or 
+
 ```shell
 git clone https://github.com/mplesser/azcam
 git clone https://github.com/mplesser/azcam-console
