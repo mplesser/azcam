@@ -1,6 +1,6 @@
 [project]
 name = "azcam"
-version = "26.0"
+version = "26.0.0"
 description = "Acquisition and analysis package for scientific imaging"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -24,7 +24,3 @@ requires-python = ">= 3.10"
 [project.urls]
 Documentation = "https://azcam.readthedocs.io/"
 Repository = "https://github.com/mplesser/azcam/"
-
-[build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
