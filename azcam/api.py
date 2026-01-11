@@ -27,32 +27,6 @@ class API(object):
         """
 
         self.mock = mock
-        self.parameters = azcam.db.parameters
-
-        try:
-            self.exposure = azcam.db.tools["exposure"]
-        except Exception:
-            pass
-        try:
-            self.tempcon = azcam.db.tools["tempcon"]
-        except Exception:
-            pass
-        try:
-            self.instrument = azcam.db.tools["instrument"]
-        except Exception:
-            pass
-        try:
-            self.telescope = azcam.db.tools["telescope"]
-        except Exception:
-            pass
-        try:
-            self.controller = azcam.db.tools["controller"]
-        except Exception:
-            pass
-        try:
-            self.focus = azcam.db.tools["focus"]
-        except Exception:
-            pass
 
         self.is_initialized = 1
 
@@ -75,7 +49,7 @@ class API(object):
             value: value of the parameter
         """
 
-        return self.parameters.get_par(parameter, subdict)
+        return azcam.db.parameters.get_par(parameter, subdict)
 
     def set_par(
         self, parameter: str, value: typing.Any = "None", subdict: str | None = None
@@ -90,14 +64,14 @@ class API(object):
             subdict: name of sub-dictionary in which to set paramater
         """
 
-        return self.parameters.set_par(parameter, value, subdict)
+        return azcam.db.parameters.set_par(parameter, value, subdict)
 
     def save_pars(self) -> None:
         """
         Writes the par_dict to the par_file using current values.
         """
 
-        return self.parameters.save_pars()
+        return azcam.db.parameters.save_pars()
 
     # *************************************************************************
     #   exposures
@@ -113,7 +87,7 @@ class API(object):
             title: image title.
         """
 
-        return self.exposure.expose(exposure_time, imagetype, title)
+        return azcam.db.tools["exposure"].expose(exposure_time, imagetype, title)
 
     def expose1(
         self, exposure_time: float, image_type: str = "", image_title: str = ""
@@ -127,7 +101,9 @@ class API(object):
             image_title: image title, usually surrounded by double quotes
         """
 
-        return self.exposure.expose1(exposure_time, image_type, image_title)
+        return azcam.db.tools["exposure"].expose1(
+            exposure_time, image_type, image_title
+        )
 
     def sequence(
         self, number_exposures: int = 1, flush_array_flag: int = -1, delay: float = -1
@@ -147,7 +123,9 @@ class API(object):
                 -1 => no change
         """
 
-        return self.exposure.sequence(number_exposures, flush_array_flag, delay)
+        return azcam.db.tools["exposure"].sequence(
+            number_exposures, flush_array_flag, delay
+        )
 
     def sequence1(
         self, number_exposures: int = 1, flush_array_flag: int = -1, delay: float = -1
@@ -167,7 +145,9 @@ class API(object):
                 -1 => no change
         """
 
-        return self.exposure.sequence1(number_exposures, flush_array_flag, delay)
+        return azcam.db.tools["exposure"].sequence1(
+            number_exposures, flush_array_flag, delay
+        )
 
     def test(self, exposure_time: float = 0.0, shutter: int = 0):
         """
@@ -178,7 +158,7 @@ class API(object):
             shutter: 0 for closed and 1 for open
         """
 
-        return self.exposure.test(exposure_time, shutter)
+        return azcam.db.tools["exposure"].test(exposure_time, shutter)
 
     def flush(self, cycles: int = 1):
         """
@@ -188,7 +168,7 @@ class API(object):
             cycles: number of times to flush the sensor
         """
 
-        return self.exposure.flush(cycles)
+        return azcam.db.tools["exposure"].flush(cycles)
 
     def set_filename(self, filename: str):
         """
@@ -198,21 +178,21 @@ class API(object):
             filename: complete filename to be set
         """
 
-        return self.exposure.set_filename(filename)
+        return azcam.db.tools["exposure"].set_filename(filename)
 
     def initialize_exposure(self):
         """
         Initialize exposure.
         """
 
-        return self.exposure.initialize()
+        return azcam.db.tools["exposure"].initialize()
 
     def reset_exposure(self):
         """
         Reset exposure.
         """
 
-        return self.exposure.reset()
+        return azcam.db.tools["exposure"].reset()
 
     def get_roi(self, roi_num: int = 0) -> list:
         """
@@ -225,7 +205,7 @@ class API(object):
         Returns: list format is (first_col,last_col,first_row,last_row,col_bin,row_bin).
         """
 
-        return self.exposure.get_roi(roi_num)
+        return azcam.db.tools["exposure"].get_roi(roi_num)
 
     def set_roi(
         self,
@@ -253,7 +233,7 @@ class API(object):
             roi_num: ROI number [0]
         """
 
-        return self.exposure.set_roi(
+        return azcam.db.tools["exposure"].set_roi(
             first_col, last_col, first_row, last_row, col_bin, row_bin, roi_num
         )
 
@@ -262,14 +242,14 @@ class API(object):
         Resets detector ROI values to full frame, current binning.
         """
 
-        return self.exposure.roi_reset()
+        return azcam.db.tools["exposure"].roi_reset()
 
     def get_format(self) -> list:
         """
         Return the current detector format parameters.
         """
 
-        return self.exposure.get_format()
+        return azcam.db.tools["exposure"].get_format()
 
     def set_format(
         self,
@@ -299,7 +279,7 @@ class API(object):
             np_frametransfer: number rows to frame transfer shift.
         """
 
-        return self.exposure.set_format(
+        return azcam.db.tools["exposure"].set_format(
             ns_total,
             ns_predark,
             ns_underscan,
@@ -316,21 +296,21 @@ class API(object):
         Abort an operation in progress.
         """
 
-        return self.exposure.abort()
+        return azcam.db.tools["exposure"].abort()
 
     def pause(self):
         """
         Pause an exposure inegration (only) in progress.
         """
 
-        return self.exposure.pause()
+        return azcam.db.tools["exposure"].pause()
 
     def resume(self):
         """
         Resume a paused exposure.
         """
 
-        return self.exposure.resume()
+        return azcam.db.tools["exposure"].resume()
 
     def set_shutter(self, state: int = 0, shutter_id: int = 0):
         """
@@ -346,14 +326,14 @@ class API(object):
         state = int(state)
         shutter_id = int(shutter_id)
 
-        return self.exposure.set_shutter(state, shutter_id)
+        return azcam.db.tools["exposure"].set_shutter(state, shutter_id)
 
     def read_header_file(self, filename):
         """
         Read header file located on the server machine.
         """
 
-        return self.exposure.read_header_file(filename)
+        return azcam.db.tools["exposure"].read_header_file(filename)
 
     def get_exposuretime(self) -> float:
         """
@@ -363,7 +343,7 @@ class API(object):
             exposure_time: exposure time in seconds.
         """
 
-        return self.exposure.get_exposuretime()
+        return azcam.db.tools["exposure"].get_exposuretime()
 
     def set_exposuretime(self, exposure_time: float):
         """
@@ -373,7 +353,7 @@ class API(object):
             exposure_time: exposure time in seconds.
         """
 
-        return self.exposure.set_exposuretime(exposure_time)
+        return azcam.db.tools["exposure"].set_exposuretime(exposure_time)
 
     def get_exposuretime_remaining(self) -> float:
         """
@@ -383,7 +363,7 @@ class API(object):
             exposure_time_remaining: exposure time remaining in seconds.
         """
 
-        return self.exposure.get_exposuretime_remaining()
+        return azcam.db.tools["exposure"].get_exposuretime_remaining()
 
     def get_pixels_remaining(self) -> int:
         """
@@ -393,7 +373,7 @@ class API(object):
             pixels_remaining: number of pixels remaining to be readout.
         """
 
-        return self.exposure.get_pixels_remaining()
+        return azcam.db.tools["exposure"].get_pixels_remaining()
 
     def get_status(self) -> dict:
         """
@@ -413,14 +393,14 @@ class API(object):
             title: image title
         """
 
-        return self.exposure.set_image_title(title)
+        return azcam.db.tools["exposure"].set_image_title(title)
 
     def get_image_title(self):
         """
         Return the image title.
         """
 
-        return self.exposure.get_image_title()
+        return azcam.db.tools["exposure"].get_image_title()
 
     def set_image_type(self, imagetype: str = "zero"):
         """
@@ -430,7 +410,7 @@ class API(object):
             imagetype: system defined, and typically includes: zero, object, dark, flat.
         """
 
-        return self.exposure.set_image_type(imagetype)
+        return azcam.db.tools["exposure"].set_image_type(imagetype)
 
     def get_image_type(self) -> str:
         """
@@ -442,7 +422,7 @@ class API(object):
             image_type: image type string
         """
 
-        return self.exposure.get_image_type()
+        return azcam.db.tools["exposure"].get_image_type()
 
     def get_image_types(self) -> list[str]:
         """
@@ -452,7 +432,7 @@ class API(object):
             image_types: list of valid iamge types
         """
 
-        return self.exposure.get_image_types()
+        return azcam.db.tools["exposure"].get_image_types()
 
     # *************************************************************************
     #   temperatures
@@ -466,7 +446,7 @@ class API(object):
             temperatures: list of temperatures read
         """
 
-        return self.tempcon.get_temperatures()
+        return azcam.db.tools["tempcon"].get_temperatures()
 
     def set_control_temperature(
         self, temperature: float | None = None, temperature_id: int = -1
@@ -479,7 +459,9 @@ class API(object):
             temperature_id: control temperature sensor number
         """
 
-        return self.tempcon.set_control_temperature(temperature, temperature_id)
+        return azcam.db.tools["tempcon"].set_control_temperature(
+            temperature, temperature_id
+        )
 
     def get_control_temperature(self, temperature_id: int = -1) -> float:
         """
@@ -492,7 +474,7 @@ class API(object):
             control_temperature: control temperature
         """
 
-        return self.tempcon.get_control_temperature(temperature_id)
+        return azcam.db.tools["tempcon"].get_control_temperature(temperature_id)
 
     # *************************************************************************
     #   instruments
@@ -505,7 +487,7 @@ class API(object):
             filter_id: filter mechanism ID
         """
 
-        return self.instrument.get_filters(filter_id)
+        return azcam.db.tools["instrument"].get_filters(filter_id)
 
     def get_filter(self, filter_id=0):
         """
@@ -514,7 +496,7 @@ class API(object):
             filter_id: filter mechanism ID
         """
 
-        return self.instrument.get_filter(filter_id)
+        return azcam.db.tools["instrument"].get_filter(filter_id)
 
     def set_filter(self, filter_name, filter_id=0):
         """
@@ -524,7 +506,7 @@ class API(object):
             filter_id: filter mechanism ID
         """
 
-        return self.instrument.set_filter(filter_name, filter_id)
+        return azcam.db.tools["instrument"].set_filter(filter_name, filter_id)
 
     def get_wavelengths(self, wavelength_id: int = 0):
         """
@@ -534,7 +516,7 @@ class API(object):
             wavelength_id: wavelength mechanism ID
         """
 
-        return self.instrument.get_wavelengths(wavelength_id)
+        return azcam.db.tools["instrument"].get_wavelengths(wavelength_id)
 
     def get_wavelength(self, wavelength_id: int = 0):
         """
@@ -543,7 +525,7 @@ class API(object):
             wavelength_id: wavelength mechanism ID
         """
 
-        return self.instrument.get_wavelength(wavelength_id)
+        return azcam.db.tools["instrument"].get_wavelength(wavelength_id)
 
     def set_wavelength(self, wavelength: typing.Any, wavelength_id: int = 0):
         """
@@ -553,7 +535,7 @@ class API(object):
             wavelength_id: wavelength mechanism ID
         """
 
-        return self.instrument.set_wavelength(wavelength, wavelength_id)
+        return azcam.db.tools["instrument"].set_wavelength(wavelength, wavelength_id)
 
     # *************************************************************************
     #   focus
@@ -563,14 +545,14 @@ class API(object):
         Initialize focus routine.
         """
 
-        return self.focus.initialize()
+        return azcam.db.tools["focus"].initialize()
 
     def focus_abort(self):
         """
         Abort focus exposure.
         """
 
-        return self.focus.abort()
+        return azcam.db.tools["focus"].abort()
 
     def focus_set_pars(
         self,
@@ -589,7 +571,7 @@ class API(object):
 
         """
 
-        return self.focus.set_pars(
+        return azcam.db.tools["focus"].set_pars(
             exposure_time,
             number_exposures,
             focus_step,
@@ -613,6 +595,6 @@ class API(object):
             detector_shift: Number of rows to shift detector for each focus step.
         """
 
-        return self.focus.run(
+        return azcam.db.tools["focus"].run(
             exposure_time, number_exposures, focus_step, detector_shift
         )
