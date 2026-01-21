@@ -4,17 +4,21 @@ Import this after all configuration has been completed.
 All API commands suported here must start with ""http://locahost:xxxx/api/" where xxxx is the
 port number like 2402.
 
-Query string example: "http://localhost:2402/api/set_filter?filter=1&filter_id=2"
+Query string example:
+"http://localhost:2403/api/set_filter?filter=1&filter_id=2"
+
+Curl example (GET):
+curl -X GET http://localhost:2403/api/get_par?parameter=version
 
 JSON example:
     data = {
         "command": "set_par",
         "args": [],
-        "kwargs": {"parameter": "imagetest", "value": 3333},
+        "kwargs": {"parameter": "imagetest", "value": 1},
     }
     r = requests.post("http://localhost:2403/api", json=data1)
     print(r.status_code, r.json())
-    
+
 Default response is JSON:
     response = {
         "message": "Finished",
@@ -22,6 +26,14 @@ Default response is JSON:
         "data": reply,
     }
 
+Curl example (POST):
+ curl -X POST http://localhost:2403/api -d "@json.txt"
+with json.txt:
+{
+    "command": "get_par",
+    "args": [],
+    "kwargs": {"parameter": "version"}
+}
 """
 
 import os
@@ -32,12 +44,7 @@ from fastapi import FastAPI, Request, APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.middleware.wsgi import WSGIMiddleware
-
-from azcam.web.exposure.exposure_web import ExposureWeb
-from azcam.web.queue.queue_web import QueueWeb
-from azcam.web.status.status_web import StatusWeb
-
+from fastapi.staticfiles import StaticFiles
 
 import azcam
 from azcam import exceptions
@@ -49,14 +56,15 @@ class WebServer(object):
     """
 
     def __init__(self):
-        self.templates_folder = ""
+
         self.index = "index.html"
         self.favicon_path = None
 
         self.logcommands = 0
         self.logstatus = 0
-        self.message = ""  # customized message
+        self.message = ""
         self.datafolder = None
+        self.static_folder = None
 
         # port for webserver
         self.port = None
@@ -83,19 +91,10 @@ class WebServer(object):
         self.index = os.path.join(os.path.dirname(__file__), self.index)
         self.version = 1  # API version
 
-        # Plotly Dash webs
-        expweb = ExposureWeb()
-        expweb.logcommands = 1
-        expweb.logstatus = 0
-        queueweb = QueueWeb()
-        queueweb.logcommands = 1
-        queueweb.logstatus = 0
-        statusweb = StatusWeb()
-        statusweb.logcommands = 1
-        statusweb.logstatus = 0
-        app.mount("/exposure", WSGIMiddleware(expweb.app.server))
-        app.mount("/queue", WSGIMiddleware(queueweb.app.server))
-        app.mount("/status", WSGIMiddleware(statusweb.app.server))
+        # static folder (for style.css and favicon)
+        if self.static_folder is None:
+            self.static_folder = os.path.dirname(__file__)
+        app.mount("/static", StaticFiles(directory=self.static_folder), name="static")
 
         # templates folder
         try:
@@ -119,43 +118,6 @@ class WebServer(object):
             )
 
         # ******************************************************************************
-        # Set API version: /api/set_version?version=2
-        # ******************************************************************************
-        @app.get("/api/set_version", response_class=JSONResponse)
-        async def set_version(request: Request, command: str = None):
-
-            qpars = request.query_params
-            self.version = int(qpars["version"])
-
-            response = {
-                "message": "Finished",
-                "command": f"api.set_version",
-                "data": self.version,
-            }
-
-            return JSONResponse(response)
-
-        @app.get("/favicon.ico", include_in_schema=False)
-        async def favicon():
-            return FileResponse(self.favicon_path)
-
-        # ******************************************************************************
-        # Example of a special case: /api/exposure/get_status
-        # ******************************************************************************
-        @app.get("/api/exposure/get_status", response_class=JSONResponse)
-        async def expstatus(request: Request, command: str = None):
-
-            expstatus = azcam.db.api.get_status()
-
-            response = {
-                "message": "Finished",
-                "command": f"exposure.get_status",
-                "data": expstatus,
-            }
-
-            return JSONResponse(response)
-
-        # ******************************************************************************
         # API interface - ../api/command or ../api JSON
         # ******************************************************************************
 
@@ -166,70 +128,55 @@ class WebServer(object):
             Remote web api commands.
             """
 
-            if self.version == 1 or self.version == 2:
+            # JSON
+            if command is None:
+                args = await request.json()
+                try:
+                    command = getattr(azcam.db.api, args["command"])
 
-                # JSON
-                if command is None:
-                    args = await request.json()
-                    try:
-                        toolid = azcam.db.api
-                        command = getattr(toolid, args["command"])
-
-                        arglist = args["args"]
-                        kwargs = args["kwargs"]
-                        reply = command(*arglist, **kwargs)
-                    except Exception as e:
-                        reply = repr(e)
-                        azcam.log(e)
-
-                    response = {
-                        "message": "Finished",
-                        "command": f"api.{args['command']}",
-                        "data": reply,
-                    }
-
-                    return JSONResponse(response)
-
-                # query string
-                url = command
-                qpars = request.query_params
-
-                if self.logcommands:
-                    azcam.log(url, prefix="Web-> ")
-
-                reply = self.web_command(url, qpars)
-
-                if self.logcommands:
-                    azcam.log(reply, prefix="---->   ")
-
-                return JSONResponse(reply)
-
-            else:
-
-                # query string
-                url = command
-                qpars = request.query_params
+                    arglist = args["args"]
+                    kwargs = args["kwargs"]
+                    reply = command(*arglist, **kwargs)
+                except Exception as e:
+                    reply = repr(e)
+                    azcam.log(e)
 
                 response = {
                     "message": "Finished",
-                    "command": url,
-                    "data": "Invalid API version",
+                    "command": f"api.{args['command']}",
+                    "data": reply,
                 }
 
                 return JSONResponse(response)
 
-    # ******************************************************************************
-    # webserver methods
-    # ******************************************************************************
+            # query string
+            url = command
+            qpars = request.query_params
 
-    def add_router(self, router):
-        """
-        Add router.
-        """
+            if self.logcommands:
+                azcam.log(url, prefix="Web-> ")
 
-        self.app.include_router(router)
+            try:
+                kwargs = qpars._dict
 
-        return
+                caller = getattr(azcam.db.api, url)
+                reply = caller() if kwargs is None else caller(**kwargs)
+
+            except Exception as e:
+                azcam.log(e)
+                reply = f"invalid API command: {url}"
+
+            # generic response
+            response = {
+                "message": "Finished",
+                "command": url,
+                "data": reply,
+            }
+
+            if self.logcommands:
+                azcam.log(response, prefix="---->   ")
+
+            return JSONResponse(response)
 
     def stop(self):
         """
@@ -266,29 +213,3 @@ class WebServer(object):
         self.is_running = 1
 
         return
-
-    def web_command(self, url, qpars=None):
-        """
-        Parse and execute a command string received as a URL.
-        Returns the reply as a JSON packet.
-        """
-
-        try:
-            method = url
-            kwargs = qpars._dict
-
-            caller = getattr(azcam.db.api, method)
-            reply = caller() if kwargs is None else caller(**kwargs)
-
-        except Exception as e:
-            azcam.log(e)
-            reply = f"invalid API command: {url}"
-
-        # generic response
-        response = {
-            "message": "Finished",
-            "command": url,
-            "data": reply,
-        }
-
-        return response
