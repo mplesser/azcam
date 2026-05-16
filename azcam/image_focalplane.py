@@ -354,10 +354,11 @@ class FocalPlane(ObjectHeaderMethods):
             numamps_x: number of amplifiers in Column direction.
             numamps_y: number of amplifiers in Row direction.
             amp_cfg: each amplifier's orientation (ex: [0,1,2,3]).
-                0. normal
-                1. flip x
-                2. flip y
-                3. flip x and y
+                
+                0: normal
+                1: flip x
+                2: flip y
+                3: flip x and y
         """
 
         if numdet_x == -1:
