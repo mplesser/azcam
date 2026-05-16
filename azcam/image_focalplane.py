@@ -252,6 +252,7 @@ class FocalPlane(ObjectHeaderMethods):
     ):
         """
         Set the detector format.
+        
         Args:
             ns_total: number of visible columns
             ns_predark: number of physical dark underscan columns
@@ -346,15 +347,17 @@ class FocalPlane(ObjectHeaderMethods):
         Sets focal plane configuration. Use after set_format() and before set_roi().
         This command replaces SetConfiguration.
         Default focalplane values are set here.
-        numdet_x defines number of detectors in Column direction.
-        numdet_y defines number of detectors in Row direction.
-        numamps_x defines number of amplifiers in Column direction.
-        numamps_y defines number of amplifiers in Row direction.
-        amp_cfg defines each amplifier's orientation (ex: [0,1,2,3]).
-        0 - normal
-        1 - flip x
-        2 - flip y
-        3 - flip x and y
+
+        Args:
+            numdet_x: number of detectors in Column direction.
+            numdet_y: number of detectors in Row direction.
+            numamps_x: number of amplifiers in Column direction.
+            numamps_y: number of amplifiers in Row direction.
+            amp_cfg: each amplifier's orientation (ex: [0,1,2,3]).
+                0 - normal
+                1 - flip x
+                2 - flip y
+                3 - flip x and y
         """
 
         if numdet_x == -1:
@@ -590,8 +593,8 @@ class FocalPlane(ObjectHeaderMethods):
     def set_amp_positions(self):
         """
         Calculates amplifiers positions including gaps between amplifiers and CCDs
-        New: Zareba 23Mar2012
         """
+
         self.amppix1 = numpy.empty(shape=[self.numamps_image], dtype="<u2")
         self.amppix2 = numpy.empty(shape=[self.numamps_image], dtype="<u2")
 
