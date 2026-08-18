@@ -12,8 +12,6 @@ AzCam is not appropriate for consumer-level cameras and is not intended to have 
 
 See https://azcam.readthedocs.io.
 
-See https://github.com/mplesser/azcam-tool.git for the standard GUI used by most telescope observers.
-
 See https://github.com/mplesser/azcam-console.git for a python package which supports a local or remote command line interface and sensor characterization tools.
 
 ## Installation Example

@@ -22,7 +22,6 @@ cd /azcam
 git clone https://github.com/mplesser/azcam
 git clone https://github.com/mplesser/azcam-console
 git clone https://github.com/mplesser/azcam-90prime  # example
-git clone https://github.com/mplesser/azcam-tool  # windows only
 ```
 
 ## Install repositories

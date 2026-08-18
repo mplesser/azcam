@@ -106,7 +106,7 @@ Some packages act as *environments* to define code and data files used for speci
 ## Applications
 AzCam *applications* are stand-alone programs which utilize AzCam functionality. The most important application is *azcamserver* which defines the tools for a system. Most but not all applications are clients which connect to an *azcamserver* application. These clients may be written in any language. Examples include:
 
-  * [azcam-tool](https://github.com/mplesser/azcam-tool): an exposure control GUI written in National Instruments LabVIEW
+  * *azcam-tool*: an exposure control GUI written in National Instruments LabVIEW. No longer supported.
   * [azcam-expstatus](https://github.com/mplesser/azcam-expstatus): a small GUI which displays exposure progress 
   * [azcam-imageserver](https://github.com/mplesser/azcam-imageserver) an app to receive and write image data from a remote *azcamserver*
 
